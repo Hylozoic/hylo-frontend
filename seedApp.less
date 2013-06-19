@@ -1,5 +1,5 @@
 #wrapper {
-    width: 90%;
+    width: 100%;
     max-width: 1100px;
     min-width: 800px;
     margin: 50px auto;
@@ -58,8 +58,34 @@
     }
 }
 
+@media (max-width: 640px) {
+  #seedWall {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+  
+  #wrapper {
+    min-width: 321px;
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 320px) {
+  #seedWall {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+  
+  #wrapper {
+    min-width: 200px;
+    max-width: 320px;
+  }
+}
+
 #seedWall:hover .pin:not(:hover) {
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 #seedProgress {
@@ -71,24 +97,3 @@
   padding: 0 5px;
 }
 
-@media only screen and (max-width: 40em) {
-  #seedWall {
-    -webkit-column-count: 2;
-    -webkit-column-gap: 0.938em; /* 15px */
-    -moz-column-count: 2;
-    -moz-column-gap: 0.938em; /* 15px */
-    column-count: 2;
-    column-gap: 0.938em; /* 15px */
-  }
-  .item {
-    margin-bottom: 0.938em; /* 15px */
-  }
-}
-
-@media only screen and (max-width: 20em) {
-  #seedWall {
-    -webkit-column-count: auto;
-    -moz-column-count: auto;
-    column-count: auto;
-  }
-}
