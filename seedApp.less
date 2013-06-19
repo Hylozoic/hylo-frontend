@@ -26,10 +26,11 @@
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
-    padding: 15px;
     padding-bottom: 5px;
     background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
-    opacity: 1;
+    
+    opacity: 0.9;
+    position: relative;
     
     -webkit-transition: all .2s ease;
     -moz-transition: all .2s ease;
@@ -45,6 +46,7 @@
 }
 
 .pin p {
+    padding: 0px 10px;
     font: 12px/18px Arial, sans-serif;
     color: #333;
     margin: 0;
@@ -84,12 +86,19 @@
   }
 }
 
-.not-over .pin {
-  opacity: 0.6;
+.pin:hover {
+  opacity: 1;
 }
 
-.over {
-  opacity: 1 !important;
+.actions {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  visibility: hidden;
+}
+
+.over .actions {
+  visibility: visible;
 }
 
 #seedProgress {
