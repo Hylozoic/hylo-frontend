@@ -8,14 +8,20 @@
 
 #seedWall {
     -webkit-column-count: 3;
-    -webkit-column-gap: 10px;
-    -webkit-column-fill: auto;
     -moz-column-count: 3;
-    -moz-column-gap: 10px;
-    -moz-column-fill: auto;
+    -ms-column-count: 3;
     column-count: 3;
-    column-gap: 15px;
-    column-fill: auto;
+    
+    -webkit-column-gap: 10px;
+    -moz-column-gap: 10px;
+    -ms-column-gap: 10px;
+    column-gap: 10px;
+    
+    column-fill: balance; /* W3C */
+    -webkit-column-fill: balance; /* Safari & Chrome */
+    -moz-column-fill: balance; /* Firefox */
+    -ms-column-fill: balance; /* Internet Explorer */
+    -o-column-fill: balance; /* Opera */
 }
 
 .img-user {
@@ -37,7 +43,7 @@
     padding-bottom: 5px;
     background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
     
-    opacity: 0.95;
+    opacity: 0.87;
     position: relative;
 }
 
