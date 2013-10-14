@@ -7,7 +7,6 @@ body {
   font-family: "Helvetica Neue", arial, sans-serif;
   font-size: 12px;
   color: #211922;
-  padding-top: 70px; 
 }
 
 .providers {
@@ -70,5 +69,71 @@ body {
 @media (max-width: 320px) {
   .banner_hero h1 {
     padding: 100px 0 20px;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 2;
+}
+
+@sidebar-width: 250px;
+
+.offcanvas {
+
+  z-index: 1;
+  position: relative;
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+
+  &.active {
+    left: @sidebar-width;
+
+    .sidebar {
+      left: 0;
+    }
+  }
+}
+
+.sidebar {
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  width: @sidebar-width;
+  left: -@sidebar-width;
+  height: 100%;
+  padding: 54px 22px 0;
+
+  background: #222;
+  &, a { color: #bbb; }
+  font-size: 18px;
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    li {
+      padding: 10px 0;
+      margin-left: 0;
+
+      a:hover {
+        color: white;
+        text-decoration: none;
+      }
+
+      &.divider {
+        height: 1px;
+        background-color: #666;
+        padding: 0;
+        margin: 12px 0;
+      }
+    }
   }
 }
