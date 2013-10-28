@@ -122,6 +122,7 @@ body {
 
   li {
     text-transform: uppercase;
+    margin: 3px 0;
 
     i {
       margin-right: 12px;
@@ -132,9 +133,13 @@ body {
     }
     a {
       display: block;
-      padding: 7px @icon-margin;
+      padding: 5px @icon-margin;
       color: black;
       text-decoration: none;
+      &.current {
+        padding-left: @icon-margin - 4px;
+        border-left: 4px solid black;
+      }
     }
     &.no-link {
       padding: 7px @icon-margin;
@@ -159,11 +164,15 @@ body {
       a:hover {
         color: @core-color;
         background-color: white;
+        &.current {
+          border-color: @core-color;
+        }
       }
 
       &.no-link {
         background-color: #f2f2f2;
       }
+
     }
 
   }
