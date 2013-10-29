@@ -9,6 +9,20 @@
 @light-gray: #B3B3B3;
 @faint-gray: #f2f2f2;
 
+@core-color-highlighted: darken(@core-color, 5%);
+
+// bootstrap overrides
+
+.btn-success {
+  background-color: @core-color;
+  &:hover, &:active, &:focus {
+    background-color: @core-color-highlighted;
+    border-color: @core-color-highlighted;
+  }
+}
+
+// app-specific styles
+
 .offcanvas {
   position: relative;
 }
@@ -272,5 +286,14 @@ body {
     box-sizing: border-box;
     width: 70%;
     margin-bottom: 10px;
+  }
+
+  .editing {
+    button {
+      width: 33%;
+      &.cancel {
+        margin-right: 4%;
+      }
+    }
   }
 }
