@@ -1,12 +1,13 @@
 @import '_mixins.less';
 
-@core-color: #6DC8BF;
-@intention-color: #6DC8BF;
-@accent1-color: #AFFF15;
+@intention-color: #00D2BF;
 @offer-color: #AFFF15;
-@accent2-color: #A43662;
-@request-color: #A43662;
-@light-gray-color: #B3B3B3;
+@request-color: #C7369F;
+@core-color: @intention-color;
+@accent1-color: @offer-color;
+@accent2-color: @request-color;
+@light-gray: #B3B3B3;
+@faint-gray: #f2f2f2;
 
 .offcanvas {
   position: relative;
@@ -173,7 +174,7 @@ body {
       }
 
       &.no-link {
-        background-color: #f2f2f2;
+        background-color: @faint-gray;
       }
 
     }
@@ -208,7 +209,7 @@ body {
     }
 
     .controls {
-      &, a { color: @light-gray-color; }
+      &, a { color: @light-gray; }
       a {
         cursor: pointer;
         text-decoration: none;
@@ -245,3 +246,31 @@ body {
   }
 }
 
+.biobar {
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
+  padding: 20px 0 10px;
+
+  .avatar {
+    display: block;
+    @avatar-size: 140px;
+    width: @avatar-size;
+    height: @avatar-size;
+    border-radius: @avatar-size / 2;
+    margin: 0 auto 20px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 3px;
+    background-color: @faint-gray;
+    margin: 20px 0;
+  }
+
+  button {
+    box-sizing: border-box;
+    width: 70%;
+    margin-bottom: 10px;
+  }
+}
