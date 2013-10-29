@@ -1,3 +1,5 @@
+@import '_mixins.less';
+
 @core-color: #6DC8BF;
 @intention-color: #6DC8BF;
 @accent1-color: #AFFF15;
@@ -185,6 +187,8 @@ body {
 
 .post {
   @avatar-size: 42px;
+  margin-bottom: 20px;
+
   .avatar {
     width: @avatar-size;
     height: @avatar-size;
@@ -192,6 +196,7 @@ body {
     float: left;
   }
   .bubble {
+    position: relative;
     margin-left: @avatar-size + 20px;
     border-radius: 5px;
     background-color: white;
@@ -215,19 +220,28 @@ body {
       }
     }
 
-    &.intention {
-      .type { color: @intention-color; }
+    .triangle {
+      background-color: white;
+      height: 16px;
+      width: 16px;
+      position: absolute;
+      top: 12px;
+      left: -9px;
+      .transform(rotate(45deg));
     }
 
-    &.request {
-      .type { color: @request-color; }
+    .type-style (@color) {
+      box-shadow: -1px 0 0 0 @color;
+      .type { color: @color; }
+      .triangle {
+        border-left: 1px solid @color;
+        border-bottom: 1px solid @color;
+      }
     }
 
-    &.offer {
-      .type { color: @offer-color; }
-    }
-
+    &.intention { .type-style(@intention-color); }
+    &.request { .type-style(@request-color); }
+    &.offer { .type-style(@offer-color); }
   }
-  margin-bottom: 20px;
 }
 
