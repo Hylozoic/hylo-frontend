@@ -4,6 +4,7 @@
 @offer-color: #AFFF15;
 @accent2-color: #A43662;
 @request-color: #A43662;
+@light-gray-color: #B3B3B3;
 
 .offcanvas {
   position: relative;
@@ -176,5 +177,57 @@ body {
     }
 
   }
+}
+
+.add-post {
+  margin-bottom: 20px;
+}
+
+.post {
+  @avatar-size: 42px;
+  .avatar {
+    width: @avatar-size;
+    height: @avatar-size;
+    border-radius: @avatar-size / 2;
+    float: left;
+  }
+  .bubble {
+    margin-left: @avatar-size + 20px;
+    border-radius: 5px;
+    background-color: white;
+    padding: 15px 20px;
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    .controls {
+      &, a { color: @light-gray-color; }
+      a {
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .timestamp { margin-right: 12px; }
+      .vote, .comment {
+        display: inline-block;
+        padding: 0 4px;
+      }
+    }
+
+    &.intention {
+      .type { color: @intention-color; }
+    }
+
+    &.request {
+      .type { color: @request-color; }
+    }
+
+    &.offer {
+      .type { color: @offer-color; }
+    }
+
+  }
+  margin-bottom: 20px;
 }
 
