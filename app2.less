@@ -8,6 +8,8 @@
 @accent2-color: @request-color;
 @light-gray: #B3B3B3;
 @faint-gray: #f2f2f2;
+@text-gray: #808080;
+@text-light-gray: #999;
 
 @core-color-highlighted: darken(@core-color, 5%);
 
@@ -196,25 +198,140 @@ body {
   }
 }
 
+.triangle {
+  background-color: white;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -8px;
+  .transform(rotate(45deg));
+}
+
+.post-type-style (@color) {
+  box-shadow: -1px 0 0 0 @color;
+  .type { color: @color; }
+  .triangle {
+    border-left: 1px solid @color;
+    border-bottom: 1px solid @color;
+  }
+}
+
+@avatar-size: 42px;
+
+.bubble {
+  position: relative;
+  margin-left: @avatar-size + 20px;
+  border-radius: 5px;
+  background-color: white;
+
+  &.intention { .post-type-style(@intention-color); }
+  &.request { .post-type-style(@request-color); }
+  &.offer { .post-type-style(@offer-color); }
+}
+
 .add-post {
-  margin-bottom: 20px;
+  margin: 18px 0;
+  @circle-size: 30px;
+
+  .circle {
+    display: block;
+    float: left;
+    height: @circle-size;
+    width: @circle-size;
+    line-height: @circle-size;
+    border-radius: @circle-size / 2;
+    margin-left: (@avatar-size - @circle-size) / 2;
+    vertical-align: middle;
+    text-align: center;
+    background-color: white;
+    color: @text-light-gray;
+  }
+
+  .start-editing {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+
+    .bubble {
+      height: @circle-size;
+      line-height: @circle-size;
+      color: @text-light-gray;
+      padding: 0 30px;
+      .post-type-style(@faint-gray);
+    }
+    .triangle {
+      top: 8px;
+    }
+  }
+
+  .editor > .bubble {
+    > .post-types {
+      margin: 0;
+      > a {
+        padding: 0;
+        display: block;
+        text-align: center;
+        background-color: @faint-gray;
+        color: @text-gray;
+        height: @circle-size;
+        line-height: @circle-size;
+        cursor: pointer;
+        text-decoration: none;
+        &:first-child { border-top-left-radius: 5px; }
+        &:last-child { border-top-right-radius: 5px; }
+      }
+    }
+
+    .selected (@color) {
+      color: @color;
+      background-color: white;
+    }
+
+    &.intention .post-types > a.intention { .selected(@intention-color); }
+    &.request .post-types > a.request { .selected(@request-color); }
+    &.offer .post-types > a.offer { .selected(@offer-color); }
+
+    > form {
+      padding: 20px;
+      > input[type="text"] {
+        margin-bottom: 20px;
+      }
+      > input[type="submit"] {
+        width: 100%;
+        color: white;
+      }
+      > label {
+        display: block;
+      }
+    }
+
+    &.intention > form > input[type="submit"] { background-color: @intention-color; }
+    &.request > form > input[type="submit"] { background-color: @request-color; }
+    &.offer > form > input[type="submit"] { background-color: @offer-color; }
+
+    > .triangle {
+      top: 8px;
+    }
+    &.request > .triangle, &.offer > .triangle {
+      background-color: @faint-gray;
+    }
+  }
+
 }
 
 .post {
-  @avatar-size: 42px;
   margin-bottom: 20px;
 
   .avatar {
-    width: @avatar-size;
-    height: @avatar-size;
-    border-radius: @avatar-size / 2;
+    &, > img {
+      width: @avatar-size;
+      height: @avatar-size;
+      border-radius: @avatar-size / 2;
+    }
     float: left;
   }
   .bubble {
-    position: relative;
-    margin-left: @avatar-size + 20px;
-    border-radius: 5px;
-    background-color: white;
     padding: 15px 20px;
 
     h2 {
@@ -236,27 +353,8 @@ body {
     }
 
     .triangle {
-      background-color: white;
-      height: 16px;
-      width: 16px;
-      position: absolute;
-      top: 12px;
-      left: -9px;
-      .transform(rotate(45deg));
+      top: 14px;
     }
-
-    .type-style (@color) {
-      box-shadow: -1px 0 0 0 @color;
-      .type { color: @color; }
-      .triangle {
-        border-left: 1px solid @color;
-        border-bottom: 1px solid @color;
-      }
-    }
-
-    &.intention { .type-style(@intention-color); }
-    &.request { .type-style(@request-color); }
-    &.offer { .type-style(@offer-color); }
   }
 }
 
