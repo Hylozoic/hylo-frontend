@@ -13,6 +13,10 @@
 
 @core-color-highlighted: darken(@core-color, 5%);
 
+@large-font-size: 19px;
+@medium-font-size: 14px;
+@small-font-size: 11px;
+
 // bootstrap overrides
 
 .btn-success {
@@ -210,8 +214,8 @@ body {
 
 .post-type-style (@color) {
   box-shadow: -1px 0 0 0 @color;
-  .type { color: @color; }
-  .triangle {
+  > .controls > .type { color: @color; }
+  > .triangle {
     border-left: 1px solid @color;
     border-bottom: 1px solid @color;
   }
@@ -328,6 +332,8 @@ body {
 
 .post {
   margin-bottom: 20px;
+  font-size: @medium-font-size;
+  color: @text-gray;
 
   .avatar {
     &, > img {
@@ -340,14 +346,16 @@ body {
   .bubble {
     padding: 15px 20px;
 
-    h2 {
+    > h2 {
       margin-top: 0;
-      font-size: 18px;
+      font-size: @large-font-size;
+      &, > a { color: black; }
     }
 
     .controls {
-      &, a { color: @light-gray; }
-      a {
+      font-size: @small-font-size;
+      &, > a { color: @light-gray; }
+      > a {
         cursor: pointer;
         text-decoration: none;
       }
@@ -360,6 +368,21 @@ body {
 
     .triangle {
       top: 14px;
+    }
+  }
+
+  .comments {
+    background-color: @faint-gray;
+    padding: 18px 20px 6px;
+    margin: 10px -20px -15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    > .comment {
+      margin-bottom: 12px;
+      > .bubble {
+        padding-top: 13px;
+        padding-bottom: 10px;
+      }
     }
   }
 }
