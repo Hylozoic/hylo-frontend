@@ -223,6 +223,15 @@ body {
 
 @avatar-size: 42px;
 
+.avatar {
+  &, > img {
+    width: @avatar-size;
+    height: @avatar-size;
+    border-radius: @avatar-size / 2;
+  }
+  float: left;
+}
+
 .bubble {
   position: relative;
   margin-left: @avatar-size + 20px;
@@ -335,14 +344,6 @@ body {
   font-size: @medium-font-size;
   color: @text-gray;
 
-  .avatar {
-    &, > img {
-      width: @avatar-size;
-      height: @avatar-size;
-      border-radius: @avatar-size / 2;
-    }
-    float: left;
-  }
   .bubble {
     padding: 15px 20px;
 
@@ -422,6 +423,39 @@ body {
       &.cancel {
         margin-right: 4%;
       }
+    }
+  }
+}
+
+.users {
+  .user {
+    background-color: white;
+    border-radius: 5px;
+    .bio {
+      @avatar-size: 60px;
+      padding: 13px 10px;
+      height: @avatar-size + 16px;
+      box-sizing: border-box;
+      border-bottom: 1px solid @faint-gray;
+      overflow: hidden; // TODO use dotdotdot
+      .avatar {
+        width: @avatar-size;
+        height: @avatar-size;
+        border-radius: 30px;
+        margin: -5px 10px -5px 0;
+      }
+      h3 {
+        font-size: @large-font-size;
+        margin: 0 0 5px;
+      }
+    }
+    .activity {
+      height: 60px;
+      overflow: hidden; // TODO use dotdotdot
+      padding: 10px;
+      &.intention { border-left: 1px solid @intention-color; }
+      &.offer { border-left: 1px solid @offer-color; }
+      &.request { border-left: 1px solid @request-color; }
     }
   }
 }
