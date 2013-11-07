@@ -13,6 +13,10 @@
 
 @core-color-highlighted: darken(@core-color, 5%);
 
+
+@avatar-size: 42px;
+@bubble-offset: @avatar-size + 20px;
+
 @large-font-size: 19px;
 @medium-font-size: 14px;
 @small-font-size: 11px;
@@ -68,6 +72,31 @@ body {
   height: 100%;
   opacity: 0.2;
   .blur(10px);
+}
+
+.filter-search-icon {
+  color: white;
+  font-size: 39px;
+  float: left;
+}
+
+.filter-query {
+  margin-left: @bubble-offset;
+  margin-bottom: 18px;
+  .query-input {
+  }
+}
+.filter-buttons {
+  margin-left: @bubble-offset;
+  margin-bottom: 18px;
+  .post-type {
+    width: 60%;
+    margin-right: 10%;
+    float: left;
+  }
+  .post-sort {
+    width: 30%;
+  }
 }
 
 .menu {
@@ -201,8 +230,6 @@ body {
   }
 }
 
-@avatar-size: 42px;
-
 .avatar {
   &, > img {
     width: @avatar-size;
@@ -214,7 +241,7 @@ body {
 
 .bubble {
   position: relative;
-  margin-left: @avatar-size + 20px;
+  margin-left: @bubble-offset;
   border-radius: 5px;
   background-color: white;
 
@@ -224,7 +251,7 @@ body {
 }
 
 .add-post {
-  margin: 18px 0;
+  margin-bottom: 18px;
   @circle-size: 30px;
 
   .circle {
