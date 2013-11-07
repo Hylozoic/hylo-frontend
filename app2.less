@@ -17,6 +17,11 @@
 @medium-font-size: 14px;
 @small-font-size: 11px;
 
+@nav-font: "Helvetica Neue";
+@header-font: "Helvetica Neue";
+@meta-font: "Droid Serif";
+@body-font: "Droid Serif";
+
 // bootstrap overrides
 
 .btn-success {
@@ -48,7 +53,7 @@ body.waiting-for-angular div#initializing-panel {
 
 body {
   background-color: white;
-  font-family: 'Droid Serif';
+  font-family: @body-font;
 }
 
 #bg {
@@ -122,6 +127,7 @@ body {
   li {
     text-transform: uppercase;
     margin: 3px 0;
+    font-family: @nav-font;
 
     i {
       margin-right: 12px;
@@ -324,12 +330,14 @@ body {
     > h2 {
       margin-top: 0;
       font-size: @large-font-size;
+      font-family: @header-font;
       &, > a { color: black; }
       > a { text-decoration: none; }
     }
 
     .controls {
       font-size: @small-font-size;
+      font-family: @meta-font;
       &, > a { color: @light-gray; }
       > a {
         cursor: pointer;
