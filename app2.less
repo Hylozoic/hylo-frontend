@@ -454,6 +454,13 @@ body {
   .user {
     background-color: white;
     border-radius: 5px;
+
+    > a {
+      display: block;
+      text-decoration: none;
+      color: @text-dark;
+    }
+
     .bio {
       @avatar-size: 60px;
       padding: 13px 10px;
@@ -473,6 +480,7 @@ body {
       }
     }
     .activity {
+      display: block;
       height: 60px;
       overflow: hidden; // TODO use dotdotdot
       padding: 10px;
@@ -480,6 +488,10 @@ body {
       &.intention { border-left: 1px solid @intention-color; }
       &.offer { border-left: 1px solid @offer-color; }
       &.request { border-left: 1px solid @request-color; }
+
+      .description {
+        color: @light-gray;
+      }
     }
   }
 }
