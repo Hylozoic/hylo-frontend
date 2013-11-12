@@ -1,6 +1,17 @@
 @import '_colors.less';
 @import '_mixins.less';
 
+.bg {
+  background-image: url(/assets/images/placeholder-bg.jpg);
+  background-size: cover;
+  .blur(5px);
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 270px;
+}
+
 .header {
   position: relative;
   text-align: center;
@@ -29,18 +40,51 @@
     border-color: @offer-color;
   }
 
-  .bg {
-    background-image: url(/assets/images/placeholder-bg.jpg);
-    background-size: cover;
-    .blur(10px);
-    opacity: 0.2;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .hero-text {
   margin-bottom: 50px;
   font-size: 16px;
+}
+
+#signup .bg {
+  position: fixed;
+  height: 100%;
+}
+
+#signup-tablet {
+  background-color: white;
+  border-radius: 5px;
+  > div {
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .providers {
+    border-bottom: 3px @faint-gray solid;
+  }
+
+  .providers > a {
+    width: 100%;
+    margin-bottom: 10px;
+    color: white;
+    &.facebook { background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat; }
+    &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
+    &.linkedin { background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat; }
+  }
+
+  .btn-success {
+    width: 100%;
+  }
+
+  .control-label {
+    padding-right: 0;
+  }
+
 }
