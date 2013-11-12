@@ -47,14 +47,16 @@
   font-size: 16px;
 }
 
-#signup .bg {
+#signup .bg, #login .bg {
   position: fixed;
   height: 100%;
 }
 
-#signup-tablet {
+#signup-login-tablet {
   background-color: white;
   border-radius: 5px;
+  &, h1 { font-family: @header-font; }
+
   > div {
     padding: 25px;
   }
@@ -74,6 +76,8 @@
     width: 100%;
     margin-bottom: 10px;
     color: white;
+    text-transform: uppercase;
+    font-size: @medium-font-size;
     &.facebook { background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat; }
     &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
     &.linkedin { background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat; }
@@ -81,10 +85,12 @@
 
   .btn-success {
     width: 100%;
+    text-transform: uppercase;
   }
 
   .control-label {
     padding-right: 0;
+    font-size: @medium-font-size;
   }
 
 }
