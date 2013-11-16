@@ -68,7 +68,7 @@
     margin-top: 0;
   }
 
-  .providers {
+  .providers, .inviteCode {
     border-bottom: 3px @faint-gray solid;
   }
 
@@ -78,9 +78,21 @@
     color: white;
     text-transform: uppercase;
     font-size: @medium-font-size;
-    &.facebook { background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat; }
+    &.facebook {
+      background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat;
+      background-size: 28px 28px;
+    }
     &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
-    &.linkedin { background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat; }
+    &.linkedin {
+      background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat;
+      background-size: 28px 28px;
+    }
+    &.google {
+      background: #5b5b5b url(/assets/images/google.png) 10px center no-repeat;
+      background-size: 28px 28px;
+    }
+
+
   }
 
   .btn-success {
