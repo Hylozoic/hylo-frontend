@@ -81,6 +81,7 @@ body {
 .menu {
   @icon-margin: 21px;
   @icon-width: 14px;
+  @icon-expanded-right-margin: 12px;
   @collapsed-width: @icon-margin * 2 + @icon-width;
 
   position: fixed;
@@ -113,7 +114,6 @@ body {
     height: 48px;
     line-height: 48px;
     margin: 0;
-    margin-right: @icon-margin;
     vertical-align: middle;
     font-size: 16px;
     display: none;
@@ -138,7 +138,7 @@ body {
     font-family: @nav-font;
 
     i {
-      margin-right: 12px;
+      margin-right: @icon-expanded-right-margin;
       width: @icon-width;
     }
     &:hover {
@@ -160,6 +160,21 @@ body {
     .only-expanded {
       display: none;
     }
+    .notification {
+      .avatar {
+        @small-avatar-width: @icon-width + 8px;
+        width: @small-avatar-width;
+        height: @small-avatar-width;
+        border-radius: @small-avatar-width / 2;
+        margin-left: -3px;
+        position: relative;
+        top: -1px;
+      }
+
+      > div {
+        margin-left: 30px;
+      }
+    }
   }
 
   &.expanded {
@@ -169,10 +184,11 @@ body {
     }
     &, ul {
       width: auto;
+      max-width: 240px;
     }
     li {
       .only-expanded {
-        display: inline;
+        display: inline-block;
       }
       a:hover {
         color: @core-color;
@@ -187,7 +203,6 @@ body {
       }
 
     }
-
   }
 }
 
