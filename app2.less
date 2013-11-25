@@ -129,6 +129,10 @@ body {
     width: @collapsed-width;
   }
 
+  .only-expanded {
+    display: none;
+  }
+
   li {
     text-transform: uppercase;
     margin: 3px 0;
@@ -153,9 +157,6 @@ body {
     }
     &.no-link {
       padding: 7px @icon-margin;
-    }
-    .only-expanded {
-      display: none;
     }
     .notification {
       .avatar {
@@ -183,10 +184,10 @@ body {
       width: auto;
       max-width: 240px;
     }
+    .only-expanded {
+      display: inline-block;
+    }
     li {
-      .only-expanded {
-        display: inline-block;
-      }
       a:hover {
         color: @core-color;
         background-color: white;
