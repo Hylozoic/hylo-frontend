@@ -1,0 +1,140 @@
+
+.menu {
+  @icon-margin: 21px;
+  @icon-width: 14px;
+  @icon-expanded-right-margin: 12px;
+  @collapsed-width: @icon-margin * 2 + @icon-width;
+
+  position: fixed;
+  top: 0;
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 15px;
+  overflow: visible;
+
+  &, ul {
+    width: @collapsed-width;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:active {
+    background-color: white;
+  }
+
+  .logo {
+    height: 48px;
+    width: 48px;
+    margin: 0 16px 0 20px;
+  }
+
+  .community-name {
+    height: 48px;
+    line-height: 48px;
+    margin: 0;
+    vertical-align: middle;
+    font-size: 16px;
+    display: none;
+  }
+
+  .hylo-logo {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+  }
+
+  ul {
+    font-size: 14px;
+    color: black;
+    width: @collapsed-width;
+  }
+
+  .only-expanded {
+    display: none;
+  }
+
+  li {
+    text-transform: uppercase;
+    margin: 3px 0;
+    font-family: @nav-font;
+
+    i {
+      margin-right: @icon-expanded-right-margin;
+      width: @icon-width;
+    }
+    &:hover {
+      background-color: @core-color;
+    }
+    a {
+      display: block;
+      padding: 5px @icon-margin;
+      color: black;
+      text-decoration: none;
+      &.current {
+        padding-left: @icon-margin - 4px;
+        border-left: 4px solid black;
+      }
+    }
+    &.no-link {
+      padding: 7px @icon-margin;
+    }
+    .notification {
+      .avatar {
+        @small-avatar-width: @icon-width + 8px;
+        width: @small-avatar-width;
+        height: @small-avatar-width;
+        border-radius: @small-avatar-width / 2;
+        margin-left: -3px;
+        position: relative;
+        top: -1px;
+      }
+
+      > div {
+        margin-left: 30px;
+      }
+    }
+  }
+
+  &.expanded {
+    background-color: white;
+    .community-name {
+      display: inline;
+    }
+    &, ul {
+      width: auto;
+      max-width: 240px;
+    }
+    .only-expanded {
+      display: inline-block;
+    }
+    li {
+      a:hover {
+        color: @core-color;
+        background-color: white;
+        &.current {
+          border-color: @core-color;
+        }
+      }
+
+      &.no-link {
+        background-color: @faint-gray;
+      }
+
+    }
+  }
+}
+
+#menu-links {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+#notifications {
+  margin-top: 0;
+
+  a.unread {
+    background-color: darkgray;
+  }
+}
