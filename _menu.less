@@ -45,6 +45,17 @@
     left: 20px;
   }
 
+  .notifications-item {
+    position: relative;
+  }
+
+  .notification-count {
+    position: absolute;
+    top: 7px;
+    left: 45px;
+    font-weight: bold;
+  }
+
   ul {
     font-size: 14px;
     color: black;
@@ -99,16 +110,23 @@
 
   &.expanded {
     background-color: white;
+
     .community-name {
       display: inline;
     }
+
     &, ul {
       width: auto;
       max-width: 240px;
     }
+
     .only-expanded {
       display: inline-block;
     }
+    .only-collapsed {
+      display: none !important;
+    }
+
     li {
       a:hover {
         color: @core-color;
