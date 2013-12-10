@@ -2,7 +2,7 @@
 @import 'app/user.less';
 
 .container {
-  padding-top: 35px;
+  padding-top: 18px;
 }
 
 body.waiting-for-angular div#content-outer {
@@ -69,6 +69,25 @@ body {
   }
   .post-sort {
     width: 32%;
+  }
+  .btn {
+    border: none;
+    background-color: @faint-gray;
+    color: @text-gray;
+    padding: 0;
+    text-align: center;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    height: 24px;
+    line-height: 24px;
+
+    &.active {
+      background-color: white;
+      box-shadow: none;
+      &.intention { border-bottom: 2px solid @intention-color; }
+      &.offer { border-bottom: 2px solid @offer-color; }
+      &.request { border-bottom: 2px solid @request-color; }
+    }
   }
 }
 
