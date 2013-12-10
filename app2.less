@@ -1,4 +1,4 @@
-@import '_menu.less';
+  @import '_menu.less';
 @import 'app/user.less';
 
 .container {
@@ -117,6 +117,12 @@ body {
   margin-bottom: 18px;
   @circle-size: 30px;
 
+  height: @circle-size;
+
+  &.editing {
+    height: auto;
+  }
+
   .circle {
     display: block;
     float: left;
@@ -169,6 +175,7 @@ body {
         line-height: @circle-size;
         cursor: pointer;
         text-decoration: none;
+        font-family: @header-font;
         &:first-child { border-top-left-radius: 5px; }
         &:last-child { border-top-right-radius: 5px; }
       }
