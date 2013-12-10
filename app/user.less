@@ -1,0 +1,71 @@
+
+.biobar {
+  border-radius: 5px;
+  background-color: white;
+  text-align: center;
+  padding: 20px 0 10px;
+
+  .profile-avatar {
+    display: block;
+    @avatar-size: 140px;
+    width: @avatar-size;
+    height: @avatar-size;
+    border-radius: @avatar-size / 2;
+    margin: 0 auto 20px;
+  }
+
+  .name {
+    font-family: @header-font;
+    font-weight: bold;
+    font-size: 26px !important;
+    color: black !important;
+  }
+
+  h4 {
+    text-transform: uppercase;
+    font-family: @header-font;
+    font-size: @font-size-base;
+  }
+
+  .skills {
+    font-size: @font-size-base;
+    color: @text-gray;
+  }
+
+  .divider {
+    width: 100%;
+    height: 3px;
+    background-color: @faint-gray;
+    margin: 20px 0;
+  }
+
+  button {
+    box-sizing: border-box;
+    width: 70%;
+    margin-bottom: 10px;
+  }
+
+  .editing {
+
+    button {
+      width: 33%;
+      &.cancel {
+        margin-right: 4%;
+      }
+    }
+
+    .form-group {
+      padding: 0 @std-padding;
+    }
+
+    .name {
+      .form-control;
+      .input-lg;
+    }
+
+    .skills {
+      .form-control;
+      min-height: 60px;
+    }
+  }
+}

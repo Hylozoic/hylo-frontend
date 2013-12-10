@@ -1,6 +1,5 @@
 @import '_menu.less';
-
-// app-specific styles
+@import 'app/user.less';
 
 .container {
   padding-top: 35px;
@@ -150,6 +149,7 @@ body {
       color: @text-light-gray;
       padding: 0 30px;
       .post-type-style(@faint-gray);
+      font-family: @header-font;
     }
     .triangle {
       top: 8px;
@@ -217,7 +217,7 @@ body {
 
 .post {
   margin-bottom: 20px;
-  font-size: @medium-font-size;
+  font-size: @font-size-base;
   color: @text-gray;
 
   .bubble {
@@ -225,14 +225,14 @@ body {
 
     > h2 {
       margin-top: 0;
-      font-size: @large-font-size;
+      font-size: @font-size-large;
       font-family: @header-font;
       &, > a { color: black; }
       > a { text-decoration: none; }
     }
 
     .controls {
-      font-size: @small-font-size;
+      font-size: @font-size-small;
       font-family: @meta-font;
       &, > a { color: @light-gray; }
       > a {
@@ -262,50 +262,6 @@ body {
       > .bubble {
         padding-top: 13px;
         padding-bottom: 10px;
-      }
-    }
-  }
-}
-
-.biobar {
-  border-radius: 5px;
-  background-color: white;
-  text-align: center;
-  padding: 20px 0 10px;
-
-  .profile-avatar {
-    display: block;
-    @avatar-size: 140px;
-    width: @avatar-size;
-    height: @avatar-size;
-    border-radius: @avatar-size / 2;
-    margin: 0 auto 20px;
-  }
-
-  .skills {
-    font-size: @medium-font-size;
-    color: @text-gray;
-
-  }
-
-  .divider {
-    width: 100%;
-    height: 3px;
-    background-color: @faint-gray;
-    margin: 20px 0;
-  }
-
-  button {
-    box-sizing: border-box;
-    width: 70%;
-    margin-bottom: 10px;
-  }
-
-  .editing {
-    button {
-      width: 33%;
-      &.cancel {
-        margin-right: 4%;
       }
     }
   }
@@ -355,7 +311,7 @@ body {
         margin: -5px 10px -5px 0;
       }
       h3 {
-        font-size: @large-font-size;
+        font-size: @font-size-large;
         margin: 0 0 5px;
       }
     }

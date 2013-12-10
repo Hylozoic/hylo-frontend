@@ -7,6 +7,21 @@
 // and changes will take effect even if declared after they are used
 
 @brand-success: @core-color;
+@brand-info: @faint-gray;
+
+.btn {
+  font-family: @header-font;
+  font-size: @font-size-small;
+  text-transform: uppercase;
+}
+
+.btn-info {
+  color: @text-gray;
+}
+
+// other useful variables
+
+@std-padding: floor(@grid-gutter-width / 2);
 
 @import '_mixins.less';
 @import 'landingpage.less';
