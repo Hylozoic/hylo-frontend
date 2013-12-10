@@ -2,6 +2,12 @@
 
 @import 'bootstrap/bootstrap.less';
 @import '_colors.less';
+
+// note that bootstrap variables (see bootstrap/variables.less) can be overridden
+// and changes will take effect even if declared after they are used
+
+@brand-success: @core-color;
+
 @import '_mixins.less';
 @import 'landingpage.less';
 @import 'app2.less';
@@ -14,15 +20,4 @@ body {
   font-family: @body-font;
   font-size: 12px;
   color: @text-dark;
-}
-
-// bootstrap overrides
-.btn-success {
-  background-color: @core-color;
-  border-color: @core-color;
-
-  &:hover, &:active, &:focus {
-    border-color: @core-color-highlighted;
-    background-color: @core-color-highlighted;
-  }
 }
