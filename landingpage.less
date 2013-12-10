@@ -1,110 +1,112 @@
-@import '_colors.less';
-@import '_mixins.less';
+.landing {
 
-.bg {
-  background-image: url(/assets/images/placeholder-bg.jpg);
-  background-size: cover;
-  .blur(5px);
-  opacity: 0.2;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 270px;
-}
-
-.header {
-  position: relative;
-  text-align: center;
-  padding-bottom: 30px;
-  margin-bottom: 45px;
-
-  .navbar-hylo {
-    background-color: transparent;
-    border: none;
+  .bg {
+    background-image: url(/assets/images/placeholder-bg.jpg);
+    background-size: cover;
+    .blur(5px);
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 270px;
   }
 
-  h2 {
-    font-family: @header-font;
-  }
-
-  .request, .intention, .offer {
-    border-bottom: 2px solid black;
-  }
-  .request {
-    border-color: @request-color;
-  }
-  .intention {
-    border-color: @intention-color;
-  }
-  .offer {
-    border-color: @offer-color;
-  }
-
-}
-
-.hero-text {
-  margin-bottom: 50px;
-  font-size: 16px;
-}
-
-#signup .bg, #login .bg {
-  position: fixed;
-  height: 100%;
-}
-
-#signup-login-tablet {
-  background-color: white;
-  border-radius: 5px;
-  margin-bottom: 10px;
-
-  &, h1 { font-family: @header-font; }
-
-  > div {
-    padding: 25px;
-  }
-
-  h1 {
-    font-size: 20px;
-    text-transform: uppercase;
+  .header {
+    position: relative;
     text-align: center;
-    margin-top: 0;
+    padding-bottom: 30px;
+    margin-bottom: 45px;
+
+    .navbar-hylo {
+      background-color: transparent;
+      border: none;
+      margin-right: @navbar-padding-horizontal;
+    }
+
+    h2 {
+      font-family: @header-font;
+    }
+
+    .request, .intention, .offer {
+      border-bottom: 2px solid black;
+    }
+    .request {
+      border-color: @request-color;
+    }
+    .intention {
+      border-color: @intention-color;
+    }
+    .offer {
+      border-color: @offer-color;
+    }
+
   }
 
-  .providers, .inviteCode {
-    border-bottom: 3px @faint-gray solid;
+  .hero-text {
+    margin-bottom: 50px;
+    font-size: 16px;
   }
 
-  .providers > a {
-    width: 100%;
+  #signup .bg, #login .bg {
+    position: fixed;
+    height: 100%;
+  }
+
+  #signup-login-tablet {
+    background-color: white;
+    border-radius: 5px;
     margin-bottom: 10px;
-    color: white;
-    text-transform: uppercase;
-    font-size: @medium-font-size;
-    &.facebook {
-      background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat;
-      background-size: 28px 28px;
-    }
-    &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
-    &.linkedin {
-      background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat;
-      background-size: 28px 28px;
-    }
-    &.google {
-      background: #5b5b5b url(/assets/images/google.png) 10px center no-repeat;
-      background-size: 28px 28px;
+
+    &, h1 { font-family: @header-font; }
+
+    > div {
+      padding: 25px;
     }
 
+    h1 {
+      font-size: 20px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 0;
+    }
 
-  }
+    .providers, .inviteCode {
+      border-bottom: 3px @faint-gray solid;
+    }
 
-  .btn-success {
-    width: 100%;
-    text-transform: uppercase;
-  }
+    .providers > a {
+      width: 100%;
+      margin-bottom: 10px;
+      color: white;
+      text-transform: uppercase;
+      font-size: @medium-font-size;
+      &.facebook {
+        background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
+      &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
+      &.linkedin {
+        background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
+      &.google {
+        background: #5b5b5b url(/assets/images/google.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
 
-  .control-label {
-    padding-right: 0;
-    font-size: @medium-font-size;
+
+    }
+
+    .btn-success {
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    .control-label {
+      padding-right: 0;
+      font-size: @medium-font-size;
+    }
+
   }
 
 }
