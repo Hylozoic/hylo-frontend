@@ -2,7 +2,7 @@
 .menu {
   @icon-margin: 21px;
   @icon-width: 24px;
-  @icon-expanded-right-margin: 12px;
+  @icon-expanded-right-margin: 8px;
   @collapsed-width: @icon-margin * 2 + @icon-width;
 
   position: fixed;
@@ -37,6 +37,7 @@
     height: 48px;
     line-height: 48px;
     margin: 0;
+    padding-right: @icon-margin;
     vertical-align: middle;
     font-size: 16px;
     display: none;
@@ -79,8 +80,12 @@
 
     i {
       margin-right: @icon-expanded-right-margin;
-      width: @icon-width;
+      width: @icon-width !important;
+      display: inline-block;
+      text-align: center;
       font-size: 18px;
+      position: relative;
+      top: 2px;
     }
     &:hover {
       background-color: @core-color;
@@ -99,8 +104,21 @@
       padding: 7px @icon-margin;
     }
     .notification {
+      font-family: @body-font;
+      text-transform: none;
+      border-left: 4px solid transparent;
+      color: @text-gray;
+      box-sizing: border-box;
+      width: 100%;
+      overflow: hidden;
+
+      &.unread {
+        background-color: @faint-gray;
+        border-left: 4px solid @core-color;
+      }
+
       .avatar {
-        @small-avatar-width: @icon-width + 8px;
+        @small-avatar-width: @icon-width;
         width: @small-avatar-width;
         height: @small-avatar-width;
         border-radius: @small-avatar-width / 2;
@@ -110,7 +128,7 @@
       }
 
       > div {
-        margin-left: 30px;
+        margin-left: 32px;
       }
     }
   }
@@ -118,6 +136,7 @@
   &.expanded {
     background-color: white;
     border-right: 1px solid #c6c6c4;
+    overflow: hidden;
 
     .community-name {
       display: inline;
@@ -159,9 +178,9 @@
 
 #notifications {
   margin-top: 0;
+  visibility: hidden;
+}
 
-  a.unread {
-    background-color: @faint-gray;
-    border-left: 4px solid @core-color;
-  }
+.expanded #notifications {
+  visibility: visible;
 }
