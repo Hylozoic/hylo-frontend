@@ -9,8 +9,10 @@
 @brand-success: @core-color;
 @brand-info: @faint-gray;
 
+@import '_mixins.less';
+
 .btn {
-  font-family: @header-font;
+  .proxima-nova-regular;
   font-size: @font-size-small;
   text-transform: uppercase;
 }
@@ -23,7 +25,6 @@
 
 @std-padding: floor(@grid-gutter-width / 2);
 
-@import '_mixins.less';
 @import 'landingpage.less';
 @import 'app2.less';
 @import 'hyloIcons.less';
