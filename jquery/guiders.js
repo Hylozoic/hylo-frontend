@@ -1,7 +1,7 @@
 /**
  * guiders.js
  *
- * version 2.0.0
+ * version 2.0.1 Modified by Ray (@see https://github.com/jeff-optimizely/Guiders-JS/issues/109)
  *
  * Released under the Apache License 2.0.
  * www.apache.org/licenses/LICENSE-2.0.html
@@ -100,6 +100,9 @@ var guiders = (function($) {
       guiderButtonsContainer.remove();
       return;
     }
+
+    // @see https://github.com/jeff-optimizely/Guiders-JS/issues/109
+    guiderButtonsContainer.html('');
   
     for (var i = myGuider.buttons.length - 1; i >= 0; i--) {
       var thisButton = myGuider.buttons[i];
