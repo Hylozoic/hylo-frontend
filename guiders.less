@@ -1,0 +1,132 @@
+/**
+ * CSS for Guiders.js
+ * Version 2.0.0 (Modified for Hylo styles)
+ *
+ */
+
+@import '_mixins';
+
+@guiderLightColor: #00D2BF;
+@guiderDarkColor: #00A591;
+@guiderTextColor: #FFFFFF;
+@borderRadius: 8px;
+
+
+.guider {
+  background: @guiderLightColor;
+  .proxima-nova-light;
+  position: absolute;
+  outline: none;
+  width: 260px;
+  z-index: 900001 !important;
+  
+  .border-radius(@borderRadius);
+}
+
+@arrowSize: 32px;
+.guiders_arrow {
+  width: @arrowSize;
+  height: @arrowSize;
+  position: absolute;
+  display: none;
+  background-color: @guiderLightColor;
+  .transform(rotate(45deg));
+  z-index: 900000 !important;
+}
+
+.guiders_arrow_right {
+  display: block;
+  right: -@arrowSize / 2;
+}
+.guiders_arrow_down {
+  display: block;
+  bottom: -@arrowSize / 2;
+}
+.guiders_arrow_up {
+  display: block;
+  top: -@arrowSize / 2;
+}
+.guiders_arrow_left {
+  display: block;
+  left: -@arrowSize / 2;
+}
+
+.guiders_button {
+  background-color: @guiderDarkColor;
+  color: @guiderTextColor;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: block;
+  .border-bottom-radius(@borderRadius);
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  .proxima-nova-light;
+  text-transform: uppercase;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.guiders_buttons_container {
+  height: 36px;
+  position: relative;
+  width: 100%;
+}
+
+.guiders_close {
+  float: right;
+  padding: 10px 0 0;
+}
+
+.guiders_content {
+  position: relative;
+  z-index: 900001 !important;
+  p {
+    clear: both;
+    color: @guiderTextColor;
+    font-size: 13px;
+    padding: 0 15px 17px 15px;
+    margin: 0;
+  }
+  h1 {
+    margin: 0;
+    padding: 20px 15px 21px 20px;
+    color: @guiderTextColor;
+    float: left;
+    font-size: 21px;
+    .proxima-nova-bold;
+  }
+}
+
+.guiders_highlight {
+  position: relative;
+  z-index: 900003 !important; /* Should be larger than anything else on your page. */
+}
+
+#guiders_overlay {
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  z-index: 800001;
+}
+
+.guiders_x_button {
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 10px;
+}
+
+.guiders_x_button:after {
+  content: "X";
+}
