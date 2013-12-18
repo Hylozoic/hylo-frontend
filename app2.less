@@ -114,11 +114,13 @@ body {
 }
 
 .avatar {
-  &, > img {
-    width: @avatar-size;
-    height: @avatar-size;
-    border-radius: @avatar-size / 2;
-  }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: @avatar-size;
+  width: @avatar-size;
+  border-radius: @avatar-size / 2;
   float: left;
 }
 
@@ -319,6 +321,10 @@ body {
       border-bottom: 1px solid @faint-gray;
       overflow: hidden; // TODO use dotdotdot
       .avatar {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: block;
         width: @avatar-size;
         height: @avatar-size;
         border-radius: 30px;
