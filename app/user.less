@@ -15,6 +15,36 @@
     width: @avatar-size;
     border-radius: @avatar-size / 2;
     margin: 0 auto 20px;
+
+    .editOverlay {
+      display: block;
+      position: absolute;
+      height: @avatar-size;
+      width: @avatar-size;
+      background-image: url(../images/editOverlay.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    .editOverlay:hover {
+      opacity: 0.9;
+    }
+
+    & > .loadingNewImage {
+      display: none;
+    }
+
+    &.loading .loadingNewImage {
+      display: block;
+      position: absolute;
+      height: @avatar-size;
+      width: @avatar-size;
+      background-image: url(../images/loader_2.gif);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
   .name {
