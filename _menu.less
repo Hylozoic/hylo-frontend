@@ -113,6 +113,8 @@
       width: 100%;
       overflow: hidden;
 
+
+
       &.unread {
         background-color: @faint-gray;
         border-left: 4px solid @core-color;
@@ -130,7 +132,7 @@
 
       .timestamp {
         .proxima-nova-regular;
-        font-size: 0.8em;
+        font-size: 10px;
         color: #AFAFAF;
         padding-top: 10px;
       }
@@ -138,19 +140,19 @@
       .itemName {
         padding-top: 10px;
         .droid-regular;
-        font-size: 0.95em;
+        font-size: 11px;
         color: #808080;
       }
 
       .action {
         .proxima-nova-light;
-        font-size: 1.2em;
+        font-size: 14px;
         color: #1A1A1A;
       }
 
       .actor {
         .proxima-nova-bold;
-        font-size: 1.2em;
+        font-size: 14px;
         color: #1A1A1A;
       }
 
@@ -202,13 +204,16 @@
     margin-left: 10px;
     margin-right: 10px;
     padding-bottom: 10px;
+    background-color: white;
+    opacity: 0.8;
 
-    font-size: 0.8em;
+    @footerFontSize: 9px;
+    font-size: @footerFontSize;
     color: #808080;
 
     a {
       .proxima-nova-regular;
-      font-size: 0.75em;
+      font-size: @footerFontSize;
       color: #808080;
     }
 
@@ -231,4 +236,3 @@
 .expanded #notifications {
   visibility: visible;
 }
-
