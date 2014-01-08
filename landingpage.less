@@ -106,44 +106,57 @@
 
 }
 
-#signup .bg, #login .bg, #mainBody .bg {
+#signup .bg, #login .bg {
   position: fixed;
   height: 100%;
 }
 
-.mainMessage {
-  text-align: center;
-
-  h1 {
-    font-size: 3.34em;
-    .proxima-nova-light;
-    margin-bottom: 30px;
-  }
-  h3 {
-    .myriad-semi-italic;
-    font-size: 1.75em;
-  }
-  h5 {
-    .proxima-nova-light;
-    font-size: 1.5em;
-    padding-top: 0px;
-    color: #666666;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  p {
-    color: #666666;
-    font-size: 1.2em;
-    .droid-regular;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  hr {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    color: #808080;
-    background-color: #808080;
-    border-color: #808080;
+.mainContainer {
+  .bg {
+    background-image: url(/assets/images/placeholder-bg.jpg);
+    background-size: cover;
+    opacity: 0.6;
+    top: 0;
+    width: 100%;
+    position: fixed;
+    height: 100%;
   }
 
+  .mainMessage {
+    padding-top: 100px;
+    text-align: center;
+
+    h1 {
+      font-size: 3.34em;
+      .proxima-nova-light;
+      margin-bottom: 30px;
+    }
+    h3 {
+      .myriad-semi-italic;
+      font-size: 1.75em;
+    }
+    h5 {
+      .proxima-nova-light;
+      font-size: 1.5em;
+      padding-top: 0px;
+      color: #666666;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    p {
+      color: #666666;
+      font-size: 1.2em;
+      .droid-regular;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    hr {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      color: #808080;
+      background-color: #808080;
+      border-color: #808080;
+    }
+
+  }
 }
