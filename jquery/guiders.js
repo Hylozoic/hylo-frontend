@@ -18,7 +18,7 @@
 var guiders = (function($) {
   var guiders = $.guiders = {};
   
-  guiders.version = "2.0.0";
+  guiders.version = "2.0.1";
 
   guiders._defaultSettings = {
     attachTo: null, // Selector of the element to attach to.
@@ -42,7 +42,7 @@ var guiders = (function($) {
     position: 0, // 1-12 follows an analog clock, 0 means centered.
     shouldSkip: function() {}, // Optional handler allows you to skip a guider if returns true.
     title: "Sample title goes here",
-    width: 400,
+    width: 300,
     xButton: false // This places a closer "x" button in the top right of the guider.
   };
 
