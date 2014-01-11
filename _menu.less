@@ -2,7 +2,7 @@
 .menu {
   @icon-margin: 21px;
   @icon-width: 24px;
-  @icon-expanded-right-margin: 8px;
+  @icon-expanded-right-margin: 10px;
   @collapsed-width: @icon-margin * 2 + @icon-width;
 
   position: fixed;
@@ -66,7 +66,7 @@
 
   ul {
     font-size: 14px;
-    color: black;
+    color: #333;
     width: @collapsed-width;
   }
 
@@ -94,11 +94,11 @@
     a {
       display: block;
       padding: 5px @icon-margin;
-      color: black;
+      color: #333;
       text-decoration: none;
       &.current {
         padding-left: @icon-margin - 4px;
-        border-left: 4px solid black;
+        border-left: 4px solid #333333;
       }
     }
     &.no-link {
