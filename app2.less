@@ -303,12 +303,17 @@ body {
       > .bubble {
         padding-top: 13px;
         padding-bottom: 10px;
+        position: relative;
 
         .delete {
-          float: right;
-          //visibility: hidden;
-          top: 0;
-          right: 10px;
+          position: absolute;
+          top: 5px;
+          right: 7px;
+          display: none;
+        }
+
+        &.deletable:hover .delete {
+          display: block;
         }
       }
     }
