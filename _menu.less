@@ -1,4 +1,7 @@
 
+@logo-height: 48px;
+@menu-padding-top: 15px;
+
 .menu {
   @icon-margin: 21px;
   @icon-width: 24px;
@@ -9,7 +12,6 @@
   top: 0;
   box-sizing: border-box;
   height: 100%;
-  padding-top: 15px;
   overflow: visible;
   z-index: 2;
 
@@ -27,17 +29,20 @@
 
   .logo {
     &, img {
-      height: 48px;
-      width: 48px;
+      height: @logo-height;
+      width: @logo-height;
     }
     display: inline-block;
-    margin: 0 16px 0 20px;
+    margin: @menu-padding-top 16px 0 20px;
+    -webkit-transition: all 250ms @ease-in-out-cubic;
+    transition: all 250ms @ease-in-out-cubic;
   }
 
   .community-name {
     height: 48px;
     line-height: 48px;
     margin: 0;
+    margin-top: @menu-padding-top;
     padding-right: @icon-margin;
     vertical-align: middle;
     font-size: 16px;
@@ -242,3 +247,23 @@
 .expanded #notifications {
   visibility: visible;
 }
+
+@media(max-width: @screen-sm) {
+  #content {
+    margin-top: @logo-height;
+  }
+  .menu.collapsed {
+    #menu-links, .collapsed #notifications {
+      display: none;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+    .logo {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}
+
+
