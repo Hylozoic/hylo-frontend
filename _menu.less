@@ -1,6 +1,7 @@
 
 @logo-height: 48px;
 @menu-padding-top: 15px;
+@menu-width: 240px;
 
 .menu {
   @icon-margin: 21px;
@@ -183,7 +184,7 @@
 
     &, ul {
       width: auto;
-      max-width: 240px;
+      max-width: @menu-width;
     }
 
     .only-expanded {
@@ -211,13 +212,15 @@
 
   .footerLinks {
 
-    margin-left: 10px;
-    margin-right: 10px;
+    width: auto !important;
+    max-width: @menu-width !important;
+    padding-left: 10px;
     padding-bottom: 18px;
+    margin: 0;
     background-color: white;
     opacity: 0.8;
 
-    @footerFontSize: 12px;
+    @footerFontSize: 11px;
     font-size: @footerFontSize;
     color: #808080;
     .proxima-nova-regular;
