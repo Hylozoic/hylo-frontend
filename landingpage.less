@@ -135,10 +135,6 @@
       .proxima-nova-light;
       margin-bottom: 30px;
     }
-    h3 {
-      .myriad-semi-italic;
-      font-size: 21px;
-    }
     h5 {
       .proxima-nova-light;
       font-size: 18px;
@@ -147,19 +143,14 @@
       padding-left: 20px;
       padding-right: 20px;
     }
-    p {
-      color: #666666;
-      font-size: 14px;
-      .droid-regular;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
+
     hr {
       margin-top: 40px;
       margin-bottom: 40px;
-      color: #808080;
-      background-color: #808080;
-      border-color: #808080;
+      @ruleColor: #808080;
+      color: @ruleColor;
+      background-color: @ruleColor;
+      border-color: @ruleColor;
     }
   }
 
@@ -182,5 +173,33 @@
       .proxima-nova-light;
       color: @intention-color;
     }
+
+    hr {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      @ruleColor: #E6E6E6;
+      color: @ruleColor;
+      background-color: @ruleColor;
+      border-color: @ruleColor;
+    }
   }
 }
+
+.hylo-definition {
+  @definitionColor: #666666;
+  text-align: center;
+  h3 {
+    .myriad-semi-italic !important;
+    font-size: 21px !important;
+    color: @definitionColor !important;
+  }
+  p {
+    color: @definitionColor;
+    font-size: 14px;
+    .droid-regular;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
