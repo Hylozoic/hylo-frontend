@@ -266,6 +266,17 @@ body {
   .bubble {
     padding: 15px 20px;
 
+    .delete {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      display: none;
+    }
+
+    &.deletable:hover .delete {
+      display: block;
+    }
+
     > h2 {
       margin-top: 0;
       font-size: @font-size-large;
