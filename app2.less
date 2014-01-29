@@ -333,6 +333,97 @@ body {
       }
     }
   }
+
+  .followers {
+    margin-top: 6px;
+    .proxima-nova-light;
+    color: @light-gray;
+    font-size: 11px;
+
+    .actionIcon {
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    a {
+      .proxima-nova-bold;
+      font-size: 11px;
+      color: @light-gray;
+      cursor: pointer;
+    }
+
+    .follower {
+      padding-right: 5px;
+
+      &:last-of-type {
+        padding-right: 0px;
+      }
+
+      .avatar {
+        width: 20px;
+        float: none;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      &:hover {
+        color: @intention-color;
+      }
+    }
+  }
+
+  .followers-edit {
+    margin-top: 10px;
+    position: relative;
+
+    .arrow {
+      &,
+      &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+    }
+
+    .arrow {
+      border-width: @popover-arrow-outer-width;
+    }
+
+    .arrow:after {
+      border-width: @popover-arrow-width;
+      content: "";
+    }
+
+    .arrow {
+      left: 3%;
+      margin-left: -@popover-arrow-outer-width;
+      border-top-width: 0;
+      border-bottom-color: @tags-border-color;
+      top: -10px;
+      &:after {
+        content: " ";
+        top: 1px;
+        margin-left: -@popover-arrow-width;
+        border-top-width: 0;
+        border-bottom-color: @tags-bg-color;
+      }
+    }
+
+    .decipher-tags {
+
+    }
+
+    .typeahead-result {
+      .proxima-nova-light;
+      strong {
+        .proxima-nova-bold;
+      }
+    }
+  }
 }
 
 .users {
