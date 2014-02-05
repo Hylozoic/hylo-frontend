@@ -39,9 +39,10 @@ body {
   height: 100%;
   opacity: 0.5;
 
-  .blur(5px);
-  filter: url(/assets/stylesheets/blur.svg#blur);
-  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+  // Remove blurring filters since they were not work and causing shadows on chrome.
+//  .blur(5px);
+//  filter: url(http://d3ngex8q79bk55.cloudfront.net/fonts/blur.svg#blur);
+//  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
 }
 
 .filter-search-icon {
