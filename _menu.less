@@ -198,8 +198,16 @@
       a:hover {
         color: @core-color;
         background-color: white;
+
         &.current {
           border-color: @core-color;
+        }
+
+        .only-hover {
+          color: #333;
+          &:hover {
+            color: @core-color;
+          }
         }
       }
 
