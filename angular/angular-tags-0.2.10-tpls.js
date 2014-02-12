@@ -184,6 +184,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
        * Toggle the input box active.
        */
       $scope.selectArea = function selectArea() {
+        $scope.toggles.focusElementNow = $scope.toggles.focusElementNow + 1;
         $scope.toggles.inputActive = true;
       };
 
@@ -354,6 +355,13 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
             * When inputActive toggle changes to true, focus the input.
             * And no I have no idea why this has to be in a timeout.
             */
+           scope.$watch('toggles.focusElementNow',
+             function (newVal) {
+               $timeout(function () {
+                 element[0].focus();
+               });
+             });
+
            scope.$watch('toggles.inputActive',
              function (newVal) {
                if (newVal) {
@@ -620,7 +628,8 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
            // this should be named something else since it's just a collection
            // of random shit.
            scope.toggles = {
-             inputActive: true
+             inputActive: true,
+             focusElementNow: 0
            };
 
            /**
