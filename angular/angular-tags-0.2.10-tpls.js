@@ -42,7 +42,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
   $templateCache.put("templates/tag.html",
     "<span class=\"decipher-tags-tag\"\n" +
     "      data-ng-class=\"getClasses(tag)\">{{tag.name}}\n" +
-    "      <i class=\"icon-remove\"\n" +
+    "      <i class=\"icon-remove-inverse\"\n" +
     "         data-ng-click=\"remove(tag)\">\n" +
     "      </i>\n" +
     "</span>\n" +
