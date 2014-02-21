@@ -28,26 +28,35 @@
     background-color: white;
   }
 
+
   .logo {
+    float: left;
+
     &, img {
       height: @logo-height;
       width: @logo-height;
     }
-    display: inline-block;
+
     margin: @menu-padding-top 16px 0 20px;
     -webkit-transition: all 250ms @ease-in-out-cubic;
     transition: all 250ms @ease-in-out-cubic;
+
   }
 
   .community-name {
-    height: 48px;
-    line-height: 48px;
-    margin: 0;
+    height: @logo-height;
+    overflow: hidden;
     margin-top: @menu-padding-top;
-    padding-right: @icon-margin;
-    vertical-align: middle;
-    font-size: 16px;
     display: none;
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 16px;
+      line-height: 18px;
+      padding-right: 5px;
+      .proxima-nova-regular;
+    }
   }
 
   .hylo-logo {
@@ -179,7 +188,7 @@
     overflow: hidden;
 
     .community-name {
-      display: inline;
+      display: table;
     }
 
     &, ul {
@@ -246,7 +255,6 @@
 }
 
 #menu-links {
-  margin-top: 20px;
   margin-bottom: 0;
 }
 
