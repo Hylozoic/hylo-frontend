@@ -15,7 +15,7 @@ body.waiting-for-angular div#content-outer {
 }
 body.waiting-for-angular div#initializing-panel {
   display: block;
-  background: url(../images/loading.gif) center center no-repeat;
+  background: url(/assets/images/loading.gif) center center no-repeat;
   position:absolute;
   top:0;
   left:0;
@@ -57,7 +57,7 @@ body {
 }
 
 .textfield-search-indicator {
-  background: url(../images/loading.gif) center center no-repeat;
+  background: url(/assets/images/loading.gif) center center no-repeat;
   position: absolute;
   right: 20px;
   top: 0;
@@ -70,7 +70,7 @@ body {
   position:absolute;
   width: 100%;
   z-index: 2000;
-  background: url(../images/loading.gif) center center no-repeat;
+  background: url(/assets/images/loading.gif) center center no-repeat;
   height: 45px;
 }
 
@@ -276,173 +276,7 @@ body {
   }
 }
 
-.post {
-  margin-bottom: 20px;
-  font-size: @font-size-base;
-  color: @text-gray;
-
-  .bubble {
-    padding: 15px 20px;
-
-    .delete {
-      position: absolute;
-      top: 5px;
-      right: 7px;
-      display: none;
-    }
-
-    &.deletable:hover .delete {
-      display: block;
-    }
-
-    > h2 {
-      margin-top: 0;
-      font-size: @font-size-large;
-      .proxima-nova-light;
-      &, > a { color: black; }
-      > a { text-decoration: none; }
-    }
-
-    .controls {
-      font-size: @font-size-small;
-      font-family: @body-font;
-      padding-top: 8px;
-
-      &, > a { color: @light-gray; }
-      > a {
-        cursor: pointer;
-        text-decoration: none;
-      }
-      .timestamp { margin-right: 12px; }
-      .vote, .comment {
-        display: inline-block;
-        padding: 0 4px;
-      }
-    }
-
-    .triangle {
-      top: 14px;
-    }
-  }
-
-  .comments {
-    background-color: @faint-gray;
-    padding: 18px 20px 6px;
-    margin: 10px -20px -15px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    > .comment {
-      margin-bottom: 12px;
-      > .bubble {
-        padding-top: 13px;
-        padding-bottom: 10px;
-        position: relative;
-
-        .delete {
-          position: absolute;
-          top: 5px;
-          right: 7px;
-          display: none;
-        }
-
-        &.deletable:hover .delete {
-          display: block;
-        }
-      }
-    }
-  }
-
-  .followers {
-    margin-top: 6px;
-    .proxima-nova-light;
-    color: @light-gray;
-    font-size: 11px;
-
-    .actionIcon {
-      font-size: 14px;
-      vertical-align: middle;
-    }
-
-    a {
-      .proxima-nova-bold;
-      font-size: 11px;
-      color: @light-gray;
-      cursor: pointer;
-    }
-
-    .follower {
-      padding-right: 5px;
-
-      &:last-of-type {
-        padding-right: 0px;
-      }
-
-      .avatar {
-        width: 20px;
-        float: none;
-        height: 20px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-
-      &:hover {
-        color: @intention-color;
-      }
-    }
-  }
-
-  .followers-edit {
-    margin-top: 10px;
-    position: relative;
-
-    .arrow {
-      &,
-      &:after {
-        position: absolute;
-        display: block;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
-      }
-    }
-
-    .arrow {
-      border-width: @popover-arrow-outer-width;
-    }
-
-    .arrow:after {
-      border-width: @popover-arrow-width;
-      content: "";
-    }
-
-    .arrow {
-      left: 3%;
-      margin-left: -@popover-arrow-outer-width;
-      border-top-width: 0;
-      border-bottom-color: @tags-border-color;
-      top: -10px;
-      &:after {
-        content: " ";
-        top: 1px;
-        margin-left: -@popover-arrow-width;
-        border-top-width: 0;
-        border-bottom-color: @tags-bg-color;
-      }
-    }
-
-    .decipher-tags {
-
-    }
-
-    .typeahead-result {
-      .proxima-nova-light;
-      strong {
-        .proxima-nova-bold;
-      }
-    }
-  }
-}
+@import "app/hylo_post";
 
 .users {
   .user {

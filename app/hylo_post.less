@@ -1,0 +1,215 @@
+.post {
+  margin-bottom: 20px;
+  font-size: @font-size-base;
+  color: @text-gray;
+
+  @fulfillColor: #00EA83;
+
+  .btn-fulfill {
+    font-size: 15px;
+    margin-top: 8px;
+    margin-bottom: 14px;
+    text-transform: capitalize;
+    .button-variant(#FFF; @fulfillColor; @fulfillColor);
+    i {
+      font-size: 13px;
+    }
+  }
+
+  .follower, .contributor {
+    padding-right: 5px;
+
+    &:last-of-type {
+      padding-right: 0px;
+    }
+
+    .avatar {
+      width: 20px;
+      float: none;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: @intention-color;
+    }
+  }
+
+  .bubble {
+    padding: 15px 0px;
+
+    & > div:not(.triangle) {
+      padding: 0 20px;
+    }
+
+    .delete {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      display: none;
+    }
+
+    &.deletable:hover .delete {
+      display: block;
+    }
+
+    .fulfillment {
+      .proxima-nova-light;
+      color: white;
+      margin: 10px 0px;
+      font-size: 12px;
+      height: 25px;
+      background-color: @fulfillColor;
+      vertical-align: middle;
+
+      a {
+        .proxima-nova-bold;
+        cursor: pointer;
+        color: white;
+      }
+
+      .dropdown-menu a {
+        color: @light-gray;
+        font-size: 11px;
+      }
+
+      > div {
+        padding-top: 4px;
+      }
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: @font-size-large;
+      .proxima-nova-light;
+      &, > a { color: black; }
+      > a { text-decoration: none; }
+    }
+
+    .comment-form {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .controls {
+      font-size: @font-size-small;
+      font-family: @body-font;
+      padding-top: 8px;
+
+      &, > a { color: @light-gray; }
+      > a {
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .timestamp { margin-right: 12px; }
+      .vote, .comment {
+        display: inline-block;
+        padding: 0 4px;
+      }
+    }
+
+    .triangle {
+      top: 14px;
+    }
+  }
+
+  .comments {
+    background-color: @faint-gray;
+    padding: 18px 20px 6px;
+    margin: 10px -20px -15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    > .comment {
+      margin-bottom: 12px;
+      > .bubble {
+        padding-top: 13px;
+        padding-bottom: 10px;
+        position: relative;
+
+        .delete {
+          position: absolute;
+          top: 5px;
+          right: 7px;
+          display: none;
+        }
+
+        &.deletable:hover .delete {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .followers {
+    margin-top: 6px;
+    .proxima-nova-light;
+    color: @light-gray;
+    font-size: 11px;
+
+    .actionIcon {
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    a {
+      .proxima-nova-bold;
+      font-size: 11px;
+      color: @light-gray;
+      cursor: pointer;
+    }
+  }
+
+  .followers-edit {
+    padding: 0 10px !important;
+    margin-top: 12px;
+    position: relative;
+
+    .arrow {
+      &,
+      &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+    }
+
+    .arrow {
+      border-width: @popover-arrow-outer-width;
+    }
+
+    .arrow:after {
+      border-width: @popover-arrow-width;
+      content: "";
+    }
+
+    .arrow {
+      left: 16px + @popover-arrow-outer-width;
+      margin-left: -@popover-arrow-outer-width;
+      border-top-width: 0;
+      border-bottom-color: @tags-border-color;
+      top: -10px;
+      &:after {
+        content: " ";
+        top: 1px;
+        margin-left: -@popover-arrow-width;
+        border-top-width: 0;
+        border-bottom-color: @tags-bg-color;
+      }
+    }
+
+    .decipher-tags {
+
+    }
+
+    .typeahead-result {
+      .proxima-nova-light;
+      strong {
+        .proxima-nova-bold;
+      }
+    }
+  }
+}
