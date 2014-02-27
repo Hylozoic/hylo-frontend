@@ -113,10 +113,6 @@ body {
   }
 }
 
-.myVote {
-  color: pink;
-}
-
 .triangle {
   background-color: white;
   height: 14px;
@@ -128,7 +124,11 @@ body {
 
 .post-type-style (@color) {
   box-shadow: -1px 0 0 0 @color;
-  > .controls > .type { color: @color; }
+  > .controls > .type {
+    color: @color;
+    .proxima-nova-regular;
+    text-transform: capitalize;
+  }
   > .triangle {
     border-left: 1px solid @color;
     border-bottom: 1px solid @color;

@@ -50,6 +50,11 @@
       display: none;
       font-size: 11px;
       padding: 2px;
+      color: @gray-light;
+    }
+
+    .delete:hover {
+      color: @gray;
     }
 
     &.deletable:hover .delete {
@@ -96,7 +101,7 @@
 
     .controls {
       font-size: @font-size-small;
-      font-family: @body-font;
+      .proxima-nova-light;
       padding-top: 8px;
 
       &, > a { color: @light-gray; }
@@ -104,10 +109,24 @@
         cursor: pointer;
         text-decoration: none;
       }
-      .timestamp { margin-right: 12px; }
+
+      .myVote {
+        color: pink;
+      }
+
       .vote, .comment {
         display: inline-block;
         padding: 0 4px;
+      }
+
+      .thank-link {
+        color: #B3B3B3;
+        .proxima-nova-semibold;
+
+        &:hover {
+          color: @fulfillColor;
+          text-decoration: none;
+        }
       }
     }
 
