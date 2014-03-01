@@ -32,7 +32,15 @@
   .logo {
     float: left;
 
+    i {
+      position: absolute;
+      font-size: 30px;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+
     &, img {
+      float: left;
       height: @logo-height;
       width: @logo-height;
     }
@@ -65,6 +73,7 @@
     left: 10px;
     img {
       width: 90px;
+      opacity: 0.6;
     }
   }
 
@@ -272,11 +281,22 @@
   visibility: visible;
 }
 
-@media(max-width: @screen-sm) {
+@media(max-width: @screen-xs-max) {
   #content {
     margin-top: @logo-height;
   }
   .menu.collapsed {
+    width: 1px;
+
+    .hylo-logo {
+      bottom: 0;
+      position: fixed;
+
+      img {
+        width: 75px;
+      }
+    }
+
     #menu-links, .collapsed #notifications {
       display: none;
     }

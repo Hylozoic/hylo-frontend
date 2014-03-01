@@ -84,14 +84,20 @@ body {
 .filter-buttons {
   margin-left: @bubble-offset;
   margin-bottom: 18px;
+  
+  @media (max-width: @screen-xs-max) {
+    margin-left: 0;
+  }
+
   .post-type {
-    width: 64%;
-    margin-right: 4%;
+    width: 68%;
+    margin-right: 2%;
     float: left;
   }
   .post-sort {
-    width: 32%;
+    width: 30%;
   }
+
   .btn {
     border: none;
     background-color: @faint-gray;
@@ -102,6 +108,10 @@ body {
     border-bottom: 2px solid transparent;
     height: 24px;
     line-height: 24px;
+
+    @media (max-width: @screen-xs-max) {
+      font-size: 10px;
+    }
 
     &.active {
       background-color: white;
