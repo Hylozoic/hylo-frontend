@@ -7,6 +7,38 @@
   padding: 20px 0 10px;
   margin-bottom: 20px;
 
+  .reputations {
+
+    .reputation {
+      text-decoration: none;
+      color: @text-dark;
+      display: block;
+      .proxima-nova-light;
+      overflow: hidden; // TODO use dotdotdot
+      max-height: 60px;
+      padding: 15px;
+      font-size: 14px;
+      &.intention { border-left: 2px solid @intention-color; }
+      &.offer { border-left: 2px solid @offer-color; }
+      &.request { border-left: 2px solid @request-color; }
+
+      span {
+        color: @text-gray;
+      }
+    }
+
+    .divider {
+      padding: 0 20px;
+      margin: 0;
+      height: 2px;
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -2px;
+
+    }
+  }
+
   .profile-avatar {
     @avatar-size: 140px;
     background-size: cover;
