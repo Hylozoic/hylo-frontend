@@ -25,11 +25,19 @@
   z-index: @zindex-modal-background;
 
   // When fading in the modal, animate it to slide down
-  &.fade .modal-dialog {
-    .translate(0, -25%);
-    .transition-transform(~"0.3s ease-out");
+//  &.fade .modal-dialog {
+//    .translate(0, -25%);
+//    .transition-transform(~"0.3s ease-out");
+//  }
+//  &.in .modal-dialog { .translate(0, 0)}
+
+  &.fade {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
   }
-  &.in .modal-dialog { .translate(0, 0)}
 }
 
 // Shell div to position the modal with bottom padding
