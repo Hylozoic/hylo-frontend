@@ -14,12 +14,14 @@ angular.module("templates/tags.html", []).run(["$templateCache", function($templ
     "  <span class=\"container-fluid\" data-ng-show=\"toggles.inputActive\">\n" +
     "    <input ng-if=\"!srcTags.length\"\n" +
     "           type=\"text\"\n" +
+    "           tabindex=\"{{tabindex}}\"\n" +
     "           data-ng-model=\"inputTag\"\n" +
     "           class=\"decipher-tags-input\"/>\n" +
     "    <!-- may want to fiddle with limitTo here, but it was inhibiting my results\n" +
     "    so perhaps there is another way -->\n" +
     "    <input ng-if=\"srcTags.length\"\n" +
     "           type=\"text\"\n" +
+    "           tabindex=\"{{tabindex}}\"\n" +
     "           data-ng-model=\"inputTag\"\n" +
     "           class=\"decipher-tags-input\"\n" +
     "           data-typeahead=\"stag as stag.name for stag in srcTags|filter:{name:$viewValue}|orderBy:orderBy\"\n" +
@@ -67,7 +69,8 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
       classes: {}, // obj of group names to classes
       templateUrl: 'templates/tags.html', // default template
       tagTemplateUrl: 'templates/tag.html', // default 'tag' template
-      selectOnBlur: false
+      selectOnBlur: false,
+      tabIndex: -1
     },
 
   // for parsing comprehension expression
@@ -631,6 +634,9 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
              angular.extend(userDefaults, scope.$eval(attrs.options)));
            // break out orderBy for view
            scope.orderBy = scope.options.orderBy;
+
+           // break out tabIndex for view
+           scope.tabindex = scope.options.tabindex;
 
            // this should be named something else since it's just a collection
            // of random shit.
