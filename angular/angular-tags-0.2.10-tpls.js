@@ -66,7 +66,8 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
       delimiter: ',', // if given a string model, it splits on this
       classes: {}, // obj of group names to classes
       templateUrl: 'templates/tags.html', // default template
-      tagTemplateUrl: 'templates/tag.html' // default 'tag' template
+      tagTemplateUrl: 'templates/tag.html', // default 'tag' template
+      selectOnBlur: false
     },
 
   // for parsing comprehension expression
@@ -298,6 +299,12 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
                scope.$apply(function () {
                  delete scope.toggles.selectedTag;
                });
+             }
+           });
+
+           element.bind("blur", function() {
+             if (scope.options.selectOnBlur) {
+               addTag(ngModel.$viewValue);
              }
            });
 
