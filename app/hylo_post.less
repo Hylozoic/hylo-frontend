@@ -121,6 +121,16 @@
       .vote, .comment {
         display: inline-block;
         padding: 0 4px;
+
+        &:hover {
+          .icon-following {
+            color: pink;
+          }
+
+          .icon-following.myVote {
+            color: @light-gray;
+          }
+        }
       }
 
       .thank-link {
