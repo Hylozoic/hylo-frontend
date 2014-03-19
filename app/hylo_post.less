@@ -39,6 +39,21 @@
   .bubble {
     padding: 15px 0px;
 
+    .post-header {
+      padding: 0 0 0 20px;
+      color: inherit;
+      width: 95%;
+      display: table;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .show-more-btn {
+      color: @link-color;
+    }
+
     & > div:not(.triangle) {
       padding: 0 20px;
     }
@@ -68,7 +83,7 @@
     .fulfillment {
       .proxima-nova-light;
       color: white;
-      margin: 10px 0px;
+      margin-top: 10px;
       font-size: 12px;
       height: 25px;
       background-color: @fulfillColor;
@@ -113,7 +128,7 @@
     .controls {
       font-size: @font-size-small;
       .proxima-nova-light;
-      padding-top: 8px;
+      margin-top: 10px;
 
       &, > a { color: @light-gray; }
       > a {
