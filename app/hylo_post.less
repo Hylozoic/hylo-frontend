@@ -40,13 +40,15 @@
     padding: 15px 0px;
 
     .post-header {
+      @color: #8a8a8a;
       padding: 0 0 0 20px;
-      color: inherit;
       width: 95%;
+      color: @color;
       display: table;
 
       &:hover {
         text-decoration: none;
+        color: darken(@color, 30%);
       }
     }
 
