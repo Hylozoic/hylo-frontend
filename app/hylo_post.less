@@ -37,11 +37,11 @@
   }
 
   .bubble {
-    padding: 15px 0px;
+    padding: 0 0 15px 0;
 
     .post-header {
       @color: #8a8a8a;
-      padding: 0 0 0 20px;
+      padding: 15px 0 10px 20px;
       width: 95%;
       color: @color;
       display: table;
@@ -85,7 +85,7 @@
     .fulfillment {
       .proxima-nova-light;
       color: white;
-      margin-top: 10px;
+      margin: 5px 0;
       font-size: 12px;
       height: 25px;
       background-color: @fulfillColor;
@@ -130,7 +130,7 @@
     .controls {
       font-size: @font-size-small;
       .proxima-nova-light;
-      margin-top: 10px;
+      margin-top: 5px;
 
       &, > a { color: @light-gray; }
       > a {
@@ -144,7 +144,7 @@
 
       .vote, .comment {
         display: inline-block;
-        padding: 0 4px;
+        padding: 5px 4px;
 
         &:hover {
           .icon-following {
