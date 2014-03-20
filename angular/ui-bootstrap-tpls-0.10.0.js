@@ -2,7 +2,7 @@
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 0.10.0 - 2014-01-13
+ * Version: 0.10.0 - Ray Hacked: https://github.com/tradingscreen/bootstrap/commit/8a16d3a53176841778acd3ee0cc7c19381d68379
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdownToggle","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
@@ -2292,17 +2292,30 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             attrs.$observe( prefix+'Trigger', function ( val ) {
               unregisterTriggers();
 
-              triggers = getTriggers( val );
+              if (val != 'manual') {
+                triggers = getTriggers( val );
 
-              if ( triggers.show === triggers.hide ) {
-                element.bind( triggers.show, toggleTooltipBind );
-              } else {
-                element.bind( triggers.show, showTooltipBind );
-                element.bind( triggers.hide, hideTooltipBind );
+                if ( triggers.show === triggers.hide ) {
+                  element.bind( triggers.show, toggleTooltipBind );
+                } else {
+                  element.bind( triggers.show, showTooltipBind );
+                  element.bind( triggers.hide, hideTooltipBind );
+                }
               }
 
               hasRegisteredTriggers = true;
             });
+
+            if (attrs[prefix + 'Visible']) {
+              scope.$parent.$watch(attrs[prefix + 'Visible'], function (val) {
+              if (val) {
+                  $timeout(show);
+                }
+              else {
+                  $timeout(hide);
+                }
+                });
+            }
 
             var animation = scope.$eval(attrs[prefix + 'Animation']);
             scope.tt_animation = angular.isDefined(animation) ? !!animation : options.animation;
