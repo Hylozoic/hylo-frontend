@@ -212,6 +212,9 @@
       vertical-align: middle;
 
       &.icon-complete {
+        -ms-animation: pulse 2s infinite ease-in-out;
+        -webkit-animation: pulse 2s infinite ease-in-out;
+        animation: pulse 2s infinite ease-in-out;
         color: @btn-success-bg;
       }
     }
@@ -324,4 +327,21 @@
       padding-left: 5px;
     }
   }
+}
+
+@-ms-keyframes pulse {
+  0% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}
+  50% {-ms-transform: scale(1.2, 1.2); opacity: 1;}
+  100% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}
+
+}
+@keyframes pulse {
+  0% {opacity: 0.7;}
+  50% {opacity: 1;}
+  100% {opacity: 0.7;}
+}
+@-webkit-keyframes pulse {
+  0% {-webkit-transform: scale(1.0, 1.0); opacity: 0.7;}
+  50% {-webkit-transform: scale(1.2, 1.2); opacity: 1;}
+  100% {-webkit-transform: scale(1.0, 1.0); opacity: 0.7;}
 }
