@@ -40,15 +40,70 @@
     padding: 0 0 15px 0;
 
     .post-header {
-      @color: #8a8a8a;
-      padding: 15px 0 10px 20px;
+      span {
+        display: inline-block;
+      }
+
+      @titleColor: #333332;
+      @color: #808080;
+      padding: 15px 0 0px 20px;
       width: 95%;
       color: @color;
       display: table;
 
+      .post-info {
+        font-size: 12px;
+        color: @color;
+        padding-bottom: 10px;
+        .type {
+          .proxima-nova-regular;
+          text-transform: capitalize;
+
+          &.intention { color: @intention-color; }
+          &.request { color: @request-color; }
+          &.offer { color: @offer-color; }
+        }
+        .name {
+          .proxima-nova-semibold;
+        }
+        .post-prefix {
+          .proxima-nova-light;
+        }
+      }
+
+      .title {
+        margin-top: 0;
+        margin-right: 10px;
+        padding-bottom: 10px;
+        font-size: 16px;
+        .proxima-nova-semibold;
+        line-height: 20px;
+        color: @titleColor;
+      }
+
+      .post-description {
+        .droid-regular;
+        font-size: 12px;
+        padding-bottom: 5px;
+        color: @color;
+      }
+
       &:hover {
+        .title {
+          color: darken(@titleColor, 30%);
+        }
+        .post-info {
+          .name {
+            color: darken(@color, 30%);
+          }
+          .post-prefix {
+            color: darken(@color, 30%);
+          }
+        }
+        .post-description {
+          color: darken(@color, 30%)
+        }
         text-decoration: none;
-        color: darken(@color, 30%);
       }
     }
 
@@ -78,10 +133,6 @@
       display: block;
     }
 
-    .post-description {
-      margin-bottom: 10px;
-    }
-
     .fulfillment {
       .proxima-nova-light;
       color: white;
@@ -107,17 +158,6 @@
       }
     }
 
-    .title {
-      margin-top: 0;
-      margin-right: 10px;
-      padding-bottom: 5px;
-      font-size: @font-size-large;
-      .proxima-nova-light;
-      & {
-        color: black;
-      }
-    }
-
     .comment-form {
       padding-left: 20px;
       padding-right: 20px;
@@ -130,7 +170,6 @@
     .controls {
       font-size: @font-size-small;
       .proxima-nova-light;
-      margin-top: 5px;
 
       &, > a { color: @light-gray; }
       > a {
@@ -145,6 +184,10 @@
       .vote, .comment {
         display: inline-block;
         padding: 5px 4px;
+
+        .num {
+          font-size: 14px;
+        }
 
         &:hover {
           .icon-following {
@@ -208,7 +251,7 @@
     font-size: 11px;
 
     .actionIcon {
-      font-size: 14px;
+      font-size: 16px;
       vertical-align: middle;
 
       &.icon-complete {
