@@ -2,21 +2,40 @@
 
 .right-inner-addon {
   position: relative;
-}
-.right-inner-addon input {
-  padding-right: 30px;
-}
-.right-inner-addon i {
-  display: none;
-  position: absolute;
-  right: 0px;
-  font-size: 20px;
-  padding: 12px 12px;
-  cursor: pointer;
-}
 
-.char-limit-warning, .char-limit-error {
-  i {
-    display: block;
+  input {
+    padding-right: 30px;
   }
+
+  & > i {
+    display: block;
+    position: absolute;
+    right: 0px;
+    padding: 9px 12px;
+    cursor: pointer;
+  }
+
+  .icon-alert {
+    font-size: 16px;
+  }
+
+  .chars-left {
+    .proxima-nova-light;
+    font-style: normal;
+    font-size: 20px;
+    color: #CCC;
+  }
+
+  &.char-limit-warning {
+    .chars-left, .icon-alert {
+      color: @alert-warning-text;
+    }
+  }
+
+  &.char-limit-error {
+    .chars-left, .icon-alert {
+      color: @alert-danger-text;
+    }
+  }
+
 }
