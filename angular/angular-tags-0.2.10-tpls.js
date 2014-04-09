@@ -11,7 +11,7 @@ angular.module("templates/tags.html", []).run(["$templateCache", function($templ
     "    </span>\n" +
     "  </div>\n" +
     "\n" +
-    "  <span class=\"container-fluid\" data-ng-show=\"toggles.inputActive\">\n" +
+    "  <span class=\"\" data-ng-show=\"toggles.inputActive\">\n" +
     "    <input ng-if=\"!srcTags.length\"\n" +
     "           type=\"text\"\n" +
     "           tabindex=\"{{tabindex}}\"\n" +
