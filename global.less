@@ -3,6 +3,46 @@
 @import 'bootstrap/bootstrap.less';
 @import '_colors.less';
 
+// Custom Bootstrap Overrides
+.btn {
+  text-transform: uppercase;
+  .proxima-nova-regular;
+}
+@headings-font-family:    "proxima-nova",sans-serif;
+@jumbotron-padding:              12px;
+@jumbotron-bg:                   white;
+@btn-info-color:                 @text-gray;
+
+.jumbotron {
+  img {
+    width: 100px;
+    height: 100px;
+    .border-radius(50px);
+    margin-bottom: 20px;
+  }
+  h2,
+  .h2 {
+    .proxima-nova-bold;
+    font-size: 30px;
+    line-height: 1;
+    margin: 0;
+    color: @jumbotron-heading-color;
+  }
+  .caps-header {
+    .proxima-nova-light;
+    font-size:15px;
+    color: #808080;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+  }
+  h3, .h3 {
+    .droid-regular;
+    margin: 0;
+    font-size: 12px;
+    color: #808080;
+  }
+}
+
 // note that bootstrap variables (see bootstrap/variables.less) can be overridden
 // and changes will take effect even if declared after they are used
 

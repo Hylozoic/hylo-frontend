@@ -6,41 +6,17 @@
 .jumbotron {
   padding: @jumbotron-padding;
   margin-bottom: @jumbotron-padding;
-  font-size: @jumbotron-font-size;
-  font-weight: 200;
-  line-height: (@line-height-base * 1.5);
   color: @jumbotron-color;
   background-color: @jumbotron-bg;
 
-  img {
-    width: 100px;
-    height: 100px;
-    .border-radius(50px);
-    margin-bottom: 20px;
-  }
-  h2,
-  .h2 {
-    .proxima-nova-bold;
-    font-size: 30px;
-    line-height: 1;
-    margin: 0;
+  h1,
+  .h1 {
     color: @jumbotron-heading-color;
   }
-  .caps-header {
-    .proxima-nova-light;
-    font-size:15px;
-    color: #808080;
-    text-transform: uppercase;
-    padding-bottom: 20px;
-  }
-  h3, .h3 {
-    .droid-regular;
-    margin: 0;
-    font-size: 12px;
-    color: #808080;
-  }
   p {
-    line-height: 1.4;
+    margin-bottom: (@jumbotron-padding / 2);
+    font-size: @jumbotron-font-size;
+    font-weight: 200;
   }
 
   .container & {
