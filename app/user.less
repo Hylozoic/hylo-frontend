@@ -216,17 +216,17 @@
       opacity: 1;
     }
 
-    input[type=radio] {
+    input[type=radio], input[type=checkbox] {
       display: none;
     }
 
-    input[type=radio]:checked + label:after {
+    input[type=radio]:checked + label:after, input[type=checkbox]:checked + label:after {
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
       filter: alpha(opacity=100);
       opacity: 1;
     }
 
-    input[type=radio]:checked + label {
+    input[type=radio]:checked + label, input[type=checkbox]:checked + label {
       background: @intention-color
     }
 
