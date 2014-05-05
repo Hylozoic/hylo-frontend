@@ -1,5 +1,5 @@
 /**
- * @license Angulartics v0.8.5
+ * @license Angulartics v0.15.17
  * (c) 2013 Luis Farzati http://luisfarzati.github.io/angulartics
  * License: MIT
  */
@@ -14,11 +14,23 @@
 angular.module('angulartics.segment.io', ['angulartics'])
 .config(['$analyticsProvider', function ($analyticsProvider) {
   $analyticsProvider.registerPageTrack(function (path) {
-    analytics.pageview(path);
+    try {
+        analytics.pageview(path);
+    } catch (e) {
+        if (!(e instanceof ReferenceError)) {
+            throw e;
+        }
+    }
   });
 
   $analyticsProvider.registerEventTrack(function (action, properties) {
-    analytics.track(action, properties);
+    try {
+      analytics.track(action, properties);
+    } catch (e) {
+        if (!(e instanceof ReferenceError)) {
+            throw e;
+        }
+    }
   });
 }]);
 })(angular);
