@@ -1,5 +1,5 @@
 /**
- * @license Angulartics v0.8.5
+ * @license Angulartics v0.15.17
  * (c) 2013 Luis Farzati http://luisfarzati.github.io/angulartics
  * License: MIT
  */
@@ -22,16 +22,17 @@ angulartics.waitForVendorApi = function (objectName, delay, registerFn) {
  */
 angular.module('angulartics', [])
 .provider('$analytics', function () {
-  var settings = { 
-    pageTracking: { 
+  var settings = {
+    pageTracking: {
       autoTrackFirstPage: true,
       autoTrackVirtualPages: true,
+      trackRelativePath: false,
       basePath: '',
-      bufferFlushDelay: 1000 
+      bufferFlushDelay: 1000
     },
     eventTracking: {
       bufferFlushDelay: 1000
-    } 
+    }
   };
 
   var cache = {
@@ -78,10 +79,14 @@ angular.module('angulartics', [])
 
 .run(['$rootScope', '$location', '$analytics', function ($rootScope, $location, $analytics) {
   if ($analytics.settings.pageTracking.autoTrackFirstPage) {
-    $analytics.pageTrack($location.absUrl());
+    if ($analytics.settings.trackRelativePath) {
+        $analytics.pageTrack($location.url());
+    } else {
+	$analytics.pageTrack($location.absUrl());
+    }
   }
   if ($analytics.settings.pageTracking.autoTrackVirtualPages) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current) {
+    $rootScope.$on('$locationChangeSuccess', function (event, current) {
       if (current && (current.$$route||current).redirectTo) return;
       var url = $analytics.settings.pageTracking.basePath + $location.url();
       $analytics.pageTrack(url);
@@ -106,24 +111,24 @@ angular.module('angulartics', [])
   }
 
   function isProperty(name) {
-    return name.substr(0, 9) === 'analytics' && ['on', 'event'].indexOf(name.substr(10)) === -1;
+    return name.substr(0, 9) === 'analytics' && ['On', 'Event'].indexOf(name.substr(9)) === -1;
   }
 
   return {
     restrict: 'A',
     scope: false,
     link: function ($scope, $element, $attrs) {
-      var eventType = $attrs.analyticsOn || inferEventType($element[0]),
-          eventName = $attrs.analyticsEvent || inferEventName($element[0]);
-
-      var properties = {};
-      angular.forEach($attrs.$attr, function(attr, name) {
-        if (isProperty(attr)) {
-          properties[name.slice(9).toLowerCase()] = $attrs[name];
-        }
-      });
+      var eventType = $attrs.analyticsOn || inferEventType($element[0]);
 
       angular.element($element[0]).bind(eventType, function () {
+        var eventName = $attrs.analyticsEvent || inferEventName($element[0]);
+        var properties = {};
+        angular.forEach($attrs.$attr, function(attr, name) {
+            if (isProperty(name)) {
+                properties[name.slice(9).toLowerCase()] = $attrs[name];
+            }
+        });
+
         $analytics.eventTrack(eventName, properties);
       });
     }
