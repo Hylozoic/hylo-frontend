@@ -18,17 +18,47 @@
     font-size: 28px;
   }
 
+
+  nav {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    border-radius: 0;
+    top: 40px;
+    -webkit-transition-property: background-color, color;
+    -moz-transition-property: background-color, color;
+    -o-transition-property: background-color, color;
+    transition-property: background-color,color;
+
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+
+  .btn-home {
+
+  }
+
   .navbar-home {
     margin-bottom: 0px;
-    background-color: #FFF;
 
     .navbar-nav li a {
-      color: #333;
+      color: white;
       .proxima-nova-regular;
       text-transform: uppercase;
       font-size: 14px;
       padding-top: 20px;
       padding-bottom: 20px;
+
+    }
+
+    &.animated {
+      background-color: #FFF;
+
+      li a {
+        color: #333;
+      }
     }
 
     .navbar-brand {
