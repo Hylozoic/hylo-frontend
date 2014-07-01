@@ -5,33 +5,53 @@
   font-family: "proxima-nova", sans-serif;
   font-style: normal;
   font-weight: 400;
-  margin: 15px 0;
-  .col1, .col2, .col3{
-    width: 33%;
-    padding: 0 20px;
+  margin: 0;
+  padding: 0;
+  .col1, .col3{
+    padding: 10px;
     float: left;
+    color: #000000;
+    span{
+      color:#939598 !important;
+    }
     small{
-      font-size: 80%;
+      font-size: 12px;
       margin: 0 15px;
       text-align: right;
-      a:link{
-        text-decoration: none;
-        color:#808080;
-      }
     }
+  }
+  .col1{
+    width: 60%;
+  }
+  .col3{
+    width: 35%;
+    float: right;
+    text-align: right;
+    a{
+      text-decoration: none;
+      color:#BCBEC0;
+    }
+    a:hover, a:focus{
+        color: #00D3BF !important;
+      }
   }
 }
 
+
 .card{
-  font-size: 20px !important;
+  font-size: 16px !important;
   font-family: "proxima-nova", sans-serif;
   font-style: normal;
   font-weight: 400;
-  color:#333332 !important;
+  color:#939598 !important;
   line-height: 45px;
 }
 
 label small{
   font-size: 12px !important;
   color:#808080 !important;
+}
+
+.modal-footer{
+  background: #fff;
 }
