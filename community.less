@@ -3,11 +3,28 @@
 .community{
   .small{
     width: 300px !important;
-    float: right;
   }
 
-  .filter-query input{
-    height: 34px;
+  .filters{
+    width: 90%;
+    .btn-group{
+      float: left;
+      margin: 5px 15px;
+    }
+  }
+
+  .filter-query{
+    margin-left:0;
+    float: left;
+    margin: 5px 15px;
+    input{
+      height: 34px;
+      text-transform: capitalize;
+      font-family: "proxima-nova", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+    }
   }
 
   .filter-query .input-group-addon{
@@ -18,12 +35,7 @@
   .second{
     padding-top: 60px;
   }
-  .add-post{
-    height: 30px;
-    position: relative;
-    z-index: 10000;
-    // top:-55px;
-  }
+
 
   .filter-buttons{
     margin-bottom: 60px;
@@ -42,4 +54,10 @@
       background: #F2F2F2;
     }
   }
+}
+
+.add-post{
+  height: 30px;
+  position: relative;
+  top:0px;
 }
