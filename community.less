@@ -16,7 +16,7 @@
   .filter-query{
     margin-left:0;
     margin: 0 15px;
-    width:200px;
+    float: none;
     input{
       height: 30px;
       text-transform: capitalize;
@@ -47,9 +47,17 @@
     line-height: 30px;
     padding: 0px 12px;
     border:none;
+    border-radius:5px;
   }
   .btn:hover{
     background: #F2F2F2;
+  }
+
+  .btn-group > .btn-group:last-child > .btn:first-child {
+    border-radius: 5px;
+  }
+  .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn{
+    border-radius: 5px;
   }
 }
 
