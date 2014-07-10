@@ -6,7 +6,7 @@
   }
 
   .btn-toolbar{
-    margin-left: 220px;
+    margin-left: 200px;
     position: absolute;
     top:0;
   }
@@ -82,15 +82,39 @@
   margin-top: -30px;
   //float: left;
   .editor{
-    margin-top:-38px;
+    // margin-top:-54px;
     width: 100%;
-    position: relative;
+    position: absolute; // switch to relative for fluid
     z-index:999999;
     top:0;
+  }
+  .circle{
+    display: block;
+    float: left;
+    height: 42px;
+    width: 42px;
+    line-height: 44px;
+    border-radius: 25px;
+    margin-left: 0;
+    margin-top: -5px;
   }
 }
 
 #content-outer{
   z-index: 100;
   position:relative;
+}
+
+.bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  width: 150px;
+  outline:0;
+}
+
+.bootstrap-select .btn:focus {
+  outline: none !important;
+  outline: 0 auto -webkit-focus-ring-color !important;
+  outline-offset: 0px;
+}
+.community .bootstrap-select.btn-group .dropdown-menu li > a {
+  outline: none;
 }
