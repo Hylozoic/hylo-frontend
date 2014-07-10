@@ -184,6 +184,10 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
         return dfrd.promise;
       };
 
+      $scope.trust = function(tag) {
+          return $sce.trustAsHtml(tag.name);
+      };
+
       /**
        * Toggle the input box active.
        */
@@ -328,7 +332,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
             * Inspects whatever you typed to see if there were character(s) of
             * concern.
             */
-           element.bind('keyup',
+           element.bind('keydown',
              function (evt) {
                scope.$apply(function () {
                  // to "complete" a tag
@@ -339,7 +343,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
 
                    // or if you want to get out of the text area
                  } else if (kcCancelInput.indexOf(evt.which) >=
-                            0) {
+                            0 && !evt.isPropagationStopped()) {
                    cancel();
                    scope.toggles.inputActive =
                    false;
@@ -536,15 +540,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
               * @param value
               */
                format = function format(value) {
-               var arr = [],
-                 sanitize = function sanitize(tag) {
-                   return tag
-                     .replace(/&/g, '&amp;')
-                     .replace(/</g, '&lt;')
-                     .replace(/>/g, '&gt;')
-                     .replace(/'/g, '&#39;')
-                     .replace(/"/g, '&quot;');
-                 };
+               var arr = [];
                if (angular.isUndefined(value)) {
                  return;
                }
@@ -553,7 +549,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
                    .split(scope.options.delimiter)
                    .map(function (item) {
                      return {
-                       name: sanitize(item.trim())
+                       name: item.trim()
                      };
                    });
                }
@@ -561,11 +557,11 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
                  arr = value.map(function (item) {
                    if (angular.isString(item)) {
                      return {
-                       name: sanitize(item.trim())
+                       name: item.trim()
                      };
                    }
                    else if (item.name) {
-                     item.name = sanitize(item.name.trim());
+                     item.name = item.name.trim();
                    }
                    return item;
                  });
@@ -666,7 +662,8 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
            if (angular.isString(model)) {
              pureStrings = true;
            }
-           else if (angular.isArray(model)) {
+           // XXX: avoid for now while fixing "empty array" bug
+           else if (angular.isArray(model) && false) {
              stringArray = true;
              i = model.length;
              while (i--) {
