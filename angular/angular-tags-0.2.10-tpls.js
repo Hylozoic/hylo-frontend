@@ -1,3 +1,9 @@
+/**
+ * A modified version of the angular-tags 0.2.10 library to support focusing of element, and some other hylo bug fixes...
+ * Don't upgrade unless you read the file history, and manaully apply upgrading changes...
+ *
+ * Latest commit sync: 5d50692920477d99514c0bcec0b9b10f0e860582
+ */
 angular.module('decipher.tags.templates', ['templates/tags.html', 'templates/tag.html']);
 
 angular.module("templates/tags.html", []).run(["$templateCache", function($templateCache) {
@@ -662,8 +668,9 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
            if (angular.isString(model)) {
              pureStrings = true;
            }
-           // XXX: avoid for now while fixing "empty array" bug
-           else if (angular.isArray(model) && false) {
+
+           // The latest commit says bypass while fixing zero length array... but it seems to work fine here!
+           else if (angular.isArray(model)) {
              stringArray = true;
              i = model.length;
              while (i--) {
