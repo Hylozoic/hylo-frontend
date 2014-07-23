@@ -3,6 +3,10 @@
   background-color: transparent;
   border: none;
 
+  .navbar-toggle .icon-bar {
+    background-color: white;
+  }
+
   .navbar-nav li a {
     color: white;
     .proxima-nova-regular;
@@ -29,14 +33,50 @@
         margin-top: 0px;
       }
     }
+
+    i {
+      position:absolute;
+      left:0;
+      right:0;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 0;
+      margin-top: 3px;
+      color: white;
+      font-size: 63px;
+      width: 70px;
+      @media (max-width: @screen-sm-max) {
+        margin-top: 0px;
+        font-size: 50px;
+      }
+    }
+  }
+
+  .collapse.in, .collapsing {
+    background-color: white !important;
+    a {
+      color: black !important;
+      &:hover {
+        color: #666 !important;
+      }
+    }
   }
 
   &.animated {
     background-color: #FFF;
 
-    .navbar-brand img {
-      -webkit-filter: invert(0%);
-      filter: invert(0%);
+    .icon-bar {
+      background-color: #333;
+    }
+
+    .navbar-brand{
+      img {
+        -webkit-filter: invert(0%);
+        filter: invert(0%);
+      }
+      i {
+        color: #333;
+      }
     }
     li a {
       color: #333;
@@ -74,5 +114,23 @@
         margin-top: 0px;
       }
     }
+
+    i {
+      position:absolute;
+      left:0;
+      right:0;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 0;
+      margin-top: 3px;
+      color: #333;
+      font-size: 63px;
+      width: 70px;
+      @media (max-width: @screen-sm-max) {
+        margin-top: 0px;
+        font-size: 50px;
+      }
+    }
+
   }
 }

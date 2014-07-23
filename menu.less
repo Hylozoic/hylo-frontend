@@ -71,8 +71,14 @@
     position: absolute;
     bottom: 15px;
     left: 10px;
+    text-decoration: none;
     img {
       width: 40px;
+      opacity: 0.6;
+    }
+    i {
+      font-size: 40px;
+      color: #333;
       opacity: 0.6;
     }
   }
@@ -251,7 +257,12 @@
 
   .footerLinks {
 
-    width: auto !important;
+    bottom: 0;
+    position: absolute;
+    z-index: 1030;
+    border-width: 1px 0 0;
+
+    width: 100%;
     max-width: @menu-width !important;
     padding-left: 10px;
     padding-bottom: 18px;
