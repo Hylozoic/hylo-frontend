@@ -1,51 +1,74 @@
-var ngIntroDirective = angular.module('angular-intro',[]);
+var ngIntroDirective = angular.module('angular-intro', []);
 
-// TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
-// See: http://stackoverflow.com/questions/18796023/in-a-directive-handle-calls-to-a-user-defined-method-name
 
-ngIntroDirective.directive('ngIntroOptions', [function () {
+ngIntroDirective.directive('ngIntroOptions', ['$timeout', function ($timeout) {
 
-   return {
-       restrict: 'A',
+    return {
+        restrict: 'A',
+        scope: {
+            ngIntroMethod: "=",
+            ngIntroOptions: '=',
+            ngIntroOncomplete: '=',
+            ngIntroOnexit: '=',
+            ngIntroOnchange: '=',
+            ngIntroOnbeforechange: '=',
+            ngIntroOnafterchange: '=',
+            ngIntroAutostart: '&'
+        },
+        link: function(scope, element, attrs) {
+            scope.ngIntroMethod = function(step) {
 
-       link: function(scope, element, attrs){
+                var intro;
 
-           scope[attrs.ngIntroMethod] = function(step) {
+                if(typeof(step) === 'string') {
+                    intro = introJs(step);
 
-               if(typeof(step)=="string"){
-                   var intro = introJs(step);
-               }
-               else{
-                   var intro = introJs();
-               }
+                } else {
+                    intro = introJs();
+                }
 
-               intro.setOptions(scope.$eval(attrs.ngIntroOptions));
+                intro.setOptions(scope.ngIntroOptions);
 
-               if(attrs.ngIntroOncomplete){
-                   intro.oncomplete(scope[attrs.ngIntroOncomplete]);
-               }
+                if(scope.ngIntroOncomplete) {
+                    intro.oncomplete(scope.ngIntroOncomplete);
+                }
 
-               if(attrs.ngIntroOnexit){
-                   intro.onexit(scope[attrs.ngIntroOnexit]);
-               }
+                if(scope.ngIntroOnexit) {
+                    intro.onexit(scope.ngIntroOnexit);
+                }
 
-               if(attrs.ngIntroOnchange){
-                   intro.onchange(scope[attrs.ngIntroOnchange]);
-               }
+                if(scope.ngIntroOnchange) {
+                    intro.onchange(function(targetElement){
+                        $timeout(function() { scope.ngIntroOnchange(targetElement)});
+                    });
+                }
 
-               if(attrs.ngIntroOnbeforechange){
-                   intro.onbeforechange(scope[attrs.ngIntroOnbeforechange]);
-               }
+                if(scope.ngIntroOnbeforechange) {
+                    intro.onbeforechange(function(targetElement) {
+                        $timeout(function() {
+                            scope.ngIntroOnbeforechange(targetElement) ;
+                        }, 0);
+                    });
+                }
 
-               if(typeof(step)=="number"){
-                   intro.goToStep(step).start();
-               }
-               else{
-                   intro.start();
+                if(scope.ngIntroOnafterchange) {
+                    intro.onafterchange(function(targetElement){
+                        $timeout(function() { scope.ngIntroOnafterchange(targetElement); });
+                    });
+                }
 
-               }
+                if(typeof(step) === 'number') {
+                    intro.goToStep(step).start();
+                } else {
+                    intro.start();
+                }
+            };
 
-           };
-       }
-   }
+            if(scope.ngIntroAutostart()) {
+                $timeout(function() {
+                    scope.ngIntroMethod();
+                });
+            }
+        }
+    };
 }]);
