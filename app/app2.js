@@ -3,7 +3,7 @@ var hyloApp = angular.module('hyloApp', [
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
-  'angulartics', 'angulartics.segment.io', 'pasvaz.bindonce',
+  'angulartics', 'angulartics.segment.io',
   'hylo.billing', 'hylo.seeds'
 ]);
 

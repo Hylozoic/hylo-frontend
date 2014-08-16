@@ -1,3 +1,5 @@
+// This is the old RequireJS init file. @see init2.js
+
 require.config({
 
   waitSeconds: 200,
@@ -24,7 +26,6 @@ require.config({
     'angular-infinite-scroll': 'angular/angular-infinite-scroll',
     'bootstrap-select': 'bootstrap-select',
     'angular-bootstrap-select': 'angular/angular-bootstrap-select',
-    'bindonce': 'angular/bindonce',
     'jquery': 'jquery/jquery-2.1.1',
     'dotdotdot': 'jquery/jquery.dotdotdot',
     'guiders': 'jquery/guiders',
@@ -80,8 +81,6 @@ require.config({
     'dotdotdot': ['jquery'],
     'guiders': ['jquery'],
 
-    'bindonce': ['angular'],
-
     'features/billing/billing': ['angular'],
     'features/seeds/seeds': ['angular'],
 
@@ -92,7 +91,6 @@ require.config({
       deps: [
         'jquery',
         'underscore',
-        'bindonce',
         'angular',
         'auth_module',
         'angular-route',
@@ -131,7 +129,6 @@ require.config({
         'filters',
         'jquery',
         'services',
-        'bindonce',
         'angular-ui-bootstrap-tpls'],
       exports: "hyloDirectives"
     },

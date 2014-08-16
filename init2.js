@@ -4,7 +4,6 @@ moment     = require('moment');
 
 require('angular');
 require('angular-animate');
-require('angular-bindonce');
 require('angular-bootstrap-select');
 require('angular-elastic');
 require('angular-growl');
