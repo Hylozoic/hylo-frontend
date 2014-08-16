@@ -15,6 +15,9 @@ angular.module("hylo.seeds", [])
 
           var limit = 100;
 
+          // Initially focus input onto the seed title
+          $scope.focusInput = true;
+
           $scope.onTitleChange = function (event) {
             var titleLength = 0;
             if ($scope.title) { // test if property is undefined, then length is 0
