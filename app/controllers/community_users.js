@@ -1,4 +1,4 @@
-hyloControllers.controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout',
+angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout',
   function($rootScope, $scope, User, $timeout) {
 
     $rootScope.$watch('community', function(community) {

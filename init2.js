@@ -28,12 +28,12 @@ require('./jquery/guiders');
 
 require('./app/auth_module');
 require('./app/filters');
-hyloDirectives = require('./app/directives');
+require('./app/directives');
 require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 require('./app/features/billing/billing');
 require('./app/features/seeds/seeds');
-hyloControllers = require('./app/controllers');
+require('./app/controllers');
 require('./app/controllers/community_users');
 require('./app/controllers/community');
 require('./app/controllers/menu');

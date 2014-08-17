@@ -1,4 +1,4 @@
-hyloControllers.controller('CommentsCtrl', ['$scope', '$http', 'Post', 'User', '$log', '$rootScope', '$modal', 'growl', '$window', 'CommentingService', '$timeout', '$analytics',
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', 'User', '$log', '$rootScope', '$modal', 'growl', '$window', 'CommentingService', '$timeout', '$analytics',
   function($scope, $http, Post, User, $log, $rootScope, $modal, growl, $window, CommentingService, $timeout, $analytics) {
 
     var loadComments = function() {

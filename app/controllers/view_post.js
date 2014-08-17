@@ -1,4 +1,4 @@
-hyloControllers.controller('ViewPostCtrl', ['$scope', 'Post', '$rootScope', '$stateParams', '$state', 'growl',
+angular.module("hyloControllers").controller('ViewPostCtrl', ['$scope', 'Post', '$rootScope', '$stateParams', '$state', 'growl',
   function($scope, Post, $rootScope, $stateParams, $state, growl) {
     $scope.post = Post.get({id: $stateParams.postId});
 

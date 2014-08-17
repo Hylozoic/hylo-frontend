@@ -1,4 +1,4 @@
-hyloControllers.controller('ProfileSettingsCtrl', ['$rootScope', 'growl', '$analytics', '$modal', '$log', '$state',
+angular.module("hyloControllers").controller('ProfileSettingsCtrl', ['$rootScope', 'growl', '$analytics', '$modal', '$log', '$state',
   function($rootScope, growl, $analytics, $modal, $log, $state) {
 
     if (!$rootScope.settingsOpened) {
@@ -26,7 +26,7 @@ hyloControllers.controller('ProfileSettingsCtrl', ['$rootScope', 'growl', '$anal
 
   }]);
 
-hyloControllers.controller('ProfileSettingsModalCtrl', ['$scope', '$modalInstance', '$window', '$rootScope', 'growl', '$http',
+angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scope', '$modalInstance', '$window', '$rootScope', 'growl', '$http',
   function($scope, $modalInstance, $window, $rootScope, growl, $http) {
 
     var previousSettingsEmail = "";

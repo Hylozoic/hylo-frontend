@@ -1,4 +1,4 @@
-hyloControllers.controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', 'Post', "$log", '$stateParams', 'growl', '$q', '$http', '$location',
+angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', 'Post', "$log", '$stateParams', 'growl', '$q', '$http', '$location',
   function($scope, $rootScope, $timeout, Post, $log, $stateParams, growl, $q, $http, $location) {
 
     $scope.postType = "all";

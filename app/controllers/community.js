@@ -1,4 +1,4 @@
-hyloControllers.controller('CommunityCtrl', ['$scope', '$rootScope', 'CurrentUser', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'CurrentUser', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
   function($scope, $rootScope, CurrentUser, Post, growl, $timeout, $http, $q, $modal, $analytics) {
 
     $scope.seedFilter = "all";

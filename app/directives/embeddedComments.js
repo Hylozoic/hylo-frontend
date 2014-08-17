@@ -1,4 +1,4 @@
-hyloDirectives.directive('embeddedComments', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', 'CommentingService', '$view',
+angular.module("hyloDirectives").directive('embeddedComments', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', 'CommentingService', '$view',
   function(Post, $filter, $state, $rootScope, $log, $modal, User, $http, $timeout, CommentingService, $view) {
     return {
       restrict: 'E',

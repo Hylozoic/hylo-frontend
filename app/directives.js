@@ -1,4 +1,4 @@
-var hyloDirectives = angular.module('hyloDirectives', ['ngResource', 'hyloFilters']).
+angular.module('hyloDirectives', ['ngResource', 'hyloFilters']).
 
 directive('ngEnter', function() {
   return function(scope, element, attrs) {
@@ -123,4 +123,3 @@ directive('fitHeightToParent', function() {
   }
 });
 
-module.exports = hyloDirectives;

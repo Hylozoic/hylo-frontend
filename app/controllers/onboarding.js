@@ -1,4 +1,4 @@
-hyloControllers.controller('OnboardingCtrl', ['$scope', '$rootScope', '$modalInstance', 'User', 'Post', '$log', '$analytics',
+angular.module("hyloControllers").controller('OnboardingCtrl', ['$scope', '$rootScope', '$modalInstance', 'User', 'Post', '$log', '$analytics',
   function($scope, $rootScope, $modalInstance, User, Post, $log, $analytics) {
 
     $scope.wizard = {};

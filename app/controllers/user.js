@@ -1,4 +1,4 @@
-hyloControllers.controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'User', '$timeout', '$http', '$rootScope', '$analytics',
+angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'User', '$timeout', '$http', '$rootScope', '$analytics',
   function($scope, $stateParams, $state, $log, Post, growl, User, $timeout, $http, $rootScope, $analytics) {
     var previous = {};
 

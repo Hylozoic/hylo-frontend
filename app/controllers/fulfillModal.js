@@ -1,4 +1,4 @@
-hyloControllers.controller('FulfillModalCtrl', ['$scope', '$rootScope', '$modalInstance', 'User', 'Post', '$log',
+angular.module("hyloControllers").controller('FulfillModalCtrl', ['$scope', '$rootScope', '$modalInstance', 'User', 'Post', '$log',
   function($scope, $rootScope, $modalInstance, User, Post, $log) {
     $scope.addContributors = function () {
       Post.markFulfilled({id: $scope.post.id, contributors: $scope.contributors}, function(res) {

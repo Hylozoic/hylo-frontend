@@ -1,5 +1,4 @@
-
-hyloControllers.controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window',
+angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window',
   function($scope, $state, $rootScope, $route, $http, $interval, $timeout, Notification, $idle, $window) {
 
     // Query for notifications every set interval

@@ -1,4 +1,4 @@
-hyloDirectives.directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', 'CommentingService', '$window', '$analytics',
+angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', 'CommentingService', '$window', '$analytics',
   function(Post, $filter, $state, $rootScope, $log, $modal, User, $http, $timeout, CommentingService, $window, $analytics) {
   return {
     restrict: 'E',
