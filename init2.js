@@ -33,7 +33,6 @@ require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 require('./app/features/billing/billing');
 require('./app/features/seeds/seeds');
-require('./app/controllers');
 require('./app/controllers/community_users');
 require('./app/controllers/community');
 require('./app/controllers/menu');
