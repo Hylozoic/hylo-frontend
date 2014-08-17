@@ -232,17 +232,13 @@ hyloDirectives.directive('hyloPost', ["Post", '$filter', '$state', '$rootScope',
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
 
-            $scope.$watchCollection("followers", function() {
-              checkIsFollowing();
-            });
+            $scope.$watchCollection("followers", checkIsFollowing);
 
           } else {
             Post.followers({id: $scope.post.id}).$promise.then(function(value) {
                   $scope.followers = value;
 
-                  $scope.$watchCollection("followers", function() {
-                    checkIsFollowing();
-                  });
+                  $scope.$watchCollection("followers", checkIsFollowing);
                 }
             );
           }
@@ -267,10 +263,12 @@ hyloDirectives.directive('hyloPost', ["Post", '$filter', '$state', '$rootScope',
 
         $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
-        setText()
+        setText();
+
+        unwatchPost();
       }
 
-      $scope.$watch('post', function(postPromise) {
+      var unwatchPost = $scope.$watch('post', function(postPromise) {
         if (postPromise.$promise) { // Case when we are viewing single posts
           // when viewing a single post, we must wait for the promise to resolve
           postPromise.$promise.then(initialize);

@@ -63,7 +63,7 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
         var parsed = $parse(iAttrs.seedText);
         function getStringValue() { return (parsed(scope) || '').toString(); }
 
-        scope.$watch(getStringValue, function seedTextWatchFn(value) {
+        var unwatch = scope.$watch(getStringValue, function seedTextWatchFn(value) {
 
           /* Filter the seed text */
           var linkyText = $filter('linky')(value, '_blank');
@@ -76,6 +76,7 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
           var paddedVal = '<span>' + $sce.getTrustedHtml(hashedText) + '</span>'
 
           iElement.html($compile(paddedVal)(scope));
+          unwatch();
         });
       }
     }
