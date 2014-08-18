@@ -1,4 +1,3 @@
-
 angular.module('hyloServices', ['ngResource']).
 
 factory('CurrentUser', ['$resource',

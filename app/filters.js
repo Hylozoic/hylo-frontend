@@ -1,6 +1,6 @@
-var hyloFilters = angular.module('hyloFilters', ['ngSanitize']);
+angular.module('hyloFilters', ['ngSanitize'])
 
-hyloFilters.filter('fromNow', function() {
+.filter('fromNow', function() {
   return function(date) {
     return moment(date).fromNow();
   }

@@ -47,7 +47,7 @@ require('./app/controllers/view_post');
 require('./app/routes');
 require('./app/services');
 
-require('./app/app2');
+require('./app/hyloApp');
 
 // FIXME: the code that depends upon the existence of this global
 // should be rewritten

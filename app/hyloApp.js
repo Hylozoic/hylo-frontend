@@ -1,13 +1,13 @@
-var hyloApp = angular.module('hyloApp', [
+angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
   'angulartics', 'angulartics.segment.io',
   'hylo.billing', 'hylo.seeds'
-]);
+])
 
-hyloApp.factory('$exceptionHandler', ['$log', function ($log) {
+.factory('$exceptionHandler', ['$log', function ($log) {
   return function (exception, cause) {
     // Pass off the error to the default error handler
     // on the AngualrJS logger. This will output the
@@ -25,9 +25,9 @@ hyloApp.factory('$exceptionHandler', ['$log', function ($log) {
       $log.log( loggingError );
     }
   };
-}]);
+}])
 
-hyloApp.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
+.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
   function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
     $locationProvider.html5Mode(true);
     growlProvider.globalTimeToLive(5000);
@@ -79,9 +79,9 @@ hyloApp.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide
 
     $httpProvider.interceptors.push('myHttpInterceptor');
 
-  }]);
+  }])
 
-hyloApp.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'CurrentCommunity', '$log', '$window', 'growl',
+.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'CurrentCommunity', '$log', '$window', 'growl',
   function(CurrentUser, $rootScope, $q, $state, $stateParams, CurrentCommunity, $log, $window, growl) {
 
     $rootScope.currentUser = CurrentUser.get();
