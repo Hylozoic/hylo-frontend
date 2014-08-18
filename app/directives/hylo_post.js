@@ -203,7 +203,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       var setText = function() {
         var text = $scope.post.description;
-        var postName = $scope.post.name;
 
         var truncate = $scope['short'] && text.length > 400;
 
@@ -213,9 +212,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           $scope.truncated = true;
         }
 
-        $scope.postName = postName;
-
-        $scope.postText = text;
+        $scope.truncatedPostText = text;
 
         $scope.isPostText = text.length > 0;
       }
