@@ -204,6 +204,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       var setText = function() {
         var text = $scope.post.description;
 
+        if (text == null) {
+          text = "";
+        }
+
         var truncate = $scope['short'] && text.length > 400;
 
         if (truncate) {
