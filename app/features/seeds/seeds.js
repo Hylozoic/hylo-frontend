@@ -13,15 +13,20 @@ angular.module("hylo.seeds", [])
         controller: function ($scope, $element) {
           $scope.postType = "intention";
 
-          var limit = 100;
+          var limit = 120;
 
           // Initially focus input onto the seed title
           $scope.focusInput = true;
 
+          $scope.typeChanged = function typeChanged(newType) {
+            $scope.postType = newType;
+            $scope.onTitleChange();
+          }
+
           $scope.onTitleChange = function (event) {
             var titleLength = 0;
-            if ($scope.title) { // test if property is undefined, then length is 0
-              titleLength = $scope.title.length;
+            if ($scope.title[$scope.postType]) { // test if property is undefined, then length is 0
+              titleLength = $scope.title[$scope.postType].length;
             }
 
             var charsLeft = limit - titleLength;
@@ -35,7 +40,11 @@ angular.module("hylo.seeds", [])
           };
 
           $scope.reset = function () {
-            $scope.title = "";
+            $scope.title = {};
+            $scope.title["intention"] = "I'd like to create ";
+            $scope.title["offer"] = "I'd like to share ";
+            $scope.title["request"] = "I'm looking for ";
+
             $scope.description = "";
             $scope.editing = false;
             $scope.saving = false;
@@ -60,7 +69,7 @@ angular.module("hylo.seeds", [])
             $scope.saving = true;
 
             var newPost = new Post();
-            newPost.name = $scope.title;
+            newPost.name = $scope.title[$scope.postType];
             newPost.description = $scope.description;
             newPost.postType = $scope.postType;
             newPost.communityId = $scope.community.id;
