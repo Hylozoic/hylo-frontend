@@ -121,15 +121,43 @@
       margin-top: 10px;
     }
 
-    i {
+    i, img {
       margin-right: @icon-expanded-right-margin;
       width: @icon-width !important;
       display: inline-block;
       text-align: center;
-      font-size: 14px;
       position: relative;
-      top: 2px;
     }
+
+    i {
+      font-size: 14px;
+      top: 2px;
+      /* Firefox */
+      -moz-transition: transform 0.3s ease;
+      /* WebKit */
+      -webkit-transition: transform 0.3s ease;
+      /* Opera */
+      -o-transition: transform 0.3s ease;
+      /* Standard */
+      transition: transform 0.3s ease;
+    }
+
+    i.icon-down {
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+    }
+
+    i.rotate {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
     &:hover {
       background-color: @core-color;
     }
@@ -206,6 +234,10 @@
       > div {
         margin-left: 32px;
       }
+    }
+
+    &.sub-group a {
+      //margin-left: 10px;
     }
   }
 
