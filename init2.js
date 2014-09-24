@@ -19,12 +19,13 @@ require('bootstrap-select');
 require('filepicker');
 require('jquery.dotdotdot');
 require('ng-idle');
-require('ng-infinite-scroller-origin');
+require('ngInfiniteScroll');
 
 require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.10.0-enhanced');
 require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
+require('./jquery/draggable-background');
 
 require('./app/auth_module');
 require('./app/filters');
@@ -33,6 +34,7 @@ require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 require('./app/features/billing/billing');
 require('./app/features/seeds/seeds');
+require('./app/features/createCommunity');
 require('./app/controllers');
 require('./app/controllers/community_users');
 require('./app/controllers/community');

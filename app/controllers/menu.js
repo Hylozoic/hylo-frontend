@@ -4,6 +4,8 @@ angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$
     // Query for notifications every set interval
     $scope.notifications = [];
 
+    $scope.membershipsExpanded = false;
+
     var queryNotifications = function() {
       Notification.query({}, function(notifications) {
         $scope.notifications = notifications;
@@ -67,6 +69,7 @@ angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$
     $scope.closeMenu = function() {
       $timeout.cancel(toggleMenuPromise);
       $scope.expanded = false;
+      $scope.membershipsExpanded = false;
       $($window).off("click.menuCloseHandler");
     }
 

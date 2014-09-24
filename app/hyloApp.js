@@ -4,7 +4,7 @@ angular.module('hyloApp', [
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
   'angulartics', 'angulartics.segment.io',
-  'hylo.billing', 'hylo.seeds'
+  'hylo.billing', 'hylo.seeds', 'hylo.createCommunity'
 ])
 
 .factory('$exceptionHandler', ['$log', function ($log) {
@@ -87,9 +87,11 @@ angular.module('hyloApp', [
     $rootScope.currentUser = CurrentUser.get();
 
     //$stateParams is not set up yet at this point
-    var currentCommunitySlug = window.location.toString().match(/c\/([^\/#\?]*)/)[1];
-
-    $rootScope.community = CurrentCommunity.get({slug: currentCommunitySlug});
+    var locationMatchCommunity = window.location.toString().match(/c\/([^\/#\?]*)/);
+    if (locationMatchCommunity != null) {
+      var currentCommunitySlug = locationMatchCommunity[1];
+      $rootScope.community = CurrentCommunity.get({slug: currentCommunitySlug});
+    }
 
     // Set a variable so we can watch for param changes
     $rootScope.watchingState = $state;
@@ -115,4 +117,11 @@ angular.module('hyloApp', [
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       guiders.hideAll();
     });
+
+    // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
+    $rootScope.navigated = false;
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+      if (from.name) { $rootScope.navigated = true; }
+    });
+
   }]);
