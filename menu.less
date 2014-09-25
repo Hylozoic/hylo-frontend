@@ -1,3 +1,7 @@
+@expandedBgColor: #3A3A3A;
+@expandedColor: #A8A8A8;
+@expandedSubColor: #565656;
+@expandedHoverColor: #32A1D5;
 
 @logo-height: 48px;
 @menu-padding-top: 15px;
@@ -25,7 +29,7 @@
   }
 
   &:active {
-    background-color: white;
+    background-color: #3A3A3A;
   }
 
 
@@ -178,15 +182,14 @@
       font-family: @body-font;
       text-transform: none;
       border-left: 4px solid transparent;
-      color: @text-gray;
+      color: @expandedColor;
       box-sizing: border-box;
       width: 100%;
       overflow: hidden;
-
-
+      background-color: #4D4D4D;
 
       &.unread {
-        background-color: @faint-gray;
+        background-color: #565656;
         border-left: 4px solid @core-color;
       }
 
@@ -207,7 +210,6 @@
       .timestamp {
         .proxima-nova-regular;
         font-size: 10px;
-        color: #AFAFAF;
         padding-top: 6px;
       }
 
@@ -215,20 +217,17 @@
         padding-top: 6px;
         .droid-regular;
         font-size: 11px;
-        color: #808080;
       }
 
       .action {
         .proxima-nova-light;
         font-size: 12px;
-        color: #1A1A1A;
         line-height: 4px;
       }
 
       .actor {
         .proxima-nova-bold;
         font-size: 12px;
-        color: #1A1A1A;
       }
 
       > div {
@@ -241,13 +240,23 @@
     }
   }
 
+  #notifications {
+    margin-top: 0;
+    visibility: hidden;
+  }
+
   &.expanded {
-    background-color: white;
+    background-color: @expandedBgColor;
+    color: @expandedColor;
     border-right: 1px solid #c6c6c4;
     overflow: hidden;
 
     .community-name {
       display: table;
+    }
+
+    #notifications {
+      visibility: visible;
     }
 
     &, ul {
@@ -264,24 +273,36 @@
     }
 
     li {
-      a:hover {
-        color: @core-color;
-        background-color: white;
+
+      a {
+        color: @expandedColor;
+
+        &:hover {
+          color: white;
+          background-color: @expandedHoverColor;
+        }
 
         &.current {
-          border-color: @core-color;
+          border-color: @expandedColor;
         }
 
         .only-hover {
-          color: #333;
+          color: @expandedColor;
           &:hover {
             color: @core-color;
           }
         }
       }
 
+      &.sub-group {
+        margin: 0px;
+        padding: 3px 0px;
+        background-color: @expandedSubColor;
+      }
+
       &.no-link {
-        background-color: @faint-gray;
+        color: @expandedColor;
+        background-color: @expandedBgColor;
       }
 
     }
@@ -299,66 +320,52 @@
     padding-left: 10px;
     padding-bottom: 18px;
     margin: 0;
-    background-color: white;
-    opacity: 0.8;
+    background-color: rgba(58, 58, 58, 0.8);
 
     @footerFontSize: 11px;
     font-size: @footerFontSize;
-    color: #808080;
+    color: @expandedColor;
     .proxima-nova-regular;
 
     a {
       font-size: @footerFontSize;
-      color: #808080;
+      color: @expandedColor;
       .proxima-nova-regular;
     }
 
     a:hover {
      color: @intention-color;
     }
+
+    .footer-icon {
+      color: @expandedColor;
+      font-size: 25px;
+    }
   }
-}
 
-#menu-links {
-  margin-bottom: 0;
-}
+  @media(max-width: @screen-xs-max) {
+    &.collapsed {
+      width: 1px;
 
-#notifications {
-  margin-top: 0;
-  visibility: hidden;
-}
-
-.expanded #notifications {
-  visibility: visible;
-}
-
-@media(max-width: @screen-xs-max) {
-  #content {
-    margin-top: @logo-height;
-  }
-  .menu.collapsed {
-    width: 1px;
-
-    .hylo-logo {
-      bottom: 0;
-      position: fixed;
-
-      img {
-        width: 35px;
+      #menu-links, .collapsed #notifications {
+        display: none;
+      }
+      &:hover {
+        background-color: transparent;
       }
     }
+  }
 
-    #menu-links, .collapsed #notifications {
-      display: none;
-    }
-    &:hover {
-      background-color: transparent;
-    }
-    .logo {
-      margin-top: 0;
-      margin-left: 0;
-    }
+  #menu-links {
+    margin-bottom: 0;
   }
 }
 
+.mobile-nav {
+  margin-bottom: 0px;
+  .navbar-brand {
+    padding: 8px 15px;
+    font-size: 38px;
+  }
 
+}
