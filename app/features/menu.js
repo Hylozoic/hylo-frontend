@@ -1,10 +1,56 @@
-angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window',
-  function($scope, $state, $rootScope, $route, $http, $interval, $timeout, Notification, $idle, $window) {
+angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", function($timeout, $window) {
+  var setMenuTimeout;
+
+  var state = {
+    expanded: false,
+    membershipExpanded: false
+  }
+
+  var openMenu = function openMenu() {
+    state.expanded = true;
+  }
+
+  var closeMenu = function closeMenu() {
+    state.expanded = false;
+    state.membershipsExpanded = false;
+  }
+
+  var setMenuState = function(isOpen, force) {
+    $timeout.cancel(setMenuTimeout);
+
+    // The delay for opening/closing
+    var delay = isOpen ? 800 : 400;
+    if (force) {
+      delay = 0;
+    }
+
+    setMenuTimeout = $timeout(function() {
+      if (isOpen) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }, delay);
+  };
+
+  var toggleMenuState = function toggleMenuState() {
+    setMenuState(!state.expanded, true);
+  }
+
+  return {
+    setMenuState: setMenuState,
+    toggleMenuState: toggleMenuState,
+    state: state
+  };
+}])
+
+.controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
+  function($scope, $state, $rootScope, $route, $http, $interval, $timeout, Notification, $idle, $window, MenuService) {
 
     // Query for notifications every set interval
     $scope.notifications = [];
 
-    $scope.membershipsExpanded = false;
+    $scope.state = MenuService.state;
 
     var queryNotifications = function() {
       Notification.query({}, function(notifications) {
@@ -21,7 +67,7 @@ angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$
         $interval.cancel(notificationInterval);
       }
       notificationInterval = $interval(function() {
-        if (!$scope.expanded) {
+        if (!MenuService.state.expanded) {
           queryNotifications()
         }
       }, 10000);
@@ -52,63 +98,7 @@ angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$
       $scope.unreadCount = count > 0 ? count : '';
     }, true);
 
-
-    $scope.expanded = false;
-
-    var openMenu = function() {
-      $scope.expanded = true;
-      $timeout.cancel(toggleMenuPromise);
-      $($window).on("click.menuCloseHandler", function (event) {
-        closeMenuOnOutsideClick(event, function() {
-          $scope.closeMenu();
-          $scope.$apply();
-        });
-      });
-    }
-
-    $scope.closeMenu = function() {
-      $timeout.cancel(toggleMenuPromise);
-      $scope.expanded = false;
-      $scope.membershipsExpanded = false;
-      $($window).off("click.menuCloseHandler");
-    }
-
-    $scope.toggleMenu = function() {
-      $scope.toggleMenuState(!$scope.expanded, true)
-    };
-
-    var toggleMenuPromise;
-    $scope.toggleMenuState = function(state, force) {
-      $timeout.cancel(toggleMenuPromise);
-
-      // The delay for opening/closing
-      var delay = state ? 800 : 400;
-      if (force) {
-        delay = 0;
-      }
-
-      toggleMenuPromise = $timeout(function() {
-        if (state) {
-          openMenu();
-        } else {
-          $scope.closeMenu();
-        }
-      }, delay);
-    };
-
-    function closeMenuOnOutsideClick(event, callbackOnClose) {
-
-      var clickedElement = event.target;
-
-      if (!clickedElement) return;
-
-      var clickedOnMenu = $(clickedElement).closest('.menu').length > 0
-
-      if (!clickedOnMenu) {
-        callbackOnClose();
-        return;
-      }
-    }
+    $scope.setMenuState = MenuService.setMenuState
 
     $scope.openSettings = function($event) {
       // Prevent bubbling to showItem.
@@ -126,4 +116,9 @@ angular.module("hyloControllers").controller('MenuCtrl', ['$scope', '$state', '$
       Notification.markRead({id: notification.id})
     }
 
+  }])
+.controller('globalMenuController', ['$scope', 'MenuService',
+  function($scope, MenuService) {
+    $scope.setMenuState = MenuService.setMenuState;
+    $scope.toggleMenuState = MenuService.toggleMenuState;
   }]);
