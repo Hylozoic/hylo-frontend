@@ -47,10 +47,10 @@ angular.module("hylo.createCommunity", [])
         $scope.step = 1;
 
         $scope.cancelCreate = function cancelCreate() {
-          if ($scope.navigated) {
+          if ($scope.navigated) { // If the rootscope 'navigated' boolean is true, then just go back TODO change to Service method
             history.back();
             $scope.apply();
-          } else {
+          } else { // Otherwise, go home
             $state.go('home')
           }
         }
