@@ -1,10 +1,21 @@
+require('shelljs/global');
+var sha1 = require('sha1');
+
 module.exports = function(grunt) {
 
   grunt.registerTask('serve', function() {
     require('./server')(3001, 'localhost', 9000);
   });
 
-  grunt.registerTask('deploy', ['browserify:prod', 'less:dev', 'cssmin:prod', 'todo']);
+  grunt.registerTask('deploy', ['browserify:prod', 'less:dev', 'cssmin:prod', 'digest']);
+
+  grunt.registerTask('digest', function() {
+    var shaCss = sha1(cat('dist/bundle.min.css'));
+    cp('dist/bundle.min.css', 'dist/bundle-' + shaCss + '.min.css');
+
+    var shaJs = sha1(cat('dist/bundle.min.js'));
+    cp('dist/bundle.min.js', 'dist/bundle-' + shaJs + '.min.js');
+  })
 
   grunt.registerTask('todo', function() {
     grunt.log.ok('todo: append hash, deploy to S3, update heroku variables');
