@@ -3,26 +3,26 @@
   "description": "A new kind of social network that helps real communities create, together.",
   "version": "1.0.0",
   "devDependencies": {
-    "bower": "latest",
-    "debowerify": "~0.8.1",
-    "uglify-js": "latest",
-    "watchify": "latest"
+    "bower": "latest"
   },
   "dependencies": {
-    "bower": "latest",
+    "browserify": "latest",
     "debowerify": "~0.8.1",
-    "uglify-js": "latest",
-    "browserify": "latest"
+    "grunt-browserify": "latest",
+    "grunt-cli": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-exec": "latest",
+    "node-static": "latest",
+    "uglifyify": "latest"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",
-    "watch": "watchify public/javascripts/init2.js -t debowerify -o public/javascripts/bundle.js --debug -v",
-    "build": "browserify public/javascripts/init2.js -t debowerify -o public/javascripts/bundle.js; cd public/javascripts; uglifyjs bundle.js --source-map bundle.min.js.map -o bundle.min.js; cd ../..;",
     "prune": "bower prune"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Hylozoic/hylo-play.git"
   }
-
 }
