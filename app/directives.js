@@ -106,6 +106,7 @@ directive('backImg', [function() {
 }]).
 
 /**
+ * ng-wrapper for draggable-background.js https://github.com/kentor/jquery-draggable-background
  * <div class="banner" back-img="createForm.banner" // must be watching some back-img element.
  *      image-drag="setBannerPos(position)" // value is a function to be called with the new position after drag is done
  *      image-drag-axis="y">   // Can be 'x' or 'y'

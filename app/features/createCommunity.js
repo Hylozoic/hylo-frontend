@@ -149,8 +149,7 @@ angular.module("hylo.createCommunity", [])
 
           var convertSettings = {
             width: 160,
-            format: 'jpg',
-            fit: 'fit',
+            fit: 'clip',
             rotate: "exif"
           };
 
