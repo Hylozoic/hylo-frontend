@@ -3,10 +3,10 @@ angular.module("hylo.createCommunity", [])
       function ($scope, $timeout, $analytics, $state, $log, CreateCommunity) {
 
         $scope.createForm = {
-          name: "asdf",
-          slug: "sa",
-          coreIntention: "intention",
-          category: "coworking",
+          name: "",
+          slug: "",
+          coreIntention: "",
+          category: "",
           banner: "https://d3ngex8q79bk55.cloudfront.net/communities/default/communitiesDefaultBanner.jpg",
           icon: "https://d3ngex8q79bk55.cloudfront.net/communities/default/communitiesDefaultIcon.png"
         };
