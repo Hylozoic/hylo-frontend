@@ -1,0 +1,373 @@
+@import 'menu.less';
+@import 'app/user.less';
+@import 'angular/charLimit';
+
+.container {
+  padding-top: 18px;
+}
+
+body.angular-app {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+
+body.waiting-for-angular div#content-outer {
+  display: none;
+}
+body.waiting-for-angular div#initializing-panel {
+  display: block;
+  background: url(/assets/images/loading.gif) center center no-repeat;
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: white;
+  font-family: @body-font;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+#bg {
+  //background-image: url(/assets/images/placeholder-bg.jpg);
+  background-size: cover;
+  background-position-y: 50%;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index:0;
+  // Remove blurring filters since they were not work and causing shadows on chrome.
+//  .blur(5px);
+//  filter: url(http://d3ngex8q79bk55.cloudfront.net/fonts/blur.svg#blur);
+//  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+}
+
+.filter-search-icon {
+  color: white;
+  font-size: 39px;
+  float: left;
+}
+
+.textfield-search-indicator {
+  background: url(/assets/images/loading.gif) center center no-repeat;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  width: 40px;
+  z-index: 2000;
+  height: 45px;
+}
+
+.search-indicator {
+  position:absolute;
+  width: 100%;
+  z-index: 2000;
+  background: url(/assets/images/loading.gif) center center no-repeat;
+  height: 45px;
+}
+
+.filter-query {
+  margin-left: @bubble-offset;
+  margin-bottom: 18px;
+  .query-input {
+  }
+}
+
+.filter-buttons {
+  margin-left: @bubble-offset;
+  margin-bottom: 18px;
+
+  @media (max-width: @screen-xs-max) {
+    margin-left: 0;
+  }
+
+  .post-type {
+    width: 68%;
+    margin-right: 2%;
+    float: left;
+  }
+  .post-sort {
+    width: 30%;
+  }
+
+  .btn {
+    border: none;
+    background-color: @faint-gray;
+    color: @text-gray;
+    padding: 0;
+    font-size: 12px;
+    text-align: center;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    height: 24px;
+    line-height: 24px;
+
+    @media (max-width: @screen-xs-max) {
+      font-size: 10px;
+    }
+
+    &.active {
+      background-color: white;
+      box-shadow: none;
+      &.intention { border-bottom: 2px solid @intention-color; }
+      &.offer { border-bottom: 2px solid @offer-color; }
+      &.request { border-bottom: 2px solid @request-color; }
+    }
+  }
+}
+
+.triangle {
+  background-color: white;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: -8px;
+  .transform(rotate(45deg));
+}
+
+.post-type-style (@color) {
+  box-shadow: -1px 0 0 0 @color;
+  > .controls > .type {
+    color: @color;
+    .proxima-nova-regular;
+  }
+  > .triangle {
+    border-left: 1px solid @color;
+    border-bottom: 1px solid @color;
+  }
+}
+
+.avatar {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: @avatar-size;
+  width: @avatar-size;
+  border-radius: @avatar-size / 2;
+  float: left;
+}
+
+.bubble {
+  position: relative;
+  margin-left: @bubble-offset;
+  border-radius: 5px;
+  background-color: white;
+  word-wrap: break-word;
+
+  strong {
+    .proxima-nova-semibold;
+  }
+
+  &.intention { .post-type-style(@intention-color); }
+  &.request { .post-type-style(@request-color); }
+  &.offer { .post-type-style(@offer-color); }
+}
+
+.add-post {
+  margin-bottom: 18px;
+  @circle-size: 30px;
+
+  height: @circle-size;
+
+  &.editing {
+    height: auto;
+  }
+
+  .circle {
+    display: block;
+    float: left;
+    height: @circle-size;
+    width: @circle-size;
+    line-height: @circle-size;
+    border-radius: @circle-size / 2;
+    margin-left: (@avatar-size - @circle-size) / 2;
+    vertical-align: middle;
+    text-align: center;
+    background-color: white;
+    color: @text-light-gray;
+    cursor: pointer;
+    > i {
+      line-height: @circle-size;
+      top: -1px;
+    }
+  }
+
+  .start-editing {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    cursor: pointer;
+    text-decoration: none;
+
+    .bubble {
+      height: @circle-size;
+      line-height: @circle-size;
+      color: @text-light-gray;
+      padding: 0 30px;
+      .post-type-style(@faint-gray);
+      .proxima-nova-regular;
+    }
+    .triangle {
+      top: 8px;
+    }
+  }
+
+  .editor > .bubble {
+    > .post-types {
+      margin: 0;
+      > a {
+        padding: 0;
+        display: block;
+        text-align: center;
+        background-color: @faint-gray;
+        color: @text-gray;
+        height: @circle-size;
+        line-height: @circle-size;
+        cursor: pointer;
+        text-decoration: none;
+        .proxima-nova-regular;
+        &:first-child { border-top-left-radius: 5px; }
+        &:last-child { border-top-right-radius: 5px; }
+      }
+    }
+
+    .addPostInput {
+      padding: 12px 10px;
+      font-size: 14px;
+    }
+
+    .selected (@color) {
+      color: @color;
+      background-color: white;
+    }
+
+    &.intention .post-types > a.intention { .selected(@intention-color); }
+    &.request .post-types > a.request { .selected(@request-color); }
+    &.offer .post-types > a.offer { .selected(@offer-color); }
+
+    > form {
+      padding: 20px;
+      > input[type="text"] {
+        margin-bottom: 20px;
+      }
+
+      > textarea {
+        margin-bottom: 20px;
+      }
+
+      > button {
+        width: 100%;
+        color: white;
+      }
+      > label {
+        display: block;
+      }
+    }
+
+    &.intention > form > button { background-color: @intention-color; }
+    &.request > form > button { background-color: @request-color; }
+    &.offer > form > button { background-color: @offer-color; }
+
+    > .triangle {
+      top: 8px;
+    }
+    &.request > .triangle, &.offer > .triangle {
+      background-color: @faint-gray;
+    }
+  }
+}
+
+@import "app/hylo_post";
+
+.users {
+  .user {
+    background-color: white;
+    border-radius: 5px;
+    margin: 5px 0px;
+
+    > a {
+      display: block;
+      text-decoration: none;
+      color: @text-dark;
+    }
+
+    .bio {
+      @avatar-size: 60px;
+      padding: 13px 10px 0;
+      height: @avatar-size + 16px;
+      box-sizing: border-box;
+      border-bottom: 1px solid @faint-gray;
+      overflow: hidden; // TODO use dotdotdot
+      .avatar {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: block;
+        width: @avatar-size;
+        height: @avatar-size;
+        border-radius: 30px;
+        margin: -5px 10px -5px 0;
+      }
+      h3 {
+        font-size: @font-size-large;
+        margin: 0 0 5px;
+      }
+      label {
+        .proxima-nova-regular;
+        text-transform: uppercase;
+        color: @text-gray;
+        margin: 0 5px 0 0;
+      }
+    }
+    .activity {
+      display: block;
+      height: 60px;
+      overflow: hidden; // TODO use dotdotdot
+      padding: 10px;
+      border-bottom-left-radius: 5px;
+      &.intention { border-left: 1px solid @intention-color; }
+      &.offer { border-left: 1px solid @offer-color; }
+      &.request { border-left: 1px solid @request-color; }
+
+      .description {
+        color: @light-gray;
+      }
+    }
+  }
+}
+
+.onboarding-modal {
+  h4 {
+    .proxima-nova-regular;
+    font-size: 30px;
+    color: @fulfillColor;
+  }
+
+  p {
+    .proxima-nova-light;
+    font-size: 14px;
+    margin: 30px 0px;
+    color: #333332
+  }
+
+  label {
+    .proxima-nova-regular;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .btn-default {
+    margin-top: 8px;
+    margin-bottom: 14px;
+  }
+}

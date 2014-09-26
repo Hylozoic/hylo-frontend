@@ -1,0 +1,80 @@
+.decipher-tags {
+  min-height: 39px;
+  border: 1px solid @tags-border-color;
+  padding: 0px 5px 5px 5px;
+  background-color: @tags-bg-color;
+  .border-radius(5px);
+
+  .decipher-tags-taglist {
+    margin-bottom: 4px;
+    display: inline;
+
+    .decipher-tags-tag {
+      display: inline-block;
+      border-radius: 5px;
+      background-color: white;
+      border: 1px solid @intention-color;
+      padding: 2px;
+      margin-right: 5px;
+      margin-top: 5px;
+      //white-space: nowrap; # removed no-wrapping of whitespace.
+      font-size: 14px;
+      .proxima-nova-regular;
+
+
+      .avatar {
+        width: 20px;
+        float: none;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .icon-remove, .icon-remove-inverse {
+        color: #B3B3B3;
+      }
+
+    }
+
+    .decipher-tags-tag i {
+      color: black;
+      text-decoration: none;
+      font-size: 10px;
+      margin-right: 3px;
+    }
+
+    .decipher-tags-tag.selected
+    {
+      border: 1px solid red;
+    }
+
+    .decipher-tags-tag:hover i {
+      color: #FF7878;
+
+      text-decoration: none;
+    }
+
+    .decipher-tags-tag i {
+      cursor: pointer;
+    }
+
+  }
+
+  .decipher-tags-input {
+    font-size: 14px;
+    border: none;
+    outline: 0;
+    margin-top: 4px;
+    background-color: @tags-bg-color;
+    .proxima-nova-regular;
+  }
+
+  .decipher-tags-invalid {
+    color: #FFF;
+  }
+
+  .decipher-tags-controls {
+    margin-top: 8px;
+    min-height: 28px;
+  }
+}

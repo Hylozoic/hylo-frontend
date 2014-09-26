@@ -1,0 +1,85 @@
+.triangle-core (@size) {
+  width: 0;
+  height: 0;
+  position: absolute;
+  border: @size solid transparent;
+}
+
+.bottom-triangle (@size, @color) {
+  .triangle-core(@size);
+  border-top: @size solid @color;
+  border-bottom: none;
+  bottom: -@size;
+}
+
+.top-triangle (@size, @color) {
+  .triangle-core(@size);
+  border-top: none;
+  border-bottom: @size solid @color;
+  top: -@size;
+}
+
+.left-triangle (@size, @color, @top) {
+  .triangle-core(@size);
+  border-left: none;
+  border-right: @size solid @color;
+  top: @top;
+  left: -@size;
+}
+
+.transform (@rule) {
+  transform: @rule;
+  -ms-transform: @rule; /* IE 9 */
+  -webkit-transform: @rule; /* Safari and Chrome */
+}
+
+.blur(@px) {
+  filter: blur(@px);
+  // Browser Specific
+  -webkit-filter: blur(@px);
+  -moz-filter: blur(@px);
+  -o-filter: blur(@px);
+  -ms-filter: blur(@px);
+}
+
+.proxima-nova-light() {
+  font-family: "proxima-nova",sans-serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.proxima-nova-regular() {
+  font-family: "proxima-nova",sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.proxima-nova-semibold() {
+  font-family: "proxima-nova",sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.proxima-nova-bold() {
+  font-family: "proxima-nova",sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.myriad-semi-italic() {
+  font-family: "myriad-pro",sans-serif;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.droid-regular() {
+  font-family: "droid-serif",serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.border-radius(@px) {
+  -moz-border-radius: @px;
+  -webkit-border-radius: @px;
+  border-radius: @px;
+}
