@@ -1,0 +1,224 @@
+.landing {
+
+  .bg {
+    background-image: url(/assets/images/homepage/coworkingBg.jpg);
+    background-size: cover;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .header {
+    position: relative;
+    text-align: center;
+
+    .navbar-hylo {
+      background-color: transparent;
+      border: none;
+      margin-right: @navbar-padding-horizontal;
+
+      .navbar-nav li a {
+        color: #333;
+        .proxima-nova-regular;
+        text-transform: uppercase;
+        font-size: 14px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+      }
+    }
+
+    h2 {
+      .proxima-nova-regular;
+      position: relative;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .request, .intention, .offer {
+      border-bottom: 2px solid black;
+    }
+    .request {
+      border-color: @request-color;
+    }
+    .intention {
+      border-color: @intention-color;
+    }
+    .offer {
+      border-color: @offer-color;
+    }
+
+  }
+
+  .hero-text {
+    margin: 50px;
+    font-size: 16px;
+  }
+
+  #signup-login-tablet {
+    background-color: white;
+    margin-top: 50px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    &.invite-code {
+      margin-top: 0px !important;
+    }
+
+    &, h1 { .proxima-nova-regular; }
+
+    > div {
+      padding: 25px;
+    }
+
+    h1 {
+      font-size: 20px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    hr {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .providers, .inviteCode {
+      border-bottom: 3px @faint-gray solid;
+    }
+
+    .providers > a {
+      width: 100%;
+      margin-bottom: 10px;
+      color: white;
+      text-transform: uppercase;
+      font-size: @font-size-base;
+      &.facebook {
+        background: #464b9a url(/assets/images/facebook.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
+      &.twitter { background: #2c99ed url(/assets/images/twitter.png) 10px center no-repeat; }
+      &.linkedin {
+        background: #4272b6 url(/assets/images/linkedin.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
+      &.google {
+        background: #5b5b5b url(/assets/images/google.png) 10px center no-repeat;
+        background-size: 28px 28px;
+      }
+
+
+    }
+
+    .btn-success {
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    .control-label {
+      padding-right: 0;
+      font-size: @font-size-base;
+    }
+
+  }
+
+}
+
+#signup .bg, #login .bg {
+  position: fixed;
+  height: 100%;
+}
+
+.mainContainer {
+  .bg {
+    background-image: url(/assets/images/placeholder-bg.jpg);
+    background-size: cover;
+    opacity: 0.6;
+    top: 0;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+  }
+
+  .mainMessage {
+    padding-top: 100px;
+    text-align: center;
+
+    @media(max-width: @screen-xs-max)  {
+      padding-top: 10px;
+    }
+
+    h1 {
+      font-size: 40px;
+      .proxima-nova-light;
+      margin-bottom: 30px;
+    }
+    h5 {
+      .proxima-nova-light;
+      font-size: 18px;
+      padding-top: 0px;
+      color: #666666;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    hr {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      @ruleColor: #808080;
+      color: @ruleColor;
+      background-color: @ruleColor;
+      border-color: @ruleColor;
+    }
+  }
+
+  .bubbleMessage {
+    padding: 15px 20px;
+    box-shadow: -1px 0 0 0 @intention-color;
+    border-radius: 5px;
+    .proxima-nova-light;
+    font-size: 15px;
+    background-color: white;
+
+    h1 {
+      font-size: 45px;
+      .proxima-nova-regular;
+      color: @intention-color;
+    }
+
+    h3 {
+      font-size: 30px;
+      .proxima-nova-light;
+      color: @intention-color;
+    }
+
+    hr {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      @ruleColor: #E6E6E6;
+      color: @ruleColor;
+      background-color: @ruleColor;
+      border-color: @ruleColor;
+    }
+  }
+}
+
+.hylo-definition {
+  @definitionColor: #666666;
+  text-align: center;
+  h3 {
+    .myriad-semi-italic !important;
+    font-size: 21px !important;
+    color: @definitionColor !important;
+  }
+  p {
+    color: @definitionColor;
+    font-size: 14px;
+    .droid-regular;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+

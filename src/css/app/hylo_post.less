@@ -1,0 +1,388 @@
+@fulfillColor: #00EA83;
+
+.btn-fulfill {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  text-transform: capitalize;
+  .button-variant(#FFF; @fulfillColor; @fulfillColor);
+  i {
+    font-size: 13px;
+  }
+}
+
+.post {
+  margin-bottom: 20px;
+  font-size: @font-size-base;
+  color: @text-gray;
+
+  .follower, .contributor {
+    padding-right: 5px;
+
+    &:last-of-type {
+      padding-right: 0px;
+    }
+
+    .avatar {
+      width: 20px;
+      float: none;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: @intention-color;
+    }
+  }
+
+  .bubble {
+    padding: 0 0 7px 0;
+
+    .post-header {
+      span {
+        display: inline-block;
+      }
+
+      @titleColor: #333332;
+      @color: #808080;
+      padding: 7px 0 0px 20px;
+      width: 95%;
+      color: @color;
+      display: table;
+
+      .post-info {
+        font-size: 12px;
+        color: @color;
+        padding-bottom: 5px;
+        .type {
+          .proxima-nova-regular;
+          font-size: 14px;
+
+          &.intention { color: @intention-color; }
+          &.request { color: @request-color; }
+          &.offer { color: @offer-color; }
+        }
+        .name {
+          .proxima-nova-semibold;
+        }
+        .post-prefix {
+          .proxima-nova-light;
+        }
+      }
+
+      .title {
+        margin-top: 0;
+        margin-right: 10px;
+        font-size: 16px;
+        .proxima-nova-semibold;
+        line-height: 20px;
+        color: @titleColor;
+      }
+
+      .post-description {
+        .droid-regular;
+        font-size: 12px;
+        padding-top: 5px;
+        color: @color;
+      }
+
+      &:hover {
+        .title {
+          color: darken(@titleColor, 30%);
+        }
+        .post-info {
+          .name {
+            color: darken(@color, 30%);
+          }
+          .post-prefix {
+            color: darken(@color, 30%);
+          }
+        }
+        .post-description {
+          color: darken(@color, 30%)
+        }
+        text-decoration: none;
+      }
+    }
+
+    .show-more-btn {
+      color: @link-color;
+    }
+
+    & > div:not(.triangle) {
+      padding: 0 20px;
+    }
+
+    .delete {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      display: none;
+      font-size: 11px;
+      padding: 2px;
+      color: @gray-light;
+    }
+
+    .delete:hover {
+      color: @gray;
+    }
+
+    &.deletable:hover .delete {
+      display: block;
+    }
+
+    .fulfillment {
+      .proxima-nova-light;
+      color: white;
+      margin: 10px 0 3px 0;
+      font-size: 12px;
+      height: 25px;
+      background-color: @fulfillColor;
+      vertical-align: middle;
+
+      a {
+        .proxima-nova-bold;
+        cursor: pointer;
+        color: white;
+      }
+
+      .dropdown-menu a {
+        color: @light-gray;
+        font-size: 11px;
+      }
+
+      > div {
+        padding-top: 4px;
+      }
+    }
+
+    .comment-form {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .btn {
+        margin-top: 5px;
+      }
+    }
+
+    .controls {
+      font-size: @font-size-small;
+      .proxima-nova-light;
+
+      &, > a { color: @light-gray; }
+      > a {
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .myVote {
+        color: pink;
+      }
+
+      .vote, .comment, .num-followers{
+        display: inline-block;
+        padding: 5px 4px;
+
+        .num {
+          font-size: 14px;
+        }
+
+        &:hover {
+          .icon-following {
+            color: pink;
+          }
+
+          &, > .icon-comment {
+            color: @gray;
+          }
+
+          .icon-following.myVote {
+            color: @light-gray;
+          }
+        }
+      }
+
+      .thank-link {
+        color: #B3B3B3;
+        .proxima-nova-semibold;
+
+        &:hover {
+          color: @fulfillColor;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .triangle {
+      top: 14px;
+    }
+  }
+
+  .comments {
+    background-color: @faint-gray;
+    padding: 18px 20px 6px;
+    margin: 10px -20px -7px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    > .comment {
+      margin-bottom: 12px;
+      > .bubble {
+        padding-top: 13px;
+        padding-bottom: 10px;
+        position: relative;
+
+        .delete {
+          display: none;
+        }
+
+        &.deletable:hover .delete {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .followers {
+    .proxima-nova-light;
+    color: @light-gray;
+    font-size: 11px;
+
+    .actionIcon {
+      font-size: 16px;
+      vertical-align: middle;
+
+      &.icon-complete {
+        -ms-animation: pulse 2s infinite ease-in-out;
+        -webkit-animation: pulse 2s infinite ease-in-out;
+        animation: pulse 2s infinite ease-in-out;
+        color: @btn-success-bg;
+      }
+    }
+
+    a {
+      .proxima-nova-bold;
+      font-size: 11px;
+      color: @light-gray;
+      cursor: pointer;
+    }
+  }
+
+  .followers-edit {
+    padding: 0 10px !important;
+    margin-top: 12px;
+    position: relative;
+
+    .arrow {
+      &,
+      &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+    }
+
+    .arrow {
+      border-width: @popover-arrow-outer-width;
+    }
+
+    .arrow:after {
+      border-width: @popover-arrow-width;
+      content: "";
+    }
+
+    .arrow {
+      left: 16px + @popover-arrow-outer-width;
+      margin-left: -@popover-arrow-outer-width;
+      border-top-width: 0;
+      border-bottom-color: @tags-border-color;
+      top: -10px;
+      &:after {
+        content: " ";
+        top: 1px;
+        margin-left: -@popover-arrow-width;
+        border-top-width: 0;
+        border-bottom-color: @tags-bg-color;
+      }
+    }
+
+    .decipher-tags {
+
+    }
+
+    .typeahead-result {
+      .proxima-nova-light;
+      strong {
+        .proxima-nova-bold;
+      }
+    }
+  }
+}
+
+.fulfill-modal {
+  h4 {
+    .proxima-nova-regular;
+    font-size: 30px;
+    color: @fulfillColor;
+  }
+
+  p {
+    .proxima-nova-light;
+    font-size: 14px;
+    margin: 30px 0px;
+    color: #333332
+  }
+
+  label {
+    .proxima-nova-regular;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .top-contributor-item {
+    padding: 3px;
+    border: 1px solid rgba(255,255,255, 0);
+
+    &.selected {
+      background-color: #F1F2F2;
+      border: 1px solid #00EA83;
+      border-radius: 5px;
+    }
+
+    .avatar {
+      height: 30px;
+      width: 30px;
+      border-radius: 15px;
+    }
+
+    div {
+      .proxima-nova-regular;
+      font-size: 12px;
+      vertical-align: middle;
+      height: 30px;
+      overflow: hidden;
+      display: table-cell;
+      padding-left: 5px;
+    }
+  }
+}
+
+@-ms-keyframes pulse {
+  0% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}
+  50% {-ms-transform: scale(1.2, 1.2); opacity: 1;}
+  100% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}
+
+}
+@keyframes pulse {
+  0% {opacity: 0.7;}
+  50% {opacity: 1;}
+  100% {opacity: 0.7;}
+}
+@-webkit-keyframes pulse {
+  0% {-webkit-transform: scale(1.0, 1.0); opacity: 0.7;}
+  50% {-webkit-transform: scale(1.2, 1.2); opacity: 1;}
+  100% {-webkit-transform: scale(1.0, 1.0); opacity: 0.7;}
+}

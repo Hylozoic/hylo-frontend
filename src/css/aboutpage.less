@@ -1,0 +1,142 @@
+.about-page {
+
+
+  .about-header {
+    padding: 160px 0;
+    color: white;
+    h1 {
+      text-align: center;
+      font-size: 81px;
+    }
+  }
+
+  .map {
+    width: 100%;
+    height: 350px;
+    border-top: solid 1px #EEE;
+    border-bottom: solid 1px #EEE;
+    margin-top: 24px;
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 5px solid #ccc;
+    background: white;
+    margin: 10px -20px 35px;
+  }
+
+  #hyloDescription {
+    background: #18CBB9 url(/assets/images/homepage/hexagon.png) fixed;
+    padding: 160px 0;
+    margin-top: 28px;
+    color: white;
+    h2 {
+      text-align: left;
+      font-size: 28px;
+      .proxima-nova-regular
+    }
+  }
+
+  #aboutCompany {
+    background: url(/assets/images/about/Company_Asset.jpg) fixed;
+  }
+  #aboutTeam {
+    background: url(/assets/images/about/Team_Asset.jpg) fixed;
+  }
+  #aboutCareers {
+    background: url(/assets/images/about/Career_Asset.jpg) fixed;
+  }
+  #aboutContact {
+    background: url(/assets/images/about/Contact_Asset.jpg) fixed;
+  }
+
+  #linksBar {
+    padding: 38px 0 10px 0;
+
+    ul {
+      color: #999;
+      padding-left: 0;
+      text-align: center;
+      margin: 0;
+    }
+
+    li {
+      display: inline;
+      padding: 0 23px;
+
+      @media (max-width: @screen-xs-max) {
+        padding: 10px;
+      }
+    }
+
+    li:first-child {
+      padding-left: 0;
+    }
+
+    li a {
+      color: #999;
+      font-size: 26px;
+      .proxima-nova-light;
+
+      @media (max-width: @screen-xs-max) {
+        font-size: 23px;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    li a.active {
+      color: black;
+    }
+  }
+
+  .left-side {
+    h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  .right-side {
+    .proxima-nova-light;
+    font-size: 18px;
+
+    p:first-of-type {
+      .proxima-nova-bold;
+      font-size: 20px;
+      padding-bottom: 40px;
+    }
+  }
+
+  .team-section {
+    .proxima-nova-light;
+    font-size: 18px;
+
+    h1 {
+      margin-bottom: 50px;
+    }
+
+    .head-shot {
+      width: 200px;
+      border: 10px solid #00CCB7;
+      .border-radius(100px);
+      margin: 20px 0;
+    }
+
+    .title {
+      font-weight: 600;
+      color: #626366;
+    }
+
+    .name {
+      font-size: 20px;
+    }
+  }
+
+  .contact-info {
+    .proxima-nova-light;
+    font-size: 20px;
+  }
+}
