@@ -8,9 +8,11 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.limit = 12;
 
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
-      communityPromise.$promise.then(function() {
-        $scope.query();
-      });
+      if (communityPromise) {
+        communityPromise.$promise.then(function () {
+          $scope.query();
+        });
+      }
     });
 
     $scope.posts = [];

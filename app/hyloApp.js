@@ -98,7 +98,7 @@ angular.module('hyloApp', [
 
     $rootScope.$watch("watchingState.params.community", function(slug) {
       if (angular.isDefined(slug) && slug != currentCommunitySlug) {
-        CurrentCommunity.get({slug: slug}, function(community) {
+        $rootScope.community = CurrentCommunity.get({slug: slug}, function(community) {
           $rootScope.community = community;
           currentCommunitySlug = slug;
         });
