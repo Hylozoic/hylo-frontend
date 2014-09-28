@@ -73,6 +73,7 @@
 
   .notifications-item {
     position: relative;
+    padding-bottom: 0px;
   }
 
   .notification-count {
@@ -104,10 +105,6 @@
     overflow: hidden;
     margin: 3px 0;
     .proxima-nova-regular;
-
-    &:first-child {
-      margin-top: 10px;
-    }
 
     i {
       font-size: 14px;
@@ -227,6 +224,7 @@
   #notifications {
     margin-top: 0;
     visibility: hidden;
+    padding-bottom: 45px;
   }
 
   &.collapsed {
@@ -353,4 +351,9 @@
     padding: 8px 15px;
     font-size: 38px;
   }
+}
+
+.scroller {
+  overflow-y: hidden;
+  position: relative;
 }
