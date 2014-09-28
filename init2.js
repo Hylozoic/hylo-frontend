@@ -21,6 +21,9 @@ require('jquery.dotdotdot');
 require('ng-idle');
 require('ngInfiniteScroll');
 
+require('perfect-scrollbar');
+require('angular-perfect-scrollbar');
+
 require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.10.0-enhanced');
 require('./angular/angulartics-segmentio');

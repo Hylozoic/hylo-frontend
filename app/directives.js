@@ -174,7 +174,7 @@ directive('fitHeightToParent', function() {
   return function(scope, element, attrs) {
     scope.$watch(function() { return $(element).position().top }, function(top) {
       var heightDiff = document.documentElement.clientHeight - top;
-      if (heightDiff > 0) element.css({height: heightDiff, 'overflow-y': 'scroll'});
+      if (heightDiff > 0) element.css({height: heightDiff});
     })
     return {
       restrict: 'A',
