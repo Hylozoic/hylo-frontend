@@ -3,8 +3,10 @@ var sha1 = require('sha1');
 
 module.exports = function(grunt) {
 
+  grunt.registerTask('dev', ['serve', 'watch']);
+
   grunt.registerTask('serve', function() {
-    require('./server')(3001, 'localhost', 9000);
+    require('./server')(3001, 'localhost', 9000); // TODO parameterize upstream address and port
   });
 
   grunt.registerTask('deploy', ['browserify:prod', 'less:dev', 'cssmin:prod', 'digest']);
