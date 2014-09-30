@@ -1,13 +1,14 @@
-@expandedBgColor: #3A3A3A;
-@expandedColor: #A8A8A8;
-@expandedSubColor: #565656;
-@expandedHoverColor: #32A1D5;
-
-@logo-height: 48px;
-@menu-padding-top: 15px;
-@menu-width: 240px;
-
 .menu {
+  @expandedBgColor: #3A3A3A;
+  @expandedColor: #A8A8A8;
+  @expandedSubColor: #565656;
+  @expandedHoverColor: #32A1D5;
+  @notificationBGColor: #4D4D4D;
+
+  @logo-height: 48px;
+  @menu-padding-top: 15px;
+  @menu-width: 240px;
+
   @icon-margin: 21px;
   @icon-width: 24px;
   @icon-expanded-right-margin: 10px;
@@ -103,7 +104,6 @@
   li {
     text-transform: uppercase;
     overflow: hidden;
-    margin: 3px 0;
     .proxima-nova-regular;
 
     i {
@@ -159,11 +159,14 @@
         border-left: 4px solid #333333;
       }
     }
+
     &.no-link {
       padding: 7px @icon-margin;
     }
 
     .notification {
+      @notificationSpacing: 10px;
+
       font-family: @body-font;
       text-transform: none;
       border-left: 4px solid transparent;
@@ -171,7 +174,8 @@
       box-sizing: border-box;
       width: 100%;
       overflow: hidden;
-      background-color: #4D4D4D;
+      background-color: @notificationBGColor;
+      padding: @notificationSpacing 10px 0px 10px;
 
       &.unread {
         background-color: #565656;
@@ -186,6 +190,22 @@
         margin-left: -3px;
         position: relative;
         top: -1px;
+      }
+
+      .notification-info {
+        margin-left : 32px;
+      }
+
+      .notification-border {
+        padding-top: @notificationSpacing;
+        border-bottom: 1px solid #606060;
+        height: 1px;
+      }
+
+      &:hover {
+        .notification-border{
+          border-bottom: 1px solid @expandedHoverColor;
+        }
       }
 
       .actor-action {
@@ -215,9 +235,6 @@
         font-size: 12px;
       }
 
-      > div {
-        margin-left: 32px;
-      }
     }
   }
 
@@ -280,7 +297,6 @@
       }
 
       &.sub-group {
-        margin: 0px;
         background-color: @expandedSubColor;
       }
 
