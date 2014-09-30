@@ -33,11 +33,13 @@ var proxy = function(req, res, upstream, port) {
 
 module.exports = function(port, upstream, upstreamPort) {
   var server = http.createServer(function(req, res) {
-    console.log(req.connection.remoteAddress + ' ' + req.method + ' ' + req.url);
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
         proxy(req, res, upstream, upstreamPort);
+        console.log(req.connection.remoteAddress + ' ↑ ' + req.method + ' ' + req.url);
+      } else {
+        console.log(req.connection.remoteAddress + ' ' + req.method + ' ' + req.url);
       }
     });
   }).listen(port);
