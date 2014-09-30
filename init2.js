@@ -2,6 +2,7 @@ $ = jQuery = require('jquery');
 _          = require('underscore');
 moment     = require('moment');
 
+/* Bower Components */
 require('angular');
 require('angular-animate');
 require('angular-bootstrap-select');
@@ -20,10 +21,11 @@ require('filepicker');
 require('jquery.dotdotdot');
 require('ng-idle');
 require('ngInfiniteScroll');
-
 require('perfect-scrollbar');
-require('angular-perfect-scrollbar');
+/* End Bower Components */
 
+/* Manually installed components */
+require('./angular/angular-perfect-scrollbar');
 require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.10.0-enhanced');
 require('./angular/angulartics-segmentio');
