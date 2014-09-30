@@ -9,12 +9,27 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
     });
 
     $stateProvider.
+      state('home', {
+          url: '/',
+          onEnter: function reloadCtrl() {
+            window.location.replace('/');
+          }
+      }).
       state('community', {
         url: '/c/:community',
         views: {
           "": {
             templateUrl: '/ui/app/community.tpl.html',
             controller: 'CommunityCtrl'
+          }
+        }
+      }).
+      state('createCommunity', {
+        url: '/create/community',
+        views: {
+          "": {
+            templateUrl: '/ui/app/createCommunity.tpl.html',
+            controller: 'CreateCommunityCtrl'
           }
         }
       }).
