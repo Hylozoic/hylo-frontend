@@ -1,9 +1,14 @@
-
-@logo-height: 48px;
-@menu-padding-top: 15px;
-@menu-width: 240px;
-
 .menu {
+  @expandedBgColor: #3A3A3A;
+  @expandedColor: #A8A8A8;
+  @expandedSubColor: #565656;
+  @expandedHoverColor: #32A1D5;
+  @notificationBGColor: #4D4D4D;
+
+  @logo-height: 48px;
+  @menu-padding-top: 15px;
+  @menu-width: 240px;
+
   @icon-margin: 21px;
   @icon-width: 24px;
   @icon-expanded-right-margin: 10px;
@@ -25,7 +30,7 @@
   }
 
   &:active {
-    background-color: white;
+    background-color: #3A3A3A;
   }
 
 
@@ -51,22 +56,6 @@
 
   }
 
-  .community-name {
-    height: @logo-height;
-    overflow: hidden;
-    margin-top: @menu-padding-top;
-    display: none;
-
-    span {
-      display: table-cell;
-      vertical-align: middle;
-      font-size: 16px;
-      line-height: 18px;
-      padding-right: 5px;
-      .proxima-nova-regular;
-    }
-  }
-
   .hylo-logo {
     position: absolute;
     bottom: 15px;
@@ -85,6 +74,7 @@
 
   .notifications-item {
     position: relative;
+    padding-bottom: 0px;
   }
 
   .notification-count {
@@ -101,38 +91,64 @@
     height: 16px;
   }
 
+  .only-expanded {
+    display: inline-block;
+  }
+
   ul {
     font-size: 12px;
     color: #333;
     width: @collapsed-width;
   }
 
-  .only-expanded {
-    display: none;
-  }
-
   li {
     text-transform: uppercase;
     overflow: hidden;
-    margin: 3px 0;
     .proxima-nova-regular;
 
-    &:first-child {
-      margin-top: 10px;
-    }
-
     i {
+      font-size: 14px;
+      top: 2px;
       margin-right: @icon-expanded-right-margin;
       width: @icon-width !important;
       display: inline-block;
       text-align: center;
-      font-size: 14px;
       position: relative;
-      top: 2px;
+      .transition-transform(0.3s ease);
     }
+
+    .image-item {
+      display: table;
+
+      .image-item-icon > div {
+        width: 34px;
+        height: 34px;
+        background-size: cover
+      }
+
+      .image-item-icon, span {
+        display: table-cell;
+      }
+
+      span {
+        padding-left: 10px;
+        vertical-align: middle;
+      }
+    }
+
+
+    i.icon-down {
+      .rotate(-90deg);
+    }
+
+    i.rotate {
+      .rotate(0deg);
+    }
+
     &:hover {
       background-color: @core-color;
     }
+
     a {
       display: block;
       padding: 5px @icon-margin;
@@ -143,22 +159,26 @@
         border-left: 4px solid #333333;
       }
     }
+
     &.no-link {
       padding: 7px @icon-margin;
     }
+
     .notification {
+      @notificationSpacing: 10px;
+
       font-family: @body-font;
       text-transform: none;
       border-left: 4px solid transparent;
-      color: @text-gray;
+      color: @expandedColor;
       box-sizing: border-box;
       width: 100%;
       overflow: hidden;
-
-
+      background-color: @notificationBGColor;
+      padding: @notificationSpacing 10px 0px 10px;
 
       &.unread {
-        background-color: @faint-gray;
+        background-color: #565656;
         border-left: 4px solid @core-color;
       }
 
@@ -172,6 +192,22 @@
         top: -1px;
       }
 
+      .notification-info {
+        margin-left : 32px;
+      }
+
+      .notification-border {
+        padding-top: @notificationSpacing;
+        border-bottom: 1px solid #606060;
+        height: 1px;
+      }
+
+      &:hover {
+        .notification-border{
+          border-bottom: 1px solid @expandedHoverColor;
+        }
+      }
+
       .actor-action {
         line-height: 16px;
       }
@@ -179,7 +215,6 @@
       .timestamp {
         .proxima-nova-regular;
         font-size: 10px;
-        color: #AFAFAF;
         padding-top: 6px;
       }
 
@@ -187,35 +222,46 @@
         padding-top: 6px;
         .droid-regular;
         font-size: 11px;
-        color: #808080;
       }
 
       .action {
         .proxima-nova-light;
         font-size: 12px;
-        color: #1A1A1A;
         line-height: 4px;
       }
 
       .actor {
         .proxima-nova-bold;
         font-size: 12px;
-        color: #1A1A1A;
       }
 
-      > div {
-        margin-left: 32px;
-      }
+    }
+  }
+
+  #notifications {
+    margin-top: 0;
+    visibility: hidden;
+    padding-bottom: 45px;
+  }
+
+  &.collapsed {
+    .only-expanded {
+      display: none !important;
     }
   }
 
   &.expanded {
-    background-color: white;
+    background-color: @expandedBgColor;
+    color: @expandedColor;
     border-right: 1px solid #c6c6c4;
     overflow: hidden;
 
     .community-name {
       display: table;
+    }
+
+    #notifications {
+      visibility: visible;
     }
 
     &, ul {
@@ -224,32 +270,39 @@
       min-width: 220px;
     }
 
-    .only-expanded {
-      display: inline-block;
-    }
     .only-collapsed {
       display: none !important;
     }
 
     li {
-      a:hover {
-        color: @core-color;
-        background-color: white;
+
+      a {
+        color: @expandedColor;
+
+        &:hover {
+          color: white;
+          background-color: @expandedHoverColor;
+        }
 
         &.current {
-          border-color: @core-color;
+          border-color: @expandedColor;
         }
 
         .only-hover {
-          color: #333;
+          color: @expandedColor;
           &:hover {
             color: @core-color;
           }
         }
       }
 
+      &.sub-group {
+        background-color: @expandedSubColor;
+      }
+
       &.no-link {
-        background-color: @faint-gray;
+        color: @expandedColor;
+        background-color: @expandedBgColor;
       }
 
     }
@@ -267,66 +320,56 @@
     padding-left: 10px;
     padding-bottom: 18px;
     margin: 0;
-    background-color: white;
-    opacity: 0.8;
+    background-color: rgba(58, 58, 58, 0.8);
 
     @footerFontSize: 11px;
     font-size: @footerFontSize;
-    color: #808080;
+    color: @expandedColor;
     .proxima-nova-regular;
 
     a {
       font-size: @footerFontSize;
-      color: #808080;
+      color: @expandedColor;
       .proxima-nova-regular;
     }
 
     a:hover {
      color: @intention-color;
     }
+
+    .footer-icon {
+      color: @expandedColor;
+      font-size: 25px;
+    }
   }
-}
 
-#menu-links {
-  margin-bottom: 0;
-}
+  @media(max-width: @screen-xs-max) {
+    &.collapsed {
+      width: 1px;
 
-#notifications {
-  margin-top: 0;
-  visibility: hidden;
-}
-
-.expanded #notifications {
-  visibility: visible;
-}
-
-@media(max-width: @screen-xs-max) {
-  #content {
-    margin-top: @logo-height;
-  }
-  .menu.collapsed {
-    width: 1px;
-
-    .hylo-logo {
-      bottom: 0;
-      position: fixed;
-
-      img {
-        width: 35px;
+      #menu-links, .collapsed #notifications {
+        display: none;
+      }
+      &:hover {
+        background-color: transparent;
       }
     }
+  }
 
-    #menu-links, .collapsed #notifications {
-      display: none;
-    }
-    &:hover {
-      background-color: transparent;
-    }
-    .logo {
-      margin-top: 0;
-      margin-left: 0;
-    }
+  #menu-links {
+    margin-bottom: 0;
   }
 }
 
+.mobile-nav {
+  margin-bottom: 0px;
+  .navbar-brand {
+    padding: 8px 15px;
+    font-size: 38px;
+  }
+}
 
+.scroller {
+  overflow-y: hidden;
+  position: relative;
+}

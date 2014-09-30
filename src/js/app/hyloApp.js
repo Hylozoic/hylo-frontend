@@ -3,8 +3,8 @@ angular.module('hyloApp', [
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
-  'angulartics', 'angulartics.segment.io',
-  'hylo.billing', 'hylo.seeds'
+  'angulartics', 'angulartics.segment.io', "perfect_scrollbar", "hylo.validate.money",
+  'hylo.billing', 'hylo.seeds', 'hylo.createCommunity', "hylo.menu"
 ])
 
 .factory('$exceptionHandler', ['$log', function ($log) {
@@ -87,16 +87,18 @@ angular.module('hyloApp', [
     $rootScope.currentUser = CurrentUser.get();
 
     //$stateParams is not set up yet at this point
-    var currentCommunitySlug = window.location.toString().match(/c\/([^\/#\?]*)/)[1];
-
-    $rootScope.community = CurrentCommunity.get({slug: currentCommunitySlug});
+    var locationMatchCommunity = window.location.toString().match(/c\/([^\/#\?]*)/);
+    if (locationMatchCommunity != null) {
+      var currentCommunitySlug = locationMatchCommunity[1];
+      $rootScope.community = CurrentCommunity.get({slug: currentCommunitySlug});
+    }
 
     // Set a variable so we can watch for param changes
     $rootScope.watchingState = $state;
 
     $rootScope.$watch("watchingState.params.community", function(slug) {
       if (angular.isDefined(slug) && slug != currentCommunitySlug) {
-        CurrentCommunity.get({slug: slug}, function(community) {
+        $rootScope.community = CurrentCommunity.get({slug: slug}, function(community) {
           $rootScope.community = community;
           currentCommunitySlug = slug;
         });
@@ -104,6 +106,7 @@ angular.module('hyloApp', [
     });
 
     // If there exists a growl message to display, then growl it.
+    // Useful for displaying a growl message after storing it in the Play! flash scope.
     if ($window._hylo_angular_growl_msg && $window._hylo_angular_growl_msg != "") {
       _.defer(function() { growl.addSuccessMessage($window._hylo_angular_growl_msg, {ttl: 5000}) });
     }
@@ -115,4 +118,12 @@ angular.module('hyloApp', [
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       guiders.hideAll();
     });
+
+    // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
+    // TODO change to a Service method.
+    $rootScope.navigated = false;
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+      if (from.name) { $rootScope.navigated = true; }
+    });
+
   }]);
