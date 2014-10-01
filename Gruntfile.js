@@ -1,27 +1,9 @@
 require('shelljs/global');
-var sha1 = require('sha1');
+var aws = require('aws-sdk'),
+  sha1 = require('sha1'),
+  _ = require('lodash');
 
 module.exports = function(grunt) {
-
-  grunt.registerTask('dev', ['serve', 'watch']);
-
-  grunt.registerTask('serve', function() {
-    require('./server')(3001, 'localhost', 9000); // TODO parameterize upstream address and port
-  });
-
-  grunt.registerTask('deploy', ['browserify:prod', 'less:dev', 'cssmin:prod', 'digest']);
-
-  grunt.registerTask('digest', function() {
-    var shaCss = sha1(cat('dist/bundle.min.css'));
-    cp('dist/bundle.min.css', 'dist/bundle-' + shaCss + '.min.css');
-
-    var shaJs = sha1(cat('dist/bundle.min.js'));
-    cp('dist/bundle.min.js', 'dist/bundle-' + shaJs + '.min.js');
-  })
-
-  grunt.registerTask('todo', function() {
-    grunt.log.ok('todo: append hash, deploy to S3, update heroku variables');
-  });
 
   grunt.initConfig({
     less: {
@@ -82,10 +64,51 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-exec');
+  require('load-grunt-tasks')(grunt);
+
+  grunt.registerTask('dev', ['serve', 'watch']);
+
+  grunt.registerTask('serve', function() {
+    require('./server')(3001, 'hylo-dev.herokuapp.com', 80);
+    // TODO parameterize upstream address and port
+  });
+
+  grunt.registerTask('package', ['browserify:prod', 'less:dev', 'cssmin:prod']);
+
+  grunt.registerTask('deploy', function(env) {
+    var done = this.async(), asyncCount = 2;
+
+    // TODO grab AWS variables from Heroku
+
+    var s3 = new aws.S3({
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_KEY
+    });
+
+    _.each(['js', 'css'], function(ext) {
+      var path = 'dist/bundle.min.' + ext,
+        contents = cat(path),
+        digest = sha1(contents).substring(0, 8),
+        bundlePath = 'assets/bundle-' + digest + '.min.' + ext;
+
+      console.log('uploading to S3: ' + bundlePath);
+
+      s3.putObject({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: bundlePath,
+        Body: contents
+      }, function(err, data) {
+        if (err) {
+          console.log('error uploading ' + bundlePath + ': ' + err);
+          done(false);
+        }
+
+        asyncCount -= 1; // HMM are there race conditions here?
+        if (asyncCount == 0) done();
+      });
+
+      // TODO update {JS,CSS}_BUNDLE_URL on Heroku
+    });
+  });
 
 };
