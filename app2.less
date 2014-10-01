@@ -181,6 +181,10 @@ body {
   position: absolute;
   left: -8px;
   .transform(rotate(45deg));
+
+  @media (max-width: @screen-xs-max) {
+    display: none;
+  }
 }
 
 .post-type-style (@color) {
@@ -216,7 +220,7 @@ body {
   strong {
     .proxima-nova-semibold;
   }
-
+  
   &.intention { .post-type-style(@intention-color); }
   &.request { .post-type-style(@request-color); }
   &.offer { .post-type-style(@offer-color); }
