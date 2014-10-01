@@ -6,6 +6,7 @@
     "bower": "latest"
   },
   "dependencies": {
+    "aws-sdk": "latest",
     "browserify": "latest",
     "debowerify": "~0.8.1",
     "grunt-browserify": "latest",
@@ -14,6 +15,8 @@
     "grunt-contrib-less": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-exec": "latest",
+    "load-grunt-tasks": "latest",
+    "lodash": "latest",
     "node-static": "latest",
     "sha1": "latest",
     "shelljs": "latest",
