@@ -7,6 +7,8 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.start = 0;
     $scope.limit = 12;
 
+    $scope.postLoaded = false;
+
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
       if (communityPromise) {
         communityPromise.$promise.then(function () {
@@ -25,11 +27,10 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
     $scope.resetQuery = function () {
       $scope.start = 0;
-      $scope.posts = [];
-      $scope.query();
+      $scope.query(true);
     }
 
-    $scope.queryTimeout = _.throttle(function() {
+    $scope.queryTimeout = _.throttle(function throttledQueryTimeout() {
       $scope.resetQuery();
     }, 750, {leading: false});
 
@@ -37,7 +38,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.$watch("seedFilter", $scope.resetQuery);
     $scope.$watch("seedSort", $scope.resetQuery);
 
-    $scope.query = function() {
+    $scope.query = function(doReset) {
       // Cancel any outstanding queries
       _.each(cancelerStack, function(canceler) { canceler.resolve() });
       cancelerStack = [];
@@ -60,15 +61,19 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         timeout: newCanceler.promise,
         responseType: 'json'
       }).success(function(posts) {
+        $scope.searching = false;
+        $scope.postLoaded = true;
+
+        if (doReset) {
+          $scope.posts = [];
+        }
+
         angular.forEach(posts, function(post, key) {
           if (!_.findWhere($scope.posts, {id: post.id})) {
             $scope.posts.push(post);
             $scope.start++;
           }
         });
-
-        $scope.searching = false;
-        $scope.noResults = $scope.posts.length == 0;
 
         if (posts.length == 0) { // There were no more posts... disable infinite scroll now
           $scope.disableInifiniteScroll = true;

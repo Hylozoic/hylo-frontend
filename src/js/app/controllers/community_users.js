@@ -6,8 +6,8 @@ angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope'
         $scope.searching = true;
         if ($rootScope.community.slug) {
           User.query({community: $rootScope.community.slug}, function(users) {
-            $scope.users = users;
             $scope.searching = false;
+            $scope.users = users;
           });
         }
       });
@@ -15,12 +15,13 @@ angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope'
 
     var queryFn = function() {
       $scope.searching = true;
-      $scope.users = User.query({
+      User.query({
         q: $scope.searchQuery,
         community: $scope.community.slug
       }, function(value) {
         $scope.searching = false;
-        $scope.noResults = value.length == 0;
+        $scope.users = value;
+        $scope.usersLoaded = true;
       });
     };
 
