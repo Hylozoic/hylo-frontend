@@ -1,7 +1,4 @@
 require('shelljs/global');
-var aws = require('aws-sdk'),
-  sha1 = require('sha1'),
-  _ = require('lodash');
 
 module.exports = function(grunt) {
 
@@ -76,39 +73,7 @@ module.exports = function(grunt) {
   grunt.registerTask('package', ['browserify:prod', 'less:dev', 'cssmin:prod']);
 
   grunt.registerTask('deploy', function(env) {
-    var done = this.async(), asyncCount = 2;
-
-    // TODO grab AWS variables from Heroku
-
-    var s3 = new aws.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY
-    });
-
-    _.each(['js', 'css'], function(ext) {
-      var path = 'dist/bundle.min.' + ext,
-        contents = cat(path),
-        digest = sha1(contents).substring(0, 8),
-        bundlePath = 'assets/bundle-' + digest + '.min.' + ext;
-
-      console.log('uploading to S3: ' + bundlePath);
-
-      s3.putObject({
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: bundlePath,
-        Body: contents
-      }, function(err, data) {
-        if (err) {
-          console.log('error uploading ' + bundlePath + ': ' + err);
-          done(false);
-        }
-
-        asyncCount -= 1; // HMM are there race conditions here?
-        if (asyncCount == 0) done();
-      });
-
-      // TODO update {JS,CSS}_BUNDLE_URL on Heroku
-    });
+    require('./deploy')(env, this.async(), grunt.log);
   });
 
 };
