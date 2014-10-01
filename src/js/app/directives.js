@@ -183,6 +183,12 @@ directive('fitHeightToParent', function() {
   }
 })
 
+.directive("loadingIndicator", function() {
+    return {
+      template: '<div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>'
+    };
+})
+
 .directive('btnLoading',function () {
   return {
     link:function (scope, element, attrs) {
