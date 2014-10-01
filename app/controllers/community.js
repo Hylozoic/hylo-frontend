@@ -74,7 +74,6 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
             $scope.start++;
           }
         });
-        console.log(posts.length)
 
         if (posts.length == 0) { // There were no more posts... disable infinite scroll now
           $scope.disableInifiniteScroll = true;
