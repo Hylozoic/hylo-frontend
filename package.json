@@ -6,6 +6,7 @@
     "bower": "latest"
   },
   "dependencies": {
+    "async": "latest",
     "aws-sdk": "latest",
     "browserify": "latest",
     "debowerify": "~0.8.1",
@@ -15,6 +16,7 @@
     "grunt-contrib-less": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-exec": "latest",
+    "heroku-client": "latest",
     "load-grunt-tasks": "latest",
     "lodash": "latest",
     "node-static": "latest",
