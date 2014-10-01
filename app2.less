@@ -2,6 +2,48 @@
 @import 'app/user.less';
 @import 'angular/charLimit';
 
+.spinner {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+}
+
 .container {
   padding-top: 18px;
 }
@@ -14,14 +56,23 @@ body.angular-app {
 body.waiting-for-angular div#content-outer {
   display: none;
 }
+
+body div#initializing-panel {
+  display: none;
+}
+
 body.waiting-for-angular div#initializing-panel {
   display: block;
-  background: url(/assets/images/loading.gif) center center no-repeat;
   position:absolute;
   top:0;
   left:0;
   width: 100%;
   height: 100%;
+
+  .spinner {
+    top: 45%;
+    margin: auto auto;
+  }
 }
 
 body {
@@ -58,21 +109,16 @@ body {
 }
 
 .textfield-search-indicator {
-  background: url(/assets/images/loading.gif) center center no-repeat;
   position: absolute;
   right: 20px;
-  top: 0;
+  top: 12px;
   width: 40px;
   z-index: 2000;
   height: 45px;
-}
-
-.search-indicator {
-  position:absolute;
-  width: 100%;
-  z-index: 2000;
-  background: url(/assets/images/loading.gif) center center no-repeat;
-  height: 45px;
+  .spinner {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .filter-query {
