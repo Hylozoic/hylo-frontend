@@ -23,10 +23,6 @@ Deployer.prototype.getAWSKeys = function(callback) {
 
   this.herokuConfig.info(function(err, vars) {
     this.herokuEnv = _.pick(vars, 'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET');
-    _.forOwn(this.herokuEnv, function(val, key) {
-      this.log.writeln(key + ': ' + val);
-    }.bind(this));
-
     callback(err);
   }.bind(this));
 };
