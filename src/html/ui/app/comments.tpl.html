@@ -1,0 +1,42 @@
+<div class="comments">
+
+  <div class="comment" ng-repeat="comment in comments">
+    <a class="avatar hidden-xs" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
+
+    <div class="bubble" ng-class="::{deletable: canDelete(comment)}">
+      <div>
+        <i class="delete icon-remove" ng-click="delete(comment)"></i>
+        <span ng-bind-html="::(comment.text | linky:'_blank' | linkyShort | convertCarriageReturn)"></span>
+      </div>
+      <div class="controls">
+        <a ui-sref="user({community: $root.community.slug, id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
+        &nbsp;•&nbsp;
+        <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
+        <span ng-show="::(!commentOwner(comment))">
+          <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank You"</a></span>
+          <span ng-if="comment.isThanked">&nbsp;•&nbsp; <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a></span>
+        </span>
+      </div>
+      <div class="triangle"></div>
+    </div>
+  </div>
+
+  <div ng-if="!post.commentsLoaded && post.numComments > 0" style="padding: 5px 0 15px 0">Loading Comments ...</div>
+
+  <div class="comment">
+    <!-- FIXME why doesn't this work without $root? -->
+    <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar"></a>
+
+    <div class="bubble">
+      <form class="comment-form">
+        <textarea tabindex="1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="form-control msd-elastic" placeholder="Write a comment..." required></textarea>
+        <button tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
+      </form>
+      <div class="triangle"></div>
+    </div>
+  </div>
+
+  <div class="text-center" ng-if="isPostOwner() && !post.fulfilled">
+    <button ng-click="markFulfilled()" class="btn btn-fulfill" style="margin-left: auto; margin-right: auto;"><i class="icon-complete"></i> MARK FULFILLED</button>
+  </div>
+</div>

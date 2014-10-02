@@ -1,0 +1,125 @@
+<div class="row">
+
+  <div class="col-sm-4 col-md-3 col-md-offset-1">
+    <div class="biobar" ng-switch="editing" >
+
+      <div ng-switch-when="true" class="editing">
+        <div class="profile-avatar" back-img="user.avatar" ng-class="{loading: loading}" ng-click="pickFile()"><span class="editOverlay"></span><span class="loadingNewImage"></span></div>
+        <div class="form-group">
+          <input type="text" ng-model="user.name" class="name"/>
+        </div>
+
+        <div class="divider"></div>
+        <h4>Organizational affiliations</h4>
+        <div class="form-group">
+          <tags options="{selectOnBlur: true}"
+                model="user.organizations"
+                class="organizations"></tags>
+        </div>
+
+        <div class="divider"></div>
+        <h4>Skills, joys, hobbies</h4>
+        <div class="form-group">
+          <tags options="{selectOnBlur: true}"
+                model="user.skills"
+                class="organizations"></tags>
+        </div>
+
+        <div class="divider"></div>
+        <button type="button" class="cancel btn btn-info" ng-click="cancel()">Cancel</button>
+        <button type="button" class="save btn btn-success" ng-click="save()">Save</button>
+
+      </div>
+
+      <div ng-switch-when="false">
+        <div class="profile-avatar" ng-class="{loading: loading}" back-img="user.avatar"><span class="loadingNewImage"></span></div>
+        <h2 class="name">{{user.name}}</h2>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div class="col-xs-6 text-center">
+            <div class="stat-value">{{user.contributions}}</div>
+            <div class="stat-header">
+              <ng-pluralize count="user.contributions"
+                             when="{'0': 'Contributions',
+                                    '1': 'Contribution',
+                                    'other': 'Contributions'}">
+              </ng-pluralize>
+            </div>
+          </div>
+          <div class="col-xs-6 text-center">
+            <div class="stat-value">{{user.thankyous}}</div>
+            <div class="stat-header">
+              <ng-pluralize count="user.thankyous"
+                             when="{'0': 'Thank You\'s',
+                                    '1': 'Thank You',
+                                    'other': 'Thank You\'s'}">
+              </ng-pluralize>
+            </div>
+          </div>
+          <div ng-if="reputationExpanded" class="reputations">
+            <div ng-repeat="rep in reputations" class="col-xs-12">
+              <a class="reputation" ng-class="rep.post.postType" ui-sref="post.comments({community: rep.post.communitySlug, postId: rep.post.id})">
+                {{rep.repType | repPrompt}}<span>{{ rep.post.name }}</span>
+              </a>
+              <div ng-if="!$last" class="divider"></div>
+            </div>
+            <div class="text-center" ng-if="!noMoreResults && !noRepResults">
+              <a ng-click="loadReps()">See More</a>
+            </div>
+            <div ng-if="noRepResults">
+              User does not have any reputation.
+            </div>
+          </div>
+          <div class="col-xs-12 text-center" style="margin-bottom: -15px;">
+            <i style="font-size: 18px; padding: 0 20px 10px 20px;" ng-click="expandReputation()" ng-class="{'icon-down': !reputationExpanded, 'icon-up': reputationExpanded}"></i>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h4>Organizational affiliations</h4>
+        <p class="organizations">{{user.organizations.join(", ")}}</p>
+
+        <div class="divider"></div>
+        <h4>Skills, joys, hobbies</h4>
+        <p class="skills">{{user.skills.join(", ")}}</p>
+
+        <div ng-switch="::editable">
+          <div ng-switch-when="true">
+            <div class="divider"></div>
+            <button type="button" class="edit btn btn-info" ng-click="edit()">Edit profile</button>
+            <a ui-sref="user.settings({id: user.id, community: $root.community.slug})" class="settings btn btn-info">Settings</a>
+          </div>
+          <div ng-switch-when="false">
+            <div class="divider"></div>
+            <a class="btn btn-info" ng-cloak ng-href="mailto:{{user.email}}" tooltip="Your email address will be cloaked to preserve your identity" target="_blank">Send Private Message</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div ui-view></div>
+
+  <div class="col-sm-8">
+    <div ng-repeat="post in posts">
+      <hylo-post post="post" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+    </div>
+
+    <div ng-if="!hasPosts" class="post">
+      <a class="avatar" back-img="user.avatar"></a>
+
+      <div class="bubble" ng-class="intention">
+        <div>
+          <h2 style="padding: 15px 0 0 0">
+            No Seeds Yet
+          </h2>
+        </div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

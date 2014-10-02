@@ -1,0 +1,32 @@
+<div class="modal-body fulfill-modal">
+  <button type="button" ng-click="$dismiss('cancelled')" class="close" aria-hidden="true">&times;</button>
+  <h4 class="modal-title">Awesome</h4>
+
+  <p>Who helped you Fulfill your Request? When you tag a “Contributor” it will show up on their profile that they helped you Fulfill this Request. </p>
+
+  <label>Contributors</label>
+  <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+        model="contributors"
+        typeahead-options="typeaheadOpts"
+        src="b as b.name for b in potentialContributors"></tags>
+
+  <br>
+  <br>
+
+  <div ng-if="(potentialContributors|filter: {topContributor: true}).length > 0" style="margin-bottom: 20px;">
+    <label>Add Top Contributors</label>
+    <div class="row">
+      <div class="col-md-4" ng-repeat="topContributor in potentialContributors | filter: {topContributor: true} ">
+        <div class="top-contributor-item" ng-click="selectTopContributor(topContributor)" ng-class="{selected: topContributor.selected}">
+          <i back-img="topContributor.avatar" class="avatar"></i>
+          <div>{{topContributor.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="button" class="btn btn-fulfill btn-lg" ng-click="addContributors()"><i class="icon-complete"></i> Add Contributors</button>
+  </div>
+</div>
+
