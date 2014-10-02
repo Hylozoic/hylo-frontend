@@ -1,0 +1,96 @@
+<div class="menu"
+  ng-controller="MenuCtrl"
+  ng-class="{expanded: state.expanded, collapsed: !state.expanded}"
+  ng-mouseenter="setMenuState(true)"
+  ng-mouseleave="setMenuState(false)"
+  ng-swipe-left="setMenuState(false, true)">
+
+  <ul class="list-unstyled clearfix" id="menu-links">
+
+    <li>
+      <a class="" ui-sref="community({community: community.slug})" ui-sref-active="current">
+        <div class="image-item">
+          <div class="image-item-icon">
+            <div back-img="community.avatar"></div>
+          </div>
+          <span class="only-expanded">{{::community.name}}</span>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a id="menu-community" ng-click="setMenuState(true, true); state.membershipsExpanded = !state.membershipsExpanded">
+        <i class="icon-communities"></i>
+        <span class="only-expanded">Communities</span>
+        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : state.membershipsExpanded}"></i>
+      </a>
+    </li>
+
+    <li class="sub-group" ng-show="state.membershipsExpanded" ng-repeat="membership in currentUser.memberships">
+      <a ui-sref="community({community: membership.slug})" ui-sref-active="current">
+        <div class="image-item">
+          <div class="image-item-icon">
+            <div back-img="::membership.avatar"></div>
+          </div>
+          <span class="only-expanded">{{::membership.name}}</span>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a ui-sref="search({community: $root.community.slug})" id="menu-search" ui-sref-active="current">
+        <i class="icon-search"></i>
+        <span class="only-expanded">Search</span>
+      </a>
+    </li>
+
+    <li>
+      <a ui-sref="members({community: $root.community.slug})" id="menu-members" ui-sref-active="current">
+        <i class="icon-members"></i>
+        <span class="only-expanded">Members</span>
+      </a>
+    </li>
+
+    <li>
+      <a ui-sref="user({community: $root.community.slug, id: $root.currentUser.id})" id="menu-user" ui-sref-active="current">
+        <i class="icon-profile"></i>
+        <span class="only-expanded">My Profile</span>
+        <i ng-click="openSettings($event)" class="only-expanded only-hover icon-settings pull-right"></i>
+      </a>
+    </li>
+
+    <li class="no-link notifications-item" ng-click="setMenuState(true, true)">
+      <i class="icon-notifications"></i>
+      <span class="notification-count only-collapsed" ng-show="unreadCount > 0">{{unreadCount}}</span>
+      <span class="only-expanded">{{notificationsTitle}}</span>
+    </li>
+  </ul>
+
+  <perfect-scrollbar class="scroller" fit-height-to-parent>
+    <ul class="list-unstyled only-expanded" id="notifications" >
+      <li ng-repeat="notification in notifications">
+        <a ng-class="{unread: !notification.read}" class="notification" ng-click="markread(notification)" ui-sref="post.comments({community: notification.communitySlug, postId: notification.postId})">
+          <div back-img="::notification.avatar" class="avatar notificationAvatar"></div>
+          <div class="notification-info">
+            <div class="actor-action"><span class="actor">{{::notification.actor}}</span> <span class="action" ng-bind="::notification.action"></span></div>
+            <div class="itemName"><span ng-bind="::notification.itemName"></span></div>
+            <div class="timestamp" ng-bind="::notification.timestamp|fromNow"></div>
+          </div>
+          <div class="notification-border clearfix"></div>
+        </a>
+      </li>
+    </ul>
+  </perfect-scrollbar>
+
+
+  <div class="only-expanded footerLinks">
+    <i class="icon-hylo-script footer-icon"></i>
+    <br>
+    <a href="/about" target="_self">About</a> | <a href="/policies/terms-of-service" target="_self">Terms of Use</a> | <a href="/policies/privacy" target="_self">Privacy Policy</a>
+  </div>
+
+  <a class="hylo-logo only-collapsed hidden-xs">
+    <i class="icon-hylo-script"></i>
+  </a>
+
+</div>

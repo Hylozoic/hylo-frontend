@@ -1,0 +1,40 @@
+<div class="row search">
+  <div class="col-md-10 col-md-offset-1 col-sm-offset-1">
+
+    <i class="icon-search shadow filter-search-icon"></i>
+    <div class="filter-query">
+      <input class="form-control input-lg" placeholder="Search for seeds..." type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+      <div class="textfield-search-indicator" loading-indicator ng-if="searching"></div>
+    </div>
+
+    <div class="filter-buttons">
+      <div class="btn-group btn-group-justified post-type">
+        <a class="btn btn-default" ng-model="postType" btn-radio="'all'">All</a>
+        <a class="btn btn-default" ng-model="postType" btn-radio="'request'">Request</a>
+        <a class="btn btn-default" ng-model="postType" btn-radio="'offer'">Offer</a>
+        <a class="btn btn-default" ng-model="postType" btn-radio="'intention'">Intention</a>
+      </div>
+
+      <div class="btn-group btn-group-justified post-sort">
+        <a class="btn btn-default" ng-model="postSort" btn-radio="'top'">Top</a>
+        <a class="btn btn-default" ng-model="postSort" btn-radio="'recent'">Recent</a>
+      </div>
+    </div>
+
+    <div infinite-scroll="queryNow()"
+         infinite-scroll-distance="1"
+         infinite-scroll-disabled="disableInifiniteScroll">
+      <div ng-class-odd="'odd'" ng-repeat="post in posts track by post.id">
+        <hylo-post post="post" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+      </div>
+
+      <div loading-indicator ng-if="searching"></div>
+    </div>
+
+    <div ng-if="noResults">
+      <h2 class="text-center" style="margin-top: 70px;">Hmm... we couldn't find you any seeds that matched your search.<br>
+        <small>If you're looking for people, skills or affiliations, search on the <a ui-sref="members({community: $root.community.slug})"><i class="icon-members"></i>&nbsp;Member&nbsp;page.</a></small></h2>
+    </div>
+
+  </div>
+</div>

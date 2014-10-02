@@ -1,0 +1,59 @@
+<div class="row community">
+  <div class="col-md-10 col-md-offset-1 col-sm-offset-1">
+    <div id="community-filter-buttons" class="filters">
+      <div ng-if="showSeedForm">
+        <hylo-seed-form on-success="addSeedSuccess(seed)" on-cancel="addSeedCancel()"></hylo-seed-form>
+      </div>
+      <div class="btn-toolbar full_width" ng-hide="showSeedForm">
+        <div class="btn-group">
+          <div class="add-seed">
+            <a href="#" id="community-addSeedButton" class="start-editing" ng-click="addSeed()">
+              <div class="circle"><i class="icon-add"></i></div>
+              <div class="bubble">
+                PLANT A SEED
+                <div class="triangle"></div>
+              </div>
+            </a>
+          </div>
+
+          <select selectpicker ng-model="seedFilter" class="btns">
+            <option value="all">All</option>
+            <option value="intention">Intentions</option>
+            <option value="offer">Offers</option>
+            <option value="request">Requests</option>
+          </select>
+
+          <select selectpicker="['top']" class="btns" ng-model="seedSort">
+            <option value="top">Top</option>
+            <option value="recent">Recent</option>
+            <!--<option value="magic">Serendipity</option>-->
+          </select>
+        </div>
+
+        <div class="filter-query input-group">
+          <i class="icon-search input-group-addon"></i>
+          <input placeholder="Search" class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+        </div>
+        <div class="textfield-search-indicator tsi-button-group" loading-indicator ng-if="searching"></div>
+      </div>
+    </div>
+
+    <div infinite-scroll="query()"
+         infinite-scroll-distance="1"
+         infinite-scroll-disabled="disableInifiniteScroll">
+
+      <div ng-repeat="post in posts track by post.id">
+        <hylo-post post="post" short="true" remove-fn="remove(postToRemove)">
+        </hylo-post>
+      </div>
+
+    </div>
+
+    <div loading-indicator ng-if="searching"></div>
+
+    <div ng-if="::postLoaded && !searching && posts.length == 0">
+      <h2 style="text-align: center;">There are no seeds to display.</h2>
+    </div>
+
+  </div>
+</div>

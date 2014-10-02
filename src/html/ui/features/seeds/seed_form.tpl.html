@@ -1,0 +1,42 @@
+<div class="add-seed-form clearfix">
+  <div class="editor clearfix" style="padding-top:0px">
+    <a class="circle" ng-click="cancel()" style="text-decoration: none;"><i class="icon-remove"></i></a>
+    <div class="bubble" ng-class="postType">
+      <div class="row post-types">
+        <a class="col-xs-4 intention" ng-click="typeChanged('intention'); focusInput=true">INTENTION</a>
+        <a class="col-xs-4 offer" ng-click="typeChanged('offer'); focusInput=true">OFFER</a>
+        <a class="col-xs-4 request" ng-click="typeChanged('request'); focusInput=true">REQUEST</a>
+      </div>
+
+      <form name="seedFrm">
+        <div class="form-group right-inner-addon"
+             ng-class="{'has-error': charLimitError, 'char-limit-warning': charLimitWarning, 'char-limit-error': charLimitError, 'has-warning': (charLimitWarning && titleFocused)}">
+          <label>{{ postType | postTitlePlaceholder }}...</label>
+          <i ng-show="titleFocused"
+             tooltip-trigger="manual"
+             tooltip-placement="bottom"
+             tooltip-visible="charLimitError"
+             tooltip-html-unsafe="Keep it short. &nbsp;You can add more details in the field below."><i class="icon-alert" ng-show="charLimitError"></i>&nbsp;<span class="chars-left" ng-bind="charsLeft"></span></i>
+
+          <input
+                 ng-focus="titleFocused = true"
+                 ng-blur="titleFocused = false"
+                 type="text"
+                 ng-focus-me="focusInput"
+                 ng-model="title[postType]"
+
+                 ng-change="onTitleChange()"
+                 class="form-control input-lg addPostInput"
+                 required
+                 placeholder="{{ postType | postPrompt }}"/>
+        </div>
+        <label>Care to say more?</label>
+        <textarea type="text" rows="1" ng-model="description" class="form-control input-lg addPostInput msd-elastic" placeholder="{{ postType | postDescPlaceholder }}"></textarea>
+
+        <button type="submit" ng-click="save()" class="btn btn-lg" ng-disabled="seedFrm.$invalid || charLimitError">PLANT SEED</button>
+      </form>
+
+      <div class="triangle"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="post" analytics-id="{{::post.id}}">
+  <a ui-sref="user({community: post.communitySlug, id: post.user.id})" back-img="post.user.avatar" class="avatar hidden-xs"></a>
+
+  <div class="bubble {{post.postType}}" ng-class="{'deletable': canDelete}">
+    <a class="post-header" ng-href="{{postUrl}}" ng-click="gotoPost($event)" ng-dblclick="gotoSinglePost()">
+      <i class="delete icon-remove" ng-click="delete(comment)"></i>
+
+      <span class="post-info">
+        <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span> &bull; <span class="name">{{::post.user.name}}</span>
+      </span>
+
+      <br>
+
+      <span class="title">
+        <span seed-text="post.name"></span>
+      </span>
+
+      <br ng-if="isPostText">
+
+      <span ng-if="isPostText" class="post-description">
+        <span seed-text="truncatedPostText"></span>
+        <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
+      </span>
+    </a>
+
+    <div class="fulfillment" ng-if="post.fulfilled">
+      <div>
+        <strong>Fulfilled</strong>&nbsp;&bull;&nbsp;
+        <span ng-if="::post.contributors.length > 0">
+          Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span></a>
+          <span ng-if="::post.contributors.length > 2">
+            <span class="dropdown">and
+            <a class="dropdown-toggle"><span>{{::post.contributors.length - 2}}</span> other</a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="contributor in post.contributors.slice(2)">
+                <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})"><i back-img="::contributor.avatar" class="avatar"></i> <span>{{::contributor.name}}</span></a>
+              </li>
+            </ul>
+            </span>
+          </span>
+          <span ng-show="::post.contributors.length > 2">Community Member</span><span ng-show="::post.contributors.length > 3">s</span>
+        </span>
+        <span ng-if="::post.contributors.length == 0">
+          No Contributors
+        </span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <span class="timestamp">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
+      <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-following'></i> me?" >
+        <i class="icon-following ng-class:{myVote: post.myVote}" ></i> <span class="num">{{post.votes}}</span>
+      </a>
+      <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment">
+        <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
+      </a>
+      <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers">
+        <i class="icon-members" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
+      </a>
+    </div>
+
+    <div ng-if="!isCommentsCollapsed">
+      <div class="followers">
+        <i class="actionIcon icon-add-inverse" ng-if="!editingFollowers" tooltip-popup-delay="500" tooltip="Add people to this Seed" ng-click="toggleEditFollowers($event)"></i>
+        <span ng-if="editingFollowers" >
+          <i class="actionIcon icon-complete" tooltip-trigger="manual" tooltip-placement="top" tooltip-visible="editingFollowers" tooltip="Click to finish adding followers" ng-click="toggleEditFollowers($event)"></i>
+        </span>
+        <span ng-if="followers.length > 0">
+          <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-repeat="follower in followers.slice(0, 2)"><span ng-bind="::follower.name"></span><span ng-if="::!$last && followers.length>1">,</span></a>
+          <span ng-if="followers.length > 2">
+            <span class="dropdown">and
+            <a class="dropdown-toggle"><span ng-bind="followers.length - 2"></span> other<span ng-if="followers.length > 3">s</span></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="follower in followers.slice(2)">
+                <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})"><i back-img="::follower.avatar" class="avatar"></i> {{::follower.name}}</a>
+              </li>
+            </ul>
+            </span>
+          </span>
+          <span ng-if="followers.length > 1">have</span><span ng-if="followers.length == 1">has</span> joined this seed.
+        </span>
+        <span ng-if="followers.length == 0">
+          No followers.
+        </span>
+        <a class="pull-right join-leave-btn" ng-click="toggleJoinPost()">{{joinPostText()}}</a>
+      </div>
+    </div>
+    <div class="followers-edit" ng-if="editingFollowers">
+      <div class="arrow"></div>
+      <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+            model="followersToAdd"
+            typeahead-options="typeaheadOpts"
+            src="b as b.name for b in potentialFollowers"></tags>
+    </div>
+
+    <div ng-if="!isCommentsCollapsed">
+      <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
+    </div>
+
+    <div class="triangle"></div>
+  </div>
+</div>
