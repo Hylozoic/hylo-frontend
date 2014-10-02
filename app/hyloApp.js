@@ -111,9 +111,6 @@ angular.module('hyloApp', [
       _.defer(function() { growl.addSuccessMessage($window._hylo_angular_growl_msg, {ttl: 5000}) });
     }
 
-    // Set filepicker key
-    filepicker.setKey('AaCSLBryuRwutbBybERE8z');
-
     // Hide all tour guiders on transition change.
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       guiders.hideAll();
