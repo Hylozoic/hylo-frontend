@@ -25,13 +25,22 @@ module.exports = function(grunt) {
         files: {
           'dist/bundle.js': ['src/js/index.js']
         }
-      },
+      }
+    },
+    ngAnnotate: {
+      prod: {
+        files: {
+          'dist/bundle.js': ['dist/bundle.js']
+        }
+      }
+    },
+    uglify: {
       prod: {
         options: {
-          transform: ['debowerify', 'uglifyify']
+          sourceMap: true
         },
         files: {
-          'dist/bundle.min.js': ['src/js/index.js']
+          'dist/bundle.min.js': ['dist/bundle.js']
         }
       }
     },
@@ -70,10 +79,14 @@ module.exports = function(grunt) {
     // TODO parameterize upstream address and port
   });
 
-  grunt.registerTask('package', ['browserify:prod', 'less:dev', 'cssmin:prod']);
+  grunt.registerTask('package', ['browserify:dev', 'ngAnnotate:prod', 'uglify:prod', 'less:dev', 'cssmin:prod']);
 
   grunt.registerTask('deploy', function(env) {
     require('./deploy')(env, this.async(), grunt.log);
   });
+
+  grunt.registerTask('clean', function() {
+    rm('dist/*');
+  })
 
 };
