@@ -90,10 +90,6 @@ Deployer.prototype.upload = function(done) {
 Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead('updating ENV on ' + this.app);
 
-  _.forIn(this.herokuEnv, function(val, key) {
-    this.log.writeln(key + ': ' + val);
-  }.bind(this));
-
   var prefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
     newVars = {
       JS_BUNDLE_URL: prefix + this.bundlePaths.js,
