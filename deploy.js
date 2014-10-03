@@ -22,12 +22,13 @@ Deployer.prototype.getAWSKeys = function(callback) {
   this.log.subhead('fetching AWS credentials for ' + this.app);
 
   this.herokuConfig.info(function(err, vars) {
-    this.herokuEnv = _.pick(vars, 'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET');
+    this.herokuEnv = _.pick(vars,
+      'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET', 'CONTENT_URL');
     callback(err);
   }.bind(this));
 };
 
-Deployer.prototype.upload = function(callback) {
+Deployer.prototype.upload = function(done) {
   this.log.subhead('uploading to S3');
 
   var s3 = new (require('aws-sdk')).S3({
@@ -35,40 +36,54 @@ Deployer.prototype.upload = function(callback) {
     secretAccessKey: this.herokuEnv.AWS_SECRET_KEY
   });
 
-  var loop = function(file, innerCallback) {
-    var contents = cat('dist/' + file.name),
-      digest = sha1(contents).substring(0, 8);
+  var upload = function(path, contents, type, done) {
+    this.log.writeln(path);
 
-    if (file.name.match(/map$/)) {
-      bundlePath = this.bundlePaths.js + '.map';
-    } else {
-      bundlePath = 'assets/' + file.name.replace('.min', '-' + digest + '.min');
-      this.bundlePaths[file.ext] = bundlePath;
-    }
+    s3.putObject({
+      Bucket: this.herokuEnv.AWS_S3_BUCKET,
+      Key: path,
+      Body: contents,
+      ACL: 'public-read',
+      ContentType: type
+    }, done);
+  }.bind(this);
 
-    if (file.name.match(/js$/)) {
+  async.series([
+    function js(done) {
+      var contents = cat('dist/bundle.min.js'),
+        digest = sha1(contents).substring(0, 8),
+        path = 'assets/bundle-' + digest + '.min.js';
+      this.bundlePaths.js = path;
+
       contents = contents.replace(
         'sourceMappingURL=bundle.min.js.map',
         'sourceMappingURL=bundle-' + digest + '.min.js.map'
       );
-    }
 
-    this.log.writeln(bundlePath);
+      upload(path, contents, 'application/x-javascript', done);
+    }.bind(this),
+    function jsMap(done) {
+      var contents = cat('dist/bundle.min.js.map'),
+        path = this.bundlePaths.js + '.map';
 
-    s3.putObject({
-      Bucket: this.herokuEnv.AWS_S3_BUCKET,
-      Key: bundlePath,
-      Body: contents,
-      ACL: 'public-read',
-      ContentType: file.contentType
-    }, innerCallback);
-  }.bind(this);
+      upload(path, contents, 'application/json', done);
+    }.bind(this),
+    function css(done) {
+      var contents = cat('dist/bundle.min.css'),
+        digest = sha1(contents).substring(0, 8),
+        path = 'assets/bundle-' + digest + '.min.css';
+      this.bundlePaths.css = path;
 
-  async.eachSeries([
-    {name: 'bundle.min.js', ext: 'js', contentType: 'application/x-javascript'},
-    {name: 'bundle.min.js.map', contentType: 'application/json'},
-    {name: 'bundle.min.css', ext: 'css', contentType: 'text/css'}
-  ], loop, callback);
+      // fix image paths
+      contents = contents.replace(
+        /url\((['"])*\//g,
+        'url($1' + this.herokuEnv.CONTENT_URL + '/'
+      );
+
+      upload(path, contents, 'text/css', done);
+    }.bind(this)
+  ], done);
+
 };
 
 Deployer.prototype.updateEnv = function(callback) {
