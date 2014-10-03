@@ -90,8 +90,17 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['bundle', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
-    require('./server')(3001, 'localhost', 9000, grunt.log);
-    // TODO parameterize upstream address and port
+    var upstream = grunt.option('upstream');
+    if (upstream) {
+      upstream = upstream.split(':');
+      host = upstream[0];
+      port = parseInt(upstream[1] || '80');
+    } else {
+      host = 'hylo-dev.herokuapp.com';
+      port = 80;
+    }
+
+    require('./server')(3001, host, port, grunt.log);
   });
 
   grunt.registerTask('deploy', function(env) {
