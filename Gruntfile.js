@@ -44,11 +44,24 @@ module.exports = function(grunt) {
         }
       }
     },
-    copy: {
-      index: {
-        files: [
-          {src: 'app/index.html', dest: 'dist/index.html'}
-        ]
+    sync: {
+      html: {
+        cwd: 'src/html/ui',
+        src: ['**'],
+        dest: 'dist/ui',
+        updateAndDelete: true,
+        verbose: true
+      }
+    },
+    ngtemplates: {
+      dev: {
+        cwd: 'src/html',
+        src: '**/*.html',
+        dest: 'dist/bundle.js',
+        options: {
+          append: true,
+          module: 'hyloApp'
+        }
       }
     },
     watch: {
@@ -62,31 +75,31 @@ module.exports = function(grunt) {
       css: {
         files: ['src/css/**/*'],
         tasks: ['less:dev']
-      } //,
-      // html: {
-      //   files: ['app/index.html'],
-      //   tasks: ['copy:index']
-      // }
+      },
+      html: {
+        files: ['src/html/**/*'],
+        tasks: ['sync:html']
+      }
     }
   });
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('dev', ['serve', 'watch']);
+  grunt.registerTask('bundle', ['browserify', 'ngtemplates', 'less']);
+  grunt.registerTask('minify', ['uglify', 'cssmin']);
+  grunt.registerTask('dev', ['bundle', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
-    require('./server')(3001, 'hylo-dev.herokuapp.com', 80);
+    require('./server')(3001, 'localhost', 9000, grunt.log);
     // TODO parameterize upstream address and port
   });
-
-  grunt.registerTask('package', ['browserify:dev', 'ngAnnotate:prod', 'uglify:prod', 'less:dev', 'cssmin:prod']);
 
   grunt.registerTask('deploy', function(env) {
     require('./deploy')(env, this.async(), grunt.log);
   });
 
   grunt.registerTask('clean', function() {
-    rm('dist/*');
+    rm('-r', 'dist/*');
   });
 
   grunt.registerTask('sync_old_repo', function() {
@@ -108,5 +121,5 @@ module.exports = function(grunt) {
     cp('-R', oldPath + 'public/ui/*', 'src/html/');
 
     cp('-f', oldPath + 'bower.json', '.');
-  })
+  });
 };
