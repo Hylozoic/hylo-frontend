@@ -23,7 +23,8 @@ Deployer.prototype.getAWSKeys = function(callback) {
 
   this.herokuConfig.info(function(err, vars) {
     this.herokuEnv = _.pick(vars,
-      'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET', 'CONTENT_URL');
+      'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET',
+      'AWS_S3_CONTENT_URL', 'CONTENT_URL');
     callback(err);
   }.bind(this));
 };
@@ -89,7 +90,11 @@ Deployer.prototype.upload = function(done) {
 Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead('updating ENV on ' + this.app);
 
-  var prefix = 'http://s3.amazonaws.com/' + this.herokuEnv.AWS_S3_BUCKET + '/',
+  _.forIn(this.herokuEnv, function(val, key) {
+    this.log.writeln(key + ': ' + val);
+  }.bind(this));
+
+  var prefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
     newVars = {
       JS_BUNDLE_URL: prefix + this.bundlePaths.js,
       CSS_BUNDLE_URL: prefix + this.bundlePaths.css
