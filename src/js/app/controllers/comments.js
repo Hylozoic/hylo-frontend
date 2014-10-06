@@ -131,7 +131,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     $scope['delete'] = function(comment) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'confirm_comment_deletion.tpl.html'
+        templateUrl: '/ui/app/confirm_comment_deletion.tpl.html'
       });
       modalInstance.result.then(function() {
         $http.post('/comment/delete', {id: comment.id}).success(function(data, status, headers, config) {
