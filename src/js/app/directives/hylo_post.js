@@ -177,7 +177,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       $scope['delete'] = function() {
         var modalInstance = $modal.open({
-          templateUrl: 'confirm_post_deletion.tpl.html',
+          templateUrl: '/ui/app/confirm_post_deletion.tpl.html',
           controller: function($scope, $modalInstance, postName) {
             $scope.postName = postName;
           },
