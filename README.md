@@ -14,4 +14,5 @@ Run `npm install` after cloning the repo or after changing anything in `bower.js
 ### Deploying
 
 * Your Heroku API token needs to be set in the shell environment variable `HEROKU_API_TOKEN`. 
-* Run `grunt deploy:app`, where `app` is the name of a Heroku app, e.g. "hylo-staging". The task will upload assets to the app's S3 bucket and change the app's config variables to point to the newly-uploaded assets.
+* Commit all your changes before deploying. The filenames of the deployed assets will include the first 8 characters of the most recent commit hash.
+* Run `grunt minify deploy:app`, where `app` is the name of a Heroku app, e.g. "hylo-staging". The task will upload assets to the app's S3 bucket and change the app's config variables to point to the newly-uploaded assets.
