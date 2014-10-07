@@ -1,31 +1,4 @@
-.triangle-core (@size) {
-  width: 0;
-  height: 0;
-  position: absolute;
-  border: @size solid transparent;
-}
 
-.bottom-triangle (@size, @color) {
-  .triangle-core(@size);
-  border-top: @size solid @color;
-  border-bottom: none;
-  bottom: -@size;
-}
-
-.top-triangle (@size, @color) {
-  .triangle-core(@size);
-  border-top: none;
-  border-bottom: @size solid @color;
-  top: -@size;
-}
-
-.left-triangle (@size, @color, @top) {
-  .triangle-core(@size);
-  border-left: none;
-  border-right: @size solid @color;
-  top: @top;
-  left: -@size;
-}
 
 .rounded-button-style() {
   .proxima-nova-regular;

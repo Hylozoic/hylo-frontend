@@ -191,6 +191,8 @@
 .add-seed-form { // the add seed expandable form
   margin-bottom: 18px;
   @circle-size: 42px;
+  position: relative;
+  z-index: 10;
 
   &.editing {
     height: auto;
@@ -231,9 +233,6 @@
       padding: 0 30px;
       .post-type-style(@faint-gray);
       .proxima-nova-regular;
-    }
-    .triangle {
-      top: 8px;
     }
   }
 
