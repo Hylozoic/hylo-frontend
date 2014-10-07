@@ -87,7 +87,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('bundle', ['browserify', 'ngtemplates', 'less', 'ngAnnotate', 'uglify', 'cssmin']);
-  grunt.registerTask('dev', ['bundle', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
     var upstream = grunt.option('upstream');
