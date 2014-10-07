@@ -1,6 +1,10 @@
 var async = require('async'),
-  sha1 = require('sha1'),
   _ = require('lodash');
+
+var currentGitHash = function() {
+  var cmd = "git show|head -n1|awk '{print $2}'|cut -c -8";
+  return exec(cmd, {silent: true}).output.replace(/\n/, '');
+};
 
 var Deployer = function(app, done, log) {
   this.app = app;
@@ -49,16 +53,17 @@ Deployer.prototype.upload = function(done) {
     }, done);
   }.bind(this);
 
+  var hash = currentGitHash();
+
   async.series([
     function js(done) {
       var contents = cat('dist/bundle.min.js'),
-        digest = sha1(contents).substring(0, 8),
-        path = 'assets/bundle-' + digest + '.min.js';
+        path = 'assets/bundle-' + hash + '.min.js';
       this.bundlePaths.js = path;
 
       contents = contents.replace(
         'sourceMappingURL=bundle.min.js.map',
-        'sourceMappingURL=bundle-' + digest + '.min.js.map'
+        'sourceMappingURL=bundle-' + hash + '.min.js.map'
       );
 
       upload(path, contents, 'application/x-javascript', done);
@@ -71,8 +76,7 @@ Deployer.prototype.upload = function(done) {
     }.bind(this),
     function css(done) {
       var contents = cat('dist/bundle.min.css'),
-        digest = sha1(contents).substring(0, 8),
-        path = 'assets/bundle-' + digest + '.min.css';
+        path = 'assets/bundle-' + hash + '.min.css';
       this.bundlePaths.css = path;
 
       // fix image paths

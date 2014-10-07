@@ -24,7 +24,6 @@
     "load-grunt-tasks": "latest",
     "lodash": "latest",
     "node-static": "latest",
-    "sha1": "latest",
     "shelljs": "latest",
     "uglifyify": "latest"
   },
