@@ -210,6 +210,16 @@ body {
   float: left;
 }
 
+//shared class for rounded button style
+.button-rounded, .button-rounded:hover {
+  .rounded-button-style;
+}
+
+.button-rounded.circle {
+  padding: 0px 8px;
+}
+
+
 .bubble {
   position: relative;
   margin-left: @bubble-offset;
@@ -224,6 +234,11 @@ body {
   &.intention { .post-type-style(@intention-color); }
   &.request { .post-type-style(@request-color); }
   &.offer { .post-type-style(@offer-color); }
+}
+
+textarea.no-border, textarea.no-border:focus {
+  border: none;
+  box-shadow: none;
 }
 
 .add-post {

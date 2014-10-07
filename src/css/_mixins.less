@@ -27,6 +27,23 @@
   left: -@size;
 }
 
+.rounded-button-style() {
+  .proxima-nova-regular;
+  font-size: 120%;
+  text-decoration: none; //this removes hover effect
+  color: @text-dark;
+  cursor: pointer;
+  border: 1px solid @light-gray;
+  border-radius: 15px;
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  padding: 0px 20px;
+  @media (max-width: @screen-sm-max) {
+    
+  }
+}
+
 .transform (@rule) {
   transform: @rule;
   -ms-transform: @rule; /* IE 9 */
@@ -40,6 +57,12 @@
   -moz-filter: blur(@px);
   -o-filter: blur(@px);
   -ms-filter: blur(@px);
+}
+
+.resize-avatar(@div) {
+  height: @avatar-size/@div;
+  width: @avatar-size/@div;
+  border-radius: @avatar-size/@div*2;
 }
 
 .proxima-nova-light() {
