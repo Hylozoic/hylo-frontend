@@ -19,7 +19,6 @@
           <span ng-if="comment.isThanked">&nbsp;•&nbsp; <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a></span>
         </span>
       </div>
-      <div class="triangle"></div>
     </div>
   </div>
 
@@ -37,7 +36,6 @@
         <textarea tabindex="1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here." required></textarea>
         <button ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
-      <div class="triangle"></div>
     </div>
   </div>
 
