@@ -60,7 +60,8 @@ module.exports = function(grunt) {
         dest: 'dist/bundle.js',
         options: {
           append: true,
-          module: 'hyloApp'
+          module: 'hyloApp',
+          prefix: '/'
         }
       }
     },
