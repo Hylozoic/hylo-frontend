@@ -9,6 +9,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
     },
     controller: function($scope, $element) {
       $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
+      $scope.isFollowersCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
       $scope.voteTooltipText = "";
 
       $scope.gotoPost = function($event) {
@@ -34,6 +35,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           }
         }
         $scope.isCommentsCollapsed = false;
+        $scope.isFollowersCollapsed = false;
 
         $event.stopPropagation();
         $event.preventDefault();
@@ -69,14 +71,14 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if ($scope.isCommentsCollapsed)
           $analytics.eventTrack('Show Comments');
 
-        $scope.isCommentsCollapsed = false;
+        $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
         $timeout(function() {
           CommentingService.setFocus($scope.post.id);
         });
       }
 
       $scope.onFollowerIconClick = function() {
-        $scope.isCommentsCollapsed = false;
+        $scope.isFollowersCollapsed = !$scope.isFollowersCollapsed;
       }
 
       $scope.followers = []; // list of current followers
@@ -229,20 +231,24 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       var initialize = function() {
+        console.log("init post");
         var loadFollowers = function() {
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
+            console.dir($scope.followers);
 
             $scope.$watchCollection("followers", checkIsFollowing);
 
           } else {
             Post.followers({id: $scope.post.id}).$promise.then(function(value) {
                   $scope.followers = value;
+                  console.dir($scope.followers);
 
                   $scope.$watchCollection("followers", checkIsFollowing);
                 }
             );
           }
+           
         }
 
         if ($scope.isCommentsCollapsed) {
@@ -252,7 +258,16 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
               unwatchCommentsCollapsed();
             }
           });
-        } else {
+        }
+        if ($scope.isFollowersCollapsed) {
+          var unwatchFolowersollapsed = $scope.$watch("isFollowersCollapsed", function(isCollapsed) {
+            if (!isCollapsed) {
+              loadFollowers();
+              unwatchFolowersollapsed();
+            }
+          });
+        }
+         else {
           loadFollowers();
         }
 

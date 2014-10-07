@@ -1,10 +1,12 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in comments">
-    <a class="avatar hidden-xs" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
+    <div class="comment-avatar">
+      <a class="avatar hidden-xs" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
+    </div>
 
-    <div class="bubble" ng-class="::{deletable: canDelete(comment)}">
-      <div>
+    <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
+      <div class="comment-text">
         <i class="delete icon-remove" ng-click="delete(comment)"></i>
         <span ng-bind-html="::(comment.text | linky:'_blank' | linkyShort | convertCarriageReturn)"></span>
       </div>
@@ -23,14 +25,17 @@
 
   <div ng-if="!post.commentsLoaded && post.numComments > 0" style="padding: 5px 0 15px 0">Loading Comments ...</div>
 
-  <div class="comment">
+  <div class="add-comment">
     <!-- FIXME why doesn't this work without $root? -->
-    <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar"></a>
 
-    <div class="bubble">
+    <div class="comment-avatar">
+      <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar"></a>
+    </div>
+
+    <div class="comment-input">
       <form class="comment-form">
-        <textarea tabindex="1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="form-control msd-elastic" placeholder="Write a comment..." required></textarea>
-        <button tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
+        <textarea tabindex="1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here." required></textarea>
+        <button ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
       <div class="triangle"></div>
     </div>
