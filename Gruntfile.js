@@ -86,8 +86,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('bundle', ['browserify', 'ngtemplates', 'less']);
-  grunt.registerTask('minify', ['ngAnnotate', 'uglify', 'cssmin']);
+  grunt.registerTask('bundle', ['browserify', 'ngtemplates', 'less', 'ngAnnotate', 'uglify', 'cssmin']);
   grunt.registerTask('dev', ['bundle', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
