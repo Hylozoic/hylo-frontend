@@ -79,14 +79,15 @@ module.exports = function(grunt) {
       },
       html: {
         files: ['src/html/**/*'],
-        tasks: ['sync:html']
+        tasks: ['sync:html', 'bundleJs']
       }
     }
   });
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('bundle', ['browserify', 'ngtemplates', 'less']);
+  grunt.registerTask('bundleJs', ['browserify', 'ngtemplates']);
+  grunt.registerTask('bundle', ['bundleJs', 'less']);
   grunt.registerTask('minify', ['ngAnnotate', 'uglify', 'cssmin']);
   grunt.registerTask('dev', ['bundle', 'serve', 'watch']);
 
