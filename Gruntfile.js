@@ -68,18 +68,30 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['src/js/**/*'],
-        tasks: ['browserify:dev'],
+        tasks: ['browserify', 'notify:js'],
         options: {
           spawn: false
         }
       },
       css: {
         files: ['src/css/**/*'],
-        tasks: ['less:dev']
+        tasks: ['less', 'notify:css']
       },
       html: {
         files: ['src/html/**/*'],
         tasks: ['sync:html']
+      }
+    },
+    notify: {
+      js: {
+        options: {
+          message: 'JS bundling done'
+        }
+      },
+      css: {
+        options: {
+          message: 'CSS bundling done'
+        }
       }
     }
   });

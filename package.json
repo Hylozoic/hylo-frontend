@@ -19,6 +19,7 @@
     "grunt-contrib-watch": "latest",
     "grunt-exec": "latest",
     "grunt-ng-annotate": "latest",
+    "grunt-notify": "latest",
     "grunt-sync": "latest",
     "heroku-client": "latest",
     "load-grunt-tasks": "latest",
