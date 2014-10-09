@@ -2,6 +2,8 @@ $ = jQuery = require('jquery');
 _          = require('underscore');
 moment     = require('moment');
 
+require('./onload');
+
 /* Bower Components */
 require('angular');
 require('angular-animate');
