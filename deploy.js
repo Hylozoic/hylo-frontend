@@ -1,5 +1,6 @@
 var async = require('async'),
   _ = require('lodash');
+  rest = require('restler');
 
 var currentGitHash = function() {
   var cmd = "git show|head -n1|awk '{print $2}'|cut -c -8";
@@ -12,6 +13,7 @@ var Deployer = function(app, done, log) {
   this.bundleExts = ['js', 'css'];
   this.bundlePaths = {};
   this.log = log;
+  this.version = currentGitHash();
 
   var heroku = new (require('heroku-client'))({token: process.env.HEROKU_API_TOKEN});
   this.herokuConfig = heroku.apps(app).configVars();
@@ -28,7 +30,8 @@ Deployer.prototype.getAWSKeys = function(callback) {
   this.herokuConfig.info(function(err, vars) {
     this.herokuEnv = _.pick(vars,
       'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET',
-      'AWS_S3_CONTENT_URL', 'CONTENT_URL');
+      'AWS_S3_CONTENT_URL', 'CONTENT_URL', 'ROLLBAR_SERVER_TOKEN',
+      'DOMAIN');
     callback(err);
   }.bind(this));
 };
@@ -53,30 +56,30 @@ Deployer.prototype.upload = function(done) {
     }, done);
   }.bind(this);
 
-  var hash = currentGitHash();
-
   async.series([
     function js(done) {
       var contents = cat('dist/bundle.min.js'),
-        path = 'assets/bundle-' + hash + '.min.js';
+        path = 'assets/bundle-' + this.version + '.min.js';
       this.bundlePaths.js = path;
 
       contents = contents.replace(
         'sourceMappingURL=bundle.min.js.map',
-        'sourceMappingURL=bundle-' + hash + '.min.js.map'
+        'sourceMappingURL=bundle-' + this.version + '.min.js.map'
       );
 
       upload(path, contents, 'application/x-javascript', done);
     }.bind(this),
+
     function jsMap(done) {
       var contents = cat('dist/bundle.min.js.map'),
         path = this.bundlePaths.js + '.map';
 
       upload(path, contents, 'application/json', done);
     }.bind(this),
+
     function css(done) {
       var contents = cat('dist/bundle.min.css'),
-        path = 'assets/bundle-' + hash + '.min.css';
+        path = 'assets/bundle-' + this.version + '.min.css';
       this.bundlePaths.css = path;
 
       // fix image paths
@@ -91,13 +94,33 @@ Deployer.prototype.upload = function(done) {
 
 };
 
+Deployer.prototype.uploadSourceMap = function(callback) {
+  this.log.subhead('uploading source map');
+
+  rest.post('https://api.rollbar.com/api/1/sourcemap', {
+    data: {
+      access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
+      version: this.version,
+      minified_url: 'http://' + this.herokuEnv.DOMAIN + '/' + this.bundlePaths.js,
+      source_map: cat('dist/bundle.min.js.map')
+    }
+  }).on('complete', function(result, response) {
+    if (result instanceof Error) {
+      this.fail(result.message);
+    } else {
+      callback();
+    }
+  }.bind(this));
+};
+
 Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead('updating ENV on ' + this.app);
 
   var prefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
     newVars = {
       JS_BUNDLE_URL: prefix + this.bundlePaths.js,
-      CSS_BUNDLE_URL: prefix + this.bundlePaths.css
+      CSS_BUNDLE_URL: prefix + this.bundlePaths.css,
+      BUNDLE_VERSION: this.version
     };
 
   _.forIn(newVars, function(val, key) {
@@ -113,6 +136,7 @@ module.exports = function(app, done, log) {
   async.series([
     deployer.getAWSKeys.bind(deployer),
     deployer.upload.bind(deployer),
+    deployer.uploadSourceMap.bind(deployer),
     deployer.updateEnv.bind(deployer)
   ], function(err) {
     if (err) {
