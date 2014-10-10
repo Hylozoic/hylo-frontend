@@ -20,10 +20,20 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
+          browserifyOptions: {
+            debug: true
+          },
           transform: ['debowerify']
         },
         files: {
           'dist/bundle.js': ['src/js/index.js']
+        }
+      }
+    },
+    extract_sourcemap: {
+      prod: {
+        files: {
+          'dist': ['dist/bundle.js']
         }
       }
     },
@@ -37,7 +47,9 @@ module.exports = function(grunt) {
     uglify: {
       prod: {
         options: {
-          sourceMap: true
+          sourceMap: true,
+          sourceMapIn: 'dist/bundle.js.map',
+          sourceMapIncludeSources: true
         },
         files: {
           'dist/bundle.min.js': ['dist/bundle.js']
@@ -98,7 +110,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('bundleJs', ['browserify', 'ngtemplates', 'ngAnnotate', 'uglify']);
+  grunt.registerTask('bundleJs', ['browserify', 'ngtemplates', 'ngAnnotate', 'extract_sourcemap', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
   grunt.registerTask('dev', ['browserify', 'less', 'serve', 'watch']);
