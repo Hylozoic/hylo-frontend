@@ -180,7 +180,6 @@ body {
 }
 
 .post-type-style (@color) {
-  box-shadow: -1px 0 0 0 @color;
   > .controls > .type {
     color: @color;
     .proxima-nova-regular;
@@ -218,6 +217,7 @@ body {
   border-radius: 5px;
   background-color: white;
   word-wrap: break-word;
+  border: 1px solid @border-dark;
 
   strong {
     .proxima-nova-semibold;
@@ -395,10 +395,10 @@ textarea.no-border, textarea.no-border:focus {
       height: 60px;
       overflow: hidden; // TODO use dotdotdot
       padding: 10px;
-      border-bottom-left-radius: 5px;
-      &.intention { border-left: 1px solid @intention-color; }
-      &.offer { border-left: 1px solid @offer-color; }
-      &.request { border-left: 1px solid @request-color; }
+      border-radius: 5px;
+      &.intention { border: 1px solid @intention-color; }
+      &.offer { border: 1px solid @offer-color; }
+      &.request { border: 1px solid @request-color; }
 
       .description {
         color: @light-gray;
