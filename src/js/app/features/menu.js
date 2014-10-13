@@ -3,7 +3,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
 
   var state = {
     expanded: false,
-    membershipExpanded: false
+    membershipsExpanded: false
   }
 
   var openMenu = function openMenu() {
@@ -110,6 +110,17 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     }, true);
 
     $scope.setMenuState = MenuService.setMenuState
+
+    $scope.openCommunitySettings = function($event, communityId) {
+      // Prevent bubbling to showItem.
+      // On recent browsers, only $event.stopPropagation() is needed
+      if ($event.stopPropagation) $event.stopPropagation();
+      if ($event.preventDefault) $event.preventDefault();
+      $event.cancelBubble = true;
+      $event.returnValue = false;
+
+      $state.go("editCommunity", {id: communityId});
+    }
 
     $scope.openSettings = function($event) {
       // Prevent bubbling to showItem.

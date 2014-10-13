@@ -28,8 +28,17 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/create/community',
         views: {
           "": {
-            templateUrl: '/ui/app/createCommunity.tpl.html',
+            templateUrl: '/ui/features/community/createCommunity.tpl.html',
             controller: 'CreateCommunityCtrl'
+          }
+        }
+      }).
+      state('editCommunity', {
+        url: '/edit/community/:id',
+        views: {
+          "": {
+            templateUrl: '/ui/features/community/editCommunity.tpl.html',
+            controller: 'EditCommunityCtrl'
           }
         }
       }).

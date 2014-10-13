@@ -138,7 +138,8 @@ directive('hyloUnique', ['$http', function ($http) {
       elem.on('blur', function (evt) {
         scope.$apply(function () {
           var val = elem.val();
-          var req = { "value": val, "dbField": attrs.hyloUnique }
+          var extraData = _.isEmpty(attrs.hyloUniqueExtra) ? null : attrs.hyloUniqueExtra;
+          var req = { "value": val, "dbField": attrs.hyloUnique, "extra": extraData}
           var ajaxConfiguration = { method: 'POST', url: 'checkunique', data: req };
           $http(ajaxConfiguration)
               .success(function(data, status, headers, config) {
