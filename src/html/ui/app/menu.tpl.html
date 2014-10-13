@@ -6,7 +6,6 @@
   ng-swipe-left="setMenuState(false, true)">
 
   <ul class="list-unstyled clearfix" id="menu-links">
-
     <li>
       <a class="" ui-sref="community({community: community.slug})" ui-sref-active="current">
         <div class="image-item">
@@ -33,6 +32,7 @@
             <div back-img="::membership.avatar"></div>
           </div>
           <span class="only-expanded">{{::membership.name}}</span>
+          <i ng-if="::membership.role == 1" ng-click="openCommunitySettings($event, membership.communityId)" class="only-expanded only-hover icon-settings"></i>
         </div>
       </a>
     </li>
