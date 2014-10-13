@@ -7,12 +7,33 @@
 
   <div class="block {{post.postType}}" ng-class="{'deletable': canDelete}">
     <div class="post-content">
-      <a class="post-header">
+      <div class="post-header">
         <i class="delete icon-remove" ng-click="delete(comment)"></i>
 
         <span class="post-info">
           <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-          <span class="timestamp">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
+          <span class="fulfillment" ng-if="post.fulfilled">
+            <div>
+              <span ng-if="::post.contributors.length > 0">
+              Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span></a>
+                <span ng-if="::post.contributors.length > 2">
+                  <span class="dropdown">and
+                  <a class="dropdown-toggle"><span>{{::post.contributors.length - 2}}</span> other<span ng-show="::post.contributors.length > 3">s</span></a>
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="contributor in post.contributors.slice(2)">
+                      <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})"><i back-img="::contributor.avatar" class="avatar"></i> <span>{{::contributor.name}}</span></a>
+                    </li>
+                  </ul>
+                  </span>
+                </span>
+              </span>
+              <span ng-if="::post.contributors.length == 0">
+                No Contributors
+              </span>
+            </div>
+          </span>
+
+          <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
         </span>
         <br>
 
@@ -26,29 +47,6 @@
           <span seed-text="truncatedPostText"></span>
           <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
         </span>
-      </a>
-
-      <div class="fulfillment" ng-if="post.fulfilled">
-        <div>
-          <strong>Fulfilled</strong>&nbsp;&bull;&nbsp;
-          <span ng-if="::post.contributors.length > 0">
-            Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span></a>
-            <span ng-if="::post.contributors.length > 2">
-              <span class="dropdown">and
-              <a class="dropdown-toggle"><span>{{::post.contributors.length - 2}}</span> other</a>
-              <ul class="dropdown-menu">
-                <li ng-repeat="contributor in post.contributors.slice(2)">
-                  <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})"><i back-img="::contributor.avatar" class="avatar"></i> <span>{{::contributor.name}}</span></a>
-                </li>
-              </ul>
-              </span>
-            </span>
-            <span ng-show="::post.contributors.length > 2">Community Member</span><span ng-show="::post.contributors.length > 3">s</span>
-          </span>
-          <span ng-if="::post.contributors.length == 0">
-            No Contributors
-          </span>
-        </div>
       </div>
 
       <div class="controls">
@@ -61,8 +59,11 @@
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment">
           <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
         </a>
-        
+        <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
+          <span ng-click="markFulfilled()">Mark as Fulfilled</span>
+        </div>
       </div>
+      
 
       <div ng-if="!isFollowersCollapsed">
         <div class="followers">
@@ -101,7 +102,6 @@
       <div ng-if="!isCommentsCollapsed">
         <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
       </div>
-      {{isCommentsCollapsed}} {{comments}}
     </div>
   </div>
 </div>

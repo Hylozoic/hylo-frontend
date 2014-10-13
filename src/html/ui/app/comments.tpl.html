@@ -16,7 +16,9 @@
         <span ng-if="canDelete(comment)" ng-click="delete(comment)" > &nbsp;•&nbsp; <a class="delete-link">delete</a> </span>
         <span ng-show="::(!commentOwner(comment))">
           <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank You"</a></span>
-          <span ng-if="comment.isThanked">&nbsp;•&nbsp; <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a></span>
+          <span ng-if="comment.isThanked">&nbsp;•&nbsp; 
+            <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a>
+          </span>
         </span>
       </div>
     </div>
@@ -28,7 +30,7 @@
     <!-- FIXME why doesn't this work without $root? -->
 
     <div class="comment-avatar">
-      <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar"></a>
+      <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar" ng-class="{'inactive-image': !commentText}"></a>
     </div>
 
     <div class="comment-input">
@@ -37,9 +39,5 @@
         <button ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
     </div>
-  </div>
-
-  <div class="text-center" ng-if="isPostOwner() && !post.fulfilled">
-    <button ng-click="markFulfilled()" class="btn btn-fulfill" style="margin-left: auto; margin-right: auto;"><i class="icon-complete"></i> MARK FULFILLED</button>
   </div>
 </div>

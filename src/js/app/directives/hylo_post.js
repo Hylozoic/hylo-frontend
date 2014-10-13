@@ -12,6 +12,39 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.isFollowersCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
       $scope.voteTooltipText = "";
 
+      $scope.isPostOwner = function() {
+        if ($scope.post.user) {
+          return $scope.post.user.id == $rootScope.currentUser.id;
+        }
+        return false;
+      };
+
+      $scope.markFulfilled = function() {
+        console.log("mark fulfilled");
+        var modalScope = $rootScope.$new(true);
+        // Map the top contributors as all the unique commentors on the post
+        modalScope.topContributors = _.map(
+          _.uniq(_.pluck($scope.comments, 'user'), false, _.property("id")), _.property('id')
+        );
+
+        modalScope.post = $scope.post;
+
+        var modalInstance = $modal.open({
+          templateUrl: '/ui/app/fulfillModal.tpl.html',
+          controller: "FulfillModalCtrl",
+          keyboard: false,
+          backdrop: 'static',
+          scope: modalScope
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          // success function
+          $analytics.eventTrack('Fulfill Post', {post_id: $scope.post.id});
+        }, function () {
+
+        });
+      };
+
       $scope.gotoPost = function($event) {
         if ($event.target) {
             // Check to see if we are clicking an embedded link...if so, then open the link instead of opening the post.
