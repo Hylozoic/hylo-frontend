@@ -235,6 +235,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         var loadFollowers = function() {
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
+            console.log("follers were loaded");
             console.dir($scope.followers);
 
             $scope.$watchCollection("followers", checkIsFollowing);
@@ -242,22 +243,27 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           } else {
             Post.followers({id: $scope.post.id}).$promise.then(function(value) {
                   $scope.followers = value;
+                  console.log("followers were NOT loaded");
                   console.dir($scope.followers);
+                  
 
                   $scope.$watchCollection("followers", checkIsFollowing);
                 }
             );
           }
+          
            
         }
 
         if ($scope.isCommentsCollapsed) {
-          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", function(isCollapsed) {
-            if (!isCollapsed) {
-              loadFollowers();
-              unwatchCommentsCollapsed();
-            }
-          });
+          /*var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", 
+            function(isCollapsed) {
+              console.log("watch statememt in is comments collapsed executed");
+              if (!isCollapsed) {
+                loadFollowers();
+                //unwatchCommentsCollapsed();
+              }
+          });*/
         }
         if ($scope.isFollowersCollapsed) {
           var unwatchFolowersollapsed = $scope.$watch("isFollowersCollapsed", function(isCollapsed) {

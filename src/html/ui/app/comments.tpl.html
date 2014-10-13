@@ -7,13 +7,13 @@
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
       <div class="comment-text">
-        <i class="delete icon-remove" ng-click="delete(comment)"></i>
         <span ng-bind-html="::(comment.text | linky:'_blank' | linkyShort | convertCarriageReturn)"></span>
       </div>
       <div class="controls">
         <a ui-sref="user({community: $root.community.slug, id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
         &nbsp;•&nbsp;
         <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
+        <span ng-if="canDelete(comment)" ng-click="delete(comment)" > &nbsp;•&nbsp; <a class="delete-link">delete</a> </span>
         <span ng-show="::(!commentOwner(comment))">
           <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank You"</a></span>
           <span ng-if="comment.isThanked">&nbsp;•&nbsp; <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a></span>
