@@ -104,7 +104,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if ($scope.isCommentsCollapsed)
           $analytics.eventTrack('Show Comments');
 
-        $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
+        //$scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
+        $scope.isCommentsCollapsed = false;
+        $scope.isFollowersCollapsed = false;
+
         $timeout(function() {
           CommentingService.setFocus($scope.post.id);
         });
