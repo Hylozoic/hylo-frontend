@@ -28,38 +28,6 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
         ($rootScope.community && $rootScope.community.canModerate);
     };
 
-    $scope.markFulfilled = function() {
-      var modalScope = $rootScope.$new(true);
-      // Map the top contributors as all the unique commentors on the post
-      modalScope.topContributors = _.map(
-        _.uniq(_.pluck($scope.comments, 'user'), false, _.property("id")), _.property('id')
-      );
-
-      modalScope.post = $scope.post;
-
-      var modalInstance = $modal.open({
-        templateUrl: '/ui/app/fulfillModal.tpl.html',
-        controller: "FulfillModalCtrl",
-        keyboard: false,
-        backdrop: 'static',
-        scope: modalScope
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        // success function
-        $analytics.eventTrack('Fulfill Post', {post_id: $scope.post.id});
-      }, function () {
-
-      });
-    };
-
-    $scope.isPostOwner = function() {
-      if ($scope.post.user) {
-        return $scope.post.user.id == $rootScope.currentUser.id;
-      }
-      return false;
-    };
-
     $scope.commentOwner = function(comment) {
       return $rootScope.currentUser.id == comment.user.id;
     };

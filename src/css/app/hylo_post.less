@@ -17,7 +17,14 @@
 
   //mixins for post
   .label-text() {
-    color: @text-light-gray;
+    &, a {
+      color: @text-light-gray;
+    }
+
+    a:hover {
+      color: @link-color;
+    }
+    
     .proxima-nova-light;
     font-size: 12px;
     letter-spacing: .3px;
@@ -56,7 +63,6 @@
 
   .seed-timestamp-text() {
     .label-text;
-    margin-left: 7px; 
   }
   /////
 
@@ -213,18 +219,11 @@
       }
 
       .fulfillment {
-        .proxima-nova-light;
-        color: white;
-        margin: 10px 0 3px 0;
-        font-size: 12px;
-        height: 25px;
-        background-color: @fulfillColor;
-        vertical-align: middle;
+        .seed-timestamp-text;
 
         a {
-          .proxima-nova-bold;
+          font-style: italic;
           cursor: pointer;
-          color: white;
         }
 
         .dropdown-menu a {
@@ -235,6 +234,10 @@
         > div {
           padding-top: 4px;
         }
+      }
+
+      .timestamp, .fulfillment {
+        margin-left: 7px; 
       }
 
 
@@ -271,6 +274,12 @@
           }
         }
 
+        .filfill-link {
+          display: inline-block;
+          float: right;
+          color: @link-color;
+        }
+
         .thank-link, .delete-link {
           color: #B3B3B3;
           .proxima-nova-semibold;
@@ -289,11 +298,14 @@
     margin: 10px 0 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    border: 1px solid @border-light;
 
     @comment-margin: @avatar-size/2+20px;
 
     > .comment {
       padding: 6px 22px;
+      border-right: none;
+      border-left: none;
 
       //add padding to top of comments
       &:first-child { 
@@ -308,6 +320,12 @@
           padding-bottom: 15px;  
         }
       }
+    }
+
+    textarea {
+      resize: none;
+      -webkit-appearance: none;
+
     }
 
     .avatar {
@@ -330,7 +348,6 @@
 
     .add-comment {
       background-color: white;
-      border: 1px solid @border-light;
       padding: 6px 20px;
       .seed-description-text;
 
