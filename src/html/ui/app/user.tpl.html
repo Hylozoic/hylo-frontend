@@ -93,7 +93,7 @@
           </div>
           <div ng-switch-when="false">
             <div class="divider"></div>
-            <a class="btn btn-info" ng-cloak ng-href="mailto:{{user.email}}" tooltip="Your email address will be cloaked to preserve your identity" target="_blank">Send Private Message</a>
+            <a class="btn btn-info" ng-cloak ng-click="openMailTo($event)" ng-href="mailto:{{user.email}}" tooltip="Your email address will be cloaked to preserve your identity" data-rel="external">Send Private Message</a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'User', '$timeout', '$http', '$rootScope', '$analytics',
-  function($scope, $stateParams, $state, $log, Post, growl, User, $timeout, $http, $rootScope, $analytics) {
+angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'User', '$timeout', '$http', '$rootScope', '$analytics', '$window',
+  function($scope, $stateParams, $state, $log, Post, growl, User, $timeout, $http, $rootScope, $analytics, $window) {
     var previous = {};
 
     $scope.editing = false;
@@ -64,6 +64,13 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
       });
     });
     $scope.hasPosts = true;
+
+    $scope.openMailTo = function openMailTo(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      $window.location.href="mailto:" + $scope.user.email;
+      return false;
+    }
 
     Post.forUser({userId: $stateParams.id}).$promise.then(function(posts) {
       $scope.posts = posts;
