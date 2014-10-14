@@ -2,6 +2,8 @@ $ = jQuery = require('jquery');
 _          = require('underscore');
 moment     = require('moment');
 
+require('./onload');
+
 /* Bower Components */
 require('angular');
 require('angular-animate');
@@ -41,7 +43,7 @@ require('./app/directives/validateMoney');
 
 require('./app/features/billing/billing');
 require('./app/features/seeds/seeds');
-require('./app/features/createCommunity');
+require('./app/features/community/createCommunity');
 require('./app/features/menu');
 require('./app/controllers');
 require('./app/controllers/community_users');
