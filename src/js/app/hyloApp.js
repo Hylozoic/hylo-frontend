@@ -16,7 +16,7 @@ angular.module('hyloApp', [
     $log.error.apply( $log, arguments );
 
     try {
-      if (!window.DEBUG) {
+      if (hyloEnv.isProd) {
         Rollbar.error("Client-Error", exception);
       }
     } catch ( loggingError ) {
@@ -51,13 +51,13 @@ angular.module('hyloApp', [
           if (rejection.status == 403) {
 //            $window.location.replace(jsRoutes.controllers.Application.show403(requestTo).absoluteURL());
             $log.error(rejection)
-            if (window.DEBUG) {
+            if (!hyloEnv.isProd) {
               $log.error("403 ERROR", requestTo);
             } else {
               $("body").load(jsRoutes.controllers.Application.show403(requestTo).absoluteURL() + " #mainContainer");
             }
           } else if (rejection.status == 500) {
-            if (window.DEBUG) {
+            if (!hyloEnv.isProd) {
               $("body").html(rejection.data);
             } else {
               growl.addErrorMessage("Oops! There was an error trying to perform your requested action.  Authorities have been notified!", {ttl: 5000});
@@ -66,7 +66,7 @@ angular.module('hyloApp', [
           } else if (rejection.status == 404) {
 //            $window.location.replace(jsRoutes.controllers.Application.show404(requestTo).absoluteURL());
             $log.error(rejection)
-            if (window.DEBUG) {
+            if (!hyloEnv.isProd) {
               $log.error("404 ERROR", requestTo);
             } else {
               $("body").load(jsRoutes.controllers.Application.show404(requestTo).absoluteURL() + " #mainContainer");
