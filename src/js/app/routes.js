@@ -1,7 +1,7 @@
 angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function(injector, location) {
-      if (window.DEBUG) {
+      if (!hyloEnv.isProd) {
         console.error("ERROR 404|Angular Routes", location)
       } else {
         window.location.replace(jsRoutes.controllers.Application.show404(location.path()).absoluteURL());
