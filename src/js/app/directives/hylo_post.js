@@ -20,7 +20,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       };
 
       $scope.markFulfilled = function() {
-        console.log("mark fulfilled");
         var modalScope = $rootScope.$new(true);
         // Map the top contributors as all the unique commentors on the post
         modalScope.topContributors = _.map(
@@ -76,7 +75,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       $scope.followHash = function(value) {
-        console.log("inside hylo post controller");
       }
 
       $scope.gotoSinglePost = function() {
@@ -267,22 +265,13 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       var initialize = function() {
-        console.log("init post");
         var loadFollowers = function() {
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
-            console.log("follers were loaded");
-            console.dir($scope.followers);
-
             $scope.$watchCollection("followers", checkIsFollowing);
-
           } else {
             Post.followers({id: $scope.post.id}).$promise.then(function(value) {
                   $scope.followers = value;
-                  console.log("followers were NOT loaded");
-                  console.dir($scope.followers);
-                  
-
                   $scope.$watchCollection("followers", checkIsFollowing);
                 }
             );

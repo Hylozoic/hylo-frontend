@@ -2,7 +2,6 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
   function($scope, $http, Post, User, $log, $rootScope, $modal, growl, $window, CommentingService, $timeout, $analytics) {
 
     var loadComments = function() {
-      console.log("load comments");
       if (!$scope.post.commentsLoaded) {
         $scope.comments = Post.getComments({id: $scope.post.id});
         $scope.comments.$promise.then(function() {
