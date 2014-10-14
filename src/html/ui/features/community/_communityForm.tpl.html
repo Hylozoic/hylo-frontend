@@ -1,0 +1,146 @@
+<div ng-switch="state.step">
+  <div ng-switch-when="1">
+
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+        <form name="step1Form" novalidate role="form">
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <span class="label label-danger" data-ng-show="step1Form.submitted && step1Form.name.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="step1Form.name.$error.unique">Community name already taken.  Choose another.</span>
+            <input id="name" type="text" hylo-unique="communityName" hylo-unique-extra="{{state.createForm.id}}" name="name" data-ng-model="state.createForm.name" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="coreIntention">Core Intention</label>
+            <span class="label label-danger" data-ng-show="step1Form.submitted && step1Form.coreIntention.$error.required">Required!</span>
+            <textarea id="coreIntention" msd-elastic name="coreIntention" data-ng-model="state.createForm.coreIntention" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="slug">Hylo URL</label>
+            <span class="label label-danger" data-ng-show="step1Form.submitted && step1Form.slug.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="step1Form.slug.$dirty && step1Form.slug.$error.pattern">Invalid Slug.  Use letters, numbers, and hyphens.</span>
+            <span class="label label-danger" data-ng-show="step1Form.slug.$error.unique">Slug already taken. choose another</span>
+            <div class="input-group">
+              <span class="input-group-addon">www.hylo.com/c/</span>
+              <input id="slug" name="slug" data-ng-model="state.createForm.slug" force-lowercase class="form-control" hylo-unique="communitySlug" hylo-unique-extra="{{state.createForm.id}}" ng-pattern="/^[a-z0-9-+]+$/" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="betaAccessCode">Beta Access Code</label>
+            <span class="label label-danger" data-ng-show="step1Form.betaAccessCode.$error.unique">Code already taken. choose another</span>
+            <span class="label label-danger" data-ng-show="step1Form.submitted && step1Form.betaAccessCode.$error.required">Required!</span>
+            <input id="betaAccessCode" type="text" name="betaAccessCode" hylo-unique="betaAccessCode" hylo-unique-extra="{{state.createForm.id}}" data-ng-model="state.createForm.betaAccessCode" class="form-control" required />
+          </div>
+
+
+          <div class="form-group">
+            <label for="category">What kind of community is this?</label>
+            <span class="label label-danger" data-ng-show="step1Form.submitted && step1Form.category.$error.required">Required!</span>
+            <select id="category" name="category" data-ng-model="state.createForm.category" data-ng-options="id as value for (id, value) in state.categoryListOptions" class="form-control" required>
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="text-center">
+            <button data-ng-disabled="progress.active()" data-ng-click="state.next(step1Form)" class="btn btn-default">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="2">
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+        <form name="step2Form" novalidate role="form">
+
+          <div class="form-group">
+            <label for="joining1">JOINING</label>
+            <span class="label label-danger" data-ng-show="step2Form.submitted && step2Form.joining1.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="step2Form.submitted && step2Form.joining2.$error.required">Please select who can add members</span>
+            <select id="joining1" name="joining1" data-ng-model="state.createForm.joining1" data-ng-options="id as value for (id, value) in state.joiningOptions" class="form-control" required>
+              <option value=""></option>
+            </select>
+
+            <div ng-show="state.createForm.joining1 != null">
+              <select id="joining2" name="joining2" data-ng-model="state.createForm.joining2" data-ng-options="id as value for (id, value) in state.joiningOptionsAdd[state.createForm.joining1]" class="form-control" ng-required="state.createForm.joining1 != null">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sharing">SHARING</label>
+            <span class="label label-danger" data-ng-show="step2Form.submitted && step2Form.sharing.$error.required">Required!</span>
+            <select id="sharing" name="sharing" data-ng-model="state.createForm.sharing" data-ng-options="id as value for (id, value) in state.sharingOptions" class="form-control" required>
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="membershipType">MEMBERSHIP</label>
+            <span class="label label-danger" data-ng-show="step2Form.submitted && step2Form.membershipType.$error.required">Required!</span>
+            <span class="label label-danger" data-ng-show="step2Form.submitted && step2Form.membershipAmount.$error.required">Membership Amount Required!</span>
+            <span class="label label-danger" data-ng-show="state.createForm.membershipType != null && step2Form.membershipAmount.$error.number">Membership Amount must be a Dollar amount!</span>
+
+            <select id="membershipType" name="membershipType" data-ng-model="state.createForm.membershipType" data-ng-options="id as value for (id, value) in state.membershipOptions" class="form-control" required>
+              <option value="">Does this community cost a fee?</option>
+            </select>
+
+            <div ng-if="state.createForm.membershipType == 'yes'">
+              <div class="input-group" >
+                <span class="input-group-addon">$</span>
+                <input type="text" validate-money placeholder="How much is the membership fee?" ng-show="state.createForm.membershipType == 'yes'" id="membershipAmount" name="membershipAmount" data-ng-model="state.createForm.membershipAmount" class="form-control" ng-required="state.createForm.membershipType == 'yes'"/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button data-ng-disabled="progress.active()" data-ng-click="state.previous()" class="btn btn-default">&lt;</button>
+      <button data-ng-disabled="progress.active()" data-ng-click="state.next(step2Form)" class="btn btn-default">Next</button>
+    </div>
+
+  </div>
+  <div ng-switch-when="3">
+    <div class="banner" back-img="state.createForm.banner" image-drag="state.createForm.bannerPos = position" image-drag-axis="y" ng-style="{'background-position': state.createForm.bannerPos}" >
+      <div class="banner-inner text-center" >
+        <div class="col-md-4 col-md-offset-4">
+          <p class="banner-help" ng-if="!state.bannerChosen">This is the default banner for your community, you can upload a custom banner now, or anytime in the moderator settings.</p>
+          <p class="banner-help" ng-if="state.bannerChosen">Drag image to reposition</p>
+          <a class="btn btn-default" ng-click="state.pickBanner()" btn-loading="state.loadingBanner" data-loading-text="Loading Image...">Upload Banner</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="community-icon" ng-style="{'background-position': state.createForm.iconPos}" back-img="state.createForm.icon" image-drag="state.createForm.iconPos = position">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+          <p class="icon-help-text" ng-if="!state.iconChosen">This is the default icon for your community, you can upload a custom icon now, or anytime in the moderator settings.</p>
+          <p class="icon-help-text" ng-if="state.iconChosen">Drag icon to reposition</p>
+          <a class="btn btn-default" ng-click="state.pickIcon()" btn-loading="state.loadingIcon" data-loading-text="Loading Image...">Upload Icon</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+          <hr/>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button data-ng-disabled="progress.active()" data-ng-click="state.previous()" class="btn btn-default">&lt;</button>
+      <button data-ng-disabled="progress.active()" data-ng-click="submit()" class="btn btn-default">Finish</button>
+    </div>
+  </div>
+
+</div>

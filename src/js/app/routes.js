@@ -1,7 +1,7 @@
 angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function(injector, location) {
-      if (window.DEBUG) {
+      if (!hyloEnv.isProd) {
         console.error("ERROR 404|Angular Routes", location)
       } else {
         window.location.replace(jsRoutes.controllers.Application.show404(location.path()).absoluteURL());
@@ -28,8 +28,17 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/create/community',
         views: {
           "": {
-            templateUrl: '/ui/app/createCommunity.tpl.html',
+            templateUrl: '/ui/features/community/createCommunity.tpl.html',
             controller: 'CreateCommunityCtrl'
+          }
+        }
+      }).
+      state('editCommunity', {
+        url: '/edit/community/:id',
+        views: {
+          "": {
+            templateUrl: '/ui/features/community/editCommunity.tpl.html',
+            controller: 'EditCommunityCtrl'
           }
         }
       }).
