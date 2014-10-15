@@ -17,8 +17,6 @@ var Deployer = function(app, done, log) {
 
   var heroku = new (require('heroku-client'))({token: process.env.HEROKU_API_TOKEN});
   this.herokuConfig = heroku.apps(app).configVars();
-
-  this.awsContentUrlPrefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
 };
 
 Deployer.prototype.fail = function(err) {
@@ -35,6 +33,8 @@ Deployer.prototype.getAWSKeys = function(callback) {
       'AWS_S3_CONTENT_URL', 'CONTENT_URL', 'ROLLBAR_SERVER_TOKEN',
       'DOMAIN');
     callback(err);
+
+    this.awsContentUrlPrefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
   }.bind(this));
 };
 
