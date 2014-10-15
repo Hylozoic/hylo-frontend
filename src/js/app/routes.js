@@ -79,14 +79,5 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         data: {
           singlePost: true
         }
-      }).
-      state('search', {
-        url: "/c/:community/search?q",
-        views: {
-          "": {
-            templateUrl: '/ui/app/search.tpl.html',
-            controller: 'SearchCtrl'
-          }
-        }
       });
   }]);
