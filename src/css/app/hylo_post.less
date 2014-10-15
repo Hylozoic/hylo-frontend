@@ -15,58 +15,6 @@
   //variables for posts
   @seed-username-padding: 30px;
 
-  //mixins for post
-  .label-text() {
-    &, a {
-      color: @text-light-gray;
-    }
-
-    a:hover {
-      color: @link-color;
-    }
-
-    .proxima-nova-light;
-    font-size: 12px;
-    letter-spacing: .3px;
-  }
-
-  //text attributes for our seed text styles
-  .seed-type-text() {
-    .proxima-nova-semibold;
-    font-size: 130%;
-    letter-spacing: 1.5px;
-  }
-
-  .seed-title-text() {
-    .proxima-nova-bold;
-    font-size: 120%;
-    line-height: 20px;
-    color: @titleColor;
-  }
-
-  .seed-description-text() {
-    .proxima-nova-light;
-    font-size: 100%;
-    color: @text-gray;
-    line-height: 1.4;
-  }
-
-  .seed-username-text() {
-    .label-text;
-    margin-top: 6px;
-    text-align: center;
-    line-height: 1.4;
-    overflow: hidden;
-    word-wrap: break-word;
-    max-height: 78px;
-  }
-
-  .seed-timestamp-text() {
-    .label-text;
-  }
-  /////
-
-  //post properties start here
   margin-bottom: 20px;
   font-size: @font-size-base;
   color: @text-gray;
@@ -79,7 +27,6 @@
       .resize-avatar(2);
     }
   }
-
 
   .user {
     position: absolute;
