@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     ngAnnotate: {
       prod: {
         files: {
-          'dist/bundle.js': ['dist/bundle.js']
+          'dist/bundle-annotated.js': ['dist/bundle.js']
         }
       }
     },
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           sourceMapIncludeSources: true
         },
         files: {
-          'dist/bundle.min.js': ['dist/bundle.js']
+          'dist/bundle.min.js': ['dist/bundle-annotated.js']
         }
       }
     },
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
       dev: {
         cwd: 'src/html',
         src: '**/*.html',
-        dest: 'dist/bundle.js',
+        dest: 'dist/bundle-annotated.js',
         options: {
           append: true,
           module: 'hyloApp',
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('bundleJs', ['browserify', 'ngtemplates', 'ngAnnotate', 'extract_sourcemap', 'uglify']);
+  grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
   grunt.registerTask('dev', ['browserify', 'less', 'serve', 'watch']);
