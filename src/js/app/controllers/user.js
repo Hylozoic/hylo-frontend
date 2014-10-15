@@ -68,7 +68,20 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
     $scope.openMailTo = function openMailTo(event) {
       event.preventDefault();
       event.stopPropagation();
-      $window.location.href="mailto:" + $scope.user.email;
+
+      try {
+        var isMobile = $window.matchMedia("only screen and (max-width: 760px)");
+
+        if (isMobile.matches) {
+          $window.location.href="mailto:" + $scope.user.email;
+        } else {
+          $window.open("mailto:" + $scope.user.email, "_blank");
+        }
+      } catch(err) {
+        Rollbar.warn("Error trying to openMailTo link.  Defaulting to window.location.href", err);
+        $window.location.href="mailto:" + $scope.user.email;
+      }
+
       return false;
     }
 
