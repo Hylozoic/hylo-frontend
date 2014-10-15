@@ -113,7 +113,7 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'sync:html', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
     var upstream = grunt.option('upstream');
