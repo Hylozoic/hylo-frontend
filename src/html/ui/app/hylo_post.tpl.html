@@ -15,7 +15,7 @@
           <span class="fulfillment" ng-if="post.fulfilled">
             <div>
               <span ng-if="::post.contributors.length > 0">
-              Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span></a>
+              Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span></a>
                 <span ng-if="::post.contributors.length > 2">
                   <span class="dropdown">and
                   <a class="dropdown-toggle"><span>{{::post.contributors.length - 2}}</span> other<span ng-show="::post.contributors.length > 3">s</span></a>
