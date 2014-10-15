@@ -122,7 +122,7 @@
         display: inline-block;
       }
 
-      @titleColor: #333332;
+      @title-color: #333332;
       @color: #808080;
     }
 
@@ -138,7 +138,7 @@
           display: inline-block;
         }
 
-        @titleColor: #333332;
+        @title-color: #333332;
         @color: #808080;
         color: @color;
         display: table;
@@ -179,7 +179,7 @@
 
         &:hover {
           .title {
-            color: darken(@titleColor, 30%);
+            color: darken(@title-color, 30%);
           }
           .post-info {
             .name {
@@ -430,7 +430,7 @@
       left: 16px + @popover-arrow-outer-width;
       margin-left: -@popover-arrow-outer-width;
       border-top-width: 0;
-      border-bottom-color: @tags-border-color;
+      border-bottom-color: @border-light;
       top: -10px;
       &:after {
         content: " ";

@@ -2,10 +2,9 @@
 
 @import 'bower_components/bootstrap/less/bootstrap.less';
 @import 'bootstrap/bootstrap-select.less';
-
 @import 'angular/perfect-scrollbar';
-
 @import '_colors.less';
+@import '_mixins.less';
 
 // Custom Bootstrap Overrides
 .btn {
@@ -14,7 +13,6 @@
 @headings-font-family:    "proxima-nova",sans-serif;
 @jumbotron-padding:              12px;
 @jumbotron-bg:                   white;
-@btn-info-color:                 @text-gray;
 
 .jumbotron {
   img {
@@ -45,14 +43,6 @@
     color: #808080;
   }
 }
-
-// note that bootstrap variables (see bootstrap/variables.less) can be overridden
-// and changes will take effect even if declared after they are used
-
-@brand-success: @core-color;
-@brand-info: @faint-gray;
-
-@import '_mixins.less';
 
 // other useful variables
 
