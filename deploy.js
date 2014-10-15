@@ -98,11 +98,12 @@ Deployer.prototype.uploadSourceMap = function(callback) {
   this.log.subhead('uploading source map');
 
   rest.post('https://api.rollbar.com/api/1/sourcemap', {
+    multipart: true,
     data: {
       access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
       version: this.version,
       minified_url: 'http://' + this.herokuEnv.DOMAIN + '/' + this.bundlePaths.js,
-      source_map: cat('dist/bundle.min.js.map')
+      source_map: rest.data('dist/bundle.min.js.map', null, cat('dist/bundle.min.js.map'))
     }
   }).on('complete', function(result, response) {
     if (result instanceof Error) {
