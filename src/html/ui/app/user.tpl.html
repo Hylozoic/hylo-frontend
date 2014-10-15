@@ -108,15 +108,7 @@
     </div>
 
     <div ng-if="!hasPosts" class="post">
-      <a class="avatar" back-img="user.avatar"></a>
-
-      <div class="bubble" ng-class="intention">
-        <div>
-          <h2 style="padding: 15px 0 0 0">
-            No Seeds Yet
-          </h2>
-        </div>
-      </div>
+      {{user.name}} has not created any seeds yet.
     </div>
 
   </div>
