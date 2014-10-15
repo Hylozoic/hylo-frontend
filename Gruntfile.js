@@ -8,6 +8,11 @@ module.exports = function(grunt) {
         files: {
           'dist/bundle.css': ['src/css/index.less']
         }
+      },
+      styleguide: {
+        files: {
+          'dist/styleguide.css': ['src/css/styleguide.less']
+        }
       }
     },
     cssmin: {
@@ -57,10 +62,17 @@ module.exports = function(grunt) {
       }
     },
     sync: {
-      html: {
+      ui: {
         cwd: 'src/html/ui',
         src: ['**'],
         dest: 'dist/ui',
+        updateAndDelete: true,
+        verbose: true
+      },
+      styleguide: {
+        cwd: 'src/html/styleguide',
+        src: ['**'],
+        dest: 'dist/styleguide',
         updateAndDelete: true,
         verbose: true
       }
@@ -89,9 +101,13 @@ module.exports = function(grunt) {
         files: ['src/css/**/*'],
         tasks: ['less', 'notify:css']
       },
-      html: {
-        files: ['src/html/**/*'],
-        tasks: ['sync:html']
+      ui: {
+        files: ['src/html/ui/**/*'],
+        tasks: ['sync:ui']
+      },
+      styleguide: {
+        files: ['src/html/styleguide/**/*'],
+        tasks: ['sync:styleguide']
       }
     },
     notify: {
@@ -113,7 +129,7 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'sync:html', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'sync', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
     var upstream = grunt.option('upstream');
