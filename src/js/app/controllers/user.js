@@ -68,7 +68,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
     $scope.openMailTo = function openMailTo(event) {
       event.preventDefault();
       event.stopPropagation();
-      $window.location.href="mailto:" + $scope.user.email;
+      $window.open("mailto:" + $scope.user.email, "_blank");
       return false;
     }
 
