@@ -12,29 +12,25 @@
 }
 
 .post {
-  //variables for posts
-  @seed-username-padding: 30px;
+  @user-width: 90px;
 
   margin-bottom: 20px;
   font-size: @font-size-base;
   color: @text-gray;
 
-  .avatar {
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-    @media (max-width: @screen-sm) {
-      .resize-avatar(2);
-    }
-  }
-
   .user {
     position: absolute;
-    width: @avatar-size + @seed-username-padding;
+    width: @user-width;
     vertical-align: top;
 
     .name, .icon {
       display: block;
+    }
+    .icon .avatar {
+      .user-avatar;
+      @media (max-width: @screen-sm) {
+        .user-avatar-xs;
+      }
     }
     .name {
       .seed-username-text;
@@ -62,7 +58,7 @@
   }
 
   .block {
-    margin-left: @avatar-size+@seed-username-padding+5;
+    margin-left: @user-width + 5;
 
     .post-header {
       span {
@@ -95,11 +91,15 @@
           color: @color;
           padding-bottom: 5px;
           .type {
-            .seed-type-text;
-
-            &.intention { color: @intention-color; }
-            &.request { color: @request-color; }
-            &.offer { color: @offer-color; }
+            &.intention {
+              .seed-type-text(@intention-color);
+            }
+            &.request {
+              .seed-type-text(@request-color);
+            }
+            &.offer {
+              .seed-type-text(@offer-color);
+            }
           }
           .name {
             .proxima-nova-semibold;
@@ -116,11 +116,11 @@
         }
 
         .timestamp {
-          .seed-timestamp-text;
+          .seed-meta-text;
         }
 
         .post-description {
-          .seed-description-text;
+          .seed-body-text;
           padding-top: 5px;
         }
 
@@ -166,7 +166,7 @@
       }
 
       .fulfillment {
-        .seed-timestamp-text;
+        .seed-meta-text;
 
         a {
           font-style: italic;
@@ -245,8 +245,6 @@
     margin: 10px 0 0;
     border: 1px solid @border-light;
 
-    @comment-margin: @avatar-size/2+20px;
-
     > .comment {
       padding: 6px 22px;
       border-right: none;
@@ -258,7 +256,7 @@
       }
 
       .comment-content {
-        margin: 0 0 0 @comment-margin;
+        margin-left: 50px;
 
         //add padding to the end of the comments
         &:last-child {
@@ -274,7 +272,7 @@
     }
 
     .avatar {
-      .resize-avatar(1.8);
+      .user-avatar-sm;
     }
 
     .comment-avatar {
@@ -282,11 +280,11 @@
     }
 
     .comment-text {
-      .seed-description-text;
+      .seed-body-text;
     }
 
     .comment-content .controls {
-      .label-text;
+      .seed-meta-text;
       line-height: 1.4;
       padding-top: 6px;
     }
@@ -294,14 +292,14 @@
     .add-comment {
       background-color: white;
       padding: 6px 20px;
-      .seed-description-text;
+      .seed-body-text;
 
       .avatar {
-        .resize-avatar(2.2);
+        .user-avatar-xs;
       }
 
       .comment-input {
-        margin: 0 0 0 @comment-margin;
+        margin-left: 50px;
         position: relative;
 
         button {

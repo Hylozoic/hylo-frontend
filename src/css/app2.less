@@ -129,6 +129,8 @@ body {
   }
 }
 
+@bubble-offset: 80px;
+
 .filter-query {
   margin-left: @bubble-offset;
   margin-bottom: 18px;
@@ -190,17 +192,6 @@ body {
   }
 }
 
-.avatar {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: block;
-  height: @avatar-size;
-  width: @avatar-size;
-  border-radius: @avatar-size / 2;
-  float: left;
-}
-
 //shared class for rounded button style
 .button-rounded, .button-rounded:hover {
   .rounded-button-style;
@@ -242,25 +233,6 @@ textarea.no-border, textarea.no-border:focus {
 
   &.editing {
     height: auto;
-  }
-
-  .circle {
-    display: block;
-    float: left;
-    height: @circle-size;
-    width: @circle-size;
-    line-height: @circle-size;
-    border-radius: @circle-size / 2;
-    margin-left: (@avatar-size - @circle-size) / 2;
-    vertical-align: middle;
-    text-align: center;
-    background-color: white;
-    color: @text-light-gray;
-    cursor: pointer;
-    > i {
-      line-height: @circle-size;
-      top: -1px;
-    }
   }
 
   .start-editing {
@@ -363,20 +335,13 @@ textarea.no-border, textarea.no-border:focus {
     }
 
     .bio {
-      @avatar-size: 60px;
       padding: 13px 10px 0;
-      height: @avatar-size + 16px;
+      height: 76px;
       box-sizing: border-box;
       border-bottom: 1px solid @faint-gray;
       overflow: hidden; // TODO use dotdotdot
       .avatar {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: block;
-        width: @avatar-size;
-        height: @avatar-size;
-        border-radius: 30px;
+        .user-avatar;
         margin: -5px 10px -5px 0;
       }
       h3 {
