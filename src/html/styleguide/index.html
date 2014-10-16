@@ -8,21 +8,21 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-offset-3"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-8 col-sm-offset-2">
 
       <h1>Colors</h1>
-      <div class="col-xs-2" id="light-gray">@light-gray</div>
-      <div class="col-xs-2" id="faint-gray">@faint-gray</div>
-      <div class="col-xs-2" id="text-dark">@text-dark</div>
-      <div class="col-xs-2" id="text-gray">@text-gray</div>
-      <div class="col-xs-2" id="text-light-gray">@text-light-gray</div>
+      <div id="colors">
+      <div><div id="light-gray">@light-gray</div></div>
+      <div><div id="faint-gray">@faint-gray</div></div>
+      <div><div id="text-dark">@text-dark</div></div>
+      <div><div id="text-gray">@text-gray</div></div>
+      <div><div id="text-light-gray">@text-light-gray</div></div>
+      <div><div id="border-light">@border-light</div></div>
+      <div><div id="border-medium">@border-medium</div></div>
+      <div><div id="border-dark">@border-dark</div></div>
+      </div>
 
       <div class="clearfix"></div>
-
 
       <h1>Mixins</h1>
 
@@ -36,22 +36,49 @@
         <tbody>
 
           <tr>
+            <td><span id="large-header">Appearance</span></td>
+            <td>.large-header()</td>
+          </tr>
+          <tr>
             <td><span id="intention">INTENTION</span></td>
-            <td>.seed-title-text(@intention-color)</td>
+            <td>.seed-type-text(@intention-color)</td>
           </tr>
           <tr>
             <td><span id="offer">OFFER</span></td>
-            <td>.seed-title-text(@offer-color)</td>
+            <td>.seed-type-text(@offer-color)</td>
           </tr>
           <tr>
             <td><span id="request">REQUEST</span></td>
-            <td>.seed-title-text(@request-color)</td>
+            <td>.seed-type-text(@request-color)</td>
           </tr>
           <tr>
-            <td><span id="large-header">A large header</span></td>
-            <td>.large-header()</td>
+            <td><span id="seed-title-text">I'm looking for a pet.</span></td>
+            <td>.seed-title-text()</td>
           </tr>
-
+          <tr>
+            <td><span id="seed-meta-text">Kirk Draheim / 5 hours ago</span></td>
+            <td>.seed-meta-text()</td>
+          </tr>
+          <tr>
+            <td><span id="seed-body-text">Have you got any parrots that you've taught to say clever things? Or perhaps a small bear that knows circus tricks.</span></td>
+            <td>.seed-body-text()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-lg"></span></td>
+            <td>.user-avatar-lg()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar"></span></td>
+            <td>.user-avatar()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-sm"></span></td>
+            <td>.user-avatar-sm()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-xs"></span></td>
+            <td>.user-avatar-xs()</td>
+          </tr>
         </tbody>
       </table>
 

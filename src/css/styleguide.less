@@ -6,6 +6,17 @@ h1 {
   .large-header;
 }
 
+#colors {
+  .make-row;
+  > div {
+    .make-xs-column(3);
+    > div {
+      margin: 3px 0;
+      padding: 5px 10px;
+    }
+  }
+}
+
 #light-gray {
   background-color: @light-gray;
 }
@@ -26,31 +37,88 @@ h1 {
   color: @text-light-gray;
 }
 
+#border-light {
+  border: 1px solid @border-light;
+}
+
+#border-medium {
+  border: 1px solid @border-medium;
+}
+
+#border-dark {
+  border: 1px solid @border-dark;
+}
+
 #text-style-examples {
   padding: 0;
-  th {
-    text-align: left;
-  }
-  td, th {
-    padding: 0 15px 10px 0;
+
+  tr {
+    td, th {
+      padding: 15px;
+    }
+    th {
+      text-align: left;
+      border: 1px solid white;
+      border-bottom: 1px solid @border-light;
+    }
+    td {
+      border: 1px solid @border-light;
+    }
+    td:first-child {
+      width: 50%;
+    }
   }
 }
 
 #intention {
-  .seed-title-text(@intention-color);
+  .seed-type-text(@intention-color);
 }
 
 #offer {
-  .seed-title-text(@offer-color);
+  .seed-type-text(@offer-color);
 }
 
 #request {
-  .seed-title-text(@request-color);
+  .seed-type-text(@request-color);
 }
 
 #large-header {
   .large-header;
 }
+
+#seed-title-text {
+  .seed-title-text;
+}
+
+#seed-meta-text {
+  .seed-meta-text;
+}
+
+#seed-body-text {
+  .seed-body-text;
+}
+
+.avatar {
+  background-image: url(http://s3.amazonaws.com/hylo-dev/styleguide/axolotl_icon.jpg);
+}
+
+#user-avatar-lg {
+  .user-avatar-lg;
+}
+
+#user-avatar {
+  .user-avatar;
+}
+
+#user-avatar-sm {
+  .user-avatar-sm;
+}
+
+#user-avatar-xs {
+  .user-avatar-xs;
+}
+
+
 
 /*
 
@@ -83,7 +151,5 @@ large form option labels (seed type chooser)
 
 large search field text
 skill list text
-
-large list label (members, community settings)
 
 */

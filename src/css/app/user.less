@@ -40,21 +40,14 @@
   }
 
   .profile-avatar {
-    @avatar-size: 140px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: block;
-    height: @avatar-size;
-    width: @avatar-size;
-    border-radius: @avatar-size / 2;
-    margin: 0 auto 20px;
+    .user-avatar-lg;
+    margin-bottom: 20px;
 
     .editOverlay {
       display: block;
       position: absolute;
-      height: @avatar-size;
-      width: @avatar-size;
+      height: 140px;
+      width: 140px;
       background-image: url(/assets/images/editOverlayGray.png);
       background-repeat: no-repeat;
       background-position: center;
