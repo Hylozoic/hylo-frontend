@@ -3,7 +3,8 @@
   "description": "A new kind of social network that helps real communities create, together.",
   "version": "1.0.0",
   "devDependencies": {
-    "bower": "latest"
+    "bower": "latest",
+    "grunt-node-inspector": "^0.1.5"
   },
   "dependencies": {
     "async": "latest",

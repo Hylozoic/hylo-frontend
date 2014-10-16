@@ -105,10 +105,15 @@ module.exports = function(grunt) {
           message: 'CSS bundling done'
         }
       }
+    },
+    'node-inspector': {
+      dev: {}
     }
   });
 
   require('load-grunt-tasks')(grunt);
+
+  grunt.loadNpmTasks('grunt-node-inspector');
 
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
