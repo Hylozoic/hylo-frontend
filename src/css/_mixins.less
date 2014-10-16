@@ -34,28 +34,26 @@
   -ms-filter: blur(@px);
 }
 
-.proxima-nova-light() {
+.proxima-nova(@weight) {
   font-family: "proxima-nova",sans-serif;
   font-style: normal;
-  font-weight: 300;
+  font-weight: @weight;
 }
 
-.proxima-nova-regular() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 400;
+.proxima-nova-light {
+  .proxima-nova(300);
 }
 
-.proxima-nova-semibold() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 600;
+.proxima-nova-regular {
+  .proxima-nova(400);
 }
 
-.proxima-nova-bold() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 700;
+.proxima-nova-semibold {
+  .proxima-nova(600);
+}
+
+.proxima-nova-bold {
+  .proxima-nova(700);
 }
 
 .myriad-semi-italic() {
