@@ -1,9 +1,15 @@
-@import 'bower_components/bootstrap/less/bootstrap.less';
-@import '_colors.less';
-@import '_mixins.less';
+@import 'bower_components/bootstrap/less/bootstrap';
+@import '_colors';
+@import '_mixins';
+@import 'hyloIcons';
+
+body {
+  margin-bottom: 45px;
+}
 
 h1 {
   .large-header;
+  margin-top: 45px;
 }
 
 #colors {
@@ -57,6 +63,7 @@ h1 {
       padding: 15px;
     }
     th {
+      .section-title;
       text-align: left;
       border: 1px solid white;
       border-bottom: 1px solid @border-light;
@@ -70,6 +77,14 @@ h1 {
   }
 }
 
+#large-header {
+  .large-header;
+}
+
+#section-title {
+  .section-title;
+}
+
 #intention {
   .seed-type-text(@intention-color);
 }
@@ -80,10 +95,6 @@ h1 {
 
 #request {
   .seed-type-text(@request-color);
-}
-
-#large-header {
-  .large-header;
 }
 
 #seed-title-text {
@@ -118,7 +129,23 @@ h1 {
   .user-avatar-xs;
 }
 
+#rounded-button {
+  .rounded-button;
+}
 
+#icons {
+  p {
+    .seed-meta-text;
+  }
+
+  i {
+    text-align: center;
+    width: 48px;
+    font-size: 24px;
+    padding: 10px;
+    display: inline-block;
+  }
+}
 
 /*
 

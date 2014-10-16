@@ -40,6 +40,10 @@
             <td>.large-header()</td>
           </tr>
           <tr>
+            <td><span id="section-title">moderator settings</span></td>
+            <td>.section-title()</td>
+          </tr>
+          <tr>
             <td><span id="intention">INTENTION</span></td>
             <td>.seed-type-text(@intention-color)</td>
           </tr>
@@ -79,12 +83,41 @@
             <td><span class="avatar" id="user-avatar-xs"></span></td>
             <td>.user-avatar-xs()</td>
           </tr>
+          <tr>
+            <td>
+              <a id="rounded-button">
+                <i class="icon-heart-new"></i>
+                <span>Radiate Love</span>
+              </a>
+            </td>
+            <td>
+              .rounded-button()
+            </td>
+          </tr>
         </tbody>
       </table>
+
+      <h1>Icons</h1>
+      <div id="icons">
+        <p>Hover over an icon to see its name.</p>
+
+      </div>
 
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var iconNames = ['communities', 'attachment', 'add-new', 'add-background', 'heart-new', 'down-new', 'search-new', 'edit', 'check', 'add-member', 'add-photo', 'hylo-script', 'time', 'alert', 'notifications', 'complete', 'add-inverse', 'remove', 'comment', 'search', 'members', 'following', 'remove-inverse', 'profile', 'add', 'feed', 'settings', 'down', 'up', 'home', 'vimeo', 'mail'];
+  var icons = document.getElementById('icons');
+  for (var i = 0; i < iconNames.length; i++) {
+    var icon = document.createElement('i');
+    var className = 'icon-' + iconNames[i];
+    icon.className = className;
+    icon.title = className;
+    icons.appendChild(icon);
+  }
+</script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
-.rounded-button-style() {
+.rounded-button() {
   .proxima-nova-regular;
-  font-size: 120%;
+  font-size: 14px;
   text-decoration: none; //this removes hover effect
   color: @text-dark;
   cursor: pointer;
@@ -8,8 +8,12 @@
   border-radius: 15px;
   display: inline-block;
   height: 32px;
-  line-height: 32px;
+  line-height: 30px;
   padding: 0px 20px;
+  > i {
+    position: relative;
+    top: 2px;
+  }
   @media (max-width: @screen-sm-max) {
 
   }
@@ -77,6 +81,13 @@
   font-size: 32px;
 }
 
+.section-title() {
+  .proxima-nova-semibold;
+  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: 3.5px;
+}
+
 .seed-meta-text() {
   &, a {
     color: @text-light-gray;
@@ -90,10 +101,9 @@
   font-size: 14px;
 }
 
-//text attributes for our seed text styles
 .seed-type-text(@color) {
-  .proxima-nova-semibold;
-  font-size: 16px;
+  .proxima-nova-bold;
+  font-size: 17px;
   letter-spacing: 1.5px;
   color: @color;
 }
