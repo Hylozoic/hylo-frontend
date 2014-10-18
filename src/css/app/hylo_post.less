@@ -18,6 +18,11 @@
   font-size: @font-size-base;
   color: @text-gray;
 
+  &:first-child {
+    padding-top: 22px;
+  }
+
+
   .user {
     position: absolute;
     width: @user-width;
@@ -75,6 +80,22 @@
       padding-bottom: 15px;
       line-height: 2;
 
+      .post-options {
+        float: right;
+
+        a, a:hover {
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        ul {
+          min-width: initial;
+          float: right;
+          right: 0;
+          left: initial;
+        }
+      }
+
 
       .post-header {
         span {
@@ -91,6 +112,8 @@
           color: @color;
           padding-bottom: 5px;
           .type {
+            margin-right: 10px;
+
             &.intention {
               .seed-type-text(@intention-color);
             }
@@ -106,6 +129,24 @@
           }
           .post-prefix {
             .proxima-nova-light;
+          }
+        }
+
+        .fulfillment {
+          .seed-meta-text;
+
+          a {
+            font-style: italic;
+            cursor: pointer;
+          }
+
+          .dropdown-menu a {
+            color: @light-gray;
+            font-size: 11px;
+          }
+
+          > div {
+            padding-top: 4px;
           }
         }
 
@@ -147,24 +188,6 @@
         display: inline;
       }
 
-      .fulfillment {
-        .seed-meta-text;
-        margin-left: 7px;
-
-        a {
-          font-style: italic;
-          cursor: pointer;
-        }
-
-        .dropdown-menu a {
-          color: @light-gray;
-          font-size: 11px;
-        }
-
-        > div {
-          padding-top: 4px;
-        }
-      }
 
       .controls {
         font-size: @font-size-small;
