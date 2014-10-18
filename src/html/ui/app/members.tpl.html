@@ -21,6 +21,22 @@
     </div>
 
     <div class="row">
+    NEW
+      <div class="col-md-8 col-md-offset-2">
+        <div ng-repeat="user in users.slice(0,2) | orderBy:'name'" class="col-sm-12 member">
+          <div class="avatar" back-img="user.avatar"></div>
+          <div class="member-info">
+            <div class="member-name" ng-bind="::user.name"></div>
+            <div class="member-skills" ng-bind="::user.skills.join(', ')"></div>
+          </div>
+
+          </div>
+        <div loading-indicator ng-if="searching"></div>
+      </div>
+    </div>
+
+    <div class="row">
+    OLD
       <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12">
       {{user.name}} > <div class="user-name" ng-bind="::user.name"></div>
 

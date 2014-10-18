@@ -136,7 +136,10 @@
   max-height: 78px;
 }
 
-.user-avatar(@size: 60px) {
+@avatar-size-default: 60px;
+@avatar-margin: @avatar-size-default + 30;
+
+.user-avatar(@size: @avatar-size-default) {
   @avatar-size: 60px;
   margin: 0 auto;
   float: none;
