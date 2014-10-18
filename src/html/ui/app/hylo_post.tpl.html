@@ -1,14 +1,23 @@
 <div class="post" analytics-id="{{::post.id}}">
 
   <div class="user">
-    <div class="icon"> <a ui-sref="user({community: post.communitySlug, id: post.user.id})" back-img="post.user.avatar" class="avatar"></a> </div>
-    <div class="name">{{::post.user.name}}</div>
+    <a ui-sref="user({community: post.communitySlug, id: post.user.id})">
+      <div class="icon"> <span back-img="post.user.avatar" class="avatar"></span> </div>
+      <div class="name">{{::post.user.name}}</div>
+    </a>
   </div>
 
   <div class="block {{post.postType}}" ng-class="{'deletable': canDelete}">
     <div class="post-content">
       <div class="post-header">
-        <i class="delete icon-remove" ng-click="delete(comment)"></i>
+        <span class="dropdown" ng-show="canDelete">
+          <a class="dropdown-toggle">\/</a>
+          <ul class="dropdown-menu">
+            <li >
+              <a class="post-option" ng-click="delete(comment)">delete</a>
+            </li>
+          </ul>
+        </span> 
 
         <span class="post-info">
           <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
@@ -36,16 +45,17 @@
           <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
         </span>
         <br>
+        <span ng-click="onCommentIconClick()">
+          <span class="title">
+            <span seed-text="post.name"></span>
+          </span>
 
-        <span class="title">
-          <span seed-text="post.name"></span>
-        </span>
+          <br ng-if="isPostText">
 
-        <br ng-if="isPostText">
-
-        <span ng-if="isPostText" class="post-description">
-          <span seed-text="truncatedPostText"></span>
-          <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
+          <span ng-if="isPostText" class="post-description">
+            <span seed-text="truncatedPostText"></span>
+            <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
+          </span>
         </span>
       </div>
 
