@@ -46,7 +46,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/c/:community/members',
         views: {
           "": {
-            templateUrl: '/ui/app/community_users.tpl.html',
+            templateUrl: '/ui/app/members.tpl.html',
             controller: 'CommunityUsersCtrl'
           }
         }
