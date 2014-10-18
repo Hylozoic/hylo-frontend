@@ -322,56 +322,6 @@ textarea.no-border, textarea.no-border:focus {
 
 @import "app/hylo_post";
 
-.users {
-  .user {
-    background-color: white;
-    border-radius: 5px;
-    margin: 5px 0px;
-
-    > a {
-      display: block;
-      text-decoration: none;
-      color: @text-dark;
-    }
-
-    .bio {
-      padding: 13px 10px 0;
-      height: 76px;
-      box-sizing: border-box;
-      border-bottom: 1px solid @faint-gray;
-      overflow: hidden; // TODO use dotdotdot
-      .avatar {
-        .user-avatar;
-        margin: -5px 10px -5px 0;
-      }
-      h3 {
-        font-size: @font-size-large;
-        margin: 0 0 5px;
-      }
-      label {
-        .proxima-nova-regular;
-        text-transform: uppercase;
-        color: @text-gray;
-        margin: 0 5px 0 0;
-      }
-    }
-    .activity {
-      display: block;
-      height: 60px;
-      overflow: hidden; // TODO use dotdotdot
-      padding: 10px;
-      border-radius: 5px;
-      &.intention { border: 1px solid @intention-color; }
-      &.offer { border: 1px solid @offer-color; }
-      &.request { border: 1px solid @request-color; }
-
-      .description {
-        color: @light-gray;
-      }
-    }
-  }
-}
-
 .onboarding-modal {
   h4 {
     .proxima-nova-regular;

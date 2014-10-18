@@ -21,12 +21,13 @@
     </div>
 
     <div class="row">
-      <div ng-repeat="user in users | orderBy:'name'" class="col-sm-6">
+      <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12">
+      {{user.name}} > <div class="user-name" ng-bind="::user.name"></div>
 
         <div class="user" ng-init="post = user.recent_post">
           <a class="bio" ui-sref="user({community: $root.community.slug, id: user.id})" dotdotdot>
             <div class="avatar" back-img="user.avatar"></div>
-            <h3 class="bold" ng-bind="::user.name"></h3>
+            
             <label>Affiliations</label>
             <span class="organizations" ng-bind="::user.organizations.join(', ')"></span>
             <br>
