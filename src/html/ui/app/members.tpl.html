@@ -23,7 +23,7 @@
     <div class="row">
     NEW
       <div class="col-md-8 col-md-offset-2">
-        <div ng-repeat="user in users.slice(0,2) | orderBy:'name'" class="col-sm-12 member">
+        <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12 member">
           <div class="avatar" back-img="user.avatar"></div>
           <div class="member-info">
             <div class="member-name" ng-bind="::user.name"></div>
