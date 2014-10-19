@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
       <i class="icon-search shadow filter-search-icon"></i>
       <div class="filter-query">
         <input placeholder="Search for members, skills or affiliations..." class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
@@ -20,52 +20,20 @@
       </div>
     </div>
 
+    <!-- List Members -->
     <div class="row">
-    NEW
       <div class="col-md-8 col-md-offset-2">
         <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12 member">
           <div class="avatar" back-img="user.avatar"></div>
           <div class="member-info">
             <div class="member-name" ng-bind="::user.name"></div>
-            <div class="member-skills" ng-bind="::user.skills.join(', ')"></div>
+            <div class="member-skills"><span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
           </div>
-
-          </div>
+        </div>
         <div loading-indicator ng-if="searching"></div>
       </div>
     </div>
 
-    <div class="row">
-    OLD
-      <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12">
-      {{user.name}} > <div class="user-name" ng-bind="::user.name"></div>
-
-        <div class="user" ng-init="post = user.recent_post">
-          <a class="bio" ui-sref="user({community: $root.community.slug, id: user.id})" dotdotdot>
-            <div class="avatar" back-img="user.avatar"></div>
-            
-            <label>Affiliations</label>
-            <span class="organizations" ng-bind="::user.organizations.join(', ')"></span>
-            <br>
-            <label>Skills</label>
-            <span class="skills" ng-bind="::user.skills.join(', ')"></span><br/>
-
-          </a>
-
-          <a ng-if="::user.recent_post" class="activity" ng-class="::post.postType" ui-sref="post.comments({community: community.slug, postId: post.id})" dotdotdot>
-            <span ng-bind="::post.name"></span><br/>
-            <span class="description" ng-bind="::post.description"></span>
-          </a>
-
-          <a ng-if="::!user.recent_post" class="activity">
-          </a>
-
-        </div>
-
-      </div>
-
-      <div loading-indicator ng-if="searching"></div>
-    </div>
     <div ng-if="usersLoaded && !searching && users.length == 0">
       <div class="col-md-12">
         <h2 style="text-align: center;">Hmm... we couldn't find any members that match your search.</h2>
