@@ -50,9 +50,8 @@
     }
 
     .avatar {
-      width: 20px;
+      .user-avatar-xs;
       float: none;
-      height: 20px;
       display: inline-block;
       vertical-align: middle;
     }
@@ -372,7 +371,7 @@
 
     .add-tags {
       min-width: 77%;
-      margin: 5px 0 0 15px;
+      margin: 3px 0 3px 15px;
 
       .decipher-tags {
         background-color: white;
@@ -386,17 +385,29 @@
         .decipher-tags-tag {
           border-color: @border-light;
           margin: 0;
-          padding: 0;
+          padding: 2px 6px 7px;
 
           .user-avatar-sm {
-            float: left;
-            display: inline-block;
+            position: absolute;
           }
           .tag-name {
-            display: inline-block;
-            top: 5px;
+            margin-left: 45px;
+            top: 4px;
             position: relative;
+            padding-right: 5px;
           }
+        }
+
+        //customizations for typeahead
+        .typeahead-tag {
+          height: 35px;
+        }
+        .avatar-typeahead {
+          .user-avatar-xs;
+          position: absolute;
+        }
+        .typeahead-result {
+          margin-left: 45px;
         }
       }
     }
@@ -405,7 +416,7 @@
   .add-followers-complete {
     height: 30px;
     margin: 10px 0 0;
-    
+
     .add-followers-btn {
       .rounded-button();
       background-color: initial;
