@@ -113,7 +113,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       }).show();
 
       guiders.createGuider({
-        attachTo: document.querySelectorAll(".post")[0],
+        attachTo: document.querySelectorAll(".post-header")[0],
         buttons: [{name: "Next"}],
         description: "Here are the seeds from your community.  You can heart a seed by clicking the <i class='icon-following'></i>, or comment on it by clicking the <i class='icon-comment'></i>",
         id: "second",
@@ -123,7 +123,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       });
 
       guiders.createGuider({
-        attachTo: "#community-filter-buttons",
+        attachTo: document.querySelectorAll(".filter-buttons")[0],
         buttons: [{name: "Next"}],
         description: "Filter the seeds by intention, request, offer or all.",
         id: "third",
