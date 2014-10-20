@@ -56,10 +56,6 @@
       display: inline-block;
       vertical-align: middle;
     }
-
-    &:hover {
-      color: @intention-color;
-    }
   }
 
   .block {
@@ -193,7 +189,13 @@
         font-size: @font-size-small;
         .proxima-nova-light;
 
-        &, > a { color: @light-gray; }
+        &, > a { 
+          color: @light-gray;
+
+          & .link-selected {
+            color: @dark-blue;
+          }
+        }
         > a {
           cursor: pointer;
           text-decoration: none;
@@ -322,9 +324,11 @@
   }
 
   .followers {
-    .proxima-nova-light;
-    color: @light-gray;
-    font-size: 11px;
+    .seed-body-text();
+    color: @default-text;
+    background-color: @visisble-gray-bkg;
+    font-size: 13px;
+    padding: 10px 15px;
 
     .actionIcon {
       font-size: 16px;
@@ -339,12 +343,76 @@
     }
 
     a {
-      .proxima-nova-bold;
-      font-size: 11px;
-      color: @light-gray;
+      font-weight: 600;
+      color: @default-text;
       cursor: pointer;
     }
   }
+
+  .add-followers{
+
+    width: 100%;
+    border: 1px solid @border-light;
+
+    .add-label, .add-tags {
+      display: inline-block;
+    }
+
+    .add-label {
+      .seed-body-text();
+      font-size: 13px;
+      font-weight: 600;
+      width: 130px;
+      float: left;
+      background-color: @dark-blue;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .add-tags {
+      min-width: 77%;
+      margin: 5px 0 0 15px;
+
+      .decipher-tags {
+        background-color: white;
+        border: none;
+        padding: 0;
+
+        .decipher-tags-input {
+          background-color: white;
+        }
+
+        .decipher-tags-tag {
+          border-color: @border-light;
+          margin: 0;
+          padding: 0;
+
+          .user-avatar-sm {
+            float: left;
+            display: inline-block;
+          }
+          .tag-name {
+            display: inline-block;
+            top: 5px;
+            position: relative;
+          }
+        }
+      }
+    }
+  }
+
+  .add-followers-complete {
+    height: 30px;
+    margin: 10px 0 0;
+    
+    .add-followers-btn {
+      .rounded-button();
+      background-color: initial;
+      float: right;
+    }
+  }
+  
 
   .followers-edit {
     padding: 0 10px !important;
