@@ -62,10 +62,10 @@
         <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-following'></i> me?" >
           <i class="icon-following ng-class:{myVote: post.myVote}" ></i> <span class="num">{{post.votes}}</span>
         </a>
-        <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers">
+        <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': !isFollowersCollapsed}">
           <i class="icon-members" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
         </a>
-        <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment">
+        <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
           <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
         </a>
         <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
@@ -76,10 +76,6 @@
 
       <div ng-if="!isFollowersCollapsed">
         <div class="followers">
-          <i class="actionIcon icon-add-inverse" ng-if="!editingFollowers" tooltip-popup-delay="500" tooltip="Add people to this Seed" ng-click="toggleEditFollowers($event)"></i>
-          <span ng-if="editingFollowers" >
-            <i class="actionIcon icon-complete" tooltip-trigger="manual" tooltip-placement="top" tooltip-visible="editingFollowers" tooltip="Click to finish adding followers" ng-click="toggleEditFollowers($event)"></i>
-          </span>
           <span ng-if="followers.length > 0">
             <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-repeat="follower in followers.slice(0, 2)"><span ng-bind="::follower.name"></span><span ng-if="::!$last && followers.length>1">,</span></a>
             <span ng-if="followers.length > 2">
@@ -92,7 +88,7 @@
               </ul>
               </span>
             </span>
-            <span ng-if="followers.length > 1">have</span><span ng-if="followers.length == 1">has</span> joined this seed.
+            <span ng-if="followers.length > 1">are</span><span ng-if="followers.length == 1">is</span> following this seed.
           </span>
           <span ng-if="followers.length == 0">
             No followers.
@@ -100,15 +96,22 @@
           <a class="pull-right join-leave-btn" ng-click="toggleJoinPost()">{{joinPostText()}}</a>
         </div>
       </div>
-      <div class="followers-edit" ng-if="editingFollowers">
-        <div class="arrow"></div>
-        <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-              model="followersToAdd"
-              typeahead-options="typeaheadOpts"
-              src="b as b.name for b in potentialFollowers"></tags>
+      <div class="add-followers" ng-if="!isFollowersCollapsed"> 
+        <div class="add-label">Add Members:</div>
+        <div class="add-tags">
+          <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+                model="followersToAdd"
+                typeahead-options="typeaheadOpts"
+                src="b as b.name for b in potentialFollowers">
+          </tags>
+        </div>
+
+      </div>
+      <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
+        <button class="add-followers-btn" ng-click="toggleEditFollowers($event)" > Done </button>
       </div>
 
-      <div ng-if="!isCommentsCollapsed">
+      <div ng-show="!isCommentsCollapsed">
         <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
       </div>
     </div>

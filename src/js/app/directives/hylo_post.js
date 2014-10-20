@@ -102,9 +102,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if ($scope.isCommentsCollapsed)
           $analytics.eventTrack('Show Comments');
 
-        //$scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-        $scope.isCommentsCollapsed = false;
-        $scope.isFollowersCollapsed = false;
+        $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
+        $scope.isFollowersCollapsed = true;
 
         $timeout(function() {
           CommentingService.setFocus($scope.post.id);
@@ -113,6 +112,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       $scope.onFollowerIconClick = function() {
         $scope.isFollowersCollapsed = !$scope.isFollowersCollapsed;
+        $scope.isCommentsCollapsed = true;
+        $scope.toggleEditFollowers();
       }
 
       $scope.followers = []; // list of current followers
