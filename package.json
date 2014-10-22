@@ -3,11 +3,13 @@
   "description": "A new kind of social network that helps real communities create, together.",
   "version": "1.0.0",
   "devDependencies": {
-    "bower": "latest"
+    "grunt-contrib-watch": "latest",
+    "node-static": "latest"
   },
   "dependencies": {
     "async": "latest",
     "aws-sdk": "latest",
+    "bower": "latest",
     "browserify": "latest",
     "debowerify": "latest",
     "grunt-angular-templates": "latest",
@@ -16,7 +18,6 @@
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-less": "latest",
     "grunt-contrib-uglify": "latest",
-    "grunt-contrib-watch": "latest",
     "grunt-exec": "latest",
     "grunt-extract-sourcemap": "latest",
     "grunt-ng-annotate": "latest",
@@ -25,7 +26,6 @@
     "heroku-client": "latest",
     "load-grunt-tasks": "latest",
     "lodash": "latest",
-    "node-static": "latest",
     "restler": "latest",
     "shelljs": "latest",
     "uglifyify": "latest"
