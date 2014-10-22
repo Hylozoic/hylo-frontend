@@ -206,8 +206,8 @@ angular.module("hylo.createCommunity", [])
       }
 
     }])
-    .controller("CreateCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService',
-      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService) {
+    .controller("CreateCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', "$rootScope", 'CurrentUser', '$analytics',
+      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $rootScope, CurrentUser, $analytics) {
 
         $scope.state = CreateCommunityService.getNewState(false);
 
@@ -220,6 +220,8 @@ angular.module("hylo.createCommunity", [])
           joining1: "public",
           joining2: "anyone",
           sharing: "no",
+          membershipType: "no",
+          membershipAmount: 0,
           banner: "https://d3ngex8q79bk55.cloudfront.net/communities/default/communitiesDefaultBanner.jpg",
           icon: "https://d3ngex8q79bk55.cloudfront.net/communities/default/communitiesDefaultIcon.png"
         };
@@ -240,7 +242,10 @@ angular.module("hylo.createCommunity", [])
             $analytics.eventTrack('Created new community');
             // Invoke scope function
 
+            $rootScope.currentUser = CurrentUser.get();
+            $analytics.eventTrack('createCommunity');
             $state.go("community", {community: value.slug});
+
           }, function (responseValue) {
             $log.error("error", responseValue);
           });
@@ -250,8 +255,8 @@ angular.module("hylo.createCommunity", [])
       }
     ])
 
-    .controller("EditCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', '$stateParams',
-      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $stateParams) {
+    .controller("EditCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', '$stateParams', '$rootScope', 'CurrentUser', '$analytics',
+      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $stateParams, $rootScope, CurrentUser, $analytics) {
 
         $scope.state = CreateCommunityService.getNewState(true);
 
@@ -273,6 +278,8 @@ angular.module("hylo.createCommunity", [])
             $analytics.eventTrack('Created new community');
             // Invoke scope function
 
+            $rootScope.currentUser = CurrentUser.get();
+            $analytics.eventTrack('editCommunity');
             $state.go("community", {community: value.slug}, {reload: true});
           }, function (responseValue) {
             $log.error("error", responseValue);
