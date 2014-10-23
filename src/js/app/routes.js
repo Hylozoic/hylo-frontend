@@ -10,10 +10,10 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
 
     $stateProvider.
       state('home', {
-          url: '/',
-          onEnter: function reloadCtrl() {
-            window.location.replace('/');
-          }
+        url: '/',
+        onEnter: function reloadCtrl() {
+          window.location.replace('/');
+        }
       }).
       state('community', {
         url: '/c/:community',
