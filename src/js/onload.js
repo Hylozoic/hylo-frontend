@@ -1,3 +1,5 @@
+if (!window.hyloEnv) hyloEnv = {};
+
 var currentUser = hyloEnv.currentUser;
 
 if (currentUser) {
