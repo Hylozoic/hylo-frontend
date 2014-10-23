@@ -88,5 +88,14 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
             controller: 'SearchCtrl'
           }
         }
+      }).
+      state('network', {
+        url: "/n/:network",
+        views: {
+          "": {
+            templateUrl: '/ui/app/network.tpl.html',
+            controller: 'NetworkCtrl'
+          }
+        }
       });
   }]);
