@@ -111,6 +111,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       $scope.onFollowerIconClick = function() {
+        $analytics.eventTrack('Show Followers');
         $scope.isFollowersCollapsed = !$scope.isFollowersCollapsed;
         $scope.isCommentsCollapsed = true;
         $scope.toggleEditFollowers();
@@ -267,6 +268,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       var initialize = function() {
         var loadFollowers = function() {
+          $analytics.eventTrack('Loading Followers');
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
             $scope.$watchCollection("followers", checkIsFollowing);
@@ -277,19 +279,16 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
                 }
             );
           }
-          
-           
         }
 
         if ($scope.isCommentsCollapsed) {
-          /*var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", 
+          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", 
             function(isCollapsed) {
-              console.log("watch statememt in is comments collapsed executed");
               if (!isCollapsed) {
                 loadFollowers();
-                //unwatchCommentsCollapsed();
+                unwatchCommentsCollapsed();
               }
-          });*/
+          });
         }
         if ($scope.isFollowersCollapsed) {
           var unwatchFolowersollapsed = $scope.$watch("isFollowersCollapsed", function(isCollapsed) {

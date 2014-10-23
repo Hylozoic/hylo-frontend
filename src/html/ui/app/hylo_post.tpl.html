@@ -111,7 +111,7 @@
         <button class="add-followers-btn" ng-click="toggleEditFollowers($event)" > Done </button>
       </div>
 
-      <div ng-show="!isCommentsCollapsed">
+      <div ng-if="!isCommentsCollapsed">
         <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
       </div>
     </div>
