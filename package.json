@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "devDependencies": {
     "bower": "latest",
+    "grunt-contrib-watch": "latest",
     "grunt-node-inspector": "^0.1.5",
+    "karma": "^0.12.24",
     "karma-bro": "^0.8.0",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",
@@ -22,7 +24,6 @@
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-less": "latest",
     "grunt-contrib-uglify": "latest",
-    "grunt-contrib-watch": "latest",
     "grunt-exec": "latest",
     "grunt-extract-sourcemap": "latest",
     "grunt-ng-annotate": "latest",
