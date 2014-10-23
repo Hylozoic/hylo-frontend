@@ -3,7 +3,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
-        $scope.comments = Post.getComments({id: $scope.post.id});
+        $scope.comments = $scope.post.comments = Post.getComments({id: $scope.post.id});
         $scope.comments.$promise.then(function() {
           $scope.post.commentsLoaded = true;
         });
