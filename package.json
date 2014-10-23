@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "devDependencies": {
     "grunt-contrib-watch": "latest",
+    "karma-bro": "^0.8.0",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
     "node-static": "latest"
   },
   "dependencies": {
@@ -14,7 +18,7 @@
     "debowerify": "latest",
     "grunt-angular-templates": "latest",
     "grunt-browserify": "latest",
-    "grunt-cli": "latest",
+    "grunt": "latest",
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-less": "latest",
     "grunt-contrib-uglify": "latest",
