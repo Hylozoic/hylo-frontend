@@ -3,13 +3,11 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
-        $scope.comments = $scope.post.comments = Post.getComments({id: $scope.post.id});
-        $scope.comments.$promise.then(function() {
+        $scope.post.comments = Post.getComments({id: $scope.post.id});
+        $scope.post.comments.$promise.then(function() {
           $scope.post.commentsLoaded = true;
         });
-      } else {
-        $scope.comments = $scope.post.comments;
-      }
+      } 
     }
 
     if ($scope.post.$promise) {
@@ -68,7 +66,8 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
         Post.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
-          $scope.comments.push(value);
+          $scope.post.comments.push(value);
+
           $scope.commentText = '';
           $scope.post.numComments++;
 

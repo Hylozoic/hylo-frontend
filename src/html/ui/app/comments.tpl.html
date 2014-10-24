@@ -1,6 +1,6 @@
 <div class="comments">
 
-  <div class="comment" ng-repeat="comment in comments">
+  <div class="comment" ng-repeat="comment in post.comments">
     <div class="comment-avatar">
       <a class="avatar hidden-xs" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
     </div>
