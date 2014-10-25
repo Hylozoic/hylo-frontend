@@ -59,11 +59,11 @@
       </div>
 
       <div class="controls">
-        <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-following'></i> me?" >
+        <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
           <i class="icon-following ng-class:{myVote: post.myVote}" ></i> <span class="num">{{post.votes}}</span>
         </a>
         <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': !isFollowersCollapsed}">
-          <i class="icon-members" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
+          <i class="icon-profile" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
         </a>
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
           <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
