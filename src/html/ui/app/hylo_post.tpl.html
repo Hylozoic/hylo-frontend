@@ -95,20 +95,20 @@
           </span>
           <a class="pull-right join-leave-btn" ng-click="toggleJoinPost()">{{joinPostText()}}</a>
         </div>
-      </div>
-      <div class="add-followers" ng-if="!isFollowersCollapsed"> 
-        <div class="add-label">Add Members:</div>
-        <div class="add-tags">
-          <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-                model="followersToAdd"
-                typeahead-options="typeaheadOpts"
-                src="b as b.name for b in potentialFollowers">
-          </tags>
+        
+        <div class="add-followers"> 
+          <div class="add-label">Add Members:</div>
+          <div class="add-tags">
+            <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+                  model="followersToAdd"
+                  typeahead-options="typeaheadOpts"
+                  src="b as b.name for b in potentialFollowers">
+            </tags>
+          </div>
         </div>
-
-      </div>
-      <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
-        <button class="add-followers-btn" ng-click="toggleEditFollowers($event)" > Done </button>
+        <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
+          <button class="add-followers-btn" ng-click="toggleEditFollowers($event)" > Done </button>
+        </div>
       </div>
 
       <div ng-if="!isCommentsCollapsed">

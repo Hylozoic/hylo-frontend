@@ -352,25 +352,27 @@
 
     width: 100%;
     border: 1px solid @border-light;
+    margin-top: 3px;
+    min-height: 48px;
 
     .add-label, .add-tags {
-      display: inline-block;
+      display: table-cell;
     }
 
     .add-label {
       .seed-body-text();
       font-size: 13px;
       font-weight: 600;
-      width: 130px;
-      float: left;
-      background-color: @dark-blue;
-      color: white;
+      width: 120px;
+      //float: left;
+      background-color: @visible-gray-bkg;
+      color: @text-dark;
       padding: 15px;
       text-align: center;
     }
 
     .add-tags {
-      min-width: 77%;
+      padding-left: 10px;
       margin: 3px 0 3px 15px;
 
       .decipher-tags {
@@ -421,6 +423,8 @@
       .rounded-button();
       background-color: initial;
       float: right;
+      background-color: @dark-blue;
+      color: white;
     }
   }
 
