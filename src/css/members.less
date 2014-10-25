@@ -12,12 +12,17 @@
       margin-left: @avatar-margin;
       padding-bottom: 10px;
       border-bottom: 1px solid @border-light;
+      min-height: 65px;
 
       .member-name {
         .member-name();
       }
-      .member-skills {
+      .member-skills, .member-affiliations {
         .seed-meta-text();
+        font-weight: 500;
+        span {
+          font-weight: 300;
+        }
       }
     }
 

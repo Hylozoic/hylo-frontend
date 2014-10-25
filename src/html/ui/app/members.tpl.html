@@ -27,7 +27,8 @@
           <div class="avatar" back-img="user.avatar"></div>
           <div class="member-info">
             <div class="member-name" ng-bind="::user.name"></div>
-            <div class="member-skills"><span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
+            <div class="member-skills" ng-show="user.skills.length > 0"> Skills: &nbsp;<span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
+            <div class="member-affiliations" ng-if="user.organizations.length > 0">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
           </div>
         </div>
         <div loading-indicator ng-if="searching"></div>
