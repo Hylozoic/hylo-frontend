@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "grunt-contrib-watch": "latest",
+    "grunt-node-inspector": "^0.1.5",
     "karma": "^0.12.24",
     "karma-bro": "^0.8.0",
     "karma-chrome-launcher": "^0.1.5",
