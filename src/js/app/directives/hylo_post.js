@@ -262,7 +262,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       var checkIsFollowing = function() {
-        console.log("checked is following");
         //get number of followers
         $scope.post.numFollowers = $scope.followers.length;
 
@@ -270,12 +269,9 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.isFollowing = _.some($scope.followers, function(val) {
           return val.value == $rootScope.currentUser.id;
         });
-        $scope.joinPostText = $scope.toggleJoinPostText();
-        console.log("is following: "+$scope.isFollowing);
       }
 
       var initialize = function() {
-        console.log("initialize");
         var loadFollowers = function() {
           $analytics.eventTrack('Loading Followers');
           if ($scope.post.followersLoaded) {
@@ -301,7 +297,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           });
         }
         if ($scope.isFollowersCollapsed) {
-          console.log("load follers ");
           var unwatchFolowersCollapsed = $scope.$watch("isFollowersCollapsed", function(isCollapsed) {
             if (!isCollapsed) {
               loadFollowers();
@@ -311,7 +306,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           loadFollowers();
         }
          else {
-          console.log("other");
           loadFollowers();
         }
 
