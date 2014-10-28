@@ -16,6 +16,12 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   }
 
   var setMenuState = function(isOpen, force, event) {
+
+    // If the menu state is not to be changed, then just exit
+    if (state.expanded === isOpen) {
+      return;
+    }
+
     $timeout.cancel(setMenuTimeout);
 
     // The delay for opening/closing
