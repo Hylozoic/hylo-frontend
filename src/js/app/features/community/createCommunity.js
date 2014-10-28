@@ -1,5 +1,5 @@
 angular.module("hylo.createCommunity", [])
-  .factory("CreateCommunityService", ['$timeout', '$analytics', function($timeout, $analytics) {
+  .factory("CreateCommunityService", ['$timeout', '$analytics', '$log', function($timeout, $analytics, $log) {
       var pickBanner = function pickBanner(imageModel, width, height) {
         // This will pick a file and store the original file in the 'orig/' subfolder, then convert it to a 200x200 image and store
         // that into the 'thumb/' folder with the same key.
