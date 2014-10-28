@@ -7,9 +7,9 @@
     </a>
   </div>
 
-  <div class="block {{post.postType}}">
+  <div class="post-container {{post.postType}}">
     <div class="post-content">
-    <span class="post-options dropdown" ng-show="canDelete">
+      <span class="post-options dropdown" ng-show="canDelete">
         <a class="dropdown-toggle"><i class="icon-down-new" title="icon-down-new"></i></a>
         <ul class="dropdown-menu">
           <li >
@@ -68,9 +68,13 @@
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
           <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
         </a>
+        <div class="join-leave-link" ng-if="!isPostOwner()" ng-click="toggleJoinPost()">
+          <span> {{joinPostText}} </span>
+        </div>
         <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
           <span ng-click="markFulfilled()">Mark as Fulfilled</span>
         </div>
+
       </div>
       
 
@@ -93,7 +97,6 @@
           <span ng-if="followers.length == 0">
             No followers.
           </span>
-          <a class="pull-right join-leave-btn" ng-click="toggleJoinPost()">{{joinPostText()}}</a>
         </div>
         
         <div class="add-followers"> 

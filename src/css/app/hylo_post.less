@@ -27,6 +27,7 @@
     position: absolute;
     width: @user-width;
     vertical-align: top;
+    padding-top: 10px;
 
     .name, .icon {
       display: block;
@@ -57,7 +58,7 @@
     }
   }
 
-  .block {
+  .post-container {
     margin-left: @user-width + 5;
 
     .post-header {
@@ -72,7 +73,7 @@
     .post-content {
       margin: 0px 0px 0px 20px;
       border-bottom: 1px solid @light-gray;
-      padding-bottom: 15px;
+      padding-bottom: 12px;
       line-height: 2;
 
       .post-options {
@@ -135,9 +136,11 @@
             cursor: pointer;
           }
 
-          .dropdown-menu a {
-            color: @light-gray;
-            font-size: 11px;
+          .dropdown-menu  {
+            a {
+              color: @light-gray;
+              font-size: 11px;
+            }
           }
 
           > div {
@@ -223,7 +226,7 @@
           }
         }
 
-        .filfill-link {
+        .filfill-link, .join-leave-link {
           display: inline-block;
           float: right;
           color: @link-color;
@@ -244,7 +247,6 @@
 
   .comments {
     background-color: @dark-accent;
-    margin: 10px 0 0;
     border: 1px solid @border-light;
 
     > .comment {
