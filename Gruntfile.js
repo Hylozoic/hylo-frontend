@@ -119,6 +119,9 @@ module.exports = function(grunt) {
           message: 'CSS bundling done'
         }
       }
+    },
+    'node-inspector': {
+      dev: {}
     }
   });
 

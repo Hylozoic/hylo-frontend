@@ -33,6 +33,8 @@ Deployer.prototype.getAWSKeys = function(callback) {
       'AWS_S3_CONTENT_URL', 'CONTENT_URL', 'ROLLBAR_SERVER_TOKEN',
       'DOMAIN');
     callback(err);
+
+    this.awsContentUrlPrefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
   }.bind(this));
 };
 
@@ -102,7 +104,7 @@ Deployer.prototype.uploadSourceMap = function(callback) {
     data: {
       access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
       version: this.version,
-      minified_url: 'http://' + this.herokuEnv.DOMAIN + '/' + this.bundlePaths.js,
+      minified_url: this.awsContentUrlPrefix + this.bundlePaths.js,
       source_map: rest.data('dist/bundle.min.js.map', null, cat('dist/bundle.min.js.map'))
     }
   }).on('complete', function(result, response) {
@@ -117,10 +119,9 @@ Deployer.prototype.uploadSourceMap = function(callback) {
 Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead('updating ENV on ' + this.app);
 
-  var prefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
     newVars = {
-      JS_BUNDLE_URL: prefix + this.bundlePaths.js,
-      CSS_BUNDLE_URL: prefix + this.bundlePaths.css,
+      JS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.js,
+      CSS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.css,
       BUNDLE_VERSION: this.version
     };
 
