@@ -34,6 +34,7 @@
     "lodash": "latest",
     "node-static": "latest",
     "restler": "latest",
+    "request": "latest",
     "shelljs": "latest",
     "uglifyify": "latest"
   },
