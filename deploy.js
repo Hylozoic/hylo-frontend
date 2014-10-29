@@ -4,6 +4,8 @@ var async = require('async'),
 var fs = require('fs');
 var request = require('request');
 
+require('shelljs/global');
+
 var currentGitHash = function() {
   var cmd = "git show|head -n1|awk '{print $2}'|cut -c -8";
   return exec(cmd, {silent: true}).output.replace(/\n/, '');
