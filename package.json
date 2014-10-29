@@ -33,6 +33,7 @@
     "load-grunt-tasks": "latest",
     "lodash": "latest",
     "restler": "latest",
+    "request": "latest",
     "shelljs": "latest",
     "uglifyify": "latest"
   },
