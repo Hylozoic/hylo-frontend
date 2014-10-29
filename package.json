@@ -17,6 +17,7 @@
     "async": "latest",
     "aws-sdk": "latest",
     "browserify": "latest",
+    "cookie": "latest",
     "debowerify": "latest",
     "grunt-angular-templates": "latest",
     "grunt-browserify": "latest",

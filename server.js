@@ -32,11 +32,14 @@ var proxy = function(req, res, upstream, port) {
 };
 
 module.exports = function(port, upstream, upstreamPort, log) {
+  var PlaySession = require('./play-session');
+
   var server = http.createServer(function(req, res) {
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        proxy(req, res, upstream, upstreamPort);
+        log.writeln("Play session valid? " + new PlaySession(req).isValid());
+        proxy(req, res, upstream, upstreamPort, log);
         log.writeln(req.connection.remoteAddress + ' ↑ ' + req.method + ' ' + req.url);
       } else {
         log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + req.url);
