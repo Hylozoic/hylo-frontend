@@ -162,7 +162,6 @@ body {
 
   .btn {
     border: none;
-    background-color: @faint-gray;
     color: @text-gray;
     padding: 0;
     font-size: 12px;
@@ -202,6 +201,10 @@ body {
 //shared class for rounded button style
 .button-rounded, .button-rounded:hover {
   .rounded-button;
+}
+
+.button-rounded:hover {
+  background-color: @visible-gray-bkg;
 }
 
 .button-rounded.circle {

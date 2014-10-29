@@ -36,6 +36,14 @@
       margin-top: auto;
       width: 100%;
       letter-spacing: 2.5px;
+      
+      @media (max-width: @screen-sm) {
+        bottom: 45px;
+        line-height: 1;
+      }
+      @media (max-width: @screen-xs) {
+        bottom: 30px;
+      }
     }
 
     .banner-menu {
@@ -76,7 +84,6 @@
       .filter-buttons {
         select {
           width: 30px;
-          color: red;
         }
       }
     }
@@ -85,6 +92,7 @@
       float: right;
       button {
         .rounded-button;
+        min-width: 105px;
       }
     }
   }
@@ -300,8 +308,12 @@
     }
   }
 
-  .icon-add {
+  .icon-add-new {
     margin-right: 5px;
+    font-size: 13px;
+    @media (max-width: @screen-xs) {
+      top: 1px;
+    }
   }
 
 }
