@@ -1,6 +1,8 @@
 var async = require('async'),
   _ = require('lodash');
-  rest = require('restler');
+
+var fs = require('fs');
+var request = require('request');
 
 var currentGitHash = function() {
   var cmd = "git show|head -n1|awk '{print $2}'|cut -c -8";
@@ -99,21 +101,33 @@ Deployer.prototype.upload = function(done) {
 Deployer.prototype.uploadSourceMap = function(callback) {
   this.log.subhead('uploading source map');
 
-  rest.post('https://api.rollbar.com/api/1/sourcemap', {
-    multipart: true,
-    data: {
-      access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
-      version: this.version,
-      minified_url: this.awsContentUrlPrefix + this.bundlePaths.js,
-      source_map: rest.data('dist/bundle.min.js.map', null, cat('dist/bundle.min.js.map'))
+  var formData = {
+    // Pass a simple key-value pair
+    access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
+    // Pass data via Buffers
+    version: this.version,
+    minified_url: this.awsContentUrlPrefix + this.bundlePaths.js,
+    // Pass optional meta-data with an 'options' object with style: {value: DATA, options: OPTIONS}
+    // See the `form-data` README for more information about options: https://github.com/felixge/node-form-data
+    source_map: {
+      value:  fs.createReadStream('dist/bundle.min.js.map'),
+      options: {
+        filename: 'dist/bundle.min.js.map',
+        contentType: 'application/octet-stream'
+      }
     }
-  }).on('complete', function(result, response) {
-    if (result instanceof Error) {
-      this.fail(result.message);
-    } else {
-      callback();
-    }
-  }.bind(this));
+  };
+  request.post({url:'https://api.rollbar.com/api/1/sourcemap',
+        formData: formData},
+        function optionalCallback(err, httpResponse, body) {
+          if (err || body.err > 0) {
+            console.error('upload failed:', err);
+            this.fail(result.message);
+          }
+          console.log('Upload successful!  Rollbar responded with:', body);
+          callback();
+        }.bind(this)
+  );
 };
 
 Deployer.prototype.updateEnv = function(callback) {
