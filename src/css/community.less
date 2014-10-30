@@ -93,6 +93,11 @@
       button {
         .rounded-button;
         min-width: 90px;
+
+        @media (max-width: @screen-xs) {
+          min-width: initial;
+          padding: 0 12px;
+        }
       }
     }
   }
