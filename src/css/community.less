@@ -73,6 +73,11 @@
     height: 70px;
 
     @media (max-width: @screen-sm-max) {
+
+      padding: 5px 1px;
+      margin: 0;
+      height: 50px;
+
       #community-addSeedButton {
         width: 30px;
         overflow: hidden;
@@ -90,6 +95,7 @@
 
     .filter-buttons {
       float: right;
+
       button {
         .rounded-button;
         min-width: 90px;
@@ -191,8 +197,12 @@
   // width: 150px;
   outline:0;
   @media (max-width: @screen-xs-max) {
-    width: 49% !important;
+    width: 36% !important;
     float: none;
+
+    button {
+      width: 95px;
+    }
   }
 }
 
@@ -313,11 +323,11 @@
     }
   }
 
-  .icon-add-new {
-    margin-right: 5px;
+  .icon-Add-01 {
     font-size: 13px;
-    @media (max-width: @screen-xs) {
+    @media (max-width: @screen-sm) {
       top: 1px;
+      left: -2px;
     }
   }
 
