@@ -269,6 +269,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.isFollowing = _.some($scope.followers, function(val) {
           return val.value == $rootScope.currentUser.id;
         });
+
+        $scope.joinPostText = $scope.toggleJoinPostText();
       }
 
       var initialize = function() {
