@@ -20,7 +20,7 @@
 
   &:first-child {
     padding-top: 22px;
-    @media (max-width: @screen-sm) { padding: 0; margin-bottom: 15px;  }
+    @media (max-width: @screen-xs-max) { padding: 0; margin-bottom: 15px;  }
   }
 
 
@@ -30,7 +30,7 @@
     vertical-align: top;
     padding-top: 10px;
 
-    @media (max-width: @screen-sm) {
+    @media (max-width: @screen-xs-max) {
       position: relative;
       width: initial;
     }
@@ -38,13 +38,13 @@
     .name, .icon {
       display: block;
 
-      @media (max-width: @screen-sm) {
+      @media (max-width: @screen-xs-max) {
         display: inline-block;
       }
     }
     .icon .avatar {
       .user-avatar;
-      @media (max-width: @screen-sm) {
+      @media (max-width: @screen-xs-max) {
         .user-avatar-xs;
       }
     }
@@ -71,7 +71,7 @@
   .post-container {
     margin-left: @user-width + 5;
 
-    @media (max-width: @screen-sm) {
+    @media (max-width: @screen-xs-max) {
       margin-left: 0;
     }
 
@@ -89,14 +89,14 @@
       border-bottom: 1px solid @light-gray;
       padding-bottom: 12px;
       line-height: 2;
-      @media (max-width: @screen-sm) {
+      @media (max-width: @screen-xs-max) {
         margin: 0;
       }
 
       .post-options {
         float: right;
 
-        @media (max-width: @screen-sm) {
+        @media (max-width: @screen-xs-max) {
           top: -30px;
         }
 
