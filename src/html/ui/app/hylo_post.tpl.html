@@ -58,12 +58,40 @@
         </span>
       </div>
 
+      <div class="followers">
+        <span ng-if="followers.length > 0">
+          <span ng-if="isFollowing">You, </span>
+          <!-- List Names -->
+          <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-repeat="follower in followers.slice(0, 2)">
+            <span ng-bind="::follower.name"></span>
+            <span ng-if="::!$last && followers.length>1">,</span>
+          </a>
+          <!-- Make a list of followers -->
+          <span ng-if="followers.length > 2">
+            <span class="dropdown">and
+            <a class="dropdown-toggle"><span ng-bind="followers.length - 2"></span> other<span ng-if="followers.length > 3">s</span></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="follower in followers.slice(2)">
+                <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
+                  <i back-img="::follower.avatar" class="avatar"></i> {{::follower.name}} {{follower.hide}}
+                </a>
+              </li>
+            </ul>
+            </span>
+          </span>
+          <span ng-if="followers.length > 1">have</span><span ng-if="followers.length == 1">has</span> joined this seed.
+        </span>
+        <span ng-if="followers.length == 0">
+          No followers.
+        </span>
+      </div>
+
       <div class="controls">
         <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
           <i class="icon-heart-new ng-class:{myVote: post.myVote}" ></i> <span class="num">{{post.votes}}</span>
         </a>
         <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': !isFollowersCollapsed}">
-          <i class="icon-add-MEMBER" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
+          <i class="icon-add-MEMBER"></i> <span class="num">{{post.numFollowers}}</span>
         </a>
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
           <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
@@ -78,27 +106,10 @@
       </div>
       
 
-      <div ng-if="!isFollowersCollapsed">
-        <div class="followers">
-          <span ng-if="followers.length > 0">
-            <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-repeat="follower in followers.slice(0, 2)"><span ng-bind="::follower.name"></span><span ng-if="::!$last && followers.length>1">,</span></a>
-            <span ng-if="followers.length > 2">
-              <span class="dropdown">and
-              <a class="dropdown-toggle"><span ng-bind="followers.length - 2"></span> other<span ng-if="followers.length > 3">s</span></a>
-              <ul class="dropdown-menu">
-                <li ng-repeat="follower in followers.slice(2)">
-                  <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})"><i back-img="::follower.avatar" class="avatar"></i> {{::follower.name}}</a>
-                </li>
-              </ul>
-              </span>
-            </span>
-            <span ng-if="followers.length > 1">are</span><span ng-if="followers.length == 1">is</span> following this seed.
-          </span>
-          <span ng-if="followers.length == 0">
-            No followers.
-          </span>
-        </div>
+      
         
+        
+      <div ng-if="!isFollowersCollapsed">
         <div class="add-followers"> 
           <div class="add-label">Add Members:</div>
           <div class="add-tags">
