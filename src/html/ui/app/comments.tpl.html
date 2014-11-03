@@ -1,9 +1,11 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in post.comments">
+    <a class="comment-close" ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="icon-remove-inverse"></i></a>
     <a class="avatar" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
+
       <div class="comment-text">
         <span ng-bind-html="::(comment.text | linky:'_blank' | linkyShort | convertCarriageReturn)"></span>
       </div>
