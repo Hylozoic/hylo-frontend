@@ -33,6 +33,7 @@
     @media (max-width: @screen-xs-max) {
       position: relative;
       width: initial;
+      height: 45px;
     }
 
     .name, .icon {
@@ -40,6 +41,7 @@
 
       @media (max-width: @screen-xs-max) {
         display: inline-block;
+        float: left
       }
     }
     .icon .avatar {
@@ -49,7 +51,10 @@
       }
     }
     .name {
-      .seed-username-text;
+      .seed-username-text; 
+      @media (max-width: @screen-xs-max) {
+        margin-left: 10px;
+      }
     }
   }
 
@@ -214,12 +219,15 @@
 
         &, > a {
           color: @light-gray;
+          margin-right: 15px;
 
           & .link-selected {
             color: @dark-blue;
           }
           i {
             color: @dark-blue;
+            font-size: 14px;
+
           }
         }
         > a {
@@ -252,7 +260,9 @@
 
         .filfill-link, .join-leave-link {
           display: inline-block;
+          position: relative;
           float: right;
+          top: 8px;
           color: @link-color;
         }
 
@@ -274,7 +284,6 @@
     border: 1px solid @border-light;
 
     > .comment {
-      padding: 6px 22px;
       border-right: none;
       border-left: none;
 
@@ -283,8 +292,36 @@
         padding-top: 22px;
       }
 
+      .avatar {
+        .user-avatar-sm;
+        position: absolute;
+        margin-left: 18px;
+      }
+
+      .comment-avatar {
+        
+      }
+
+      .comment-text {
+        .seed-body-text;
+      }
+
+      .comment-content .controls {
+        .seed-meta-text;
+        line-height: 1.4;
+        padding-top: 6px;
+      }
+
       .comment-content {
-        margin-left: 50px;
+        .avatar-margin-xs(10px);
+
+        &:first-of-type {
+          color: red;
+        }
+
+        &:first-child {
+          color: blue;
+        }
 
         //add padding to the end of the comments
         &:last-child {
@@ -299,23 +336,6 @@
 
     }
 
-    .avatar {
-      .user-avatar-sm;
-    }
-
-    .comment-avatar {
-      position: absolute;
-    }
-
-    .comment-text {
-      .seed-body-text;
-    }
-
-    .comment-content .controls {
-      .seed-meta-text;
-      line-height: 1.4;
-      padding-top: 6px;
-    }
 
     .add-comment {
       background-color: white;
@@ -324,6 +344,7 @@
 
       .avatar {
         .user-avatar-xs;
+        position: absolute;
       }
 
       .comment-input {
