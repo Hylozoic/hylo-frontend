@@ -170,3 +170,26 @@
 .user-avatar-xs {
   .user-avatar(27px);
 }
+
+.add-avatar-margin(@size: @avatar-size-default) {
+  float: none;
+  display: inline-block;
+  position: relative;
+  margin-left: @size + 30;
+}
+
+.avatar-margin-xs(@add-margin: 0) {
+  .add-avatar-margin(27px+@add-margin);
+}
+
+.avatar-margin-sm(@add-margin: 0) {
+  .add-avatar-margin(33px+@add-margin);
+}
+
+.avatar-margin-med(@add-margin: 0) {
+  .add-avatar-margin(@avatar-size-default+@add-margin);
+}
+
+.avatar-margin-lg(@add-margin: 0) {
+  .add-avatar-margin(140px+@add-margin);
+}

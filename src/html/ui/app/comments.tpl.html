@@ -1,9 +1,7 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in post.comments">
-    <div class="comment-avatar">
-      <a class="avatar hidden-xs" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
-    </div>
+    <a class="avatar" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
       <div class="comment-text">
@@ -30,12 +28,12 @@
     <!-- FIXME why doesn't this work without $root? -->
 
     <div class="comment-avatar">
-      <a class="avatar hidden-xs" back-img="::$root.currentUser.avatar" ng-class="{'inactive-image': !commentText}"></a>
+      <a class="avatar" back-img="::$root.currentUser.avatar" ng-class="{'inactive-image': !commentText}"></a>
     </div>
 
     <div class="comment-input">
-      <form class="comment-form">
-        <textarea tabindex="1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here." required></textarea>
+      <form class="comment-form" >
+        <textarea tabindex="-1" ng-disabled="createDisabled" ng-focus-me="focusInput[post.id]" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here." required></textarea>
         <button ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
     </div>
