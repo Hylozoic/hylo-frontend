@@ -88,13 +88,19 @@
 
       <div class="controls">
         <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
-          <i class="icon-heart-new ng-class:{myVote: post.myVote}" ></i> <span class="num">{{post.votes}}</span>
+          <i ng-if="!post.myVote" class="icon-heart-new"></i> 
+          <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i> 
+          <span class="num">{{post.votes}}</span>
         </a>
         <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': !isFollowersCollapsed}">
-          <i class="icon-add-MEMBER" style="font-size: 18px; vertical-align: sub;"></i> <span class="num">{{post.numFollowers}}</span>
+          <i ng-if="isFollowersCollapsed" class="icon-add-MEMBER" style="font-size: 18px; vertical-align: sub;"></i> 
+          <i ng-if="!isFollowersCollapsed" class="icon-add-MEMBER-selected" style="font-size: 18px; vertical-align: sub;"></i> 
+          <span class="num">{{post.numFollowers}}</span>
         </a>
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
-          <i class="icon-comment"></i> <span class="num">{{post.numComments}}</span>
+          <i ng-if="isCommentsCollapsed" class="icon-comment"></i> 
+          <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i> 
+          <span class="num">{{post.numComments}}</span>
         </a>
         <div class="join-leave-link" ng-if="!isPostOwner()" ng-click="toggleJoinPost()">
           <span>{{joinPostText}} </span>
