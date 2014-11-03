@@ -296,6 +296,8 @@
           padding-top: 22px;
         }
 
+
+
         .avatar {
           .user-avatar-sm;
           position: absolute;
@@ -363,7 +365,7 @@
     .add-comment {
       background-color: white;
       padding: 6px 20px;
-      margin-top: 20px;
+      margin-top: 20px; //gives padding on last post
       .seed-body-text;
 
       .avatar {
@@ -390,6 +392,29 @@
         font-style: italic;
       }
 
+    }
+
+    //downsize the posts on mobile
+    @media (max-width: @screen-xs-max) {
+      .comments > .comment {
+
+        &:first-child {
+          padding-top: 8px;
+        }
+
+        .avatar {
+          .user-avatar-xs;
+          position: absolute;
+          margin-left: 5px;
+        }
+        .comment-content {
+          .avatar-margin-xs(-10px);
+        }
+      }
+      .add-comment {
+        padding: 6px;
+        margin-top: 6px;
+      }
     }
 
     .followers {
