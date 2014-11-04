@@ -76,12 +76,14 @@
     position: relative;
     height: 70px;
 
-    @media (max-width: @screen-sm-max) {
+    @media (max-width: @screen-xs-max) {
 
       padding: 5px 1px;
       margin: 0;
       height: 50px;
+    }
 
+    @media (max-width: @screen-sm-max) {
       #community-addSeedButton {
         width: 30px;
         overflow: hidden;
@@ -200,10 +202,15 @@
 .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   // width: 150px;
   outline:0;
+
   @media (max-width: @screen-xs-max) {
     width: 36% !important;
     float: none;
-
+    button {
+      width: 105px;
+    }
+  }
+  @media (max-width: @screen-xs-min) {
     button {
       width: 95px;
     }
