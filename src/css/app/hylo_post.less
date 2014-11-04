@@ -15,74 +15,115 @@
   @media (max-width: @screen-xs-min) {
     padding: 1px 7px;
   }
-  .post {
-    @user-width: 90px;
+}
 
-    margin-bottom: 20px;
-    font-size: @font-size-base;
-    color: @text-gray;
+.post {
+  @user-width: 90px;
 
-    &:first-child {
-      padding-top: 22px;
-      @media (max-width: @screen-xs-max) { padding: 0; margin-bottom: 15px;  }
+  margin-bottom: 20px;
+  font-size: @font-size-base;
+  color: @text-gray;
+
+  &:first-child {
+    padding-top: 22px;
+    @media (max-width: @screen-xs-max) { padding: 0; margin-bottom: 15px;  }
+  }
+
+
+  .user {
+    position: absolute;
+    width: @user-width;
+    vertical-align: top;
+    padding-top: 10px;
+
+    @media (max-width: @screen-xs-max) {
+      position: relative;
+      width: initial;
+      height: 45px;
     }
 
-
-    .user {
-      position: absolute;
-      width: @user-width;
-      vertical-align: top;
-      padding-top: 10px;
+    .name, .icon {
+      display: block;
 
       @media (max-width: @screen-xs-max) {
-        position: relative;
-        width: initial;
-        height: 45px;
-      }
-
-      .name, .icon {
-        display: block;
-
-        @media (max-width: @screen-xs-max) {
-          display: inline-block;
-          float: left
-        }
-      }
-      .icon .avatar {
-        .user-avatar;
-        @media (max-width: @screen-xs-max) {
-          .user-avatar-xs;
-        }
-      }
-      .name {
-        .seed-username-text; 
-        @media (max-width: @screen-xs-max) {
-          margin-left: 10px;
-        }
-      }
-    }
-
-    .follower, .contributor {
-      padding-right: 5px;
-
-      &:last-of-type {
-        padding-right: 0px;
-      }
-
-      .avatar {
-        .user-avatar-xs;
-        float: none;
         display: inline-block;
-        vertical-align: middle;
+        float: left
       }
     }
-
-    .post-container {
-      margin-left: @user-width + 5;
-
+    .icon .avatar {
+      .user-avatar;
       @media (max-width: @screen-xs-max) {
-        margin-left: 0;
+        .user-avatar-xs;
       }
+    }
+    .name {
+      .seed-username-text; 
+      @media (max-width: @screen-xs-max) {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .follower, .contributor {
+    padding-right: 5px;
+
+    &:last-of-type {
+      padding-right: 0px;
+    }
+
+    .avatar {
+      .user-avatar-xs;
+      float: none;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .post-container {
+    margin-left: @user-width + 5;
+
+    @media (max-width: @screen-xs-max) {
+      margin-left: 0;
+    }
+
+    .post-header {
+      span {
+        display: inline-block;
+      }
+
+      @title-color: #333332;
+      @color: #808080;
+    }
+
+    .post-content {
+      margin: 0px 0px 0px 20px;
+      border-bottom: 1px solid @light-gray;
+      padding-bottom: 12px;
+      line-height: 2;
+      @media (max-width: @screen-xs-max) {
+        margin: 0;
+      }
+
+      .post-options {
+        float: right;
+
+        @media (max-width: @screen-xs-max) {
+          top: -30px;
+        }
+
+        a, a:hover {
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        ul {
+          min-width: initial;
+          float: right;
+          right: 0;
+          left: initial;
+        }
+      }
+
 
       .post-header {
         span {
@@ -91,492 +132,453 @@
 
         @title-color: #333332;
         @color: #808080;
+        color: @color;
+        display: table;
+
+        .post-info {
+          font-size: 12px;
+          color: @color;
+          padding-bottom: 5px;
+          .type {
+            margin-right: 10px;
+
+            &.intention {
+              .seed-type-text(@intention-color);
+            }
+            &.request {
+              .seed-type-text(@request-color);
+            }
+            &.offer {
+              .seed-type-text(@offer-color);
+            }
+          }
+          .name {
+            .proxima-nova-semibold;
+          }
+          .post-prefix {
+            .proxima-nova-light;
+          }
+        }
+
+        .fulfillment {
+          .seed-meta-text;
+
+          a {
+            font-style: italic;
+            cursor: pointer;
+          }
+
+          .dropdown-menu  {
+            a {
+              color: @light-gray;
+              font-size: 11px;
+            }
+          }
+
+          > div {
+            padding-top: 4px;
+          }
+        }
+
+        .title {
+          margin-top: 0;
+          margin-right: 10px;
+          .seed-title-text;
+        }
+
+        .timestamp {
+          .seed-meta-text;
+        }
+
+        .post-description {
+          .seed-body-text;
+          padding-top: 5px;
+        }
       }
 
-      .post-content {
-        margin: 0px 0px 0px 20px;
-        border-bottom: 1px solid @light-gray;
-        padding-bottom: 12px;
-        line-height: 2;
-        @media (max-width: @screen-xs-max) {
-          margin: 0;
+      .show-more-btn {
+        color: @link-color;
+      }
+
+      .delete {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        display: none;
+        font-size: 11px;
+        padding: 2px;
+        color: @gray-light;
+      }
+
+      .delete:hover {
+        color: @gray;
+      }
+
+      &.deletable:hover .delete {
+        display: inline;
+      }
+
+
+      .controls {
+        font-size: @font-size-small;
+        .proxima-nova-light;
+
+        &, > a {
+          color: @light-gray;
+          margin-right: 15px;
+
+          & .link-selected {
+            color: @dark-blue;
+          }
+          i {
+            color: @dark-blue;
+            font-size: 14px;
+
+          }
+        }
+        > a {
+          cursor: pointer;
+          text-decoration: none;
         }
 
-        .post-options {
+        .myVote {
+          color: pink;
+        }
+
+        .vote, .comment, .num-followers{
+          display: inline-block;
+          padding: 5px 4px;
+
+          .num {
+            font-size: 14px;
+          }
+
+          &:hover {
+            .icon-following {
+              text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+            }
+
+            &, > .icon-comment {
+              color: @gray;
+            }
+          }
+        }
+
+        .filfill-link, .join-leave-link {
+          display: inline-block;
+          position: relative;
           float: right;
-
-          @media (max-width: @screen-xs-max) {
-            top: -30px;
-          }
-
-          a, a:hover {
-            cursor: pointer;
-            text-decoration: none;
-          }
-
-          ul {
-            min-width: initial;
-            float: right;
-            right: 0;
-            left: initial;
-          }
-        }
-
-
-        .post-header {
-          span {
-            display: inline-block;
-          }
-
-          @title-color: #333332;
-          @color: #808080;
-          color: @color;
-          display: table;
-
-          .post-info {
-            font-size: 12px;
-            color: @color;
-            padding-bottom: 5px;
-            .type {
-              margin-right: 10px;
-
-              &.intention {
-                .seed-type-text(@intention-color);
-              }
-              &.request {
-                .seed-type-text(@request-color);
-              }
-              &.offer {
-                .seed-type-text(@offer-color);
-              }
-            }
-            .name {
-              .proxima-nova-semibold;
-            }
-            .post-prefix {
-              .proxima-nova-light;
-            }
-          }
-
-          .fulfillment {
-            .seed-meta-text;
-
-            a {
-              font-style: italic;
-              cursor: pointer;
-            }
-
-            .dropdown-menu  {
-              a {
-                color: @light-gray;
-                font-size: 11px;
-              }
-            }
-
-            > div {
-              padding-top: 4px;
-            }
-          }
-
-          .title {
-            margin-top: 0;
-            margin-right: 10px;
-            .seed-title-text;
-          }
-
-          .timestamp {
-            .seed-meta-text;
-          }
-
-          .post-description {
-            .seed-body-text;
-            padding-top: 5px;
-          }
-        }
-
-        .show-more-btn {
+          top: 8px;
           color: @link-color;
         }
 
-        .delete {
-          position: absolute;
-          top: 5px;
-          right: 7px;
-          display: none;
-          font-size: 11px;
-          padding: 2px;
-          color: @gray-light;
-        }
+        .thank-link, .delete-link {
+          color: #B3B3B3;
+          .proxima-nova-semibold;
 
-        .delete:hover {
-          color: @gray;
-        }
-
-        &.deletable:hover .delete {
-          display: inline;
-        }
-
-
-        .controls {
-          font-size: @font-size-small;
-          .proxima-nova-light;
-
-          &, > a {
-            color: @light-gray;
-            margin-right: 15px;
-
-            & .link-selected {
-              color: @dark-blue;
-            }
-            i {
-              color: @dark-blue;
-              font-size: 14px;
-
-            }
-          }
-          > a {
-            cursor: pointer;
+          &:hover {
+            color: @fulfillColor;
             text-decoration: none;
           }
-
-          .myVote {
-            color: pink;
-          }
-
-          .vote, .comment, .num-followers{
-            display: inline-block;
-            padding: 5px 4px;
-
-            .num {
-              font-size: 14px;
-            }
-
-            &:hover {
-              .icon-following {
-                text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
-              }
-
-              &, > .icon-comment {
-                color: @gray;
-              }
-            }
-          }
-
-          .filfill-link, .join-leave-link {
-            display: inline-block;
-            position: relative;
-            float: right;
-            top: 8px;
-            color: @link-color;
-          }
-
-          .thank-link, .delete-link {
-            color: #B3B3B3;
-            .proxima-nova-semibold;
-
-            &:hover {
-              color: @fulfillColor;
-              text-decoration: none;
-            }
-          }
-        }
-      }
-    }
-
-    .comments {
-      background-color: @dark-accent;
-      border: 1px solid @border-light;
-
-      > .comment {
-        border-right: none;
-        border-left: none;
-
-        //add padding to top of comments
-        &:first-child {
-          padding-top: 22px;
-        }
-
-
-
-        .avatar {
-          .user-avatar-sm;
-          position: absolute;
-          margin-left: 18px;
-        }
-
-        .comment-close {
-          float: right;
-
-          a:hover {
-            text-decoration: none;
-          }
-
-          .icon-remove-inverse {
-            color: @border-dark;
-            font-size: 16px;
-            margin: 5px -25px;
-
-            &:hover {
-              color: @link-color;           
-            }
-          }
-
-          //get delete to appear on mobile
-          @media (max-width: @screen-xs-min) {
-            float: none;
-            position: absolute;
-            width: 92%;
-
-            a {
-              margin-left: 92%;
-              position: relative;
-              right: 1px;
-
-              .icon-remove-inverse {
-                margin: 0;
-              }
-            }
-          }
-        }
-        
-
-        .comment-text {
-          .seed-body-text;
-        }
-
-        .comment-content .controls {
-          .seed-meta-text;
-          line-height: 1.4;
-          padding-top: 6px;
-        }
-
-        .comment-content {
-          .avatar-margin-xs(10px);
-        }
-      }
-
-      textarea {
-        resize: none;
-        -webkit-appearance: none;
-
-      }
-    }
-
-    .add-comment {
-      background-color: white;
-      padding: 6px 20px;
-      margin-top: 20px; //gives padding on last post
-      .seed-body-text;
-
-      .avatar {
-        .user-avatar-xs;
-        position: absolute;
-      }
-
-      .comment-input {
-        margin-left: 50px;
-        position: relative;
-
-        button {
-          position: absolute;
-          right: -9px;
-          top: 3px;
-        }
-
-        textarea {
-          padding: 6px 0;
-        }
-      }
-
-      .empty-comment {
-        font-style: italic;
-      }
-
-    }
-
-    //downsize the posts on mobile
-    @media (max-width: @screen-xs-max) {
-      .comments > .comment {
-
-        &:first-child {
-          padding-top: 8px;
-        }
-
-        .avatar {
-          .user-avatar-xs;
-          position: absolute;
-          margin-left: 5px;
-        }
-        .comment-content {
-          .avatar-margin-xs(-10px);
-        }
-      }
-      .add-comment {
-        padding: 6px;
-        margin-top: 6px;
-      }
-    }
-
-    .followers {
-      .seed-body-text();
-      color: @text-medium-dark;
-      font-size: 13px;
-      padding: 15px 0;
-
-      .actionIcon {
-        font-size: 16px;
-        vertical-align: middle;
-
-        &.icon-complete {
-          -ms-animation: pulse 2s infinite ease-in-out;
-          -webkit-animation: pulse 2s infinite ease-in-out;
-          animation: pulse 2s infinite ease-in-out;
-          color: @btn-success-bg;
-        }
-      }
-
-      a {
-        font-weight: 600;
-        color: @link-color;
-        cursor: pointer;
-      }
-    }
-
-    .add-followers{
-
-      width: 100%;
-      border: 1px solid @border-light;
-      margin-top: 3px;
-      min-height: 48px;
-
-      .add-label, .add-tags {
-        display: table-cell;
-      }
-
-      .add-label {
-        .seed-body-text();
-        font-size: 13px;
-        font-weight: 600;
-        width: 120px;
-        //float: left;
-        background-color: @visible-gray-bkg;
-        color: @text-dark;
-        padding: 15px;
-        text-align: center;
-      }
-
-      .add-tags {
-        padding-left: 10px;
-        margin: 3px 0 3px 15px;
-
-        .decipher-tags {
-          background-color: white;
-          border: none;
-          padding: 0;
-
-          .decipher-tags-input {
-            background-color: white;
-          }
-
-          .decipher-tags-tag {
-            border-color: @border-light;
-            margin: 0;
-            padding: 2px 6px 7px;
-
-            .user-avatar-sm {
-              position: absolute;
-            }
-            .tag-name {
-              margin-left: 45px;
-              top: 4px;
-              position: relative;
-              padding-right: 5px;
-            }
-          }
-
-          //customizations for typeahead
-          .typeahead-tag {
-            height: 35px;
-          }
-          .avatar-typeahead {
-            .user-avatar-xs;
-            position: absolute;
-          }
-          .typeahead-result {
-            margin-left: 45px;
-          }
-        }
-      }
-    }
-
-    .add-followers-complete {
-      height: 30px;
-      margin: 10px 0 0;
-
-      .add-followers-btn {
-        .rounded-button();
-        background-color: initial;
-        float: right;
-        background-color: @dark-blue;
-        color: white;
-      }
-    }
-
-
-    .followers-edit {
-      padding: 0 10px !important;
-      margin-top: 12px;
-      position: relative;
-
-      .arrow {
-        &,
-        &:after {
-          position: absolute;
-          display: block;
-          width: 0;
-          height: 0;
-          border-color: transparent;
-          border-style: solid;
-        }
-      }
-
-      .arrow {
-        border-width: @popover-arrow-outer-width;
-      }
-
-      .arrow:after {
-        border-width: @popover-arrow-width;
-        content: "";
-      }
-
-      .arrow {
-        left: 16px + @popover-arrow-outer-width;
-        margin-left: -@popover-arrow-outer-width;
-        border-top-width: 0;
-        border-bottom-color: @border-light;
-        top: -10px;
-        &:after {
-          content: " ";
-          top: 1px;
-          margin-left: -@popover-arrow-width;
-          border-top-width: 0;
-          border-bottom-color: @tags-bg-color;
-        }
-      }
-
-      .decipher-tags {
-
-      }
-
-      .typeahead-result {
-        .proxima-nova-light;
-        strong {
-          .proxima-nova-bold;
         }
       }
     }
   }
+
+  .comments {
+    background-color: @dark-accent;
+    border: 1px solid @border-light;
+
+    > .comment {
+      border-right: none;
+      border-left: none;
+
+      //add padding to top of comments
+      &:first-child {
+        padding-top: 22px;
+      }
+
+
+
+      .avatar {
+        .user-avatar-sm;
+        position: absolute;
+        margin-left: 18px;
+      }
+
+      .comment-close {
+        float: right;
+
+        a:hover {
+          text-decoration: none;
+        }
+
+        .icon-remove-inverse {
+          color: @border-dark;
+          font-size: 16px;
+          margin: 5px -25px;
+
+          &:hover {
+            color: @link-color;           
+          }
+        }
+
+        //get delete to appear on mobile
+        @media (max-width: @screen-xs-min) {
+          float: none;
+          position: absolute;
+          width: 92%;
+
+          a {
+            margin-left: 92%;
+            position: relative;
+            right: 1px;
+
+            .icon-remove-inverse {
+              margin: 0;
+            }
+          }
+        }
+      }
+      
+
+      .comment-text {
+        .seed-body-text;
+      }
+
+      .comment-content .controls {
+        .seed-meta-text;
+        line-height: 1.4;
+        padding-top: 6px;
+      }
+
+      .comment-content {
+        .avatar-margin-xs(10px);
+      }
+    }
+
+    textarea {
+      resize: none;
+      -webkit-appearance: none;
+
+    }
+  }
+
+  .add-comment {
+    background-color: white;
+    padding: 6px 20px;
+    margin-top: 20px; //gives padding on last post
+    .seed-body-text;
+
+    .avatar {
+      .user-avatar-xs;
+      position: absolute;
+    }
+
+    .comment-input {
+      margin-left: 50px;
+      position: relative;
+
+      button {
+        position: absolute;
+        right: -9px;
+        top: 3px;
+      }
+
+      textarea {
+        padding: 6px 0;
+      }
+    }
+
+    .empty-comment {
+      font-style: italic;
+    }
+
+  }
+
+  //downsize the posts on mobile
+  @media (max-width: @screen-xs-max) {
+    .comments > .comment {
+
+      &:first-child {
+        padding-top: 8px;
+      }
+
+      .avatar {
+        .user-avatar-xs;
+        position: absolute;
+        margin-left: 5px;
+      }
+      .comment-content {
+        .avatar-margin-xs(-10px);
+      }
+    }
+    .add-comment {
+      padding: 6px;
+      margin-top: 6px;
+    }
+  }
+
+  .followers {
+    .seed-body-text();
+    color: @text-medium-dark;
+    font-size: 13px;
+    padding: 15px 0;
+
+    .actionIcon {
+      font-size: 16px;
+      vertical-align: middle;
+
+      &.icon-complete {
+        -ms-animation: pulse 2s infinite ease-in-out;
+        -webkit-animation: pulse 2s infinite ease-in-out;
+        animation: pulse 2s infinite ease-in-out;
+        color: @btn-success-bg;
+      }
+    }
+
+    a {
+      font-weight: 600;
+      color: @link-color;
+      cursor: pointer;
+    }
+  }
+
+  .add-followers{
+
+    width: 100%;
+    border: 1px solid @border-light;
+    margin-top: 3px;
+    min-height: 48px;
+
+    .add-label, .add-tags {
+      display: table-cell;
+    }
+
+    .add-label {
+      .seed-body-text();
+      font-size: 13px;
+      font-weight: 600;
+      width: 120px;
+      //float: left;
+      background-color: @visible-gray-bkg;
+      color: @text-dark;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .add-tags {
+      padding-left: 10px;
+      margin: 3px 0 3px 15px;
+
+      .decipher-tags {
+        background-color: white;
+        border: none;
+        padding: 0;
+
+        .decipher-tags-input {
+          background-color: white;
+        }
+
+        .decipher-tags-tag {
+          border-color: @border-light;
+          margin: 0;
+          padding: 2px 6px 7px;
+
+          .user-avatar-sm {
+            position: absolute;
+          }
+          .tag-name {
+            margin-left: 45px;
+            top: 4px;
+            position: relative;
+            padding-right: 5px;
+          }
+        }
+
+        //customizations for typeahead
+        .typeahead-tag {
+          height: 35px;
+        }
+        .avatar-typeahead {
+          .user-avatar-xs;
+          position: absolute;
+        }
+        .typeahead-result {
+          margin-left: 45px;
+        }
+      }
+    }
+  }
+
+  .add-followers-complete {
+    height: 30px;
+    margin: 10px 0 0;
+
+    .add-followers-btn {
+      .rounded-button();
+      background-color: initial;
+      float: right;
+      background-color: @dark-blue;
+      color: white;
+    }
+  }
+
+
+  .followers-edit {
+    padding: 0 10px !important;
+    margin-top: 12px;
+    position: relative;
+
+    .arrow {
+      &,
+      &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+    }
+
+    .arrow {
+      border-width: @popover-arrow-outer-width;
+    }
+
+    .arrow:after {
+      border-width: @popover-arrow-width;
+      content: "";
+    }
+
+    .arrow {
+      left: 16px + @popover-arrow-outer-width;
+      margin-left: -@popover-arrow-outer-width;
+      border-top-width: 0;
+      border-bottom-color: @border-light;
+      top: -10px;
+      &:after {
+        content: " ";
+        top: 1px;
+        margin-left: -@popover-arrow-width;
+        border-top-width: 0;
+        border-bottom-color: @tags-bg-color;
+      }
+    }
+
+    .decipher-tags {
+
+    }
+
+    .typeahead-result {
+      .proxima-nova-light;
+      strong {
+        .proxima-nova-bold;
+      }
+    }
+  }
 }
+
 
 .fulfill-modal {
   h4 {
