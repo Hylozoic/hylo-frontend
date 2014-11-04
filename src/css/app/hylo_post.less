@@ -114,6 +114,10 @@
         a, a:hover {
           cursor: pointer;
           text-decoration: none;
+          color: @default-text;
+          i {
+            font-size: 12px;
+          }
         }
 
         ul {
@@ -287,11 +291,10 @@
 
   .comments {
     background-color: @dark-accent;
-    border: 1px solid @border-light;
+    border-top: 1px solid @border-light;
+    border-bottom: 1px solid @border-light;
 
     > .comment {
-      border-right: none;
-      border-left: none;
       margin-bottom: 18px;
 
       //add padding to top of comments
@@ -371,6 +374,8 @@
     padding: 6px 0;
     margin-top: 20px; //gives padding on last post
     .seed-body-text;
+    border-right: 1px solid @border-light;
+    border-left: 1px solid @border-light;
 
 
     .avatar {
@@ -390,9 +395,10 @@
       }
 
       textarea {
-        //padding: 6px 0;
         padding: 0;
         width: 80%;
+        position: relative;
+        top: 3px;
       }
     }
 
@@ -402,7 +408,7 @@
 
   }
 
-  //downsize the posts on mobile
+  //downsize the comment margins on mobile
   @media (max-width: @screen-xs-max) {
     .comments > .comment {
 
