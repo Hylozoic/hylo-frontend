@@ -193,3 +193,12 @@
 .avatar-margin-lg(@add-margin: 0) {
   .add-avatar-margin(140px+@add-margin);
 }
+
+.remove-link-display(@color: @default-text) {
+  
+  &, &:hover {
+    color: @color;
+    text-decoration: none;
+  }
+
+}
