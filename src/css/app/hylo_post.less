@@ -292,6 +292,7 @@
     > .comment {
       border-right: none;
       border-left: none;
+      margin-bottom: 18px;
 
       //add padding to top of comments
       &:first-child {
@@ -366,27 +367,32 @@
 
   .add-comment {
     background-color: white;
-    padding: 6px 20px;
+    position: relative;
+    padding: 6px 0;
     margin-top: 20px; //gives padding on last post
     .seed-body-text;
+
 
     .avatar {
       .user-avatar-xs;
       position: absolute;
+      margin-left: 18px;
     }
 
     .comment-input {
-      margin-left: 50px;
-      position: relative;
+      .avatar-margin-xs(10px, false);
+      min-height: 25px;
 
       button {
         position: absolute;
-        right: -1px;
-        top: 3px;
+        right: 3px;
+        bottom: 3px;
       }
 
       textarea {
-        padding: 6px 0;
+        //padding: 6px 0;
+        padding: 0;
+        width: 80%;
       }
     }
 
@@ -401,7 +407,7 @@
     .comments > .comment {
 
       &:first-child {
-        padding-top: 8px;
+        padding-top: 12px;
       }
 
       .avatar {
@@ -414,8 +420,20 @@
       }
     }
     .add-comment {
-      padding: 6px;
-      margin-top: 6px;
+      margin-top: 8px;
+
+      .avatar {
+        margin-left: 5px;
+      }
+
+      .comment-input {
+        .avatar-margin-xs(-10px, false);
+
+        button {
+          position: relative;
+          margin-top: 12px;
+        }
+      }
     }
   }
 

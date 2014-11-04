@@ -171,27 +171,31 @@
   .user-avatar(27px);
 }
 
-.add-avatar-margin(@size: @avatar-size-default) {
-  float: none;
-  display: inline-block;
-  position: relative;
+.add-avatar-margin(@size: @avatar-size-default, @use-properties: true) {
   margin-left: @size + 30;
+
+  & when (@use-properties = true) {
+    float: none;
+    display: inline-block;
+    position: relative;
+  }
+  
 }
 
-.avatar-margin-xs(@add-margin: 0) {
-  .add-avatar-margin(27px+@add-margin);
+.avatar-margin-xs(@add-margin: 0, @use-properties: true) {
+  .add-avatar-margin(27px+@add-margin, @use-properties);
 }
 
-.avatar-margin-sm(@add-margin: 0) {
-  .add-avatar-margin(33px+@add-margin);
+.avatar-margin-sm(@add-margin: 0, @use-properties: true) {
+  .add-avatar-margin(33px+@add-margin, @use-properties);
 }
 
-.avatar-margin-med(@add-margin: 0) {
-  .add-avatar-margin(@avatar-size-default+@add-margin);
+.avatar-margin-med(@add-margin: 0, @use-properties: true) {
+  .add-avatar-margin(@avatar-size-default+@add-margin, @use-properties);
 }
 
-.avatar-margin-lg(@add-margin: 0) {
-  .add-avatar-margin(140px+@add-margin);
+.avatar-margin-lg(@add-margin: 0, @use-properties: true) {
+  .add-avatar-margin(140px+@add-margin, @use-properties);
 }
 
 .remove-link-display(@color: @default-text) {
