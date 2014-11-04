@@ -119,17 +119,12 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['browserify', 'less', 'sync:html', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
-    var upstream = grunt.option('upstream');
-    if (upstream) {
-      upstream = upstream.split(':');
-      host = upstream[0];
-      port = parseInt(upstream[1] || '80');
-    } else {
-      host = 'hylo-dev.herokuapp.com';
-      port = 80;
-    }
-
-    require('./server')(3001, host, port, grunt.log);
+    require('./server')({
+      log: grunt.log,
+      port: parseInt(grunt.option('port') || 3001),
+      upstream: grunt.option('upstream') || 'hylo-dev.herokuapp.com',
+      nodeUpstream: grunt.option('node-upstream') || 'hylo-node-dev.herokuapp.com'
+    });
   });
 
   grunt.registerTask('deploy', function(env) {
