@@ -140,24 +140,4 @@ module.exports = function(grunt) {
     rm('-r', 'dist/*');
   });
 
-  grunt.registerTask('sync_old_repo', function() {
-    var oldPath = '../hylo-play/';
-
-    rm('-r', 'src/*');
-
-    mkdir('src/css');
-    cp('-R', oldPath + 'app/assets/stylesheets/*', 'src/css/');
-    cp('-R', oldPath + 'public/stylesheets/*', 'src/css/');
-    mv('src/css/global.less', 'src/css/index.less');
-    sed('-i', '\.\./\.\./\.\./bower_components', 'bower_components', 'src/css/index.less');
-
-    mkdir('src/js');
-    cp('-R', oldPath + 'public/javascripts/*', 'src/js/');
-    mv('src/js/init2.js', 'src/js/index.js');
-
-    mkdir('src/html');
-    cp('-R', oldPath + 'public/ui/*', 'src/html/');
-
-    cp('-f', oldPath + 'bower.json', '.');
-  });
 };
