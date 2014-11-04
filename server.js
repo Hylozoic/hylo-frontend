@@ -31,18 +31,35 @@ var proxy = function(req, res, upstream, port) {
   });
 };
 
-module.exports = function(port, upstream, upstreamPort, log) {
+module.exports = function(opts) {
+
+  var upstream = opts.upstream.split(':'),
+    upstreamHost = upstream[0],
+    upstreamPort = parseInt(upstream[1] || '80'),
+    nodeUpstream = opts.nodeUpstream.split(':'),
+    nodeUpstreamHost = nodeUpstream[0],
+    nodeUpstreamPort = parseInt(nodeUpstream[1] || '80');
+
   var server = http.createServer(function(req, res) {
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        proxy(req, res, upstream, upstreamPort);
-        log.writeln(req.connection.remoteAddress + ' ↑ ' + req.method + ' ' + req.url);
+        if (req.url.match(/^\/noo/)) {
+          proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
+          opts.log.writeln(req.connection.remoteAddress + ' ↑n ' + req.method + ' ' + req.url);
+        } else {
+          proxy(req, res, upstreamHost, upstreamPort);
+          opts.log.writeln(req.connection.remoteAddress + ' ↑p ' + req.method + ' ' + req.url);
+        }
+
       } else {
-        log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + req.url);
+        opts.log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + req.url);
       }
     });
-  }).listen(port);
+  }).listen(opts.port);
 
-  console.log('listening on port ' + port + ', proxying ' + upstream + ':' + upstreamPort);
+  opts.log.writeln(
+    'listening on port ' + opts.port + ', proxying ' + upstreamHost + ':' + upstreamPort +
+    ' and ' + nodeUpstreamHost + ':' + nodeUpstreamPort
+  );
 };
