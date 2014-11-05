@@ -60,18 +60,24 @@
 
       <div class="followers">
         <span ng-if="followers.length > 0">
-          <span ng-if="isFollowing">You, </span>
+          <span ng-if="isFollowing">You</span>
+          <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
+          <span ng-if="isFollowing && followersNotMe.length > 1">, </span>
+
           <!-- List Names -->
-          <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-repeat="follower in followers.slice(0, 2)">
-            <span ng-bind="::follower.name"></span>
-            <span ng-if="::!$last && followers.length>1">,</span>
-          </a>
+          <span ng-repeat="follower in followersNotMe.slice(0, 2)">
+            <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})">
+              <span ng-bind="::follower.name"></span>
+            </a>
+            <span ng-if="::!$last && followersNotMe.length>1">,</span>
+          </span>
+
           <!-- Make a list of followers -->
-          <span ng-if="followers.length > 2">
+          <span ng-if="followersNotMe.length > 2">
             <span class="dropdown">and
-            <a class="dropdown-toggle"><span ng-bind="followers.length - 2"></span> other<span ng-if="followers.length > 3">s</span></a>
+            <a class="dropdown-toggle"><span ng-bind="followersNotMe.length - 2"></span> other<span ng-if="followersNotMe.length > 3">s</span></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="follower in followers.slice(2)">
+              <li ng-repeat="follower in followersNotMe.slice(2)">
                 <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
                   <i back-img="::follower.avatar" class="avatar"></i> {{::follower.name}} {{follower.hide}}
                 </a>
@@ -79,7 +85,7 @@
             </ul>
             </span>
           </span>
-          <span ng-if="followers.length > 1">have</span><span ng-if="followers.length == 1">has</span> joined this seed.
+          <span ng-if="isFollowing || followersNotMe.length > 1">have</span><span ng-if="!isFollowing && followersNotMe.length == 1">has</span> joined this seed.
         </span>
         <span ng-if="followers.length == 0">
           No followers.
@@ -110,11 +116,7 @@
         </div>
 
       </div>
-      
 
-      
-        
-        
       <div ng-if="!isFollowersCollapsed">
         <div class="add-followers"> 
           <div class="add-label">Add Members:</div>

@@ -261,18 +261,21 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.isPostText = text.length > 0;
       }
 
+      $scope.followersNotMe = [];
+
       var checkIsFollowing = function() {
         //get number of followers
         $scope.post.numFollowers = $scope.followers.length;
 
-        //check if the current user is listed in the list of followers
-        $scope.isFollowing = false;
-        _.each($scope.followers, function(follower) {
-          if (follower.value == $rootScope.currentUser.id) {
-            $scope.isFollowing = true;
-            follower.hide = true; //mark the user's own entry so that it can be hidden
-          }
-        });
+        var meInFollowers = _.findWhere($scope.followers, {value: $rootScope.currentUser.id});
+
+        if (meInFollowers) {
+          $scope.followersNotMe = _.without($scope.followers, meInFollowers);
+          $scope.isFollowing = true;
+        } else {
+          $scope.followersNotMe = $scope.followers;
+          $scope.isFollowing = false;
+        }
 
         $scope.joinPostText = $scope.toggleJoinPostText();
       }
