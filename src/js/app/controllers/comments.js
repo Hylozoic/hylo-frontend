@@ -103,7 +103,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       modalInstance.result.then(function() {
         $http.post('/comment/delete', {id: comment.id}).success(function(data, status, headers, config) {
           $log.debug("success", data);
-          $scope.comments.splice($scope.comments.indexOf(comment), 1);
+          $scope.post.comments.splice($scope.post.comments.indexOf(comment), 1);
           $scope.post.numComments--;
         });
         growl.addSuccessMessage("Comment Deleted", {ttl: 5000});
