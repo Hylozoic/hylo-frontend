@@ -9,7 +9,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
     },
     controller: function($scope, $element) {
       $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
-      $scope.isFollowersCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
       $scope.voteTooltipText = "";
 
       $scope.isPostOwner = function() {
@@ -67,7 +66,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           }
         }
         $scope.isCommentsCollapsed = false;
-        $scope.isFollowersCollapsed = false;
 
         $event.stopPropagation();
         $event.preventDefault();
@@ -102,8 +100,9 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if ($scope.isCommentsCollapsed)
           $analytics.eventTrack('Show Comments');
 
+        $scope.editingFollowers = false;
+
         $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-        $scope.isFollowersCollapsed = true;
 
         $timeout(function() {
           CommentingService.setFocus($scope.post.id);
@@ -112,7 +111,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       $scope.onFollowerIconClick = function() {
         $analytics.eventTrack('Show Followers');
-        $scope.isFollowersCollapsed = !$scope.isFollowersCollapsed;
         $scope.isCommentsCollapsed = true;
         $scope.toggleEditFollowers();
       }
@@ -188,7 +186,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         }
       }
 
-      $scope.toggleEditFollowers = function(event) {
+      $scope.toggleEditFollowers = function() {
         var isEditing = !$scope.editingFollowers;
         if (isEditing) { // populate potential followers
           $http.get('/users/getpossiblefollowers', {
@@ -203,7 +201,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
               Post.addFollower({id: $scope.post.id, followerId: follower.value});
             }
           });
-
           $scope.followersToAdd = [];
         }
         $scope.editingFollowers = isEditing;
@@ -303,18 +300,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
               }
           });
         }
-        if ($scope.isFollowersCollapsed) {
-          var unwatchFolowersCollapsed = $scope.$watch("isFollowersCollapsed", function(isCollapsed) {
-            if (!isCollapsed) {
-              loadFollowers();
-              unwatchFolowersCollapsed();
-            }
-          });
-          loadFollowers();
-        }
-         else {
-          loadFollowers();
-        }
+
+        loadFollowers();
 
         // Determines if this post is deletable by currentUser. (is their post OR a moderator)
         $scope.canDelete = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||
