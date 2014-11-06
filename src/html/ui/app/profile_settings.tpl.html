@@ -7,7 +7,9 @@
           <input id="settingsEmail" ng-blur="saveEmail()" type="email" name="userEmail" class="form-control gray"
             ng-model="user.email">
           <span class="help-block" ng-show="settingsForm.userEmail.$dirty">By changing your email, you will be logged out and will have to re-verify your new email address.</span>
-          <span class="help-block">Linked Accounts: <span style="font-weight: 600" ng-repeat="account in currentUser.linkedAccounts"><span ng-if="!$first">, </span>{{account | capitalize}}</span></span>
+          <span ng-if="linkedAccounts.length > 0">
+            <span class="help-block">Linked Accounts: <span style="font-weight: 600" ng-repeat="account in linkedAccounts"><span ng-if="!$first">, </span>{{account | capitalize}}</span></span>
+          </span>
         </div>
 
         <div class="divider"></div>

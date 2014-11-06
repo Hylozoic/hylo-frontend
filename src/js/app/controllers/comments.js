@@ -3,13 +3,11 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
-        $scope.comments = Post.getComments({id: $scope.post.id});
-        $scope.comments.$promise.then(function() {
+        $scope.post.comments = Post.getComments({id: $scope.post.id});
+        $scope.post.comments.$promise.then(function() {
           $scope.post.commentsLoaded = true;
         });
-      } else {
-        $scope.comments = $scope.post.comments;
-      }
+      } 
     }
 
     if ($scope.post.$promise) {
@@ -25,38 +23,6 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     $scope.canDelete = function(comment) {
       return ($rootScope.currentUser && comment.user.id == $rootScope.currentUser.id) ||
         ($rootScope.community && $rootScope.community.canModerate);
-    };
-
-    $scope.markFulfilled = function() {
-      var modalScope = $rootScope.$new(true);
-      // Map the top contributors as all the unique commentors on the post
-      modalScope.topContributors = _.map(
-        _.uniq(_.pluck($scope.comments, 'user'), false, _.property("id")), _.property('id')
-      );
-
-      modalScope.post = $scope.post;
-
-      var modalInstance = $modal.open({
-        templateUrl: '/ui/app/fulfillModal.tpl.html',
-        controller: "FulfillModalCtrl",
-        keyboard: false,
-        backdrop: 'static',
-        scope: modalScope
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        // success function
-        $analytics.eventTrack('Fulfill Post', {post_id: $scope.post.id});
-      }, function () {
-
-      });
-    };
-
-    $scope.isPostOwner = function() {
-      if ($scope.post.user) {
-        return $scope.post.user.id == $rootScope.currentUser.id;
-      }
-      return false;
     };
 
     $scope.commentOwner = function(comment) {
@@ -100,7 +66,8 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
         Post.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
-          $scope.comments.push(value);
+          $scope.post.comments.push(value);
+
           $scope.commentText = '';
           $scope.post.numComments++;
 
@@ -136,7 +103,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       modalInstance.result.then(function() {
         $http.post('/comment/delete', {id: comment.id}).success(function(data, status, headers, config) {
           $log.debug("success", data);
-          $scope.comments.splice($scope.comments.indexOf(comment), 1);
+          $scope.post.comments.splice($scope.post.comments.indexOf(comment), 1);
           $scope.post.numComments--;
         });
         growl.addSuccessMessage("Comment Deleted", {ttl: 5000});

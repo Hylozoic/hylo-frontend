@@ -10,6 +10,11 @@
   margin-right: auto;
 }
 
+//use this class to make an image appear inactive
+.inactive-image {
+  opacity: 0.5;
+}
+
 .double-bounce1, .double-bounce2 {
   width: 100%;
   height: 100%;
@@ -44,8 +49,7 @@
     }
 }
 
-.container {
-  padding-top: 18px;
+.container-fluid {
   cursor: auto !important;
 }
 
@@ -83,6 +87,11 @@ body {
 
 .bold {
   font-weight: 700;
+}
+
+//set the default dropdown menu width
+.dropdown-menu li {
+  min-width: 200px;
 }
 
 #bg {
@@ -125,6 +134,8 @@ body {
   }
 }
 
+@bubble-offset: 80px;
+
 .filter-query {
   margin-left: @bubble-offset;
   margin-bottom: 18px;
@@ -151,7 +162,6 @@ body {
 
   .btn {
     border: none;
-    background-color: @faint-gray;
     color: @text-gray;
     padding: 0;
     font-size: 12px;
@@ -166,7 +176,9 @@ body {
     }
 
     &.active {
-      background-color: white;
+      background-color: @light-gray;
+      color: white;
+      font-weight: 600;
       box-shadow: none;
       &.intention { border-bottom: 2px solid @intention-color; }
       &.offer { border-bottom: 2px solid @offer-color; }
@@ -175,21 +187,7 @@ body {
   }
 }
 
-.triangle {
-  background-color: white;
-  height: 14px;
-  width: 14px;
-  position: absolute;
-  left: -8px;
-  .transform(rotate(45deg));
-
-  @media (max-width: @screen-xs-max) {
-    display: none;
-  }
-}
-
 .post-type-style (@color) {
-  box-shadow: -1px 0 0 0 @color;
   > .controls > .type {
     color: @color;
     .proxima-nova-regular;
@@ -200,16 +198,19 @@ body {
   }
 }
 
-.avatar {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: block;
-  height: @avatar-size;
-  width: @avatar-size;
-  border-radius: @avatar-size / 2;
-  float: left;
+//shared class for rounded button style
+.button-rounded, .button-rounded:hover {
+  .rounded-button;
 }
+
+.button-rounded:hover {
+  background-color: @visible-gray-bkg;
+}
+
+.button-rounded.circle {
+  padding: 0px 8px;
+}
+
 
 .bubble {
   position: relative;
@@ -217,6 +218,7 @@ body {
   border-radius: 5px;
   background-color: white;
   word-wrap: break-word;
+  border: 1px solid @border-dark;
 
   strong {
     .proxima-nova-semibold;
@@ -227,6 +229,12 @@ body {
   &.offer { .post-type-style(@offer-color); }
 }
 
+textarea.no-border, textarea.no-border:focus {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
 .add-post {
   margin-bottom: 18px;
   @circle-size: 30px;
@@ -235,25 +243,6 @@ body {
 
   &.editing {
     height: auto;
-  }
-
-  .circle {
-    display: block;
-    float: left;
-    height: @circle-size;
-    width: @circle-size;
-    line-height: @circle-size;
-    border-radius: @circle-size / 2;
-    margin-left: (@avatar-size - @circle-size) / 2;
-    vertical-align: middle;
-    text-align: center;
-    background-color: white;
-    color: @text-light-gray;
-    cursor: pointer;
-    > i {
-      line-height: @circle-size;
-      top: -1px;
-    }
   }
 
   .start-editing {
@@ -342,63 +331,6 @@ body {
 }
 
 @import "app/hylo_post";
-
-.users {
-  .user {
-    background-color: white;
-    border-radius: 5px;
-    margin: 5px 0px;
-
-    > a {
-      display: block;
-      text-decoration: none;
-      color: @text-dark;
-    }
-
-    .bio {
-      @avatar-size: 60px;
-      padding: 13px 10px 0;
-      height: @avatar-size + 16px;
-      box-sizing: border-box;
-      border-bottom: 1px solid @faint-gray;
-      overflow: hidden; // TODO use dotdotdot
-      .avatar {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: block;
-        width: @avatar-size;
-        height: @avatar-size;
-        border-radius: 30px;
-        margin: -5px 10px -5px 0;
-      }
-      h3 {
-        font-size: @font-size-large;
-        margin: 0 0 5px;
-      }
-      label {
-        .proxima-nova-regular;
-        text-transform: uppercase;
-        color: @text-gray;
-        margin: 0 5px 0 0;
-      }
-    }
-    .activity {
-      display: block;
-      height: 60px;
-      overflow: hidden; // TODO use dotdotdot
-      padding: 10px;
-      border-bottom-left-radius: 5px;
-      &.intention { border-left: 1px solid @intention-color; }
-      &.offer { border-left: 1px solid @offer-color; }
-      &.request { border-left: 1px solid @request-color; }
-
-      .description {
-        color: @light-gray;
-      }
-    }
-  }
-}
 
 .onboarding-modal {
   h4 {

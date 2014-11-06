@@ -60,7 +60,7 @@ angular.module('hyloApp', [
             if (!hyloEnv.isProd) {
               $("body").html(rejection.data);
             } else {
-              growl.addErrorMessage("Oops! There was an error trying to perform your requested action.  Authorities have been notified!", {ttl: 5000});
+              growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team will be notified of the problem.", {ttl: 5000});
 //              $window.location.replace(jsRoutes.controllers.Application.show500().absoluteURL());
             }
           } else if (rejection.status == 404) {

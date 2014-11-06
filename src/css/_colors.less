@@ -1,22 +1,35 @@
-@intention-color: #00D2BF;
-@offer-color: #00EA83;
-@request-color: #FFB600;
-@core-color: @intention-color;
-@accent1-color: @offer-color;
-@accent2-color: @request-color;
-@light-gray: #B3B3B3;
-@faint-gray: #f2f2f2;
-@text-dark: #333332;
-@text-gray: #808080;
-@text-light-gray: #999;
+@intention-color:         #4FB19F;
+@offer-color:             #E79336;
+@request-color:           #52B065;
+@core-color:              @intention-color;
+@accent1-color:           @offer-color;
+@accent2-color:           @request-color;
+@dark-gray:               #444;
+@visible-gray-bkg:        #E6E6E6;
+@light-gray:              #B3B3B3;
+@faint-gray:              #f2f2f2;
+@text-dark:               #333332;
+@text-medium-dark:        #5b5b5b;
+@text-gray:               #808080;
+@text-light-gray:         #999;
+@link-color:              #388DCB;
+@title-color:             #333332;
+@tags-bg-color:           #F1F1F1;
+@dark-blue:				  #388ECB;
+@default-text:			  #333332;
 
-@tags-border-color: #ccc;
-@tags-bg-color: #F1F1F1;
+@border-light:            #ccc;
+@border-medium:           @text-light-gray;
+@border-dark:             @text-gray;
 
-@core-color-highlighted: darken(@core-color, 5%);
+@dark-accent:             @visible-gray-bkg;
+@core-color-highlighted:  darken(@core-color, 5%);
 
-@avatar-size: 42px;
-@bubble-offset: @avatar-size + 20px;
+@meta-font:               "droid-serif",serif;
+@body-font:               "droid-serif",serif;
 
-@meta-font: "droid-serif",serif;
-@body-font: "droid-serif",serif;
+// these are overrides to variables defined in bootstrap/variables.less.
+// changes will take effect even if declared after they are used
+@brand-success:           @core-color;
+@brand-info:              @faint-gray;
+@btn-info-color:          @text-gray;

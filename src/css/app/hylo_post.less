@@ -1,4 +1,4 @@
-@fulfillColor: #00EA83;
+@fulfillColor: @intention-color;
 
 .btn-fulfill {
   font-size: 15px;
@@ -11,10 +11,58 @@
   }
 }
 
+.posts {
+  @media (max-width: @screen-xs-min) {
+    padding: 1px 7px;
+  }
+}
+
 .post {
+  @user-width: 90px;
+
   margin-bottom: 20px;
   font-size: @font-size-base;
   color: @text-gray;
+
+  &:first-child {
+    padding-top: 22px;
+    @media (max-width: @screen-xs-max) { padding: 0; margin-bottom: 15px;  }
+  }
+
+
+  .user {
+    position: absolute;
+    width: @user-width;
+    vertical-align: top;
+    padding-top: 10px;
+
+    @media (max-width: @screen-xs-max) {
+      position: relative;
+      width: initial;
+      height: 45px;
+    }
+
+    .name, .icon {
+      display: block;
+
+      @media (max-width: @screen-xs-max) {
+        display: inline-block;
+        float: left
+      }
+    }
+    .icon .avatar {
+      .user-avatar;
+      @media (max-width: @screen-xs-max) {
+        .user-avatar-xs;
+      }
+    }
+    .name {
+      .seed-username-text; 
+      @media (max-width: @screen-xs-max) {
+        margin-left: 10px;
+      }
+    }
+  }
 
   .follower, .contributor {
     padding-right: 5px;
@@ -24,23 +72,18 @@
     }
 
     .avatar {
-      width: 20px;
+      .user-avatar-xs;
       float: none;
-      height: 20px;
       display: inline-block;
       vertical-align: middle;
     }
-
-    &:hover {
-      color: @intention-color;
-    }
   }
 
-  .bubble {
-    padding: 0 0 7px 0;
+  .post-container {
+    margin-left: @user-width + 5;
 
     @media (max-width: @screen-xs-max) {
-      margin-left: 0px;
+      margin-left: 0;
     }
 
     .post-header {
@@ -48,205 +91,364 @@
         display: inline-block;
       }
 
-      @titleColor: #333332;
+      @title-color: #333332;
       @color: #808080;
-      padding: 7px 0 0px 20px;
-      width: 95%;
-      color: @color;
-      display: table;
+    }
 
-      .post-info {
-        font-size: 12px;
+    .post-content {
+      margin: 0px 0px 0px 20px;
+      border-bottom: 1px solid @light-gray;
+      padding-bottom: 12px;
+      line-height: 2;
+      @media (max-width: @screen-xs-max) {
+        margin: 0;
+      }
+
+      .post-options {
+        float: right;
+        .seed-meta-text();
+
+        @media (max-width: @screen-xs-max) {
+          top: -30px;
+        }
+
+        a, a:hover {
+          cursor: pointer;
+          text-decoration: none;
+          color: @default-text;
+          i {
+            font-size: 12px;
+          }
+        }
+
+        ul {
+          min-width: initial;
+          float: right;
+          right: 0;
+          left: initial;
+        }
+      }
+
+
+      .post-header {
+        span {
+          display: inline-block;
+        }
+
+        @title-color: #333332;
+        @color: #808080;
         color: @color;
-        padding-bottom: 5px;
-        .type {
-          .proxima-nova-regular;
-          font-size: 14px;
+        display: table;
 
-          &.intention { color: @intention-color; }
-          &.request { color: @request-color; }
-          &.offer { color: @offer-color; }
-        }
-        .name {
-          .proxima-nova-semibold;
-        }
-        .post-prefix {
-          .proxima-nova-light;
-        }
-      }
-
-      .title {
-        margin-top: 0;
-        margin-right: 10px;
-        font-size: 16px;
-        .proxima-nova-semibold;
-        line-height: 20px;
-        color: @titleColor;
-      }
-
-      .post-description {
-        .droid-regular;
-        font-size: 12px;
-        padding-top: 5px;
-        color: @color;
-      }
-
-      &:hover {
-        .title {
-          color: darken(@titleColor, 30%);
-        }
         .post-info {
+          font-size: 12px;
+          color: @color;
+          padding-bottom: 5px;
+          .type {
+            margin-right: 10px;
+
+            &.intention {
+              .seed-type-text(@intention-color);
+            }
+            &.request {
+              .seed-type-text(@request-color);
+            }
+            &.offer {
+              .seed-type-text(@offer-color);
+            }
+          }
           .name {
-            color: darken(@color, 30%);
+            .proxima-nova-semibold;
           }
           .post-prefix {
-            color: darken(@color, 30%);
+            .proxima-nova-light;
           }
         }
+
+        .fulfillment {
+          .seed-meta-text;
+
+          a {
+            font-style: italic;
+            cursor: pointer;
+          }
+
+          .dropdown-menu  {
+            a {
+              color: @light-gray;
+              font-size: 11px;
+            }
+          }
+
+          > div {
+            padding-top: 4px;
+          }
+        }
+
+        .title {
+          margin-top: 0;
+          margin-right: 10px;
+          .seed-title-text;
+        }
+
+        .timestamp {
+          .seed-meta-text;
+        }
+
         .post-description {
-          color: darken(@color, 30%)
+          .seed-body-text;
+          padding-top: 5px;
         }
-        text-decoration: none;
-      }
-    }
-
-    .show-more-btn {
-      color: @link-color;
-    }
-
-    & > div:not(.triangle) {
-      padding: 0 20px;
-    }
-
-    .delete {
-      position: absolute;
-      top: 5px;
-      right: 7px;
-      display: none;
-      font-size: 11px;
-      padding: 2px;
-      color: @gray-light;
-    }
-
-    .delete:hover {
-      color: @gray;
-    }
-
-    &.deletable:hover .delete {
-      display: block;
-    }
-
-    .fulfillment {
-      .proxima-nova-light;
-      color: white;
-      margin: 10px 0 3px 0;
-      font-size: 12px;
-      height: 25px;
-      background-color: @fulfillColor;
-      vertical-align: middle;
-
-      a {
-        .proxima-nova-bold;
-        cursor: pointer;
-        color: white;
       }
 
-      .dropdown-menu a {
-        color: @light-gray;
+      .show-more-btn {
+        color: @link-color;
+      }
+
+      .delete {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+        display: none;
         font-size: 11px;
+        padding: 2px;
+        color: @gray-light;
       }
 
-      > div {
-        padding-top: 4px;
-      }
-    }
-
-    .comment-form {
-      padding-left: 20px;
-      padding-right: 20px;
-
-      .btn {
-        margin-top: 5px;
-      }
-    }
-
-    .controls {
-      font-size: @font-size-small;
-      .proxima-nova-light;
-
-      &, > a { color: @light-gray; }
-      > a {
-        cursor: pointer;
-        text-decoration: none;
+      .delete:hover {
+        color: @gray;
       }
 
-      .myVote {
-        color: pink;
+      &.deletable:hover .delete {
+        display: inline;
       }
 
-      .vote, .comment, .num-followers{
-        display: inline-block;
-        padding: 5px 4px;
 
-        .num {
-          font-size: 14px;
-        }
+      .controls {
+        font-size: @font-size-small;
+        .proxima-nova-light;
 
-        &:hover {
-          .icon-following {
-            text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+        &, > a {
+          color: @light-gray;
+          margin-right: 15px;
+
+          & .link-selected {
+            color: @dark-blue;
           }
+          i {
+            color: @dark-blue;
+            font-size: 14px;
 
-          &, > .icon-comment {
-            color: @gray;
           }
         }
-      }
-
-      .thank-link {
-        color: #B3B3B3;
-        .proxima-nova-semibold;
-
-        &:hover {
-          color: @fulfillColor;
+        > a {
+          cursor: pointer;
           text-decoration: none;
         }
-      }
-    }
 
-    .triangle {
-      top: 14px;
+        .myVote {
+          color: pink;
+        }
+
+        .vote, .comment, .num-followers{
+          display: inline-block;
+          padding: 5px 4px;
+
+          .num {
+            font-size: 14px;
+          }
+
+          &:hover {
+            .icon-following {
+              text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+            }
+
+            &, > .icon-comment {
+              color: @gray;
+            }
+          }
+        }
+
+        .filfill-link, .join-leave-link {
+          display: inline-block;
+          position: relative;
+          float: right;
+          top: 8px;
+          color: @link-color;
+        }
+
+        .thank-link, .delete-link {
+          color: #B3B3B3;
+          .proxima-nova-semibold;
+
+          &:hover {
+            color: @fulfillColor;
+            text-decoration: none;
+          }
+        }
+      }
     }
   }
 
   .comments {
-    background-color: @faint-gray;
-    padding: 18px 20px 6px;
-    margin: 10px -20px -7px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    > .comment {
-      margin-bottom: 12px;
-      > .bubble {
-        padding-top: 13px;
-        padding-bottom: 10px;
-        position: relative;
+    background-color: @dark-accent;
+    border-top: 1px solid @border-light;
+    border-bottom: 1px solid @border-light;
 
-        .delete {
-          display: none;
+    > .comment {
+      margin-bottom: 18px;
+
+      //add padding to top of comments
+      &:first-child {
+        padding-top: 22px;
+      }
+
+
+
+      .avatar {
+        .user-avatar-sm;
+        position: absolute;
+        margin-left: 18px;
+      }
+
+      .comment-close {
+        float: right;
+
+        a:hover {
+          text-decoration: none;
         }
 
-        &.deletable:hover .delete {
-          display: block;
+        .icon-remove-inverse {
+          color: @border-dark;
+          font-size: 16px;
+          margin: 5px -25px;
+
+          &:hover {
+            color: @link-color;           
+          }
+        }
+
+        //get delete to appear on mobile
+        @media (max-width: @screen-xs-min) {
+          float: none;
+          position: absolute;
+          width: 92%;
+
+          a {
+            margin-left: 92%;
+            position: relative;
+            right: 1px;
+
+            .icon-remove-inverse {
+              margin: 0;
+            }
+          }
+        }
+      }
+      
+
+      .comment-text {
+        .seed-body-text;
+      }
+
+      .comment-content .controls {
+        .seed-meta-text;
+        line-height: 1.4;
+        padding-top: 6px;
+      }
+
+      .comment-content {
+        .avatar-margin-sm();
+      }
+    }
+
+    textarea {
+      resize: none;
+      -webkit-appearance: none;
+
+    }
+  }
+
+  .add-comment {
+    background-color: white;
+    position: relative;
+    padding: 6px 0;
+    margin-top: 20px; //gives padding on last post
+    .seed-body-text;
+    border-right: 1px solid @border-light;
+    border-left: 1px solid @border-light;
+
+
+    .avatar {
+      .user-avatar-xxs;
+      position: absolute;
+      margin-left: 18px;
+    }
+
+    .comment-input {
+      .avatar-margin-sm(30px, false);
+      min-height: 25px;
+
+      button {
+        position: absolute;
+        right: 3px;
+        bottom: 3px;
+      }
+
+      textarea {
+        padding: 0;
+        width: 80%;
+        position: relative;
+        top: 3px;
+      }
+    }
+
+    .empty-comment {
+      font-style: italic;
+    }
+
+  }
+
+  //downsize the comment margins on mobile
+  @media (max-width: @screen-xs-max) {
+    .comments > .comment {
+
+      &:first-child {
+        padding-top: 12px;
+      }
+
+      .avatar {
+        .user-avatar-xxs;
+        position: absolute;
+        margin-left: 5px;
+      }
+      .comment-content {
+        .avatar-margin-xs();
+      }
+    }
+    .add-comment {
+      margin-top: 8px;
+
+      .avatar {
+        margin-left: 5px;
+      }
+
+      .comment-input {
+        .avatar-margin-xs(10px, false);
+
+        button {
+          position: relative;
+          margin-top: 12px;
         }
       }
     }
   }
 
   .followers {
-    .proxima-nova-light;
-    color: @light-gray;
-    font-size: 11px;
+    .seed-body-text();
+    color: @text-medium-dark;
+    font-size: 13px;
+    padding: 15px 0;
 
     .actionIcon {
       font-size: 16px;
@@ -261,12 +463,70 @@
     }
 
     a {
-      .proxima-nova-bold;
-      font-size: 11px;
-      color: @light-gray;
+      font-weight: 500;
+      color: @default-text;
       cursor: pointer;
     }
   }
+
+  .add-followers{
+
+    width: 100%;
+    border: 1px solid @border-light;
+    margin-top: 3px;
+    min-height: 48px;
+
+    .add-label, .add-tags {
+      display: table-cell;
+    }
+
+    .add-label {
+      .seed-body-text();
+      font-size: 13px;
+      font-weight: 600;
+      width: 120px;
+      //float: left;
+      background-color: @visible-gray-bkg;
+      color: @text-dark;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .add-tags {
+      padding-left: 10px;
+      margin: 3px 0 3px 15px;
+
+      .decipher-tags {
+        background-color: white;
+        border: none;
+        padding: 0;
+        height: 37px;
+
+        .decipher-tags-input {
+          background-color: white;
+        }
+
+        .icon-remove-inverse, .tag-name  {
+          vertical-align: initial;
+          top: initial;
+        }
+      }
+    }
+  }
+
+  .add-followers-complete {
+    height: 30px;
+    margin: 10px 0 0;
+
+    .add-followers-btn {
+      .rounded-button();
+      background-color: initial;
+      float: right;
+      background-color: @dark-blue;
+      color: white;
+    }
+  }
+
 
   .followers-edit {
     padding: 0 10px !important;
@@ -298,7 +558,7 @@
       left: 16px + @popover-arrow-outer-width;
       margin-left: -@popover-arrow-outer-width;
       border-top-width: 0;
-      border-bottom-color: @tags-border-color;
+      border-bottom-color: @border-light;
       top: -10px;
       &:after {
         content: " ";
@@ -322,11 +582,12 @@
   }
 }
 
+
 .fulfill-modal {
   h4 {
     .proxima-nova-regular;
     font-size: 30px;
-    color: @fulfillColor;
+    color: @intention-color;
   }
 
   p {
@@ -369,6 +630,7 @@
     }
   }
 }
+
 
 @-ms-keyframes pulse {
   0% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}

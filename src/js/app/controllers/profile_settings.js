@@ -42,6 +42,8 @@ angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scop
         previousSettingsEmail = $rootScope.currentUser.email;
         previousSettingsSendPref = $rootScope.currentUser.sendEmailPreference;
         previousSettingsDigest = $rootScope.currentUser.dailyDigest;
+
+        $scope.linkedAccounts = _.reject(user.linkedAccounts, function(x) { return x == 'password' });
       });
     });
 
