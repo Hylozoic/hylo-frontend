@@ -1,73 +1,48 @@
+/* Customizations for the tag user directive*/
 .decipher-tags {
-  min-height: 39px;
-  border: 1px solid @border-light;
-  padding: 0px 5px 5px 5px;
-  background-color: @tags-bg-color;
-  .border-radius(5px);
 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 5px;
+  height: @avatar-size-xs + 17px;
+/* restyle todo
+
+
+*/
   .decipher-tags-taglist {
-    margin-bottom: 4px;
     display: inline;
 
     .decipher-tags-tag {
       display: inline-block;
+      height: @avatar-size-xs + 5px;
+      margin: 0;
+      padding: 2px 6px 7px;
+      border: 1px solid @border-light;
       border-radius: 5px;
-      background-color: white;
-      border: 1px solid @intention-color;
-      padding: 2px;
-      margin-right: 5px;
-      margin-top: 5px;
-      //white-space: nowrap; # removed no-wrapping of whitespace.
-      font-size: 14px;
-      .proxima-nova-regular;
+      vertical-align: middle;
 
 
-      .avatar {
-        width: 20px;
-        float: none;
-        height: 20px;
-        display: inline-block;
-        vertical-align: middle;
+      .user-avatar-xs {
+        position: absolute;
       }
 
-      .icon-remove, .icon-remove-inverse {
-        color: #B3B3B3;
+      .tag-name {
+        .avatar-margin-xs();
+        .seed-meta-text();
       }
 
+      .icon-remove-inverse, .tag-name  {
+        vertical-align: sub;
+        top: 3px; 
+      }
     }
-
-    .decipher-tags-tag i {
-      color: black;
-      text-decoration: none;
-      font-size: 10px;
-      margin-right: 3px;
-    }
-
-    .decipher-tags-tag.selected
-    {
-      border: 1px solid red;
-    }
-
-    .decipher-tags-tag:hover i {
-      color: #FF7878;
-
-      text-decoration: none;
-    }
-
-    .decipher-tags-tag i {
-      cursor: pointer;
-    }
-
   }
 
   .decipher-tags-input {
-    font-size: 14px;
-    border: none;
+    border: 0;
     outline: 0;
-    margin-top: 4px;
-    background-color: @tags-bg-color;
-    .proxima-nova-regular;
   }
+
 
   .decipher-tags-invalid {
     color: #FFF;
@@ -76,5 +51,19 @@
   .decipher-tags-controls {
     margin-top: 8px;
     min-height: 28px;
+  }
+}
+
+/* Customizations for the typehead directive*/
+.typeahead-tag {
+  color: blue;
+
+  .avatar-typeahead {
+    position: absolute;
+    .user-avatar-xxs();
+  }
+
+  .typeahead-result {
+    .add-avatar-margin(30px);
   }
 }

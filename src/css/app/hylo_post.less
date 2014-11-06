@@ -1,4 +1,4 @@
-@fulfillColor: #00EA83;
+@fulfillColor: @intention-color;
 
 .btn-fulfill {
   font-size: 15px;
@@ -504,32 +504,9 @@
           background-color: white;
         }
 
-        .decipher-tags-tag {
-          border-color: @border-light;
-          margin: 0;
-          padding: 2px 6px 7px;
-
-          .user-avatar-sm {
-            position: absolute;
-          }
-          .tag-name {
-            margin-left: 45px;
-            top: 4px;
-            position: relative;
-            padding-right: 5px;
-          }
-        }
-
-        //customizations for typeahead
-        .typeahead-tag {
-          height: 35px;
-        }
-        .avatar-typeahead {
-          .user-avatar-xs;
-          position: absolute;
-        }
-        .typeahead-result {
-          margin-left: 45px;
+        .icon-remove-inverse, .tag-name  {
+          vertical-align: initial;
+          top: initial;
         }
       }
     }
@@ -608,7 +585,7 @@
   h4 {
     .proxima-nova-regular;
     font-size: 30px;
-    color: @fulfillColor;
+    color: @intention-color;
   }
 
   p {

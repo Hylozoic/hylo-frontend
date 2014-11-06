@@ -171,8 +171,12 @@
   .user-avatar(27px);
 }
 
-.add-avatar-margin(@size: @avatar-size-default, @use-properties: true) {
-  margin-left: @size + 30;
+.user-avatar-xxs {
+  .user-avatar(22px);
+}
+
+.add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
+  margin-left: @size;
 
   & when (@use-properties = true) {
     float: none;
@@ -182,19 +186,22 @@
   
 }
 
-.avatar-margin-xs(@add-margin: 0, @use-properties: true) {
+@avatar-size-sm: 33px;
+@avatar-size-xs: 27px;
+
+.avatar-margin-xs(@add-margin: 10, @use-properties: true) {
   .add-avatar-margin(27px+@add-margin, @use-properties);
 }
 
-.avatar-margin-sm(@add-margin: 0, @use-properties: true) {
+.avatar-margin-sm(@add-margin: 15, @use-properties: true) {
   .add-avatar-margin(33px+@add-margin, @use-properties);
 }
 
-.avatar-margin-med(@add-margin: 0, @use-properties: true) {
+.avatar-margin-med(@add-margin: 20, @use-properties: true) {
   .add-avatar-margin(@avatar-size-default+@add-margin, @use-properties);
 }
 
-.avatar-margin-lg(@add-margin: 0, @use-properties: true) {
+.avatar-margin-lg(@add-margin: 30, @use-properties: true) {
   .add-avatar-margin(140px+@add-margin, @use-properties);
 }
 
