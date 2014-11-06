@@ -1,5 +1,9 @@
 //variables
+@avatar-size-xxs: 22px;
+@avatar-size-xs: 27px;
+@avatar-size-sm: 33px;
 @avatar-size-default: 60px;
+@avatar-size-lg: 140px;
 @avatar-margin: @avatar-size-default + 30;
 
 
@@ -160,19 +164,19 @@
 }
 
 .user-avatar-lg {
-  .user-avatar(140px);
+  .user-avatar(@avatar-size-lg);
 }
 
 .user-avatar-sm {
-  .user-avatar(33px);
+  .user-avatar(@avatar-size-sm);
 }
 
 .user-avatar-xs {
-  .user-avatar(27px);
+  .user-avatar(@avatar-size-xs);
 }
 
 .user-avatar-xxs {
-  .user-avatar(22px);
+  .user-avatar(@avatar-size-xxs);
 }
 
 .add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
@@ -185,9 +189,6 @@
   }
   
 }
-
-@avatar-size-sm: 33px;
-@avatar-size-xs: 27px;
 
 .avatar-margin-xs(@add-margin: 10, @use-properties: true) {
   .add-avatar-margin(27px+@add-margin, @use-properties);
