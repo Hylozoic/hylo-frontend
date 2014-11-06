@@ -11,6 +11,38 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
       $scope.voteTooltipText = "";
 
+      $scope.isPostOwner = function() {
+        if ($scope.post.user) {
+          return $scope.post.user.id == $rootScope.currentUser.id;
+        }
+        return false;
+      };
+
+      $scope.markFulfilled = function() {
+        var modalScope = $rootScope.$new(true);
+        // Map the top contributors as all the unique commentors on the post
+        modalScope.topContributors = _.map(
+          _.uniq(_.pluck($scope.comments, 'user'), false, _.property("id")), _.property('id')
+        );
+
+        modalScope.post = $scope.post;
+
+        var modalInstance = $modal.open({
+          templateUrl: '/ui/app/fulfillModal.tpl.html',
+          controller: "FulfillModalCtrl",
+          keyboard: false,
+          backdrop: 'static',
+          scope: modalScope
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          // success function
+          $analytics.eventTrack('Fulfill Post', {post_id: $scope.post.id});
+        }, function () {
+
+        });
+      };
+
       $scope.gotoPost = function($event) {
         if ($event.target) {
             // Check to see if we are clicking an embedded link...if so, then open the link instead of opening the post.
@@ -41,7 +73,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       $scope.followHash = function(value) {
-        console.log("inside hylo post controller");
       }
 
       $scope.gotoSinglePost = function() {
@@ -69,14 +100,19 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if ($scope.isCommentsCollapsed)
           $analytics.eventTrack('Show Comments');
 
-        $scope.isCommentsCollapsed = false;
+        $scope.editingFollowers = false;
+
+        $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
+
         $timeout(function() {
           CommentingService.setFocus($scope.post.id);
         });
       }
 
       $scope.onFollowerIconClick = function() {
-        $scope.isCommentsCollapsed = false;
+        $analytics.eventTrack('Show Followers');
+        $scope.isCommentsCollapsed = true;
+        $scope.toggleEditFollowers();
       }
 
       $scope.followers = []; // list of current followers
@@ -122,8 +158,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.editingFollowers = false;
 
       $scope.isFollowing = false;
+      $scope.joinPostText = "";
 
-      $scope.joinPostText = function() {
+
+      $scope.toggleJoinPostText = function() {
         if ($scope.isFollowing) {
           return "Leave";
         } else {
@@ -148,7 +186,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         }
       }
 
-      $scope.toggleEditFollowers = function(event) {
+      $scope.toggleEditFollowers = function() {
         var isEditing = !$scope.editingFollowers;
         if (isEditing) { // populate potential followers
           $http.get('/users/getpossiblefollowers', {
@@ -163,7 +201,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
               Post.addFollower({id: $scope.post.id, followerId: follower.value});
             }
           });
-
           $scope.followersToAdd = [];
         }
         $scope.editingFollowers = isEditing;
@@ -221,24 +258,34 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.isPostText = text.length > 0;
       }
 
+      $scope.followersNotMe = [];
+
       var checkIsFollowing = function() {
+        //get number of followers
         $scope.post.numFollowers = $scope.followers.length;
-        $scope.isFollowing = _.some($scope.followers, function(val) {
-          return val.value == $rootScope.currentUser.id;
-        });
+
+        var meInFollowers = _.findWhere($scope.followers, {value: $rootScope.currentUser.id});
+
+        if (meInFollowers) {
+          $scope.followersNotMe = _.without($scope.followers, meInFollowers);
+          $scope.isFollowing = true;
+        } else {
+          $scope.followersNotMe = $scope.followers;
+          $scope.isFollowing = false;
+        }
+
+        $scope.joinPostText = $scope.toggleJoinPostText();
       }
 
       var initialize = function() {
         var loadFollowers = function() {
+          $analytics.eventTrack('Loading Followers');
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
-
             $scope.$watchCollection("followers", checkIsFollowing);
-
           } else {
             Post.followers({id: $scope.post.id}).$promise.then(function(value) {
                   $scope.followers = value;
-
                   $scope.$watchCollection("followers", checkIsFollowing);
                 }
             );
@@ -246,15 +293,15 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         }
 
         if ($scope.isCommentsCollapsed) {
-          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", function(isCollapsed) {
-            if (!isCollapsed) {
-              loadFollowers();
-              unwatchCommentsCollapsed();
-            }
+          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", 
+            function(isCollapsed) {
+              if (!isCollapsed) {
+                unwatchCommentsCollapsed();
+              }
           });
-        } else {
-          loadFollowers();
         }
+
+        loadFollowers();
 
         // Determines if this post is deletable by currentUser. (is their post OR a moderator)
         $scope.canDelete = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||

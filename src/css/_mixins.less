@@ -1,30 +1,37 @@
-.triangle-core (@size) {
-  width: 0;
-  height: 0;
-  position: absolute;
-  border: @size solid transparent;
+//variables
+@avatar-size-xxs: 22px;
+@avatar-size-xs: 27px;
+@avatar-size-sm: 33px;
+@avatar-size-default: 60px;
+@avatar-size-lg: 140px;
+@avatar-margin: @avatar-size-default + 30;
+
+
+//mixins
+.rounded-button() {
+  .proxima-nova-regular;
+  font-size: 14px;
+  text-decoration: none; //this removes hover effect
+  color: @text-dark;
+  cursor: pointer;
+  border: 1px solid @light-gray;
+  border-radius: 15px;
+  display: inline-block;
+  height: 32px;
+  line-height: 30px;
+  padding: 0px 20px;
+  > i {
+    position: relative;
+  }
+  @media (max-width: @screen-sm-max) {
+
+  }
 }
 
-.bottom-triangle (@size, @color) {
-  .triangle-core(@size);
-  border-top: @size solid @color;
-  border-bottom: none;
-  bottom: -@size;
-}
-
-.top-triangle (@size, @color) {
-  .triangle-core(@size);
-  border-top: none;
-  border-bottom: @size solid @color;
-  top: -@size;
-}
-
-.left-triangle (@size, @color, @top) {
-  .triangle-core(@size);
-  border-left: none;
-  border-right: @size solid @color;
-  top: @top;
-  left: -@size;
+.rounded-button-dark {
+  .rounded-button;
+  color: white;
+  background-color: @dark-gray;
 }
 
 .transform (@rule) {
@@ -42,28 +49,26 @@
   -ms-filter: blur(@px);
 }
 
-.proxima-nova-light() {
+.proxima-nova(@weight) {
   font-family: "proxima-nova",sans-serif;
   font-style: normal;
-  font-weight: 300;
+  font-weight: @weight;
 }
 
-.proxima-nova-regular() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 400;
+.proxima-nova-light {
+  .proxima-nova(300);
 }
 
-.proxima-nova-semibold() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 600;
+.proxima-nova-regular {
+  .proxima-nova(400);
 }
 
-.proxima-nova-bold() {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 700;
+.proxima-nova-semibold {
+  .proxima-nova(600);
+}
+
+.proxima-nova-bold {
+  .proxima-nova(700);
 }
 
 .myriad-semi-italic() {
@@ -82,4 +87,130 @@
   -moz-border-radius: @px;
   -webkit-border-radius: @px;
   border-radius: @px;
+}
+
+.large-header() {
+  .proxima-nova-bold;
+  font-size: 32px;
+}
+
+.section-title() {
+  .proxima-nova-semibold;
+  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: 3.5px;
+}
+
+.member-name() {
+  .proxima-nova-semibold;
+  font-size: 24px;
+}
+
+.seed-meta-text() {
+  &, a {
+    color: @text-light-gray;
+  }
+
+  a:hover {
+    color: @link-color;
+  }
+
+  .proxima-nova-light;
+  font-size: 14px;
+}
+
+.seed-type-text(@color) {
+  .proxima-nova-bold;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+  color: @color;
+}
+
+.seed-title-text {
+  .proxima-nova-semibold;
+  font-size: 18px;
+  line-height: 20px;
+  color: @title-color;
+}
+
+.seed-body-text() {
+  .proxima-nova-light;
+  font-size: 15px;
+  color: @text-medium-dark;
+  line-height: 1.25em;
+}
+
+.seed-username-text() {
+  .seed-meta-text;
+  margin-top: 6px;
+  text-align: center;
+  line-height: 1.4;
+  overflow: hidden;
+  word-wrap: break-word;
+  max-height: 78px;
+}
+
+.user-avatar(@size: @avatar-size-default) {
+  @avatar-size: 60px;
+  margin: 0 auto;
+  float: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+  height: @size;
+  width: @size;
+  border-radius: @size/2;
+}
+
+.user-avatar-lg {
+  .user-avatar(@avatar-size-lg);
+}
+
+.user-avatar-sm {
+  .user-avatar(@avatar-size-sm);
+}
+
+.user-avatar-xs {
+  .user-avatar(@avatar-size-xs);
+}
+
+.user-avatar-xxs {
+  .user-avatar(@avatar-size-xxs);
+}
+
+.add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
+  margin-left: @size;
+
+  & when (@use-properties = true) {
+    float: none;
+    display: inline-block;
+    position: relative;
+  }
+  
+}
+
+.avatar-margin-xs(@add-margin: 10, @use-properties: true) {
+  .add-avatar-margin(27px+@add-margin, @use-properties);
+}
+
+.avatar-margin-sm(@add-margin: 30, @use-properties: true) {
+  .add-avatar-margin(33px+@add-margin, @use-properties);
+}
+
+.avatar-margin-med(@add-margin: 30, @use-properties: true) {
+  .add-avatar-margin(@avatar-size-default+@add-margin, @use-properties);
+}
+
+.avatar-margin-lg(@add-margin: 30, @use-properties: true) {
+  .add-avatar-margin(140px+@add-margin, @use-properties);
+}
+
+.remove-link-display(@color: @default-text) {
+  
+  &, &:hover {
+    color: @color;
+    text-decoration: none;
+  }
+
 }

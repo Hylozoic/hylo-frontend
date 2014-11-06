@@ -1,8 +1,131 @@
 // community view
 
 .community{ // main style wrapper for community page
+
+  #banner {
+    position: relative;
+
+    #banner-image {
+      background-color: rgba(0,0,0,.6);
+      background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+      linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+      linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8));
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+
+      #innerImage {
+        position: relative;
+        z-index: -2;
+        opacity: .9;
+        height: 400px;
+        height: 50vh;
+        background-size: cover;
+        background-position: center;
+
+        @media (max-width: @screen-xs-max) {
+          max-height: 320px;
+        }
+      }
+    }
+
+    .banner-communityName {
+      .proxima-nova-semibold;
+      font-size: 400%;
+      color: white;
+      position: absolute;
+      bottom: 110px;
+      text-align: center;
+      margin-left: auto;
+      margin-top: auto;
+      width: 100%;
+      letter-spacing: 2.5px;
+      
+      @media (max-width: @screen-xs-max) {
+        bottom: 45px;
+        line-height: 1;
+      }
+      @media (max-width: @screen-xs) {
+        bottom: 30px;
+      }
+    }
+
+    .banner-menu {
+      position: absolute;
+      bottom: 50px;
+      text-align: center;
+      margin-left: auto;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .banner-menuItem {
+      .proxima-nova-light;
+      color: white;
+      font-size: 130%;
+      display: inline-block;
+      margin: 0px 40px;
+      letter-spacing: 2px;
+    }
+  }
+
+  .community-filter-buttons {
+    border: 1px solid @border-light;
+    top: -5px;
+    padding: 15px 6% 0px 6%;
+    position: relative;
+    height: 70px;
+
+    @media (max-width: @screen-xs-max) {
+
+      padding: 5px 1px;
+      margin: 0;
+      height: 50px;
+    }
+
+    @media (max-width: @screen-sm-max) {
+      #community-addSeedButton {
+        width: 30px;
+        overflow: hidden;
+        padding-left: 8px;
+        &-text {
+          visibility: hidden;
+        }
+      }
+      .filter-buttons {
+        select {
+          width: 30px;
+        }
+      }
+    }
+
+    .filter-buttons {
+      float: right;
+
+      button {
+        .rounded-button;
+        min-width: 90px;
+
+        @media (max-width: @screen-xs) {
+          min-width: initial;
+          padding: 0 12px;
+        }
+      }
+    }
+  }
+
+  #search-popover {
+    position: absolute;
+    width: 150px;
+    right: 1px;
+    margin-top: 3px;
+
+    input {
+      border: 1px solid @border-medium;
+    }
+  }
+
   .full_width{
-    margin-right: -15px;
     @media (max-width: @screen-xs-max) {
       width: 100% !important;
       margin: 0 auto;
@@ -12,25 +135,14 @@
   .filters{
     width: 100%;
     margin-bottom: 20px;
-    .btn-group{
-      margin: 0px 5px;
-      @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-        width: auto !important;
-      }
-      @media (max-width: @screen-xs-max) {
-        width: 100% !important;
-        margin: 10px auto;
-      }
-      @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-        width: auto !important;
-      }
-    }
   }
 
   .filter-query{
     margin-left:0;
     margin: 0 15px;
+    top: -3px;
     float: none;
+    display: inline-block;
     input{
       height: 30px;
       font-family: "proxima-nova", sans-serif;
@@ -38,10 +150,6 @@
       font-weight: 400;
       font-size: 12px;
       border: 0px;
-    }
-    @media (max-width: @screen-xs-max) {
-      width: 100% !important;
-      margin: 10px 0;
     }
   }
 
@@ -69,10 +177,10 @@
   }
 
   .btn-group > .btn-group:last-child > .btn:first-child {
-    border-radius: 5px;
+    border-radius: 15px;
   }
   .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn{
-    border-radius: 5px;
+    border-radius: 15px;
   }
 
   .bootstrap-select.btn-group .dropdown-menu li > a{
@@ -94,9 +202,18 @@
 .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
   // width: 150px;
   outline:0;
+
   @media (max-width: @screen-xs-max) {
-    width: 49% !important;
+    width: 36% !important;
     float: none;
+    button {
+      width: 105px;
+    }
+  }
+  @media (max-width: @screen-xs-min) {
+    button {
+      width: 95px;
+    }
   }
 }
 
@@ -112,52 +229,24 @@
 .add-seed-form { // the add seed expandable form
   margin-bottom: 18px;
   @circle-size: 42px;
+  position: relative;
+  z-index: 10;
+
+  .icon-remove-inverse {
+    font-size: 15px;
+    @media (max-width: @screen-xs-max) {
+      font-size: 22px;
+    }
+  }
 
   &.editing {
     height: auto;
   }
 
-  .circle {
-    display: block;
-    float: left;
-    height: @circle-size;
-    width: @circle-size;
-    line-height: @circle-size;
-    border-radius: @circle-size / 2;
-    margin-left: (@avatar-size - @circle-size) / 2;
-    margin-top: -5px;
-    vertical-align: middle;
-    text-align: center;
-    background-color: white;
-    color: @text-light-gray;
-    cursor: pointer;
-    > i {
-      line-height: @circle-size;
-      top: -1px;
-    }
-  }
-
-  .start-editing {
-    display: inline-block;
-    height: 32px;
-    line-height: 32px;
-    cursor: pointer;
-    text-decoration: none;
-
-    .bubble {
-      height: @circle-size;
-      line-height: @circle-size;
-      color: @text-light-gray;
-      padding: 0 30px;
-      .post-type-style(@faint-gray);
-      .proxima-nova-regular;
-    }
-    .triangle {
-      top: 8px;
-    }
-  }
-
   .editor > .bubble {
+
+    margin-left: 0;
+
     > .post-types {
       margin: 0;
       > a {
@@ -231,25 +320,8 @@
   @media (max-width: @screen-xs-max) {
     float: none;
   }
-
-  .circle {
-    display: block;
-    float: left;
-    height: @circle-size;
-    width: @circle-size;
-    line-height: @circle-size;
-    border-radius: @circle-size / 2;
-    margin-left: (@avatar-size - @circle-size) / 2;
-    margin-top: -5px;
-    vertical-align: middle;
-    text-align: center;
-    background-color: white;
-    color: @text-light-gray;
-    cursor: pointer;
-    > i {
-      line-height: @circle-size;
-      top: -1px;
-    }
+  @media (min-width: @screen-xs) and (max-width: @screen-sm-max) {
+    margin-left: 8px;
   }
 
   .start-editing {
@@ -272,6 +344,15 @@
       @media (max-width: @screen-xs) {
         display: block;
       }
+    }
+  }
+
+  .icon-Add-01 {
+    font-size: 13px;
+    
+    @media (max-width: @screen-sm-max) {
+      top: 1px;
+      left: -2px;
     }
   }
 

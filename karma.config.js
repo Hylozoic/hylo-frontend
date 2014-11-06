@@ -1,7 +1,5 @@
 'use strict';
 
-var path = require('path');
-
 // Karma configuration
 // Generated on Wed Oct 22 2014 16:54:59 GMT-0700 (PDT)
 

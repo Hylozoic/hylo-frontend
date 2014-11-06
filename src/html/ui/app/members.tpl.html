@@ -1,0 +1,45 @@
+<div class="col-md-10 col-md-offset-1 col-sm-offset-1 users">
+  <div class="row">
+
+    <div class="col-md-12 jumbotron text-center">
+      <img ng-src="{{::community.background}}">
+      <br>
+      <h2 ng-bind="::community.name"></h2>
+      <hr>
+      <h3 class="caps-header">Core Intention</h3>
+      <h3 ng-bind="::community.description"></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <i class="icon-search shadow filter-search-icon"></i>
+      <div class="filter-query">
+        <input placeholder="Search for members, skills or affiliations..." class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+        <div class="textfield-search-indicator" loading-indicator ng-if="searching"></div>
+      </div>
+      </div>
+    </div>
+
+    <!-- List Members -->
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div ng-repeat="user in users | orderBy:'name'" class="col-sm-12 member">
+          <a ui-sref="user({community: $root.community.slug, id: user.id})">
+            <div class="avatar" back-img="user.avatar"></div> </a>
+          <div class="member-info">
+            <a class="member-name" ui-sref="user({community: $root.community.slug, id: user.id})" ng-bind="::user.name"></a> 
+            <div class="member-skills" ng-show="user.skills.length > 0"> Skills: &nbsp;<span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
+            <div class="member-affiliations" ng-if="user.organizations.length > 0">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
+          </div>
+        </div>
+        <div loading-indicator ng-if="searching"></div>
+      </div>
+    </div>
+
+    <div ng-if="usersLoaded && !searching && users.length == 0">
+      <div class="col-md-12">
+        <h2 style="text-align: center;">Hmm... we couldn't find any members that match your search.</h2>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+@import 'bower_components/bootstrap/less/bootstrap';
+@import '_colors';
+@import '_mixins';
+@import 'hyloIcons';
+
+body {
+  margin-bottom: 45px;
+}
+
+h1 {
+  .large-header;
+  margin-top: 45px;
+}
+
+.styleguide-header {
+  .large-header;
+  text-align: center;
+  background-color: #4fb19f;
+  padding: 15px 0 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+#colors {
+  .make-row;
+  > div {
+    .make-xs-column(3);
+    > div {
+      margin: 3px 0;
+      padding: 5px 10px;
+    }
+  }
+  padding-bottom: 25px;
+}
+
+#colors .color-group-title {
+  text-transform: uppercase;
+  float: none;
+}
+
+//Seeds
+#intention-color {
+  background-color: @intention-color;
+}
+#offer-color{
+  background-color: @offer-color;
+}
+#request-color{
+  background-color: @request-color;
+}
+
+//Colors
+
+#visible-gray-bkg{
+  background-color: @visible-gray-bkg;
+}
+
+#light-gray {
+  background-color: @light-gray;
+}
+
+#faint-gray {
+  background-color: @faint-gray;
+}
+
+#text-dark {
+  color: @text-dark;
+}
+
+#text-medium-dark {
+  color: @text-medium-dark;
+}
+
+#text-gray {
+  color: @text-gray;
+}
+
+#text-light-gray {
+  color: @text-light-gray;
+}
+
+#border-light {
+  border: 1px solid @border-light;
+}
+
+#border-medium {
+  border: 1px solid @border-medium;
+}
+
+#border-dark {
+  border: 1px solid @border-dark;
+}
+
+#text-style-examples {
+  padding: 0;
+
+  tr {
+    td, th {
+      padding: 15px;
+    }
+    th {
+      .section-title;
+      text-align: left;
+      border: 1px solid white;
+      border-bottom: 1px solid @border-light;
+    }
+    td {
+      border: 1px solid @border-light;
+    }
+    td:first-child {
+      width: 50%;
+    }
+  }
+}
+
+#large-header {
+  .large-header;
+}
+
+#section-title {
+  .section-title;
+}
+
+#member-name {
+  .member-name;
+}
+
+#intention {
+  .seed-type-text(@intention-color);
+}
+
+#offer {
+  .seed-type-text(@offer-color);
+}
+
+#request {
+  .seed-type-text(@request-color);
+}
+
+#seed-title-text {
+  .seed-title-text;
+}
+
+#seed-meta-text, .seed-meta-text {
+  .seed-meta-text;
+}
+
+#seed-body-text {
+  .seed-body-text;
+}
+
+.avatar {
+  background-image: url(http://s3.amazonaws.com/hylo-dev/styleguide/axolotl_icon.jpg);
+}
+
+#user-avatar-lg {
+  .user-avatar-lg;
+}
+
+#user-avatar {
+  .user-avatar;
+}
+
+#user-avatar-sm {
+  .user-avatar-sm;
+}
+
+#user-avatar-xs {
+  .user-avatar-xs;
+}
+
+#rounded-button {
+  .rounded-button;
+}
+
+#rounded-button-dark {
+  .rounded-button-dark;
+}
+
+#icons {
+  p {
+    .seed-meta-text;
+  }
+
+  i {
+    text-align: center;
+    width: 48px;
+    font-size: 24px;
+    padding: 10px;
+    display: inline-block;
+  }
+}
+
+/*
+TYPE STYLES
+
+title in hero image
+small caps title (name in profile)
+seed footer info niblets
+large form option labels (seed type chooser)
+large search field text
+skill list text
+*/

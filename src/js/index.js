@@ -46,15 +46,6 @@ require('./app/features/seeds/seeds');
 require('./app/features/community/createCommunity');
 require('./app/features/menu');
 require('./app/controllers');
-require('./app/controllers/community_users');
-require('./app/controllers/community');
-require('./app/controllers/user');
-require('./app/controllers/comments');
-require('./app/controllers/profile_settings');
-require('./app/controllers/fulfillModal');
-require('./app/controllers/onboarding');
-require('./app/controllers/search');
-require('./app/controllers/view_post');
 require('./app/routes');
 require('./app/services');
 

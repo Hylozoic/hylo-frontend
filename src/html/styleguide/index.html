@@ -1,0 +1,186 @@
+<html>
+<head>
+  <script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <link rel="stylesheet" type="text/css" href="/styleguide.css">
+  <title>Hylo Style Guide</title>
+</head>
+<body>
+
+<div class="styleguide-header">Hylo Style Guide</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <br><br>
+
+      <h1>Colors</h1>
+      <div id="colors">
+        <div class="color-group-title seed-meta-text">Seeds</div>
+        <div><div id="intention-color">@lintention-color</div></div>
+        <div><div id="offer-color">@offer-color</div></div>
+        <div><div id="request-color">@request-color</div></div>
+        <br><br><br>
+
+        <div class="color-group-title seed-meta-text">Grays</div>
+        <div><div id="light-gray">@light-gray</div></div>
+        <div><div id="visible-gray-bkg">@visible-gray-bkg</div></div>
+        <div><div id="faint-gray">@faint-gray</div></div>
+        <br><br><br>
+
+        <div class="color-group-title seed-meta-text">Text</div>
+        <div><div id="text-dark">@text-dark</div></div>
+        <div><div id="text-medium-dark">@text-medium-dark</div></div>
+        <div><div id="text-gray">@text-gray</div></div>
+        <div><div id="text-light-gray">@text-light-gray</div></div>
+        <br><br><br>
+
+        <div class="color-group-title seed-meta-text">Borders</div>
+        <div><div id="border-light">@border-light</div></div>
+        <div><div id="border-medium">@border-medium</div></div>
+        <div><div id="border-dark">@border-dark</div></div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <h1>Mixins</h1>
+
+      <table id="text-style-examples">
+        <thead>
+          <tr>
+            <th>Display</th>
+            <th>Mixin</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><span id="large-header">Appearance</span></td>
+            <td>.large-header()</td>
+          </tr>
+          <tr>
+            <td><span id="member-name">Member Name</span></td>
+            <td>.member-name()</td>
+          </tr>
+          <tr>
+            <td><span id="section-title">moderator settings</span></td>
+            <td>.section-title()</td>
+          </tr>
+          <tr>
+            <td><span id="intention">INTENTION</span></td>
+            <td>.seed-type-text(@intention-color)</td>
+          </tr>
+          <tr>
+            <td><span id="offer">OFFER</span></td>
+            <td>.seed-type-text(@offer-color)</td>
+          </tr>
+          <tr>
+            <td><span id="request">REQUEST</span></td>
+            <td>.seed-type-text(@request-color)</td>
+          </tr>
+          <tr>
+            <td><span id="seed-title-text">I'm looking for a pet.</span></td>
+            <td>.seed-title-text()</td>
+          </tr>
+          <tr>
+            <td><span id="seed-meta-text">Kirk Draheim / 5 hours ago</span></td>
+            <td>.seed-meta-text()</td>
+          </tr>
+          <tr>
+            <td><span id="seed-body-text">Have you got any parrots that you've taught to say clever things? Or perhaps a small bear that knows circus tricks.</span></td>
+            <td>.seed-body-text()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-lg"></span></td>
+            <td>.user-avatar-lg()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar"></span></td>
+            <td>.user-avatar()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-sm"></span></td>
+            <td>.user-avatar-sm()</td>
+          </tr>
+          <tr>
+            <td><span class="avatar" id="user-avatar-xs"></span></td>
+            <td>.user-avatar-xs()</td>
+          </tr>
+          <tr>
+            <td>
+              <a id="rounded-button">
+                <i class="icon-heart-new"></i>
+                <span>Radiate Love</span>
+              </a>
+            </td>
+            <td>
+              .rounded-button()
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a id="rounded-button-dark">
+                <i class="icon-remove"></i>
+                <span>Cancel</span>
+              </a>
+            </td>
+            <td>
+              .rounded-button-dark()
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="clearfix"></div>
+
+      <h1>Variables</h1>
+
+      <table id="text-style-examples">
+        <thead>
+          <tr>
+            <th>Variable Name</th>
+            <th>Usage</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>@avatar-size-default</td>
+            <td>default size (height and width) for the avatar</td>
+            <td>60px</td>
+          </tr>
+          <tr>
+            <td>@avatar-margin</td>
+            <td>margin to use for the default height and width of the avatar</td>
+            <td>90px</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <h1>Icons</h1>
+      <div id="icons">
+        <p>Hover over an icon to see its name.</p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var iconNames = ['complete', 'add-inverse', 'remove-inverse', 'right', 'down', 'Add-01', 'big-check', 'little-check', 'edit',  'attachment', 'add-background',  'add-photo', 'hylo-script', 'Notifications',  'search', 'Settings', 'Home', 'mail', 'Twitter', 'LinkedIn', 'Facebook', 'info','home', 'edit-profile-photo', 'duration', 'share', 'heart-new', 'heart-new-selected', 'members-new', 'comment', 'comment-selected', 'add-MEMBER', 'add-MEMBER-selected', 'profile', 'profile2', 'members', 'communities-new' ];
+  var icons = document.getElementById('icons');
+  for (var i = 0; i < iconNames.length; i++) {
+    var icon = document.createElement('i');
+    var className = 'icon-' + iconNames[i];
+    icon.className = className;
+    icon.title = className;
+    icons.appendChild(icon);
+  }
+</script>
+
+</body>
+</html>

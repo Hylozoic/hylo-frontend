@@ -10,10 +10,10 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
 
     $stateProvider.
       state('home', {
-          url: '/',
-          onEnter: function reloadCtrl() {
-            window.location.replace('/');
-          }
+        url: '/',
+        onEnter: function reloadCtrl() {
+          window.location.replace('/');
+        }
       }).
       state('community', {
         url: '/c/:community',
@@ -46,7 +46,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/c/:community/members',
         views: {
           "": {
-            templateUrl: '/ui/app/community_users.tpl.html',
+            templateUrl: '/ui/app/members.tpl.html',
             controller: 'CommunityUsersCtrl'
           }
         }
@@ -86,6 +86,15 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           "": {
             templateUrl: '/ui/app/search.tpl.html',
             controller: 'SearchCtrl'
+          }
+        }
+      }).
+      state('network', {
+        url: "/n/:network",
+        views: {
+          "": {
+            templateUrl: '/ui/app/network.tpl.html',
+            controller: 'NetworkCtrl'
           }
         }
       });
