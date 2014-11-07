@@ -42,35 +42,21 @@
       height: 45px;
     }
 
-    .name, .icon {
-      display: block;
-
-      @media (max-width: @screen-xs-max) {
-        display: inline-block;
-        float: left
-      }
-    }
-    .icon .avatar {
-      .user-avatar;
+    .icon .avatar {  
       @media (max-width: @screen-xs-max) {
         .user-avatar-xs;
       }
     }
+
     .name {
       .seed-username-text; 
       @media (max-width: @screen-xs-max) {
-        margin-left: 10px;
+        .avatar-margin-xs();
       }
     }
   }
 
   .follower, .contributor {
-    padding-right: 5px;
-
-    &:last-of-type {
-      padding-right: 0px;
-    }
-
     .avatar {
       .user-avatar-xs;
       float: none;
@@ -306,7 +292,7 @@
 
 
       .avatar {
-        .user-avatar-sm;
+        //.user-avatar-sm;
         position: absolute;
         margin-left: 18px;
       }
@@ -485,7 +471,6 @@
       font-size: 13px;
       font-weight: 600;
       width: 120px;
-      //float: left;
       background-color: @visible-gray-bkg;
       color: @text-dark;
       padding: 15px;
@@ -500,7 +485,7 @@
         background-color: white;
         border: none;
         padding: 0;
-        height: 37px;
+        min-height: 37px;
 
         .decipher-tags-input {
           background-color: white;

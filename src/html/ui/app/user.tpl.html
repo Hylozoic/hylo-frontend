@@ -3,7 +3,7 @@
     <div class="biobar" ng-switch="editing" >
 
       <div ng-switch-when="true" class="editing">
-        <div class="profile-avatar" back-img="user.avatar" ng-class="{loading: loading}" ng-click="pickFile()"><span class="editOverlay"></span><span class="loadingNewImage"></span></div>
+        <div class="profile-avatar avatar user-avatar-lg user-avatar-block" back-img="user.avatar" ng-class="{loading: loading}" ng-click="pickFile()"><span class="editOverlay"></span><span class="loadingNewImage"></span></div>
         <div class="form-group">
           <input type="text" ng-model="user.name" class="name"/>
         </div>
@@ -31,7 +31,7 @@
       </div>
 
       <div ng-switch-when="false">
-        <div class="profile-avatar" ng-class="{loading: loading}" back-img="user.avatar"><span class="loadingNewImage"></span></div>
+        <div class="profile-avatar avatar user-avatar-lg user-avatar-block" ng-class="{loading: loading}" back-img="user.avatar"><span class="loadingNewImage"></span></div>
         <h2 class="name">{{user.name}}</h2>
 
         <div class="divider"></div>
