@@ -4,6 +4,7 @@
 @avatar-size-sm: 33px;
 @avatar-size-default: 60px;
 @avatar-size-lg: 140px;
+@avatar-size: @avatar-size-default;
 @avatar-margin: @avatar-size-default + 30;
 
 
@@ -157,14 +158,25 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: block;
   height: @size;
   width: @size;
   border-radius: @size/2;
+  position: absolute;
+}
+
+
+//add this class to get the avatar to appear as a block
+*.avatar.user-avatar-block {
+  display: block;
+  position: initial;
 }
 
 .user-avatar-lg {
   .user-avatar(@avatar-size-lg);
+}
+
+.user-avatar {
+  .user-avatar();
 }
 
 .user-avatar-sm {
@@ -204,6 +216,11 @@
 
 .avatar-margin-lg(@add-margin: 30, @use-properties: true) {
   .add-avatar-margin(140px+@add-margin, @use-properties);
+}
+
+
+.avatar-margin-xs {
+  .avatar-margin-xs();
 }
 
 .remove-link-display(@color: @default-text) {
