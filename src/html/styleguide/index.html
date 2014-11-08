@@ -17,29 +17,39 @@
 
       <h1>Colors</h1>
       <div id="colors">
-        <div class="color-group-title seed-meta-text">Seeds</div>
-        <div><div id="intention-color">@lintention-color</div></div>
-        <div><div id="offer-color">@offer-color</div></div>
-        <div><div id="request-color">@request-color</div></div>
-        <br><br><br>
+        <div class="color-group">
+          <div class="color-group-title seed-meta-text">Seeds</div>
+          <div><div id="intention-color">@lintention-color</div></div>
+          <div><div id="offer-color">@offer-color</div></div>
+          <div><div id="request-color">@request-color</div></div>
+        </div>
 
-        <div class="color-group-title seed-meta-text">Grays</div>
-        <div><div id="light-gray">@light-gray</div></div>
-        <div><div id="visible-gray-bkg">@visible-gray-bkg</div></div>
-        <div><div id="faint-gray">@faint-gray</div></div>
-        <br><br><br>
+        <div class="color-group">
+          <div class="color-group-title seed-meta-text">Grays</div>
+          <div><div id="light-gray">@light-gray</div></div>
+          <div><div id="visible-gray-bkg">@dark-accent</div></div>
+          <div><div id="faint-gray">@faint-gray</div></div>
+        </div>
 
-        <div class="color-group-title seed-meta-text">Text</div>
-        <div><div id="text-dark">@text-dark</div></div>
-        <div><div id="text-medium-dark">@text-medium-dark</div></div>
-        <div><div id="text-gray">@text-gray</div></div>
-        <div><div id="text-light-gray">@text-light-gray</div></div>
-        <br><br><br>
+        <div class="color-group">
+          <div class="color-group-title seed-meta-text">Links</div>
+          <div><div id="link-color">@link-color</div></div>
+        </div>
 
-        <div class="color-group-title seed-meta-text">Borders</div>
-        <div><div id="border-light">@border-light</div></div>
-        <div><div id="border-medium">@border-medium</div></div>
-        <div><div id="border-dark">@border-dark</div></div>
+        <div class="color-group">
+          <div class="color-group-title seed-meta-text">Text</div>
+          <div><div id="text-dark">@default-text</div></div>
+          <div><div id="text-medium-dark">@text-medium-dark</div></div>
+          <div><div id="text-gray">@text-gray</div></div>
+          <div><div id="text-light-gray">@text-light-gray</div></div>
+        </div>
+
+        <div class="color-group">
+          <div class="color-group-title seed-meta-text">Borders</div>
+          <div><div id="border-light">@border-light</div></div>
+          <div><div id="border-medium">@border-medium</div></div>
+          <div><div id="border-dark">@border-dark</div></div>
+        </div>
       </div>
 
       <div class="clearfix"></div>
@@ -134,6 +144,65 @@
 
       <div class="clearfix"></div>
 
+      <table id="text-style-examples">
+        <thead>
+          <tr>
+            <th>Mixin</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>.user-avatar(@size)</td>
+            <td>add properties to display a user avatar of the supplied size</td>
+          </tr>
+          <tr>
+            <td>.user-avatar-block()</td>
+            <td>add properties to display the user avatar as a block</td>
+          </tr>
+          <tr>
+            <td>.add-avatar-margin(@size, @use-properties)</td>
+            <td>add a margin of the supplied size to fit an avatar to the elements left</td>
+          </tr>
+          <tr>
+            <td>.remove-link-display(@color)</td>
+            <td>remove the settings that make an element look like a link. Resets to the default text color unless another is supplied.</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="clearfix"></div>
+
+      <h1>Classes</h1>
+
+      <table id="text-style-examples">
+        <thead>
+          <tr>
+            <th>Class Name</th>
+            <th>Usage</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>.user-avatar-*</td>
+            <td>display a user avatar as a background image</td>
+            <td>xxs, xs, sm, lg</td>
+          </tr>
+          <tr>
+            <td>.avatar-margin-*</td>
+            <td>add a margin to fit an absolute positioned avatar to the left of any html element</td>
+            <td>xs, sm. med, lg</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="clearfix"></div>
+
       <h1>Variables</h1>
 
       <table id="text-style-examples">
@@ -147,14 +216,29 @@
         <tbody>
 
           <tr>
+            <td>@avatar-size-xxs</td>
+            <td>size (height and width) for the avatar</td>
+            <td>22px</td>
+          </tr>
+          <tr>
+            <td>@avatar-size-xs</td>
+            <td>"</td>
+            <td>27px</td>
+          </tr>
+          <tr>
+            <td>@avatar-size-sm</td>
+            <td>"</td>
+            <td>33px</td>
+          </tr>
+          <tr>
             <td>@avatar-size-default</td>
-            <td>default size (height and width) for the avatar</td>
+            <td>"</td>
             <td>60px</td>
           </tr>
           <tr>
-            <td>@avatar-margin</td>
-            <td>margin to use for the default height and width of the avatar</td>
-            <td>90px</td>
+            <td>@avatar-size-lg</td>
+            <td>"</td>
+            <td>140px</td>
           </tr>
 
         </tbody>

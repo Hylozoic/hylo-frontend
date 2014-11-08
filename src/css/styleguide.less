@@ -23,21 +23,29 @@ h1 {
 }
 
 #colors {
-  .make-row;
+  padding-bottom: 25px;
+
   > div {
-    .make-xs-column(3);
+    .make-row;
     > div {
-      margin: 3px 0;
-      padding: 5px 10px;
+      .make-xs-column(3);
+      > div {
+        margin: 3px 0;
+        padding: 5px 10px;
+      }
     }
   }
-  padding-bottom: 25px;
+
+  .color-group {
+    padding-bottom: 20px;
+  }
+
+  .color-group-title {
+    text-transform: uppercase;
+    float: none;
+  }
 }
 
-#colors .color-group-title {
-  text-transform: uppercase;
-  float: none;
-}
 
 //Seeds
 #intention-color {
@@ -64,8 +72,12 @@ h1 {
   background-color: @faint-gray;
 }
 
+#link-color {
+  background-color: @link-color;
+}
+
 #text-dark {
-  color: @text-dark;
+  color: @default-text;
 }
 
 #text-medium-dark {
@@ -156,18 +168,22 @@ h1 {
 
 #user-avatar-lg {
   .user-avatar-lg;
+  .user-avatar-block();
 }
 
 #user-avatar {
   .user-avatar;
+  .user-avatar-block();
 }
 
 #user-avatar-sm {
   .user-avatar-sm;
+  .user-avatar-block();
 }
 
 #user-avatar-xs {
   .user-avatar-xs;
+  .user-avatar-block();
 }
 
 #rounded-button {
