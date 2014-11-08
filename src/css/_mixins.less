@@ -187,11 +187,14 @@
   .user-avatar(@avatar-size-xxs);
 }
 
-
-//add this class to get the avatar to appear as a block element
-*.avatar.user-avatar-block {
+.user-avatar-block() {
   display: block;
   position: initial;
+}
+
+//add this class to get the avatar to appear as a block element
+*.user-avatar-block, *.avatar.user-avatar-block {
+  .user-avatar-block();
 }
 
 
