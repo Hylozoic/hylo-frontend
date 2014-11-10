@@ -16,7 +16,7 @@
             <a class="post-option" ng-click="delete(comment)">delete</a>
           </li>
         </ul>
-      </span> 
+      </span>
       <div class="post-header">
         <span class="post-info">
           <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
@@ -30,7 +30,7 @@
                   <ul class="dropdown-menu">
                     <li ng-repeat="contributor in post.contributors.slice(2)">
                       <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})">
-                        <i back-img="::contributor.avatar" class="avatar"></i> 
+                        <i back-img="::contributor.avatar" class="avatar"></i>
                         <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
                     </li>
                   </ul>
@@ -65,7 +65,7 @@
           <!-- Add yourself as a follower -->
           <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
           <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
-          
+
           <!-- List Names -->
           <span ng-repeat="follower in followersNotMe.slice(0, 2)">
             <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})">
@@ -81,7 +81,8 @@
             <ul class="dropdown-menu">
               <li ng-repeat="follower in followersNotMe.slice(2)">
                 <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
-                  <i back-img="::follower.avatar" class="avatar"></i> {{::follower.name}} 
+                  <i back-img="::follower.avatar" class="avatar"></i>
+                  <span class="name">{{::follower.name}}</span>
                 </a>
               </li>
             </ul>
@@ -96,8 +97,8 @@
 
       <div class="controls">
         <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
-          <i ng-if="!post.myVote" class="icon-heart-new"></i> 
-          <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i> 
+          <i ng-if="!post.myVote" class="icon-heart-new"></i>
+          <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i>
           <span class="num">{{post.votes}}</span>
         </a>
         <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
@@ -106,8 +107,8 @@
           <span class="num">{{post.numFollowers}}</span>
         </a>
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
-          <i ng-if="isCommentsCollapsed" class="icon-comment"></i> 
-          <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i> 
+          <i ng-if="isCommentsCollapsed" class="icon-comment"></i>
+          <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
           <span class="num">{{post.numComments}}</span>
         </a>
         <div class="join-leave-link" ng-if="!isPostOwner()" ng-click="toggleJoinPost()">
@@ -120,7 +121,7 @@
       </div>
 
       <div ng-if="editingFollowers">
-        <div class="add-followers"> 
+        <div class="add-followers">
           <div class="add-label">Add Members:</div>
           <div class="add-tags">
             <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"

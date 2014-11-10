@@ -42,14 +42,14 @@
       height: 45px;
     }
 
-    .icon .avatar {  
+    .icon .avatar {
       @media (max-width: @screen-xs-max) {
         .user-avatar-xs;
       }
     }
 
     .name {
-      .seed-username-text; 
+      .seed-username-text;
       @media (max-width: @screen-xs-max) {
         .avatar-margin-xs();
       }
@@ -59,7 +59,7 @@
   .follower, .contributor {
     .avatar {
       .user-avatar-xs;
-      float: none;
+      position: initial;
       display: inline-block;
       vertical-align: middle;
     }
@@ -310,7 +310,7 @@
           margin: 5px -25px;
 
           &:hover {
-            color: @link-color;           
+            color: @link-color;
           }
         }
 
@@ -331,7 +331,7 @@
           }
         }
       }
-      
+
 
       .comment-text {
         .seed-body-text;
