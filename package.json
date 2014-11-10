@@ -18,6 +18,7 @@
     "bower": "latest",
     "browserify": "latest",
     "debowerify": "latest",
+    "dotenv": "^0.4.0",
     "grunt": "latest",
     "grunt-angular-templates": "latest",
     "grunt-browserify": "latest",
