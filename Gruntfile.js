@@ -61,16 +61,16 @@ module.exports = function(grunt) {
     },
     sync: {
       ui: {
-        cwd: 'src/html/ui',
-        src: ['**'],
-        dest: 'dist/ui',
+        files: [
+          {cwd: 'src/html/ui/', src: ['**'], dest: 'dist/ui/'}
+        ],
         updateAndDelete: true,
         verbose: true
       },
       styleguide: {
-        cwd: 'src/html/styleguide',
-        src: ['**'],
-        dest: 'dist/styleguide',
+        files: [
+          {cwd: 'src/html/styleguide', src: ['**'], dest: 'dist/styleguide'}
+        ],
         updateAndDelete: true,
         verbose: true
       }
