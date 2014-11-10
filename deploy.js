@@ -19,6 +19,9 @@ var Deployer = function(app, done, log) {
   this.log = log;
   this.version = currentGitHash();
 
+  if (!process.env.HEROKU_API_TOKEN) {
+    this.log.errorlns("HEROKU_API_TOKEN is not set");
+  }
   var heroku = new (require('heroku-client'))({token: process.env.HEROKU_API_TOKEN});
   this.herokuConfig = heroku.apps(app).configVars();
 };
