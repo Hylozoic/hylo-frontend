@@ -26,13 +26,15 @@
     </li>
 
     <li class="sub-group" ng-show="state.membershipsExpanded" ng-repeat="membership in currentUser.memberships">
+      <a ng-if="::membership.role == 1" ng-click="openCommunitySettings($event, membership.communityId)" class="open-community-settings only-expanded only-hover">
+        <i class="icon-Settings"></i>
+      </a>
       <a ui-sref="community({community: membership.slug})" ui-sref-active="current">
         <div class="image-item">
           <div class="image-item-icon">
             <div back-img="::membership.avatar"></div>
           </div>
           <span class="only-expanded">{{::membership.name}}</span>
-          <i ng-if="::membership.role == 1" ng-click="openCommunitySettings($event, membership.communityId)" class="only-expanded only-hover icon-settings"></i>
         </div>
       </a>
     </li>
