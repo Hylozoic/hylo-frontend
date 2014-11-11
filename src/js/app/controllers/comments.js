@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', 'User', '$log', '$rootScope', '$modal', 'growl', '$window', 'CommentingService', '$timeout', '$analytics',
-  function($scope, $http, Post, User, $log, $rootScope, $modal, growl, $window, CommentingService, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', 'User', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
+  function($scope, $http, Post, User, $log, $rootScope, $modal, growl, $window, $timeout, $analytics) {
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
@@ -7,7 +7,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
         $scope.post.comments.$promise.then(function() {
           $scope.post.commentsLoaded = true;
         });
-      } 
+      }
     }
 
     if ($scope.post.$promise) {
@@ -17,8 +17,6 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     } else {
       loadComments();
     }
-
-    $scope.focusInput = CommentingService.isFocused;
 
     $scope.canDelete = function(comment) {
       return ($rootScope.currentUser && comment.user.id == $rootScope.currentUser.id) ||
