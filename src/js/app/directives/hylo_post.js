@@ -38,7 +38,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
         modalInstance.result.then(function (selectedItem) {
           // success function
-          $analytics.eventTrack('Fulfill Post', {post_id: $scope.post.id});
+          $analytics.eventTrack('Post: Fulfill', {post_id: $scope.post.id});
         }, function () {
 
         });
@@ -77,6 +77,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       }
 
       $scope.gotoSinglePost = function() {
+        $analytics.eventTrack('Post: Load Single Post', {post_id: $scope.post.id});
         $state.go('post.comments', {community: $scope.post.communitySlug, postId: $scope.post.id})
       }
 
@@ -94,7 +95,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         Post.vote({id: thisPost.id}, function(value, responseHeaders) {
           thisPost.votes = value.numVotes;
           thisPost.myVote = value.myVote;
-          $analytics.eventTrack('Like', {state: (thisPost.myVote ? 'on' : 'off')})
+          $analytics.eventTrack('Like Post', {state: (thisPost.myVote ? 'on' : 'off')})
         });
       };
 
@@ -236,7 +237,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       };
 
       $scope.openFollowers = function() {
-        $analytics.eventTrack('Opened Followers List', {num_followers: $scope.followersNotMe.length});
+        $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length});
       }
 
       var setText = function() {

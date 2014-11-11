@@ -13,6 +13,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       if (communityPromise) {
         communityPromise.$promise.then(function () {
           $scope.query();
+          $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
         });
       }
     });
@@ -85,7 +86,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
     $scope.addSeedSuccess = function(newSeed) {
       growl.addSuccessMessage("Successfully created new seed: " + newSeed.name, {ttl: 5000});
-      $analytics.eventTrack('Added new seed', {seed_id: newSeed.id, seed_name: newSeed.name, seed_community_name: newSeed.cName, seed_community_slug: newSeed.communitySlug, post_type: newSeed.postType});
+      $analytics.eventTrack('Post: Add New Seed', {seed_id: newSeed.id, seed_name: newSeed.name, seed_community_name: newSeed.cName, seed_community_slug: newSeed.communitySlug, post_type: newSeed.postType});
       $scope.posts.unshift(newSeed);
       $scope.showSeedForm = false;
     }
@@ -95,11 +96,12 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     }
     $scope.addSeed = function(){
       $scope.showSeedForm = true;
-      $analytics.eventTrack('Open Add Seed Form');
+      $analytics.eventTrack('Post: Open Add Seed Form');
     }
 
     $scope.remove = function(postToRemove) {
       growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
+      $analytics.eventTrack('Post: Remove a Seed', {post_name: postToRemove.name, post_id: postToRemove.id});
       $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
     }
 

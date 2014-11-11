@@ -26,12 +26,13 @@ angular.module("hyloControllers").controller('ProfileSettingsCtrl', ['$rootScope
 
   }]);
 
-angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scope', '$modalInstance', '$window', '$rootScope', 'growl', '$http',
-  function($scope, $modalInstance, $window, $rootScope, growl, $http) {
+angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scope', '$modalInstance', '$window', '$rootScope', 'growl', '$http', '$analytics',
+  function($scope, $modalInstance, $window, $rootScope, growl, $http, $analytics) {
 
     var previousSettingsEmail = "";
     var previousSettingsSendPref = "";
     var previousSettingsDigest = "";
+    $analytics.eventTrack('Settings - User: Open User Preferences', {user_id: $rootScope.currentUser.id, user_email: $rootScope.currentUser.email});
 
     $scope.$watch('currentUser', function(user) {
       user.$promise.then(function(user) {
@@ -55,6 +56,7 @@ angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scop
       if($window.confirm("By changing your email address, you will have to re-validate your email address before you can continue using Hylo.  Are you sure you want to continue?")) {
         $rootScope.currentUser.$savePrefs(function(u, putRespHeaders) {
           growl.addSuccessMessage("Email address successfully changed");
+          $analytics.eventTrack('Settings - User: Updated Email Address');
         }, function(response) {
           if (response.data.error) {
             growl.addErrorMessage(response.data.error);
@@ -69,6 +71,7 @@ angular.module("hyloControllers").controller('ProfileSettingsModalCtrl', ['$scop
     $scope.savePrefs = function() {
       $rootScope.currentUser.$savePrefs(function(u) {
         growl.addSuccessMessage("Preferences successfully changed");
+        $analytics.eventTrack('Settings - User: Save User Preferences', {user_id: u.id, user_email: u.email});
       }, function(response) {
         if (response.data.error) {
           growl.addErrorMessage(response.data.error);
