@@ -168,7 +168,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
 
               var cloudFrontURL = new_InkBlob.url.replace('www.filepicker.io', 'd2kdz49m4u0buf.cloudfront.net');
 
-              $analytics.eventTrack("Uploaded Profile Image", {url: cloudFrontURL});
+              $analytics.eventTrack("Uploaded Image: User Profile Image", {url: cloudFrontURL});
 
               $scope.user.avatar = cloudFrontURL;
 
@@ -192,6 +192,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
 
     $scope.edit = function() {
       if (!$scope.editing) {
+        $analytics.eventTrack("Profile: Open Edit Info", {user_id: $scope.user.id, user_name: $scope.user.name, user_email: $scope.user.email});
         $scope.editing = true;
         previous.name = $scope.user.name;
         previous.skills = $scope.user.skills.slice();
@@ -212,7 +213,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
       if ($scope.editing) {
         $scope.editing = false;
         $scope.user.$save(function(u, putRespHeaders) {
-          $analytics.eventTrack("Updated Profile Info");
+          $analytics.eventTrack("Profile: Updated User Info", {user_id: $scope.user.id, user_name: $scope.user.name, user_email: $scope.user.email});
           growl.addSuccessMessage('Saved!');
           // TODO for now we just re-retrieve the users posts to get their new thumbnails...maybe there is a better solution?
           Post.forUser({userId: $stateParams.id}).$promise.then(function(posts) {
