@@ -100,24 +100,6 @@ body {
   min-width: 200px;
 }
 
-#bg {
-  //background-image: url(/assets/images/placeholder-bg.jpg);
-  background-size: cover;
-  background-position-y: 50%;
-  position: fixed;
-  margin: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  z-index:0;
-  // Remove blurring filters since they were not work and causing shadows on chrome.
-//  .blur(5px);
-//  filter: url(http://d3ngex8q79bk55.cloudfront.net/fonts/blur.svg#blur);
-//  filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
-}
-
 .filter-search-icon {
   color: white;
   font-size: 39px;
@@ -217,7 +199,6 @@ body {
   padding: 0px 8px;
 }
 
-
 .bubble {
   position: relative;
   margin-left: @bubble-offset;
@@ -240,103 +221,6 @@ textarea.no-border, textarea.no-border:focus {
   box-shadow: none;
   background-color: transparent;
 }
-
-.add-post {
-  margin-bottom: 18px;
-  @circle-size: 30px;
-
-  height: @circle-size;
-
-  &.editing {
-    height: auto;
-  }
-
-  .start-editing {
-    display: inline-block;
-    height: 32px;
-    line-height: 32px;
-    cursor: pointer;
-    text-decoration: none;
-
-    .bubble {
-      height: @circle-size;
-      line-height: @circle-size;
-      color: @text-light-gray;
-      padding: 0 30px;
-      .post-type-style(@faint-gray);
-      .proxima-nova-regular;
-    }
-    .triangle {
-      top: 8px;
-    }
-  }
-
-  .editor > .bubble {
-    > .post-types {
-      margin: 0;
-      > a {
-        padding: 0;
-        display: block;
-        text-align: center;
-        background-color: @faint-gray;
-        color: @text-gray;
-        height: @circle-size;
-        line-height: @circle-size;
-        cursor: pointer;
-        text-decoration: none;
-        .proxima-nova-regular;
-        &:first-child { border-top-left-radius: 5px; }
-        &:last-child { border-top-right-radius: 5px; }
-      }
-    }
-
-    .addPostInput {
-      padding: 12px 10px;
-      font-size: 14px;
-    }
-
-    .selected (@color) {
-      color: @color;
-      background-color: white;
-    }
-
-    &.intention .post-types > a.intention { .selected(@intention-color); }
-    &.request .post-types > a.request { .selected(@request-color); }
-    &.offer .post-types > a.offer { .selected(@offer-color); }
-
-    > form {
-      padding: 20px;
-      > input[type="text"] {
-        margin-bottom: 20px;
-      }
-
-      > textarea {
-        margin-bottom: 20px;
-      }
-
-      > button {
-        width: 100%;
-        color: white;
-      }
-      > label {
-        display: block;
-      }
-    }
-
-    &.intention > form > button { background-color: @intention-color; }
-    &.request > form > button { background-color: @request-color; }
-    &.offer > form > button { background-color: @offer-color; }
-
-    > .triangle {
-      top: 8px;
-    }
-    &.request > .triangle, &.offer > .triangle {
-      background-color: @faint-gray;
-    }
-  }
-}
-
-@import "app/hylo_post";
 
 .onboarding-modal {
   h4 {
