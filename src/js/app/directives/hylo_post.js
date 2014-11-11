@@ -10,6 +10,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
     controller: function($scope, $element) {
       $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
       $scope.voteTooltipText = "";
+      $scope.followersNotMe = [];
 
       $scope.isPostOwner = function() {
         if ($scope.post.user) {
@@ -82,6 +83,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       var voteText = "click to <i class='icon-following'></i> me.";
       var unvoteText = "click to un-<i class='icon-following'></i> me.";
 
+      //Voting is the same thing as "liking"
       $scope.vote = function() {
         var thisPost = $scope.post;
         var newVoteState = true; // TODO allow de-voting: !thisPost.myVote;
@@ -92,7 +94,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         Post.vote({id: thisPost.id}, function(value, responseHeaders) {
           thisPost.votes = value.numVotes;
           thisPost.myVote = value.myVote;
-          $analytics.eventTrack('Vote', {state: (thisPost.myVote ? 'on' : 'off')})
+          $analytics.eventTrack('Like', {state: (thisPost.myVote ? 'on' : 'off')})
         });
       };
 
@@ -233,6 +235,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $event.preventDefault();
       };
 
+      $scope.openFollowers = function() {
+        $analytics.eventTrack('Opened Followers List', {num_followers: $scope.followersNotMe.length});
+      }
+
       var setText = function() {
         var text = $scope.post.description;
 
@@ -253,8 +259,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.isPostText = text.length > 0;
       }
 
-      $scope.followersNotMe = [];
-
       var checkIsFollowing = function() {
         //get number of followers
         $scope.post.numFollowers = $scope.followers.length;
@@ -274,7 +278,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       var initialize = function() {
         var loadFollowers = function() {
-          $analytics.eventTrack('Loading Followers');
           if ($scope.post.followersLoaded) {
             $scope.followers = $scope.post.followers;
             $scope.$watchCollection("followers", checkIsFollowing);
