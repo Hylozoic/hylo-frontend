@@ -15,6 +15,7 @@
   font-size: 14px;
   text-decoration: none; //this removes hover effect
   color: @text-dark;
+  background-color: white;
   cursor: pointer;
   border: 1px solid @light-gray;
   border-radius: 15px;
@@ -57,19 +58,19 @@
   font-weight: @weight;
 }
 
-.proxima-nova-light {
+.proxima-nova-light() {
   .proxima-nova(300);
 }
 
-.proxima-nova-regular {
+.proxima-nova-regular() {
   .proxima-nova(400);
 }
 
-.proxima-nova-semibold {
+.proxima-nova-semibold() {
   .proxima-nova(600);
 }
 
-.proxima-nova-bold {
+.proxima-nova-bold() {
   .proxima-nova(700);
 }
 
@@ -92,7 +93,7 @@
 }
 
 .large-header() {
-  .proxima-nova-bold;
+  .proxima-nova-semibold;
   font-size: 32px;
 }
 
@@ -150,6 +151,27 @@
   overflow: hidden;
   word-wrap: break-word;
   max-height: 78px;
+}
+
+.big-close() {
+  .proxima-nova-bold;
+  &, &:hover { color: @default-text; }
+  font-size: 42px;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 1;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.borderless-text-input() {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
 }
 
 //mixin to size an avatar and add display properties
