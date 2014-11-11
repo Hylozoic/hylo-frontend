@@ -210,6 +210,11 @@
 
 }
 
+@avatar-margin-xs-default: @avatar-size-xs + 10;
+@avatar-margin-sm-default: @avatar-size-sm + 30;
+@avatar-margin-md-default: @avatar-size-default + 30;
+@avatar-margin-lg-default: @avatar-size-lg + 30;
+
 //mixins for adding margins at various avatar sizes
 .avatar-margin-xs(@use-properties: true, @add-margin: 10) {
   .add-avatar-margin(@avatar-size-xs+@add-margin, @use-properties);

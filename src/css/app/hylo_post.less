@@ -344,7 +344,10 @@
       }
 
       .comment-content {
-        .avatar-margin-sm();
+        padding-left: @avatar-margin-sm-default;
+        padding-right: 18px;
+        max-width: 100%;
+        word-wrap: break-word;
       }
     }
 
@@ -409,7 +412,8 @@
         margin-left: 5px;
       }
       .comment-content {
-        .avatar-margin-xs();
+        padding-left: @avatar-margin-xs-default;
+        padding-right: 5px;
       }
     }
     .add-comment {
