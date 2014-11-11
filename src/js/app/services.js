@@ -111,16 +111,3 @@ factory("Post", ["$resource",
           }
         })
 }]);
-
-/*
- * Simple service to share state between hyloPost and Comment controllers to focus the
- * comment input when clicking the icon-comment button on the post.
- */
-angular.module('hyloServices').service('CommentingService', function () {
-  // Has to be an object so that it can be watched properly for changes.
-  this.isFocused = {};
-
-  this.setFocus = function(id) {
-    this.isFocused[id] = true;
-  }
-});

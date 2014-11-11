@@ -1,5 +1,5 @@
-angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', 'CommentingService', '$window', '$analytics',
-  function(Post, $filter, $state, $rootScope, $log, $modal, User, $http, $timeout, CommentingService, $window, $analytics) {
+angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', '$window', '$analytics',
+  function(Post, $filter, $state, $rootScope, $log, $modal, User, $http, $timeout, $window, $analytics) {
   return {
     restrict: 'E',
     scope: {
@@ -97,16 +97,11 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       };
 
       $scope.onCommentIconClick = function() {
-        if ($scope.isCommentsCollapsed)
+        if ($scope.isCommentsCollapsed) {
           $analytics.eventTrack('Show Comments');
-
-        $scope.editingFollowers = false;
-
+          $scope.editingFollowers = false;
+        }
         $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-
-        $timeout(function() {
-          CommentingService.setFocus($scope.post.id);
-        });
       }
 
       $scope.onFollowerIconClick = function() {
@@ -293,7 +288,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         }
 
         if ($scope.isCommentsCollapsed) {
-          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed", 
+          var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed",
             function(isCollapsed) {
               if (!isCollapsed) {
                 unwatchCommentsCollapsed();
