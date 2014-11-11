@@ -1,0 +1,136 @@
+.comments {
+  background-color: @dark-accent;
+  border-top: 1px solid @border-light;
+  border-bottom: 1px solid @border-light;
+
+  > .comment {
+    margin-bottom: 18px;
+
+    //add padding to top of comments
+    &:first-child {
+      padding-top: 22px;
+    }
+
+    .avatar {
+      position: absolute;
+      margin-left: 18px;
+    }
+
+    .comment-close {
+      float: right;
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      .icon-remove-inverse {
+        color: @border-dark;
+        font-size: 16px;
+        margin: 5px -25px;
+
+        &:hover {
+          color: @link-color;
+        }
+      }
+    }
+
+    .comment-text {
+      .seed-body-text;
+    }
+
+    .comment-content .controls {
+      .seed-meta-text;
+      line-height: 1.4;
+      padding-top: 6px;
+    }
+
+    .comment-content {
+      padding-left: @avatar-margin-sm-default;
+      padding-right: 18px;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+  }
+
+  textarea {
+    resize: none;
+    -webkit-appearance: none;
+
+  }
+}
+
+.add-comment {
+  background-color: white;
+  position: relative;
+  padding: 6px 0;
+  margin-top: 20px; //gives padding on last post
+  .seed-body-text;
+  border-right: 1px solid @border-light;
+  border-left: 1px solid @border-light;
+
+
+  .avatar {
+    .user-avatar-xxs;
+    position: absolute;
+    margin-left: 18px;
+  }
+
+  .comment-input {
+    .avatar-margin-sm(false, 30px);
+    min-height: 25px;
+
+    button {
+      position: absolute;
+      right: 3px;
+      bottom: 3px;
+    }
+
+    textarea {
+      padding: 0;
+      width: 80%;
+      position: relative;
+      top: 3px;
+    }
+  }
+
+  .empty-comment {
+    font-style: italic;
+  }
+
+}
+
+//downsize the comment margins on mobile
+@media (max-width: @screen-xs-max) {
+  .comments > .comment {
+
+    &:first-child {
+      padding-top: 12px;
+    }
+
+    .avatar {
+      .user-avatar-xxs;
+      position: absolute;
+      margin-left: 5px;
+    }
+    .comment-content {
+      padding-left: @avatar-margin-xs-default;
+      padding-right: 5px;
+    }
+  }
+  .add-comment {
+    margin-top: 8px;
+
+    .avatar {
+      margin-left: 5px;
+    }
+
+    .comment-input {
+      .avatar-margin-xs(false);
+
+      button {
+        position: relative;
+        margin-top: 12px;
+      }
+    }
+  }
+}

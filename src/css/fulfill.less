@@ -1,0 +1,58 @@
+.btn-fulfill {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  text-transform: capitalize;
+  .button-variant(#FFF; @fulfillColor; @fulfillColor);
+  i {
+    font-size: 13px;
+    }
+}
+
+.fulfill-modal {
+  h4 {
+    .proxima-nova-regular;
+    font-size: 30px;
+    color: @intention-color;
+  }
+
+  p {
+    .proxima-nova-light;
+    font-size: 14px;
+    margin: 30px 0px;
+    color: #333332
+  }
+
+  label {
+    .proxima-nova-regular;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .top-contributor-item {
+    padding: 3px;
+    border: 1px solid rgba(255,255,255, 0);
+
+    &.selected {
+      background-color: #F1F2F2;
+      border: 1px solid #00EA83;
+      border-radius: 5px;
+    }
+
+    .avatar {
+      height: 30px;
+      width: 30px;
+      border-radius: 15px;
+    }
+
+    div {
+      .proxima-nova-regular;
+      font-size: 12px;
+      vertical-align: middle;
+      height: 30px;
+      overflow: hidden;
+      display: table-cell;
+      padding-left: 5px;
+    }
+  }
+}
