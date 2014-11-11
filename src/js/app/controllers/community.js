@@ -85,6 +85,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
     $scope.addSeedSuccess = function(newSeed) {
       growl.addSuccessMessage("Successfully created new seed: " + newSeed.name, {ttl: 5000});
+      $analytics.eventTrack('Added new seed', {seed_id: newSeed.id, seed_name: newSeed.name, seed_community_name: newSeed.cName, seed_community_slug: newSeed.communitySlug, post_type: newSeed.postType});
       $scope.posts.unshift(newSeed);
       $scope.showSeedForm = false;
     }

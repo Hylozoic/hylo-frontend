@@ -15,7 +15,7 @@ angular.module("hyloControllers").controller('OnboardingCtrl', ['$scope', '$root
 
     $scope.saveSkills = function() {
       $rootScope.currentUser.$save(function(u, putRespHeaders) {
-        $analytics.eventTrack("Saved User Skills Onboarding");
+        $analytics.eventTrack("Onboarding: Saved User Skills");
       });
     }
 
@@ -36,7 +36,7 @@ angular.module("hyloControllers").controller('OnboardingCtrl', ['$scope', '$root
 
     $scope.saveOrgs = function() {
       $rootScope.currentUser.$save(function(u, putRespHeaders) {
-        $analytics.eventTrack("Saved User Organizations Onboarding");
+        $analytics.eventTrack("Onboarding: Saved User Organizations");
       });
     }
 
@@ -61,7 +61,7 @@ angular.module("hyloControllers").controller('OnboardingCtrl', ['$scope', '$root
 
     $scope.finishedWizard = function() {
 
-      $analytics.eventTrack("Finished Wizard");
+      $analytics.eventTrack("Onboarding: Finished Wizard");
 
       createPost($scope.wizard.offer, "offer");
       createPost($scope.wizard.request, "request");

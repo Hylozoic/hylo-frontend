@@ -223,6 +223,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
       }
     }
 
+    //??? Is this depreicated? It doesn't look like it's being used anywhere....
     $scope.addPostFn = function(newPost) {
       growl.addSuccessMessage("Successfully created new seed: " + newPost.name, {ttl: 5000});
       $scope.posts.unshift(newPost);
