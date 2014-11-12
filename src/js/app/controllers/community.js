@@ -1,8 +1,11 @@
 angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
   function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics) {
 
-    $scope.seedFilter = "all";
-    $scope.seedSort = "recent";
+    var DEFAULT_SEED_FILTER = "all";
+    var DEFULT_SEED_SORT = "recent";
+
+    $scope.seedFilter = DEFAULT_SEED_FILTER;
+    $scope.seedSort = DEFULT_SEED_SORT;
 
     $scope.start = 0;
     $scope.limit = 12;
@@ -36,10 +39,19 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     }, 750, {leading: false});
 
 
-    $scope.$watch("seedFilter", $scope.resetQuery);
-    $scope.$watch("seedSort", $scope.resetQuery);
+    $scope.$watch("seedFilter", function () {
+      $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: $scope.community.id});
+      $scope.resetQuery();
+    }); 
+
+    $scope.$watch("seedSort", function() {
+      $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: $scope.community.id});
+      $scope.resetQuery();
+    }); 
 
     $scope.query = function(doReset) {
+
+
       // Cancel any outstanding queries
       _.each(cancelerStack, function(canceler) { canceler.resolve() });
       cancelerStack = [];
@@ -65,12 +77,22 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         $scope.searching = false;
         $scope.postLoaded = true;
 
+        if ($scope.searchQuery) {
+          $analytics.eventTrack('Posts: Filter by Query', {query: $scope.searchQuery, community_id: $rootScope.community.slug})
+        }
+
+        var firstLoad = $scope.posts.length < $scope.limit;
+        if (!firstLoad) {
+          $analytics.eventTrack('Posts: Load more in Feed', {community_id: $rootScope.community.slug});
+        }
+
         if (doReset) {
           $scope.posts = [];
         }
 
         angular.forEach(posts, function(post, key) {
           if (!_.findWhere($scope.posts, {id: post.id})) {
+            $analytics.eventTrack('Posts: Load', {post_id: post.id, community_id: $rootScope.community.slug, sort_by: $scope.seedSort, post_type: $scope.seedFilter, search_by: $scope.searchQuery, loaded_on:'community page'});
             $scope.posts.push(post);
             $scope.start++;
           }
