@@ -1,0 +1,35 @@
+<div class="community-settings">
+  <nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <div class="navbar-text">
+        <i class="icon-hylo-script"></i>
+      </div>
+    </div>
+    <div class="navbar-center navbar-brand" href="#">COMMUNITY SETTINGS</div>
+
+    <a class="navbar-right close" ng-click="close()">&times;</a>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6">
+
+        <!-- <section class="appearance">
+          <div class="section-label">Appearance</div>
+        </section> -->
+
+        <section class="invite">
+          <div class="section-label">Invite Members</div>
+          <button ng-click="sendInvites()">
+            <i class="icon-big-check"></i>
+            Send Invite
+          </button>
+          <input type="text" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>

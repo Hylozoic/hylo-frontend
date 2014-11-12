@@ -255,42 +255,10 @@ angular.module("hylo.createCommunity", [])
       }
     ])
 
-    .controller("EditCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', '$stateParams', '$rootScope', 'CurrentUser', '$analytics',
-      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $stateParams, $rootScope, CurrentUser, $analytics) {
-
-        $scope.state = CreateCommunityService.getNewState(true);
-
-        var originalSlug;
-        $scope.state.createForm = CreateCommunityResource.get({id: $stateParams.id}, function(createForm) {
-          // We need to save the original slug in case the user modified the slug, but cancels the changes.
-          originalSlug = createForm.slug;
-        });
-
-        $scope.cancel = function cancelEdit() {
-            $state.go('community', {community: originalSlug});
-        }
-
-        $scope.submit = function() {
-
-          var newCommunity = new CreateCommunityResource($scope.state.createForm);
-
-          CreateCommunityResource.update({}, newCommunity, function (value, respHeaders) {
-            $analytics.eventTrack('Created new community');
-            // Invoke scope function
-
-            $rootScope.currentUser = CurrentUser.get();
-            $analytics.eventTrack('editCommunity');
-            $state.go("community", {community: value.slug}, {reload: true});
-          }, function (responseValue) {
-            $log.error("error", responseValue);
-          });
-        }
-      }
-    ])
-
     .factory("CreateCommunityResource", ["$resource",
-  function($resource) {
-    return $resource("/rest/create/community/:id", null, {
-      'update': { method:'PUT' }
-    });
-  }]);
+      function($resource) {
+        return $resource("/rest/create/community/:id", null, {
+          'update': { method:'PUT' }
+        });
+      }]);
+
