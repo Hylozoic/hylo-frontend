@@ -49,28 +49,19 @@ angular.module('hyloApp', [
         'responseError': function(rejection) {
           var requestTo = rejection.config ? rejection.config.url : "N/A"
           if (rejection.status == 403) {
-//            $window.location.replace(jsRoutes.controllers.Application.show403(requestTo).absoluteURL());
-            $log.error(rejection)
-            if (!hyloEnv.isProd) {
-              $log.error("403 ERROR", requestTo);
-            } else {
-              $("body").load(jsRoutes.controllers.Application.show403(requestTo).absoluteURL() + " #mainContainer");
-            }
+            $log.error("403 ResponseError", rejection)
+            Rollbar.error("Client 403 Error", {page: rejection.config.url});
+            growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           } else if (rejection.status == 500) {
             if (!hyloEnv.isProd) {
               $("body").html(rejection.data);
             } else {
-              growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team will be notified of the problem.", {ttl: 5000});
-//              $window.location.replace(jsRoutes.controllers.Application.show500().absoluteURL());
+              growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
             }
           } else if (rejection.status == 404) {
-//            $window.location.replace(jsRoutes.controllers.Application.show404(requestTo).absoluteURL());
-            $log.error(rejection)
-            if (!hyloEnv.isProd) {
-              $log.error("404 ERROR", requestTo);
-            } else {
-              $("body").load(jsRoutes.controllers.Application.show404(requestTo).absoluteURL() + " #mainContainer");
-            }
+            $log.error("404 ResponseError", rejection, jsRoutes.controllers.Application.show404(requestTo).absoluteURL())
+            Rollbar.error("Client 404 Error", {page: rejection.config.url});
+            growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           }
           return $q.reject(rejection);
         }
