@@ -1,7 +1,7 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in post.comments">
-    <div class="comment-close hidden-xs"><a ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="icon-remove-inverse"></i>&nbsp;</a></div>
+    <div class="comment-close hidden-xs"><a ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="cancel-01"></i>&nbsp;</a></div>
     <a class="avatar user-avatar-sm" back-img="::comment.user.avatar" ui-sref="user({community: $root.community.slug, id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
