@@ -95,20 +95,20 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         Post.vote({id: thisPost.id}, function(value, responseHeaders) {
           thisPost.votes = value.numVotes;
           thisPost.myVote = value.myVote;
-          $analytics.eventTrack('Like Post', {state: (thisPost.myVote ? 'on' : 'off')})
+          $analytics.eventTrack('Post: Like', {post_id: $scope.post.id, state: (thisPost.myVote ? 'on' : 'off')})
         });
       };
 
       $scope.onCommentIconClick = function() {
         if ($scope.isCommentsCollapsed) {
-          $analytics.eventTrack('Show Comments');
+          $analytics.eventTrack('Post: Comments: Show', {post_id: $scope.post.id});
           $scope.editingFollowers = false;
         }
         $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
       }
 
       $scope.onFollowerIconClick = function() {
-        $analytics.eventTrack('Show Followers');
+        $analytics.eventTrack('Post: Followers: Show', {post_id: $scope.post.id});
         $scope.isCommentsCollapsed = true;
         $scope.toggleEditFollowers();
       }
@@ -175,9 +175,11 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
 
       $scope.toggleJoinPost = function() {
         if (!$scope.isFollowing) {
+          $analytics.eventTrack('Post: Join: Follow', {post_id: $scope.post.id});
           $scope.followPost();
         } else {
           Post.unfollow({id: $scope.post.id}, function(res) {
+            $analytics.eventTrack('Post: Join: Unfollow', {post_id: $scope.post.id});
             // remove the follower from list of followers.
             $scope.followers = _.without($scope.followers, _.findWhere($scope.followers, {value: res.value}));
           });

@@ -1,5 +1,7 @@
-angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout',
-  function($rootScope, $scope, User, $timeout) {
+angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout', '$analytics',
+  function($rootScope, $scope, User, $timeout, $analytics) {
+
+    $analytics.eventTrack('Members: Load Community Members');
 
     $rootScope.$watch('community', function(community) {
       community.$promise.then(function() {
@@ -15,6 +17,7 @@ angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope'
 
     var queryFn = function() {
       $scope.searching = true;
+      $analytics.eventTrack('Members: Query', {community_id: $scope.community.slug, query: $scope.searchQuery});
       User.query({
         q: $scope.searchQuery,
         community: $scope.community.slug
