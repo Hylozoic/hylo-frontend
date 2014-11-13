@@ -49,7 +49,9 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
 
     $rootScope.$watch('currentUser', function(user) {
       user.$promise.then(function(user) {
-        if (user.id == $stateParams.id) {
+        var isOwnProfile = (user.id == $stateParams.id);
+        $analytics.eventTrack('User: Load a Member Profile', {user_id: user.id, is_own_profile: isOwnProfile});
+        if (isOwnProfile) {
           $scope.user = user;
           $scope.editable = true;
 
@@ -91,6 +93,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
     });
 
     $scope.removePost = function(postToRemove) {
+      console.log('delete post');
       growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
       $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
     }
