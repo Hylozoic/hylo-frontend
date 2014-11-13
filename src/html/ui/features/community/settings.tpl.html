@@ -3,7 +3,7 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <div class="navbar-text">
-        <i class="icon-hylo-script"></i>
+        <i class="icon-hylo-script" ng-click="close()"></i>
       </div>
     </div>
     <div class="navbar-center navbar-brand" href="#">COMMUNITY SETTINGS</div>
@@ -21,12 +21,19 @@
 
         <section class="invite">
           <div class="section-label">Invite Members</div>
-          <button ng-click="sendInvites()">
-            <i class="icon-big-check"></i>
-            Send Invite
+          <button ng-click="submit()">
+            <span ng-show="submitting">
+              <i class="icon-duration"></i>
+              Sending...
+            </span>
+            <span ng-hide="submitting">
+              <i class="icon-big-check"></i>
+              Send Invite
+            </span>
           </button>
           <input type="text" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
 
+          <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
         </section>
 
       </div>
