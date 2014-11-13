@@ -11,16 +11,13 @@ module.exports = function(angularModule) {
       // TODO: add this when community editing is restored
       // $analytics.eventTrack('Community: Edited Community', {community_id: value.slug});
 
-      $scope.submit = function() {
+      $scope.invite = function() {
         if ($scope.submitting) return;
         $scope.submitting = true;
 
         Community.invite({id: $scope.community.id, emails: $scope.emails})
         .$promise.then(function(resp) {
-          if (resp.sent > 1)
-            alert('Your invitations are on their way!');
-          else
-            alert('Your invitation is on its way!');
+          $scope.inviteResults = resp.results;
           $scope.emails = '';
           $scope.submitting = false;
         }, function() {

@@ -21,7 +21,7 @@
 
         <section class="invite">
           <div class="section-label">Invite Members</div>
-          <button ng-click="submit()">
+          <button ng-click="invite()">
             <span ng-show="submitting">
               <i class="icon-duration"></i>
               Sending...
@@ -32,6 +32,18 @@
             </span>
           </button>
           <input type="text" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+
+          <div ng-show="inviteResults" class="results">
+            <h3>Results</h3>
+            <table>
+              <tr ng-repeat="result in inviteResults">
+                <td>{{result.email}}</td>
+                <td class="status" ng-class="{error: result.error}">
+                  {{result.error ? result.error : "invitation sent!"}}
+                </td>
+              </tr>
+            </table>
+          </div>
 
           <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
         </section>
