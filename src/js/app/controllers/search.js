@@ -83,7 +83,6 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
         // Push posts to stack
         angular.forEach(posts, function(post, key) {
           if (!_.findWhere($scope.posts, {id: post.id})) {
-            $analytics.eventTrack('Posts: Load', {post_id: post.id, community_id: $rootScope.community.slug, sort_by: $scope.postSort, post_type: $scope.postType, search_by: $scope.searchQuery, loaded_on:'search page'});
             $scope.posts.push(post);
             $scope.start++;
           }
