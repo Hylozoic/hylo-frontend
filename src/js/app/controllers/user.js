@@ -93,7 +93,6 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
     });
 
     $scope.removePost = function(postToRemove) {
-      console.log('delete post');
       growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
       $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
     }

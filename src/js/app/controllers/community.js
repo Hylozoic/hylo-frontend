@@ -15,8 +15,8 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
       if (communityPromise) {
         communityPromise.$promise.then(function () {
-          $scope.query();
           $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
+          $scope.query();
         });
       }
     });
@@ -92,7 +92,6 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
         angular.forEach(posts, function(post, key) {
           if (!_.findWhere($scope.posts, {id: post.id})) {
-            $analytics.eventTrack('Posts: Load', {post_id: post.id, community_id: $rootScope.community.slug, sort_by: $scope.seedSort, post_type: $scope.seedFilter, search_by: $scope.searchQuery, loaded_on:'community page'});
             $scope.posts.push(post);
             $scope.start++;
           }
