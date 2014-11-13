@@ -1,7 +1,7 @@
 angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout', '$analytics',
   function($rootScope, $scope, User, $timeout, $analytics) {
 
-    $analytics.eventTrack('Members: Load Community Members');
+    $analytics.eventTrack('Members: Load Community Members Page');
 
     $rootScope.$watch('community', function(community) {
       community.$promise.then(function() {
