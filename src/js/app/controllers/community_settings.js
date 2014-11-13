@@ -8,6 +8,9 @@ module.exports = function(angularModule) {
         $state.go('community', {community: $scope.community.slug});
       };
 
+      // TODO: add this when community editing is restored
+      // $analytics.eventTrack('Community: Edited Community', {community_id: value.slug});
+
       $scope.submit = function() {
         if ($scope.submitting) return;
         $scope.submitting = true;
