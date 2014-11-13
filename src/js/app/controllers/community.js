@@ -1,8 +1,11 @@
 angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
   function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics) {
 
-    $scope.seedFilter = "all";
-    $scope.seedSort = "recent";
+    var DEFAULT_SEED_FILTER = "all";
+    var DEFULT_SEED_SORT = "recent";
+
+    $scope.seedFilter = DEFAULT_SEED_FILTER;
+    $scope.seedSort = DEFULT_SEED_SORT;
 
     $scope.start = 0;
     $scope.limit = 12;
@@ -12,6 +15,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
       if (communityPromise) {
         communityPromise.$promise.then(function () {
+          $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
           $scope.query();
         });
       }
@@ -35,10 +39,19 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     }, 750, {leading: false});
 
 
-    $scope.$watch("seedFilter", $scope.resetQuery);
-    $scope.$watch("seedSort", $scope.resetQuery);
+    $scope.$watch("seedFilter", function () {
+      $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: $scope.community.id});
+      $scope.resetQuery();
+    }); 
+
+    $scope.$watch("seedSort", function() {
+      $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: $scope.community.id});
+      $scope.resetQuery();
+    }); 
 
     $scope.query = function(doReset) {
+
+
       // Cancel any outstanding queries
       _.each(cancelerStack, function(canceler) { canceler.resolve() });
       cancelerStack = [];
@@ -64,6 +77,15 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         $scope.searching = false;
         $scope.postLoaded = true;
 
+        if ($scope.searchQuery) {
+          $analytics.eventTrack('Posts: Filter by Query', {query: $scope.searchQuery, community_id: $rootScope.community.slug})
+        }
+
+        var firstLoad = $scope.posts.length < $scope.limit;
+        if (!firstLoad) {
+          $analytics.eventTrack('Posts: Load more in Feed', {community_id: $rootScope.community.slug});
+        }
+
         if (doReset) {
           $scope.posts = [];
         }
@@ -85,6 +107,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
     $scope.addSeedSuccess = function(newSeed) {
       growl.addSuccessMessage("Successfully created new seed: " + newSeed.name, {ttl: 5000});
+      $analytics.eventTrack('Post: Add New Seed', {seed_id: newSeed.id, seed_name: newSeed.name, seed_community_name: newSeed.cName, seed_community_slug: newSeed.communitySlug, post_type: newSeed.postType});
       $scope.posts.unshift(newSeed);
       $scope.showSeedForm = false;
     }
@@ -94,11 +117,12 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     }
     $scope.addSeed = function(){
       $scope.showSeedForm = true;
-      $analytics.eventTrack('Open Add Seed Form');
+      $analytics.eventTrack('Post: Open Add Seed Form');
     }
 
     $scope.remove = function(postToRemove) {
       growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
+      $analytics.eventTrack('Post: Remove a Seed', {post_name: postToRemove.name, post_id: postToRemove.id});
       $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
     }
 
