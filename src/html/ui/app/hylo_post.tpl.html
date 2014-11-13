@@ -77,7 +77,7 @@
           <!-- Make a list of followers -->
           <span ng-if="followersNotMe.length > 2">
             <span class="dropdown">and
-            <a class="dropdown-toggle"><span ng-bind="followersNotMe.length - 2"></span> other<span ng-if="followersNotMe.length > 3">s</span></a>
+            <a class="dropdown-toggle" ng-click="openFollowers()"><span ng-bind="followersNotMe.length - 2"></span> other<span ng-if="followersNotMe.length > 3">s</span></a>
             <ul class="dropdown-menu">
               <li ng-repeat="follower in followersNotMe.slice(2)">
                 <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
@@ -102,8 +102,8 @@
           <span class="num">{{post.votes}}</span>
         </a>
         <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
-          <i ng-if="!editingFollowers" class="icon-add-MEMBER" style="font-size: 18px; vertical-align: sub;"></i>
-          <i ng-if="editingFollowers" class="icon-add-MEMBER-selected" style="font-size: 18px; vertical-align: sub;"></i>
+          <i ng-if="!editingFollowers" class="icon-add-member"></i>
+          <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
           <span class="num">{{post.numFollowers}}</span>
         </a>
         <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">

@@ -37,7 +37,7 @@ angular.module("hylo.createCommunity", [])
                   $timeout(function() {
                     var cloudFrontURL = new_InkBlob.url.replace('www.filepicker.io', 'd2kdz49m4u0buf.cloudfront.net');
 
-                    $analytics.eventTrack("Uploaded image", {url: cloudFrontURL});
+                    $analytics.eventTrack("Uploaded Image: Community Banner", {url: cloudFrontURL});
 
                     state.createForm.banner = cloudFrontURL;
                     state.bannerChosen = true;
@@ -45,6 +45,7 @@ angular.module("hylo.createCommunity", [])
 
                 }, function(FPERROR) { // Error Handler
                   growl.addErrorMessage('Error uploading image.  Please try again.');
+                  $analytics.eventTrack('Upload Image: Community Banner FAILED');
                   $timeout(function() {
                     state.loadingBanner = false;
                   });
@@ -62,6 +63,7 @@ angular.module("hylo.createCommunity", [])
           })
           if (FPError.code != 101) {
             growl.addErrorMessage('Error uploading image.  Please try again.');
+            $analytics.eventTrack('Upload Image: Community Banner FAILED');
           }
         });
       };
@@ -102,7 +104,7 @@ angular.module("hylo.createCommunity", [])
                   $timeout(function() {
                     var cloudFrontURL = new_InkBlob.url.replace('www.filepicker.io', 'd2kdz49m4u0buf.cloudfront.net');
 
-                    $analytics.eventTrack("Uploaded image", {url: cloudFrontURL});
+                    $analytics.eventTrack("Uploaded Image: Community Icon", {url: cloudFrontURL});
 
                     state.createForm.icon = cloudFrontURL;
                     state.iconChosen = true;
@@ -110,6 +112,7 @@ angular.module("hylo.createCommunity", [])
 
                 }, function(FPERROR) { // Error Handler
                   growl.addErrorMessage('Error uploading image.  Please try again.');
+                  $analytics.eventTrack('Upload Image: Community Icon FAILED');
                   $timeout(function() {
                     state.loadingIcon = false;
                   });
@@ -127,6 +130,7 @@ angular.module("hylo.createCommunity", [])
           $log.error(FPError);
           if (FPError.code != 101) {
             growl.addErrorMessage('Error uploading image.  Please try again.');
+            $analytics.eventTrack('Upload Image: Community Icon FAILED');
           }
         });
       };
@@ -239,11 +243,10 @@ angular.module("hylo.createCommunity", [])
           var newCommunity = new CreateCommunityResource($scope.state.createForm);
 
           newCommunity.$save(function (value, respHeaders) {
-            $analytics.eventTrack('Created new community');
+            $analytics.eventTrack('Community: Created New Community', {community_id: value.slug});
             // Invoke scope function
 
             $rootScope.currentUser = CurrentUser.get();
-            $analytics.eventTrack('createCommunity');
             $state.go("community", {community: value.slug});
 
           }, function (responseValue) {
@@ -261,4 +264,3 @@ angular.module("hylo.createCommunity", [])
           'update': { method:'PUT' }
         });
       }]);
-

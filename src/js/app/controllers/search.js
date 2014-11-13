@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', 'Post', "$log", '$stateParams', 'growl', '$q', '$http', '$location',
-  function($scope, $rootScope, $timeout, Post, $log, $stateParams, growl, $q, $http, $location) {
+angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', 'Post', "$log", '$stateParams', 'growl', '$q', '$http', '$location', '$analytics',
+  function($scope, $rootScope, $timeout, Post, $log, $stateParams, growl, $q, $http, $location, $analytics) {
 
     $scope.postType = "all";
     $scope.postSort = "top";
@@ -67,6 +67,19 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
         timeout: newCanceler.promise,
         responseType: 'json'
       }).success(function(posts) {
+        if ($scope.searchQuery) {
+          $analytics.eventTrack('Search: Filter', {query: $scope.searchQuery, community_id: $rootScope.community.slug})
+        }
+
+        var firstLoad = $scope.posts.length < $scope.limit;
+
+        if (!firstLoad) {
+          $analytics.eventTrack('Posts: Load more in Search', {community_id: $rootScope.community.slug});
+        }
+        else {
+          $analytics.eventTrack('Search: Load Search Page', {community_id: $rootScope.community.slug});
+        }
+
         // Push posts to stack
         angular.forEach(posts, function(post, key) {
           if (!_.findWhere($scope.posts, {id: post.id})) {

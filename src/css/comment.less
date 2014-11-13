@@ -16,20 +16,22 @@
       margin-left: 18px;
     }
 
-    .comment-close {
-      float: right;
-
-      a:hover {
-        text-decoration: none;
-      }
-
-      .icon-remove-inverse {
-        color: @border-dark;
-        font-size: 16px;
-        margin: 5px -25px;
+    .comment-delete {  
+      a {
+        float: right;
 
         &:hover {
-          color: @link-color;
+          text-decoration: none;
+        }
+
+        .comment-delete-icon{
+          color: @border-dark;
+          font-size: 12px;
+          margin: 5px -25px;
+
+          &:hover {
+            color: @link-color;
+          }
         }
       }
     }
