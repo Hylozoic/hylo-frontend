@@ -73,7 +73,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
           closeCommenting();
 
-          $analytics.eventTrack('Add Comment', {post_id: $scope.post.id});
+          $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id});
 
           $scope.followPost();
         });
@@ -89,7 +89,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
       $http.post('/comment/thank', {id: comment.id}).success(function(data, status, headers, config) {
         comment.isThanked = data.isThanked;
-        $analytics.eventTrack('Thank Comment', {post_id: $scope.post.id, comment_id: comment.id, state: (comment.isThanked ? 'on' : 'off')})
+        $analytics.eventTrack('Post: Comment: Thank', {post_id: $scope.post.id, comment_id: comment.id, state: (comment.isThanked ? 'on' : 'off')})
       });
     };
 
@@ -100,12 +100,12 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       });
       modalInstance.result.then(function() {
         $http.post('/comment/delete', {id: comment.id}).success(function(data, status, headers, config) {
-          $log.debug("success", data);
+          $log.debug("success", data);      
+          $analytics.eventTrack('Post: Comment: Delete', {post_id: $scope.post.id, comment_id: comment.id, comment_text: comment.text} );
           $scope.post.comments.splice($scope.post.comments.indexOf(comment), 1);
           $scope.post.numComments--;
         });
         growl.addSuccessMessage("Comment Deleted", {ttl: 5000});
-
         $log.debug('delete', comment.id);
       });
     };
