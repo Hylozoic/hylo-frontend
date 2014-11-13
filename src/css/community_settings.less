@@ -98,6 +98,18 @@
         text-decoration: underline;
       }
     }
+    .results {
+      h3 {
+        .seed-title-text;
+      }
+      td {
+        padding-right: @std-padding * 2;
+        .seed-body-text;
+        &.error {
+          color: @error-color;
+        }
+      }
+    }
   }
 
 
