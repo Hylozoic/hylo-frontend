@@ -116,17 +116,6 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
 
     $scope.setMenuState = MenuService.setMenuState;
 
-    $scope.openSettings = function($event) {
-      // Prevent bubbling to showItem.
-      // On recent browsers, only $event.stopPropagation() is needed
-      if ($event.stopPropagation) $event.stopPropagation();
-      if ($event.preventDefault) $event.preventDefault();
-      $event.cancelBubble = true;
-      $event.returnValue = false;
-
-      $state.go("user.settings", {community: $rootScope.community.slug, id: $rootScope.currentUser.id});
-    }
-
     $scope.markread = function(notification) {
       notification.read = true;
       Notification.markRead({id: notification.id})
