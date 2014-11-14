@@ -106,10 +106,11 @@
     overflow: hidden;
     .proxima-nova-regular;
     visibility: hidden;
+    position: relative;
 
     &.current-community {
       visibility: visible;
-    } 
+    }
 
     i {
       font-size: 14px;
@@ -302,14 +303,6 @@
       &.sub-group {
         background-color: @expandedSubColor;
         max-height: 300px;
-
-        .icon-settings {
-          right: -10px;
-          display: table-cell;
-          vertical-align: middle;
-          margin-right: 0px;
-          top: 0;
-        }
       }
 
       &.no-link {
@@ -372,14 +365,20 @@
     margin-bottom: 0;
   }
 
-  a.open-community-settings {
-    float: right;
-    margin-top: 10px;
+  a.open-settings {
+    position: absolute;
+    right: 2px;
     padding: 2px;
+    margin-top: 3px;
     i {
-      margin: 0
+      margin: 0;
+      width: 18px !important;
     }
   }
+  .sub-group a.open-settings {
+    margin-top: 10px;
+  }
+
 }
 
 .mobile-nav {
