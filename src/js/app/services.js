@@ -1,5 +1,17 @@
 angular.module('hyloServices', ['ngResource']).
 
+factory('Community', ['$resource',
+  function($resource) {
+    return $resource('/noo/community/:id', {
+      id: '@id'
+    }, {
+      invite: {
+        method: 'POST',
+        url: '/noo/community/:id/invite'
+      }
+    });
+  }]).
+
 factory('CurrentUser', ['$resource',
   function($resource) {
     return $resource('/current_user', {}, {
