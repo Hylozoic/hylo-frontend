@@ -1,5 +1,5 @@
 <div class="row community">
-  
+
   <div id="banner">
     <div id="banner-image">
       <div id="innerImage" back-img="community.banner" > </div>
@@ -41,8 +41,8 @@
             <option value="intention">Intentions</option>
             <option value="offer">Offers</option>
             <option value="request">Requests</option>
-          </select>          
-        
+          </select>
+
 
           <div class="filter-query input-group">
             <a class="button-rounded circle" ng-click="searchSelected = !searchSelected" ng-init="searchSelected = false">
@@ -52,10 +52,10 @@
               <input placeholder="Search" class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
               <div class="textfield-search-indicator tsi-button-group" loading-indicator ng-if="searching"></div>
             </div>
-            
+
           </div>
         </div>
-      </div>      
+      </div>
     </div>
     <div class="col-md-10 col-md-offset-1 col-sm-offset-1 posts">
     <div infinite-scroll="query()"

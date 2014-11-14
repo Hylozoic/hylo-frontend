@@ -16,7 +16,6 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   }
 
   var setMenuState = function(isOpen, force, event) {
-
     // If the menu state is not to be changed, then just exit
     if (state.expanded === isOpen) {
       return;
@@ -115,18 +114,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
       $scope.unreadCount = count > 0 ? count : '';
     }, true);
 
-    $scope.setMenuState = MenuService.setMenuState
-
-    $scope.openCommunitySettings = function($event, communityId) {
-      // Prevent bubbling to showItem.
-      // On recent browsers, only $event.stopPropagation() is needed
-      if ($event.stopPropagation) $event.stopPropagation();
-      if ($event.preventDefault) $event.preventDefault();
-      $event.cancelBubble = true;
-      $event.returnValue = false;
-
-      $state.go("editCommunity", {id: communityId});
-    }
+    $scope.setMenuState = MenuService.setMenuState;
 
     $scope.openSettings = function($event) {
       // Prevent bubbling to showItem.

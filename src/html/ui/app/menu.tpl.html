@@ -26,7 +26,7 @@
     </li>
 
     <li class="sub-group" ng-show="state.membershipsExpanded" ng-repeat="membership in currentUser.memberships">
-      <a ng-if="::membership.role == 1" ng-click="openCommunitySettings($event, membership.communityId)" class="open-community-settings only-expanded only-hover">
+      <a ng-if="::membership.role == 1" ui-sref="communitySettings({community: membership.slug})" class="open-community-settings only-expanded only-hover">
         <i class="icon-Settings"></i>
       </a>
       <a ui-sref="community({community: membership.slug})" ui-sref-active="current">
@@ -57,7 +57,7 @@
       <a ui-sref="user({community: $root.community.slug, id: $root.currentUser.id})" id="menu-user" ui-sref-active="current">
         <i class="icon-profile"></i>
         <span class="only-expanded">My Profile</span>
-        <i ng-click="openSettings($event)" class="only-expanded only-hover icon-settings pull-right"></i>
+        <i ng-click="openSettings($event)" class="only-expanded only-hover icon-Settings pull-right"></i>
       </a>
     </li>
 

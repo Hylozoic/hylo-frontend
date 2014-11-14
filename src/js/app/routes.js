@@ -31,12 +31,12 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('editCommunity', {
-        url: '/edit/community/:id',
+      state('communitySettings', {
+        url: '/c/:community/settings',
         views: {
           "": {
-            templateUrl: '/ui/features/community/editCommunity.tpl.html',
-            controller: 'EditCommunityCtrl'
+            templateUrl: '/ui/features/community/settings.tpl.html',
+            controller: 'CommunitySettingsCtrl'
           }
         }
       }).

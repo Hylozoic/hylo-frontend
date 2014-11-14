@@ -1,0 +1,116 @@
+.community-settings {
+  position: fixed;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  background: white;
+
+  nav .close {
+    .big-close;
+    margin-top: 7px;
+  }
+
+  .navbar-brand {
+    .section-title;
+  }
+
+  form {
+    padding-bottom: 30px;
+
+    label {
+      text-transform: uppercase;
+    }
+  }
+
+  .icon-help-text {
+    .proxima-nova-semibold;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .banner {
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    display: table;
+    overflow: hidden;
+
+    .banner-help {
+      background-color: rgba(10, 10, 10, 0.4);
+      padding: 4px;
+      .border-radius(5px)
+    }
+
+    .banner-inner {
+      display: table-cell;
+      vertical-align: middle;
+      color: white;
+      .proxima-nova-semibold;
+      font-size: 14px;
+    }
+  }
+
+  .community-icon {
+    height: 160px;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-size: cover;
+  }
+
+  .section-label {
+    .large-header;
+    height: 75px;
+    line-height: 75px;
+    border-bottom: 1px solid @border-light;
+    margin-bottom: @std-padding;
+  }
+
+  section {
+    margin: @std-padding 0;
+    position: relative;
+  }
+
+  .invite {
+    button {
+      .rounded-button;
+      position: absolute;
+      right: 0;
+    }
+    input {
+      .borderless-text-input;
+      .seed-body-text;
+      line-height: 30px;
+      &.placeholding { font-style: italic; }
+      display: block;
+      padding-right: 150px;
+      width: 100%;
+    }
+    .note {
+      .seed-meta-text;
+      margin-top: @std-padding;
+      text-align: center;
+      a {
+        text-decoration: underline;
+      }
+    }
+    .results {
+      h3 {
+        .seed-title-text;
+      }
+      td {
+        padding-right: @std-padding * 2;
+        .seed-body-text;
+        &.error {
+          color: @error-color;
+        }
+      }
+    }
+  }
+
+
+}

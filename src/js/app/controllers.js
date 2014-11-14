@@ -1,4 +1,4 @@
-angular.module('hyloControllers', ['hyloFilters']);
+var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 
 require('./controllers/comments');
 require('./controllers/community_users');
@@ -10,3 +10,5 @@ require('./controllers/profile_settings');
 require('./controllers/search');
 require('./controllers/user');
 require('./controllers/view_post');
+
+require('./controllers/community_settings')(angularModule);
