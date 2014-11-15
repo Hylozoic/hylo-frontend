@@ -26,7 +26,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/seeds',
         views: {
           "communityContentView": {
-            templateUrl: '/ui/app/community_list.tpl.html',
+            templateUrl: '/ui/app/community_seeds.tpl.html',
             controller: 'CommunitySeedsCtrl'
           }
         }

@@ -1,3 +1,45 @@
+<div class="community-filter-buttons" class="filters">
+  <div ng-if="showSeedForm">
+    <hylo-seed-form on-success="addSeedSuccess(seed)" on-cancel="addSeedCancel()"></hylo-seed-form>
+  </div>
+  <div class="btn-toolbar full_width" ng-hide="showSeedForm">
+    <div class="btn-group">
+      <div class="add-seed">
+        <a href="#" id="community-addSeedButton" class="button-rounded" ng-click="addSeed()">
+          <i class="add-seed-icon icon-add-01"></i>
+          <span id="community-addSeedButton-text"> New Seed</span>
+        </a>
+      </div>
+    </div>
+    <div class="filter-buttons" class="btn-group">
+
+      <select selectpicker="['top']" class="rounded-style" ng-model="seedSort">
+        <option value="recent">Recent</option>
+        <option value="top">Top</option>
+        <!--<option value="magic">Serendipity</option>-->
+      </select>
+
+      <select id="filter-seed-type" selectpicker ng-model="seedFilter" class="rounded-style">
+        <option value="all">All Seeds</option>
+        <option value="intention">Intentions</option>
+        <option value="offer">Offers</option>
+        <option value="request">Requests</option>
+      </select>
+
+
+      <div class="filter-query input-group">
+        <a class="button-rounded circle" ng-click="searchSelected = !searchSelected" ng-init="searchSelected = false">
+          <i class="icon-search"></i>
+        </a>
+        <div id="search-popover" ng-show="searchSelected">
+          <input placeholder="Search" class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+          <div class="textfield-search-indicator tsi-button-group" loading-indicator ng-if="searching"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 <div class="col-md-10 col-md-offset-1 col-sm-offset-1 posts">
   <div infinite-scroll="query()"
        infinite-scroll-distance="1"
@@ -15,4 +57,5 @@
   <div ng-if="::postLoaded && !searching && posts.length == 0">
     <h2 style="text-align: center;">There are no seeds to display.</h2>
   </div>
-</div>
+</div>      
+

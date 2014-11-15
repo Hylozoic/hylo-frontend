@@ -12,7 +12,6 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
 
     $scope.postLoaded = false;
 
-    console.dir($state);
     $scope.stateName = $state.current.name;
     $scope.stateParams = $state.params;
 
