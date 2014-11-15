@@ -6,13 +6,13 @@
     </div>
     <div id="banner-text">
       <div class="banner-communityName" ng-bind="::community.name"></div>
-      <!--
+      
       <div class="banner-menu">
-        <div class="banner-menuItem">SEEDS</div>
-        <div class="banner-menuItem">MEMBERS</div>
-        <div class="banner-menuItem">ABOUT</div>
+        <a ui-sref=".seeds"><div class="banner-menuItem">SEEDS</div></a>
+        <a ui-sref=".members"><div class="banner-menuItem">MEMBERS</div></a>
+        <a ui-sref=".about"><div class="banner-menuItem">ABOUT</div></a>        
       </div>
-      -->
+      
     </div>
   </div>
     <div class="community-filter-buttons" class="filters">
@@ -58,7 +58,8 @@
       </div>
     </div>
     <div class="col-md-10 col-md-offset-1 col-sm-offset-1 posts">
-      <a ui-sref=".list" style="width:100%; float:right">Show List</a>
+      <a ui-sref=".list" style="width:100%; float:right">Show List -- demonstrate example of using different views</a>
+      <div ui-view="communityContentView"></div>
       <div ui-view="listA"></div>
       <div ui-view="listB"></div>
     </div>
