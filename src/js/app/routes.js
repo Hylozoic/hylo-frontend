@@ -49,7 +49,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         views: {
           "communityContentView": {
             templateUrl: '/ui/features/community/communityMembers.tpl.html',
-            controller: function($scope) {
+            controller: function($scope, $state) {
               $scope.list = "list of members to go here";
             }
           }

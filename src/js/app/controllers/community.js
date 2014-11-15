@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
-  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics) {
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state',
+  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state) {
 
     var DEFAULT_SEED_FILTER = "all";
     var DEFULT_SEED_SORT = "recent";
@@ -11,6 +11,10 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.limit = 12;
 
     $scope.postLoaded = false;
+
+    console.dir($state);
+    $scope.stateName = $state.current.name;
+    $scope.stateParams = $state.params;
 
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
       if (communityPromise) {
