@@ -27,9 +27,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         views: {
           "communityContentView": {
             templateUrl: '/ui/app/community_list.tpl.html',
-            controller: function($scope) {
-              $scope.items = ['Seed1', 'Seed2', 'Seed3'];
-            }
+            controller: 'CommunitySeedsCtrl'
           }
         }
       }).
@@ -38,9 +36,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         views: {
           "communityContentView": {
             templateUrl: '/ui/features/community/aboutCommunity.tpl.html',
-            controller: function($scope) {
-              $scope.intention = "Community Intention to go here";
-            }
+            controller: 'AboutCommunityCtrl'
           }
         }
       }).
