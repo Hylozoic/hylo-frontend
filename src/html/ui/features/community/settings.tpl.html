@@ -15,40 +15,73 @@
     <div class="row">
       <div class="col-sm-offset-3 col-sm-6">
 
-        <!-- <section class="appearance">
-          <div class="section-label">Appearance</div>
-        </section> -->
-
-        <section class="invite">
-          <div class="section-label">Invite Members</div>
-          <button ng-click="invite()">
-            <span ng-show="submitting">
-              <i class="icon-duration"></i>
-              Sending...
-            </span>
-            <span ng-hide="submitting">
-              <i class="icon-big-check"></i>
-              Send Invite
-            </span>
-          </button>
-          <input type="text" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
-
-          <div ng-show="inviteResults" class="results">
-            <h3>Results</h3>
-            <table>
-              <tr ng-repeat="result in inviteResults">
-                <td>{{result.email}}</td>
-                <td class="status" ng-class="{error: result.error}">
-                  {{result.error ? result.error : "invitation sent!"}}
-                </td>
-              </tr>
-            </table>
+        <div class="row section-label" ng-click="expand1 = !expand1">
+          <div class="col-sm-12">
+            Appearance
+            <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
           </div>
+        </div>
+        <div class="section appearance" collapse="!expand1">
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Icon</label>
+              <p>This image appears next to your community's name.</p>
+            </div>
+            <div class="col-sm-6 right">
+              <div class="community-icon" back-img="community.avatar"></div>
+              <button ng-click="changeIcon()">Change</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Banner</label>
+              <p>This image appears at the top of your community page.</p>
+            </div>
+            <div class="col-sm-6 right">
+              <div class="community-banner" back-img="community.banner"></div>
+              <button ng-click="changeBanner()">Change</button>
+            </div>
+          </div>
+        </div>
 
-          <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
-        </section>
+        <div class="row section-label" ng-click="expand2 = !expand2">
+          <div class="col-sm-12">
+            Invite Members
+            <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
+          </div>
+        </div>
+        <div class="row section invite" collapse="!expand2">
+          <div class="col-sm-12">
+            <button ng-click="invite()">
+              <span ng-show="submitting">
+                <i class="icon-duration"></i>
+                Sending...
+              </span>
+              <span ng-hide="submitting">
+                <i class="icon-big-check"></i>
+                Send Invite
+              </span>
+            </button>
+            <input type="text" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+
+            <div ng-show="inviteResults" class="results">
+              <h3>Results</h3>
+              <table>
+                <tr ng-repeat="result in inviteResults">
+                  <td>{{result.email}}</td>
+                  <td class="status" ng-class="{error: result.error}">
+                    {{result.error ? result.error : "invitation sent!"}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
+          </div>
+        </div>
 
       </div>
     </div>
+
   </div>
 </div>
