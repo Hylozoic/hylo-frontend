@@ -1,3 +1,9 @@
+filepickerUpload = function(path, onSuccess, onFailure) {
+  console.log('faking picture upload for path ' + path);
+  onSuccess();
+  // TODO
+};
+
 module.exports = function(angularModule) {
 
   angularModule.controller("CommunitySettingsCtrl", [
@@ -8,8 +14,31 @@ module.exports = function(angularModule) {
         $state.go('community', {community: $scope.community.slug});
       };
 
-      // TODO: add this when community editing is restored
-      // $analytics.eventTrack('Community: Edited Community', {community_id: value.slug});
+      $scope.changeIcon = function() {
+        filepickerUpload('communityIcon',
+          function() {
+            $analytics.eventTrack('Community: Changed Icon', {
+              community_id: $scope.community.slug,
+              moderator_id: $scope.currentUser.id
+            });
+          },
+          function() {
+            // error!
+          })
+      };
+
+      $scope.changeBanner = function() {
+        filepickerUpload('communityBanner',
+          function() {
+            $analytics.eventTrack('Community: Changed Banner', {
+              community_id: $scope.community.slug,
+              moderator_id: $scope.currentUser.id
+            });
+          },
+          function() {
+            // error!
+          })
+      };
 
       $scope.invite = function() {
         if ($scope.submitting) return;
