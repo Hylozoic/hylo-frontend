@@ -59,7 +59,7 @@ angular.module('hyloApp', [
               growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
             }
           } else if (rejection.status == 404) {
-            $log.error("404 ResponseError", rejection, jsRoutes.controllers.Application.show404(requestTo).absoluteURL())
+            $log.error("404 ResponseError", rejection)
             Rollbar.error("Client 404 Error", {page: rejection.config.url});
             growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           }
