@@ -16,10 +16,12 @@
       <div class="col-sm-offset-3 col-sm-6">
 
         <div class="row section-label" ng-click="expand1 = !expand1">
-          Appearance
-          <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
+          <div class="col-sm-12">
+            Appearance
+            <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
+          </div>
         </div>
-        <div class="row section appearance" collapse="!expand1">
+        <div class="section appearance" collapse="!expand1">
           <div class="row">
             <div class="col-sm-6">
               <label>Icon</label>
@@ -43,11 +45,13 @@
         </div>
 
         <div class="row section-label" ng-click="expand2 = !expand2">
-          Invite Members
-          <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
+          <div class="col-sm-12">
+            Invite Members
+            <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
+          </div>
         </div>
         <div class="row section invite" collapse="!expand2">
-          <div>
+          <div class="col-sm-12">
             <button ng-click="invite()">
               <span ng-show="submitting">
                 <i class="icon-duration"></i>
