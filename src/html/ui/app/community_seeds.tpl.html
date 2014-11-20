@@ -43,7 +43,7 @@
 <div class="col-md-10 col-md-offset-1 col-sm-offset-1 posts">
   <div infinite-scroll="query()"
        infinite-scroll-distance="1"
-       infinite-scroll-disabled="disableInifiniteScroll">
+       infinite-scroll-disabled="disableInfiniteScroll">
 
     <div ng-repeat="post in posts track by post.id">
       <hylo-post post="post" short="true" remove-fn="remove(postToRemove)">
@@ -57,5 +57,5 @@
   <div ng-if="::postLoaded && !searching && posts.length == 0">
     <h2 style="text-align: center;">There are no seeds to display.</h2>
   </div>
-</div>      
+</div>
 
