@@ -6,11 +6,6 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
       $scope.query();
     });
 
-    var DEFAULT_SEED_FILTER = "all";
-    var DEFAULT_SEED_SORT = "recent";
-
-    $scope.seedFilter = DEFAULT_SEED_FILTER;
-    $scope.seedSort = DEFAULT_SEED_SORT;
     $scope.start = 0;
     $scope.limit = 12;
     $scope.postLoaded = false;
@@ -34,11 +29,13 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
 
 
     $scope.$watch("seedFilter", function () {
+      if (!$scope.postLoaded) return;
       $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: $scope.community.id});
       $scope.resetQuery();
     });
 
     $scope.$watch("seedSort", function() {
+      if (!$scope.postLoaded) return;
       $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: $scope.community.id});
       $scope.resetQuery();
     });
