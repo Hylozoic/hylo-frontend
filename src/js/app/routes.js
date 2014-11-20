@@ -22,19 +22,10 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('community.seeds', {
-        url: '/seeds',
-        views: {
-          "communityContentView": {
-            templateUrl: '/ui/app/community_seeds.tpl.html',
-            controller: 'CommunitySeedsCtrl'
-          }
-        }
-      }).
       state('community.about', {
         url: '/about',
         views: {
-          "communityContentView": {
+          "tab": {
             templateUrl: '/ui/features/community/aboutCommunity.tpl.html',
             controller: 'AboutCommunityCtrl'
           }
@@ -43,7 +34,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       state('community.members', {
         url: '/members',
         views: {
-          "communityContentView": {
+          "tab": {
             templateUrl: '/ui/features/community/communityMembers.tpl.html',
             controller: function($scope, $state) {
               $scope.list = "list of members to go here";
