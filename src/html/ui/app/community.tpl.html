@@ -6,21 +6,17 @@
     </div>
     <div id="banner-text">
       <div class="banner-communityName" ng-bind="::community.name"></div>
-      
+
       <div class="banner-menu">
-        <a ui-sref=".seeds" ng-class="{selected: stateName === 'community.seeds'}"><div class="banner-menuItem">SEEDS</div></a>
-        <a ui-sref=".members" ng-class="{selected: stateName === 'community.members'}"><div class="banner-menuItem">MEMBERS</div></a>
-        <a ui-sref=".about" ng-class="{selected: stateName === 'community.about'}"><div class="banner-menuItem">ABOUT</div></a>        
+        <a ui-sref="." ng-class="{selected: state.current.name === 'community'}"><div class="banner-menuItem">SEEDS</div></a>
+        <a ui-sref=".members" ng-class="{selected: state.current.name === 'community.members'}"><div class="banner-menuItem">MEMBERS</div></a>
+        <a ui-sref=".about" ng-class="{selected: state.current.name === 'community.about'}"><div class="banner-menuItem">ABOUT</div></a>
       </div>
-      
+
     </div>
   </div>
-  <div ui-view="communityContentView"></div>
-    
-
-    <!-- <a ui-sref=".list" style="width:100%; float:right">Show List -- demonstrate example of using different views</a>
-      <hr>
-      <div ui-view="listA"></div>
-      <div ui-view="listB"></div> -->
+  <div ui-view="tab">
+    <ng-include ng-if="state.current.name === 'community'" src="'/ui/app/community_seeds.tpl.html'" ng-controller="CommunitySeedsCtrl"></ng-include>
+  </div>
 
 </div>

@@ -2,18 +2,14 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
   function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state) {
 
     var DEFAULT_SEED_FILTER = "all";
-    var DEFULT_SEED_SORT = "recent";
+    var DEFAULT_SEED_SORT = "recent";
 
     $scope.seedFilter = DEFAULT_SEED_FILTER;
-    $scope.seedSort = DEFULT_SEED_SORT;
-
+    $scope.seedSort = DEFAULT_SEED_SORT;
     $scope.start = 0;
     $scope.limit = 12;
-
     $scope.postLoaded = false;
-
-    $scope.stateName = $state.current.name;
-    $scope.stateParams = $state.params;
+    $scope.state = $state;
 
     $rootScope.$watch('community', function watchCommunity(communityPromise) {
       if (communityPromise) {
@@ -45,12 +41,12 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.$watch("seedFilter", function () {
       $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: $scope.community.id});
       $scope.resetQuery();
-    }); 
+    });
 
     $scope.$watch("seedSort", function() {
       $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: $scope.community.id});
       $scope.resetQuery();
-    }); 
+    });
 
     $scope.query = function(doReset) {
 
