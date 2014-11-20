@@ -121,9 +121,4 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
       Notification.markRead({id: notification.id})
     }
 
-  }])
-.controller('globalMenuController', ['$scope', 'MenuService',
-  function($scope, MenuService) {
-    $scope.setMenuState = MenuService.setMenuState;
-    $scope.toggleMenuState = MenuService.toggleMenuState;
   }]);
