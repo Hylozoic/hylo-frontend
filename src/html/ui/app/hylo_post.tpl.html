@@ -7,7 +7,7 @@
     </a>
   </div>
 
-  <div class="post-container {{post.postType}}">
+  <div class="post-container" ng-class="::post.postType">
     <div class="post-content">
       <span class="post-options dropdown" ng-show="canDelete">
         <a class="dropdown-toggle"><i class="icon-down" title="icon-down-new"></i></a>

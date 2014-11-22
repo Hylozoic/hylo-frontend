@@ -52,7 +52,7 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
       $scope.disableInfiniteScroll = true;
       $scope.searching = true;
 
-      $http.get('/posts', {
+      $http.get('/noo/community/' + $scope.community.id + "/posts", {
         params: {
           q: $scope.searchQuery,
           community: $scope.community.slug,
