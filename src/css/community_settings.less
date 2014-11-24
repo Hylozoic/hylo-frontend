@@ -8,6 +8,10 @@
   z-index: 100000;
   background: white;
 
+  .container-fluid {
+    padding-top: @std-padding;
+  }
+
   nav .close {
     .big-close;
     margin-top: 7px;
@@ -23,12 +27,6 @@
     label {
       text-transform: uppercase;
     }
-  }
-
-  .icon-help-text {
-    .proxima-nova-semibold;
-    font-size: 14px;
-    color: #333;
   }
 
   .banner {
@@ -53,33 +51,32 @@
     }
   }
 
-  .community-icon {
-    height: 160px;
-    width: 160px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    background-size: cover;
-  }
-
   .section-label {
-    .large-header;
-    height: 75px;
-    line-height: 75px;
+    .medium-header;
+    padding: @std-padding 0;
     border-bottom: 1px solid @border-light;
-    margin-bottom: @std-padding;
+    .icon-right, .icon-down {
+      float: right;
+      margin-top: 14px;
+      font-size: 12px;
+    }
   }
 
-  section {
-    margin: @std-padding 0;
-    position: relative;
+  .section {
+    // this nested div hack is necessary because you
+    // can't apply padding to the parent directly; it
+    // causes a visual "hiccup" when collapsing
+    > div {
+      padding-top: @std-padding;
+      padding-bottom: @std-padding;
+    }
   }
 
   .invite {
     button {
       .rounded-button;
       position: absolute;
-      right: 0;
+      right: @std-padding;
     }
     input {
       .borderless-text-input;
@@ -109,6 +106,37 @@
           color: @error-color;
         }
       }
+    }
+  }
+
+  .appearance {
+    label {
+      .seed-title-text;
+    }
+    p {
+      .seed-meta-text;
+    }
+    .right {
+      text-align: right;
+    }
+    .community-icon {
+      width: 34px;
+      height: 34px;
+      background-size: cover;
+      vertical-align: middle;
+      display: inline-block;
+      margin-right: @std-padding;
+    }
+    .community-banner {
+      display: block;
+      width: 100%;
+      .fluid-height(38%);
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 5px;
+    }
+    button {
+      .rounded-button;
     }
   }
 

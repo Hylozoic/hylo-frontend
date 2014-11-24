@@ -8,6 +8,26 @@
 @avatar-size-lg: 140px;
 @avatar-size: @avatar-size-default;
 
+// set up a div whose height will always be $percent of its width
+// e.g. http://jsfiddle.net/B8FU8/2441/
+// via: http://stackoverflow.com/questions/5445491/height-equal-to-dynamic-width-css-fluid-layout
+.fluid-height(@percent) {
+  display: inline-block;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    margin-top: @percent;
+  }
+  > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
 
 /* Mixins for our app */
 .rounded-button() {
@@ -105,7 +125,7 @@
   letter-spacing: 3.5px;
 }
 
-.member-name() {
+.medium-header() {
   .proxima-nova-semibold;
   font-size: 24px;
 }
@@ -154,6 +174,12 @@
   max-height: 78px;
 }
 
+.small-title-text() {
+  .proxima-nova-regular;
+  font-size: 13px;
+  letter-spacing: 2.4px;
+}
+
 .big-close() {
   .proxima-nova-bold;
   &, &:hover { color: @default-text; }
@@ -166,6 +192,15 @@
   height: 50px;
   line-height: 50px;
   vertical-align: middle;
+  @media (max-width: @screen-xs-max) {
+    font-size: 28px;
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    margin-right: -12px;
+    margin-top: 8px;
+  }
+
 }
 
 .borderless-text-input() {
