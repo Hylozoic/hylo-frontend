@@ -29,7 +29,7 @@ require('perfect-scrollbar');
 /* Manually installed components */
 require('./angular/angular-perfect-scrollbar');
 require('./angular/angular-tags-0.2.10-tpls');
-require('./angular/ui-bootstrap-tpls-0.10.0-enhanced');
+require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
 require('./jquery/draggable-background');

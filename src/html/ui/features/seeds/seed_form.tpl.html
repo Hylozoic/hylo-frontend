@@ -12,11 +12,13 @@
         <div class="form-group right-inner-addon"
              ng-class="{'has-error': charLimitError, 'char-limit-warning': charLimitWarning, 'char-limit-error': charLimitError, 'has-warning': (charLimitWarning && titleFocused)}">
           <label>{{ postType | postTitlePlaceholder }}...</label>
+
           <i ng-show="titleFocused"
              tooltip-trigger="manual"
              tooltip-placement="bottom"
              tooltip-visible="charLimitError"
-             tooltip-html-unsafe="Keep it short. &nbsp;You can add more details in the field below."><i class="icon-alert" ng-show="charLimitError"></i>&nbsp;<span class="chars-left" ng-bind="charsLeft"></span></i>
+             tooltip-html-unsafe="Keep it short. &nbsp;You can add more details in the field below.">
+            <i class="icon-notifications" ng-show="charLimitError"></i>&nbsp;<span class="chars-left" ng-bind="charsLeft"></span></i>
 
           <input
                  ng-focus="titleFocused = true"
