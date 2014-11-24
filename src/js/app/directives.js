@@ -173,7 +173,7 @@ directive('forceLowercase', function() {
 
 directive('fitHeightToParent', function() {
   return function(scope, element, attrs) {
-    scope.$watch(function() { return $(element).position().top }, function(top) {
+    scope.$watch(function() { return $(element).offset().top }, function(top) {
       var heightDiff = document.documentElement.clientHeight - top;
       if (heightDiff > 0) element.css({height: heightDiff});
     })

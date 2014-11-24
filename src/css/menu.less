@@ -25,14 +25,9 @@
     width: @collapsed-width;
   }
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-
   &:active {
     background-color: #3A3A3A;
   }
-
 
   .logo {
     float: left;
@@ -96,29 +91,26 @@
   }
 
   ul {
-    font-size: 12px;
-    color: #333;
+    color: @text-light-gray;
     width: @collapsed-width;
   }
 
   li {
+    .small-title-text;
     text-transform: uppercase;
     overflow: hidden;
-    .proxima-nova-regular;
     visibility: hidden;
     position: relative;
 
-    &.current-community {
-      visibility: visible;
-    }
-
     i {
       font-size: 14px;
-      top: 2px;
       margin-right: @icon-expanded-right-margin;
-      width: @icon-width !important;
-      display: inline-block;
+      width: @avatar-size-sm !important;
+      height: @avatar-size-sm;
+      line-height: @avatar-size-sm;
+      vertical-align: middle;
       text-align: center;
+      display: inline-block;
       position: relative;
       .transition-transform(0.3s ease);
     }
@@ -127,9 +119,9 @@
       display: table;
 
       .image-item-icon > div {
-        width: 34px;
-        height: 34px;
-        background-size: cover
+        width: @avatar-size-sm;
+        height: @avatar-size-sm;
+        background-size: cover;
       }
 
       .image-item-icon, span {
@@ -137,22 +129,36 @@
       }
 
       span {
-        padding-left: 10px;
+        padding-left: 15px;
         vertical-align: middle;
       }
     }
 
+    &.current-community {
+      visibility: visible;
+      a {
+        padding: 0 5px 0 0;
+        .image-item-icon > div {
+          width: @avatar-size-default;
+          height: @avatar-size-default;
+        }
+        .image-item span {
+          padding-left: 9px;
+        }
+      }
+    }
 
     i.icon-down {
+      top: -2px;
+      width: 28px !important;
+      font-size: 12px;
+      float: right;
+      margin-right: 0;
       .rotate(-90deg);
     }
 
     i.rotate {
       .rotate(0deg);
-    }
-
-    &:hover {
-      background-color: @core-color;
     }
 
     a {
@@ -172,8 +178,11 @@
 
     .notification {
       @notificationSpacing: 10px;
+      font-size: 12px;
+      .proxima-nova-regular;
 
-      font-family: @body-font;
+      .seed-meta-text;
+      letter-spacing: normal;
       text-transform: none;
       border-left: 4px solid transparent;
       color: @expandedColor;
@@ -181,7 +190,7 @@
       width: 100%;
       overflow: hidden;
       background-color: @notificationBGColor;
-      padding: @notificationSpacing 10px 0px 10px;
+      padding: @notificationSpacing 10px 0px 19px;
 
       &.unread {
         background-color: #565656;
@@ -190,13 +199,11 @@
 
       .avatar {
         .user-avatar-xs;
-        margin-left: -3px;
-        position: relative;
-        top: -1px;
+        float: left;
       }
 
       .notification-info {
-        margin-left : 32px;
+        margin-left: 45px;
       }
 
       .notification-border {
@@ -216,26 +223,20 @@
       }
 
       .timestamp {
-        .proxima-nova-regular;
-        font-size: 10px;
         padding-top: 6px;
       }
 
       .itemName {
         padding-top: 6px;
-        .droid-regular;
-        font-size: 11px;
+        font-style: italic;
       }
 
       .action {
-        .proxima-nova-light;
-        font-size: 12px;
         line-height: 4px;
       }
 
       .actor {
         .proxima-nova-bold;
-        font-size: 12px;
       }
 
     }
@@ -348,26 +349,13 @@
     }
   }
 
-  @media(max-width: @screen-xs-max) {
-    &.collapsed {
-      width: 1px;
-
-      #menu-links, .collapsed #notifications {
-        display: none;
-      }
-      &:hover {
-        background-color: transparent;
-      }
-    }
-  }
-
   #menu-links {
     margin-bottom: 0;
   }
 
   a.open-settings {
     position: absolute;
-    right: 2px;
+    right: 4px;
     padding: 2px;
     margin-top: 3px;
     i {
@@ -375,10 +363,28 @@
       width: 18px !important;
     }
   }
-  .sub-group a.open-settings {
-    margin-top: 10px;
+
+  @media (max-width: @screen-xs-max) {
+    position: absolute;
+    top: 50px;
+    height: auto;
+
+    &.collapsed {
+      display: none;
+    }
+
+    &.expanded {
+      &, ul {
+       width: 100%;
+       max-width: 100%;
+      }
+    }
   }
 
+}
+
+#menu-community {
+  padding-right: 0;
 }
 
 .mobile-nav {
