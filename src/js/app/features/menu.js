@@ -52,8 +52,8 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   };
 }])
 
-.controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
-  function($scope, $state, $rootScope, $route, $http, $interval, $timeout, Notification, $idle, $window, MenuService) {
+.controller('MenuCtrl', ['$scope', '$state', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
+  function($scope, $state, $interval, $timeout, Notification, $idle, $window, MenuService) {
 
     // Query for notifications every set interval
     $scope.notifications = [];
