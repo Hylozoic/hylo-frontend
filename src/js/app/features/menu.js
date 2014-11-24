@@ -15,7 +15,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     state.membershipsExpanded = false;
   }
 
-  var setMenuState = function(isOpen, force, event) {
+  var setMenuState = function(isOpen, immediate, event) {
     // If the menu state is not to be changed, then just exit
     if (state.expanded === isOpen) {
       return;
@@ -23,27 +23,19 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
 
     $timeout.cancel(setMenuTimeout);
 
-    // The delay for opening/closing
-    var delay = isOpen ? 800 : 400;
-    if (force) {
-      delay = 0;
+    if (immediate) {
+      isOpen ? openMenu() : closeMenu();
+    } else {
+      setMenuTimeout = $timeout(function() {
+        isOpen ? openMenu() : closeMenu();
+      }, (isOpen ? 800 : 400));
     }
-
-    setMenuTimeout = $timeout(function() {
-      if (isOpen) {
-        openMenu();
-      } else {
-        closeMenu();
-      }
-    }, delay);
 
     if (event) {
       try {
         event.preventDefault();
         event.stopPropagation();
-      } catch(e) {
-        ;
-      }
+      } catch(e) {}
     }
 
     return false;
