@@ -137,8 +137,7 @@
     &.current-community {
       visibility: visible;
       a {
-        padding-top: 0;
-        padding-left: 0;
+        padding: 0 5px 0 0;
         .image-item-icon > div {
           width: @avatar-size-default;
           height: @avatar-size-default;
@@ -150,9 +149,11 @@
     }
 
     i.icon-down {
+      top: -2px;
+      width: 28px !important;
       font-size: 12px;
       float: right;
-      top: -2px;
+      margin-right: 0;
       .rotate(-90deg);
     }
 
@@ -383,7 +384,7 @@
 }
 
 #menu-community {
-  padding-right: 5px;
+  padding-right: 0;
 }
 
 .mobile-nav {
