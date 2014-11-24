@@ -29,7 +29,6 @@
     background-color: #3A3A3A;
   }
 
-
   .logo {
     float: left;
 
@@ -344,19 +343,6 @@
     }
   }
 
-  @media(max-width: @screen-xs-max) {
-    &.collapsed {
-      width: 1px;
-
-      #menu-links, .collapsed #notifications {
-        display: none;
-      }
-      &:hover {
-        background-color: transparent;
-      }
-    }
-  }
-
   #menu-links {
     margin-bottom: 0;
   }
@@ -373,6 +359,23 @@
   }
   .sub-group a.open-settings {
     margin-top: 10px;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    position: absolute;
+    top: 50px;
+    height: auto;
+
+    &.collapsed {
+      display: none;
+    }
+
+    &.expanded {
+      &, ul {
+       width: 100%;
+       max-width: 100%;
+      }
+    }
   }
 
 }
