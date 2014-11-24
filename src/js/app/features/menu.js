@@ -113,4 +113,8 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
       Notification.markRead({id: notification.id})
     }
 
-  }]);
+  }])
+
+.controller("MobileMenuCtrl", ['$scope', 'MenuService', function($scope, MenuService) {
+  $scope.toggleMenuState = MenuService.toggleMenuState;
+}]);
