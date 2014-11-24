@@ -2,7 +2,9 @@
  * angular-ui-bootstrap
  * http://angular-ui.github.io/bootstrap/
 
- * Version: 0.12.0 - 2014-11-16
+ * Version: 0.12.0 - 2014-11-16 - Enhanced with:
+ *    1) https://github.com/tradingscreen/bootstrap/commit/8a16d3a53176841778acd3ee0cc7c19381d68379
+ *
  * License: MIT
  */
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
@@ -2545,6 +2547,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
 
               var positionTooltip = function () {
 
+                console.log("ttscope", ttScope)
                 var ttPosition = $position.positionElements(element, tooltip, ttScope.placement, appendToBody);
                 ttPosition.top += 'px';
                 ttPosition.left += 'px';
@@ -2714,16 +2717,29 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
                 var val = attrs[ prefix + 'Trigger' ];
                 unregisterTriggers();
 
-                triggers = getTriggers( val );
+                if (val != 'manual') {
+                  triggers = getTriggers( val );
 
-                if ( triggers.show === triggers.hide ) {
-                  element.bind( triggers.show, toggleTooltipBind );
-                } else {
-                  element.bind( triggers.show, showTooltipBind );
-                  element.bind( triggers.hide, hideTooltipBind );
+                  if ( triggers.show === triggers.hide ) {
+                    element.bind( triggers.show, toggleTooltipBind );
+                  } else {
+                    element.bind( triggers.show, showTooltipBind );
+                    element.bind( triggers.hide, hideTooltipBind );
+                  }
                 }
               }
               prepTriggers();
+
+              if (attrs[prefix + 'Visible']) {
+                scope.$watch(attrs[prefix + 'Visible'], function (val) {
+                  if (val) {
+                    $timeout(showTooltipBind);
+                  }
+                  else {
+                    $timeout(hideTooltipBind);
+                  }
+                });
+              }
 
               var animation = scope.$eval(attrs[prefix + 'Animation']);
               ttScope.animation = angular.isDefined(animation) ? !!animation : options.animation;
