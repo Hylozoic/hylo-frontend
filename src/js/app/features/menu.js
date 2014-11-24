@@ -15,7 +15,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     state.membershipsExpanded = false;
   }
 
-  var setMenuState = function(isOpen, force, event) {
+  var setMenuState = function(isOpen, immediate, event) {
     // If the menu state is not to be changed, then just exit
     if (state.expanded === isOpen) {
       return;
@@ -23,27 +23,19 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
 
     $timeout.cancel(setMenuTimeout);
 
-    // The delay for opening/closing
-    var delay = isOpen ? 800 : 400;
-    if (force) {
-      delay = 0;
+    if (immediate) {
+      isOpen ? openMenu() : closeMenu();
+    } else {
+      setMenuTimeout = $timeout(function() {
+        isOpen ? openMenu() : closeMenu();
+      }, (isOpen ? 800 : 400));
     }
-
-    setMenuTimeout = $timeout(function() {
-      if (isOpen) {
-        openMenu();
-      } else {
-        closeMenu();
-      }
-    }, delay);
 
     if (event) {
       try {
         event.preventDefault();
         event.stopPropagation();
-      } catch(e) {
-        ;
-      }
+      } catch(e) {}
     }
 
     return false;
@@ -60,8 +52,8 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   };
 }])
 
-.controller('MenuCtrl', ['$scope', '$state', '$rootScope', '$route', '$http', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
-  function($scope, $state, $rootScope, $route, $http, $interval, $timeout, Notification, $idle, $window, MenuService) {
+.controller('MenuCtrl', ['$scope', '$state', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
+  function($scope, $state, $interval, $timeout, Notification, $idle, $window, MenuService) {
 
     // Query for notifications every set interval
     $scope.notifications = [];
@@ -122,8 +114,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     }
 
   }])
-.controller('globalMenuController', ['$scope', 'MenuService',
-  function($scope, MenuService) {
-    $scope.setMenuState = MenuService.setMenuState;
-    $scope.toggleMenuState = MenuService.toggleMenuState;
-  }]);
+
+.controller("MobileMenuCtrl", ['$scope', 'MenuService', function($scope, MenuService) {
+  $scope.toggleMenuState = MenuService.toggleMenuState;
+}]);

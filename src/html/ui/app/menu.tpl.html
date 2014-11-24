@@ -1,27 +1,25 @@
 <div class="menu"
   ng-controller="MenuCtrl"
   ng-class="{expanded: state.expanded, collapsed: !state.expanded}"
-  ng-mouseenter="setMenuState(true)"
-  ng-mouseleave="setMenuState(false)"
-  ng-swipe-left="setMenuState(false, true)">
+  ng-mouseleave="setMenuState(false)">
 
   <ul class="list-unstyled clearfix" id="menu-links">
     <li class="current-community">
-      <a class="" ui-sref="community({community: community.slug})" ui-sref-active="current">
+      <a class="" ui-sref="community({community: community.slug})" ng-click="setMenuState(true, true)">
         <div class="image-item">
           <div class="image-item-icon">
             <div back-img="community.avatar"></div>
           </div>
-          <span class="only-expanded">{{::community.name}}</span>
+          <span class="only-expanded">{{community.name}}</span>
         </div>
       </a>
     </li>
 
     <li>
       <a id="menu-community" ng-click="setMenuState(true, true); state.membershipsExpanded = !state.membershipsExpanded">
+        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : state.membershipsExpanded}"></i>
         <i class="icon-communities-new"></i>
         <span class="only-expanded">Communities</span>
-        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : state.membershipsExpanded}"></i>
       </a>
     </li>
 
@@ -64,7 +62,7 @@
     </li>
 
     <li class="no-link notifications-item" ng-click="setMenuState(true, true)">
-      <i class="icon-Notifications"></i>
+      <i class="icon-notifications"></i>
       <span class="notification-count only-collapsed" ng-show="unreadCount > 0">{{unreadCount}}</span>
       <span class="only-expanded">{{notificationsTitle}}</span>
     </li>
