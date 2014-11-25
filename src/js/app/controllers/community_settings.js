@@ -32,7 +32,7 @@ module.exports = function(angularModule) {
     function ($scope, $timeout, $state, $log, $analytics, Community) {
 
       $scope.close = function() {
-        $state.go('community', {community: $scope.community.slug});
+        window.history.back();
       };
 
       $scope.changeIcon = function() {

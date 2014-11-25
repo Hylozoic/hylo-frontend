@@ -7,8 +7,8 @@
 
     #banner-image {
       background-color: rgba(0,0,0,.6);
-      background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
-      linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+      background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+      linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
       linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8));
       display: inline-block;
       width: 100%;
@@ -40,7 +40,7 @@
       margin-top: auto;
       width: 100%;
       letter-spacing: 2.5px;
-      
+
       @media (max-width: @screen-xs-max) {
         bottom: 45px;
         line-height: 1;
@@ -108,3 +108,42 @@
   outline: none;
 }
 
+// TODO this should go somewhere more general
+.toolbar {
+  padding: @std-padding/2 @std-padding;
+  .toolbar-right {
+    float: right;
+    button {
+      margin-left: @std-padding / 2;
+    }
+  }
+  button, a.button {
+    .rounded-button;
+  }
+  border-bottom: 1px solid @border-light;
+  height: 48px;
+}
+
+.community-members {
+  margin-top: @std-padding;
+
+  .avatar {
+    .user-avatar;
+    float: left;
+  }
+
+  .member-info {
+    min-height: @avatar-size-default + @std-padding;
+    margin-left: @avatar-size-default + @std-padding;
+    margin-bottom: @std-padding;
+    padding-bottom: @std-padding;
+    border-bottom: 1px solid @border-light;
+    .name {
+      .medium-header;
+      .remove-link-display;
+    }
+    .skills, .affiliations {
+      .seed-meta-text;
+    }
+  }
+}
