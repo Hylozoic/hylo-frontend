@@ -110,18 +110,37 @@
 
 // TODO this should go somewhere more general
 .toolbar {
-  padding: @std-padding/2 @std-padding;
+  padding: @std-padding 0;
   .toolbar-right {
     float: right;
-    button {
+    padding-right: @std-padding;
+    * {
       margin-left: @std-padding / 2;
     }
   }
-  button, a.button {
-    .rounded-button;
-  }
   border-bottom: 1px solid @border-light;
-  height: 48px;
+}
+
+.community-members-toolbar {
+  .invite, .search {
+    .rounded-button;
+    margin-right: @std-padding/2;
+  }
+
+  .search {
+    input {
+      .borderless-text-input;
+      width: 180px;
+    }
+  }
+  div[loading-indicator] {
+    display: inline-block;
+    vertical-align: top;
+    .spinner {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
 
 .community-members {
@@ -145,5 +164,9 @@
     .skills, .affiliations {
       .seed-meta-text;
     }
+  }
+
+  .no-match {
+    .seed-body-text;
   }
 }

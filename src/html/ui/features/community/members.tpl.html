@@ -1,15 +1,18 @@
-<div class="col-sm-12">
-  <div class="row toolbar">
-    <div class="toolbar-right">
-      <a class="button" ui-sref="communitySettings({community: community.slug})">
+<div class="toolbar community-members-toolbar">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+      <a class="invite" ui-sref="communitySettings({community: community.slug})">
         <i class="icon-add-01"></i>
         Invite Members
       </a>
-      <button>
+      <div class="search">
         <i class="icon-search"></i>
-      </button>
+        <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+      </div>
+      <div loading-indicator ng-if="searching"></div>
     </div>
   </div>
+  <div class="clearfix"></div>
 </div>
 
 <div class="col-sm-8 col-sm-offset-2 community-members">
@@ -22,22 +25,8 @@
         <div class="affiliations">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="col-sm-10 col-sm-offset-1">
-  <div class="row">
-
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-      <i class="icon-search shadow filter-search-icon"></i>
-      <div class="filter-query">
-        <input placeholder="Search for members, skills or affiliations..." class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
-        <div class="textfield-search-indicator" loading-indicator ng-if="searching"></div>
-      </div>
-      </div>
+    <div ng-if="users.length == 0" class="no-match">
+      No members matched your search terms.
     </div>
-
   </div>
 </div>
-
