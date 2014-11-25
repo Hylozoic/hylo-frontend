@@ -8,8 +8,8 @@
       <div class="search toolbar-right">
         <i class="icon-search"></i>
         <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+        <div loading-indicator ng-if="searching"></div>
       </div>
-      <div loading-indicator ng-if="searching"></div>
     </div>
   </div>
   <div class="clearfix"></div>
