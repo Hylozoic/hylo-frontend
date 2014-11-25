@@ -139,10 +139,10 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       guiders.createGuider({
         attachTo: document.querySelectorAll(".post-header")[0],
         buttons: [{name: "Next"}],
-        description: "Here are the seeds from your community.  You can heart a seed by clicking the <i class='icon-following'></i>, or comment on it by clicking the <i class='icon-comment'></i>",
+        description: "Here are the seeds from your community.  You can heart a seed by clicking the <i class='icon-heart-new'></i>, or comment on it by clicking the <i class='icon-comment'></i>",
         id: "second",
         next: 'third',
-        position: 6,
+        position: 7,
         title: "Let’s create together!"
       });
 
@@ -152,34 +152,40 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         description: "Filter the seeds by intention, request, offer or all.",
         id: "third",
         next: "fourth",
-        position: 6,
+        position: 5,
         title: "Filter seeds by type"
       });
 
       guiders.createGuider({
         attachTo: "#community-addSeedButton",
-        buttons: [{name: "Next"}],
-        description: "Click here to add a seed of your own.",
-        id: "fourth",
-        next: "fifth",
-        position: 7,
-        title: "Add a New Seed"
-      });
-
-      guiders.createGuider({
-        attachTo: "#menu-user",
         buttons: [{name: "Done", onclick: function() {
           guiders.hideAll();
         }}],
-        description: "Click here to access your profile.",
-        id: "fifth",
-        position: 3,
-        title: "Your Profile",
+        description: "Click here to add a seed of your own.",
+        id: "fourth",
+        //next: "fifth",
+        position: 7,
+        title: "Plant a New Seed",
         onHide: function() {
           $http.post('/endtour', {}, {params: {tour:'communityTour'}});
           $rootScope.currentUser.communityTour = false;
         }
       });
+
+      //guiders.createGuider({
+      //  attachTo: "#menu-user",
+      //  buttons: [{name: "Done", onclick: function() {
+      //    guiders.hideAll();
+      //  }}],
+      //  description: "Click here to access your profile.",
+      //  id: "fifth",
+      //  position: 3,
+      //  title: "Your Profile",
+      //  onHide: function() {
+      //    $http.post('/endtour', {}, {params: {tour:'communityTour'}});
+      //    $rootScope.currentUser.communityTour = false;
+      //  }
+      //});
     }
 
     var startOnboarding = function() {
