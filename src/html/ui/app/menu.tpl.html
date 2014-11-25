@@ -1,6 +1,7 @@
 <div class="menu"
   ng-controller="MenuCtrl"
   ng-class="{expanded: state.expanded, collapsed: !state.expanded}"
+  ng-mouseenter="keepMenuOpen()"
   ng-mouseleave="setMenuState(false)">
 
   <ul class="list-unstyled clearfix" id="menu-links">
@@ -38,17 +39,17 @@
     </li>
 
     <li>
-      <a ui-sref="search({community: $root.community.slug})" ui-sref-active="current">
+      <a ui-sref="search({community: community.slug})" ui-sref-active="current">
         <i class="icon-search"></i>
         <span class="only-expanded">Search</span>
       </a>
     </li>
 
     <li>
-      <a ui-sref="user.settings({id: currentUser.id})" class="open-settings">
+      <a ui-sref="user.settings({community: community.slug, id: currentUser.id})" class="open-settings">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="user({community: $root.community.slug, id: $root.currentUser.id})" id="menu-user" ui-sref-active="current">
+      <a ui-sref="user({community: community.slug, id: currentUser.id})" id="menu-user" ui-sref-active="current">
         <i class="icon-profile"></i>
         <span class="only-expanded">My Profile</span>
       </a>
