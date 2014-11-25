@@ -42,11 +42,8 @@
       letter-spacing: 2.5px;
 
       @media (max-width: @screen-xs-max) {
-        bottom: 45px;
+        font-size: 32px;
         line-height: 1;
-      }
-      @media (max-width: @screen-xs) {
-        bottom: 30px;
       }
     }
 
@@ -123,17 +120,21 @@
   }
 
   .search {
+    position: relative;
     input {
       .borderless-text-input;
       width: 180px;
     }
   }
   div[loading-indicator] {
+    position: absolute;
+    right: 5px;
+    top: 5px;
     display: inline-block;
     vertical-align: top;
     .spinner {
-      width: 32px;
-      height: 32px;
+      width: 20px;
+      height: 20px;
     }
   }
 }
