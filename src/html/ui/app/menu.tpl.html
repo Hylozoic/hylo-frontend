@@ -1,6 +1,7 @@
 <div class="menu"
   ng-controller="MenuCtrl"
   ng-class="{expanded: state.expanded, collapsed: !state.expanded}"
+  ng-mouseenter="keepMenuOpen()"
   ng-mouseleave="setMenuState(false)">
 
   <ul class="list-unstyled clearfix" id="menu-links">

@@ -41,14 +41,15 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     return false;
   };
 
-  var toggleMenuState = function toggleMenuState() {
-    setMenuState(!state.expanded, true);
-  }
-
   return {
+    state: state,
     setMenuState: setMenuState,
-    toggleMenuState: toggleMenuState,
-    state: state
+    toggleMenuState: function() {
+      setMenuState(!state.expanded, true);
+    },
+    keepMenuOpen: function() {
+      $timeout.cancel(setMenuTimeout);
+    }
   };
 }])
 
@@ -59,6 +60,8 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
     $scope.notifications = [];
 
     $scope.state = MenuService.state;
+    $scope.setMenuState = MenuService.setMenuState;
+    $scope.keepMenuOpen = MenuService.keepMenuOpen;
 
     var queryNotifications = function() {
       Notification.query({}, function(notifications) {
@@ -105,8 +108,6 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
       }
       $scope.unreadCount = count > 0 ? count : '';
     }, true);
-
-    $scope.setMenuState = MenuService.setMenuState;
 
     $scope.markread = function(notification) {
       notification.read = true;
