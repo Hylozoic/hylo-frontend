@@ -52,7 +52,7 @@
     </li>
 
     <li>
-      <a ui-sref="user.settings({id: currentUser.id})" class="open-settings">
+      <a ui-sref="user.settings({community: community.slug, id: currentUser.id})" class="open-settings">
         <i class="icon-settings"></i>
       </a>
       <a ui-sref="user({community: $root.community.slug, id: $root.currentUser.id})" id="menu-user" ui-sref-active="current">
