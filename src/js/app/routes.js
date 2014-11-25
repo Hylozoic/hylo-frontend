@@ -36,9 +36,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         views: {
           "tab": {
             templateUrl: '/ui/features/community/members.tpl.html',
-            controller: function($scope, $state) {
-              $scope.list = "list of members to go here";
-            }
+            controller: 'CommunityUsersCtrl'
           }
         }
       }).
@@ -74,15 +72,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           "": {
             templateUrl: '/ui/features/community/settings.tpl.html',
             controller: 'CommunitySettingsCtrl'
-          }
-        }
-      }).
-      state('members', {
-        url: '/c/:community/members',
-        views: {
-          "": {
-            templateUrl: '/ui/app/members.tpl.html',
-            controller: 'CommunityUsersCtrl'
           }
         }
       }).
