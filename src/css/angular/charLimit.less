@@ -27,14 +27,20 @@
   }
 
   &.char-limit-warning {
-    .chars-left, .icon-alert {
+    .chars-left, i {
       color: @alert-warning-text;
     }
   }
 
   &.char-limit-error {
-    .chars-left, .icon-alert {
+    .chars-left, i {
       color: @alert-danger-text;
+    }
+  }
+
+  &.char-limit-error, &.char-limit-warning {
+    .chars-left {
+      background-color: white;
     }
   }
 
