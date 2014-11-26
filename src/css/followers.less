@@ -1,7 +1,6 @@
   .followers {
-    .seed-body-text();
+    .seed-meta-text();
     color: @text-medium-dark;
-    font-size: 13px;
     padding: 15px 0;
 
     .actionIcon {
@@ -23,45 +22,60 @@
     }
   }
 
-  .add-followers{
-
+  .add-followers {
+    .seed-meta-text;
     width: 100%;
     border: 1px solid @border-light;
-    margin-top: 3px;
     min-height: 48px;
+    display: table;
 
     .add-label, .add-tags {
       display: table-cell;
     }
 
     .add-label {
-      .seed-body-text();
-      font-size: 13px;
       font-weight: 600;
       width: 120px;
       background-color: @visible-gray-bkg;
       color: @text-dark;
-      padding: 15px;
       text-align: center;
+      vertical-align: top;
+      padding-top: 13px;
     }
 
     .add-tags {
-      padding-left: 10px;
-      margin: 3px 0 3px 15px;
+      .proxima-nova-light;
+      padding: 5px 5px 0 5px;
 
       .decipher-tags {
         background-color: white;
         border: none;
         padding: 0;
-        min-height: 37px;
+        min-height: 32px;
 
         .decipher-tags-input {
-          background-color: white;
+          top: -1px;
+          background-color: transparent;
+          line-height: 37px;
+          height: 37px;
         }
 
-        .icon-remove-inverse, .tag-name  {
-          vertical-align: initial;
-          top: initial;
+        .tag-name {
+          margin-left: 34px !important;
+          margin-right: 3px;
+        }
+      }
+
+      .decipher-tags-taglist {
+        display: inline-block;
+      }
+
+      .decipher-tags-tag {
+        line-height: 26px;
+        margin-bottom: 5px !important;
+        > * {
+          vertical-align: middle !important;
+          top: initial !important;
         }
       }
     }
