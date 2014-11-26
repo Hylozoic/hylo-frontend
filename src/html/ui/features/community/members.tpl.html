@@ -1,10 +1,12 @@
 <div class="toolbar community-members-toolbar">
   <div class="col-sm-8 col-sm-offset-2">
     <div class="row">
-      <a class="invite" ui-sref="communitySettings({community: community.slug})">
-        <i class="icon-add-01"></i>
-        Invite Members
-      </a>
+      <div class="toolbar-left">
+        <a class="invite" ui-sref="communitySettings({community: community.slug})">
+          <i class="icon-add-01"></i>
+          <span class="hidden-xs">Invite Members</span>
+        </a>
+      </div>
       <div class="search toolbar-right">
         <i class="icon-search"></i>
         <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">

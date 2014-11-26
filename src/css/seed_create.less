@@ -4,6 +4,14 @@
   position: relative;
   z-index: 10;
 
+  .close {
+    .big-close;
+    position: absolute;
+    top: -22px;
+    right: -22px;
+    z-index: 2;
+  }
+
   .icon-remove-inverse {
     font-size: 15px;
     @media (max-width: @screen-xs-max) {
@@ -15,7 +23,16 @@
     height: auto;
   }
 
+  @media (max-width: @screen-xs-max) {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+
   .editor > .bubble {
+
+    @media (max-width: @screen-xs-max) {
+      border: none;
+    }
 
     margin-left: 0;
 
@@ -73,12 +90,5 @@
     &.intention > form > button { background-color: @intention-color; }
     &.request > form > button { background-color: @request-color; }
     &.offer > form > button { background-color: @offer-color; }
-
-    > .triangle {
-      top: 8px;
-    }
-    &.request > .triangle, &.offer > .triangle {
-      background-color: @faint-gray;
-    }
   }
 }
