@@ -68,9 +68,7 @@
 
           <!-- List Names -->
           <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-            <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})">
-              <span ng-bind="::follower.name"></span><span ng-if="::!$last && followersNotMe.length > 2">, </span>
-            </a>
+            <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
             <span ng-if="::!$last && followersNotMe.length == 2"> and </span>
           </span>
 
