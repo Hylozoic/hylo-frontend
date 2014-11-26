@@ -84,9 +84,13 @@
 .toolbar {
   text-align: center;
   padding: @std-padding 0;
+  border-bottom: 1px solid @border-light;
+  min-height: 64px;
+
   @media (max-width: @screen-xs-max) {
     padding: 5px;
   }
+
   .toolbar-left {
     float: left;
     text-align: left;
@@ -98,7 +102,12 @@
     float: right;
     text-align: left;
   }
-  border-bottom: 1px solid @border-light;
+
+  h3 {
+    .section-title;
+    margin: 0;
+    line-height: 33px;
+  }
 }
 
 .community-members-toolbar {
@@ -162,4 +171,10 @@
   .no-match {
     .seed-body-text;
   }
+}
+
+.core-intention {
+  .large-body-text;
+  color: @text-medium-dark;
+  margin-top: @std-padding * 2;
 }
