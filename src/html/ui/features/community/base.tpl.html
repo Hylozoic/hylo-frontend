@@ -8,9 +8,18 @@
       <div class="banner-communityName" ng-bind="::community.name"></div>
 
       <div class="banner-menu">
-        <a ui-sref="." ng-class="{selected: state.current.name === 'community'}">SEEDS</a>
-        <a ui-sref=".members" ng-class="{selected: state.current.name === 'community.members'}">MEMBERS</a>
-        <a ui-sref=".about" ng-class="{selected: state.current.name === 'community.about'}">ABOUT</a>
+        <a ui-sref="." ng-class="{selected: state.current.name === 'community'}">
+          SEEDS
+          <div class="triangle"></div>
+        </a>
+        <a ui-sref=".members" ng-class="{selected: state.current.name === 'community.members'}">
+          MEMBERS
+          <div class="triangle"></div>
+        </a>
+        <a ui-sref=".about" ng-class="{selected: state.current.name === 'community.about'}">
+          ABOUT
+          <div class="triangle"></div>
+        </a>
       </div>
 
     </div>
