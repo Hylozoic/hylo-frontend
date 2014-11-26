@@ -25,8 +25,8 @@
             <option value="request">Requests</option>
           </select>
 
-          <a class="search" ng-hide="showSeedForm">
-            <i class="icon-search" ng-click="searchSelected = !searchSelected"></i>
+          <a class="search" ng-hide="showSeedForm" ng-click="searchSelected = !searchSelected">
+            <i class="icon-search"></i>
           </a>
           <div class="search-input" ng-show="searchSelected">
             <input placeholder="Search" class="form-control input" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
