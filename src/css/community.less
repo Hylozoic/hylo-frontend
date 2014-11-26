@@ -10,7 +10,6 @@
       background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
       linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
       linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8));
-      display: inline-block;
       width: 100%;
       height: 100%;
 
@@ -34,7 +33,7 @@
       font-size: 400%;
       color: white;
       position: absolute;
-      bottom: 110px;
+      bottom: 100px;
       text-align: center;
       margin-left: auto;
       margin-top: auto;
@@ -49,25 +48,29 @@
 
     .banner-menu {
       position: absolute;
-      bottom: 50px;
+      bottom: 40px;
       text-align: center;
       margin-left: auto;
       margin-top: auto;
       width: 100%;
 
-      .selected .banner-menuItem  {
-        color: white;
-        font-weight: 600;
+      @media (max-width: @screen-xs-max) {
+        bottom: 28px;
       }
 
-      .banner-menuItem {
-        .proxima-nova-light;
-        font-weight: 100;
-        color: #D7D6D6;
-        font-size: 130%;
+      a {
+        .medium-title-text;
+        .remove-link-display(@lighter-gray);
         display: inline-block;
-        margin: 0px 40px;
-        letter-spacing: 2px;
+        padding: 10px 40px;
+        @media (max-width: @screen-xs-max) {
+          padding: 10px 13px;
+        }
+
+        &.selected {
+          color: white;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -78,38 +81,23 @@
   position:relative;
 }
 
-.bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-  // width: 150px;
-  outline:0;
-
-  @media (max-width: @screen-xs-max) {
-    width: 36% !important;
-    float: none;
-    button {
-      width: 105px;
-    }
-  }
-  @media (max-width: @screen-xs-min) {
-    button {
-      width: 95px;
-    }
-  }
-}
-
-.bootstrap-select .btn:focus {
-  outline: none !important;
-  outline: 0 auto -webkit-focus-ring-color !important;
-  outline-offset: 0px;
-}
-.community .bootstrap-select.btn-group .dropdown-menu li > a {
-  outline: none;
-}
-
 // TODO this should go somewhere more general
 .toolbar {
+  text-align: center;
   padding: @std-padding 0;
+  @media (max-width: @screen-xs-max) {
+    padding: 5px;
+  }
+  .toolbar-left {
+    float: left;
+    text-align: left;
+  }
+  .toolbar-center {
+    margin: 0 auto;
+  }
   .toolbar-right {
     float: right;
+    text-align: left;
   }
   border-bottom: 1px solid @border-light;
 }
@@ -145,6 +133,10 @@
   .avatar {
     .user-avatar;
     float: left;
+    @media (max-width: @screen-xs-max) {
+      .user-avatar-sm;
+      margin-left: @std-padding;
+    }
   }
 
   .member-info {
@@ -159,6 +151,12 @@
     }
     .skills, .affiliations {
       .seed-meta-text;
+    }
+    @media (max-width: @screen-xs-max) {
+      margin-left: @avatar-size-sm + @std-padding*2;
+      .name {
+        .seed-title-text;
+      }
     }
   }
 

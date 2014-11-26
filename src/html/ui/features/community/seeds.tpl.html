@@ -1,52 +1,50 @@
 <div ng-controller="CommunitySeedsCtrl">
 
-  <div class="community-filter-buttons" class="filters">
-    <div ng-if="showSeedForm">
-      <hylo-seed-form on-success="addSeedSuccess(seed)" on-cancel="addSeedCancel()"></hylo-seed-form>
-    </div>
-    <div class="btn-toolbar full-width" ng-hide="showSeedForm">
-      <div class="btn-group">
-        <div class="add-seed">
-          <a href="#" id="community-addSeedButton" class="button-rounded" ng-click="addSeed()">
-            <i class="add-seed-icon icon-add-01"></i>
-            <span id="community-addSeedButton-text"> New Seed</span>
-          </a>
+  <div class="toolbar community-seeds-toolbar">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="row">
+        <div ng-if="showSeedForm">
+          <hylo-seed-form on-success="addSeedSuccess(seed)" on-cancel="addSeedCancel()"></hylo-seed-form>
         </div>
-      </div>
-      <div class="filter-buttons" class="btn-group">
+        <a id="community-addSeedButton" class="toolbar-left" ng-click="addSeed()" ng-hide="showSeedForm">
+          <i class="icon-add-01"></i>
+          <span class="hidden-xs">New Seed</span>
+        </a>
 
-        <select selectpicker class="rounded-style" ng-model="seedSort">
-          <option value="recent">Recent</option>
-          <option value="top">Top</option>
-          <!--<option value="magic">Serendipity</option>-->
-        </select>
+        <div class="toolbar-right" ng-hide="showSeedForm">
+          <select selectpicker ng-model="seedSort">
+            <option value="recent">Recent</option>
+            <option value="top">Top</option>
+            <!--<option value="magic">Serendipity</option>-->
+          </select>
 
-        <select id="filter-seed-type" selectpicker ng-model="seedFilter" class="rounded-style">
-          <option value="all">All Seeds</option>
-          <option value="intention">Intentions</option>
-          <option value="offer">Offers</option>
-          <option value="request">Requests</option>
-        </select>
+          <select id="filter-seed-type" selectpicker ng-model="seedFilter">
+            <option value="all">All Seeds</option>
+            <option value="intention">Intentions</option>
+            <option value="offer">Offers</option>
+            <option value="request">Requests</option>
+          </select>
 
-        <div class="filter-query input-group">
-          <a class="button-rounded circle" ng-click="searchSelected = !searchSelected" ng-init="searchSelected = false">
-            <i class="icon-search"></i>
+          <a class="search" ng-hide="showSeedForm">
+            <i class="icon-search" ng-click="searchSelected = !searchSelected"></i>
           </a>
-          <div id="search-popover" ng-show="searchSelected">
-            <input placeholder="Search" class="form-control input-lg" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
-            <div class="textfield-search-indicator tsi-button-group" loading-indicator ng-if="searching"></div>
+          <div class="search-input" ng-show="searchSelected">
+            <input placeholder="Search" class="form-control input" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+            <div loading-indicator ng-if="searching"></div>
           </div>
-
         </div>
+
       </div>
     </div>
+    <div class="clearfix"></div>
   </div>
+
   <div class="col-md-10 col-md-offset-1 col-sm-offset-1 posts">
     <div infinite-scroll="query()"
          infinite-scroll-distance="1"
          infinite-scroll-disabled="disableInfiniteScroll">
 
-      <div ng-repeat="post in posts track by post.id">
+      <div ng-repeat="post in posts track by post.id" class="row">
         <hylo-post post="post" short="true" remove-fn="remove(postToRemove)">
         </hylo-post>
       </div>

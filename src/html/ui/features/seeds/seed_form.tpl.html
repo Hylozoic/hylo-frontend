@@ -1,6 +1,6 @@
 <div class="add-seed-form clearfix">
   <div class="editor clearfix" style="padding-top:0px">
-    <a class="circle" ng-click="cancel()" style="text-decoration: none;"><i class="icon-remove-inverse"></i></a>
+    <a class="close hidden-xs" ng-click="cancel()">&times;</a>
     <div class="bubble" ng-class="postType">
       <div class="row post-types">
         <a class="col-xs-4 intention" ng-click="typeChanged('intention'); focusInput=true">INTENTION</a>
@@ -36,7 +36,9 @@
         <textarea type="text" rows="1" ng-model="description" class="form-control input-lg addPostInput msd-elastic" placeholder="{{ postType | postDescPlaceholder }}"></textarea>
 
         <button type="submit" ng-click="save()" class="btn btn-lg" ng-disabled="seedFrm.$invalid || charLimitError">PLANT SEED</button>
+
       </form>
     </div>
+    <a ng-click="cancel()" class="visible-xs">Cancel</a>
   </div>
 </div>
