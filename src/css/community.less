@@ -47,28 +47,43 @@
 
     .banner-menu {
       position: absolute;
-      bottom: 40px;
+      bottom: 0;
       text-align: center;
       margin-left: auto;
       margin-top: auto;
       width: 100%;
 
-      @media (max-width: @screen-xs-max) {
-        bottom: 28px;
-      }
-
       a {
         .medium-title-text;
         .remove-link-display(@lighter-gray);
         display: inline-block;
-        padding: 10px 40px;
-        @media (max-width: @screen-xs-max) {
-          padding: 10px 13px;
+        position: relative;
+        padding: 10px 40px 0;
+        height: 72px;
+        .triangle {
+          display: none;
         }
 
         &.selected {
           color: white;
           font-weight: 600;
+          .triangle {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -13px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 14px solid white;
+          }
+        }
+
+        @media (max-width: @screen-xs-max) {
+          padding: 10px 13px 0;
+          height: 60px;
         }
       }
     }
@@ -89,6 +104,7 @@
 
   @media (max-width: @screen-xs-max) {
     padding: 5px;
+    min-height: 44px;
   }
 
   .toolbar-left {
@@ -162,6 +178,7 @@
     }
     @media (max-width: @screen-xs-max) {
       margin-left: @avatar-size-sm + @std-padding*2;
+      margin-right: 5px;
       .name {
         .seed-title-text;
       }
@@ -177,4 +194,7 @@
   .large-body-text;
   color: @text-medium-dark;
   margin-top: @std-padding * 2;
+  @media (max-width: @screen-xs-max) {
+    padding: 0 @std-padding*2;
+  }
 }
