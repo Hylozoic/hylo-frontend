@@ -72,8 +72,8 @@ angular.module('hyloApp', [
 
   }])
 
-.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'CurrentCommunity', '$log', '$window', 'growl',
-  function(CurrentUser, $rootScope, $q, $state, $stateParams, CurrentCommunity, $log, $window, growl) {
+.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'CurrentCommunity', '$log', '$window', 'growl', 'MenuService',
+  function(CurrentUser, $rootScope, $q, $state, $stateParams, CurrentCommunity, $log, $window, growl, MenuService) {
 
     $rootScope.currentUser = CurrentUser.get();
 
@@ -102,8 +102,8 @@ angular.module('hyloApp', [
       _.defer(function() { growl.addSuccessMessage($window._hylo_angular_growl_msg, {ttl: 5000}) });
     }
 
-    // Hide all tour guiders on transition change.
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      MenuService.setMenuState(false, false);
       guiders.hideAll();
     });
 

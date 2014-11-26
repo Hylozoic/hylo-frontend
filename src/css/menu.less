@@ -114,7 +114,7 @@
     .image-item {
       display: table;
 
-      .image-item-icon > div {
+      .image-item-icon {
         width: @avatar-size-sm;
         height: @avatar-size-sm;
         background-size: cover;
@@ -133,14 +133,16 @@
     &.current-community {
       visibility: visible;
       a {
-        padding: 0 5px 0 0;
-        .image-item-icon > div {
-          width: @avatar-size-default;
-          height: @avatar-size-default;
-        }
-        .image-item span {
-          padding-left: 9px;
-        }
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0 5px 0 9px;
+      }
+      .image-item-icon {
+        width: @avatar-size-default;
+        height: @avatar-size-default;
+      }
+      .image-item span {
+        padding-left: 9px;
       }
     }
 
