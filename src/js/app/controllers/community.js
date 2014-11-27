@@ -1,130 +1,11 @@
-angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
-  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics) {
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state',
+  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state) {
 
-    var DEFAULT_SEED_FILTER = "all";
-    var DEFULT_SEED_SORT = "recent";
+    $scope.state = $state;
 
-    $scope.seedFilter = DEFAULT_SEED_FILTER;
-    $scope.seedSort = DEFULT_SEED_SORT;
-
-    $scope.start = 0;
-    $scope.limit = 12;
-
-    $scope.postLoaded = false;
-
-    $rootScope.$watch('community', function watchCommunity(communityPromise) {
-      if (communityPromise) {
-        communityPromise.$promise.then(function () {
-          $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
-          $scope.query();
-        });
-      }
+    $scope.community.$promise.then(function () {
+      $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
     });
-
-    $scope.posts = [];
-    $scope.searchQuery = "";
-
-    // Initially Disabled Infinite Scroll
-    $scope.disableInifiniteScroll = true;
-
-    var cancelerStack = [];
-
-    $scope.resetQuery = function () {
-      $scope.start = 0;
-      $scope.query(true);
-    }
-
-    $scope.queryTimeout = _.throttle(function throttledQueryTimeout() {
-      $scope.resetQuery();
-    }, 750, {leading: false});
-
-
-    $scope.$watch("seedFilter", function () {
-      $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: $scope.community.id});
-      $scope.resetQuery();
-    }); 
-
-    $scope.$watch("seedSort", function() {
-      $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: $scope.community.id});
-      $scope.resetQuery();
-    }); 
-
-    $scope.query = function(doReset) {
-
-
-      // Cancel any outstanding queries
-      _.each(cancelerStack, function(canceler) { canceler.resolve() });
-      cancelerStack = [];
-
-      var newCanceler = $q.defer();
-      cancelerStack.push(newCanceler);
-
-      $scope.disableInifiniteScroll = true;
-      $scope.searching = true;
-
-      $http.get('/posts', {
-        params: {
-          q: $scope.searchQuery,
-          community: $rootScope.community.slug,
-          postType: $scope.seedFilter,
-          sort: $scope.seedSort,
-          start: $scope.start,
-          limit: $scope.limit
-        },
-        timeout: newCanceler.promise,
-        responseType: 'json'
-      }).success(function(posts) {
-        $scope.searching = false;
-        $scope.postLoaded = true;
-
-        if ($scope.searchQuery) {
-          $analytics.eventTrack('Posts: Filter by Query', {query: $scope.searchQuery, community_id: $rootScope.community.slug})
-        }
-
-        var firstLoad = $scope.posts.length < $scope.limit;
-        if (!firstLoad) {
-          $analytics.eventTrack('Posts: Load more in Feed', {community_id: $rootScope.community.slug});
-        }
-
-        if (doReset) {
-          $scope.posts = [];
-        }
-
-        angular.forEach(posts, function(post, key) {
-          if (!_.findWhere($scope.posts, {id: post.id})) {
-            $scope.posts.push(post);
-            $scope.start++;
-          }
-        });
-
-        if (posts.length == 0) { // There were no more posts... disable infinite scroll now
-          $scope.disableInifiniteScroll = true;
-        } else {
-          $scope.disableInifiniteScroll = false;
-        }
-      });
-    };
-
-    $scope.addSeedSuccess = function(newSeed) {
-      growl.addSuccessMessage("Successfully created new seed: " + newSeed.name, {ttl: 5000});
-      $analytics.eventTrack('Post: Add New Seed', {seed_id: newSeed.id, seed_name: newSeed.name, seed_community_name: newSeed.cName, seed_community_slug: newSeed.communitySlug, post_type: newSeed.postType});
-      $scope.posts.unshift(newSeed);
-      $scope.showSeedForm = false;
-    }
-
-    $scope.addSeedCancel = function(){
-      $scope.showSeedForm = false;
-    }
-    $scope.addSeed = function(){
-      $scope.showSeedForm = true;
-      $analytics.eventTrack('Post: Open Add Seed Form');
-    }
-
-    $scope.remove = function(postToRemove) {
-      growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
-      $analytics.eventTrack('Post: Remove a Seed', {post_name: postToRemove.name, post_id: postToRemove.id});
-      $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
-    }
 
     var startTour = function() {
       guiders.createGuider({
@@ -212,14 +93,12 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       });
     }
 
-    $scope.$watch('currentUser', function(user) {
-      user.$promise.then(function(user) {
-        // Start the community tour/onboarding if the user hasn't finished it.
-        if (!user.finishedOnboarding) {
-          $timeout(startOnboarding, 100)
-        } else if (user.communityTour) {
-          $timeout(startTour, 500);
-        }
-      });
+    $scope.currentUser.$promise.then(function(user) {
+      // Start the community tour/onboarding if the user hasn't finished it.
+      if (!user.finishedOnboarding) {
+        $timeout(startOnboarding, 100)
+      } else if (user.communityTour) {
+        $timeout(startTour, 500);
+      }
     });
   }]);

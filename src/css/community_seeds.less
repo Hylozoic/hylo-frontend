@@ -1,0 +1,64 @@
+.community-seeds-toolbar {
+  .search {
+    .rounded-button;
+    padding: 0 6px;
+  }
+  #community-addSeedButton {
+    .rounded-button;
+    @media (max-width: @screen-xs-max) {
+      padding: 0 6px;
+    }
+  }
+  .bootstrap-select {
+    outline: 0;
+    .btn:focus {
+      outline: none !important;
+      outline: 0 auto -webkit-focus-ring-color !important;
+      outline-offset: 0px;
+    }
+    .dropdown-menu {
+      .seed-body-text;
+      li > a {
+        outline: none;
+      }
+    }
+    margin-bottom: 0 !important;
+    width: 120px !important;
+    margin-right: 10px;
+    @media (max-width: @screen-xs-max) {
+      width: 100px !important;
+      margin-right: 5px;
+    }
+    button {
+      border-color: @light-gray;
+      border-radius: 15px;
+      height: 32px;
+      line-height: 30px;
+      top: -1px;
+      padding-top: 0;
+    }
+  }
+  .search-input {
+    margin-top: 5px;
+    position: relative;
+    input {
+      .seed-body-text;
+    }
+    div[loading-indicator] {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      .spinner {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.posts {
+  @media (max-width: @screen-xs-max) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}

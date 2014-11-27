@@ -42,13 +42,14 @@
   display: inline-block;
   height: 32px;
   line-height: 30px;
-  padding: 0px 20px;
+  padding: 0px 15px;
   outline: none;
   > i {
     position: relative;
+    top: 1px;
   }
   &:active {
-    line-height: 32px;
+    background-color: @faint-gray;
   }
 }
 
@@ -174,10 +175,22 @@
   max-height: 78px;
 }
 
+.medium-title-text() {
+  .proxima-nova-regular;
+  font-size: 16px;
+  letter-spacing: 2.4px;
+}
+
 .small-title-text() {
   .proxima-nova-regular;
   font-size: 13px;
   letter-spacing: 2.4px;
+}
+
+.large-body-text() {
+  .proxima-nova-regular;
+  font-size: 20px;
+  line-height: 1.4em;
 }
 
 .big-close() {
@@ -200,7 +213,6 @@
     margin-right: -12px;
     margin-top: 8px;
   }
-
 }
 
 .borderless-text-input() {

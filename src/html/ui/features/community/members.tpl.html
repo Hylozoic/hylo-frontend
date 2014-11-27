@@ -1,0 +1,34 @@
+<div class="toolbar community-members-toolbar">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+      <div class="toolbar-left">
+        <a class="invite" ui-sref="communitySettings({community: community.slug})">
+          <i class="icon-add-01"></i>
+          <span class="hidden-xs">Invite Members</span>
+        </a>
+      </div>
+      <div class="search toolbar-right">
+        <i class="icon-search"></i>
+        <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
+        <div loading-indicator ng-if="searching"></div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2 community-members">
+  <div class="row">
+    <div ng-repeat="user in users | orderBy:'name'" class="member">
+      <a class="avatar" back-img="user.avatar" ui-sref="user({community: community.slug, id: user.id})"></a>
+      <div class="member-info">
+        <a class="name" ui-sref="user({community: community.slug, id: user.id})" ng-bind="::user.name"></a>
+        <div class="skills">Skills: &nbsp;<span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
+        <div class="affiliations">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
+      </div>
+    </div>
+    <div ng-if="users.length == 0" class="no-match">
+      No members matched your search terms.
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
 var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 
+
 require('./controllers/comments');
+require('./controllers/community_about');
+require('./controllers/community_seeds');
 require('./controllers/community_users');
 require('./controllers/community');
 require('./controllers/fulfillModal');

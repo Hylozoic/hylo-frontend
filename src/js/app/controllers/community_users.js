@@ -1,17 +1,15 @@
-angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$rootScope', '$scope', 'User', '$timeout', '$analytics',
-  function($rootScope, $scope, User, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$scope', 'User', '$timeout', '$analytics',
+  function($scope, User, $timeout, $analytics) {
 
-    $rootScope.$watch('community', function(community) {
-      community.$promise.then(function() {
-        $scope.searching = true;
-        if ($rootScope.community.slug) {
-          User.query({community: $rootScope.community.slug}, function(users) {
-            $scope.searching = false;
-            $scope.users = users;
-          });
-        }
-      });
-    })
+    $scope.community.$promise.then(function() {
+      $scope.searching = true;
+      if ($scope.community.slug) {
+        User.query({community: $scope.community.slug}, function(users) {
+          $scope.searching = false;
+          $scope.users = users;
+        });
+      }
+    });
 
     var queryFn = function() {
       $scope.searching = true;
