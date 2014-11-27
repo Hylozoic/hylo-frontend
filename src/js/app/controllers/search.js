@@ -11,7 +11,7 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
     $scope.searchQuery = $stateParams.q;
 
     // Initially Disabled Infinite Scroll
-    $scope.disableInifiniteScroll = true;
+    $scope.disableInfiniteScroll = true;
 
     $scope.$watch("postType", function(newFilter) {
       $scope.start = 0;
@@ -52,7 +52,7 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
       cancelerStack.push(newCanceler);
 
       // Disable infinite scroll until the query completes
-      $scope.disableInifiniteScroll = true;
+      $scope.disableInfiniteScroll = true;
       $scope.searching = true;
 
       $http.get('/posts', {
@@ -92,9 +92,9 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
         $scope.noResults = $scope.posts.length == 0;
 
         if (posts.length == 0) { // There were no more posts... disable infinite scroll now
-          $scope.disableInifiniteScroll = true;
+          $scope.disableInfiniteScroll = true;
         } else {
-          $scope.disableInifiniteScroll = false;
+          $scope.disableInfiniteScroll = false;
         }
       });
     };

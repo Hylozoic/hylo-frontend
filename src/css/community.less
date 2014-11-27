@@ -7,10 +7,9 @@
 
     #banner-image {
       background-color: rgba(0,0,0,.6);
-      background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
-      linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), 
+      background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+      linear-gradient(to left, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
       linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.8));
-      display: inline-block;
       width: 100%;
       height: 100%;
 
@@ -18,8 +17,7 @@
         position: relative;
         z-index: -2;
         opacity: .9;
-        height: 400px;
-        height: 50vh;
+        height: 38.2vh;
         background-size: cover;
         background-position: center;
 
@@ -34,163 +32,61 @@
       font-size: 400%;
       color: white;
       position: absolute;
-      bottom: 110px;
+      bottom: 100px;
       text-align: center;
       margin-left: auto;
       margin-top: auto;
       width: 100%;
       letter-spacing: 2.5px;
-      
+
       @media (max-width: @screen-xs-max) {
-        bottom: 45px;
+        font-size: 32px;
         line-height: 1;
-      }
-      @media (max-width: @screen-xs) {
-        bottom: 30px;
       }
     }
 
     .banner-menu {
       position: absolute;
-      bottom: 50px;
+      bottom: 0;
       text-align: center;
       margin-left: auto;
       margin-top: auto;
       width: 100%;
-    }
 
-    .banner-menuItem {
-      .proxima-nova-light;
-      color: white;
-      font-size: 130%;
-      display: inline-block;
-      margin: 0px 40px;
-      letter-spacing: 2px;
-    }
-  }
-
-  .community-filter-buttons {
-    border: 1px solid @border-light;
-    top: -5px;
-    padding: 15px 6% 0px 6%;
-    position: relative;
-    height: 70px;
-
-    @media (max-width: @screen-xs-max) {
-
-      padding: 5px 1px;
-      margin: 0;
-      height: 50px;
-    }
-
-    @media (max-width: @screen-sm-max) {
-      #community-addSeedButton {
-        width: 30px;
-        overflow: hidden;
-        padding-left: 8px;
-        &-text {
-          visibility: hidden;
+      a {
+        .medium-title-text;
+        .remove-link-display(@lighter-gray);
+        display: inline-block;
+        position: relative;
+        padding: 10px 40px 0;
+        height: 72px;
+        .triangle {
+          display: none;
         }
-      }
-      .filter-buttons {
-        select {
-          width: 30px;
+
+        &.selected {
+          color: white;
+          font-weight: 600;
+          .triangle {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -13px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 14px solid white;
+          }
+        }
+
+        @media (max-width: @screen-xs-max) {
+          padding: 10px 13px 0;
+          height: 60px;
         }
       }
     }
-
-    .filter-buttons {
-      float: right;
-
-      button {
-        .rounded-button;
-        min-width: 90px;
-
-        @media (max-width: @screen-xs) {
-          min-width: initial;
-          padding: 0 12px;
-        }
-      }
-    }
-  }
-
-  #search-popover {
-    position: absolute;
-    width: 150px;
-    right: 1px;
-    margin-top: 3px;
-
-    input {
-      border: 1px solid @border-medium;
-    }
-  }
-
-  .full_width{
-    @media (max-width: @screen-xs-max) {
-      width: 100% !important;
-      margin: 0 auto;
-    }
-  }
-
-  .filters{
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .filter-query{
-    margin-left:0;
-    margin: 0 15px;
-    top: -3px;
-    float: none;
-    display: inline-block;
-    input{
-      height: 30px;
-      font-family: "proxima-nova", sans-serif;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 12px;
-      border: 0px;
-    }
-  }
-
-  .filter-query .input-group-addon{
-    background:#fff;
-    border:none;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  }
-
-
-  .btns button { // the only way to style the default button styles for community page toolbar
-    font-family: "proxima-nova", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    height: 30px;
-    color: #999999 !important;
-    font-size: 12px;
-    line-height: 30px;
-    padding: 0px 20px;
-    border:none;
-    border-radius:5px;
-  }
-  .btns button:hover{
-    background: #F2F2F2;
-  }
-
-  .btn-group > .btn-group:last-child > .btn:first-child {
-    border-radius: 15px;
-  }
-  .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn{
-    border-radius: 15px;
-  }
-
-  .bootstrap-select.btn-group .dropdown-menu li > a{
-    font-family: "proxima-nova", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    height: 30px;
-    color: #999999 !important;
-    font-size: 12px;
-    //line-height: 30px;
   }
 }
 
@@ -199,160 +95,106 @@
   position:relative;
 }
 
-.bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-  // width: 150px;
-  outline:0;
+// TODO this should go somewhere more general
+.toolbar {
+  text-align: center;
+  padding: @std-padding 0;
+  border-bottom: 1px solid @border-light;
+  min-height: 64px;
 
   @media (max-width: @screen-xs-max) {
-    width: 36% !important;
-    float: none;
-    button {
-      width: 105px;
-    }
-  }
-  @media (max-width: @screen-xs-min) {
-    button {
-      width: 95px;
-    }
-  }
-}
-
-.bootstrap-select .btn:focus {
-  outline: none !important;
-  outline: 0 auto -webkit-focus-ring-color !important;
-  outline-offset: 0px;
-}
-.community .bootstrap-select.btn-group .dropdown-menu li > a {
-  outline: none;
-}
-
-.add-seed-form { // the add seed expandable form
-  margin-bottom: 18px;
-  @circle-size: 42px;
-  position: relative;
-  z-index: 10;
-
-  .icon-remove-inverse {
-    font-size: 15px;
-    @media (max-width: @screen-xs-max) {
-      font-size: 22px;
-    }
+    padding: 5px;
+    min-height: 44px;
   }
 
-  &.editing {
-    height: auto;
+  .toolbar-left {
+    float: left;
+    text-align: left;
+  }
+  .toolbar-center {
+    margin: 0 auto;
+  }
+  .toolbar-right {
+    float: right;
+    text-align: left;
   }
 
-  .editor > .bubble {
-
-    margin-left: 0;
-
-    > .post-types {
-      margin: 0;
-      > a {
-        padding: 0;
-        display: block;
-        text-align: center;
-        background-color: @faint-gray;
-        color: @text-gray;
-        height: @circle-size;
-        line-height: @circle-size;
-        cursor: pointer;
-        text-decoration: none;
-        .proxima-nova-regular;
-        &:first-child { border-top-left-radius: 5px; }
-        &:last-child { border-top-right-radius: 5px; }
-      }
-    }
-
-    .addPostInput {
-      padding: 12px 10px;
-      font-size: 14px;
-    }
-
-    .selected (@color) {
-      color: @color;
-      background-color: white;
-    }
-
-    &.intention .post-types > a.intention { .selected(@intention-color); }
-    &.request .post-types > a.request { .selected(@request-color); }
-    &.offer .post-types > a.offer { .selected(@offer-color); }
-
-    > form {
-      padding: 20px;
-      > input[type="text"] {
-        margin-bottom: 20px;
-      }
-
-      > textarea {
-        margin-bottom: 20px;
-      }
-
-      > button {
-        width: 100%;
-        color: white;
-      }
-      > label {
-        display: block;
-      }
-    }
-
-    &.intention > form > button { background-color: @intention-color; }
-    &.request > form > button { background-color: @request-color; }
-    &.offer > form > button { background-color: @offer-color; }
-
-    > .triangle {
-      top: 8px;
-    }
-    &.request > .triangle, &.offer > .triangle {
-      background-color: @faint-gray;
-    }
+  h3 {
+    .section-title;
+    margin: 0;
+    line-height: 33px;
   }
 }
 
-.add-seed { // the add seed button from toolbar
-  margin-bottom: 18px;
-  float: left;
-  margin-right: 15px;
-  @circle-size: 42px;
-  height: 30px;
-  @media (max-width: @screen-xs-max) {
-    float: none;
-  }
-  @media (min-width: @screen-xs) and (max-width: @screen-sm-max) {
-    margin-left: 8px;
+.community-members-toolbar {
+  .invite, .search {
+    .rounded-button;
   }
 
-  &-icon {
-    font-size: 13px;
-    
-    @media (max-width: @screen-sm-max) {
-      top: 1px;
-      left: -2px;
+  .search {
+    position: relative;
+    input {
+      .borderless-text-input;
+      width: 180px;
     }
   }
-
-  .start-editing {
+  div[loading-indicator] {
+    position: absolute;
+    right: 5px;
+    top: 5px;
     display: inline-block;
-    height: 32px;
-    line-height: 32px;
-    cursor: pointer;
-    text-decoration: none;
-
-    .bubble {
-      height: 30px;
-      line-height: 30px;
-      color: @text-light-gray;
-      padding: 0 30px;
-      .post-type-style(@faint-gray);
-      .proxima-nova-regular;
+    vertical-align: top;
+    .spinner {
+      width: 20px;
+      height: 20px;
     }
-    .triangle {
-      top: 8px;
-      @media (max-width: @screen-xs) {
-        display: block;
+  }
+}
+
+.community-members {
+  margin-top: @std-padding;
+
+  .avatar {
+    .user-avatar;
+    float: left;
+    @media (max-width: @screen-xs-max) {
+      .user-avatar-sm;
+      margin-left: @std-padding;
+    }
+  }
+
+  .member-info {
+    min-height: @avatar-size-default + @std-padding;
+    margin-left: @avatar-size-default + @std-padding;
+    margin-bottom: @std-padding;
+    padding-bottom: @std-padding;
+    border-bottom: 1px solid @border-light;
+    .name {
+      .medium-header;
+      .remove-link-display;
+    }
+    .skills, .affiliations {
+      .seed-meta-text;
+    }
+    @media (max-width: @screen-xs-max) {
+      margin-left: @avatar-size-sm + @std-padding*2;
+      margin-right: 5px;
+      .name {
+        .seed-title-text;
       }
     }
+  }
+
+  .no-match {
+    .seed-body-text;
+  }
+}
+
+.core-intention {
+  .large-body-text;
+  color: @text-medium-dark;
+  margin-top: @std-padding * 2;
+  @media (max-width: @screen-xs-max) {
+    padding: 0 @std-padding*2;
   }
 }
