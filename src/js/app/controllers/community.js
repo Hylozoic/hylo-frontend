@@ -81,8 +81,6 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         $rootScope.currentUser.finishedOnboarding = true;
         $http.post('/endtour', {}, {params: {tour:'onboarding'}});
 
-        $scope.resetQuery();
-
         // Start the community tour if the user hasn't started yet
         if ($rootScope.currentUser.communityTour) {
           $timeout(startTour, 500);
