@@ -9,14 +9,16 @@
 
   <div class="post-container" ng-class="::post.postType">
     <div class="post-content">
-      <span class="post-options dropdown" ng-show="canDelete">
-        <a class="dropdown-toggle"><i class="icon-down" title="icon-down-new"></i></a>
+
+      <span class="post-options dropdown" dropdown ng-show="canDelete">
+        <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
         <ul class="dropdown-menu">
           <li >
             <a class="post-option" ng-click="delete(comment)">delete</a>
           </li>
         </ul>
       </span>
+
       <div class="post-header">
         <span class="post-info">
           <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
