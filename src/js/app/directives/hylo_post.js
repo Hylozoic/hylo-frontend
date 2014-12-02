@@ -238,8 +238,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $event.preventDefault();
       };
 
-      $scope.openFollowers = function() {
-        $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length});
+      $scope.openFollowers = function(isOpen) {
+        if (isOpen) {
+          $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length});
+        }
       }
 
       var setText = function() {

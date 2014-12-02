@@ -27,15 +27,19 @@
               <span ng-if="::post.contributors.length > 0">
               Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
                 <span ng-if="::post.contributors.length > 2">
-                  <span class="dropdown">and
-                  <a class="dropdown-toggle"><span>{{::post.contributors.length - 2}}</span> other<span ng-show="::post.contributors.length > 3">s</span></a>
-                  <ul class="dropdown-menu">
-                    <li ng-repeat="contributor in post.contributors.slice(2)">
-                      <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})">
-                        <i back-img="::contributor.avatar" class="avatar"></i>
-                        <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
-                    </li>
-                  </ul>
+                  and
+                  <span class="dropdown" dropdown>
+                    <a class="dropdown-toggle" dropdown-toggle>
+                      {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                      <li ng-repeat="contributor in post.contributors.slice(2)">
+                        <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})">
+                          <i back-img="::contributor.avatar" class="avatar"></i>
+                          <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
+                      </li>
+                    </ul>
                   </span>
                 </span>
               </span>
@@ -76,8 +80,11 @@
 
           <!-- Make a list of followers -->
           <span ng-if="followersNotMe.length > 2">
-            <span class="dropdown">and
-            <a class="dropdown-toggle" ng-click="openFollowers()"><span ng-bind="followersNotMe.length - 2"></span> other<span ng-if="followersNotMe.length > 3">s</span></a>
+            and
+            <span class="dropdown" dropdown on-toggle="openFollowers(open)">
+            <a class="dropdown-toggle" dropdown-toggle>
+              {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
+            </a>
             <ul class="dropdown-menu">
               <li ng-repeat="follower in followersNotMe.slice(2)">
                 <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
