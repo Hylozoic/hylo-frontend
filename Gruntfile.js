@@ -108,6 +108,10 @@ module.exports = function(grunt) {
       styleguide: {
         files: ['src/html/styleguide/**/*'],
         tasks: ['sync:styleguide']
+      },
+      options: {
+        livereload: true,
+        livereloadOnError: false
       }
     },
     notify: {
