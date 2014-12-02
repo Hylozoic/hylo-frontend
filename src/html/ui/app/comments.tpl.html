@@ -36,7 +36,7 @@
     <div class="comment-input">
       <form class="comment-form" >
         <textarea tabindex="-1" ng-disabled="createDisabled" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here." required></textarea>
-        <button ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
+        <button type="button" ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
     </div>
   </div>

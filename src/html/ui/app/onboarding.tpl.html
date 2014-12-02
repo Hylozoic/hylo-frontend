@@ -9,7 +9,7 @@
           model="$root.currentUser.organizations" ></tags>
 
       <div class="text-right">
-        <button class="btn btn-fulfill" wz-next="saveOrgs()" tabindex="2">Next</button>
+        <button type="button" class="btn btn-fulfill" wz-next="saveOrgs()" tabindex="2">Next</button>
       </div>
     </wz-step>
 
@@ -20,7 +20,7 @@
           model="$root.currentUser.skills"></tags>
 
       <div class="text-right">
-        <button class="btn btn-fulfill" wz-next="saveSkills()" tabindex="4">Next</button>
+        <button type="button" class="btn btn-fulfill" wz-next="saveSkills()" tabindex="4">Next</button>
       </div>
     </wz-step>
 
@@ -31,8 +31,8 @@
       <textarea class="form-control" rows="3" tabindex="5" ng-model="wizard.request"></textarea>
 
       <div class="text-right">
-        <button class="btn btn-default" wz-next="skip('request')" tabindex="100">Skip</button>
-        <button class="btn btn-fulfill" wz-next tabindex="6">Next</button>
+        <button type="button" class="btn btn-default" wz-next="skip('request')" tabindex="100">Skip</button>
+        <button type="button" class="btn btn-fulfill" wz-next tabindex="6">Next</button>
       </div>
     </wz-step>
 
@@ -43,8 +43,8 @@
       <textarea class="form-control" rows="3" tabindex="7" ng-model="wizard.offer"></textarea>
 
       <div class="text-right">
-        <button class="btn btn-default" wz-next="skip('offer')" tabindex="100">Skip</button>
-        <button class="btn btn-fulfill" wz-next tabindex="8">Next</button>
+        <button type="button" class="btn btn-default" wz-next="skip('offer')" tabindex="100">Skip</button>
+        <button type="button" class="btn btn-fulfill" wz-next tabindex="8">Next</button>
       </div>
     </wz-step>
 
@@ -55,8 +55,8 @@
       <textarea class="form-control" tabindex="9" rows="3" ng-model="wizard.intention"></textarea>
 
       <div class="text-right">
-        <button class="btn btn-default" wz-next="skip('intention')" tabindex="100">Skip</button>
-        <button class="btn btn-fulfill" wz-next tabindex="10">Finish</button>
+        <button type="button" class="btn btn-default" wz-next="skip('intention')" tabindex="100">Skip</button>
+        <button type="button" class="btn btn-fulfill" wz-next tabindex="10">Finish</button>
       </div>
     </wz-step>
   </wizard>
