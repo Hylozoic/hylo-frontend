@@ -44,7 +44,7 @@ module.exports = function(opts) {
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        if (req.url.match(/^\/noo/)) {
+        if (req.url.match(/^\/(noo|admin)/)) {
           proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
           opts.log.writeln(req.connection.remoteAddress + ' ↑n ' + req.method + ' ' + req.url);
         } else {
