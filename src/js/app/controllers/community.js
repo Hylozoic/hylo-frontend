@@ -4,7 +4,6 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
     $scope.state = $state;
 
     $scope.$watch('community', function watchCommunity(communityPromise) {
-      console.log(communityPromise)
       if (communityPromise) {
         communityPromise.$promise.then(function () {
           $analytics.eventTrack('Community: Load Community', {community_id: $scope.community.id, community_name: $scope.community.name, community_slug: $scope.community.slug});
