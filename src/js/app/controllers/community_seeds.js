@@ -2,8 +2,12 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
   ['$scope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics',
   function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics) {
 
-    $scope.community.$promise.then(function(community) {
-      $scope.query();
+    $scope.$watch('community', function watchCommunity(communityPromise) {
+      if (communityPromise) {
+        communityPromise.$promise.then(function () {
+          $scope.query();
+        });
+      }
     });
 
     $scope.start = 0;
