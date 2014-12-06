@@ -1,4 +1,4 @@
-filepickerUpload = function(opts) {
+var filepickerUpload = function(opts) {
   var pickOptions = {
     mimetype: 'image/*',
     multiple: false,

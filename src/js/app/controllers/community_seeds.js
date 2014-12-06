@@ -59,7 +59,6 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
       $http.get('/noo/community/' + $scope.community.id + "/posts", {
         params: {
           q: $scope.searchQuery,
-          community: $scope.community.slug,
           postType: $scope.seedFilter,
           sort: $scope.seedSort,
           start: $scope.start,
