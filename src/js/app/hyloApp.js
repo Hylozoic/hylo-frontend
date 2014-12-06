@@ -49,7 +49,6 @@ angular.module('hyloApp', [
         'responseError': function(rejection) {
           var requestTo = rejection.config ? rejection.config.url : "N/A"
           if (rejection.status == 403) {
-            $log.error("403 ResponseError", rejection)
             Rollbar.error("Client 403 Error", {page: rejection.config.url});
             growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           } else if (rejection.status == 500) {
@@ -72,26 +71,26 @@ angular.module('hyloApp', [
 
   }])
 
-.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'CurrentCommunity', '$log', '$window', 'growl', 'MenuService',
-  function(CurrentUser, $rootScope, $q, $state, $stateParams, CurrentCommunity, $log, $window, growl, MenuService) {
-
+.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService',
+  function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService) {
+    var currentSlug;
     $rootScope.currentUser = CurrentUser.get();
 
     //$stateParams is not set up yet at this point
     var locationMatchCommunity = window.location.toString().match(/c\/([^\/#\?]*)/);
     if (locationMatchCommunity != null) {
-      var currentCommunitySlug = locationMatchCommunity[1];
-      $rootScope.community = CurrentCommunity.get({slug: currentCommunitySlug});
+      currentSlug = locationMatchCommunity[1];
+      $rootScope.community = Community.get({id: currentSlug});
     }
 
     // Set a variable so we can watch for param changes
     $rootScope.watchingState = $state;
 
     $rootScope.$watch("watchingState.params.community", function(slug) {
-      if (angular.isDefined(slug) && slug != currentCommunitySlug) {
-        $rootScope.community = CurrentCommunity.get({slug: slug}, function(community) {
+      if (angular.isDefined(slug) && slug != currentSlug) {
+        $rootScope.community = Community.get({id: slug}, function(community) {
           $rootScope.community = community;
-          currentCommunitySlug = slug;
+          currentSlug = slug;
         });
       }
     });

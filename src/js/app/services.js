@@ -22,13 +22,6 @@ factory('CurrentUser', ['$resource',
     });
   }]).
 
-factory('CurrentCommunity', ['$resource',
-  function($resource) {
-    return $resource('/current_community/:slug', {
-      slug: "@slug"
-    });
-  }]).
-
 factory('User', ['$resource',
   function($resource) {
     return $resource('/users/:id',
