@@ -97,18 +97,6 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
 
     $idle.watch();
 
-    $scope.$watch('notifications', function() {
-      var count = _.filter($scope.notifications, function(n) { return !n.read }).length;
-      if (count > 0) {
-        var title = count + ' new notification';
-        if (count > 1) title += 's';
-        $scope.notificationsTitle = title;
-      } else {
-        $scope.notificationsTitle = 'Notifications';
-      }
-      $scope.unreadCount = count > 0 ? count : '';
-    }, true);
-
     $scope.markread = function(notification) {
       notification.read = true;
       Notification.markRead({id: notification.id})
