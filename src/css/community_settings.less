@@ -73,18 +73,23 @@
   }
 
   .invite {
+    label {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 32px;
+    }
+    .right {
+      text-align: right;
+    }
     button {
       .rounded-button;
-      position: absolute;
-      right: @std-padding;
     }
-    input {
+    input[type="text"] {
       .borderless-text-input;
       .seed-body-text;
       line-height: 30px;
       &.placeholding { font-style: italic; }
       display: block;
-      padding-right: 150px;
       width: 100%;
     }
     .note {

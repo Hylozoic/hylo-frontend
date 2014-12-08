@@ -101,7 +101,7 @@ module.exports = function(angularModule) {
         $scope.submitting = true;
         $scope.inviteResults = null;
 
-        Community.invite({id: $scope.community.id, emails: $scope.emails})
+        Community.invite({id: $scope.community.id, emails: $scope.emails, moderator: $scope.inviteAsModerator})
         .$promise.then(function(resp) {
           $scope.inviteResults = resp.results;
           $scope.emails = '';
