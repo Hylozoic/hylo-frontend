@@ -90,6 +90,25 @@
           </div>
         </div>
 
+        <div class="row section-label" ng-click="toggleModerators()" style="display:none">
+          <div class="col-sm-12">
+            Moderators
+            <i ng-class="{'icon-down': expand3, 'icon-right': !expand3}"></i>
+          </div>
+        </div>
+        <div class="row section moderators" collapse="!expand3">
+          <div class="col-sm-12">
+            <div class="moderator" ng-repeat="user in moderators">
+              <a class="avatar" back-img="user.avatar_url" ui-sref="user({community: community.slug, id: user.id})"></a>
+              <a class="name" ui-sref="user({community: community.slug, id: user.id})" ng-bind="::user.name"></a>
+              <a class="close" ng-click="removeModerator(user.id)">&times;</a>
+            </div>
+            <p class="note">
+              Moderators can invite new members and delete other members' seeds.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 
