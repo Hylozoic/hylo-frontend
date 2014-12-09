@@ -155,6 +155,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.isFollowing = false;
       $scope.joinPostText = "";
 
+      $scope.onlyAuthorFollowing = false;
+
 
       $scope.toggleJoinPostText = function() {
         if ($scope.isFollowing) {
@@ -274,6 +276,10 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           $scope.followersNotMe = $scope.followers;
           $scope.isFollowing = false;
         }
+
+        //If the only person following the post is the author we can hide the following status in the post
+        var firstFollower = _.first($scope.followers);
+        $scope.onlyAuthorFollowing = (firstFollower.name === $scope.post.user.name && $scope.followers.length === 1);
 
         $scope.joinPostText = $scope.toggleJoinPostText();
       }

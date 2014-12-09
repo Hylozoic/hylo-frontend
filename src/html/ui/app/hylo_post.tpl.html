@@ -67,7 +67,7 @@
         </span>
 
         <div class="followers">
-          <span ng-if="followers.length > 0">
+          <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
             <!-- Add yourself as a follower -->
             <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
             <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
