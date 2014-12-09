@@ -112,19 +112,7 @@
           font-size: 12px;
           color: @color;
           padding-bottom: 5px;
-          .type {
-            margin-right: 10px;
 
-            &.intention {
-              .seed-type-text(@intention-color);
-            }
-            &.request {
-              .seed-type-text(@request-color);
-            }
-            &.offer {
-              .seed-type-text(@offer-color);
-            }
-          }
           .name {
             .proxima-nova-semibold;
           }
@@ -156,10 +144,6 @@
           margin-top: 0;
           margin-right: 10px;
           .seed-title-text;
-        }
-
-        .timestamp {
-          .seed-meta-text;
         }
 
         .post-description {
@@ -254,6 +238,42 @@
           }
         }
       }
+    }
+
+    .post-context {
+
+      padding: 10px 0 20px 0;
+
+      > span, > div {
+        display: inline-block;
+
+        @media (min-width: @screen-sm) {
+          float: left;
+
+          &.followers {
+            float: right;
+          }
+        }
+      }
+
+      .post-type {
+        margin-right: 10px;
+
+        &.intention {
+          .seed-type-text(@intention-color);
+        }
+        &.request {
+          .seed-type-text(@request-color);
+        }
+        &.offer {
+          .seed-type-text(@offer-color);
+        }
+      }
+
+      .timestamp {
+        .seed-meta-text;
+      }
+
     }
   }
 }
