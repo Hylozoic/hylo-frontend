@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', 'User', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
-  function($scope, $http, Post, User, $log, $rootScope, $modal, growl, $window, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
+  function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics) {
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
@@ -100,7 +100,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       });
       modalInstance.result.then(function() {
         $http.post('/comment/delete', {id: comment.id}).success(function(data, status, headers, config) {
-          $log.debug("success", data);      
+          $log.debug("success", data);
           $analytics.eventTrack('Post: Comment: Delete', {post_id: $scope.post.id, comment_id: comment.id, comment_text: comment.text} );
           $scope.post.comments.splice($scope.post.comments.indexOf(comment), 1);
           $scope.post.numComments--;

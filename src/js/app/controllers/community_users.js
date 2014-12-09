@@ -1,10 +1,10 @@
-angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$scope', 'User', '$timeout', '$analytics',
-  function($scope, User, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$scope', 'OldUser', '$timeout', '$analytics',
+  function($scope, OldUser, $timeout, $analytics) {
 
     $scope.community.$promise.then(function() {
       $scope.searching = true;
       if ($scope.community.slug) {
-        User.query({community: $scope.community.slug}, function(users) {
+        OldUser.query({community: $scope.community.slug}, function(users) {
           $scope.searching = false;
           $scope.users = users;
         });
@@ -14,7 +14,7 @@ angular.module("hyloControllers").controller('CommunityUsersCtrl', ['$scope', 'U
     var queryFn = function() {
       $scope.searching = true;
       $analytics.eventTrack('Members: Query', {community_id: $scope.community.slug, query: $scope.searchQuery});
-      User.query({
+      OldUser.query({
         q: $scope.searchQuery,
         community: $scope.community.slug
       }, function(value) {

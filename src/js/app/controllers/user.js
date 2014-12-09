@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'User', '$timeout', '$http', '$rootScope', '$analytics', '$window',
-  function($scope, $stateParams, $state, $log, Post, growl, User, $timeout, $http, $rootScope, $analytics, $window) {
+angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'OldUser', '$timeout', '$http', '$rootScope', '$analytics', '$window',
+  function($scope, $stateParams, $state, $log, Post, growl, OldUser, $timeout, $http, $rootScope, $analytics, $window) {
     var previous = {};
 
     $scope.editing = false;
@@ -60,7 +60,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
 //            $timeout(startTour, 900);
 //          }
         } else {
-          $scope.user = User.get({id: $stateParams.id});
+          $scope.user = OldUser.get({id: $stateParams.id});
           $scope.editable = false;
         }
       });

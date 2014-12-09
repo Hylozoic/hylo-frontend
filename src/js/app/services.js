@@ -42,7 +42,7 @@ factory('CurrentUser', ['$resource',
     });
   }]).
 
-factory('User', ['$resource',
+factory('OldUser', ['$resource',
   function($resource) {
     return $resource('/users/:id',
       {
