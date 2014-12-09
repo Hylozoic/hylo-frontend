@@ -20,6 +20,23 @@
       </span>
 
       <div class="post-header">
+        <span ng-click="onCommentIconClick()">
+          <span class="title">
+            <span seed-text="post.name"></span>
+          </span>
+
+          <br ng-if="isPostText">
+
+          <span ng-if="isPostText" class="post-description">
+            <span seed-text="truncatedPostText"></span>
+            <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
+          </span>
+        </span>
+      </div>
+
+      <div class="post-context">
+        <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
+        <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
         <span class="post-info">
           <span class="fulfillment" ng-if="post.fulfilled">
             <div>
@@ -48,24 +65,6 @@
             </div>
           </span>
         </span>
-        <br>
-        <span ng-click="onCommentIconClick()">
-          <span class="title">
-            <span seed-text="post.name"></span>
-          </span>
-
-          <br ng-if="isPostText">
-
-          <span ng-if="isPostText" class="post-description">
-            <span seed-text="truncatedPostText"></span>
-            <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
-          </span>
-        </span>
-      </div>
-
-      <div class="post-context">
-        <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-        <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
 
         <div class="followers">
           <span ng-if="followers.length > 0">
