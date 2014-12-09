@@ -2,14 +2,34 @@ angular.module('hyloServices', ['ngResource']).
 
 factory('Community', ['$resource',
   function($resource) {
-    return $resource('/noo/community/:id', {
+    var Community = $resource('/noo/community/:id', {
       id: '@id'
     }, {
       invite: {
         method: 'POST',
         url: '/noo/community/:id/invite'
+      },
+      findModerators: {
+        url: '/noo/community/:id/moderators',
+        isArray: true
+      },
+      removeModerator: {
+        url: '/noo/community/:id/moderator/:user_id',
+        method: 'DELETE'
       }
     });
+
+    // let's make things a bit more OO around here
+    _.extend(Community.prototype, {
+      findModerators: function(success, error) {
+        return Community.findModerators({id: this.id}, success, error);
+      },
+      removeModerator: function(params, success, error) {
+        return Community.removeModerator(_.extend({id: this.id}, params), success, error);
+      }
+    });
+
+    return Community;
   }]).
 
 factory('CurrentUser', ['$resource',
