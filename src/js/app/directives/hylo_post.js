@@ -1,5 +1,5 @@
-angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', 'User', '$http', '$timeout', '$window', '$analytics',
-  function(Post, $filter, $state, $rootScope, $log, $modal, User, $http, $timeout, $window, $analytics) {
+angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', '$http', '$timeout', '$window', '$analytics',
+  function(Post, $filter, $state, $rootScope, $log, $modal, $http, $timeout, $window, $analytics) {
   return {
     restrict: 'E',
     scope: {
