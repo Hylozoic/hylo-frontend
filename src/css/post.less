@@ -49,6 +49,10 @@
   }
 
   .post-container {
+
+    @title-color: #333332;
+    @color: #808080;
+
     margin-left: @user-width + 5;
 
     @media (max-width: @screen-xs-max) {
@@ -103,23 +107,8 @@
           display: inline-block;
         }
 
-        @title-color: #333332;
-        @color: #808080;
         color: @color;
         display: table;
-
-        .post-info {
-          font-size: 12px;
-          color: @color;
-          padding-bottom: 5px;
-
-          .name {
-            .proxima-nova-semibold;
-          }
-          .post-prefix {
-            .proxima-nova-light;
-          }
-        }
 
         .fulfillment {
           .seed-meta-text;
@@ -273,6 +262,18 @@
       .timestamp {
         .seed-meta-text;
       }
+
+      .post-info {
+          .seed-meta-text;
+          color: @color;
+
+          .name {
+            .proxima-nova-semibold;
+          }
+          .post-prefix {
+            .proxima-nova-light;
+          }
+        }
 
     }
   }
