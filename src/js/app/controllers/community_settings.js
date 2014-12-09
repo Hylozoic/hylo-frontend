@@ -115,7 +115,7 @@ module.exports = function(angularModule) {
       $scope.toggleModerators = function() {
         $scope.expand3 = !$scope.expand3;
         if (!$scope.moderators) {
-          $scope.moderators = $scope.community.findModerators();
+          $scope.moderators = $scope.community.moderators();
         }
       };
 
@@ -130,6 +130,17 @@ module.exports = function(angularModule) {
             });
           });
         }
+      };
+
+      $scope.findMembers = function(search) {
+        return $scope.community.members({search: search}).$promise;
+      };
+
+      $scope.addModerator = function(item, model, label) {
+        $scope.selectedMember = null;
+        $scope.community.addModerator({user_id: item.id}, function() {
+          $scope.moderators.push(item);
+        })
       }
 
     }
