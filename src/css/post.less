@@ -17,7 +17,6 @@
     position: absolute;
     width: @user-width;
     vertical-align: top;
-    padding-top: 10px;
 
     @media (max-width: @screen-xs-max) {
       position: relative;
@@ -231,7 +230,7 @@
 
     .post-context {
 
-      padding: 10px 0 20px 0;
+      padding: 12px 0 17px 0;
 
       > span, > div {
         display: inline-block;
@@ -264,16 +263,21 @@
       }
 
       .post-info {
-          .seed-meta-text;
-          color: @color;
+        .seed-meta-text;
+        color: @color;
 
-          .name {
-            .proxima-nova-semibold;
-          }
-          .post-prefix {
-            .proxima-nova-light;
-          }
+        a {
+          color: @link-color;
         }
+        
+
+        .name {
+          .proxima-nova-semibold;
+        }
+        .post-prefix {
+          .proxima-nova-light;
+        }
+      }
 
     }
   }
