@@ -112,6 +112,26 @@ module.exports = function(angularModule) {
         });
       };
 
+      $scope.toggleModerators = function() {
+        $scope.expand3 = !$scope.expand3;
+        if (!$scope.moderators) {
+          $scope.moderators = $scope.community.findModerators();
+        }
+      };
+
+      $scope.removeModerator = function(userId) {
+        var user = _.find($scope.moderators, function(user) { return user.id == userId }),
+          confirmText = "Are you sure you wish to remove " + user.name + "'s moderator powers?";
+
+        if (confirm(confirmText)) {
+          $scope.community.removeModerator({user_id: userId}, function() {
+            $scope.moderators = $scope.moderators.filter(function(user) {
+              return user.id != userId;
+            });
+          });
+        }
+      }
+
     }
   ]);
 
