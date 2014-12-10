@@ -1,7 +1,10 @@
   .followers {
     .seed-meta-text();
     color: @text-medium-dark;
-    padding: 15px 0;
+
+    @media (max-width: @screen-xs-max) {
+      margin-top: 4px;
+    }
 
     .actionIcon {
       font-size: 16px;
@@ -15,10 +18,12 @@
       }
     }
 
-    a {
-      font-weight: 500;
-      color: @default-text;
-      cursor: pointer;
+    a, a:hover {
+      color: @link-color;
+    }
+
+    a.dropdown-toggle, a.dropdown-toggle:hover {
+      font-weight: 600;
     }
   }
 
