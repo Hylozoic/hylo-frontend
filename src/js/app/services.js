@@ -1,14 +1,5 @@
 var angularModule = angular.module('hyloServices', ['ngResource']).
 
-factory('User', ['$resource',
-  function($resource) {
-    return $resource('/noo/user/:id', {
-      id: '@id'
-    }, {
-
-    });
-  }]).
-
 factory('CurrentUser', ['$resource',
   function($resource) {
     return $resource('/current_user', {}, {
@@ -114,4 +105,5 @@ factory("Post", ["$resource",
         })
 }]);
 
+require('./services/user.js')(angularModule);
 require('./services/community.js')(angularModule);
