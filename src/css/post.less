@@ -17,6 +17,7 @@
       position: relative;
       width: initial;
       height: 45px;
+      padding: 0 10px;
     }
 
     .icon .avatar {
@@ -67,6 +68,7 @@
       padding-bottom: 7px;
       @media (max-width: @screen-xs-max) {
         margin: 0;
+        padding: 0 10px;
       }
 
       .post-options {
@@ -220,19 +222,8 @@
 
       border-bottom: 1px solid @light-gray;
 
-      @media (max-width: @screen-xs-max) {
-        border-top: 1px solid @light-gray;
-        border-bottom: 2px solid @light-gray;
-
-        > a i {
-          font-size: 18px;
-        }
-      }
-      
-
       &, > a {
         color: @light-gray;
-        margin-right: 15px;
 
         & .link-selected {
           color: @dark-blue;
@@ -243,11 +234,24 @@
           @media (max-width: @screen-xs-max) { 
             font-size: 18px; 
             font-weight: 400;
+            top: 3px;
+            position: relative;
           }
         }
       }
+      
+      @media (max-width: @screen-xs-max) {
+        border-top: 1px solid @light-gray;
+        border-bottom: 2px solid @light-gray;
+        margin-bottom: 10px;
+        margin-left: -10px;
+        margin-right: -10px;
+        padding-left: 10px;
+      }
+
       > a {
         cursor: pointer;
+        margin-right: 15px;
         text-decoration: none;
       }
 
