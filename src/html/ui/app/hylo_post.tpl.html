@@ -1,7 +1,7 @@
 <div class="post" analytics-id="{{::post.id}}">
 
   <div class="user">
-    <a ui-sref="user({community: post.communitySlug, id: post.user.id})">
+    <a ui-sref="user({id: post.user.id})">
       <div class="icon"> <span back-img="post.user.avatar" class="avatar user-avatar user-avatar-block"></span> </div>
       <div class="name">{{::post.user.name}}</div>
     </a>
@@ -25,7 +25,7 @@
           <span class="fulfillment" ng-if="post.fulfilled">
             <div>
               <span ng-if="::post.contributors.length > 0">
-              Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+              Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
                 <span ng-if="::post.contributors.length > 2">
                   and
                   <span class="dropdown" dropdown>
@@ -35,7 +35,7 @@
 
                     <ul class="dropdown-menu">
                       <li ng-repeat="contributor in post.contributors.slice(2)">
-                        <a class="contributor" ui-sref="user({community: post.communitySlug, id: contributor.id})">
+                        <a class="contributor" ui-sref="user({id: contributor.id})">
                           <i back-img="::contributor.avatar" class="avatar"></i>
                           <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
                       </li>
@@ -74,7 +74,7 @@
 
           <!-- List Names -->
           <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-            <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
+            <a class="follower" ui-sref="user({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
             <span ng-if="::!$last && followersNotMe.length == 2"> and </span>
           </span>
 
@@ -87,7 +87,7 @@
             </a>
             <ul class="dropdown-menu">
               <li ng-repeat="follower in followersNotMe.slice(2)">
-                <a class="follower" ui-sref="user({community: post.communitySlug, id: follower.value})" ng-if="!follower.hide">
+                <a class="follower" ui-sref="user({id: follower.value})" ng-if="!follower.hide">
                   <i back-img="::follower.avatar" class="avatar"></i>
                   <span class="name">{{::follower.name}}</span>
                 </a>
