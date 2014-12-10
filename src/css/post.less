@@ -3,7 +3,7 @@
 .post {
   @user-width: 90px;
 
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: @font-size-base;
   color: @text-gray;
 
@@ -70,7 +70,7 @@
     .post-content {
       margin: 0px 0px 0px 20px;
       border-bottom: 1px solid @light-gray;
-      padding-bottom: 12px;
+      padding-bottom: 7px;
       @media (max-width: @screen-xs-max) {
         margin: 0;
       }
@@ -165,6 +165,7 @@
 
       .controls {
         font-size: @font-size-small;
+        margin-top: 13px;
         .proxima-nova-light;
 
         &, > a {
@@ -230,7 +231,7 @@
 
     .post-context {
 
-      padding: 12px 0 17px 0;
+      padding: 12px 0 3px 0;
 
       > span, > div {
         display: inline-block;
@@ -261,24 +262,25 @@
       .timestamp {
         .seed-meta-text;
       }
+    }
 
-      .post-info {
-        .seed-meta-text;
-        color: @color;
+    .post-info {
+      .seed-meta-text;
+      color: @color;
+      display: block;
+      margin-top: 10px;
 
-        a {
-          color: @link-color;
-        }
-        
-
-        .name {
-          .proxima-nova-semibold;
-        }
-        .post-prefix {
-          .proxima-nova-light;
-        }
+      a {
+        color: @link-color;
       }
+      
 
+      .name {
+        .proxima-nova-semibold;
+      }
+      .post-prefix {
+        .proxima-nova-light;
+      }
     }
   }
 }
