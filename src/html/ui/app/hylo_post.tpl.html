@@ -36,7 +36,7 @@
 
       <div class="post-context">
         <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-        <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
+        <span class="timestamp">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
         <div class="followers">
           <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
             <!-- Add yourself as a follower -->
@@ -73,8 +73,6 @@
           </span>
         </div>
       </div>
-
-
 
       <span class="post-info">
         <span class="fulfillment" ng-if="post.fulfilled">
