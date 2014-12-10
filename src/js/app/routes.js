@@ -40,23 +40,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('community.list', {
-        url: '/list',
-        views: {
-          "listA": {
-            templateUrl: '/ui/app/community_list.tpl.html',
-            controller: function($scope) {
-              $scope.items = ['A', 'B', 'C'];
-            }
-          },
-          "listB": {
-            templateUrl: '/ui/app/community_list.tpl.html',
-            controller: function($scope) {
-              $scope.items = ['1', '2', '3'];
-            }
-          }
-        }
-      }).
       state('createCommunity', {
         url: '/create/community',
         views: {
