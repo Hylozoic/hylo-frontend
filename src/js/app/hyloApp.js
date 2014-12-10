@@ -27,13 +27,28 @@ angular.module('hyloApp', [
   };
 }])
 
-.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
-  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
+.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider', '$urlRouterProvider',
+  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
     growlProvider.globalTimeToLive(5000);
 
     $idleProvider.idleDuration(45); // in seconds
     $idleProvider.warningDuration(1); // in seconds
+
+    $urlRouterProvider.rule(function ($injector, $location) {
+      var path = $location.url();
+
+      // check to see if the path already has a slash where it should be
+      if (path[path.length - 1] === '/' || path.indexOf('/?') > -1) {
+        return;
+      }
+
+      if (path.indexOf('?') > -1) {
+        return path.replace('?', '/?');
+      }
+
+      return path + '/';
+    });
 
     // Disable bootstrap UI animations
     $tooltipProvider.options({
