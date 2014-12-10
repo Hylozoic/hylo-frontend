@@ -48,7 +48,7 @@ module.exports = function(angularModule) {
               id: $scope.community.id,
               avatar_url: url
             }, function() {
-              $scope.community.avatar = url;
+              $scope.community.avatar_url = url;
               $analytics.eventTrack('Community: Changed Icon', {
                 community_id: $scope.community.slug,
                 moderator_id: $scope.currentUser.id
@@ -79,7 +79,7 @@ module.exports = function(angularModule) {
               id: $scope.community.id,
               banner_url: url
             }, function() {
-              $scope.community.banner = url;
+              $scope.community.banner_url = url;
               $analytics.eventTrack('Community: Changed Banner', {
                 community_id: $scope.community.slug,
                 moderator_id: $scope.currentUser.id
