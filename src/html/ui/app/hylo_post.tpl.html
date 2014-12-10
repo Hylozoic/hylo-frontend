@@ -120,9 +120,11 @@
           <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
           <span class="num">{{post.numComments}}</span>
         </a>
-        <div class="join-leave-link" ng-if="!isPostOwner()" ng-click="toggleJoinPost()">
-          <span>{{joinPostText}} </span>
-        </div>
+        <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostText}} Post" class="join">
+          <i ng-if="!isFollowing" class="icon-join"></i>
+          <i ng-if="isFollowing" class="icon-leave"></i>
+          <span class="num">{{joinPostText | uppercase}}</span>
+        </a>
         <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
           <span ng-click="markFulfilled()">Mark as Fulfilled</span>
         </div>
