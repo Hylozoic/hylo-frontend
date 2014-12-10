@@ -20,38 +20,6 @@
       </span>
 
       <div class="post-header">
-        <span class="post-info">
-          <span class="type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-          <span class="fulfillment" ng-if="post.fulfilled">
-            <div>
-              <span ng-if="::post.contributors.length > 0">
-              Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
-                <span ng-if="::post.contributors.length > 2">
-                  and
-                  <span class="dropdown" dropdown>
-                    <a class="dropdown-toggle" dropdown-toggle>
-                      {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                      <li ng-repeat="contributor in post.contributors.slice(2)">
-                        <a class="contributor" ui-sref="user({id: contributor.id})">
-                          <i back-img="::contributor.avatar" class="avatar"></i>
-                          <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
-                      </li>
-                    </ul>
-                  </span>
-                </span>
-              </span>
-              <span ng-if="::post.contributors.length == 0">
-                No Contributors
-              </span>
-            </div>
-          </span>
-
-          <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
-        </span>
-        <br>
         <span ng-click="onCommentIconClick()">
           <span class="title">
             <span seed-text="post.name"></span>
@@ -59,47 +27,82 @@
 
           <br ng-if="isPostText">
 
-          <span ng-if="isPostText" class="post-description">
+          <span ng-if="isPostText && truncatedPostText.length > 0" class="post-description">
             <span seed-text="truncatedPostText"></span>
             <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
           </span>
         </span>
       </div>
 
-      <div class="followers">
-        <span ng-if="followers.length > 0">
-          <!-- Add yourself as a follower -->
-          <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
-          <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
+      <div class="post-context">
+        <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
+        <span class="timestamp">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
+        <div class="followers">
+          <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
+            <!-- Add yourself as a follower -->
+            <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
+            <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
 
-          <!-- List Names -->
-          <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-            <a class="follower" ui-sref="user({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
-            <span ng-if="::!$last && followersNotMe.length == 2"> and </span>
-          </span>
-
-          <!-- Make a list of followers -->
-          <span ng-if="followersNotMe.length > 2">
-            and
-            <span class="dropdown" dropdown on-toggle="openFollowers(open)">
-            <a class="dropdown-toggle" dropdown-toggle>
-              {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li ng-repeat="follower in followersNotMe.slice(2)">
-                <a class="follower" ui-sref="user({id: follower.value})" ng-if="!follower.hide">
-                  <i back-img="::follower.avatar" class="avatar"></i>
-                  <span class="name">{{::follower.name}}</span>
-                </a>
-              </li>
-            </ul>
+            <!-- List Names -->
+            <span ng-repeat="follower in followersNotMe.slice(0, 2)">
+              <a class="follower" ui-sref="user({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
+              <span ng-if="::!$last && followersNotMe.length == 2"> and </span>
             </span>
+
+            <!-- Make a list of followers -->
+            <span ng-if="followersNotMe.length > 2">
+              and
+              <span class="dropdown" dropdown on-toggle="openFollowers(open)">
+              <a class="dropdown-toggle" dropdown-toggle>
+                {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="follower in followersNotMe.slice(2)">
+                  <a class="follower" ui-sref="user({id: follower.value})" ng-if="!follower.hide">
+                    <i back-img="::follower.avatar" class="avatar"></i>
+                    <span class="name">{{::follower.name}}</span>
+                  </a>
+                </li>
+              </ul>
+              </span>
+            </span>
+            <span ng-if="isFollowing || followersNotMe.length > 1">have</span><span ng-if="!isFollowing && followersNotMe.length == 1">has</span> joined this seed.
           </span>
-          <span ng-if="isFollowing || followersNotMe.length > 1">have</span><span ng-if="!isFollowing && followersNotMe.length == 1">has</span> joined this seed.
+          <span ng-if="followers.length == 0">
+            No followers.
+          </span>
+        </div>
+      </div>
+
+      <span class="post-info" ng-if="post.fulfilled">
+        <span class="fulfillment">
+          <div>
+            Fulfilled&nbsp;&nbsp;•&nbsp;
+            <span ng-if="::post.contributors.length > 0">
+            Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+              <span ng-if="::post.contributors.length > 2">
+                and
+                <span class="dropdown" dropdown>
+                  <a class="dropdown-toggle" dropdown-toggle>
+                    {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="contributor in post.contributors.slice(2)">
+                      <a class="contributor" ui-sref="user({id: contributor.id})">
+                        <i back-img="::contributor.avatar" class="avatar"></i>
+                        <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
+                    </li>
+                  </ul>
+                </span>
+              </span>
+            </span>
+            <span ng-if="::post.contributors.length == 0">
+              No Contributors
+            </span>
+          </div>
         </span>
-        <span ng-if="followers.length == 0">
-          No followers.
-        </span>
+      </span>
       </div>
 
       <div class="controls">
@@ -118,9 +121,11 @@
           <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
           <span class="num">{{post.numComments}}</span>
         </a>
-        <div class="join-leave-link" ng-if="!isPostOwner()" ng-click="toggleJoinPost()">
-          <span>{{joinPostText}} </span>
-        </div>
+        <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostText}} Post" class="join">
+          <i ng-if="!isFollowing" class="icon-join"></i>
+          <i ng-if="isFollowing" class="icon-leave"></i>
+          <span class="num">{{joinPostText | uppercase}}</span>
+        </a>
         <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
           <span ng-click="markFulfilled()">Mark as Fulfilled</span>
         </div>
@@ -147,5 +152,4 @@
         <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
       </div>
     </div>
-  </div>
 </div>
