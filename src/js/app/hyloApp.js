@@ -81,6 +81,8 @@ angular.module('hyloApp', [
     if (locationMatchCommunity != null) {
       currentSlug = locationMatchCommunity[1];
       $rootScope.community = Community.get({id: currentSlug});
+    } else {
+      $rootScope.community = Community.default();
     }
 
     // Set a variable so we can watch for param changes
