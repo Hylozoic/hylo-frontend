@@ -64,7 +64,7 @@
     }
 
     .post-content {
-        
+
       padding-bottom: 7px;
       @media (max-width: @screen-xs-max) {
         margin: 0;
@@ -204,7 +204,7 @@
       a {
         color: @link-color;
       }
-      
+
 
       .name {
         .proxima-nova-semibold;
@@ -216,7 +216,7 @@
 
     .controls {
       font-size: @font-size-small;
-      margin-top: 13px;
+      margin-top: 9px;
       margin-bottom: 25px;
       .proxima-nova-light;
 
@@ -231,22 +231,22 @@
         i {
           color: @dark-blue;
           font-size: 16px;
-          @media (max-width: @screen-xs-max) { 
-            font-size: 18px; 
+          @media (max-width: @screen-xs-max) {
+            font-size: 18px;
             font-weight: 400;
             top: 3px;
             position: relative;
           }
         }
       }
-      
+
       @media (max-width: @screen-xs-max) {
         border-top: 1px solid @light-gray;
         border-bottom: 2px solid @light-gray;
         margin-bottom: 10px;
         margin-left: -10px;
         margin-right: -10px;
-        padding-left: 10px;
+        padding-left: 38px;
       }
 
       > a {
@@ -263,10 +263,6 @@
         display: inline-block;
         padding: 5px 4px;
 
-        .num {
-          font-size: 14px;
-        }
-
         &:hover {
           .icon-following {
             text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
@@ -276,6 +272,12 @@
             color: @gray;
           }
         }
+      }
+
+      .num {
+        font-size: 14px;
+        position: relative;
+        top: -2px;
       }
 
       .filfill-link, .join-leave-link {
