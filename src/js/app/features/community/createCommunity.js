@@ -60,7 +60,7 @@ angular.module("hylo.createCommunity", [])
           $timeout(function() {
             state.loadingBanner = false;
             $log.error(FPError);
-          })
+          });
           if (FPError.code != 101) {
             growl.addErrorMessage('Error uploading image.  Please try again.');
             $analytics.eventTrack('Upload Image: Community Banner FAILED');
@@ -126,7 +126,7 @@ angular.module("hylo.createCommunity", [])
         }, function (FPError) {
           $timeout(function() {
             state.loadingIcon = false;
-          })
+          });
           $log.error(FPError);
           if (FPError.code != 101) {
             growl.addErrorMessage('Error uploading image.  Please try again.');
@@ -137,7 +137,7 @@ angular.module("hylo.createCommunity", [])
 
       var previous = function previous() {
         state.step--;
-      }
+      };
 
       var next = function next(form) {
         // Trigger validation flag.
@@ -149,14 +149,20 @@ angular.module("hylo.createCommunity", [])
         }
 
         state.step++;
-      }
+      };
 
       var state = {
         categoryListOptions: {
-          'coworking': 'Co-working',
-          'makerspace': 'Makerspace',
-          'neighborhood': 'Neighborhood',
+          'coworking': 'Co-working Space',
+          'makerspace': 'Maker space',
+          'startupAccelerator': 'Startup accelerator',
+          'communityCenter': 'Community center',
+          'localAffinityNetwork': 'Local affinity network',
+          'distributedAffinityNetwork': 'Distributed affinity network',
           'event': 'Special Event',
+          'neighborhood': 'Neighborhood',
+          'alumniCommunity': 'Alumni community',
+          'organization': 'Organization',
           'other': 'Other'
         },
 
@@ -203,7 +209,7 @@ angular.module("hylo.createCommunity", [])
         state.iconChosen = isEditing;
 
         return state;
-      }
+      };
 
       return {
         getNewState: getNewState
@@ -236,7 +242,7 @@ angular.module("hylo.createCommunity", [])
           } else { // Otherwise, go home
             $state.go('home')
           }
-        }
+        };
 
         $scope.submit = function() {
 
