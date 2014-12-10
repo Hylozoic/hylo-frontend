@@ -3,6 +3,9 @@ dependencies.push(function($resource) {
   var Community = $resource('/noo/community/:id', {
     id: '@id'
   }, {
+    default: {
+      url: '/noo/community/default'
+    },
     invite: {
       method: 'POST',
       url: '/noo/community/:id/invite'
