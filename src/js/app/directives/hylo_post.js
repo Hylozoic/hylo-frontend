@@ -73,9 +73,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         return false;
       }
 
-      $scope.followHash = function(value) {
-      }
-
       $scope.gotoSinglePost = function() {
         $analytics.eventTrack('Post: Load Single Post', {post_id: $scope.post.id});
         $state.go('post.comments', {community: $scope.post.communitySlug, postId: $scope.post.id})

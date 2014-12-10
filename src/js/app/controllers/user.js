@@ -1,71 +1,23 @@
-angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'OldUser', '$timeout', '$http', '$rootScope', '$analytics', '$window',
-  function($scope, $stateParams, $state, $log, Post, growl, OldUser, $timeout, $http, $rootScope, $analytics, $window) {
+angular.module("hyloControllers").controller('UserCtrl', [
+  '$scope', '$stateParams', '$state', '$log', 'Post', 'growl', 'OldUser', '$timeout', '$http', '$analytics', '$window',
+  function($scope, $stateParams, $state, $log, Post, growl, OldUser, $timeout, $http, $analytics, $window) {
     var previous = {};
 
     $scope.editing = false;
-
     $scope.loading = false;
 
-    var startTour = function() {
-      guiders.createGuider({
-        attachTo: ".organizations",
-        buttons: [{name: "Next"}],
-        description: "To get started, enter a couple of the communities or organizations you're a part of",
-        id: "userFirst",
-        next: 'userSecond',
-        position: 3,
-        title: "Hi, welcome to your profile on Hylo!",
-        onShow: $scope.edit
-      }).show();
+    $scope.currentUser.$promise.then(function(user) {
+      var isOwnProfile = (user.id == $stateParams.id);
+      $analytics.eventTrack('User: Load a Member Profile', {user_id: user.id, is_own_profile: isOwnProfile});
+      if (isOwnProfile) {
+        $scope.user = user;
+        $scope.editable = true;
 
-      guiders.createGuider({
-        attachTo: ".skills",
-        buttons: [{name: "Next"}],
-        description: "Great! now enter a couple of the things you enjoy, things you're good at",
-        id: "userSecond",
-        next: 'userThird',
-        position: 3,
-        title: "Enter some skills",
-        onShow: $scope.edit,
-        onHide: $scope.save
-      })
-
-      guiders.createGuider({
-        attachTo: "#menu-community",
-        buttons: [{name: "Finish",
-          onclick: function() {
-            guiders.hideAll();
-          }}],
-        description: "To view your communities seeds click here",
-        id: "userThird",
-        position: 3,
-        onHide: function() {
-          $http.post('/endtour', {}, {params: {tour:'profileTour'}});
-          $rootScope.currentUser.profileTour = false;
-        },
-        title: "Community Seeds"
-      });
-    }
-
-    $rootScope.$watch('currentUser', function(user) {
-      user.$promise.then(function(user) {
-        var isOwnProfile = (user.id == $stateParams.id);
-        $analytics.eventTrack('User: Load a Member Profile', {user_id: user.id, is_own_profile: isOwnProfile});
-        if (isOwnProfile) {
-          $scope.user = user;
-          $scope.editable = true;
-
-          // TODO Disable the profile tour since we need to update it after the onboarding is in place.
-//          if (user.profileTour) {
-//            $timeout(startTour, 900);
-//          }
-        } else {
-          $scope.user = OldUser.get({id: $stateParams.id});
-          $scope.editable = false;
-        }
-      });
+      } else {
+        $scope.user = OldUser.get({id: $stateParams.id});
+        $scope.editable = false;
+      }
     });
-    $scope.hasPosts = true;
 
     $scope.openMailTo = function openMailTo(event) {
       event.preventDefault();
@@ -87,6 +39,7 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
       return false;
     }
 
+    $scope.hasPosts = true;
     Post.forUser({userId: $stateParams.id}).$promise.then(function(posts) {
       $scope.posts = posts;
       $scope.hasPosts = posts.length > 0;
@@ -226,9 +179,4 @@ angular.module("hyloControllers").controller('UserCtrl', ['$scope', '$stateParam
       }
     }
 
-    //??? Is this depreicated? It doesn't look like it's being used anywhere....
-    $scope.addPostFn = function(newPost) {
-      growl.addSuccessMessage("Successfully created new seed: " + newPost.name, {ttl: 5000});
-      $scope.posts.unshift(newPost);
-    }
   }]);
