@@ -59,7 +59,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('user', {
-        url: '/c/:community/user/:id',
+        url: '/u/:id',
         views: {
           "": {
             templateUrl: '/ui/app/user.tpl.html',
