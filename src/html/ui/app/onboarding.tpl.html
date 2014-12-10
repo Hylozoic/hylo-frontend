@@ -23,42 +23,6 @@
         <button type="button" class="btn btn-fulfill" wz-next="saveSkills()" tabindex="4">Next</button>
       </div>
     </wz-step>
-
-    <wz-step title="Requests">
-      <h4>Requests</h4>
-      <p>Is there anything you’re looking for right now that you think your community could help you find?<br><small>(Just add one thing right now: you can add more later.)</small></p>
-
-      <textarea class="form-control" rows="3" tabindex="5" ng-model="wizard.request"></textarea>
-
-      <div class="text-right">
-        <button type="button" class="btn btn-default" wz-next="skip('request')" tabindex="100">Skip</button>
-        <button type="button" class="btn btn-fulfill" wz-next tabindex="6">Next</button>
-      </div>
-    </wz-step>
-
-    <wz-step title="Offers">
-      <h4>Offers</h4>
-      <p>Is there anything you’d like to share with your community?<br><small>(Just add one thing right now: you can add more later.)</small></p>
-
-      <textarea class="form-control" rows="3" tabindex="7" ng-model="wizard.offer"></textarea>
-
-      <div class="text-right">
-        <button type="button" class="btn btn-default" wz-next="skip('offer')" tabindex="100">Skip</button>
-        <button type="button" class="btn btn-fulfill" wz-next tabindex="8">Next</button>
-      </div>
-    </wz-step>
-
-    <wz-step title="Intentions">
-      <h4>Intentions</h4>
-      <p>Is there anything you’ve been imagining that you’d like to create? Tell your community, and you'll find help in the most surprising places.<br><small>(Just add one thing right now: you can add more later.)</small></p>
-
-      <textarea class="form-control" tabindex="9" rows="3" ng-model="wizard.intention"></textarea>
-
-      <div class="text-right">
-        <button type="button" class="btn btn-default" wz-next="skip('intention')" tabindex="100">Skip</button>
-        <button type="button" class="btn btn-fulfill" wz-next tabindex="10">Finish</button>
-      </div>
-    </wz-step>
   </wizard>
 </div>
 

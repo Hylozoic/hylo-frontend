@@ -65,11 +65,12 @@ angular.module("hyloControllers").controller('OnboardingCtrl', ['$scope', '$root
 
       $analytics.eventTrack("Onboarding: Finished Wizard");
 
-      createPost($scope.wizard.offer, "offer");
-      createPost($scope.wizard.request, "request");
-      createPost($scope.wizard.intention, "intention", function() {
-        $modalInstance.close("success");
-      });
+      $modalInstance.close("success");
+      //createPost($scope.wizard.offer, "offer");
+      //createPost($scope.wizard.request, "request");
+      //createPost($scope.wizard.intention, "intention", function() {
+      //  $modalInstance.close("success");
+      //});
     }
 
   }
