@@ -27,7 +27,7 @@
 
           <br ng-if="isPostText">
 
-          <span ng-if="isPostText" class="post-description">
+          <span ng-if="isPostText && truncatedPostText.length > 0" class="post-description">
             <span seed-text="truncatedPostText"></span>
             <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
           </span>
@@ -37,35 +37,6 @@
       <div class="post-context">
         <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
         <span class="timestamp" ng-if="!post.fulfilled">{{::post.creationDate | fromNow}}</span>&nbsp;&nbsp;
-        <span class="post-info">
-          <span class="fulfillment" ng-if="post.fulfilled">
-            <div>
-              <span ng-if="::post.contributors.length > 0">
-              Fulfilled&nbsp;•&nbsp;Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
-                <span ng-if="::post.contributors.length > 2">
-                  and
-                  <span class="dropdown" dropdown>
-                    <a class="dropdown-toggle" dropdown-toggle>
-                      {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
-                    </a>
-
-                    <ul class="dropdown-menu">
-                      <li ng-repeat="contributor in post.contributors.slice(2)">
-                        <a class="contributor" ui-sref="user({id: contributor.id})">
-                          <i back-img="::contributor.avatar" class="avatar"></i>
-                          <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
-                      </li>
-                    </ul>
-                  </span>
-                </span>
-              </span>
-              <span ng-if="::post.contributors.length == 0">
-                No Contributors
-              </span>
-            </div>
-          </span>
-        </span>
-
         <div class="followers">
           <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
             <!-- Add yourself as a follower -->
@@ -103,7 +74,37 @@
         </div>
       </div>
 
-      <div class="clearfix"></div>
+
+
+      <span class="post-info">
+        <span class="fulfillment" ng-if="post.fulfilled">
+          <div>
+            Fulfilled&nbsp;&nbsp;•&nbsp;
+            <span ng-if="::post.contributors.length > 0">
+            Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+              <span ng-if="::post.contributors.length > 2">
+                and
+                <span class="dropdown" dropdown>
+                  <a class="dropdown-toggle" dropdown-toggle>
+                    {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="contributor in post.contributors.slice(2)">
+                      <a class="contributor" ui-sref="user({id: contributor.id})">
+                        <i back-img="::contributor.avatar" class="avatar"></i>
+                        <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
+                    </li>
+                  </ul>
+                </span>
+              </span>
+            </span>
+            <span ng-if="::post.contributors.length == 0">
+              No Contributors
+            </span>
+          </div>
+        </span>
+      </span>
 
       <div class="controls">
         <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
