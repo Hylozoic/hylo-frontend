@@ -2,6 +2,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
   function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function($injector, $location){
       var state = $injector.get('$state');
+      Rollbar.warning("404 Error: " + $location.path());
       state.go('404');
       return $location.path();
     });
