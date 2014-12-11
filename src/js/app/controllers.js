@@ -15,3 +15,4 @@ require('./controllers/user');
 require('./controllers/view_post');
 
 require('./controllers/community_settings')(angularModule);
+require('./controllers/profile')(angularModule);
