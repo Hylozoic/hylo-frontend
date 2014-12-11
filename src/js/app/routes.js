@@ -4,7 +4,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
 
     $stateProvider.
       state("404", {
-        url: '/404',
+        url: '/404/',
         templateUrl: '/ui/app/404.tpl.html'
       }).
       state('home', {
@@ -14,7 +14,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('community', {
-        url: '/c/:community',
+        url: '/c/:community/',
         views: {
           "": {
             templateUrl: '/ui/features/community/base.tpl.html',
@@ -23,7 +23,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('community.about', {
-        url: '/about',
+        url: 'about/',
         views: {
           "tab": {
             templateUrl: '/ui/features/community/about.tpl.html',
@@ -32,7 +32,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('community.members', {
-        url: '/members',
+        url: 'members/',
         views: {
           "tab": {
             templateUrl: '/ui/features/community/members.tpl.html',
@@ -41,7 +41,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('createCommunity', {
-        url: '/create/community',
+        url: '/create/community/',
         views: {
           "": {
             templateUrl: '/ui/features/community/createCommunity.tpl.html',
@@ -50,7 +50,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('communitySettings', {
-        url: '/c/:community/settings',
+        url: '/c/:community/settings/',
         views: {
           "": {
             templateUrl: '/ui/features/community/settings.tpl.html',
@@ -59,7 +59,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('user', {
-        url: '/u/:id',
+        url: '/u/:id/',
         views: {
           "": {
             templateUrl: '/ui/app/user.tpl.html',
@@ -68,7 +68,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('user.settings', {
-        url: '/settings',
+        url: 'settings/',
         template: "",
         controller: 'ProfileSettingsCtrl'
       }).
@@ -82,13 +82,13 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('post.comments', {
-        url: '/comments',
+        url: '/comments/',
         data: {
           singlePost: true
         }
       }).
       state('search', {
-        url: "/c/:community/search?q",
+        url: "/c/:community/search/?q",
         views: {
           "": {
             templateUrl: '/ui/app/search.tpl.html',
@@ -97,7 +97,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('network', {
-        url: "/n/:network",
+        url: "/n/:network/",
         views: {
           "": {
             templateUrl: '/ui/app/network.tpl.html',
