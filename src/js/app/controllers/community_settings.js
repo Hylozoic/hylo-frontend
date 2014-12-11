@@ -10,6 +10,31 @@ module.exports = function(angularModule) {
         $state.go('community', {community: $scope.community.slug});
       };
 
+      $scope.editing = {};
+      $scope.edited = {};
+
+      $scope.edit = function(field) {
+        $scope.edited[field] = $scope.community[field];
+        $scope.editing[field] = true;
+      };
+
+      $scope.cancelEdit = function(field) {
+        $scope.editing[field] = false;
+      };
+
+      $scope.saveEdit = function(field) {
+        $scope.editing[field] = false;
+        var data = {id: $scope.community.id};
+        data[field] = $scope.edited[field];
+        Community.save(data, function() {
+          $scope.community[field] = $scope.edited[field];
+          $analytics.eventTrack('Community: Changed ' + field, {
+            community_id: $scope.community.slug,
+            moderator_id: $scope.currentUser.id
+          });
+        });
+      };
+
       $scope.changeIcon = function() {
         filepickerUpload({
           path: 'communityIcon',
