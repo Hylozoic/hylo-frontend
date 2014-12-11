@@ -72,6 +72,15 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         template: "",
         controller: 'ProfileSettingsCtrl'
       }).
+      state('profile', {
+        url: '/u2/:id',
+        views: {
+          '': {
+            templateUrl: '/ui/profile/base.tpl.html',
+            controller: 'ProfileCtrl'
+          }
+        }
+      }).
       state('post', {
         url: '/c/:community/s/:postId',
         views: {
