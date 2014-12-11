@@ -35,66 +35,46 @@ module.exports = function(angularModule) {
         });
       };
 
-      $scope.changeIcon = function() {
-        filepickerUpload({
-          path: 'communityIcon',
-          convert: {
-            width: 160,
-            fit: 'clip',
-            rotate: "exif"
-          },
-          success: function(url) {
-            Community.save({
-              id: $scope.community.id,
-              avatar_url: url
-            }, function() {
-              $scope.community.avatar_url = url;
-              $analytics.eventTrack('Community: Changed Icon', {
+      var imageChangeFn = function(opts) {
+        return function() {
+          filepickerUpload({
+            path: opts.path,
+            convert: opts.convert,
+            success: function(url) {
+              var data = {id: $scope.community.id};
+              data[opts.fieldName] = url;
+              Community.save(data, function() {
+                $scope.community[opts.fieldName] = url;
+                $analytics.eventTrack('Community: Changed ' + opts.humanName, {
+                  community_id: $scope.community.slug,
+                  moderator_id: $scope.currentUser.id
+                });
+              });
+            },
+            failure: function(error) {
+              growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
+              $analytics.eventTrack('Community: Failed to Change ' + opts.humanName, {
                 community_id: $scope.community.slug,
                 moderator_id: $scope.currentUser.id
               });
-            });
-          },
-          failure: function(error) {
-            growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
-            $analytics.eventTrack('Community: Failed to Change Icon', {
-              community_id: $scope.community.slug,
-              moderator_id: $scope.currentUser.id
-            });
-          }
-        });
-      };
+            }
+          });
+        };
+      }
 
-      $scope.changeBanner = function() {
-        filepickerUpload({
-          path: 'communityBanner',
-          convert: {
-            width: 1600,
-            format: 'jpg',
-            fit: 'max',
-            rotate: "exif"
-          },
-          success: function(url) {
-            Community.save({
-              id: $scope.community.id,
-              banner_url: url
-            }, function() {
-              $scope.community.banner_url = url;
-              $analytics.eventTrack('Community: Changed Banner', {
-                community_id: $scope.community.slug,
-                moderator_id: $scope.currentUser.id
-              });
-            });
-          },
-          failure: function(error) {
-            growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
-            $analytics.eventTrack('Community: Failed to Change Banner', {
-              community_id: $scope.community.slug,
-              moderator_id: $scope.currentUser.id
-            });
-          }
-        });
-      };
+      $scope.changeIcon = imageChangeFn({
+        fieldName: 'avatar_url',
+        humanName: 'Icon',
+        path: 'communityIcon',
+        convert: {width: 160, fit: 'clip', rotate: "exif"}
+      });
+
+      $scope.changeBanner = imageChangeFn({
+        fieldName: 'banner_url',
+        humanName: 'Banner',
+        path: 'communityBanner',
+        convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
+      });
 
       $scope.invite = function() {
         if ($scope.submitting) return;
