@@ -1,10 +1,13 @@
 angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/404");
+    $urlRouterProvider.otherwise(function($injector, $location){
+      var state = $injector.get('$state');
+      state.go('404');
+      return $location.path();
+    });
 
     $stateProvider.
       state("404", {
-        url: '/404',
         templateUrl: '/ui/app/404.tpl.html'
       }).
       state('home', {
