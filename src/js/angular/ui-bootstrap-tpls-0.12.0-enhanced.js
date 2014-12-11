@@ -2547,7 +2547,6 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
 
               var positionTooltip = function () {
 
-                console.log("ttscope", ttScope)
                 var ttPosition = $position.positionElements(element, tooltip, ttScope.placement, appendToBody);
                 ttPosition.top += 'px';
                 ttPosition.left += 'px';
