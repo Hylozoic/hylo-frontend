@@ -24,10 +24,38 @@
         <div class="section appearance" collapse="!expand1">
           <div class="row">
             <div class="col-sm-6">
+              <label>Name</label>
+            </div>
+            <div class="col-sm-6 value" ng-hide="editing.name">
+              <p>{{community.name}}</p>
+              <button type="button" ng-click="edit('name')">Change</button>
+            </div>
+            <div class="col-sm-6 edit" ng-show="editing.name">
+              <input type="text" class="form-control" ng-model="edited.name"/>
+              <button type="button" ng-click="cancelEdit('name')">Cancel</button>
+              <button type="button" ng-click="saveEdit('name')">Save</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Intention</label>
+            </div>
+            <div class="col-sm-6 value" ng-hide="editing.description">
+              <p>{{community.description}}</p>
+              <button type="button" ng-click="edit('description')">Change</button>
+            </div>
+            <div class="col-sm-6 edit" ng-show="editing.description">
+              <textarea class="form-control" ng-model="edited.description" rows="4"></textarea>
+              <button type="button" ng-click="cancelEdit('description')">Cancel</button>
+              <button type="button" ng-click="saveEdit('description')">Save</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
               <label>Icon</label>
               <p>This image appears next to your community's name.</p>
             </div>
-            <div class="col-sm-6 right">
+            <div class="col-sm-6 value">
               <div class="community-icon" back-img="community.avatar_url"></div>
               <button type="button" ng-click="changeIcon()">Change</button>
             </div>
@@ -37,7 +65,7 @@
               <label>Banner</label>
               <p>This image appears at the top of your community page.</p>
             </div>
-            <div class="col-sm-6 right">
+            <div class="col-sm-6 value">
               <div class="community-banner" back-img="community.banner_url"></div>
               <button type="button" ng-click="changeBanner()">Change</button>
             </div>
