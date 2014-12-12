@@ -1,6 +1,8 @@
 .comments {
+  .loading {
+    padding: @std-padding;
+  }
   background-color: @dark-accent;
-  border-top: 1px solid @border-light;
   border-bottom: 1px solid @border-light;
 
   > .comment {
@@ -12,7 +14,7 @@
     }
 
     .avatar {
-      position: absolute;
+      .user-avatar-sm;
       margin-left: 18px;
     }
 
@@ -24,7 +26,7 @@
           text-decoration: none;
         }
 
-        .comment-delete-icon{
+        .comment-delete-icon {
           color: @border-dark;
           font-size: 12px;
           margin: 5px -25px;
@@ -73,14 +75,14 @@
 
 
   .avatar {
-    .user-avatar-xxs;
-    position: absolute;
-    margin-left: 18px;
+    .user-avatar-sm;
+    margin-left: 17px;
   }
 
   .comment-input {
-    .avatar-margin-sm(false, 30px);
-    min-height: 25px;
+    .avatar-margin-sm(false, 29px);
+    margin-top: 5px;
+    min-height: 28px;
 
     button {
       position: absolute;

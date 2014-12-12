@@ -2,7 +2,7 @@
 
   <div class="comment" ng-repeat="comment in post.comments">
     <div class="comment-delete "><a ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>&nbsp;</a></div>
-    <a class="avatar user-avatar-sm" back-img="::comment.user.avatar" ui-sref="user({id: comment.user.id})"></a>
+    <a class="avatar" back-img="::comment.user.avatar" ui-sref="user({id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div ng-if="!post.commentsLoaded && post.numComments > 0" style="padding: 5px 0 15px 0">Loading Comments ...</div>
+  <div ng-if="!post.commentsLoaded && post.numComments > 0" class="loading">Loading comments...</div>
 
   <div class="add-comment">
     <!-- FIXME why doesn't this work without $root? -->
