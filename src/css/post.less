@@ -7,7 +7,7 @@
 .post {
   @user-width: 90px;
 
-  margin-bottom: 5px;
+  margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
   color: @text-gray;
 
@@ -46,12 +46,6 @@
     }
   }
 
-  .post-header {
-    span {
-      display: inline-block;
-    }
-  }
-
   .post-content {
 
     a.dropdown-toggle {
@@ -63,73 +57,50 @@
       margin: 0;
       padding: 0 10px;
     }
+  }
 
-    .post-options {
+  .post-options {
+    float: right;
+    .seed-meta-text();
+
+    @media (max-width: @screen-xs-max) {
+      top: -30px;
+    }
+
+    a, a:hover {
+      cursor: pointer;
+      text-decoration: none;
+      color: @default-text;
+      i {
+        font-size: 12px;
+      }
+    }
+
+    ul {
+      min-width: initial;
       float: right;
-      .seed-meta-text();
+      right: 0;
+      left: initial;
+    }
+  }
 
-      @media (max-width: @screen-xs-max) {
-        top: -30px;
-      }
+  .post-header {
+    color: @text-gray;
 
-      a, a:hover {
-        cursor: pointer;
-        text-decoration: none;
-        color: @default-text;
-        i {
-          font-size: 12px;
-        }
-      }
-
-      ul {
-        min-width: initial;
-        float: right;
-        right: 0;
-        left: initial;
-      }
+    .title {
+      margin-top: 0;
+      margin-right: 10px;
+      .seed-title-text;
     }
 
-    .post-header {
-      span {
-        display: inline-block;
-      }
-
-      color: @text-gray;
-      display: table;
-
-      .title {
-        margin-top: 0;
-        margin-right: 10px;
-        .seed-title-text;
-      }
-
-      .post-description {
-        .seed-body-text;
-        padding-top: 5px;
-      }
+    .post-description {
+      .seed-body-text;
+      padding-top: 5px;
     }
+  }
 
-    .show-more-btn {
-      color: @link-color;
-    }
-
-    .delete {
-      position: absolute;
-      top: 5px;
-      right: 7px;
-      display: none;
-      font-size: 11px;
-      padding: 2px;
-      color: @gray-light;
-    }
-
-    .delete:hover {
-      color: @gray;
-    }
-
-    &.deletable:hover .delete {
-      display: inline;
-    }
+  .show-more-btn {
+    color: @link-color;
   }
 
   .post-context {
@@ -182,7 +153,6 @@
   .controls {
     font-size: @font-size-small;
     margin-top: 9px;
-    margin-bottom: 25px;
     .proxima-nova-light;
 
     border-bottom: 1px solid @light-gray;

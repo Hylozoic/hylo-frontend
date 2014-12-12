@@ -57,7 +57,7 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
     return {
       restrict: 'A',
       replace: true,
-      template: '<div></div>',
+      template: '<span></span>',
       transclude: 'element',
       link: function(scope, iElement, iAttrs, controller, $transclude) {
         var parsed = $parse(iAttrs.seedText);
