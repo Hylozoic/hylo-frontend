@@ -53,17 +53,17 @@
             <span ng-if="followersNotMe.length > 2">
               and
               <span class="dropdown" dropdown on-toggle="openFollowers(open)">
-              <a class="dropdown-toggle" dropdown-toggle>
-                {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li ng-repeat="user in followersNotMe.slice(2)">
-                  <a class="dropdown-list-user" ui-sref="user({id: user.value})" ng-if="!user.hide">
-                    <div back-img="::user.avatar" class="avatar"></div>
-                    <div class="name">{{::user.name}}</div>
-                  </a>
-                </li>
-              </ul>
+                <a class="dropdown-toggle" dropdown-toggle>
+                  {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="user in followersNotMe.slice(2)">
+                    <a class="dropdown-list-user" ui-sref="user({id: user.value})" ng-if="!user.hide">
+                      <div back-img="::user.avatar" class="avatar"></div>
+                      <div class="name">{{::user.name}}</div>
+                    </a>
+                  </li>
+                </ul>
               </span>
             </span>
             <span ng-if="isFollowing || followersNotMe.length > 1">have</span><span ng-if="!isFollowing && followersNotMe.length == 1">has</span> joined this seed.
@@ -79,7 +79,7 @@
           <div>
             Fulfilled&nbsp;&nbsp;•&nbsp;
             <span ng-if="::post.contributors.length > 0">
-            Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+              Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
               <span ng-if="::post.contributors.length > 2">
                 and
                 <span class="dropdown" dropdown>
@@ -104,53 +104,53 @@
           </div>
         </span>
       </span>
+    </div>
+
+    <div class="controls">
+      <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
+        <i ng-if="!post.myVote" class="icon-heart-new"></i>
+        <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i>
+        <span class="num">{{post.votes}}</span>
+      </a>
+      <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
+        <i ng-if="!editingFollowers" class="icon-add-member"></i>
+        <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
+        <span class="num">{{post.numFollowers}}</span>
+      </a>
+      <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
+        <i ng-if="isCommentsCollapsed" class="icon-comment"></i>
+        <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
+        <span class="num">{{post.numComments}}</span>
+      </a>
+      <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostText}} Post" class="join">
+        <i ng-if="!isFollowing" class="icon-join"></i>
+        <i ng-if="isFollowing" class="icon-leave"></i>
+        <span class="num">{{joinPostText | uppercase}}</span>
+      </a>
+      <div class="fulfill-link" ng-if="isPostOwner() && !post.fulfilled">
+        <span ng-click="markFulfilled()">Mark as Fulfilled</span>
       </div>
 
-      <div class="controls">
-        <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Do you <i class='icon-heart-new'></i> me?" >
-          <i ng-if="!post.myVote" class="icon-heart-new"></i>
-          <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i>
-          <span class="num">{{post.votes}}</span>
-        </a>
-        <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
-          <i ng-if="!editingFollowers" class="icon-add-member"></i>
-          <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
-          <span class="num">{{post.numFollowers}}</span>
-        </a>
-        <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
-          <i ng-if="isCommentsCollapsed" class="icon-comment"></i>
-          <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
-          <span class="num">{{post.numComments}}</span>
-        </a>
-        <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostText}} Post" class="join">
-          <i ng-if="!isFollowing" class="icon-join"></i>
-          <i ng-if="isFollowing" class="icon-leave"></i>
-          <span class="num">{{joinPostText | uppercase}}</span>
-        </a>
-        <div class="fulfill-link" ng-if="isPostOwner() && !post.fulfilled">
-          <span ng-click="markFulfilled()">Mark as Fulfilled</span>
-        </div>
+    </div>
 
-      </div>
-
-      <div ng-if="editingFollowers">
-        <div class="add-followers">
-          <div class="add-label">Add Members:</div>
-          <div class="add-tags">
-            <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-                  model="followersToAdd"
-                  typeahead-options="typeaheadOpts"
-                  src="b as b.name for b in potentialFollowers">
-            </tags>
-          </div>
-        </div>
-        <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
-          <button type="button" class="add-followers-btn" ng-click="toggleEditFollowers()" > Done </button>
-        </div>
-      </div>
-
-      <div ng-if="!isCommentsCollapsed">
-        <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
+    <div ng-if="editingFollowers">
+      <div class="add-followers">
+        <div class="add-label">Add Members:</div>
+        <div class="add-tags">
+          <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+          model="followersToAdd"
+          typeahead-options="typeaheadOpts"
+          src="b as b.name for b in potentialFollowers">
+        </tags>
       </div>
     </div>
+    <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
+      <button type="button" class="add-followers-btn" ng-click="toggleEditFollowers()" > Done </button>
+    </div>
+  </div>
+
+  <div ng-if="!isCommentsCollapsed">
+    <embedded-comments post="post" follow-fn="followPost()"></embedded-comments>
+  </div>
+</div>
 </div>
