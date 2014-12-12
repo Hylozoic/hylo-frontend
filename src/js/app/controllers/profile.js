@@ -1,16 +1,16 @@
-var dependencies = ['$scope', '$analytics', '$stateParams', 'OldUser'];
-dependencies.push(function($scope, $analytics, $stateParams, OldUser) {
+var dependencies = ['$scope', '$analytics', '$stateParams', 'User'];
+dependencies.push(function($scope, $analytics, $stateParams, User) {
 	$scope.hello = 'on two lines';
 
-  $scope.currentUser.$promise.then(function(user) {
-    var isOwnProfile = (user.id == $stateParams.id);
-    $analytics.eventTrack('User: Load a Member Profile', {user_id: user.id, is_own_profile: isOwnProfile});
+  $scope.currentUser.$promise.then(function(currentUser) {
+    var isOwnProfile = (currentUser.id == $stateParams.id);
+    $analytics.eventTrack('User: Load a Member Profile', {member_id: $stateParams.id, is_own_profile: isOwnProfile});
     if (isOwnProfile) {
-      $scope.user = user;
+      $scope.user = User.current();
       $scope.editable = true;
 
     } else {
-      $scope.user = OldUser.get({id: $stateParams.id});
+      $scope.user = User.get({id: $stateParams.id});
       $scope.editable = false;
     }
     console.log("user: ");
