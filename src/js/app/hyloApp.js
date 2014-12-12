@@ -27,13 +27,16 @@ angular.module('hyloApp', [
   };
 }])
 
-.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
-  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
+.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider', '$urlRouterProvider',
+  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
     growlProvider.globalTimeToLive(5000);
 
     $idleProvider.idleDuration(45); // in seconds
     $idleProvider.warningDuration(1); // in seconds
+
+    // remove trailing slashes from paths
+    $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
 
     // Disable bootstrap UI animations
     $tooltipProvider.options({
