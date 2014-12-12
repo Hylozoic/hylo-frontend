@@ -74,36 +74,32 @@
         </div>
       </div>
 
-      <span class="post-info" ng-if="post.fulfilled">
-        <span class="fulfillment">
-          <div>
-            Fulfilled&nbsp;&nbsp;•&nbsp;
-            <span ng-if="::post.contributors.length > 0">
-              Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
-              <span ng-if="::post.contributors.length > 2">
-                and
-                <span class="dropdown" dropdown>
-                  <a class="dropdown-toggle" dropdown-toggle>
-                    {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
-                  </a>
+      <div class="fulfillment" ng-if="post.fulfilled">
+        Fulfilled&nbsp;&nbsp;•&nbsp;
+        <span ng-if="::post.contributors.length > 0">
+          Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+          <span ng-if="::post.contributors.length > 2">
+            and
+            <span class="dropdown" dropdown>
+              <a class="dropdown-toggle" dropdown-toggle>
+                {{::post.contributors.length - 2}}&nbsp;other<span ng-if="::post.contributors.length > 3">s</span>
+              </a>
 
-                  <ul class="dropdown-menu">
-                    <li ng-repeat="user in post.contributors.slice(2)">
-                      <a class="dropdown-list-user" ui-sref="user({id: user.id})">
-                        <div back-img="::user.avatar" class="avatar"></div>
-                        <div class="name">{{::user.name}}</div>
-                      </a>
-                    </li>
-                  </ul>
-                </span>
-              </span>
+              <ul class="dropdown-menu">
+                <li ng-repeat="user in post.contributors.slice(2)">
+                  <a class="dropdown-list-user" ui-sref="user({id: user.id})">
+                    <div back-img="::user.avatar" class="avatar"></div>
+                    <div class="name">{{::user.name}}</div>
+                  </a>
+                </li>
+              </ul>
             </span>
-            <span ng-if="::post.contributors.length == 0">
-              No Contributors
-            </span>
-          </div>
+          </span>
         </span>
-      </span>
+        <span ng-if="::post.contributors.length == 0">
+          No Contributors
+        </span>
+      </div>
     </div>
 
     <div class="controls">
