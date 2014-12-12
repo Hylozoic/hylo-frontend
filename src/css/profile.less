@@ -1,10 +1,5 @@
 .profile {
 
-	h1 {
-		padding-top: 50px;
-		color: orange;
-	}
-
 	.profile-content {
 		border: 1px solid orange;
 		div {
@@ -16,10 +11,57 @@
 		}
 
 		.banner {
+      .dark-background-gradient;
+      width: 100%;
+      height: 100%;
+      position: relative;
 
-			.banner-content {
+      &, div * {
+        border: 0;
+      }
 
-			}
+			.banner-image {
+        height: 38.2vh;
+
+        @media (max-width: @screen-xs-max) {
+          max-height: 320px;
+        }
+      }
+
+      .banner-content {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        .row {
+
+        }
+
+        .profile-image {
+          .avatar {
+            .user-avatar-lg;
+            position: relative;
+            top: -15px;
+            border: 2px solid white;
+          }
+        }
+
+        .profile-info {
+          margin-top: 20px;
+
+          .profile-name {
+            .medium-title-text();
+            font-size: 24px;
+            color: white;
+            margin-bottom: 10px;
+          }
+          .profile-description {
+            .proxima-nova(100);
+            color: @faint-gray;
+            line-height: 1.8;
+          }
+        }
+      }
 		}
 	}
 }
