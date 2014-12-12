@@ -57,10 +57,10 @@
                 {{::followersNotMe.length - 2}} other<span ng-if="::followersNotMe.length > 3">s</span>
               </a>
               <ul class="dropdown-menu">
-                <li ng-repeat="follower in followersNotMe.slice(2)">
-                  <a class="follower" ui-sref="user({id: follower.value})" ng-if="!follower.hide">
-                    <i back-img="::follower.avatar" class="avatar"></i>
-                    <span class="name">{{::follower.name}}</span>
+                <li ng-repeat="user in followersNotMe.slice(2)">
+                  <a class="dropdown-list-user" ui-sref="user({id: user.value})" ng-if="!user.hide">
+                    <div back-img="::user.avatar" class="avatar"></div>
+                    <div class="name">{{::user.name}}</div>
                   </a>
                 </li>
               </ul>
@@ -88,10 +88,11 @@
                   </a>
 
                   <ul class="dropdown-menu">
-                    <li ng-repeat="contributor in post.contributors.slice(2)">
-                      <a class="contributor" ui-sref="user({id: contributor.id})">
-                        <i back-img="::contributor.avatar" class="avatar"></i>
-                        <span class="avatar-margin-sm">{{::contributor.name}}</span></a>
+                    <li ng-repeat="user in post.contributors.slice(2)">
+                      <a class="dropdown-list-user" ui-sref="user({id: user.id})">
+                        <div back-img="::user.avatar" class="avatar"></div>
+                        <div class="name">{{::user.name}}</div>
+                      </a>
                     </li>
                   </ul>
                 </span>

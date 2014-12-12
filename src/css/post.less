@@ -34,15 +34,6 @@
     }
   }
 
-  .follower, .contributor {
-    .avatar {
-      .user-avatar-xs;
-      position: initial;
-      display: inline-block;
-      vertical-align: middle;
-    }
-  }
-
   .post-container {
 
     @title-color: #333332;
@@ -64,6 +55,10 @@
     }
 
     .post-content {
+
+      a.dropdown-toggle {
+        cursor: pointer;
+      }
 
       padding-bottom: 7px;
       @media (max-width: @screen-xs-max) {
@@ -205,10 +200,6 @@
         color: @link-color;
       }
 
-
-      .name {
-        .proxima-nova-semibold;
-      }
       .post-prefix {
         .proxima-nova-light;
       }
