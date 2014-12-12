@@ -1,6 +1,8 @@
-var dependencies = ['$scope', '$analytics', '$stateParams', 'User'];
-dependencies.push(function($scope, $analytics, $stateParams, User) {
+var dependencies = ['$scope', '$analytics', '$stateParams', 'User', '$state'];
+dependencies.push(function($scope, $analytics, $stateParams, User, $state) {
 	$scope.hello = 'on two lines';
+
+  $scope.state = $state;
 
   $scope.currentUser.$promise.then(function(currentUser) {
     var isOwnProfile = (currentUser.id == $stateParams.id);
