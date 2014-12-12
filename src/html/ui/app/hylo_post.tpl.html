@@ -1,11 +1,9 @@
 <div class="post" analytics-id="{{::post.id}}">
 
-  <div class="user">
-    <a ui-sref="user({id: post.user.id})">
-      <div class="icon"> <span back-img="post.user.avatar" class="avatar user-avatar user-avatar-block"></span> </div>
-      <div class="name">{{::post.user.name}}</div>
-    </a>
-  </div>
+  <a class="user" ui-sref="user({id: post.user.id})">
+    <div class="icon"> <span back-img="post.user.avatar" class="avatar user-avatar user-avatar-block"></span> </div>
+    <div class="name">{{::post.user.name}}</div>
+  </a>
 
   <div class="post-container">
     <span class="post-options dropdown" dropdown ng-show="canDelete">
@@ -118,16 +116,14 @@
       </div>
     </div>
 
-    <div ng-if="editingFollowers">
-      <div class="add-followers">
-        <div class="add-label">Add Members:</div>
-        <div class="add-tags">
-          <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-          model="followersToAdd"
-          typeahead-options="typeaheadOpts"
-          src="b as b.name for b in potentialFollowers">
-        </tags>
-      </div>
+    <div ng-if="editingFollowers" class="add-followers">
+      <div class="add-label">Add Members:</div>
+      <div class="add-tags">
+        <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
+        model="followersToAdd"
+        typeahead-options="typeaheadOpts"
+        src="b as b.name for b in potentialFollowers">
+      </tags>
     </div>
 
     <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
