@@ -126,7 +126,7 @@
           <i ng-if="isFollowing" class="icon-leave"></i>
           <span class="num">{{joinPostText | uppercase}}</span>
         </a>
-        <div class="filfill-link" ng-if="isPostOwner() && !post.fulfilled">
+        <div class="fulfill-link" ng-if="isPostOwner() && !post.fulfilled">
           <span ng-click="markFulfilled()">Mark as Fulfilled</span>
         </div>
 
