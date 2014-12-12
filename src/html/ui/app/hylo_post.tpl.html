@@ -7,31 +7,21 @@
     </a>
   </div>
 
-  <div class="post-container" ng-class="::post.postType">
-    <div class="post-content">
+  <div class="post-container">
+    <span class="post-options dropdown" dropdown ng-show="canDelete">
+      <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
+      <ul class="dropdown-menu">
+        <li >
+          <a class="post-option" ng-click="delete(comment)">delete</a>
+        </li>
+      </ul>
+    </span>
 
-      <span class="post-options dropdown" dropdown ng-show="canDelete">
-        <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
-        <ul class="dropdown-menu">
-          <li >
-            <a class="post-option" ng-click="delete(comment)">delete</a>
-          </li>
-        </ul>
-      </span>
-
-      <div class="post-header">
-        <span ng-click="onCommentIconClick()">
-          <span class="title">
-            <span seed-text="post.name"></span>
-          </span>
-
-          <br ng-if="isPostText"/>
-
-          <span ng-if="isPostText && truncatedPostText.length > 0" class="post-description">
-            <span seed-text="truncatedPostText"></span>
-            <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
-          </span>
-        </span>
+    <div class="post-header" ng-click="onCommentIconClick()">
+      <span class="title" seed-text="post.name"></span>
+      <div ng-if="isPostText && truncatedPostText.length > 0" class="post-description">
+        <span seed-text="truncatedPostText"></span>
+        <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
       </div>
     </div>
 
