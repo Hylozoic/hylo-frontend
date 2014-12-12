@@ -13,6 +13,7 @@
 
 
   .user {
+    text-decoration: none;
     position: absolute;
     width: @user-width;
     vertical-align: top;
@@ -21,7 +22,6 @@
     @media (max-width: @screen-xs-max) {
       position: relative;
       width: initial;
-      height: 45px;
       padding: 0 10px;
     }
 
@@ -31,13 +31,17 @@
 
       @media (max-width: @screen-xs-max) {
         .user-avatar-xs;
+        display: inline-block;
+        margin-right: 4px;
       }
     }
 
     .name {
       .seed-username-text;
       @media (max-width: @screen-xs-max) {
-        .avatar-margin-xs();
+        line-height: @avatar-size-xs;
+        display: inline-block;
+        margin-top: 0;
       }
     }
   }
@@ -56,7 +60,7 @@
     .seed-meta-text();
 
     @media (max-width: @screen-xs-max) {
-      top: -39px;
+      top: -27px;
     }
 
     a, a:hover {
@@ -206,6 +210,9 @@
       font-size: 14px;
       position: relative;
       top: -2px;
+      @media (max-width: @screen-xs-max) {
+        top: 0;
+      }
     }
 
     .fulfill-link, .join-leave-link {
