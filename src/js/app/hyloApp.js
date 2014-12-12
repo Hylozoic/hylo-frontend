@@ -35,19 +35,17 @@ angular.module('hyloApp', [
     $idleProvider.idleDuration(45); // in seconds
     $idleProvider.warningDuration(1); // in seconds
 
+    // remove trailing slashes from paths
     $urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.url();
 
-      // check to see if the path already has a slash where it should be
       if (path[path.length - 1] === '/') {
-        return path.substring(0, path.length - 1)
+        return path.substring(0, path.length - 1);
       }
 
       if (path.indexOf('/?') > -1) {
         return path.replace('/?', '?');
       }
-
-      return;
     });
 
     // Disable bootstrap UI animations
