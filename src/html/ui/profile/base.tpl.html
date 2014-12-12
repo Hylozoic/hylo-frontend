@@ -9,9 +9,16 @@
     					  <div class="avatar" back-img="user.avatar"></div>
               </div>
     				</div>
-    				<div class="col-sm-9">
+    				<div class="col-sm-9 col-xs-12">
               <div class="profile-info">
-      					<div class="profile-name">{{user.name | uppercase}}</div>
+      					<div class="profile-title">
+                  <span class="user-name">{{user.name | uppercase}} </span>
+                  <span class="social-media">
+                    <i class="icon-twitter"></i>
+                    <i class="icon-facebook"></i>
+                    <i class="icon-linkedin"></i>
+                  </span>
+                </div>
       					<div class="profile-description"> profile description <br> {{hello}}</div>
               </div>
     				</div>
@@ -19,17 +26,38 @@
     		</div>
       </div>
     </div>
-		<div class="col-sm-3 navigation">
-			Tabs and Skills
+		<div class="col-sm-3">
 			<div class="row">
-				<div class="col-sm-push-1 tabs">
-					Tabs
-				</div>
-				<div class="col-sm-pull-1 user-info">
-					Skills and Affiliations
-				</div>
-			</div>
-		</div>
+        <div class="profile-navigation">
+  				<div class="tabs">
+  					<div class="col-xs-4 col-sm-12">
+              <div class="tab">
+                <div class="title">SEEDS PLANTED </div>
+                <div class="count"></div>
+                <div class="count-label">5 </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-12">
+              <div class="tab">
+                <div class="title">CONTRIBUTIONS </div>
+                <div class="count"></div>
+                <div class="count-label">8 </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-12">
+              <div class="tab">
+                <div class="title">THANK YOU'S </div>
+                <div class="count"></div>
+                <div class="count-label">13 </div>
+              </div>
+            </div>
+  				</div>
+  				<div class="user-info">
+  					Skills and Affiliations
+  				</div>
+  			</div>
+  		</div>
+    </div>
 		<div class="col-sm-9 feed">
 			Feed
 		</div>
