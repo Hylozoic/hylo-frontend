@@ -48,6 +48,10 @@
       line-height: 1.4;
       padding-top: 6px;
       border-bottom: none;
+
+      @media (max-width: @screen-xs-max) {
+        padding-left: 10px;
+      }
     }
 
     .comment-content {
@@ -62,6 +66,11 @@
     resize: none;
     -webkit-appearance: none;
 
+  }
+
+  @media (max-width: @screen-xs-max) {
+    margin-left: -10px;
+    margin-right: -10px;
   }
 }
 
@@ -116,23 +125,27 @@
 
     .avatar {
       .user-avatar-xs;
-      position: absolute;
-      margin-left: 5px;
+      position: static;
+      float: left;
+      margin: 0 8px 8px 8px;
+
     }
     .comment-content {
-      padding-left: @avatar-margin-xs-default;
-      padding-right: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
   }
   .add-comment {
     margin-top: 8px;
 
     .avatar {
-      margin-left: 5px;
+      margin-left: 8px;
+      .user-avatar-xs;
     }
 
     .comment-input {
-      .avatar-margin-xs(false);
+      margin-left: 42px;
+      margin-top: 2px;
 
       button {
         position: relative;

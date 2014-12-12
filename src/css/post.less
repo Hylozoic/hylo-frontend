@@ -2,6 +2,9 @@
 
 .single-post {
   margin-top: @std-padding * 2;
+  @media (max-width: @screen-xs-max) {
+    padding: 0;
+  }
 }
 
 .post {
@@ -174,7 +177,6 @@
     @media (max-width: @screen-xs-max) {
       border-top: 1px solid @light-gray;
       border-bottom: 1px solid @light-gray;
-      margin-bottom: 10px;
       margin-left: -10px;
       margin-right: -10px;
       padding-left: 23px;
