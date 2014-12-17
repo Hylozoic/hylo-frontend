@@ -9,7 +9,7 @@
     <span class="post-options dropdown" dropdown ng-show="canDelete">
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
-        <li >
+        <li>
           <a class="post-option" ng-click="delete(comment)">delete</a>
         </li>
       </ul>
@@ -25,7 +25,7 @@
 
     <div class="post-context">
       <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-      <a class="timestamp" ui-sref="post({community: post.communitySlug, postId: post.id})">{{::post.creationDate | fromNow}}</a>
+      <a class="timestamp" ui-sref="post.comments({community: post.communitySlug, postId: post.id})">{{::post.creationDate | fromNow}}</a>
       <div class="followers">
         <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
           <!-- Add yourself as a follower -->
