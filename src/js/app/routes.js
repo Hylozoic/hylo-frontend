@@ -82,7 +82,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('profile.contributions', {
-        url: 'contributions',
+        url: '/contributions',
         views: {
           'tab': {
             templateUrl: '/ui/profile/contributions.tpl.html',
@@ -91,7 +91,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('profile.thanks', {
-        url: 'thanks',
+        url: '/thanks',
         views: {
           'tab': {
             templateUrl: '/ui/profile/thanks.tpl.html',
