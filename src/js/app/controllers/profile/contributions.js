@@ -1,12 +1,6 @@
-var dependencies = ['$scope', '$analytics', 'User'];
-dependencies.push(function($scope, $analytics, User) {
-
-  $scope.user.$promise.then(function() {
-    $scope.user.contributions({}, function(contributions) {
-      $scope.contributions = contributions;
-      console.log(contributions)
-    });
-  });
+var dependencies = ['$scope', '$analytics', 'contributions'];
+dependencies.push(function($scope, $analytics, contributions ) {
+  $scope.contributions = contributions;
 });
 
 module.exports = function(angularModule) {

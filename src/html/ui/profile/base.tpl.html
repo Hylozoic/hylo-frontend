@@ -31,7 +31,7 @@
         <div class="profile-navigation">
           <div class="tabs">
             <div class="col-xs-4 col-sm-12">
-              <a class="tab" ui-sref=".">
+              <a class="tab" ui-sref=".seeds">
                 <div class="title">SEEDS PLANTED </div>
                 <div class="count"></div>
                 <div class="count-label">5 </div>
@@ -58,9 +58,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-9 feed" ui-view="tab">
-      <ng-include ng-if="state.current.name === 'profile'" src="'/ui/profile/seeds.tpl.html'"></ng-include>
-    </div>
+    <div class="col-sm-9 feed" ui-view="tab"></div>
 
   </div>
 
