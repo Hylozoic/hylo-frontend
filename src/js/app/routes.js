@@ -7,6 +7,19 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/404',
         templateUrl: '/ui/app/404.tpl.html'
       }).
+      state('main', {
+        abstract: true,
+        template: "<div ui-view='main'></div>",
+        resolve: {
+          // Get AngularJS CurrentUser resource to query
+          CurrentUser: 'CurrentUser',
+
+          // Use the resource to fetch data from the server
+          currentUser: ['CurrentUser', function(CurrentUser) {
+            return CurrentUser.get().$promise;
+          }]
+        }
+      }).
       state('home', {
         url: '/',
         onEnter: function reloadCtrl() {
@@ -72,17 +85,50 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         template: "",
         controller: 'ProfileSettingsCtrl'
       }).
-      state('profile', {
+      state('main.profile', {
         url: '/u2/:id',
+        abstract: true,
+        resolve: {
+          editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
+            return currentUser.id === $stateParams.id;
+          }],
+          User: 'User',
+          user: ['User', 'editable', '$stateParams', function(User, editable, $stateParams) {
+            if (editable) {
+              return User.current().$promise;
+            } else {
+              return User.get({id: $stateParams.id}).$promise;
+            }
+          }]
+        },
         views: {
-          '': {
+          'main': {
             templateUrl: '/ui/profile/base.tpl.html',
             controller: 'ProfileCtrl'
           }
         }
       }).
-      state('profile.contributions', {
+      state('main.profile.seeds', {
+        url: '',
+        resolve: {
+          seeds: ['user', function(user) {
+            //return user.seeds().$promise;
+          }]
+        },
+        views: {
+          'tab': {
+            templateUrl: '/ui/profile/seeds.tpl.html'
+            //controller: 'ProfileContributionsCtrl'
+          }
+        }
+      }).
+      state('main.profile.contributions', {
         url: '/contributions',
+        resolve: {
+          contributions: ['user', function(user) {
+            return user.contributions().$promise;
+          }]
+        },
         views: {
           'tab': {
             templateUrl: '/ui/profile/contributions.tpl.html',
@@ -90,7 +136,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('profile.thanks', {
+      state('main.profile.thanks', {
         url: '/thanks',
         views: {
           'tab': {
