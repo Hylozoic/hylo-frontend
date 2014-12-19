@@ -158,11 +158,13 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.onlyAuthorFollowing = false;
 
 
-      $scope.toggleJoinPostText = function() {
+      var toggleJoinPostText = function() {
         if ($scope.isFollowing) {
-          return "Stop receiving notifications";
+          $scope.joinPostTooltipText = "Stop receiving notifications";
+          $scope.joinPostText = "Leave";
         } else {
-          return "Receive notifications";
+          $scope.joinPostTooltipText = "Receive notifications";
+          $scope.joinPostText = "Join";
         }
       };
 
@@ -281,7 +283,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         var firstFollower = _.first($scope.followers);
         $scope.onlyAuthorFollowing = ($scope.followers.length == 1 && firstFollower.name === $scope.post.user.name);
 
-        $scope.joinPostText = $scope.toggleJoinPostText();
+        toggleJoinPostText();
       };
 
       var initialize = function() {

@@ -106,7 +106,7 @@
         <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
         <span class="num">{{post.numComments}}</span>
       </a>
-      <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostText}} Post" class="join">
+      <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostTooltipText}}" class="join">
         <i ng-if="!isFollowing" class="icon-join"></i>
         <i ng-if="isFollowing" class="icon-leave"></i>
         <span class="num">{{joinPostText | uppercase}}</span>
