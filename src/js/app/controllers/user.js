@@ -37,7 +37,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
       }
 
       return false;
-    }
+    };
 
     $scope.hasPosts = true;
     Post.forUser({userId: $stateParams.id}).$promise.then(function(posts) {
@@ -48,7 +48,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
     $scope.removePost = function(postToRemove) {
       growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
       $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
-    }
+    };
 
     $scope.reputationExpanded = false;
     $scope.reputations = [];
@@ -64,7 +64,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
       if (!$scope.noMoreResults) {
         $scope.loadReps();
       }
-    }
+    };
 
     $scope.loadReps = function() {
       $http.get('/user/recent-reputation', {
@@ -88,7 +88,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
           $scope.noRepResults = $scope.reputations.length == 0;
 
         });
-    }
+    };
 
     $scope.pickFile = function() {
       // This will pick a file and store the original file in the 'orig/' subfolder, then convert it to a 200x200 image and store
@@ -154,7 +154,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
         previous.organizations = $scope.user.organizations.slice();
         previous.avatar = $scope.user.avatar;
       }
-    }
+    };
 
     $scope.cancel = function() {
       $scope.editing = false;
@@ -162,7 +162,7 @@ angular.module("hyloControllers").controller('UserCtrl', [
       $scope.user.skills = previous.skills.slice();
       $scope.user.organizations = previous.organizations.slice();
       $scope.user.avatar = previous.avatar;
-    }
+    };
 
     $scope.save = function() {
       if ($scope.editing) {

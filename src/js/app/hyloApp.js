@@ -27,13 +27,16 @@ angular.module('hyloApp', [
   };
 }])
 
-.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
-  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
+.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider', '$urlRouterProvider',
+  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
     growlProvider.globalTimeToLive(5000);
 
     $idleProvider.idleDuration(45); // in seconds
     $idleProvider.warningDuration(1); // in seconds
+
+    // remove trailing slashes from paths
+    $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
 
     // Disable bootstrap UI animations
     $tooltipProvider.options({
@@ -47,18 +50,23 @@ angular.module('hyloApp', [
         },
 
         'responseError': function(rejection) {
-          var requestTo = rejection.config ? rejection.config.url : "N/A"
+          var requestTo = rejection.config ? rejection.config.url : "N/A";
           if (rejection.status == 403) {
             Rollbar.error("Client 403 Error", {page: rejection.config.url});
             growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           } else if (rejection.status == 500) {
             if (!hyloEnv.isProd) {
-              $("body").html(rejection.data);
+              if (rejection.headers()['content-type'] === "text/html") {
+                $("body").html(rejection.data);
+              } else {
+                growl.addErrorMessage("DEBUG: 500 Internal Server Error.\nRoute: " + rejection.config.url, {ttl: 15000});
+              }
+              console.log(rejection, rejection.data);
             } else {
               growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
             }
           } else if (rejection.status == 404) {
-            $log.error("404 ResponseError", rejection)
+            $log.error("404 ResponseError", rejection);
             Rollbar.error("Client 404 Error", {page: rejection.config.url});
             growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
           }

@@ -6,9 +6,20 @@ var request = require('request');
 
 require('shelljs/global');
 
-var currentGitHash = function() {
-  var cmd = "git show|head -n1|awk '{print $2}'|cut -c -8";
+var _command = function(cmd) {
   return exec(cmd, {silent: true}).output.replace(/\n/, '');
+};
+
+var currentGitHash = function() {
+  return _command("git show|head -n1|awk '{print $2}'|cut -c -8");
+};
+
+var currentGitSha = function() {
+  return _command("git show|head -n1|awk '{print $2}'");
+};
+
+var gitUser = function() {
+  return _command("git config user.email")
 };
 
 var Deployer = function(app, done, log) {
@@ -18,6 +29,8 @@ var Deployer = function(app, done, log) {
   this.bundlePaths = {};
   this.log = log;
   this.version = currentGitHash();
+  this.gitSha = currentGitSha();
+  this.gitUser = gitUser();
 
   if (!process.env.HEROKU_API_TOKEN) {
     this.log.errorlns("HEROKU_API_TOKEN is not set");
@@ -38,7 +51,7 @@ Deployer.prototype.getAWSKeys = function(callback) {
     this.herokuEnv = _.pick(vars,
       'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET',
       'AWS_S3_CONTENT_URL', 'CONTENT_URL', 'ROLLBAR_SERVER_TOKEN',
-      'DOMAIN');
+      'DOMAIN', 'APPLICATION_ENV');
     callback(err);
 
     this.awsContentUrlPrefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
@@ -135,6 +148,30 @@ Deployer.prototype.uploadSourceMap = function(callback) {
   );
 };
 
+Deployer.prototype.notifyRollbar = function(callback) {
+  this.log.subhead('Notifying Rollbar of deploy');
+
+  var formData = {
+    // Pass a simple key-value pair
+    access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
+    // Pass data via Buffers
+    revision: this.gitSha,
+    environment: this.herokuEnv.APPLICATION_ENV,
+    local_username: this.gitUser
+  };
+  request.post({url:'https://api.rollbar.com/api/1/deploy/',
+      formData: formData},
+    function optionalCallback(err, httpResponse, body) {
+      if (err || body.err > 0) {
+        console.error('notify rollbar failed:', err);
+        this.fail(result.message);
+      }
+      console.log('Rollbar notified successfuly!');
+      callback();
+    }.bind(this)
+  );
+};
+
 Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead('updating ENV on ' + this.app);
 
@@ -158,6 +195,7 @@ module.exports = function(app, done, log) {
     deployer.getAWSKeys.bind(deployer),
     deployer.upload.bind(deployer),
     deployer.uploadSourceMap.bind(deployer),
+    deployer.notifyRollbar.bind(deployer),
     deployer.updateEnv.bind(deployer)
   ], function(err) {
     if (err) {
