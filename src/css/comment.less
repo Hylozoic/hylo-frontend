@@ -1,6 +1,8 @@
 .comments {
+  .loading {
+    padding: @std-padding;
+  }
   background-color: @dark-accent;
-  border-top: 1px solid @border-light;
   border-bottom: 1px solid @border-light;
 
   > .comment {
@@ -12,11 +14,12 @@
     }
 
     .avatar {
+      .user-avatar-sm;
       position: absolute;
       margin-left: 18px;
     }
 
-    .comment-delete {  
+    .comment-delete {
       a {
         float: right;
 
@@ -24,7 +27,7 @@
           text-decoration: none;
         }
 
-        .comment-delete-icon{
+        .comment-delete-icon {
           color: @border-dark;
           font-size: 12px;
           margin: 5px -25px;
@@ -44,6 +47,11 @@
       .seed-meta-text;
       line-height: 1.4;
       padding-top: 6px;
+      border-bottom: none;
+
+      @media (max-width: @screen-xs-max) {
+        padding-left: 10px;
+      }
     }
 
     .comment-content {
@@ -59,6 +67,11 @@
     -webkit-appearance: none;
 
   }
+
+  @media (max-width: @screen-xs-max) {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
 }
 
 .add-comment {
@@ -72,14 +85,15 @@
 
 
   .avatar {
-    .user-avatar-xxs;
+    .user-avatar-sm;
     position: absolute;
-    margin-left: 18px;
+    margin-left: 17px;
   }
 
   .comment-input {
-    .avatar-margin-sm(false, 30px);
-    min-height: 25px;
+    .avatar-margin-sm(false, 29px);
+    margin-top: 5px;
+    min-height: 28px;
 
     button {
       position: absolute;
@@ -110,24 +124,28 @@
     }
 
     .avatar {
-      .user-avatar-xxs;
-      position: absolute;
-      margin-left: 5px;
+      .user-avatar-xs;
+      position: static;
+      float: left;
+      margin: 0 8px 8px 8px;
+
     }
     .comment-content {
-      padding-left: @avatar-margin-xs-default;
-      padding-right: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
   }
   .add-comment {
     margin-top: 8px;
 
     .avatar {
-      margin-left: 5px;
+      margin-left: 8px;
+      .user-avatar-xs;
     }
 
     .comment-input {
-      .avatar-margin-xs(false);
+      margin-left: 42px;
+      margin-top: 2px;
 
       button {
         position: relative;

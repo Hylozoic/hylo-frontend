@@ -1,306 +1,241 @@
 @fulfillColor: @intention-color;
 
+.single-post {
+  margin-top: @std-padding * 2;
+  @media (max-width: @screen-xs-max) {
+    padding: 0;
+  }
+}
+
 .post {
   @user-width: 90px;
 
-  margin-bottom: 5px;
+  margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
   color: @text-gray;
 
 
   .user {
+    text-decoration: none;
     position: absolute;
     width: @user-width;
     vertical-align: top;
+    display: block;
 
     @media (max-width: @screen-xs-max) {
       position: relative;
       width: initial;
-      height: 45px;
       padding: 0 10px;
     }
 
-    .icon .avatar {
+    .avatar {
+      .user-avatar;
+      margin: 0 auto;
+
       @media (max-width: @screen-xs-max) {
         .user-avatar-xs;
+        display: inline-block;
+        margin-right: 4px;
       }
     }
 
     .name {
       .seed-username-text;
       @media (max-width: @screen-xs-max) {
-        .avatar-margin-xs();
+        line-height: @avatar-size-xs;
+        display: inline-block;
+        margin-top: 0;
       }
-    }
-  }
-
-  .follower, .contributor {
-    .avatar {
-      .user-avatar-xs;
-      position: initial;
-      display: inline-block;
-      vertical-align: middle;
     }
   }
 
   .post-container {
-
-    @title-color: #333332;
-    @color: #808080;
-
     margin-left: @user-width + 25;
 
     @media (max-width: @screen-xs-max) {
-      margin-left: 0;
+      margin: 0;
+      padding: 0 10px;
+    }
+  }
+
+  .post-options {
+    float: right;
+    .seed-meta-text();
+
+    @media (max-width: @screen-xs-max) {
+      top: -27px;
     }
 
-    .post-header {
-      span {
-        display: inline-block;
+    a, a:hover {
+      cursor: pointer;
+      text-decoration: none;
+      color: @default-text;
+      i {
+        font-size: 12px;
       }
-
-      @title-color: #333332;
-      @color: #808080;
     }
 
-    .post-content {
+    ul {
+      min-width: initial;
+      float: right;
+      right: 0;
+      left: initial;
+    }
+  }
 
-      padding-bottom: 7px;
-      @media (max-width: @screen-xs-max) {
-        margin: 0;
-        padding: 0 10px;
-      }
+  .post-header {
+    color: @text-gray;
 
-      .post-options {
-        float: right;
-        .seed-meta-text();
+    .title {
+      margin-top: 0;
+      margin-right: 10px;
+      .seed-title-text;
+    }
 
-        @media (max-width: @screen-xs-max) {
-          top: -30px;
-        }
+    .post-description {
+      .seed-body-text;
+      padding-top: 5px;
+    }
+  }
 
-        a, a:hover {
-          cursor: pointer;
-          text-decoration: none;
-          color: @default-text;
-          i {
-            font-size: 12px;
-          }
-        }
+  .show-more-btn {
+    color: @link-color;
+  }
 
-        ul {
-          min-width: initial;
+  .post-context {
+
+    padding: 12px 0 3px 0;
+
+    > span, > div {
+      display: inline-block;
+
+      @media (min-width: @screen-sm) {
+        float: left;
+
+        &.followers {
           float: right;
-          right: 0;
-          left: initial;
         }
-      }
-
-
-      .post-header {
-        span {
-          display: inline-block;
-        }
-
-        color: @color;
-        display: table;
-
-        .fulfillment {
-          .seed-meta-text;
-
-          a {
-            cursor: pointer;
-          }
-
-          .dropdown-menu  {
-            a {
-              color: @light-gray;
-              font-size: 11px;
-            }
-          }
-
-          > div {
-            padding-top: 4px;
-          }
-        }
-
-        .title {
-          margin-top: 0;
-          margin-right: 10px;
-          .seed-title-text;
-        }
-
-        .post-description {
-          .seed-body-text;
-          padding-top: 5px;
-        }
-      }
-
-      .show-more-btn {
-        color: @link-color;
-      }
-
-      .delete {
-        position: absolute;
-        top: 5px;
-        right: 7px;
-        display: none;
-        font-size: 11px;
-        padding: 2px;
-        color: @gray-light;
-      }
-
-      .delete:hover {
-        color: @gray;
-      }
-
-      &.deletable:hover .delete {
-        display: inline;
       }
     }
 
-    .post-context {
+    .post-type {
+      margin-right: 10px;
 
-      padding: 12px 0 3px 0;
-
-      > span, > div {
-        display: inline-block;
-
-        @media (min-width: @screen-sm) {
-          float: left;
-
-          &.followers {
-            float: right;
-          }
-        }
+      &.intention {
+        .seed-type-text(@intention-color);
       }
-
-      .post-type {
-        margin-right: 10px;
-
-        &.intention {
-          .seed-type-text(@intention-color);
-        }
-        &.request {
-          .seed-type-text(@request-color);
-        }
-        &.offer {
-          .seed-type-text(@offer-color);
-        }
+      &.request {
+        .seed-type-text(@request-color);
       }
-
-      .timestamp {
-        .seed-meta-text;
-        line-height: 20px;
+      &.offer {
+        .seed-type-text(@offer-color);
       }
     }
 
-    .post-info {
+    .timestamp {
       .seed-meta-text;
-      color: @color;
-      display: block;
-      margin-top: 10px;
+      line-height: 20px;
+    }
+  }
 
-      a {
-        color: @link-color;
+  .fulfillment {
+    .seed-meta-text;
+    color: @text-gray;
+    display: block;
+    margin-top: 10px;
+
+    a {
+      color: @link-color;
+    }
+  }
+
+  .controls {
+    font-size: @font-size-small;
+    margin-top: 9px;
+    .proxima-nova-light;
+
+    border-bottom: 1px solid @light-gray;
+
+    &, > a {
+      color: @light-gray;
+
+      & .link-selected {
+        color: @dark-blue;
       }
-
-
-      .name {
-        .proxima-nova-semibold;
-      }
-      .post-prefix {
-        .proxima-nova-light;
+      i {
+        color: @dark-blue;
+        font-size: 16px;
+        @media (max-width: @screen-xs-max) {
+          font-size: 18px;
+          font-weight: 400;
+          top: 3px;
+          position: relative;
+        }
       }
     }
 
-    .controls {
-      font-size: @font-size-small;
-      margin-top: 9px;
-      margin-bottom: 25px;
-      .proxima-nova-light;
-
+    @media (max-width: @screen-xs-max) {
+      border-top: 1px solid @light-gray;
       border-bottom: 1px solid @light-gray;
+      margin-left: -10px;
+      margin-right: -10px;
+      padding-left: 23px;
+    }
 
-      &, > a {
-        color: @light-gray;
+    > a {
+      cursor: pointer;
+      margin-right: 15px;
+      text-decoration: none;
+    }
 
-        & .link-selected {
-          color: @dark-blue;
+    .myVote {
+      color: pink;
+    }
+
+    .vote, .comment, .num-followers {
+      display: inline-block;
+      padding: 5px 4px;
+      width: 50px;
+
+      &:hover {
+        .icon-following {
+          text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
         }
-        i {
-          color: @dark-blue;
-          font-size: 16px;
-          @media (max-width: @screen-xs-max) {
-            font-size: 18px;
-            font-weight: 400;
-            top: 3px;
-            position: relative;
-          }
+
+        &, > .icon-comment {
+          color: @gray;
         }
       }
+    }
 
+    .num {
+      font-size: 14px;
+      position: relative;
+      top: -2px;
       @media (max-width: @screen-xs-max) {
-        border-top: 1px solid @light-gray;
-        border-bottom: 2px solid @light-gray;
-        margin-bottom: 10px;
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 38px;
+        top: 0;
       }
+    }
 
-      > a {
-        cursor: pointer;
-        margin-right: 15px;
+    .fulfill-link, .join-leave-link {
+      display: inline-block;
+      position: relative;
+      float: right;
+      top: 8px;
+      color: @link-color;
+    }
+
+    .thank-link, .delete-link {
+      color: #B3B3B3;
+      .proxima-nova-semibold;
+
+      &:hover {
+        color: @fulfillColor;
         text-decoration: none;
-      }
-
-      .myVote {
-        color: pink;
-      }
-
-      .vote, .comment, .num-followers{
-        display: inline-block;
-        padding: 5px 4px;
-
-        &:hover {
-          .icon-following {
-            text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
-          }
-
-          &, > .icon-comment {
-            color: @gray;
-          }
-        }
-      }
-
-      .num {
-        font-size: 14px;
-        position: relative;
-        top: -2px;
-      }
-
-      .filfill-link, .join-leave-link {
-        display: inline-block;
-        position: relative;
-        float: right;
-        top: 8px;
-        color: @link-color;
-      }
-
-      .thank-link, .delete-link {
-        color: #B3B3B3;
-        .proxima-nova-semibold;
-
-        &:hover {
-          color: @fulfillColor;
-          text-decoration: none;
-        }
       }
     }
   }
 }
-
 
 @-ms-keyframes pulse {
   0% {-ms-transform: scale(1.0, 1.0); opacity: 0.7;}

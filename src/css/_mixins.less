@@ -1,7 +1,6 @@
 /* Variables for Mixins */
 
 //avatar sizes
-@avatar-size-xxs: 22px;
 @avatar-size-xs: 27px;
 @avatar-size-sm: 33px;
 @avatar-size-default: 60px;
@@ -224,48 +223,31 @@
 //mixin to size an avatar and add display properties
 .user-avatar(@size: @avatar-size-default) {
   @avatar-size: 60px;
-  margin: 0 auto;
-  float: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: @size;
   width: @size;
   border-radius: @size/2;
-  position: absolute;
 }
 
 //classes to use the avatar at various sizes
-.user-avatar-lg {
+.user-avatar-lg() {
   .user-avatar(@avatar-size-lg);
 }
 
-.user-avatar {
-  .user-avatar();
-}
-
-.user-avatar-sm {
+.user-avatar-sm() {
   .user-avatar(@avatar-size-sm);
 }
 
-.user-avatar-xs {
+.user-avatar-xs() {
   .user-avatar(@avatar-size-xs);
-}
-
-.user-avatar-xxs {
-  .user-avatar(@avatar-size-xxs);
 }
 
 .user-avatar-block() {
   display: block;
   position: initial;
 }
-
-//add this class to get the avatar to appear as a block element
-*.user-avatar-block, *.avatar.user-avatar-block {
-  .user-avatar-block();
-}
-
 
 // mixin to add a margin to some element positioned next to an avatar
 .add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
@@ -299,23 +281,6 @@
 
 .avatar-margin-lg(@use-properties: true, @add-margin: 30) {
   .add-avatar-margin(@avatar-size-lg+@add-margin, @use-properties);
-}
-
-//classes for adding margins
-.avatar-margin-xs {
-  .avatar-margin-xs();
-}
-
-.avatar-margin-sm {
-  .avatar-margin-sm();
-}
-
-.avatar-margin-med {
-  .avatar-margin-med();
-}
-
-.avatar-margin-lg {
-  .avatar-margin-lg();
 }
 
 //helper to remove link display properties from an element
