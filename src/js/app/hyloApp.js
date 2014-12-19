@@ -73,8 +73,37 @@ angular.module('hyloApp', [
 
 .run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService',
   function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService) {
+
+    $rootScope.$on('$stateChangeError',
+      function(event, toState, toParams, fromState, fromParams, error) {
+        if (!hyloEnv.isProd) {
+          console.error("$stateChangeError Occurred", event, toState, toParams, fromState, fromParams, error)
+        } else {
+          Rollbar.error("$stateChangeError Occurred", {
+            toState: toState,
+            toParams: toParams,
+            fromState: fromState,
+            fromParams: fromParams,
+            error: error
+          });
+          growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
+        }
+      }
+    );
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      MenuService.setMenuState(false, false);
+      guiders.hideAll();
+    });
+
+    // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
+    // TODO change to a Service method.
+    $rootScope.navigated = false;
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+      if (from.name) { $rootScope.navigated = true; }
+    });
+
     var currentSlug;
-    $rootScope.currentUser = CurrentUser.get();
 
     //$stateParams is not set up yet at this point
     var locationMatchCommunity = window.location.toString().match(/c\/([^\/#\?]*)/);
@@ -102,17 +131,5 @@ angular.module('hyloApp', [
     if ($window._hylo_angular_growl_msg && $window._hylo_angular_growl_msg != "") {
       _.defer(function() { growl.addSuccessMessage($window._hylo_angular_growl_msg, {ttl: 5000}) });
     }
-
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      MenuService.setMenuState(false, false);
-      guiders.hideAll();
-    });
-
-    // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
-    // TODO change to a Service method.
-    $rootScope.navigated = false;
-    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-      if (from.name) { $rootScope.navigated = true; }
-    });
 
   }]);

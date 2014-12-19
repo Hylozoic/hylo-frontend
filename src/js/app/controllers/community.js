@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state',
-  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state) {
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state', 'currentUser',
+  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state, currentUser) {
 
     $scope.state = $state;
 
@@ -26,12 +26,9 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
       }, function () {
         // Dismissed Modal...Do nothing
       });
-    }
+    };
 
-    $scope.currentUser.$promise.then(function(user) {
-      // Start the community tour/onboarding if the user hasn't finished it.
-      if (!user.finishedOnboarding) {
-        $timeout(startOnboarding, 100)
-      }
-    });
+    if (!currentUser.finishedOnboarding) {
+      $timeout(startOnboarding, 100)
+    }
   }]);
