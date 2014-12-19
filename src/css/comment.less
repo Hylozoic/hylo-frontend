@@ -2,7 +2,7 @@
   .loading {
     padding: @std-padding;
   }
-  background-color: @dark-accent;
+  background-color: @faint-gray;
   border-bottom: 1px solid @border-light;
 
   > .comment {
@@ -49,14 +49,15 @@
       padding-top: 6px;
       border-bottom: none;
 
-      @media (max-width: @screen-xs-max) {
-        padding-left: 10px;
+      a, span {
+        color: @text-gray;
+        margin: 0;
       }
     }
 
     .comment-content {
-      padding-left: @avatar-margin-sm-default;
-      padding-right: 18px;
+      .add-avatar-margin(@avatar-size-sm+45);
+      padding-right: 40px;
       max-width: 100%;
       word-wrap: break-word;
     }
@@ -91,7 +92,8 @@
   }
 
   .comment-input {
-    .avatar-margin-sm(false, 29px);
+    .add-avatar-margin(@avatar-size-sm+45);
+    display: block;
     margin-top: 5px;
     min-height: 28px;
 
@@ -133,6 +135,8 @@
     .comment-content {
       padding-left: 10px;
       padding-right: 10px;
+      margin: 0;
+      width: 80%;
     }
   }
   .add-comment {
