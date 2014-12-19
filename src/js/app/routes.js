@@ -15,9 +15,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         abstract: true,
         template: "<div ui-view='main'></div>",
         resolve: {
-          // Get AngularJS CurrentUser resource to query
-          CurrentUser: 'CurrentUser',
-
           // Use the resource to fetch data from the server
           currentUser: ['CurrentUser', function(CurrentUser) {
             return CurrentUser.get().$promise;
@@ -105,7 +102,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
             return currentUser.id === $stateParams.id;
           }],
-          User: 'User',
           user: ['User', 'editable', '$stateParams', function(User, editable, $stateParams) {
             if (editable) {
               return User.current().$promise;
