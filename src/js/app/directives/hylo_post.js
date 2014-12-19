@@ -71,12 +71,12 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $event.stopPropagation();
         $event.preventDefault();
         return false;
-      }
+      };
 
       $scope.gotoSinglePost = function() {
         $analytics.eventTrack('Post: Load Single Post', {post_id: $scope.post.id});
         $state.go('post.comments', {community: $scope.post.communitySlug, postId: $scope.post.id})
-      }
+      };
 
       var voteText = "click to <i class='icon-following'></i> me.";
       var unvoteText = "click to un-<i class='icon-following'></i> me.";
@@ -102,13 +102,13 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           $scope.editingFollowers = false;
         }
         $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-      }
+      };
 
       $scope.onFollowerIconClick = function() {
         $analytics.eventTrack('Post: Followers: Show', {post_id: $scope.post.id});
         $scope.isCommentsCollapsed = true;
         $scope.toggleEditFollowers();
-      }
+      };
 
       $scope.followers = []; // list of current followers
 
@@ -158,19 +158,21 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
       $scope.onlyAuthorFollowing = false;
 
 
-      $scope.toggleJoinPostText = function() {
+      var toggleJoinPostText = function() {
         if ($scope.isFollowing) {
-          return "Leave";
+          $scope.joinPostTooltipText = "Stop receiving notifications";
+          $scope.joinPostText = "Leave";
         } else {
-          return "Join";
+          $scope.joinPostTooltipText = "Receive notifications";
+          $scope.joinPostText = "Join";
         }
-      }
+      };
 
       $scope.followPost = function() {
         Post.follow({id: $scope.post.id}, function(res) {
           $scope.followers.push(res);
         });
-      }
+      };
 
       $scope.toggleJoinPost = function() {
         if (!$scope.isFollowing) {
@@ -183,7 +185,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
             $scope.followers = _.without($scope.followers, _.findWhere($scope.followers, {value: res.value}));
           });
         }
-      }
+      };
 
       $scope.toggleEditFollowers = function() {
         var isEditing = !$scope.editingFollowers;
@@ -203,7 +205,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           $scope.followersToAdd = [];
         }
         $scope.editingFollowers = isEditing;
-      }
+      };
 
       $scope.typeaheadOpts = {
         minLength: 1,
@@ -241,7 +243,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         if (isOpen) {
           $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length});
         }
-      }
+      };
 
       var setText = function() {
         var text = $scope.post.description;
@@ -261,7 +263,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.truncatedPostText = text;
 
         $scope.isPostText = text.length > 0;
-      }
+      };
 
       var checkIsFollowing = function() {
         //get number of followers
@@ -281,8 +283,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         var firstFollower = _.first($scope.followers);
         $scope.onlyAuthorFollowing = ($scope.followers.length == 1 && firstFollower.name === $scope.post.user.name);
 
-        $scope.joinPostText = $scope.toggleJoinPostText();
-      }
+        toggleJoinPostText();
+      };
 
       var initialize = function() {
         var loadFollowers = function() {
@@ -296,7 +298,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
                 }
             );
           }
-        }
+        };
 
         if ($scope.isCommentsCollapsed) {
           var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed",
@@ -313,14 +315,14 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
         $scope.canDelete = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||
               ($rootScope.community && $rootScope.community.canModerate);
 
-        $scope.postUrl = $state.href("post.comments", {community: $scope.post.communitySlug, postId: $scope.post.id})
+        $scope.postUrl = $state.href("post.comments", {community: $scope.post.communitySlug, postId: $scope.post.id});
 
         $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
         setText();
 
         unwatchPost();
-      }
+      };
 
       var unwatchPost = $scope.$watch('post', function(postPromise) {
         if (postPromise.$promise) { // Case when we are viewing single posts

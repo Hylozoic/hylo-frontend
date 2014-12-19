@@ -15,7 +15,7 @@
     "angular-touch": "1.3.3",
     "angular-ui-router": "0.2.13",
     "angular-wizard": "0.4.0",
-    "angulartics": "0.16.4",
+    "angulartics": "0.17.1",
     "angular-bootstrap-select": "joaoneto/angular-bootstrap-select#v0.1.x",
     "bootstrap-select": "1.6.2",
     "ng-idle": "0.3.5",
