@@ -18,18 +18,24 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           currentUser: ['CurrentUser', function(CurrentUser) {
             return CurrentUser.get().$promise;
           }]
-        }
+        },
+        controller: ['$rootScope', 'currentUser', function($rootScope, currentUser) {
+          // Set the currentUser into rootScope to be used in templates across the app
+          $rootScope.currentUser = currentUser;
+        }]
       }).
       state('home', {
         url: '/',
+        // redirects to hylo-play which resolves the URL to a community.
         onEnter: function reloadCtrl() {
           window.location.replace('/');
         }
       }).
       state('community', {
         url: '/c/:community',
+        parent: "main",
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/features/community/base.tpl.html',
             controller: 'CommunityCtrl'
           }
@@ -55,6 +61,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('createCommunity', {
         url: '/create/community',
+        parent: 'main',
         views: {
           "": {
             templateUrl: '/ui/features/community/createCommunity.tpl.html',
@@ -73,8 +80,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('user', {
         url: '/u/:id',
+        parent: 'main',
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/app/user.tpl.html',
             controller: 'UserCtrl'
           }
@@ -85,8 +93,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         template: "",
         controller: 'ProfileSettingsCtrl'
       }).
-      state('main.profile', {
+      state('profile', {
         url: '/u2/:id',
+        parent: 'main',
         abstract: true,
         resolve: {
           editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
@@ -108,7 +117,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('main.profile.seeds', {
+      state('profile.seeds', {
         url: '',
         resolve: {
           seeds: ['user', function(user) {
@@ -122,7 +131,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('main.profile.contributions', {
+      state('profile.contributions', {
         url: '/contributions',
         resolve: {
           contributions: ['user', function(user) {
@@ -136,7 +145,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('main.profile.thanks', {
+      state('profile.thanks', {
         url: '/thanks',
         views: {
           'tab': {
@@ -147,8 +156,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('post', {
         url: '/c/:community/s/:postId',
+        parent: 'main',
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/app/view_post.tpl.html',
             controller: 'ViewPostCtrl'
           }
@@ -162,8 +172,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('search', {
         url: "/c/:community/search?q",
+        parent: 'main',
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/app/search.tpl.html',
             controller: 'SearchCtrl'
           }
