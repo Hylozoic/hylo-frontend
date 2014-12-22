@@ -101,6 +101,7 @@
   padding: @std-padding 0;
   border-bottom: 1px solid @border-light;
   min-height: 64px;
+  position: relative;
 
   @media (max-width: @screen-xs-max) {
     padding: 5px;
@@ -108,7 +109,8 @@
   }
 
   .toolbar-left {
-    float: left;
+    position: absolute;
+    left: 0;
     text-align: left;
   }
   .toolbar-center {
@@ -187,6 +189,12 @@
 
   .no-match {
     .seed-body-text;
+  }
+}
+
+.community-about-toolbar {
+  .settings {
+    .rounded-button;
   }
 }
 
