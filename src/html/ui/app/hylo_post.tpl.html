@@ -97,7 +97,7 @@
         <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i>
         <span class="num">{{post.votes}}</span>
       </a>
-      <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Number of Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
+      <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Add Members" class="num-followers" ng-class="{'link-selected': editingFollowers}">
         <i ng-if="!editingFollowers" class="icon-add-member"></i>
         <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
         <span class="num">{{post.numFollowers}}</span>
