@@ -37,7 +37,7 @@
       margin-left: auto;
       margin-top: auto;
       width: 100%;
-      letter-spacing: 2.5px;
+      letter-spacing: 0px;
 
       @media (max-width: @screen-xs-max) {
         font-size: 32px;
@@ -60,13 +60,17 @@
         position: relative;
         padding: 10px 40px 0;
         height: 72px;
+        letter-spacing: 3.4;
+        font-weight: 300;
+        font-size: 14px;
+
         .triangle {
           display: none;
         }
 
         &.selected {
           color: white;
-          font-weight: 600;
+          font-weight: 500;
           .triangle {
             display: block;
             position: absolute;
