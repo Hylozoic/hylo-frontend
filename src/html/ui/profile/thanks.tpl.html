@@ -1,1 +1,6 @@
-thanks
+<div ng-repeat="thank in thanks track by thank.id ">
+  Thanked in {{thank.comment.post.creator.name}}'s {{thank.comment.post.type}}
+  <br/>
+  {{thank.comment.post.name}}
+</div>
+{{thanks.size}}

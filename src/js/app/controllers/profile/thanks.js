@@ -1,7 +1,6 @@
-var dependencies = ['$scope', '$analytics', 'User'];
-dependencies.push(function($scope, $analytics, User) {
-
-
+var dependencies = ['$scope', '$analytics', 'thanks'];
+dependencies.push(function($scope, $analytics, thanks) {
+  $scope.thanks = thanks;
 });
 
 module.exports = function(angularModule) {
