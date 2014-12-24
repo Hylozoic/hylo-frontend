@@ -147,6 +147,11 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('profile.thanks', {
         url: '/thanks',
+        resolve: {
+          thanks: ['user', function(user) {
+            return user.thanks().$promise;
+          }]
+        },
         views: {
           'tab': {
             templateUrl: '/ui/profile/thanks.tpl.html',
