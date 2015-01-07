@@ -105,5 +105,6 @@ factory("Post", ["$resource",
         })
 }]);
 
-require('./services/user.js')(angularModule);
-require('./services/community.js')(angularModule);
+require('./services/user')(angularModule);
+require('./services/community')(angularModule);
+require('./services/bodyClass')(angularModule);

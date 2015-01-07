@@ -9,11 +9,9 @@
 
 .post {
   @user-width: 90px;
-
   margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
   color: @text-gray;
-
 
   .user {
     text-decoration: none;
@@ -149,12 +147,13 @@
     }
   }
 
-  .controls {
+  .post-controls {
     font-size: @font-size-small;
     margin-top: 9px;
+    padding-bottom: 15px;
     .proxima-nova-light;
 
-    border-bottom: 1px solid @light-gray;
+    border-bottom: 1px solid @border-lightest;
 
     &, > a {
       color: @light-gray;
@@ -175,11 +174,12 @@
     }
 
     @media (max-width: @screen-xs-max) {
-      border-top: 1px solid @light-gray;
-      border-bottom: 1px solid @light-gray;
+      border-top: 1px solid @border-lightest;
+      border-bottom: 1px solid @border-lightest;
       margin-left: -10px;
       margin-right: -10px;
       padding-left: 23px;
+      padding-bottom: 2px;
     }
 
     > a {

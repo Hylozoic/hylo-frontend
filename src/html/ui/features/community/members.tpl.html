@@ -1,5 +1,5 @@
 <div class="toolbar community-members-toolbar">
-  <div class="col-sm-8 col-sm-offset-2">
+  <div class="col-sm-6 col-sm-offset-3">
     <div class="row">
       <div class="toolbar-left">
         <a class="invite" ui-sref="communitySettings({community: community.slug})" ng-if="community.canModerate">
@@ -17,7 +17,7 @@
   <div class="clearfix"></div>
 </div>
 
-<div class="col-sm-8 col-sm-offset-2 community-members">
+<div class="col-sm-6 col-sm-offset-3">
   <div class="row">
     <div ng-repeat="user in users | orderBy:'name'" class="member">
       <a class="avatar" back-img="user.avatar" ui-sref="user({id: user.id})"></a>

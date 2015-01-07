@@ -1,6 +1,4 @@
-// community view
-
-.community{ // main style wrapper for community page
+.community {
 
   #banner {
     position: relative;
@@ -34,7 +32,7 @@
       margin-left: auto;
       margin-top: auto;
       width: 100%;
-      letter-spacing: 2.5px;
+      letter-spacing: 0px;
 
       @media (max-width: @screen-xs-max) {
         font-size: 32px;
@@ -57,13 +55,17 @@
         position: relative;
         padding: 10px 40px 0;
         height: 72px;
+        letter-spacing: 3.4;
+        font-weight: 300;
+        font-size: 14px;
+
         .triangle {
           display: none;
         }
 
         &.selected {
           color: white;
-          font-weight: 600;
+          font-weight: 500;
           .triangle {
             display: block;
             position: absolute;
@@ -87,17 +89,13 @@
   }
 }
 
-#content-outer{
-  z-index: 100;
-  position:relative;
-}
-
 // TODO this should go somewhere more general
 .toolbar {
   text-align: center;
   padding: @std-padding 0;
   border-bottom: 1px solid @border-light;
   min-height: 64px;
+  position: relative;
 
   @media (max-width: @screen-xs-max) {
     padding: 5px;
@@ -105,7 +103,8 @@
   }
 
   .toolbar-left {
-    float: left;
+    position: absolute;
+    left: 0;
     text-align: left;
   }
   .toolbar-center {
@@ -124,6 +123,8 @@
 }
 
 .community-members-toolbar {
+  margin-bottom: @std-padding;
+
   .invite, .search {
     .rounded-button;
   }
@@ -149,9 +150,7 @@
 }
 
 .community-members {
-  margin-top: @std-padding;
-
-  .avatar {
+  .member .avatar {
     .user-avatar;
     float: left;
     @media (max-width: @screen-xs-max) {
@@ -187,8 +186,15 @@
   }
 }
 
+.community-about-toolbar {
+  .settings {
+    .rounded-button;
+  }
+}
+
 .core-intention {
   .large-body-text;
+  text-align: center;
   color: @text-medium-dark;
   margin-top: @std-padding * 2;
   @media (max-width: @screen-xs-max) {
