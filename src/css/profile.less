@@ -76,11 +76,17 @@
   .sidebar {
     .make-sm-column(3);
     border: 1px solid purple;
+
+    .tabs {
+      .make-row;
+    }
+
     .tab {
+      .make-xs-column(4);
+      .make-sm-column(12);
       display: block;
       text-align: center;
       position: relative;
-      margin: 0 -@std-padding;
       padding: @std-padding;
       border: 1px solid green;
       text-decoration: none;
@@ -114,6 +120,13 @@
       }
     }
 
+    .user-info-mobile {
+      .visible-xs-block;
+    }
+
+    .user-info {
+      .hidden-xs;
+    }
   }
 
   .tab-content {
