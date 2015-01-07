@@ -2,10 +2,15 @@
   .loading {
     padding: @std-padding;
   }
-  background-color: @dark-accent;
-  border-bottom: 1px solid @border-light;
+  background-color: @faint-gray;
+  border: 1px solid @border-lightest;
+  border-top: none;
 
-  > .comment {
+  .comment:last-of-type {
+    margin-bottom: 25px;
+  }
+
+  .comment {
     margin-bottom: 18px;
 
     //add padding to top of comments
@@ -49,14 +54,15 @@
       padding-top: 6px;
       border-bottom: none;
 
-      @media (max-width: @screen-xs-max) {
-        padding-left: 10px;
+      a, span {
+        color: @text-gray;
+        margin: 0;
       }
     }
 
     .comment-content {
-      padding-left: @avatar-margin-sm-default;
-      padding-right: 18px;
+      .add-avatar-margin(@avatar-size-sm+45, false);
+      padding-right: 40px;
       max-width: 100%;
       word-wrap: break-word;
     }
@@ -78,11 +84,7 @@
   background-color: white;
   position: relative;
   padding: 6px 0;
-  margin-top: 20px; //gives padding on last post
   .seed-body-text;
-  border-right: 1px solid @border-light;
-  border-left: 1px solid @border-light;
-
 
   .avatar {
     .user-avatar-sm;
@@ -91,19 +93,20 @@
   }
 
   .comment-input {
-    .avatar-margin-sm(false, 29px);
+    .add-avatar-margin(@avatar-size-sm+45);
+    display: block;
     margin-top: 5px;
     min-height: 28px;
 
     button {
       position: absolute;
       right: 3px;
-      bottom: 3px;
+      bottom: 1px;
     }
 
     textarea {
       padding: 0;
-      width: 80%;
+      width: 90%;
       position: relative;
       top: 3px;
     }
@@ -117,7 +120,7 @@
 
 //downsize the comment margins on mobile
 @media (max-width: @screen-xs-max) {
-  .comments > .comment {
+  .comments .comment {
 
     &:first-child {
       padding-top: 12px;
@@ -133,6 +136,7 @@
     .comment-content {
       padding-left: 10px;
       padding-right: 10px;
+      margin: 0;
     }
   }
   .add-comment {
