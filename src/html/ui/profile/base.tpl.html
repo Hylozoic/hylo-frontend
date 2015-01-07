@@ -1,65 +1,41 @@
-<div class="profile">
-  <div class="row profile-content">
-    <div class="col-sm-12 banner">
-      <div class="banner-image">
-        <div class="banner-content">
-          <div class="row">
-            <div class="col-sm-3">
-              <div class="profile-image">
-                <div class="avatar" back-img="user.avatar_url"></div>
-              </div>
-            </div>
-            <div class="col-sm-9 col-xs-12">
-              <div class="profile-info">
-                <div class="profile-title">
-                  <span class="user-name">{{user.name | uppercase}} </span>
-                  <span class="social-media">
-                    <i class="icon-twitter"></i>
-                    <i class="icon-facebook"></i>
-                    <i class="icon-linkedin"></i>
-                  </span>
-                </div>
-                <div class="profile-description"> profile description <br> {{hello}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="banner">
+  <div class="background" back-img="'http://miriadna.com/desctopwalls/images/max/Falling-asleep-forest.jpg'"></div>
+  <div class="banner-content">
+    <div class="avatar-column">
+      <div class="avatar" back-img="user.avatar_url"></div>
     </div>
-    <div class="col-sm-3">
-      <div class="row">
-        <div class="profile-navigation">
-          <div class="tabs">
-            <div class="col-xs-4 col-sm-12">
-              <a class="tab" ui-sref=".seeds">
-                <div class="title">SEEDS PLANTED </div>
-                <div class="count"></div>
-                <div class="count-label">5 </div>
-              </a>
-            </div>
-            <div class="col-xs-4 col-sm-12">
-              <a class="tab" ui-sref=".contributions">
-                <div class="title">CONTRIBUTIONS </div>
-                <div class="count"></div>
-                <div class="count-label">8 </div>
-              </a>
-            </div>
-            <div class="col-xs-4 col-sm-12">
-              <a class="tab" ui-sref=".thanks">
-                <div class="title">THANK YOU'S </div>
-                <div class="count"></div>
-                <div class="count-label">13 </div>
-              </a>
-            </div>
-          </div>
-          <div class="user-info">
-            Skills and Affiliations
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-9 feed" ui-view="tab"></div>
 
+    <div class="info-column">
+      <div class="title">
+        <span class="name">{{user.name | uppercase}}</span>
+        <span class="social-media">
+          <i class="icon-twitter"></i>
+          <i class="icon-facebook"></i>
+          <i class="icon-linkedin"></i>
+        </span>
+      </div>
+      <div class="bio">profile description<br>{{hello}}</div>
+    </div>
   </div>
+</div>
 
+<div class="main-content">
+  <div class="sidebar">
+    <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
+      <div class="title">SEEDS PLANTED</div>
+      <div class="count">5</div>
+    </a>
+    <a class="tab" ui-sref=".contributions" ng-class="{selected: $state.current.name === 'profile.contributions'}">
+      <div class="title">CONTRIBUTIONS</div>
+      <div class="count">8</div>
+    </a>
+    <a class="tab" ui-sref=".thanks" ng-class="{selected: $state.current.name === 'profile.thanks'}">
+      <div class="title">THANK YOU'S</div>
+      <div class="count">13</div>
+    </a>
+    <div class="user-info">
+      Skills and Affiliations
+    </div>
+  </div>
+  <div class="tab-content" ui-view="tab"></div>
 </div>
