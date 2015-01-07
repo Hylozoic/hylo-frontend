@@ -1,6 +1,128 @@
 .profile {
 
+  .banner {
+    .make-row;
+    .dark-background-gradient;
+    height: 38.2vh;
+    position: relative;
+
+    .background {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: -2;
+    }
+
+    .banner-content {
+
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      .avatar-column {
+        .make-sm-column(3);
+        text-align: center;
+        .avatar {
+          .user-avatar-lg;
+          position: relative;
+          top: -15px;
+          @media (max-width: @screen-xs-max) {
+            .user-avatar();
+            position: relative;
+            float: left;
+            top: 0;
+          }
+          border: 2px solid white;
+        }
+      }
+
+      .info-column {
+        .make-sm-column(9);
+        margin-top: 10px;
+
+        .title {
+          .medium-title-text();
+          font-size: 24px;
+          color: white;
+          margin-bottom: 10px;
+
+          .social-media {
+            margin-left: 10px;
+
+            i {
+              font-size: 16px;
+              letter-spacing: -5px;
+            }
+
+          }
+        }
+        .bio {
+          .proxima-nova(100);
+          color: @faint-gray;
+          line-height: 1.8;
+          @media (max-width: @screen-xs-max) {
+            line-height: 1.2;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .main-content {
+    .make-row;
+  }
+
+  .sidebar {
+    .make-sm-column(3);
+    border: 1px solid purple;
+    .tab {
+      display: block;
+      text-align: center;
+      position: relative;
+      margin: 0 -@std-padding;
+      padding: @std-padding;
+      border: 1px solid green;
+      text-decoration: none;
+
+      &.selected {
+        background-color: @dark-accent;
+      }
+
+      .title {
+        .small-title-text();
+        margin-bottom: 10px;
+        font-weight: 600;
+        word-wrap: break-word;
+
+        // TODO should this go into a mixin?
+        @media (max-width: @screen-xs-max) { letter-spacing: 1px; }
+      }
+
+      .count {
+        border: 1px solid @link-color;
+        @size: 50px;
+        width: @size;
+        height: @size;
+        .border-radius(@size/2);
+        margin: 0 auto;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 100;
+        color: @link-color;
+        line-height: 48px;
+      }
+    }
+
+  }
+
+  .tab-content {
+    .make-sm-column(9);
+    border: 1px solid orange;
+  }
+
   .profile-content {
+    .make-row;
     border: 1px solid orange;
     div {
       border: 1px solid blue;
@@ -10,79 +132,6 @@
       border: 1px solid purple;
     }
 
-    .banner {
-      .dark-background-gradient;
-      width: 100%;
-      height: 100%;
-      position: relative;
-
-      &, div * {
-        border: 0;
-      }
-
-      .banner-image {
-        height: 38.2vh;
-
-        @media (max-width: @screen-xs-max) {
-          max-height: 320px;
-        }
-      }
-
-      .banner-content {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-
-        .row {
-
-        }
-
-        .profile-image {
-          .avatar {
-            .user-avatar-lg;
-            position: relative;
-            top: -15px;
-            @media (max-width: @screen-xs-max) {
-              .user-avatar();
-              position: relative;
-              float: left;
-              top: 0;
-            }
-            border: 2px solid white;
-          }
-        }
-
-        .profile-info {
-          margin-top: 10px;
-
-          .profile-title {
-            .medium-title-text();
-            font-size: 24px;
-            color: white;
-            margin-bottom: 10px;
-
-            .social-media {
-              margin-left: 10px;
-
-              i {
-                font-size: 16px;
-                letter-spacing: -5px;
-              }
-
-            }
-          }
-          .profile-description {
-            .proxima-nova(100);
-            color: @faint-gray;
-            line-height: 1.8;
-            @media (max-width: @screen-xs-max) {
-              line-height: 1.2;
-              margin-bottom: 10px;
-            }
-          }
-        }
-      }
-    }
   }
 
   .profile-navigation {
@@ -91,41 +140,6 @@
     .tabs {
       &, div * {
         border: 0px;
-      }
-      .tab {
-        display: block;
-        text-align: center;
-        position: relative;
-        margin: 15px 0 15px;
-
-        .title {
-          .small-title-text();
-          margin-bottom: 10px;
-          font-weight: 600;
-          word-wrap: break-word;
-
-          @media (max-width: @screen-xs-max) { letter-spacing: 1px; }
-        }
-
-        .count {
-
-          border: 1px solid @link-color;
-          @size: 50px;
-          width: @size;
-          height: @size;
-          .border-radius(@size/2);
-          margin: 0 auto;
-
-          &-label {
-            text-align: center;
-            font-size: 30px;
-            font-weight: 100;
-            color: @link-color;
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-          }
-        }
       }
     }
   }
