@@ -79,8 +79,8 @@ angular.module('hyloApp', [
 
   }])
 
-.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService',
-  function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService) {
+.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
+  function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
     var currentSlug;
     $rootScope.currentUser = CurrentUser.get();
 
@@ -94,9 +94,10 @@ angular.module('hyloApp', [
     }
 
     // Set a variable so we can watch for param changes
-    $rootScope.watchingState = $state;
+    $rootScope.$state = $state;
+    $rootScope.$bodyClass = $bodyClass;
 
-    $rootScope.$watch("watchingState.params.community", function(slug) {
+    $rootScope.$watch("$state.params.community", function(slug) {
       if (angular.isDefined(slug) && slug != currentSlug) {
         $rootScope.community = Community.get({id: slug}, function(community) {
           $rootScope.community = community;
