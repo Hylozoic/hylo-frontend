@@ -1,15 +1,16 @@
-.post-comments {
+.comments {
   .loading {
     padding: @std-padding;
   }
   background-color: @faint-gray;
-  border-bottom: 1px solid @border-light;
+  border: 1px solid @border-lightest;
+  border-top: none;
 
-  > .comments > div:last-of-type {
+  .comment:last-of-type {
     margin-bottom: 25px;
   }
 
-  >.comments .comment {
+  .comment {
     margin-bottom: 18px;
 
     //add padding to top of comments
@@ -84,9 +85,6 @@
   position: relative;
   padding: 6px 0;
   .seed-body-text;
-  border-right: 1px solid @border-light;
-  border-left: 1px solid @border-light;
-
 
   .avatar {
     .user-avatar-sm;
@@ -122,7 +120,7 @@
 
 //downsize the comment margins on mobile
 @media (max-width: @screen-xs-max) {
-  .post-comments > .comments .comment {
+  .comments .comment {
 
     &:first-child {
       padding-top: 12px;

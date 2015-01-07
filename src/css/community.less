@@ -1,6 +1,4 @@
-// community view
-
-.community{ // main style wrapper for community page
+.community {
 
   #banner {
     position: relative;
@@ -94,11 +92,6 @@
   }
 }
 
-#content-outer{
-  z-index: 100;
-  position:relative;
-}
-
 // TODO this should go somewhere more general
 .toolbar {
   text-align: center;
@@ -133,6 +126,8 @@
 }
 
 .community-members-toolbar {
+  margin-bottom: @std-padding;
+
   .invite, .search {
     .rounded-button;
   }
@@ -158,9 +153,7 @@
 }
 
 .community-members {
-  margin-top: @std-padding;
-
-  .avatar {
+  .member .avatar {
     .user-avatar;
     float: left;
     @media (max-width: @screen-xs-max) {

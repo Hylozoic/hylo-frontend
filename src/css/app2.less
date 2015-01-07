@@ -57,25 +57,26 @@ body.angular-app {
   overflow-y: scroll;
 }
 
-body.waiting-for-angular div#content-outer {
+#initializing-panel {
   display: none;
 }
 
-body div#initializing-panel {
-  display: none;
-}
+body.waiting-for-angular {
+  #content-outer {
+    display: none;
+  }
+  #initializing-panel {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
 
-body.waiting-for-angular div#initializing-panel {
-  display: block;
-  position:absolute;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-
-  .spinner {
-    top: 45%;
-    margin: auto auto;
+    .spinner {
+      top: 45%;
+      margin: auto auto;
+    }
   }
 }
 
@@ -84,6 +85,11 @@ body.waiting-for-angular div#initializing-panel {
     width: 100%;
     overflow-x: hidden;
   }
+}
+
+#content-outer {
+  z-index: 100;
+  position: relative;
 }
 
 .bold {
