@@ -19,3 +19,4 @@ require('./controllers/profile/thanks')(angularModule);
 
 require('./controllers/community_settings')(angularModule);
 require('./controllers/profile')(angularModule);
+require('./controllers/profile/edit')(angularModule);

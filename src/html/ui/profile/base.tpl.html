@@ -1,5 +1,8 @@
 <div class="banner">
   <div class="background" back-img="'http://miriadna.com/desctopwalls/images/max/Falling-asleep-forest.jpg'"></div>
+  <div class="buttons">
+    <a class="edit" ui-sref="editProfile" ng-if="editable">Edit profile</a>
+  </div>
   <div class="banner-content">
     <div class="avatar-column">
       <div class="avatar" back-img="user.avatar_url"></div>
@@ -14,7 +17,7 @@
           <i class="icon-linkedin"></i>
         </span>
       </div>
-      <div class="bio">profile description<br>{{hello}}</div>
+      <div class="bio">{{user.bio}}</div>
     </div>
   </div>
 </div>

@@ -18,6 +18,12 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           // Use the resource to fetch data from the server
           currentUser: ['CurrentUser', function(CurrentUser) {
             return CurrentUser.get().$promise;
+          }],
+          // user info has to be fetched from the new API for editing on
+          // the new profile. eventually the old CurrentUser will be replaced
+          // with this one.
+          newCurrentUser: ['User', function(User) {
+            return User.current().$promise;
           }]
         },
         controller: ['$rootScope', 'currentUser', function($rootScope, currentUser) {
@@ -100,11 +106,11 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         abstract: true,
         resolve: {
           editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
-            return currentUser.id === $stateParams.id;
+            return parseInt(currentUser.id) == parseInt($stateParams.id);
           }],
-          user: ['User', 'editable', '$stateParams', function(User, editable, $stateParams) {
+          user: ['User', 'editable', '$stateParams', 'newCurrentUser', function(User, editable, $stateParams, newCurrentUser) {
             if (editable) {
-              return User.current().$promise;
+              return newCurrentUser;
             } else {
               return User.get({id: $stateParams.id}).$promise;
             }
@@ -156,6 +162,16 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           'tab': {
             templateUrl: '/ui/profile/thanks.tpl.html',
             controller: 'ProfileThanksCtrl'
+          }
+        }
+      }).
+      state('editProfile', {
+        url: '/edit-profile',
+        parent: 'main',
+        views: {
+          'main': {
+            templateUrl: '/ui/profile/edit.tpl.html',
+            controller: 'ProfileEditCtrl'
           }
         }
       }).

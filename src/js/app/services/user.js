@@ -23,6 +23,9 @@ dependencies.push(function($resource) {
     },
     thanks: function(params, success, error) {
       return User.thanks(_.extend({id: this.id}, params), success, error);
+    },
+    update: function(params, success, error) {
+      return User.save(_.extend({id: this.id}, params), success, error);
     }
   });
 
