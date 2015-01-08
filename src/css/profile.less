@@ -1,5 +1,10 @@
-.profile .banner {
-  .dark-background-gradient;
+.profile {
+  .banner {
+    .dark-background-gradient;
+  }
+  .edit {
+    .rounded-button-clear;
+  }
 }
 
 .profile, .editProfile {
@@ -13,6 +18,12 @@
       height: 100%;
       width: 100%;
       z-index: -2;
+    }
+
+    .buttons {
+      position: absolute;
+      right: 0;
+      padding: @std-padding;
     }
 
     .banner-content {
@@ -68,10 +79,6 @@
         }
       }
     }
-  }
-
-  .edit {
-    .rounded-button;
   }
 
   .main-content {
@@ -139,26 +146,4 @@
     border: 1px solid orange;
   }
 
-  .profile-content {
-    .make-row;
-    border: 1px solid orange;
-    div {
-      border: 1px solid blue;
-    }
-
-    .row div {
-      border: 1px solid purple;
-    }
-
-  }
-
-  .profile-navigation {
-    background-color: @dark-accent;
-
-    .tabs {
-      &, div * {
-        border: 0px;
-      }
-    }
-  }
 }
