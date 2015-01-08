@@ -1,8 +1,10 @@
-.profile {
+.profile .banner {
+  .dark-background-gradient;
+}
 
+.profile, .editProfile {
   .banner {
     .make-row;
-    .dark-background-gradient;
     height: 38.2vh;
     position: relative;
 
@@ -14,59 +16,62 @@
     }
 
     .banner-content {
-
       position: absolute;
       bottom: 0;
       width: 100%;
+    }
 
-      .avatar-column {
-        .make-sm-column(3);
-        text-align: center;
-        .avatar {
-          .user-avatar-lg;
+    .avatar-column {
+      .make-sm-column(3);
+      text-align: center;
+      .avatar {
+        .user-avatar-lg;
+        position: relative;
+        top: -15px;
+        @media (max-width: @screen-xs-max) {
+          .user-avatar();
           position: relative;
-          top: -15px;
-          @media (max-width: @screen-xs-max) {
-            .user-avatar();
-            position: relative;
-            float: left;
-            top: 0;
+          float: left;
+          top: 0;
+        }
+        border: 2px solid white;
+      }
+    }
+
+    .info-column {
+      .make-sm-column(9);
+      margin-top: 10px;
+
+      .title {
+        .medium-title-text();
+        font-size: 24px;
+        color: white;
+        margin-bottom: 10px;
+
+        .social-media {
+          margin-left: 10px;
+
+          i {
+            font-size: 16px;
+            letter-spacing: -5px;
           }
-          border: 2px solid white;
+
         }
       }
-
-      .info-column {
-        .make-sm-column(9);
-        margin-top: 10px;
-
-        .title {
-          .medium-title-text();
-          font-size: 24px;
-          color: white;
+      .bio {
+        .proxima-nova(100);
+        color: @faint-gray;
+        line-height: 1.8;
+        @media (max-width: @screen-xs-max) {
+          line-height: 1.2;
           margin-bottom: 10px;
-
-          .social-media {
-            margin-left: 10px;
-
-            i {
-              font-size: 16px;
-              letter-spacing: -5px;
-            }
-
-          }
-        }
-        .bio {
-          .proxima-nova(100);
-          color: @faint-gray;
-          line-height: 1.8;
-          @media (max-width: @screen-xs-max) {
-            line-height: 1.2;
-            margin-bottom: 10px;
-          }
         }
       }
     }
+  }
+
+  .edit {
+    .rounded-button;
   }
 
   .main-content {
