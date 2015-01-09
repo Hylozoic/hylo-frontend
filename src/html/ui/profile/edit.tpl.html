@@ -30,7 +30,7 @@
     <ul>
       <li ng-repeat="skill in editData.skills">
         {{skill}}
-        <a class="close">&times;</a>
+        <a class="close" ng-click="remove(skill, 'skills')">&times;</a>
       </li>
     </ul>
 
@@ -39,7 +39,7 @@
     <ul>
       <li ng-repeat="org in editData.organizations">
         {{org}}
-        <a class="close">&times;</a>
+        <a class="close" ng-click="remove(skill, 'organizations')">&times;</a>
       </li>
     </ul>
   </div>

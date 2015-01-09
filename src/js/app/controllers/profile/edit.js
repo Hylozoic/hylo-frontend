@@ -1,12 +1,11 @@
 var dependencies = ['$scope', '$analytics', 'newCurrentUser'];
 dependencies.push(function($scope, $analytics, newCurrentUser) {
   var user = $scope.user = newCurrentUser;
-
-  $scope.editData = _.pick(user, ['bio', 'skills', 'organizations']);
+  var editData = $scope.editData = _.pick(user, ['bio', 'skills', 'organizations']);
 
   $scope.save = function() {
-    user.update($scope.editData, function() {
-      _.extend(user, $scope.editData);
+    user.update(editData, function() {
+      _.extend(user, editData);
       $scope.cancel();
     });
   };
@@ -17,11 +16,15 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
 
   $scope.add = function(event, type) {
     if (event.which == 13) {
-      $scope.editData[type].unshift(event.target.value);
+      editData[type].unshift(event.target.value);
       event.target.value = '';
     }
     return true;
   };
+
+  $scope.remove = function(value, type) {
+    editData[type].splice(editData[type].indexOf(value), 1);
+  }
 });
 
 module.exports = function(angularModule) {
