@@ -25,24 +25,24 @@
 <div class="main-content">
   <div class="sidebar">
     <div class="user-info-mobile">
-      Skills and Affiliations (mobile)
+      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
     </div>
     <div class="tabs">
       <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
-        <div class="title">SEEDS PLANTED</div>
+        <h3>SEEDS PLANTED</h3>
         <div class="count">5</div>
       </a>
       <a class="tab" ui-sref=".contributions" ng-class="{selected: $state.current.name === 'profile.contributions'}">
-        <div class="title">CONTRIBUTIONS</div>
+        <h3>CONTRIBUTIONS</h3>
         <div class="count">8</div>
       </a>
       <a class="tab" ui-sref=".thanks" ng-class="{selected: $state.current.name === 'profile.thanks'}">
-        <div class="title">THANK YOU'S</div>
+        <h3>THANK YOU'S</h3>
         <div class="count">13</div>
       </a>
     </div>
     <div class="user-info">
-      Skills and Affiliations
+      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
     </div>
   </div>
   <div class="tab-content" ui-view="tab"></div>
