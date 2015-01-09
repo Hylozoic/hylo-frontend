@@ -89,6 +89,10 @@
     .make-sm-column(3);
     border: 1px solid purple;
 
+    h3 {
+      .small-bold-title-text;
+    }
+
     .tabs {
       .make-row;
     }
@@ -99,7 +103,6 @@
       display: block;
       text-align: center;
       position: relative;
-      padding: @std-padding;
       border: 1px solid green;
       text-decoration: none;
 
@@ -107,12 +110,7 @@
         background-color: @dark-accent;
       }
 
-      .title {
-        .small-title-text();
-        margin-bottom: 10px;
-        font-weight: 600;
-        word-wrap: break-word;
-
+      h3 {
         // TODO should this go into a mixin?
         @media (max-width: @screen-xs-max) { letter-spacing: 1px; }
       }
@@ -123,7 +121,7 @@
         width: @size;
         height: @size;
         .border-radius(@size/2);
-        margin: 0 auto;
+        margin: 10px auto @std-padding;
         text-align: center;
         font-size: 30px;
         font-weight: 100;
