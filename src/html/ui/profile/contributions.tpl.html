@@ -1,4 +1,5 @@
 <h3>contributions</h3>
-<div ng-repeat="contribution in contributions track by contribution.id">
-  <span>{{contribution.post.name}}</span> <strong>IN</strong> <span>{{contribution.post.communities[0].name}}</span> <strong>BY</strong> <span>{{contribution.post.creator.name}}</span>
+<div ng-repeat="contribution in contributions track by contribution.id" class="feed-item">
+	<div class="summary">Contributed to <span ng-show="contribution.post.type==='request'">a</span><span ng-hide="contribution.post.type==='request'">an</span> {{contribution.post.type}} by {{contribution.post.creator.name}}</div>
+  <div class="title">{{contribution.post.name}}</div>
 </div>

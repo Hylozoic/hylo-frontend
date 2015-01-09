@@ -161,6 +161,20 @@
 
   .tab-content {
     .make-sm-column(9);
+
+    .feed-item {
+      border-bottom: 1px solid @default-border;
+      padding-bottom: @std-padding;
+      margin-bottom: @std-padding;
+
+      .summary {
+        .seed-meta-text();
+        line-height: 1.8;
+      }
+      .title {
+        .seed-title-text();
+      }
+    }
   }
 
 }
