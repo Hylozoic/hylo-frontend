@@ -23,4 +23,37 @@
     width: 100%;
   }
 
+  .edit-skills {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+
+    h3 {
+      .small-bold-title-text;
+    }
+
+    input[type="text"] {
+      .borderless-text-input;
+      width: 100%;
+      margin-bottom: @std-padding;
+      border-bottom: 1px solid @border-light;
+      line-height: 28px;
+    }
+
+    ul {
+      padding-left: 0;
+      margin-bottom: @std-padding;
+    }
+
+    li {
+      list-style-type: none;
+      position: relative;
+      padding: 5px 0;
+      color: @default-text;
+      .close {
+        position: absolute;
+        top: 4px;
+        left: -20px;
+      }
+    }
+  }
 }

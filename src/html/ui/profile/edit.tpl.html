@@ -22,3 +22,25 @@
     </div>
   </div>
 </div>
+
+<div class="main-content">
+  <div class="edit-skills">
+    <h3>Skills</h3>
+    <input type="text" placeholder="Type here to add a skill, then press enter." ng-keypress="add($event, 'skills')"/>
+    <ul>
+      <li ng-repeat="skill in editData.skills">
+        {{skill}}
+        <a class="close">&times;</a>
+      </li>
+    </ul>
+
+    <h3>Affiliations</h3>
+    <input type="text" placeholder="Type here to add an affiliation, then press enter." ng-keypress="add($event, 'organizations')"/>
+    <ul>
+      <li ng-repeat="org in editData.organizations">
+        {{org}}
+        <a class="close">&times;</a>
+      </li>
+    </ul>
+  </div>
+</div>
