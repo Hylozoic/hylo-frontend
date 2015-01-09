@@ -39,6 +39,7 @@
         .user-avatar-lg;
         position: relative;
         top: -15px;
+        margin: 0 auto;
         @media (max-width: @screen-xs-max) {
           .user-avatar();
           position: relative;
@@ -71,7 +72,7 @@
       }
       .bio {
         .proxima-nova(100);
-        color: @faint-gray;
+        color: @nonactive-text;
         line-height: 1.8;
         @media (max-width: @screen-xs-max) {
           line-height: 1.2;
@@ -87,7 +88,7 @@
 
   .sidebar {
     .make-sm-column(3);
-    border: 1px solid purple;
+    border-right: 1px solid @default-border;
 
     h3 {
       .small-bold-title-text;
@@ -103,7 +104,6 @@
       display: block;
       text-align: center;
       position: relative;
-      border: 1px solid green;
       text-decoration: none;
 
       &.selected {
@@ -113,6 +113,7 @@
       h3 {
         // TODO should this go into a mixin?
         @media (max-width: @screen-xs-max) { letter-spacing: 1px; }
+        color: @default-text;
       }
 
       .count {
@@ -130,6 +131,14 @@
       }
     }
 
+    .user-info-mobile, .user-info {
+      text-align: center;
+      .list-entry {
+        .seed-meta-text();
+        line-height: 1.8;
+      }
+    }
+
     .user-info-mobile {
       .visible-xs-block;
     }
@@ -141,7 +150,6 @@
 
   .tab-content {
     .make-sm-column(9);
-    border: 1px solid orange;
   }
 
 }
