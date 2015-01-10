@@ -1,5 +1,14 @@
 .editProfile {
 
+  .icon-edit-profile-photo {
+    width: 136px;
+    line-height: 130px;
+    color: white;
+    opacity: 0.7;
+    font-size: 38px;
+    padding-left: 3px;
+  }
+
   .banner {
     .light-background-gradient;
 
@@ -8,7 +17,7 @@
     }
   }
 
-  .cancel {
+  .cancel, .edit-banner {
     .rounded-button;
   }
 
@@ -50,9 +59,11 @@
       padding: 5px 0;
       color: @default-text;
       .close {
-        position: absolute;
-        top: 4px;
-        left: -20px;
+        @media (min-width: @screen-sm) {
+          position: absolute;
+          top: 4px;
+          left: -20px;
+        }
       }
     }
   }

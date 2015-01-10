@@ -60,7 +60,7 @@ module.exports = function(angularModule) {
             }
           });
         };
-      }
+      };
 
       $scope.changeIcon = imageChangeFn({
         fieldName: 'avatar_url',
