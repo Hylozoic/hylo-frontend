@@ -12,6 +12,10 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
     if (!edited.skills) delete editData.skills;
     if (!edited.organizations) delete editData.organizations;
 
+    if (editData.banner_url === require('../../services/defaultUserBanner')) {
+      editData.banner_url = null;
+    }
+
     user.update(editData, function() {
       _.extend(user, editData);
       $scope.cancel();
