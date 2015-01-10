@@ -1,12 +1,18 @@
 <div class="banner">
-  <div class="background" back-img="'http://miriadna.com/desctopwalls/images/max/Falling-asleep-forest.jpg'"></div>
+  <div class="background" back-img="editData.banner_url"></div>
   <div class="buttons">
+    <a class="edit-banner" ng-click="changeBanner()">
+      <i class="icon-add-background"></i>
+      Change Background
+    </a>
     <a class="cancel" ng-click="cancel()">Cancel</a>
     <a class="save" ng-click="save()">Save</a>
   </div>
   <div class="banner-content">
     <div class="avatar-column">
-      <div class="avatar" back-img="user.avatar_url"></div>
+      <div class="avatar" back-img="editData.avatar_url" ng-click="changeAvatar()">
+        <i class="icon-edit-profile-photo"></i>
+      </div>
     </div>
 
     <div class="info-column">
