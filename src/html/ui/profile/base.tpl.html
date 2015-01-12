@@ -30,16 +30,16 @@
     <div class="tabs">
       <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
         <h3>SEEDS PLANTED</h3>
-        <div class="count">5</div>
+        <div class="count">{{user.seed_count}}</div>
       </a>
       <a class="tab" ui-sref=".contributions" ng-class="{selected: $state.current.name === 'profile.contributions'}">
         <h3 class="hidden-xs">CONTRIBUTIONS</h3>
         <h3 class="visible-xs">CONTRI-<br/>BUTIONS</h3>
-        <div class="count">8</div>
+        <div class="count">{{user.contribution_count}}</div>
       </a>
       <a class="tab" ui-sref=".thanks" ng-class="{selected: $state.current.name === 'profile.thanks'}">
         <h3>THANK YOU'S</h3>
-        <div class="count">13</div>
+        <div class="count">{{user.thank_count}}</div>
       </a>
     </div>
     <div class="user-info">
