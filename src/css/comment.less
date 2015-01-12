@@ -68,7 +68,7 @@
     }
   }
 
-  textarea {
+  textarea, .mentio-editor {
     resize: none;
     -webkit-appearance: none;
 
@@ -81,6 +81,7 @@
 }
 
 .add-comment {
+
   background-color: white;
   position: relative;
   padding: 6px 0;
@@ -98,15 +99,15 @@
     margin-top: 5px;
     min-height: 28px;
 
-    button {
+    .add-comment-btn {
       position: absolute;
       right: 3px;
       bottom: 1px;
     }
 
-    textarea {
+    textarea, .mentio-editor {
       padding: 0;
-      width: 90%;
+      width: 81%;
       position: relative;
       top: 3px;
     }
@@ -157,4 +158,42 @@
       }
     }
   }
+}
+
+.mentio-editor {
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+
+
+.menu-highlighted {
+  font-weight: bold;
+}
+
+.user-search .list-group-item.active {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.user-search .list-group-item.active .text-muted {
+  color: #ccc;
+}
+
+.user-search .list-group-item.active .text-primary {
+  color: #fff;
+}
+
+.user-search .list-group-item {
+  padding: 5px;
+}
+
+.user-search .user-photo {
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 15px;
+}
+
+.user-mention {
+  color: blue;
 }

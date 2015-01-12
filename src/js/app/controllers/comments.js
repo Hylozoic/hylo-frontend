@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
-  function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics', '$q', 'Seed', '$sce', '$filter',
+  function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics, $q, Seed, $sce, $filter) {
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
@@ -8,7 +8,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
           $scope.post.commentsLoaded = true;
         });
       }
-    }
+    };
 
     if ($scope.post.$promise) {
       $scope.post.$promise.then(function() {
@@ -51,7 +51,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
       if (!clickedElement) return;
 
-      var clickOnCommentForm = $(clickedElement).closest('.comment-form').length > 0
+      var clickOnCommentForm = $(clickedElement).closest('.comment-form').length > 0;
 
       if (!clickOnCommentForm) {
         callbackOnClose();
@@ -63,7 +63,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       var content = $scope.commentText;
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
-        Post.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
+        Seed.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
           $scope.post.comments.push(value);
 
           $scope.commentText = '';
@@ -108,6 +108,30 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
         growl.addSuccessMessage("Comment Deleted", {ttl: 5000});
         $log.debug('delete', comment.id);
       });
+    };
+
+    $scope.commentTextSafe = function(commentText) {
+      var text = $filter('linkyDontMatchExistingAnchors')(commentText);
+      return $sce.trustAsHtml(text);
+    };
+
+    $scope.people = [];
+
+    $scope.searchPeople = function(query) {
+      var peopleList = [];
+      return $rootScope.community.members({search: query}).$promise.then(function (items) {
+        angular.forEach(items, function(item) {
+          if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
+            peopleList.push(item);
+          }
+        });
+        $scope.people = peopleList;
+        return $q.when(peopleList);
+      });
+    };
+
+    $scope.getPeopleTextRaw = function(person) {
+      return '<a contenteditable="false" target="_blank" href="/u/' + person.id + '" data-uid="' + person.id + '">@' + person.name + '</a>'
     };
 
 //    $scope.onKeypress = function(event) {

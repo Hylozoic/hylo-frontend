@@ -24,6 +24,7 @@ require('jquery.dotdotdot');
 require('ng-idle');
 require('ngInfiniteScroll');
 require('perfect-scrollbar');
+require('ment.io');
 /* End Bower Components */
 
 /* Manually installed components */
@@ -33,6 +34,8 @@ require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
 require('./jquery/draggable-background');
+
+Medium = require('./thirdparty/medium');
 
 require('./app/auth_module');
 require('./app/filters');
