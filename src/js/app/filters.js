@@ -20,6 +20,17 @@ filter('linkyShort', [ '$sanitize', function($sanitize) {
   }
 }]).
 
+filter('linkyDontMatchExistingAnchors', [ '$sanitize', function($sanitize) {
+  return function(text) {
+    if (!text) return text;
+    var replacePattern2 = /(?:(?:ht|f)tps?:\/\/|www)[^<>\]]+?(?![^<>\]]*([>]|<\/))(?=[\s!,?\]]|$)/gm;
+    var replacedText = text.replace(replacePattern2, '<a href="$0" target="_blank">$0</a>');
+
+    //returns the text result
+    return replacedText;
+  }
+}]).
+
 filter('hashtag', [ '$sce', function($sce) {
   return function(text) {
     if (!text) return text;
@@ -29,6 +40,20 @@ filter('hashtag', [ '$sce', function($sce) {
       var trimmedHash = hash.trim();
       return '<a class="hashtag" ui-sref="search({community: $root.community.slug, q: \'' + trimmedHash + '\'})">'+hash+'</a>';
     });
+
+    var cleaned = $sce.trustAsHtml(replacedText);
+
+    return cleaned;
+  }
+}]).
+
+filter('userMention', [ '$sce', function($sce) {
+  return function(text) {
+    if (!text) return text;
+    // convert user mentions into clickable items
+    var replacePattern = /\[~([0-9]+)~([^\]]*)\]/g;
+    var replacedText = text.replace(replacePattern, '<a class="userProfile" ui-sref="user({id: \'$1\'})">$2</a>');
+    console.log(replacedText);
 
     var cleaned = $sce.trustAsHtml(replacedText);
 

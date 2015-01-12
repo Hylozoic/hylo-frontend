@@ -103,7 +103,21 @@ factory("Post", ["$resource",
             }
           }
         })
-}]);
+}]).
+
+factory("Seed", ["$resource",
+  function($resource) {
+    return $resource("/noo/seed/:id/:action", {
+      id: '@id'
+    }, {
+      comment: {
+        method: "POST",
+        params: {
+          action: "comment"
+        }
+      }
+    })
+  }]);
 
 require('./services/user')(angularModule);
 require('./services/community')(angularModule);

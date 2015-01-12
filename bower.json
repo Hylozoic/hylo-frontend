@@ -25,7 +25,8 @@
     "jquery.dotdotdot": "1.6.16",
     "moment": "latest",
     "underscore": "1.6.0",
-    "perfect-scrollbar": "0.5.2"
+    "perfect-scrollbar": "0.5.2",
+    "ment.io": "0.9.22"
   },
   "private": true,
   "resolutions": {
