@@ -76,6 +76,9 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
           $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id});
 
           $scope.followPost();
+        }, function() {
+          $scope.createDisabled = false;
+          growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
         });
       }
     };
@@ -131,19 +134,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     };
 
     $scope.getPeopleTextRaw = function(person) {
-      return '<a contenteditable="false" target="_blank" href="/u/' + person.id + '" data-uid="' + person.id + '">@' + person.name + '</a>'
+      return '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/' + person.id + '" data-uid="' + person.id + '">@' + person.name + '</a>'
     };
-
-//    $scope.onKeypress = function(event) {
-//      if (event.which == 13 && event.shiftKey) {
-//        event.stopPropagation();
-//      } else if (event.which === 13) {
-//        var content = $scope.commentText;
-//        if (content && content.trim().length > 0) {
-//          $scope.create();
-//          event.stopPropagation();
-//        }
-//      }
-//    };
 
   }]);
