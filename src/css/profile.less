@@ -8,6 +8,11 @@
   .edit {
     .rounded-button-clear;
   }
+
+  .main-content {
+    border-bottom: 1px solid @default-border;
+    margin-bottom: @std-padding;
+  }
 }
 
 .profile, .editProfile {
@@ -89,7 +94,9 @@
       }
 
       .social-media {
-        margin-left: 10px;
+        @media (min-width: @screen-sm) {
+          margin-left: 10px;
+        }
 
         i {
           width: 21px;
@@ -228,6 +235,10 @@
       .summary {
         .seed-meta-text();
         line-height: 1.8;
+
+        .seed {
+          text-transform: capitalize;
+        }
       }
       .title {
         .seed-title-text();
@@ -258,10 +269,4 @@
       }
     }
   }
-
-  .main-content {
-    border-bottom: 1px solid @default-border;
-    margin-bottom: @std-padding;
-  }
-
 }
