@@ -114,6 +114,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
             } else {
               return User.get({id: $stateParams.id}).$promise;
             }
+          }],
+          posts: ['Post', 'user', function(Post, user) {
+            return Post.forUser({userId: user.id}).$promise;
           }]
         },
         views: {
