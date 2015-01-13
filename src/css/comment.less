@@ -68,12 +68,6 @@
     }
   }
 
-  textarea, .mentio-editor {
-    resize: none;
-    -webkit-appearance: none;
-
-  }
-
   @media (max-width: @screen-xs-max) {
     margin-left: -10px;
     margin-right: -10px;
@@ -158,42 +152,4 @@
       }
     }
   }
-}
-
-.mentio-editor {
-  overflow-y: auto;
-  overflow-x:hidden;
-}
-
-
-.menu-highlighted {
-  font-weight: bold;
-}
-
-.user-search .list-group-item.active {
-  color: #fff;
-  background-color: #428bca;
-  border-color: #428bca;
-}
-
-.user-search .list-group-item.active .text-muted {
-  color: #ccc;
-}
-
-.user-search .list-group-item.active .text-primary {
-  color: #fff;
-}
-
-.user-search .list-group-item {
-  padding: 5px;
-}
-
-.user-search .user-photo {
-  max-width: 30px;
-  max-height: 30px;
-  border-radius: 15px;
-}
-
-.user-mention {
-  color: blue;
 }
