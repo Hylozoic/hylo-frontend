@@ -16,14 +16,29 @@
     </div>
 
     <div class="info-column">
-      <div class="title">
-        <span class="name">{{user.name | uppercase}}</span>
-        <span class="social-media">
-          <i class="icon-twitter"></i>
-          <i class="icon-facebook"></i>
-          <i class="icon-linkedin"></i>
-        </span>
-      </div>
+      <span class="name">{{user.name | uppercase}}</span>
+      <span class="social-media">
+        <i class="icon-twitter">
+          <i class="status"
+             ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"
+             ng-click="changeTwitter()"></i>
+
+          <div id="twitter-editor" ng-class="{active: editingTwitter}">
+            <input type="text" ng-model="editData.twitter_name" class="form-control" placeholder="Twitter username"/>
+            <input type="submit" value="Save" ng-click="changeTwitter()"/>
+          </div>
+        </i>
+        <i class="icon-facebook">
+          <i class="status"
+             ng-class="editData.facebook_url ? 'icon-big-check' : 'icon-add-01'"
+             ng-click="changeFacebook()"></i>
+        </i>
+        <i class="icon-linkedin">
+          <i class="status"
+             ng-class="editData.linkedin_name ? 'icon-big-check' : 'icon-add-01'"
+             ng-click="changeLinkedIn"></i>
+        </i>
+      </span>
       <textarea ng-model="editData.bio" placeholder="Type here to add a short statement about yourself. Maximum 175 characters."></textarea>
     </div>
   </div>

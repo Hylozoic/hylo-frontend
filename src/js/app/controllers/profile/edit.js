@@ -5,7 +5,10 @@ var filepickerUpload = require('../../services/filepickerUpload');
 var dependencies = ['$scope', '$analytics', 'newCurrentUser'];
 dependencies.push(function($scope, $analytics, newCurrentUser) {
   var user = $scope.user = newCurrentUser,
-    editData = $scope.editData = _.pick(user, ['bio', 'skills', 'organizations', 'avatar_url', 'banner_url']),
+    editData = $scope.editData = _.pick(user, [
+      'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
+      'twitter_name'
+    ]),
     edited = {};
 
   $scope.save = function() {
@@ -70,6 +73,19 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
     path: 'userBanner',
     convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
   });
+
+  $scope.changeTwitter = function() {
+    $scope.editingTwitter = !$scope.editingTwitter;
+  };
+
+  $scope.changeFacebook = function() {
+    // trigger API
+    // get auth
+    // get profile url
+    // save profile url
+    // OR
+    // delete profile url
+  };
 
 });
 
