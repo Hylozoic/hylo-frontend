@@ -28,33 +28,29 @@ directive('contenteditable', ['$sce', '$filter', function($sce, $filter) {
         if (attrs.stripBr && html === '<br>') {
           html = '';
         }
+
         ngModel.$setViewValue(html);
       }
 
-      //Specify how UI should be updated
+      //update mediumEditor when ngModel updates
       ngModel.$render = function() {
-        if (ngModel.$viewValue !== element.html()) {
-          element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-        }
+        mediumEditor.value(ngModel.$viewValue);
       };
 
-      new Medium({
+      var mediumEditor = new Medium({
         element: angular.element(element)[0],
         mode: Medium.partialMode,
-        placeholder: 'Your Comment',
+        placeholder: 'Write a comment...',
         autoHR: false,
         pasteAsText: false
       });
 
-      //// Forces plain text on paste
-      //element.on('paste',function(e) {
-      //  e.preventDefault();
-      //  var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
-      //  document.execCommand('insertText', false, text);
-      //});
+      scope.$on("$destroy", function handleDestroyEvent() {
+        mediumEditor.destroy();
+      });
 
       // Listen for change events to enable binding
-      element.on('blur keyup change', function() {
+      element.on('blur keyup change', function(e) {
         scope.$apply(read);
       });
 
