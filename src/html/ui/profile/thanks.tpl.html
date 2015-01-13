@@ -1,6 +1,5 @@
-<h3>thanks</h3>
 <div ng-repeat="thank in thanks track by thank.id " class="feed-item">
   <div class="summary">Thanked in {{thank.comment.post.creator.name}}'s {{thank.comment.post.type}}</div>
   <div class="title">{{thank.comment.post.name}} </div>
 </div>
-{{thanks.size}}
+<div ng-if="thanks.length <= 0" class="empty-content"> This user has no thank you's to show.  </div>
