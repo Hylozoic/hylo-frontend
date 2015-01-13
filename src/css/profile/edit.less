@@ -12,7 +12,7 @@
   .banner {
     .light-background-gradient;
 
-    .info-column .title {
+    .info-column .name, .social-media > i {
       color: @default-text;
     }
   }
@@ -67,4 +67,45 @@
       }
     }
   }
+}
+
+#twitter-editor {
+  // just imitating autocomplete dropdowns, which are the closest thing
+  // we have to popovers at the moment
+  background: white;
+  border-radius: 4px;
+  border: 1px solid @border-light;
+  padding: @std-padding;
+  text-align: left;
+  font-size: 14px;
+  @editor-width: 320px;
+  @input-width: 216px;
+  width: @editor-width;
+
+  .form-control {
+    width: 216px;
+    display: inline-block;
+  }
+
+  input[type="submit"] {
+    .rounded-button-dark;
+    width: @editor-width - @input-width - @std-padding*2 - 11;
+    position: relative;
+    top: -1px;
+  }
+
+  display: none;
+
+  &.active {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    @media (max-width: @screen-xs-max) {
+
+    }
+  }
+
 }

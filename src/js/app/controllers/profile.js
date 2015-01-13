@@ -14,6 +14,10 @@ dependencies.push(function($scope, $analytics, User, user, editable, posts) {
     $scope.posts.splice($scope.posts.indexOf(post), 1);
   };
 
+  $scope.twitterUrl = function() {
+    return 'https://twitter.com/' + user.twitter_name;
+  };
+
 });
 
 module.exports = function(angularModule) {
