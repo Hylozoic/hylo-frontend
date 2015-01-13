@@ -1,18 +1,13 @@
-var dependencies = ['$scope', '$analytics', 'User', 'user', 'editable', 'Post'];
-dependencies.push(function($scope, $analytics, User, user, editable, Post) {
+var dependencies = ['$scope', '$analytics', 'User', 'user', 'editable', 'posts'];
+dependencies.push(function($scope, $analytics, User, user, editable, posts) {
   $scope.user = user;
   $scope.editable = editable;
+  $scope.posts = posts;
+  $scope.hasPosts = posts.length > 0;
 
   if (!user.banner_url) {
     user.banner_url = require('../services/defaultUserBanner');
   }
-
-  $scope.hasPosts = true;
-
-  Post.forUser({userId: user.id}).$promise.then(function(posts) {
-    $scope.posts = posts;
-    $scope.hasPosts = posts.length > 0;
-  });
 
   $scope.removePost = function(post) {
     growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});
