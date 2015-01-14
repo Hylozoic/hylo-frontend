@@ -12,15 +12,16 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
     edited = {};
 
   $scope.save = function() {
-    if (!edited.skills) delete editData.skills;
-    if (!edited.organizations) delete editData.organizations;
-
     if (editData.banner_url === require('../../services/defaultUserBanner')) {
       editData.banner_url = null;
     }
 
-    user.update(editData, function() {
-      _.extend(user, editData);
+    var saveData = _.clone(editData);
+    if (!edited.skills) delete saveData.skills;
+    if (!edited.organizations) delete saveData.organizations;
+
+    user.update(saveData, function() {
+      _.extend(user, saveData);
       $scope.cancel();
     });
   };
@@ -75,7 +76,11 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
   });
 
   $scope.changeTwitter = function() {
-    $scope.editingTwitter = !$scope.editingTwitter;
+    var response = prompt(
+      'Enter your Twitter username, or leave blank:',
+      editData.twitter_name
+    );
+    if (response) editData.twitter_name = response;
   };
 
   $scope.changeFacebook = function() {

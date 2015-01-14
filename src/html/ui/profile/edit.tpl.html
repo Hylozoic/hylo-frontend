@@ -3,7 +3,7 @@
   <div class="buttons">
     <a class="edit-banner" ng-click="changeBanner()">
       <i class="icon-add-background"></i>
-      Change Background
+      Change Banner
     </a>
     <a class="cancel" ng-click="cancel()">Cancel</a>
     <a class="save" ng-click="save()">Save</a>
@@ -18,25 +18,14 @@
     <div class="info-column">
       <span class="name">{{user.name | uppercase}}</span>
       <span class="social-media">
-        <i class="icon-twitter">
-          <i class="status"
-             ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"
-             ng-click="changeTwitter()"></i>
-
-          <div id="twitter-editor" ng-class="{active: editingTwitter}">
-            <input type="text" ng-model="editData.twitter_name" class="form-control" placeholder="Twitter username"/>
-            <input type="submit" value="Save" ng-click="changeTwitter()"/>
-          </div>
+        <i class="icon-twitter" ng-click="changeTwitter()">
+          <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
         </i>
-        <i class="icon-facebook">
-          <i class="status"
-             ng-class="editData.facebook_url ? 'icon-big-check' : 'icon-add-01'"
-             ng-click="changeFacebook()"></i>
+        <i class="icon-facebook" ng-click="changeFacebook()">
+          <i class="status" ng-class="editData.facebook_url ? 'icon-big-check' : 'icon-add-01'"></i>
         </i>
-        <i class="icon-linkedin">
-          <i class="status"
-             ng-class="editData.linkedin_name ? 'icon-big-check' : 'icon-add-01'"
-             ng-click="changeLinkedIn"></i>
+        <i class="icon-linkedin" ng-click="changeLinkedIn">
+          <i class="status" ng-class="editData.linkedin_name ? 'icon-big-check' : 'icon-add-01'"></i>
         </i>
       </span>
       <textarea ng-model="editData.bio" placeholder="Type here to add a short statement about yourself. Maximum 175 characters."></textarea>
