@@ -66,7 +66,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       var content = $scope.commentText;
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
-        Seed.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
+        Seed.comment({id: $scope.post.id, text: $scope.commentText.trim()}, function(value, responseHeaders) {
           $scope.post.comments.push(value);
 
           $scope.commentText = '';
