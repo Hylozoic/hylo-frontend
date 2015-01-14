@@ -108,3 +108,4 @@ factory("Post", ["$resource",
 require('./services/user')(angularModule);
 require('./services/community')(angularModule);
 require('./services/bodyClass')(angularModule);
+require('./services/popupDone');

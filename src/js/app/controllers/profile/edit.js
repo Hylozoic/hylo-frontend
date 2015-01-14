@@ -7,7 +7,7 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
   var user = $scope.user = newCurrentUser,
     editData = $scope.editData = _.pick(user, [
       'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
-      'twitter_name'
+      'twitter_name', 'linkedin_url'
     ]),
     edited = {};
 
@@ -90,6 +90,23 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
     // save profile url
     // OR
     // delete profile url
+  };
+
+  $scope.changeLinkedin = function() {
+    if (editData.linkedin_url) {
+      if (confirm('Choose OK to remove your LinkedIn information.')) {
+        editData.linkedin_url = null;
+      }
+    } else {
+      var left = document.documentElement.clientWidth/2 - 520/2;
+      $scope.linkedinDialog = window.open('/noo/linkedin/authorize', 'linkedinAuth',
+        'width=400, height=625, titlebar=no, toolbar=no, menubar=no, left=' + left);
+    }
+  };
+
+  $scope.finishLinkedinChange = function(url) {
+    editData.linkedin_url = url;
+    $scope.linkedinDialog.close();
   };
 
 });
