@@ -137,7 +137,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     };
 
     $scope.getPeopleTextRaw = function(person) {
-      return '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/' + person.id + '" data-uid="' + person.id + '">@' + person.name + '</a>'
+      return '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/' + person.id + '" data-user-id="' + person.id + '">@' + person.name + '</a>'
     };
 
   }]);
