@@ -6,8 +6,7 @@
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
-      <div class="comment-text">
-        <span ng-bind-html="commentTextSafe(comment.text)"></span>
+      <div class="comment-text" ng-bind-html="commentTextSafe(comment.text)">
       </div>
       <div class="controls">
         <a ui-sref="user({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
@@ -37,7 +36,6 @@
       <form class="comment-form" >
         <div tabindex="-1"
                   autocomplete="off"
-                  ng-trim="false"
                   contenteditable="true"
 
                   mentio=""
@@ -55,7 +53,6 @@
                   ng-model="commentText"
                   class="mentio-editor no-border"
                   ng-class="{'empty-comment': !commentText}"
-                  placeholder="Type your comment here..."
                   required>
         </div>
         <button type="button" ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm add-comment-btn" ng-if="commentOpen" ng-click="create()">Comment</button>
