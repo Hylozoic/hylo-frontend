@@ -68,44 +68,30 @@
       }
     }
   }
-}
 
-#twitter-editor {
-  // just imitating autocomplete dropdowns, which are the closest thing
-  // we have to popovers at the moment
-  background: white;
-  border-radius: 4px;
-  border: 1px solid @border-light;
-  padding: @std-padding;
-  text-align: left;
-  font-size: 14px;
-  @editor-width: 320px;
-  @input-width: 216px;
-  width: @editor-width;
+  @media (max-width: @screen-xs-max) {
+    .icon-edit-profile-photo {
+      width: 60px;
+      line-height: 52px;
+      font-size: 30px;
+    }
 
-  .form-control {
-    width: 216px;
-    display: inline-block;
-  }
+    .banner {
+      height: auto;
 
-  input[type="submit"] {
-    .rounded-button-dark;
-    width: @editor-width - @input-width - @std-padding*2 - 11;
-    position: relative;
-    top: -1px;
-  }
+      .buttons {
+        padding: @std-padding 0;
+        text-align: center;
+        position: static;
+      }
+    }
 
-  display: none;
+    .banner-content {
+      position: static;
+    }
 
-  &.active {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    @media (max-width: @screen-xs-max) {
-
+    .social-media {
+      margin-top: 32px;
     }
   }
 
