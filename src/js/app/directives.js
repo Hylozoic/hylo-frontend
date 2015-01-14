@@ -42,7 +42,12 @@ directive('contenteditable', ['$sce', '$filter', function($sce, $filter) {
         mode: Medium.partialMode,
         placeholder: 'Write a comment...',
         autoHR: false,
-        pasteAsText: false
+        pasteAsText: true,
+        pasteEventHandler: function(e) {
+            e.preventDefault();
+            var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
+            document.execCommand('insertText', false, text);
+        }
       });
 
       scope.$on("$destroy", function handleDestroyEvent() {
