@@ -70,7 +70,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/create/community',
         parent: 'main',
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/features/community/createCommunity.tpl.html',
             controller: 'CreateCommunityCtrl'
           }
