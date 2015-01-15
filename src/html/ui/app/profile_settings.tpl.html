@@ -84,7 +84,7 @@
             <td>{{membership.fee}}</td>
             <td>{{membership.joinDate|date:'dd/MM/yyyy'}}</td>
             <td>{{(membership.nextInvoiceAt|date:"dd/MM/yyyy")||'-'}}</td>
-            <td><a href="#" ng-click="deactivate(membership.communityId, membership.name)"><i class="icon-remove"> </i></a></td>
+            <td><a style="cursor: pointer" href="#" ng-click="deactivate(membership.communityId, membership.name)"><i class="icon-remove-inverse"> </i></a></td>
           </tr>
         </tbody>
       </table>
