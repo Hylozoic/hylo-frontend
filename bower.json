@@ -26,7 +26,8 @@
     "moment": "latest",
     "underscore": "1.6.0",
     "perfect-scrollbar": "0.5.2",
-    "ment.io": "0.9.22"
+    "ment.io": "0.9.22",
+    "medium.js": "~1.0.1"
   },
   "private": true,
   "resolutions": {
