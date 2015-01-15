@@ -3,7 +3,7 @@
   z-index: 3;
 }
 
-.community-settings, .user-settings {
+.full-screen-modal {
   position: fixed;
   overflow-y: auto;
   width: 100%;
@@ -12,14 +12,14 @@
   left: 0;
   background: white;
 
-  .container-fluid {
-    padding-top: @std-padding;
+  nav {
+    margin-bottom: @std-padding !important;
   }
 
-  nav .close {
-    .big-close;
-    margin-top: 7px;
-  }
+}
+
+.community-settings, .user-settings {
+  .full-screen-modal;
 
   form {
     padding-bottom: 30px;
