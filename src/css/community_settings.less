@@ -69,12 +69,17 @@
               color: @text-gray;
             }
           }
+
+          button {
+            .rounded-button;
+          }
+
+          a {
+            font-size: 15px;
+          }
+
           .main-column {
             .make-sm-column(8);
-
-            .summary {
-              .seed-meta-text;
-            }
 
           }
           .side-column {
@@ -84,8 +89,12 @@
               text-align: right;
             }
           }
-          button {
-            .rounded-button;
+          .full-column {
+            .make-sm-column(12);
+          }
+
+          .summary {
+            .seed-meta-text;
           }
         }
       }
