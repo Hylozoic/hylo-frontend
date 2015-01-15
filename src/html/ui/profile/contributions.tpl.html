@@ -1,0 +1,5 @@
+<div ng-repeat="contribution in contributions track by contribution.id" class="feed-item">
+	<div class="summary">Contributed to <span ng-show="contribution.post.type==='request'">a</span><span ng-hide="contribution.post.type==='request'">an</span> <span class="seed">{{contribution.post.type}}</span> by {{contribution.post.creator.name}}</div>
+	<div class="title" ui-sref="post({community: contribution.post.communities[0].id, postId: contribution.post_id})">{{contribution.post.name}}</div>
+</div>
+<div ng-if="contributions.length <= 0" class="empty-content"> This user has no contributions to show.  </div>

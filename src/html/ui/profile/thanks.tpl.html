@@ -1,0 +1,5 @@
+<div ng-repeat="thank in thanks track by thank.id " class="feed-item">
+  <div class="summary">Thanked in {{thank.comment.post.creator.name}}'s  <span class="seed">{{thank.comment.post.type}}</span></div>
+  <div class="title" ui-sref="post({community: thank.comment.post.communities[0].id, postId: thank.comment.post.id})">{{thank.comment.post.name}} </div>
+</div>
+<div ng-if="thanks.length <= 0" class="empty-content"> This user has no thank you's to show.  </div>

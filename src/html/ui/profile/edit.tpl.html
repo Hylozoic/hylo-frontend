@@ -1,0 +1,56 @@
+<div class="banner">
+  <div class="background" back-img="editData.banner_url"></div>
+  <div class="buttons">
+    <a class="edit-banner" ng-click="changeBanner()">
+      <i class="icon-add-background"></i>
+      Change Banner
+    </a>
+    <a class="cancel" ng-click="cancel()">Cancel</a>
+    <a class="save" ng-click="save()">Save</a>
+  </div>
+  <div class="banner-content">
+    <div class="avatar-column">
+      <div class="avatar" back-img="editData.avatar_url" ng-click="changeAvatar()">
+        <i class="icon-edit-profile-photo"></i>
+      </div>
+    </div>
+
+    <div class="info-column">
+      <span class="name">{{user.name | uppercase}}</span>
+      <span class="social-media">
+        <i class="icon-twitter" ng-click="changeTwitter()">
+          <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
+        </i>
+        <i class="icon-facebook" ng-click="changeFacebook()">
+          <i class="status" ng-class="editData.facebook_url ? 'icon-big-check' : 'icon-add-01'"></i>
+        </i>
+        <i class="icon-linkedin" ng-click="changeLinkedin()">
+          <i class="status" ng-class="editData.linkedin_url ? 'icon-big-check' : 'icon-add-01'"></i>
+        </i>
+      </span>
+      <textarea ng-model="editData.bio" placeholder="Type here to add a short statement about yourself. Maximum 175 characters."></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="edit-skills">
+    <h3>Skills</h3>
+    <input type="text" placeholder="Type here to add a skill, then press enter." ng-keypress="add($event, 'skills')"/>
+    <ul>
+      <li ng-repeat="skill in editData.skills">
+        {{skill}}
+        <a class="close" ng-click="remove(skill, 'skills')">&times;</a>
+      </li>
+    </ul>
+
+    <h3>Affiliations</h3>
+    <input type="text" placeholder="Type here to add an affiliation, then press enter." ng-keypress="add($event, 'organizations')"/>
+    <ul>
+      <li ng-repeat="org in editData.organizations">
+        {{org}}
+        <a class="close" ng-click="remove(skill, 'organizations')">&times;</a>
+      </li>
+    </ul>
+  </div>
+</div>
