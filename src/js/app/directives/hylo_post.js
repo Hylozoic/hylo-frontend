@@ -1,5 +1,9 @@
-angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$state', '$rootScope', '$log', '$modal', '$http', '$timeout', '$window', '$analytics',
-  function(Post, $filter, $state, $rootScope, $log, $modal, $http, $timeout, $window, $analytics) {
+angular.module("hyloDirectives").directive('hyloPost', ["Post",
+  '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
+  '$timeout', '$window', '$analytics', '$sce',
+  function(Post,
+           $filter, $state, $rootScope, $log, $modal, $http,
+           $timeout, $window, $analytics, $sce) {
   return {
     restrict: 'E',
     scope: {
@@ -260,7 +264,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", '$filter', '$sta
           $scope.truncated = true;
         }
 
-        $scope.truncatedPostText = text;
+        $scope.truncatedPostText = $sce.trustAsHtml(text);
 
         $scope.isPostText = text.length > 0;
       };

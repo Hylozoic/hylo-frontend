@@ -17,8 +17,8 @@
 
     <div class="post-header" ng-click="onCommentIconClick()">
       <span class="title" seed-text="post.name"></span>
-      <div ng-if="isPostText && truncatedPostText.length > 0" class="post-description">
-        <span seed-text="truncatedPostText"></span>
+      <div ng-if="isPostText" class="post-description">
+        <div class="unpad-last-p" ng-bind-html="truncatedPostText"></div>
         <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
       </div>
     </div>

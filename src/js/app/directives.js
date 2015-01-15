@@ -40,7 +40,7 @@ directive('contenteditable', ['$sce', '$filter', function($sce, $filter) {
       var mediumEditor = new Medium({
         element: angular.element(element)[0],
         mode: Medium.partialMode,
-        placeholder: 'Write a comment...',
+        placeholder: attrs.placeholder,
         autoHR: false,
         pasteAsText: true,
         pasteEventHandler: function(e) {
