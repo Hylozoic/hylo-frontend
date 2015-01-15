@@ -49,7 +49,7 @@
             .seed-title-text;
           }
           p {
-            .seed-body-text();
+            .seed-body-text;
           }
           input[type=checkbox] {
             -webkit-appearance: none;
@@ -70,17 +70,15 @@
               color: @text-gray;
             }
           }
-          .main-section {
-            .make-xs-column(12);
+          .main-column {
             .make-sm-column(8);
 
             .summary {
-              .seed-meta-text();
+              .seed-meta-text;
             }
 
           }
-          .side-section {
-            .make-xs-column(12);
+          .side-column {
             .make-sm-column(4);
 
             @media (min-width: @screen-sm) {
@@ -88,7 +86,7 @@
             }
           }
           button {
-            .rounded-button();
+            .rounded-button;
           }
         }
       }
