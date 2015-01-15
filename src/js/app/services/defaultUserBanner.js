@@ -1,0 +1,1 @@
+module.exports = 'http://cdn.hylo.com/misc/default_user_banner.jpg';

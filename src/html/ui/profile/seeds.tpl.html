@@ -1,0 +1,7 @@
+<div ng-repeat="post in posts">
+  <hylo-post post="post" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+</div>
+
+<div ng-if="!hasPosts" class="empty-content">
+  {{user.name}} has not created any seeds yet.
+</div>

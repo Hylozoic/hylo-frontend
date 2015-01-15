@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = function(opts) {
   var pickOptions = {
     mimetype: 'image/*',
@@ -15,7 +17,11 @@ module.exports = function(opts) {
 
   var convert = function(blobs) {
     var blob = blobs[0],
-      convertStoreOptions = $.extend(storeOptions, {path: opts.path + blob.key.substring(5)});
+      // trim the old path "orig/" and replace spaces
+      filename = blob.key.substring(5).replace(/ /g, '_'),
+      convertStoreOptions = $.extend(storeOptions, {
+        path: path.join(opts.path, filename)
+      });
 
     filepicker.convert(blob, opts.convert, convertStoreOptions, function(newBlob) {
       opts.success(hyloEnv.s3.cloudfrontHost + '/' + newBlob.key);

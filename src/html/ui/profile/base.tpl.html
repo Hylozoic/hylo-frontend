@@ -1,0 +1,56 @@
+<div class="banner">
+  <div class="background" back-img="user.banner_url"></div>
+  <div class="buttons">
+    <a class="edit" ui-sref="editProfile" ng-if="editable">Edit profile</a>
+  </div>
+  <div class="banner-content">
+    <div class="avatar-column">
+      <div class="avatar" back-img="user.avatar_url"></div>
+    </div>
+
+    <div class="info-column">
+      <div class="title">
+        <span class="name">{{user.name | uppercase}}</span>
+        <span class="social-media">
+          <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" target="_blank">
+            <i class="icon-twitter"></i>
+          </a>
+          <a ng-href="{{user.facebook_url}}" ng-if="user.facebook_url" target="_blank">
+            <i class="icon-facebook"></i>
+          </a>
+          <a ng-href="{{user.linkedin_url}}" ng-if="user.linkedin_url" target="_blank">
+            <i class="icon-linkedin"></i>
+          </a>
+        </span>
+      </div>
+      <div class="bio">{{user.bio}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="sidebar">
+    <div class="user-info-mobile">
+      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
+    </div>
+    <div class="tabs">
+      <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
+        <h3>SEEDS PLANTED</h3>
+        <div class="count">{{user.seed_count}}</div>
+      </a>
+      <a class="tab" ui-sref=".contributions" ng-class="{selected: $state.current.name === 'profile.contributions'}">
+        <h3 class="hidden-xs">CONTRIBUTIONS</h3>
+        <h3 class="visible-xs">CONTRI-<br/>BUTIONS</h3>
+        <div class="count">{{user.contribution_count}}</div>
+      </a>
+      <a class="tab" ui-sref=".thanks" ng-class="{selected: $state.current.name === 'profile.thanks'}">
+        <h3>THANK YOU'S</h3>
+        <div class="count">{{user.thank_count}}</div>
+      </a>
+    </div>
+    <div class="user-info">
+      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
+    </div>
+  </div>
+  <div class="tab-content" ui-view="tab"></div>
+</div>
