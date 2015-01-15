@@ -133,8 +133,10 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
 
 directive('dotdotdot', ['$timeout', function($timeout) {
   return {
-    link: function linkDotDotDot(scope, elm) {
-      $timeout(function() { angular.element(elm).dotdotdot() }, 0);
+    link: function linkDotDotDot(scope, element) {
+      scope.$watch(function() {
+        element.dotdotdot({watch: true});
+      });
     }
   };
 }]).
