@@ -1,0 +1,56 @@
+<div class="user-settings">
+	<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <div class="navbar-text">
+        <i class="icon-hylo-script" ng-click="close()"></i>
+      </div>
+    </div>
+    <div class="navbar-center navbar-brand" href="#">User Settings</div>
+
+    <a class="navbar-right close" ng-click="close()">&times;</a>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="main-content">
+      <div class="all-sections">
+
+        <div class="section-label" ng-click="expand1 = !expand1">
+            Your Account
+            <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
+        </div>
+        <div class="section" collapse="!expand1">
+        	<div class="setting-item">
+	        	<div class="main-section">
+	        		<label>Your Email</label>
+	        		<p>me@me.om </p>
+	    		</div>
+	        	<div class="side-section"><button type="button">Change</button></div>
+        	</div>
+        	<div class="setting-item">
+	        	<div class="main-section"><label>Your Password</label></div>
+	        	<div class="side-section"><button type="button">Change</button></div>
+        	</div>
+        	<div class="setting-item">
+	        	<div class="main-section">
+              <label>Recieve email notifications?</label>
+              <div class="summary">Check the circle to get updates on seeds you have created or joined.</div>
+            </div>
+	        	<div class="side-section"><input type="checkbox"></div>
+        	</div>
+          <div class="setting-item">
+            <div class="main-section">
+              <label>Get Daily Digests?</label>
+              <div class="summary">Check the circle to get digests of new seeds in your community.</div>
+            </div>
+            <div class="side-section"><input type="checkbox"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

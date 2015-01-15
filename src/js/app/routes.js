@@ -85,6 +85,15 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
+      state('userSettings', {
+        url: '/u2/settings',
+        views: {
+          "": {
+            templateUrl: '/ui/profile/settings.tpl.html',
+            controller: 'UserSettingsCtrl'
+          }
+        }
+      }).
       state('user', {
         url: '/u/:id',
         parent: 'main',
