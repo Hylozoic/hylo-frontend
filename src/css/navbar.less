@@ -1,140 +1,3 @@
-.navbar-home {
-  margin-bottom: 0px;
-  background-color: transparent;
-  border: none;
-
-  .navbar-toggle .icon-bar {
-    background-color: white;
-  }
-
-  .navbar-nav li a {
-    color: white;
-    .proxima-nova-regular;
-    text-transform: uppercase;
-    font-size: 14px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-
-  .navbar-brand {
-    padding: 0;
-    img {
-      position:absolute;
-      left:0;
-      right:0;
-      margin-left:auto;
-      margin-right:auto;
-      padding: 0;
-      margin-top: 11px;
-      -webkit-filter: invert(100%);
-      filter: invert(100%);
-      height: 50px;
-      @media (max-width: @screen-sm-max) {
-        margin-top: 0px;
-      }
-    }
-
-    i {
-      position:absolute;
-      left:0;
-      right:0;
-      margin-left:auto;
-      margin-right:auto;
-      padding: 0;
-      margin-top: 3px;
-      color: white;
-      font-size: 63px;
-      width: 70px;
-      @media (max-width: @screen-sm-max) {
-        margin-top: 0px;
-        font-size: 50px;
-      }
-    }
-  }
-
-  .collapse.in, .collapsing {
-    background-color: white !important;
-    a {
-      color: black !important;
-      &:hover {
-        color: #666 !important;
-      }
-    }
-  }
-
-  &.animated {
-    background-color: #FFF;
-
-    .icon-bar {
-      background-color: #333;
-    }
-
-    .navbar-brand{
-      img {
-        -webkit-filter: invert(0%);
-        filter: invert(0%);
-      }
-      i {
-        color: #333;
-      }
-    }
-    li a {
-      color: #333;
-    }
-  }
-}
-
-.navbar-hylo-white {
-  background-color: #FFF;
-  border-radius: 0px;
-  border: none;
-  margin-bottom: 0px;
-
-  .navbar-nav li a {
-    color: #333;
-    .proxima-nova-regular;
-    text-transform: uppercase;
-    font-size: 14px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-
-  .navbar-brand {
-    padding: 0;
-    img {
-      position:absolute;
-      left:0;
-      right:0;
-      margin-left:auto;
-      margin-right:auto;
-      padding: 0;
-      margin-top: 11px;
-      height: 50px;
-      @media (max-width: @screen-sm-max) {
-        margin-top: 0px;
-      }
-    }
-
-    i {
-      position:absolute;
-      left:0;
-      right:0;
-      margin-left:auto;
-      margin-right:auto;
-      padding: 0;
-      margin-top: 3px;
-      color: #333;
-      font-size: 63px;
-      width: 70px;
-      @media (max-width: @screen-sm-max) {
-        margin-top: 0px;
-        font-size: 50px;
-      }
-    }
-
-  }
-}
-
 .navbar-hylo-create {
   margin-bottom: 0px;
   border: none;
@@ -144,6 +7,11 @@
   padding: 0 20px;
   @media (max-width: @screen-xs-max) {
     padding: 0 @std-padding;
+  }
+
+  .close {
+    .big-close;
+    margin-top: 7px;
   }
 
   .navbar-brand {
