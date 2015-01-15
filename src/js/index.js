@@ -35,7 +35,7 @@ require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
 require('./jquery/draggable-background');
 
-Medium = require('./thirdparty/medium');
+Medium = require('medium.js/medium');
 
 require('./app/auth_module');
 require('./app/filters');
