@@ -44,10 +44,8 @@ require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 require('./app/directives/validateMoney');
 
-require('./app/features/billing/billing');
-require('./app/features/seeds/seeds');
-require('./app/features/community/createCommunity');
-require('./app/features/menu');
+require('./app/features/features');
+
 require('./app/controllers');
 require('./app/routes');
 require('./app/services');

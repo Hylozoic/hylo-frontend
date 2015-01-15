@@ -6,7 +6,7 @@
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
-      <div class="comment-text" ng-bind-html="commentTextSafe(comment.text)">
+      <div class="comment-text unpad-last-p" ng-bind-html="commentTextSafe(comment.text)">
       </div>
       <div class="controls">
         <a ui-sref="user({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
@@ -37,6 +37,7 @@
         <div tabindex="-1"
                   autocomplete="off"
                   contenteditable="true"
+                  placeholder="Write a comment..."
 
                   mentio=""
                   mentio-trigger-char="'@'"
@@ -48,8 +49,6 @@
 
                   ng-disabled="createDisabled"
                   ng-focus="openCommenting()"
-                  rows="1"
-                  type="text"
                   ng-model="commentText"
                   class="mentio-editor no-border"
                   ng-class="{'empty-comment': !commentText}"

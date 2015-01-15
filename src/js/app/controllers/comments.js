@@ -1,5 +1,9 @@
-angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics', '$q', 'Seed', '$sce', '$filter',
-  function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics, $q, Seed, $sce, $filter) {
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post',
+  '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
+  '$q', 'Seed', '$sce', '$filter', 'UserMentions',
+  function($scope, $http, Post,
+           $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
+           $q, Seed, $sce, $filter, UserMentions) {
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
@@ -125,19 +129,16 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     $scope.searchPeople = function(query) {
       var peopleList = [];
-      return $rootScope.community.members({search: query}).$promise.then(function (items) {
+      $rootScope.community.members({search: query}).$promise.then(function (items) {
         angular.forEach(items, function(item) {
           if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
             peopleList.push(item);
           }
         });
         $scope.people = peopleList;
-        return $q.when(peopleList);
       });
     };
 
-    $scope.getPeopleTextRaw = function(person) {
-      return '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/' + person.id + '" data-user-id="' + person.id + '">@' + person.name + '</a>'
-    };
+    $scope.getPeopleTextRaw = UserMentions.userTextRaw;
 
   }]);
