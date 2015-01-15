@@ -12,7 +12,7 @@ require('./controllers/onboarding');
 require('./controllers/profile_settings');
 require('./controllers/search');
 require('./controllers/user');
-require('./controllers/view_post');
+require('./controllers/user_profile');
 require('./controllers/view_post');
 require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);

@@ -1,4 +1,4 @@
-.community-settings {
+.community-settings, .user-settings {
   position: fixed;
   overflow-y: auto;
   width: 100%;
@@ -19,6 +19,7 @@
 
   .navbar-brand {
     .section-title;
+    text-transform: uppercase;
   }
 
   form {
@@ -26,6 +27,71 @@
 
     label {
       text-transform: uppercase;
+    }
+  }
+
+  //only used by user settings
+  .main-content {
+    .make-row;
+
+    .all-sections {
+      .make-sm-column(6);
+      .make-sm-column-offset(3);
+
+      .section {
+
+        .setting-item {
+          .make-row;
+          padding-top: @std-padding;
+          padding-bottom: @std-padding;
+
+          label {
+            .seed-title-text;
+          }
+          p {
+            .seed-body-text();
+          }
+          input[type=checkbox] {
+            -webkit-appearance: none;
+            border: 2px solid @default-border;
+            padding: 11px;
+            border-radius: 15px;
+            margin: 0 5px 0;
+            display: inline-block;
+            position: relative;
+            .proxima-nova(100);
+
+            &:checked:after {
+              content: '\2714';
+              font-size: 16px;
+              position: absolute;
+              top: 2px;
+              left: 4px;
+              color: @text-gray;
+            }
+          }
+          .main-section {
+            .make-xs-column(12);
+            .make-sm-column(8);
+
+            .summary {
+              .seed-meta-text();
+            }
+
+          }
+          .side-section {
+            .make-xs-column(12);
+            .make-sm-column(4);
+
+            @media (min-width: @screen-sm) {
+              text-align: right;
+            }
+          }
+          button {
+            .rounded-button();
+          }
+        }
+      }
     }
   }
 
@@ -62,15 +128,6 @@
     }
   }
 
-  .section {
-    // this nested div hack is necessary because you
-    // can't apply padding to the parent directly; it
-    // causes a visual "hiccup" when collapsing
-    > div {
-      padding-top: @std-padding;
-      padding-bottom: @std-padding;
-    }
-  }
 
   .invite {
     label {
@@ -194,4 +251,16 @@
     }
   }
 
+}
+
+.community-settings {
+  .section {
+    // this nested div hack is necessary because you
+    // can't apply padding to the parent directly; it
+    // causes a visual "hiccup" when collapsing
+    > div {
+      padding-top: @std-padding;
+      padding-bottom: @std-padding;
+    }
+  }
 }
