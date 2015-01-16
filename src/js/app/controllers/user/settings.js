@@ -37,7 +37,7 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser, Co
         growl.addSuccessMessage('Reloading...')
         setTimeout(function() {
           window.location = '/accounts/unverified';
-        }, 5000);
+        }, 3000);
       }
     }, function(err) {
       growl.addErrorMessage(err.data);
