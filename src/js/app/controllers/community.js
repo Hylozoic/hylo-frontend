@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootScope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state', 'currentUser',
-  function($scope, $rootScope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state, currentUser) {
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state', 'currentUser',
+  function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state, currentUser) {
 
     $scope.state = $state;
 
@@ -19,12 +19,12 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', '$rootS
         backdrop: 'static'
       });
 
-      modalInstance.result.then(function () {
-        $rootScope.currentUser.finishedOnboarding = true;
+      modalInstance.result.then(function() {
+        $scope.currentUser.finishedOnboarding = true;
         $http.post('/endtour', {}, {params: {tour:'onboarding'}});
 
-      }, function () {
-        // Dismissed Modal...Do nothing
+      }, function() {
+        // dismissed modal... do nothing
       });
     };
 
