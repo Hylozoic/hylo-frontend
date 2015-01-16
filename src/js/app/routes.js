@@ -87,9 +87,10 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('userSettings', {
         url: '/u2/settings',
+        parent: 'main',
         views: {
-          "": {
-            templateUrl: '/ui/profile/settings.tpl.html',
+          "main": {
+            templateUrl: '/ui/user/settings.tpl.html',
             controller: 'UserSettingsCtrl'
           }
         }
