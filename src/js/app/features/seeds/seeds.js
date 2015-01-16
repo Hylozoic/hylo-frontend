@@ -58,25 +58,6 @@ angular.module("hylo.seeds", [])
             communityWatch();
           });
 
-          $scope.people = [];
-
-          $scope.searchPeople = function(query) {
-            var peopleList = [];
-            return $rootScope.community.members({search: query}).$promise.then(function (items) {
-              angular.forEach(items, function(item) {
-                if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
-                  peopleList.push(item);
-                }
-              });
-              $scope.people = peopleList;
-              return $q.when(peopleList);
-            });
-          };
-
-          $scope.getPeopleTextRaw = function(person) {
-            return '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/' + person.id + '" data-user-id="' + person.id + '">@' + person.name + '</a>'
-          };
-
           $scope.reset();
 
           $scope.cancel = function() {
@@ -98,7 +79,6 @@ angular.module("hylo.seeds", [])
           };
 
           $scope.getPeopleTextRaw = UserMentions.userTextRaw;
-
 
           $scope.save = function () {
             if ($scope.saving) return false;
