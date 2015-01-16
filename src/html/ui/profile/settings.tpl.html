@@ -21,13 +21,22 @@
       	<div class="setting-item">
         	<div class="main-column">
         		<label>Your Email</label>
-        		<p>me@me.om </p>
+        		<p ng-hide="editing.email">me@me.om </p>
+            <input type="text" ng-show="editing.email">
       		</div>
-        	<div class="side-column"><button type="button">Change</button></div>
+        	<div class="side-column" >
+            <button type="button" ng-hide="editing.email" ng-click="edit('email')">Change</button>
+            <button type="button" ng-show="editing.email" class="main-action" ng-click="saveEdit('email')">Save</button>
+            <button type="button" ng-show="editing.email" ng-click="cancelEdit('email')">Cancel</button>
+          </div>
       	</div>
       	<div class="setting-item">
         	<div class="main-column"><label>Your Password</label></div>
-        	<div class="side-column"><button type="button">Change</button></div>
+        	<div class="side-column">
+            <button type="button" ng-hide="editing.password" ng-click="edit('password')">Change</button>
+            <button type="button" ng-show="editing.password" class="main-action" ng-click="saveEdit('password')">Save</button>
+            <button type="button" ng-show="editing.password" ng-click="cancelEdit('password')">Cancel</button>
+          </div>
       	</div>
       	<div class="setting-item">
         	<div class="main-column">
