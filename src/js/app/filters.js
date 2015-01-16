@@ -20,6 +20,30 @@ filter('linkyShort', [ '$sanitize', function($sanitize) {
   }
 }]).
 
+/**
+ * A filter to convert urls in text as anchors, but don't match existing anchor urls.
+ * Also adds the protocol to urls that don't contain one.
+ */
+filter('linkyDontMatchExistingAnchors', [ '$sanitize', function($sanitize) {
+  return function(text) {
+    if (!text) return text;
+    var replacePattern2 = /((?:(?:ht|f)tps?:\/\/|www)[^<>\]]+?(?![^<>\]]*([>]|<\/))(?=[\s!,?\]]|$))/gm;
+    var replacedText = text.replace(replacePattern2, function (match, $1) {
+      // add protocol if needed
+      url = $1;
+
+      if (!/^(?:f|ht)tps?\:\/\//.test($1)) {
+        url = "http://" + $1;
+      }
+
+      return '<a href="' + url + '" target="_blank">' + $1 + '</a>'
+    });
+
+    //returns the text result
+    return replacedText;
+  }
+}]).
+
 filter('hashtag', [ '$sce', function($sce) {
   return function(text) {
     if (!text) return text;
@@ -29,6 +53,20 @@ filter('hashtag', [ '$sce', function($sce) {
       var trimmedHash = hash.trim();
       return '<a class="hashtag" ui-sref="search({community: $root.community.slug, q: \'' + trimmedHash + '\'})">'+hash+'</a>';
     });
+
+    var cleaned = $sce.trustAsHtml(replacedText);
+
+    return cleaned;
+  }
+}]).
+
+filter('userMention', [ '$sce', function($sce) {
+  return function(text) {
+    if (!text) return text;
+    // convert user mentions into clickable items
+    var replacePattern = /\[~([0-9]+)~([^\]]*)\]/g;
+    var replacedText = text.replace(replacePattern, '<a class="userProfile" ui-sref="user({id: \'$1\'})">$2</a>');
+    console.log(replacedText);
 
     var cleaned = $sce.trustAsHtml(replacedText);
 
