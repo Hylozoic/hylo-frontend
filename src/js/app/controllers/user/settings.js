@@ -1,5 +1,5 @@
-var dependencies = ['$scope', 'growl', '$analytics', '$state', 'newCurrentUser'];
-dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser) {
+var dependencies = ['$scope', 'growl', '$analytics', '$state', 'newCurrentUser', 'Community'];
+dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser, Community) {
 
   var user = $scope.user = newCurrentUser,
     editing = $scope.editing = {},
@@ -54,6 +54,17 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser) {
     }, function(err) {
       growl.addErrorMessage(err.data);
     })
+  };
+
+  $scope.leaveCommunity = function(communityId, index) {
+    if (!confirm('Are you sure you want to leave this community?'))
+      return;
+
+    Community.removeMember({id: communityId, user_id: user.id}, function() {
+      user.memberships.splice(index, 1);
+    }, function(err) {
+      growl.addErrorMessage(err.data);
+    });
   };
 
 });

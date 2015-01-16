@@ -63,12 +63,12 @@
         <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
     </div>
     <div class="section" collapse="!expand2">
-      <div class="setting-item">
+      <div class="setting-item" ng-repeat="membership in user.memberships track by $index">
         <div class="main-column">
-          <label>Community Name</label>
-          <div class="summary">Membership: [cost]<br>Joined: [date]</div>
+          <label><a ui-sref="community({community: membership.community.slug})">{{membership.community.name}}</a></label>
+          <div class="summary">Joined: {{membership.date_joined | date:'longDate'}}</div>
         </div>
-        <div class="side-column"><a href="">Leave</a></div>
+        <div class="side-column"><a ng-click="leaveCommunity(membership.community_id, $index)">Leave</a></div>
       </div>
     </div>
 
