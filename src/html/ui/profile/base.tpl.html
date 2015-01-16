@@ -1,8 +1,8 @@
 <div class="banner">
   <div class="background" back-img="user.banner_url"></div>
   <div class="buttons">
-    <a class="edit" ui-sref="editProfile" ng-if="editable">Edit profile</a>
     <a class="settings" ui-sref="userSettings" ng-if="editable">Settings</a>
+    <a class="edit" ui-sref="editProfile" ng-if="editable">Edit profile</a>
   </div>
   <div class="banner-content">
     <div class="avatar-column">
@@ -13,7 +13,7 @@
       <div class="title">
         <span class="name">{{user.name | uppercase}}</span>
         <span class="social-media">
-          <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" target="_blank">
+          <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" ng-click="clickedSocialLink()" target="_blank">
             <i class="icon-twitter"></i>
           </a>
           <a ng-href="{{user.facebook_url}}" ng-if="user.facebook_url" target="_blank">
