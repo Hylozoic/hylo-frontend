@@ -62,7 +62,7 @@
         Communities
         <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
     </div>
-    <div class="section" collapse="!expand2">
+    <div class="section communities" collapse="!expand2">
       <div class="setting-item" ng-repeat="membership in user.memberships track by $index">
         <div class="main-column">
           <label><a ui-sref="community({community: membership.community.slug})">{{membership.community.name}}</a></label>
