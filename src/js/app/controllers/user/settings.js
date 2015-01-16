@@ -34,7 +34,7 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser) {
     user.update(data, function() {
       user[field] = edited[field];
       $analytics.eventTrack('User Settings: Changed ' + field, {user_id: user.id});
-      growl.addSuccessMessage('Saved changes.');
+      growl.addSuccessMessage('Saved change.');
       if (field === 'email' && $scope.needsRevalidation()) {
         growl.addSuccessMessage('Reloading...')
         setTimeout(function() {
@@ -42,8 +42,18 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser) {
         }, 5000);
       }
     }, function(err) {
-      growl.addErrorMessage(err.data.message);
+      growl.addErrorMessage(err.data);
     });
+  };
+
+  $scope.toggle = function(field) {
+    var data = {};
+    data[field] = user[field];
+    user.update(data, function() {
+      growl.addSuccessMessage('Saved change.');
+    }, function(err) {
+      growl.addErrorMessage(err.data);
+    })
   };
 
 });
