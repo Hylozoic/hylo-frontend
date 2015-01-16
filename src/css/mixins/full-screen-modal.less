@@ -11,6 +11,9 @@
       top: 0;
       left: 0;
       background: white;
+      @media (max-width: @screen-xs-max) {
+        padding: 0;
+      }
     }
   }
 
@@ -107,6 +110,20 @@
 
     .summary {
       .seed-meta-text;
+    }
+  }
+
+  //padding for mobile
+  @media (max-width: @screen-xs-max) {
+    .navbar-brand {
+      padding-left: @std-padding*2;
+    }
+    .navbar-right {
+      padding-right: @std-padding*2;
+    }
+    .section-label, .section {
+      padding-left: @std-padding;
+      padding-right: @std-padding;
     }
   }
 }
