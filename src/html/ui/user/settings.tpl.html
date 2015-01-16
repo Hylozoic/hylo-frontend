@@ -13,7 +13,7 @@
 <div class="main-content">
   <div class="all-sections">
     <div class="section-label" ng-click="expand1 = !expand1">
-        Your Account
+        Account
         <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
     </div>
     <div class="section" collapse="!expand1">
@@ -35,9 +35,7 @@
     	<div class="setting-item">
       	<div class="main-column"><label>Your Password</label></div>
       	<div class="side-column">
-          <button type="button" ng-hide="editing.password" ng-click="edit('password')">Change</button>
-          <button type="button" ng-show="editing.password" class="main-action" ng-click="saveEdit('password')">Save</button>
-          <button type="button" ng-show="editing.password" ng-click="cancelEdit('password')">Cancel</button>
+          <a class="change-password" href="/accounts/password/change" target="_self">Change</a>
         </div>
     	</div>
     	<div class="setting-item">
@@ -45,19 +43,23 @@
           <label>Receive email notifications?</label>
           <div class="summary">Check the circle to get updates on seeds you have created or joined.</div>
         </div>
-      	<div class="side-column"><input type="checkbox"></div>
+      	<div class="side-column">
+          <input type="checkbox" ng-model="user.send_email_preference" ng-click="toggle('send_email_preference')"/>
+        </div>
     	</div>
       <div class="setting-item">
         <div class="main-column">
-          <label>Get Daily Digests?</label>
-          <div class="summary">Check the circle to get digests of new seeds in your community.</div>
+          <label>Get daily email digests?</label>
+          <div class="summary">Check the circle to get daily digests of new activity in your communities.</div>
         </div>
-        <div class="side-column"><input type="checkbox"></div>
+        <div class="side-column">
+          <input type="checkbox" ng-model="user.daily_digest" ng-click="toggle('daily_digest')"/>
+        </div>
       </div>
     </div>
 
     <div class="section-label" ng-click="expand2 = !expand2">
-        Your Communities
+        Communities
         <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
     </div>
     <div class="section" collapse="!expand2">
@@ -71,7 +73,7 @@
     </div>
 
     <div class="section-label" ng-click="expand3 = !expand3">
-        Your Payment Details
+        Payment Details
         <i ng-class="{'icon-down': expand3, 'icon-right': !expand3}"></i>
     </div>
     <div class="section" collapse="!expand3">
