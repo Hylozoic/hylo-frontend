@@ -22,6 +22,10 @@ dependencies.push(function($scope, $analytics, User, user, editable, posts) {
     return 'https://twitter.com/' + user.twitter_name;
   };
 
+  $scope.clickedSocialLink = function() {
+    console.log("clicked social link");
+  }
+
 });
 
 module.exports = function(angularModule) {

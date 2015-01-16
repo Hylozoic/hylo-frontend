@@ -63,10 +63,12 @@
     }
 
     input[type=text] {
-      display: inline-block;
-      width: 50%;
-      margin-right: @std-padding;
-      margin-bottom: @std-padding/2;
+      @media (min-width: @screen-sm) {
+        display: inline-block;
+        width: 50%;
+        margin-right: @std-padding;
+        margin-bottom: @std-padding/2;
+      }
     }
 
     input[type=checkbox] {
@@ -99,6 +101,9 @@
 
     .main-column {
       .make-sm-column(8);
+      button {
+        margin-top: @std-padding/2;
+      }
     }
     .side-column {
       .make-sm-column(4);
