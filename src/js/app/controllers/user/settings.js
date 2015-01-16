@@ -35,8 +35,11 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser) {
       user[field] = edited[field];
       $analytics.eventTrack('User Settings: Changed ' + field, {user_id: user.id});
       growl.addSuccessMessage('Saved changes.');
-      if ($scope.needsRevalidation()) {
-        window.location = '/accounts/unverified';
+      if (field === 'email' && $scope.needsRevalidation()) {
+        growl.addSuccessMessage('Reloading...')
+        setTimeout(function() {
+          window.location = '/accounts/unverified';
+        }, 5000);
       }
     }, function(err) {
       growl.addErrorMessage(err.data.message);
