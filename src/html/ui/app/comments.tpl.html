@@ -6,8 +6,7 @@
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
-      <div class="comment-text">
-        <span ng-bind-html="::(comment.text | linky:'_blank' | linkyShort | convertCarriageReturn)"></span>
+      <div class="comment-text unpad-last-p" ng-bind-html="commentTextSafe(comment.text)">
       </div>
       <div class="controls">
         <a ui-sref="user({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
@@ -35,8 +34,27 @@
 
     <div class="comment-input">
       <form class="comment-form" >
-        <textarea tabindex="-1" ng-disabled="createDisabled" ng-focus="openCommenting()" ng-keypress="onKeypress($event)" rows="1" type="text" ng-model="commentText" class="no-border form-control msd-elastic" ng-class="{'empty-comment': !commentText}" placeholder="Type your comment here..." required></textarea>
-        <button type="button" ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm" ng-if="commentOpen" ng-click="create()">Comment</button>
+        <div tabindex="-1"
+                  autocomplete="off"
+                  contenteditable="true"
+                  placeholder="Write a comment..."
+
+                  mentio=""
+                  mentio-trigger-char="'@'"
+                  mentio-items="people"
+                  mentio-template-url="/ui/shared/people-mentions.tpl.html"
+                  mentio-search="searchPeople(term)"
+                  mentio-select="getPeopleTextRaw(item)"
+                  mentio-typed-term="typedTerm2"
+
+                  ng-disabled="createDisabled"
+                  ng-focus="openCommenting()"
+                  ng-model="commentText"
+                  class="mentio-editor no-border"
+                  ng-class="{'empty-comment': !commentText}"
+                  required>
+        </div>
+        <button type="button" ng-show="commentText" tabindex="1" ng-disabled="createDisabled" class="btn btn-primary btn-sm add-comment-btn" ng-if="commentOpen" ng-click="create()">Comment</button>
       </form>
     </div>
   </div>
