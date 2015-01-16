@@ -1,5 +1,9 @@
-angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post', '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
-  function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics) {
+angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http', 'Post',
+  '$log', '$rootScope', '$modal', 'growl', '$window', '$timeout', '$analytics',
+  '$q', 'Seed', '$sce', '$filter', 'UserMentions',
+  function($scope, $http, Post,
+           $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
+           $q, Seed, $sce, $filter, UserMentions) {
 
     var loadComments = function() {
       if (!$scope.post.commentsLoaded) {
@@ -8,7 +12,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
           $scope.post.commentsLoaded = true;
         });
       }
-    }
+    };
 
     if ($scope.post.$promise) {
       $scope.post.$promise.then(function() {
@@ -37,13 +41,16 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     $scope.openCommenting = function() {
       $scope.commentOpen = true;
 
-      $($window).on("click.seedComment", function (event) {
-        $scope.$apply(function() {
-          closeCommentOnOutsideClick(event, function() {
-            closeCommenting();
+      $($window).off("click.seedComment");
+      $timeout(function() {
+        $($window).on("click.seedComment", function (event) {
+          $scope.$apply(function() {
+            closeCommentOnOutsideClick(event, function() {
+              closeCommenting();
+            });
           });
         });
-      });
+      }, 0);
     };
 
     function closeCommentOnOutsideClick(event, callbackOnClose) {
@@ -51,7 +58,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
       if (!clickedElement) return;
 
-      var clickOnCommentForm = $(clickedElement).closest('.comment-form').length > 0
+      var clickOnCommentForm = $(clickedElement).closest('.comment-form, .list-group-item').length > 0;
 
       if (!clickOnCommentForm) {
         callbackOnClose();
@@ -63,7 +70,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       var content = $scope.commentText;
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
-        Post.comment({id: $scope.post.id, text: $scope.commentText}, function(value, responseHeaders) {
+        Seed.comment({id: $scope.post.id, text: $scope.commentText.trim()}, function(value, responseHeaders) {
           $scope.post.comments.push(value);
 
           $scope.commentText = '';
@@ -76,6 +83,9 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
           $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id});
 
           $scope.followPost();
+        }, function() {
+          $scope.createDisabled = false;
+          growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
         });
       }
     };
@@ -110,16 +120,25 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       });
     };
 
-//    $scope.onKeypress = function(event) {
-//      if (event.which == 13 && event.shiftKey) {
-//        event.stopPropagation();
-//      } else if (event.which === 13) {
-//        var content = $scope.commentText;
-//        if (content && content.trim().length > 0) {
-//          $scope.create();
-//          event.stopPropagation();
-//        }
-//      }
-//    };
+    $scope.commentTextSafe = function(commentText) {
+      var text = $filter('linkyDontMatchExistingAnchors')(commentText);
+      return $sce.trustAsHtml(text);
+    };
+
+    $scope.people = [];
+
+    $scope.searchPeople = function(query) {
+      var peopleList = [];
+      $rootScope.community.members({search: query}).$promise.then(function (items) {
+        angular.forEach(items, function(item) {
+          if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
+            peopleList.push(item);
+          }
+        });
+        $scope.people = peopleList;
+      });
+    };
+
+    $scope.getPeopleTextRaw = UserMentions.userTextRaw;
 
   }]);

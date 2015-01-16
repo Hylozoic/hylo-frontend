@@ -14,6 +14,56 @@ directive('ngEnter', function() {
   };
 }).
 
+directive('contenteditable', ['$sce', '$filter', function($sce, $filter) {
+  return {
+    restrict: 'A', // only activate on element attribute
+    require: '?ngModel', // get a hold of NgModelController
+    link: function(scope, element, attrs, ngModel) {
+      if(!ngModel) return; // do nothing if no ng-model
+
+      function read() {
+        var html = element.html();
+        // When we clear the content editable the browser leaves a <br> behind
+        // If strip-br attribute is provided then we strip this out
+        if (attrs.stripBr && html === '<br>') {
+          html = '';
+        }
+
+        ngModel.$setViewValue(html);
+      }
+
+      //update mediumEditor when ngModel updates
+      ngModel.$render = function() {
+        mediumEditor.value(ngModel.$viewValue);
+      };
+
+      var mediumEditor = new Medium({
+        element: angular.element(element)[0],
+        mode: Medium.partialMode,
+        placeholder: attrs.placeholder,
+        autoHR: false,
+        pasteAsText: true,
+        pasteEventHandler: function(e) {
+            e.preventDefault();
+            var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
+            document.execCommand('insertText', false, text);
+        }
+      });
+
+      scope.$on("$destroy", function handleDestroyEvent() {
+        mediumEditor.destroy();
+      });
+
+      // Listen for change events to enable binding
+      element.on('blur keyup change', function(e) {
+        scope.$apply(read);
+      });
+
+      read(); // initialize
+    }
+  };
+}]).
+
 directive('ngFocusMe', ['$timeout', '$parse', '$window', function($timeout, $parse, $window) {
   return {
     //scope: true,   // optionally create a child scope
@@ -83,8 +133,10 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
 
 directive('dotdotdot', ['$timeout', function($timeout) {
   return {
-    link: function linkDotDotDot(scope, elm) {
-      $timeout(function() { angular.element(elm).dotdotdot() }, 0);
+    link: function linkDotDotDot(scope, element) {
+      scope.$watch(function() {
+        element.dotdotdot({watch: true});
+      });
     }
   };
 }]).
@@ -114,7 +166,7 @@ directive('backImg', [function() {
 directive('imageDrag', ['$timeout', '$parse', function($timeout, $parse) {
   function link(scope, element, attrs) {
     scope.$watch(attrs.backImg, function(value) {
-      var fn = $parse(attrs.imageDrag)
+      var fn = $parse(attrs.imageDrag);
       if (!value) return;
       $timeout(function() { angular.element(element).backgroundDraggable({
         axis: attrs.imageDragAxis,

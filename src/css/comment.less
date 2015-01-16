@@ -68,12 +68,6 @@
     }
   }
 
-  textarea {
-    resize: none;
-    -webkit-appearance: none;
-
-  }
-
   @media (max-width: @screen-xs-max) {
     margin-left: -10px;
     margin-right: -10px;
@@ -81,6 +75,7 @@
 }
 
 .add-comment {
+
   background-color: white;
   position: relative;
   padding: 6px 0;
@@ -98,15 +93,15 @@
     margin-top: 5px;
     min-height: 28px;
 
-    button {
+    .add-comment-btn {
       position: absolute;
       right: 3px;
       bottom: 1px;
     }
 
-    textarea {
+    textarea, .mentio-editor {
       padding: 0;
-      width: 90%;
+      width: 81%;
       position: relative;
       top: 3px;
     }

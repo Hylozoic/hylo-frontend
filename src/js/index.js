@@ -24,6 +24,7 @@ require('jquery.dotdotdot');
 require('ng-idle');
 require('ngInfiniteScroll');
 require('perfect-scrollbar');
+require('ment.io');
 /* End Bower Components */
 
 /* Manually installed components */
@@ -34,6 +35,8 @@ require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
 require('./jquery/draggable-background');
 
+Medium = require('medium.js/medium');
+
 require('./app/auth_module');
 require('./app/filters');
 require('./app/directives');
@@ -41,10 +44,8 @@ require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 require('./app/directives/validateMoney');
 
-require('./app/features/billing/billing');
-require('./app/features/seeds/seeds');
-require('./app/features/community/createCommunity');
-require('./app/features/menu');
+require('./app/features/features');
+
 require('./app/controllers');
 require('./app/routes');
 require('./app/services');

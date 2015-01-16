@@ -1,7 +1,7 @@
 angular.module("hylo.seeds", [])
   .directive('hyloSeedForm', [
-    "Post", '$rootScope', '$log', '$analytics',
-    function (Post, $rootScope, $log, $analytics) {
+    "Post", '$rootScope', '$log', '$analytics', 'UserMentions', 'Seed',
+    function (Post, $rootScope, $log, $analytics, UserMentions, Seed) {
       return {
         restrict: 'E',
         templateUrl: "/ui/features/seeds/seed_form.tpl.html",
@@ -21,7 +21,7 @@ angular.module("hylo.seeds", [])
           $scope.typeChanged = function typeChanged(newType) {
             $scope.postType = newType;
             $scope.onTitleChange();
-          }
+          };
 
           $scope.onTitleChange = function (event) {
             var titleLength = 0;
@@ -64,23 +64,40 @@ angular.module("hylo.seeds", [])
             $scope.onCancel();
           };
 
+          $scope.people = [];
+
+          $scope.searchPeople = function(query) {
+            var peopleList = [];
+            $rootScope.community.members({search: query}).$promise.then(function (items) {
+              angular.forEach(items, function(item) {
+                if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
+                  peopleList.push(item);
+                }
+              });
+              $scope.people = peopleList;
+            });
+          };
+
+          $scope.getPeopleTextRaw = UserMentions.userTextRaw;
+
           $scope.save = function () {
             if ($scope.saving) return false;
             $scope.saving = true;
 
-            var newPost = new Post();
-            newPost.name = $scope.title[$scope.postType];
-            newPost.description = $scope.description;
-            newPost.postType = $scope.postType;
-            newPost.communityId = $scope.community.id;
+            var newSeed = new Seed();
+            newSeed.name = $scope.title[$scope.postType];
+            newSeed.description = $scope.description;
+            newSeed.postType = $scope.postType;
+            newSeed.communityId = $scope.community.id;
 
-            newPost.$save(function (value, respHeaders) {
+            newSeed.$save(function (value, respHeaders) {
               $scope.reset();
               $analytics.eventTrack('Add Post');
               // Invoke scope function
               $scope.onSuccess({seed: value});
 
             }, function (responseValue) {
+              $scope.saving = false,
               $log.error("error", responseValue);
             });
           }
