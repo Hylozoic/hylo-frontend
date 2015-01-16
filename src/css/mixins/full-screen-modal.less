@@ -74,7 +74,7 @@
       border: 2px solid @default-border;
       padding: 11px;
       border-radius: 15px;
-      margin: 0 5px 0;
+      margin: 0;
       display: inline-block;
       position: relative;
       .proxima-nova(100);
@@ -121,7 +121,6 @@
     }
   }
 
-  //padding for mobile
   @media (max-width: @screen-xs-max) {
     .navbar-center {
       padding-left: @std-padding*2;
@@ -132,6 +131,10 @@
     .section-label, .section {
       padding-left: @std-padding;
       padding-right: @std-padding;
+    }
+
+    .setting-item input[type="checkbox"] {
+      margin-top: 5px;
     }
   }
 }
