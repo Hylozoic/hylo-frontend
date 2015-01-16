@@ -1,7 +1,8 @@
-angular.module("hyloControllers").controller('UserSettingsCtrl', ['$scope', '$rootScope', 'growl', '$analytics', '$modal', '$log', '$state',
-  function($scope, $rootScope, growl, $analytics, $modal, $log, $state) {
+angular.module("hyloControllers").controller('UserSettingsCtrl', ['$scope', '$rootScope', 'growl', '$analytics', '$state',
+  function($scope, $rootScope, growl, $analytics, $state) {
 
    console.log("loaded user settings");
+   $analytics.eventTrack('Profile: User Settings: Opened User Settings');
 
    $scope.close = function() {
       //todo: direct to member profile page
@@ -24,6 +25,8 @@ angular.module("hyloControllers").controller('UserSettingsCtrl', ['$scope', '$ro
       $scope.editing[field] = false;
       var data = {id: $scope.community.id};
       data[field] = $scope.edited[field];
+      $analytics.eventTrack('Profile: User Settings: Updated a User Setting', {updated_setting: field});
+
       //save data via API
     };
 
