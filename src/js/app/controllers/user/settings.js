@@ -12,9 +12,7 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser, Co
   };
 
   $scope.needsRevalidation = function() {
-    return _.any(user.linkedAccounts, function(account) {
-      return account.provider_key == 'password';
-    });
+    return user.provider_key == 'password';
   };
 
   $scope.edit = function(field) {
