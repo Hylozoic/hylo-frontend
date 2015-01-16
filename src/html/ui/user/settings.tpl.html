@@ -22,14 +22,14 @@
       		<label>Your Email</label>
       		<p ng-hide="editing.email">{{user.email}}</p>
           <input type="text" ng-show="editing.email" ng-model="edited.email" class="form-control"/>
+          <button type="button" ng-show="editing.email" class="main-action" ng-click="saveEdit('email')">Save</button>
+          <button type="button" ng-show="editing.email" ng-click="cancelEdit('email')">Cancel</button>
           <div ng-show="editing.email && needsRevalidation()" class="summary">
             You will have to re-validate your email address after changing it.
           </div>
     		</div>
       	<div class="side-column">
           <button type="button" ng-hide="editing.email" ng-click="edit('email')">Change</button>
-          <button type="button" ng-show="editing.email" class="main-action" ng-click="saveEdit('email')">Save</button>
-          <button type="button" ng-show="editing.email" ng-click="cancelEdit('email')">Cancel</button>
         </div>
     	</div>
     	<div class="setting-item">
