@@ -34,6 +34,9 @@ dependencies.push(function($resource) {
     seeds: function(params, success, error) {
       return User.seeds(_.extend({id: this.id}, params), success, error);
     },
+    firstName: function() {
+      return this.name.split(' ')[0];
+    }
   });
 
   return User;
