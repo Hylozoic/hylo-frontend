@@ -2,12 +2,12 @@ var filepickerUpload = require('../../services/filepickerUpload');
 
 // the newCurrentUser dependency will change once the rest of
 // the app is switched over to using the new User API
-var dependencies = ['$scope', '$analytics', 'newCurrentUser'];
-dependencies.push(function($scope, $analytics, newCurrentUser) {
+var dependencies = ['$scope', '$analytics', 'newCurrentUser', 'growl'];
+dependencies.push(function($scope, $analytics, newCurrentUser, growl) {
   var user = $scope.user = newCurrentUser,
     editData = $scope.editData = _.pick(user, [
       'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
-      'twitter_name', 'linkedin_url'
+      'twitter_name', 'linkedin_url', 'facebook_url'
     ]),
     edited = {};
 
@@ -84,12 +84,17 @@ dependencies.push(function($scope, $analytics, newCurrentUser) {
   };
 
   $scope.changeFacebook = function() {
-    // trigger API
-    // get auth
-    // get profile url
-    // save profile url
-    // OR
-    // delete profile url
+    if (editData.facebook_url) {
+      if (confirm('Choose OK to remove your Facebook information.')) {
+        editData.facebook_url = null;
+      }
+    } else {
+      FB.login(function() {
+        FB.api('/me', function(resp) {
+          editData.facebook_url = resp.link;
+        })
+      })
+    }
   };
 
   $scope.changeLinkedin = function() {

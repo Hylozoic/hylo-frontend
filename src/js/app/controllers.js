@@ -1,6 +1,5 @@
 var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 
-
 require('./controllers/comments');
 require('./controllers/community_about');
 require('./controllers/community_seeds');
@@ -13,10 +12,10 @@ require('./controllers/profile_settings');
 require('./controllers/search');
 require('./controllers/user');
 require('./controllers/view_post');
-require('./controllers/view_post');
-require('./controllers/profile/contributions')(angularModule);
-require('./controllers/profile/thanks')(angularModule);
 
 require('./controllers/community_settings')(angularModule);
 require('./controllers/profile')(angularModule);
 require('./controllers/profile/edit')(angularModule);
+require('./controllers/profile/contributions')(angularModule);
+require('./controllers/profile/thanks')(angularModule);
+require('./controllers/user/settings')(angularModule);

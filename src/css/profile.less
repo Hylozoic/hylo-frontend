@@ -4,9 +4,11 @@
   }
   .banner {
     .dark-background-gradient;
-  }
-  .edit {
-    .rounded-button-clear;
+
+    .buttons a {
+      .rounded-button-clear;
+    }
+
   }
 
   .main-content {
@@ -15,11 +17,21 @@
   }
 }
 
+.editProfile {
+  .banner div.buttons a {
+    .rounded-button;
+  }
+}
+
 .profile, .editProfile {
   .banner {
     .make-row;
     height: 38.2vh;
     position: relative;
+
+    .buttons a {
+      .rounded-button-clear;
+    }
 
     .background {
       position: absolute;

@@ -1,12 +1,12 @@
 /* Global Styles */
 
-@import '../../bower_components/bootstrap/less/bootstrap.less';
+@import '../../bower_components/bootstrap/less/bootstrap';
+@import 'bootstrap/bootstrap-select';
 @import (inline) '../../bower_components/medium.js/medium.css';
-@import 'bootstrap/bootstrap-select.less';
 @import 'ment.io/userMentions';
 @import 'angular/perfect-scrollbar';
-@import '_colors.less';
-@import '_mixins.less';
+@import '_colors';
+@import '_mixins';
 @import 'hyloIcons';
 
 // Custom Bootstrap Overrides
@@ -14,38 +14,6 @@
   .proxima-nova-regular;
 }
 @headings-font-family:    "proxima-nova",sans-serif;
-@jumbotron-padding:              12px;
-@jumbotron-bg:                   white;
-
-.jumbotron {
-  img {
-    width: 100px;
-    height: 100px;
-    .border-radius(50px);
-    margin-bottom: 20px;
-  }
-  h2,
-  .h2 {
-    .proxima-nova-bold;
-    font-size: 30px;
-    line-height: 1;
-    margin: 0;
-    color: @jumbotron-heading-color;
-  }
-  .caps-header {
-    .proxima-nova-light;
-    font-size:15px;
-    color: #808080;
-    text-transform: uppercase;
-    padding-bottom: 20px;
-  }
-  h3, .h3 {
-    .droid-regular;
-    margin: 0;
-    font-size: 12px;
-    color: #808080;
-  }
-}
 
 // other useful variables
 
@@ -65,6 +33,7 @@
   background-size: cover !important;
 }
 
+@import 'mixins/full-screen-modal';
 @import 'homepage';
 @import 'landingpage';
 @import 'aboutpage';
@@ -81,6 +50,7 @@
 @import 'angular/angular-csp';
 @import 'angular/angular-wizard';
 @import 'user';
+@import 'user/settings';
 @import 'community';
 @import 'community_seeds';
 @import 'community_settings';
