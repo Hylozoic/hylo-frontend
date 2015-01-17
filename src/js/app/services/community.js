@@ -25,6 +25,10 @@ dependencies.push(function($resource) {
     removeModerator: {
       url: '/noo/community/:id/moderator/:user_id',
       method: 'DELETE'
+    },
+    removeMember: {
+      url: '/noo/community/:id/member/:user_id',
+      method: 'DELETE'
     }
   });
 

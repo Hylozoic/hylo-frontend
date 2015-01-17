@@ -1,151 +1,147 @@
-<div class="community-settings">
-  <nav class="navbar navbar-default navbar-hylo-create" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <div class="navbar-text">
-        <i class="icon-hylo-script" ng-click="close()"></i>
+<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <div class="navbar-text">
+      <i class="icon-hylo-script" ng-click="close()"></i>
+    </div>
+  </div>
+  <div class="navbar-center" href="#">COMMUNITY SETTINGS</div>
+
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
+
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+
+    <div class="row section-label" ng-click="expand1 = !expand1">
+      <div class="col-sm-12">
+        Appearance
+        <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
       </div>
     </div>
-    <div class="navbar-center navbar-brand" href="#">COMMUNITY SETTINGS</div>
-
-    <a class="navbar-right close" ng-click="close()">&times;</a>
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-offset-3 col-sm-6">
-
-        <div class="row section-label" ng-click="expand1 = !expand1">
-          <div class="col-sm-12">
-            Appearance
-            <i ng-class="{'icon-down': expand1, 'icon-right': !expand1}"></i>
-          </div>
+    <div class="section appearance" collapse="!expand1">
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Name</label>
         </div>
-        <div class="section appearance" collapse="!expand1">
-          <div class="row">
-            <div class="col-sm-6">
-              <label>Name</label>
-            </div>
-            <div class="col-sm-6 value" ng-hide="editing.name">
-              <p>{{community.name}}</p>
-              <button type="button" ng-click="edit('name')">Change</button>
-            </div>
-            <div class="col-sm-6 edit" ng-show="editing.name">
-              <input type="text" class="form-control" ng-model="edited.name"/>
-              <button type="button" ng-click="cancelEdit('name')">Cancel</button>
-              <button type="button" ng-click="saveEdit('name')">Save</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <label>Intention</label>
-            </div>
-            <div class="col-sm-6 value" ng-hide="editing.description">
-              <p>{{community.description}}</p>
-              <button type="button" ng-click="edit('description')">Change</button>
-            </div>
-            <div class="col-sm-6 edit" ng-show="editing.description">
-              <textarea class="form-control" ng-model="edited.description" rows="4"></textarea>
-              <button type="button" ng-click="cancelEdit('description')">Cancel</button>
-              <button type="button" ng-click="saveEdit('description')">Save</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <label>Icon</label>
-              <p>This image appears next to your community's name.</p>
-            </div>
-            <div class="col-sm-6 value">
-              <div class="community-icon" back-img="community.avatar_url"></div>
-              <button type="button" ng-click="changeIcon()">Change</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <label>Banner</label>
-              <p>This image appears at the top of your community page.</p>
-            </div>
-            <div class="col-sm-6 value">
-              <div class="community-banner" back-img="community.banner_url"></div>
-              <button type="button" ng-click="changeBanner()">Change</button>
-            </div>
-          </div>
+        <div class="col-sm-6 value" ng-hide="editing.name">
+          <p>{{community.name}}</p>
+          <button type="button" ng-click="edit('name')">Change</button>
         </div>
-
-        <div class="row section-label" ng-click="expand2 = !expand2">
-          <div class="col-sm-12">
-            Invite Members
-            <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
-          </div>
+        <div class="col-sm-6 edit" ng-show="editing.name">
+          <input type="text" class="form-control" ng-model="edited.name"/>
+          <button type="button" ng-click="cancelEdit('name')">Cancel</button>
+          <button type="button" ng-click="saveEdit('name')">Save</button>
         </div>
-        <div class="row section invite" collapse="!expand2">
-          <div class="col-sm-12">
-            <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
-            <div class="row">
-              <div class="col-xs-6">
-                <label>
-                  <input type="checkbox" ng-model="inviteAsModerator"/>
-                  Invite them to be moderators
-                </label>
-              </div>
-              <div class="col-xs-6 right">
-                <button type="button" ng-click="invite()">
-                  <span ng-show="submitting">
-                    <i class="icon-duration"></i>
-                    Sending...
-                  </span>
-                  <span ng-hide="submitting">
-                    <i class="icon-big-check"></i>
-                    Send Invite
-                  </span>
-                </button>
-              </div>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Intention</label>
+        </div>
+        <div class="col-sm-6 value" ng-hide="editing.description">
+          <p>{{community.description}}</p>
+          <button type="button" ng-click="edit('description')">Change</button>
+        </div>
+        <div class="col-sm-6 edit" ng-show="editing.description">
+          <textarea class="form-control" ng-model="edited.description" rows="4"></textarea>
+          <button type="button" ng-click="cancelEdit('description')">Cancel</button>
+          <button type="button" ng-click="saveEdit('description')">Save</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Icon</label>
+          <p>This image appears next to your community's name.</p>
+        </div>
+        <div class="col-sm-6 value">
+          <div class="community-icon" back-img="community.avatar_url"></div>
+          <button type="button" ng-click="changeIcon()">Change</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Banner</label>
+          <p>This image appears at the top of your community page.</p>
+        </div>
+        <div class="col-sm-6 value">
+          <div class="community-banner" back-img="community.banner_url"></div>
+          <button type="button" ng-click="changeBanner()">Change</button>
+        </div>
+      </div>
+    </div>
 
-            <div ng-show="inviteResults" class="results">
-              <h3>Results</h3>
-              <table>
-                <tr ng-repeat="result in inviteResults">
-                  <td>{{result.email}}</td>
-                  <td class="status" ng-class="{error: result.error}">
-                    {{result.error ? result.error : "invitation sent!"}}
-                  </td>
-                </tr>
-              </table>
-            </div>
-
-            <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
+    <div class="row section-label" ng-click="expand2 = !expand2">
+      <div class="col-sm-12">
+        Invite Members
+        <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
+      </div>
+    </div>
+    <div class="row section invite" collapse="!expand2">
+      <div class="col-sm-12">
+        <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+        <div class="row">
+          <div class="col-xs-6">
+            <label>
+              <input type="checkbox" ng-model="inviteAsModerator"/>
+              Invite them to be moderators
+            </label>
+          </div>
+          <div class="col-xs-6 right">
+            <button type="button" ng-click="invite()">
+              <span ng-show="submitting">
+                <i class="icon-duration"></i>
+                Sending...
+              </span>
+              <span ng-hide="submitting">
+                <i class="icon-big-check"></i>
+                Send Invite
+              </span>
+            </button>
           </div>
         </div>
 
-        <div class="row section-label" ng-click="toggleModerators()">
-          <div class="col-sm-12">
-            Moderators
-            <i ng-class="{'icon-down': expand3, 'icon-right': !expand3}"></i>
-          </div>
-        </div>
-        <div class="row section moderators" collapse="!expand3">
-          <div class="col-sm-12">
-            <p>Moderators can invite new members and delete other members' seeds.</p>
-
-            <div class="moderator" ng-repeat="user in moderators">
-              <a class="avatar" back-img="user.avatar_url" ui-sref="user({id: user.id})"></a>
-              <a class="name" ui-sref="user({id: user.id})" ng-bind="::user.name"></a>
-              <a class="close" ng-click="removeModerator(user.id)">&times;</a>
-            </div>
-
-            <p>Search for members to grant moderator powers:</p>
-            <input type="text" class="form-control" ng-model="selectedMember"
-              typeahead="user.name for user in findMembers($viewValue)"
-              typeahead-min-length="2"
-              typeahead-template-url="/ui/shared/typeaheadUser.tpl.html"
-              typeahead-wait-ms="300"
-              typeahead-on-select="addModerator($item)"/>
-          </div>
+        <div ng-show="inviteResults" class="results">
+          <h3>Results</h3>
+          <table>
+            <tr ng-repeat="result in inviteResults">
+              <td>{{result.email}}</td>
+              <td class="status" ng-class="{error: result.error}">
+                {{result.error ? result.error : "invitation sent!"}}
+              </td>
+            </tr>
+          </table>
         </div>
 
+        <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
+      </div>
+    </div>
+
+    <div class="row section-label" ng-click="toggleModerators()">
+      <div class="col-sm-12">
+        Moderators
+        <i ng-class="{'icon-down': expand3, 'icon-right': !expand3}"></i>
+      </div>
+    </div>
+    <div class="row section moderators" collapse="!expand3">
+      <div class="col-sm-12">
+        <p>Moderators can invite new members and delete other members' seeds.</p>
+
+        <div class="moderator" ng-repeat="user in moderators">
+          <a class="avatar" back-img="user.avatar_url" ui-sref="user({id: user.id})"></a>
+          <a class="name" ui-sref="user({id: user.id})" ng-bind="::user.name"></a>
+          <a class="close" ng-click="removeModerator(user.id)">&times;</a>
+        </div>
+
+        <p>Search for members to grant moderator powers:</p>
+        <input type="text" class="form-control" ng-model="selectedMember"
+          typeahead="user.name for user in findMembers($viewValue)"
+          typeahead-min-length="2"
+          typeahead-template-url="/ui/shared/typeaheadUser.tpl.html"
+          typeahead-wait-ms="300"
+          typeahead-on-select="addModerator($item)"/>
       </div>
     </div>
 
   </div>
 </div>
+

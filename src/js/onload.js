@@ -35,7 +35,19 @@ if (hyloEnv.isProd) {
   }
 }
 
-//Prevents backspace except in the case of textareas and text inputs to prevent user navigation.
+window.fbAsyncInit = function() {
+  FB.init({appId: hyloEnv.fb.appId, xfbml: true, version: 'v2.1'});
+};
+
+(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Prevents backspace except in the case of textareas and text inputs to prevent user navigation.
 $(document).keydown(function (e) {
   var preventKeyPress;
   if (e.keyCode == 8) {

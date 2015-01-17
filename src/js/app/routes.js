@@ -85,6 +85,16 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
+      state('userSettings', {
+        url: '/u2/settings',
+        parent: 'main',
+        views: {
+          "main": {
+            templateUrl: '/ui/user/settings.tpl.html',
+            controller: 'UserSettingsCtrl'
+          }
+        }
+      }).
       state('user', {
         url: '/u/:id',
         parent: 'main',
@@ -115,8 +125,8 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
               return User.get({id: $stateParams.id}).$promise;
             }
           }],
-          posts: ['Post', 'user', function(Post, user) {
-            return Post.forUser({userId: user.id}).$promise;
+          posts: ['user', function(user) {
+            return user.seeds().$promise;
           }]
         },
         views: {
