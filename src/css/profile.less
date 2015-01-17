@@ -5,10 +5,31 @@
   .banner {
     .dark-background-gradient;
 
-    .buttons a {
-      .rounded-button-clear;
+    div.buttons {
+      @media (max-width: @screen-xs-max) {
+        padding-top: 5px;
+      }
+      a {
+        @media (max-width: @screen-xs-max) {.rounded-button;}
+        @media (min-width: @screen-sm) {.rounded-button-clear;}
+      }
     }
 
+    .banner-content {
+      .info-column {
+        @media (max-width: @screen-xs-max) {
+          margin: 0;
+
+          .name {
+            margin: 0;
+          }
+
+          .social-media a {
+            margin: 0 1px;
+          }
+        }
+      }
+    }
   }
 
   .main-content {
@@ -28,10 +49,6 @@
     .make-row;
     height: 38.2vh;
     position: relative;
-
-    .buttons a {
-      .rounded-button-clear;
-    }
 
     .background {
       position: absolute;
@@ -284,6 +301,16 @@
         margin-left: 0;
         @media (max-width: @screen-xs-max) {
           padding: 0;
+
+          .post-options {
+            top: 0;
+          }
+        }
+      }
+
+      .post-controls {
+        .fulfill-link {
+          visibility: hidden;
         }
       }
     }
