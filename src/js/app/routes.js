@@ -125,8 +125,8 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
               return User.get({id: $stateParams.id}).$promise;
             }
           }],
-          posts: ['Post', 'user', function(Post, user) {
-            return Post.forUser({userId: user.id}).$promise;
+          posts: ['user', function(user) {
+            return user.seeds().$promise;
           }]
         },
         views: {
