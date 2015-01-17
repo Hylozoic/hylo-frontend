@@ -13,6 +13,10 @@ dependencies.push(function($resource) {
     thanks: {
       url: '/noo/user/:id/thanks',
       isArray: true
+    },
+    seeds: {
+      url: '/noo/user/:id/seeds',
+      isArray: true
     }
   });
 
@@ -26,7 +30,10 @@ dependencies.push(function($resource) {
     },
     update: function(params, success, error) {
       return User.save(_.extend({id: this.id}, params), success, error);
-    }
+    },
+    seeds: function(params, success, error) {
+      return User.seeds(_.extend({id: this.id}, params), success, error);
+    },
   });
 
   return User;
