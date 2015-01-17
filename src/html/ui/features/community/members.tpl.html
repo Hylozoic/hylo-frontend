@@ -20,9 +20,9 @@
 <div class="col-sm-6 col-sm-offset-3">
   <div class="row">
     <div ng-repeat="user in users | orderBy:'name'" class="member">
-      <a class="avatar" back-img="user.avatar" ui-sref="user({id: user.id})"></a>
+      <a class="avatar" back-img="user.avatar" ui-sref="profile({id: user.id})"></a>
       <div class="member-info">
-        <a class="name" ui-sref="user({id: user.id})" ng-bind="::user.name"></a>
+        <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
         <div class="skills">Skills: &nbsp;<span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
         <div class="affiliations">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
       </div>

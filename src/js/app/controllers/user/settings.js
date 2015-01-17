@@ -8,7 +8,7 @@ dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser, Co
   $analytics.eventTrack('User Settings: Viewed');
 
   $scope.close = function() {
-    $state.go('profile.seeds', {id: user.id});
+    $state.go('profile', {id: user.id});
   };
 
   $scope.needsRevalidation = function() {

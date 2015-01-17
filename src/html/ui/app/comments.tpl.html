@@ -2,14 +2,14 @@
 
   <div class="comment" ng-repeat="comment in post.comments">
     <div class="comment-delete "><a ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>&nbsp;</a></div>
-    <a class="avatar" back-img="::comment.user.avatar" ui-sref="user({id: comment.user.id})"></a>
+    <a class="avatar" back-img="::comment.user.avatar" ui-sref="profile({id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
       <div class="comment-text unpad-last-p" ng-bind-html="commentTextSafe(comment.text)">
       </div>
       <div class="controls">
-        <a ui-sref="user({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
+        <a ui-sref="profile({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
         &nbsp;•&nbsp;
         <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
         <span ng-if="canDelete(comment)" ng-click="delete(comment)" class="visible-xs-inline"> &nbsp;•&nbsp; <a class="delete-link">delete</a> </span>

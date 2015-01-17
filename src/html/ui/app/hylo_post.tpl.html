@@ -1,6 +1,6 @@
 <div class="post" analytics-id="{{::post.id}}">
 
-  <a class="user" ui-sref="user({id: post.user.id})">
+  <a class="user" ui-sref="profile({id: post.user.id})">
     <div back-img="post.user.avatar" class="avatar"></div>
     <div class="name">{{::post.user.name}}</div>
   </a>
@@ -34,7 +34,7 @@
 
           <!-- List Names -->
           <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-            <a class="follower" ui-sref="user({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
+            <a class="follower" ui-sref="profile({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="::!$last && followersNotMe.length > 2">, </span>
             <span ng-if="::!$last && followersNotMe.length == 2"> and </span>
           </span>
 
@@ -47,7 +47,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li ng-repeat="user in followersNotMe.slice(2)">
-                  <a class="dropdown-list-user" ui-sref="user({id: user.value})" ng-if="!user.hide">
+                  <a class="dropdown-list-user" ui-sref="profile({id: user.value})" ng-if="!user.hide">
                     <div back-img="::user.avatar" class="avatar"></div>
                     <div class="name">{{::user.name}}</div>
                   </a>
@@ -66,7 +66,7 @@
     <div class="fulfillment" ng-if="post.fulfilled">
       Fulfilled&nbsp;&nbsp;•&nbsp;
       <span ng-if="::post.contributors.length > 0">
-        Contributed to by&nbsp;<a class="contributor" ui-sref="user({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
+        Contributed to by&nbsp;<a class="contributor" ui-sref="profile({id: contributor.id})" ng-repeat="contributor in post.contributors.slice(0, 2)"><span>{{::contributor.name}}</span><span ng-show="::!$last && post.contributors.length>1">,&nbsp;</span></a>
         <span ng-if="::post.contributors.length > 2">
           and
           <span class="dropdown" dropdown>
@@ -76,7 +76,7 @@
 
             <ul class="dropdown-menu">
               <li ng-repeat="user in post.contributors.slice(2)">
-                <a class="dropdown-list-user" ui-sref="user({id: user.id})">
+                <a class="dropdown-list-user" ui-sref="profile({id: user.id})">
                   <div back-img="::user.avatar" class="avatar"></div>
                   <div class="name">{{::user.name}}</div>
                 </a>

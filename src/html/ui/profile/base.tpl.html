@@ -35,7 +35,7 @@
       <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
     </div>
     <div class="tabs">
-      <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
+      <a class="tab" ui-sref="." ng-class="{selected: $state.current.name === 'profile'}">
         <h3>SEEDS PLANTED</h3>
         <div class="count">{{user.seed_count}}</div>
       </a>
@@ -53,5 +53,7 @@
       <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
     </div>
   </div>
-  <div class="tab-content" ui-view="tab"></div>
+  <div class="tab-content" ui-view="tab">
+    <ng-include ng-if="$state.current.name === 'profile'" src="'/ui/profile/seeds.tpl.html'"></ng-include>
+  </div>
 </div>
