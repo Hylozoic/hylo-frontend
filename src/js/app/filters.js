@@ -65,7 +65,7 @@ filter('userMention', [ '$sce', function($sce) {
     if (!text) return text;
     // convert user mentions into clickable items
     var replacePattern = /\[~([0-9]+)~([^\]]*)\]/g;
-    var replacedText = text.replace(replacePattern, '<a class="userProfile" ui-sref="user({id: \'$1\'})">$2</a>');
+    var replacedText = text.replace(replacePattern, '<a class="userProfile" ui-sref="profile({id: \'$1\'})">$2</a>');
     console.log(replacedText);
 
     var cleaned = $sce.trustAsHtml(replacedText);

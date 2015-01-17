@@ -88,7 +88,7 @@
           <div ng-switch-when="true">
             <div class="divider"></div>
             <button type="button" class="edit btn btn-info" ng-click="edit()">Edit profile</button>
-            <a ui-sref="user.settings({id: user.id, community: $root.community.slug})" class="settings btn btn-info">Settings</a>
+            <a ui-sref="userSettings({id: user.id, community: $root.community.slug})" class="settings btn btn-info">Settings</a>
           </div>
           <div ng-switch-when="false">
             <div class="divider"></div>

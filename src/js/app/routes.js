@@ -86,7 +86,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('userSettings', {
-        url: '/u2/settings',
+        url: '/settings',
         parent: 'main',
         views: {
           "main": {
@@ -95,25 +95,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('user', {
-        url: '/u/:id',
-        parent: 'main',
-        views: {
-          "main": {
-            templateUrl: '/ui/app/user.tpl.html',
-            controller: 'UserCtrl'
-          }
-        }
-      }).
-      state('user.settings', {
-        url: '/settings',
-        template: "",
-        controller: 'ProfileSettingsCtrl'
-      }).
       state('profile', {
-        url: '/u2/:id',
         parent: 'main',
-        abstract: true,
+        url: '/u/:id',
         resolve: {
           editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
             return parseInt(currentUser.id) == parseInt($stateParams.id);
@@ -133,20 +117,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           'main': {
             templateUrl: '/ui/profile/base.tpl.html',
             controller: 'ProfileCtrl'
-          }
-        }
-      }).
-      state('profile.seeds', {
-        url: '',
-        resolve: {
-          seeds: ['user', function(user) {
-            //return user.seeds().$promise;
-          }]
-        },
-        views: {
-          'tab': {
-            templateUrl: '/ui/profile/seeds.tpl.html'
-            //controller: 'ProfileContributionsCtrl'
           }
         }
       }).
