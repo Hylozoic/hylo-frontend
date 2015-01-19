@@ -79,8 +79,8 @@ angular.module('hyloApp', [
 
   }])
 
-.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
-  function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
+.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
+  function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
 
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {
