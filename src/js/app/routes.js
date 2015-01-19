@@ -85,6 +85,15 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
+      state('newSeed', {
+        url: '/c/:community/new-seed',
+        views: {
+          "": {
+            templateUrl: '/ui/seeds/new.tpl.html',
+            controller: 'NewSeedCtrl'
+          }
+        }
+      }).
       state('userSettings', {
         url: '/settings',
         parent: 'main',
