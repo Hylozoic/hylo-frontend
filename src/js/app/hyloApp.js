@@ -2,9 +2,9 @@ angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
-  'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
-  'angulartics', 'angulartics.segment.io', "perfect_scrollbar", "hylo.validate.money",
-  'hylo.billing', 'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features"
+  'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
+  'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io', "perfect_scrollbar",
+  'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features"
 ])
 
 .factory('$exceptionHandler', ['$log', function ($log) {

@@ -42,7 +42,6 @@ require('./app/filters');
 require('./app/directives');
 require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
-require('./app/directives/validateMoney');
 
 require('./app/features/features');
 
