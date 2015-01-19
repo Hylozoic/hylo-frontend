@@ -121,10 +121,11 @@
       <div class="add-label">Add Members:</div>
       <div class="add-tags">
         <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-        model="followersToAdd"
-        typeahead-options="typeaheadOpts"
-        src="b as b.name for b in potentialFollowers">
-      </tags>
+          model="followersToAdd"
+          typeahead-options="typeaheadOpts"
+          src="b as b.name for b in potentialFollowers">
+        </tags>
+      </div>
     </div>
 
     <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
