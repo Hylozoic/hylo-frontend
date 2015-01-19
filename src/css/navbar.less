@@ -12,6 +12,10 @@
   .close {
     .big-close;
     margin-top: 7px;
+
+    &.navbar-right {
+      margin-right: -15px;
+    }
   }
 
   .navbar-brand {
@@ -27,6 +31,8 @@
 
   .icon-hylo-script {
     font-size: 50px;
+    display: block;
+    margin: 7px 0 5px;
     @media (max-width: @screen-xs-max) {
       display: none;
     }
@@ -45,11 +51,17 @@
     z-index: -1;
     @media (max-width: @screen-xs-max) {
       text-align: left;
+      padding-top: 15px;
     }
 
   }
+
   .btn {
     margin-top: 14px;
+  }
+
+  .navbar-right {
+    margin-right: 0;
   }
 }
 
