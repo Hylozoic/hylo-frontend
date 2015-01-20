@@ -7,14 +7,14 @@ dependencies.push(function($scope) {
   $scope.switchSeedType = function(seedType) {
   	$scope.seedType = seedType;
   	if (seedType === 'intention') {
-  		$scope.placeholderText = "I'd like to create ";
+  		$scope.titleText = "I'd like to create ";
   	}
   	else if (seedType === 'offer') {
-  		$scope.placeholderText = "I'd like to share ";
+  		$scope.titleText = "I'd like to share ";
 
   	}
   	else if (seedType === 'request') {
-  		$scope.placeholderText = "I'm looking for ";
+  		$scope.titleText = "I'm looking for ";
   	}
   }
 
