@@ -1,3 +1,43 @@
 .newSeed {
   .full-screen-modal;
+
+  .seed-form {
+  	.make-sm-column(8);
+  	.make-sm-column-offset(2);
+
+  	.seed-type {
+  		.make-row;
+  		border-bottom: 2px solid @default-border;
+  		padding-bottom: @std-padding/2;
+
+  		.seed-option {
+  			@media (min-width: @screen-sm) {
+  				//width: 33%;
+  				//display: inline-block;
+  			}
+  			.make-sm-column(4);
+
+  			label {
+  				.large-header;
+  			}
+
+  			input[type=radio] {
+  			    -webkit-appearance: none;
+  			    border: 2px solid @default-border;
+				padding: 11px;
+				border-radius: 15px;
+				margin: 0;
+				display: inline-block;
+				position: relative;
+				.proxima-nova(100);
+
+				&:checked {
+					&.intention {background-color: @intention-color;}
+					&.offer {background-color: @offer-color;}
+					&.request {background-color: @request-color;}
+				}
+  			}
+  		}
+  	}
+  }
 }
