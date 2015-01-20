@@ -216,8 +216,8 @@ angular.module("hylo.createCommunity", [])
       }
 
     }])
-    .controller("CreateCommunityCtrl", [ "$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', "$rootScope", 'CurrentUser', '$analytics',
-      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $rootScope, CurrentUser, $analytics) {
+    .controller("CreateCommunityCtrl", ["$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', '$analytics',
+      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $analytics) {
 
         $scope.state = CreateCommunityService.getNewState(false);
 
