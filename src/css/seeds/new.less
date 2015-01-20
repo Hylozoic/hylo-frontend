@@ -11,14 +11,17 @@
   		padding-bottom: @std-padding/2;
 
   		.seed-option {
-  			@media (min-width: @screen-sm) {
-  				//width: 33%;
-  				//display: inline-block;
-  			}
   			.make-sm-column(4);
+
+  			&.active {
+  				label {
+  					color: @default-text;
+  				}
+  			}
 
   			label {
   				.large-header;
+  				color: @nonactive-text;
   			}
 
   			input[type=radio] {
@@ -28,8 +31,24 @@
 					&.intention {background-color: @intention-color; border-color: @intention-color;}
 					&.offer {background-color: @offer-color; border-color: @offer-color;}
 					&.request {background-color: @request-color; border-color: @request-color;}
+					color: red;
 				}
   			}
+  		}
+  	}
+
+  	.seed-body {
+  		.title {
+  			.medium-title-text;
+  			font-weight: 600;
+  			margin-top: @std-padding*2;
+  			margin-bottom: @std-padding/2;
+  		}
+  		input, textarea {
+  			margin-bottom: @std-padding;
+  			.proxima-nova-regular;
+  			font-size: 18px;
+  			width: 100%;
   		}
   	}
   }
