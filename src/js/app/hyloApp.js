@@ -2,9 +2,9 @@ angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
-  'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select', 'angular-bootstrap-select.extra',
-  'angulartics', 'angulartics.segment.io', "perfect_scrollbar", "hylo.validate.money",
-  'hylo.billing', 'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features"
+  'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
+  'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io', "perfect_scrollbar",
+  'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features"
 ])
 
 .factory('$exceptionHandler', ['$log', function ($log) {
@@ -79,8 +79,8 @@ angular.module('hyloApp', [
 
   }])
 
-.run(['CurrentUser', '$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
-  function(CurrentUser, $rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
+.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
+  function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
 
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {

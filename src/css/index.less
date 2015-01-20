@@ -16,22 +16,12 @@
 @headings-font-family:    "proxima-nova",sans-serif;
 
 // other useful variables
-
 @std-padding: floor(@grid-gutter-width / 2);
 
 // from easings.net
 @ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
 @ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 @ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
-
-.parallax-section {
-  height: auto;
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  padding: 100px 0;
-  background-size: cover !important;
-}
 
 @import 'mixins/full-screen-modal';
 @import 'homepage';
@@ -48,13 +38,11 @@
 @import 'angular/angular-growl';
 @import 'angular/angular-csp';
 @import 'angular/angular-wizard';
-@import 'user';
 @import 'user/settings';
 @import 'community';
 @import 'community/create';
 @import 'community_seeds';
 @import 'community_settings';
-@import 'members';
 @import 'search';
 @import 'profile';
 @import 'profile/settings';
