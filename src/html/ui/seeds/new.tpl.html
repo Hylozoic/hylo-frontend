@@ -8,6 +8,7 @@
 
 <div class="main-content">
   <div class="seed-form">
+
     <div class="seed-type">
       <div class="seed-option" ng-class="{active: seedType==='intention'}">
         <label>
@@ -28,11 +29,17 @@
         </label>
       </div>
     </div>
+
     <div class="seed-body">
       <div class="title">Seed Title</div>
       <input type="text" ng-model="titleText"/>
       <div class="title">Description</div>
       <textarea rows="3" ng-model="descriptionText" placeholder="Why, when, where, what do you need?"> </textarea>
     </div>
+
+    <div class="footer">
+      <a ng-click="addImage()">Attach Image</a>
+    </div>
+
   </div>
 </div>
