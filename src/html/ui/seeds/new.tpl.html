@@ -11,24 +11,26 @@
     <div class="seed-type">
       <div class="seed-option">
         <label>
-          <input type="radio" class="intention" name="seedTypeSelector" value="intention" checked>
+          <input type="radio" class="intention" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
             Intention
         </label>
       </div>
       <div class="seed-option">
         <label>
-          <input type="radio" class="offer" name="seedTypeSelector" value="offer">
+          <input type="radio" class="offer" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
             Offer
         </label>
       </div>
       <div class="seed-option">
         <label>
-          <input type="radio" class="request" name="seedTypeSelector" value="request">
+          <input type="radio" class="request" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
             Request
         </label>
       </div>
     </div>
-
-    {{foo}}
+    <div class="seed-body">
+      <div class="title">Seed Title</div>
+      <input type="text" ng-model="placeholderText"/>
+    </div>
   </div>
 </div>
