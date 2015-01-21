@@ -54,7 +54,8 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
       name: $scope.title,
       description: $scope.description,
       postType: $scope.seedType,
-      communityId: community.id
+      communityId: community.id,
+      imageUrl: $scope.imageUrl
     });
 
     seed.$save(function() {
