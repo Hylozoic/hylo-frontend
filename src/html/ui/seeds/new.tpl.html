@@ -55,11 +55,9 @@
     </div>
 
     <div ng-if="addingImage">Please wait...</div>
-    <div ng-if="imageUrl" style="padding:5px;margin-top:5px;background-color:#eee">
-      added image:
-      <a ng-href="{{imageUrl}}" target="_blank">{{imageUrl}}</a>
-      <br/>
-      <a ng-click="removeImage()">remove</a>
+    <div ng-if="imageUrl">
+      Added image: <a ng-href="{{imageUrl}}" target="_blank">{{imageUrl}}</a>
+      (<a ng-click="removeImage()">remove</a>)
     </div>
   </div>
 </div>
