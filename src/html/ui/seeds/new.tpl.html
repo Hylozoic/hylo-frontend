@@ -32,14 +32,26 @@
 
     <div class="seed-body">
       <div class="title">Seed Title</div>
-      <input type="text" ng-model="titleText"/>
+      <input type="text" ng-model="title"/>
       <div class="title">Description</div>
-      <textarea rows="3" ng-model="descriptionText" placeholder="Why, when, where, what do you need?"> </textarea>
+      <textarea rows="3" ng-model="description" placeholder="Why, when, where, what do you need?"> </textarea>
     </div>
 
     <div class="footer">
       <a ng-click="addImage()">Attach Image</a>
-    </div>
+      <button type="button" class="save" ng-click="save()" ng-disabled="saving">
+        <i class="icon-big-check"></i>
+        <span ng-if="saving">Saving...</span>
+        <span ng-hide="saving">Plant Seed</span>
+      </a>
+    </button>
 
+    <div ng-if="addingImage">Please wait...</div>
+    <div ng-if="imageUrl" style="padding:5px;margin-top:5px;background-color:#eee">
+      added image:
+      <a ng-href="{{imageUrl}}" target="_blank">{{imageUrl}}</a>
+      <br/>
+      <a ng-click="removeImage()">remove</a>
+    </div>
   </div>
 </div>
