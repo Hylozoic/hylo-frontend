@@ -7,22 +7,22 @@
 </nav>
 
 <div class="main-content">
-  <div class="seed-form">
+  <div class="main-col">
 
-    <div class="seed-type">
-      <div class="seed-option" ng-class="{active: seedType==='intention'}">
+    <div class="select-type">
+      <div class="option" ng-class="{active: seedType==='intention'}">
         <label>
           <input type="radio" class="intention" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
             Intention
         </label>
       </div>
-      <div class="seed-option" ng-class="{active: seedType==='offer'}">
+      <div class="option" ng-class="{active: seedType==='offer'}">
         <label>
           <input type="radio" class="offer" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
             Offer
         </label>
       </div>
-      <div class="seed-option" ng-class="{active: seedType==='request'}">
+      <div class="option" ng-class="{active: seedType==='request'}">
         <label>
           <input type="radio" class="request" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
             Request
@@ -30,21 +30,29 @@
       </div>
     </div>
 
-    <div class="seed-body">
+    <div class="edit-content">
       <div class="title">Seed Title</div>
       <input type="text" ng-model="title"/>
       <div class="title">Description</div>
       <textarea rows="3" ng-model="description" placeholder="Why, when, where, what do you need?"> </textarea>
     </div>
 
-    <div class="footer">
-      <a ng-click="addImage()">Attach Image</a>
-      <button type="button" class="save" ng-click="save()" ng-disabled="saving">
-        <i class="icon-big-check"></i>
-        <span ng-if="saving">Saving...</span>
-        <span ng-hide="saving">Plant Seed</span>
-      </a>
-    </button>
+    <div class="bottom-bar">
+      <div class="add-meta">Duration</div>
+      <div class="add-meta">Add Members</div>
+      <div class="add-meta"><a ng-click="addImage()">Attach Image</a></div>
+      <div class="add-meta">
+        <button type="button" class="save" ng-click="save()" ng-disabled="saving">
+          <i class="icon-big-check"></i>
+          <span ng-if="saving">Saving...</span>
+          <span ng-hide="saving">Plant Seed</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="notifications">
+      Notifications will go here.
+    </div>
 
     <div ng-if="addingImage">Please wait...</div>
     <div ng-if="imageUrl" style="padding:5px;margin-top:5px;background-color:#eee">
