@@ -5,6 +5,17 @@
   @media (max-width: @screen-xs-max) {
     padding: 0;
   }
+
+  .post {
+    .full-media {
+      display: block;
+      width: 100%;
+    }
+
+    .media {
+      display: none;
+    }
+  }
 }
 
 .post {
@@ -94,10 +105,21 @@
       .seed-body-text;
       padding-top: 5px;
     }
+  }
 
-    > img {
-      display: block;
-    }
+  .media, .full-media {
+    margin: @std-padding 0;
+  }
+
+  .media {
+    width: 100%;
+    .fluid-height(56.25%); // 16:9
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .full-media {
+    display: none;
   }
 
   .show-more-btn {
