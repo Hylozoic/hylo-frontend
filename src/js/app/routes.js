@@ -177,8 +177,8 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         parent: 'main',
         views: {
           "main": {
-            templateUrl: '/ui/app/view_post.tpl.html',
-            controller: 'ViewPostCtrl'
+            templateUrl: '/ui/seeds/show.tpl.html',
+            controller: 'SeedCtrl'
           }
         }
       }).
