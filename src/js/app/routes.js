@@ -86,11 +86,17 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       }).
       state('newSeed', {
         url: '/c/:community/new-seed',
+        parent: 'main',
         views: {
-          "": {
+          "main": {
             templateUrl: '/ui/seeds/new.tpl.html',
             controller: 'NewSeedCtrl'
           }
+        },
+        resolve: {
+          community: ['Community', '$stateParams', function(Community, $stateParams) {
+            return Community.get({id: $stateParams.community}).$promise;
+          }]
         }
       }).
       state('userSettings', {
