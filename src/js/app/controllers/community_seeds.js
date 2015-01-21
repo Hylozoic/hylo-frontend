@@ -56,7 +56,7 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
       $scope.disableInfiniteScroll = true;
       $scope.searching = true;
 
-      $http.get('/noo/community/' + $scope.community.id + "/posts", {
+      $http.get('/noo/community/' + $scope.community.id + "/seeds", {
         params: {
           q: $scope.searchQuery,
           postType: $scope.seedFilter,
