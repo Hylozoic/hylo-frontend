@@ -1,4 +1,6 @@
 .comments {
+  margin-left: 115px;
+
   .loading {
     padding: @std-padding;
   }
@@ -115,6 +117,10 @@
 
 //downsize the comment margins on mobile
 @media (max-width: @screen-xs-max) {
+  .comments {
+    margin-left: 0;
+  }
+
   .comments .comment {
 
     &:first-child {
