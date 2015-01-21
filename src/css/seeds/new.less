@@ -1,16 +1,16 @@
 .newSeed {
   .full-screen-modal;
 
-  .seed-form {
+  .main-col {
   	.make-sm-column(8);
   	.make-sm-column-offset(2);
 
-  	.seed-type {
+  	.select-type {
   		.make-row;
   		border-bottom: 2px solid @default-border;
   		padding-bottom: @std-padding/2;
 
-  		.seed-option {
+  		.option {
   			.make-sm-column(4);
 
   			&.active {
@@ -37,7 +37,7 @@
   		}
   	}
 
-  	.seed-body {
+  	.edit-content {
   		.title {
   			.medium-title-text;
   			font-weight: 600;
@@ -49,6 +49,22 @@
   			.proxima-nova-regular;
   			font-size: 18px;
   			width: 100%;
+  			border: 1px solid @default-border;
+  		}
+  	}
+
+  	.bottom-bar {
+  		.make-row;
+  		border-top: 2px solid @default-border;
+  		border-bottom: 2px solid @default-border;
+  		margin-top: @std-padding;
+  		margin-bottom: @std-padding;
+
+  		.add-meta {
+  			.make-sm-column(3);
+  			.seed-meta-text;
+  			padding-top: 1.5*@std-padding;
+  			padding-bottom: 1.5*@std-padding;
   		}
   	}
 
