@@ -10,21 +10,21 @@
   <div class="main-col">
 
     <div class="select-type">
-      <div class="option" ng-class="{active: seedType==='intention'}">
+      <div class="option intention" ng-class="{active: seedType==='intention'}">
         <label>
-          <input type="radio" class="intention" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
+          <input type="radio" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
             Intention
         </label>
       </div>
-      <div class="option" ng-class="{active: seedType==='offer'}">
+      <div class="option offer" ng-class="{active: seedType==='offer'}">
         <label>
-          <input type="radio" class="offer" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
+          <input type="radio" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
             Offer
         </label>
       </div>
-      <div class="option" ng-class="{active: seedType==='request'}">
+      <div class="option request" ng-class="{active: seedType==='request'}">
         <label>
-          <input type="radio" class="request" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
+          <input type="radio" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
             Request
         </label>
       </div>

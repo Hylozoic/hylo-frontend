@@ -13,6 +13,27 @@
   		.option {
   			.make-sm-column(4);
 
+  			.make-radio-color(@color) {
+  				input[type=radio]:checked {
+  					background-color: @color;
+  					border-color: @color;
+  				}
+  			}
+
+  			&.intention {
+  				.make-radio-color(@intention-color);
+  				padding-left: 0;
+  			}
+  			&.offer {
+  				.make-radio-color(@offer-color);
+  				text-align: center;
+  			}
+  			&.request {
+  				.make-radio-color(@request-color);
+  				text-align: right;
+  				padding-right: 0;
+  			}
+
   			&.active {
   				label {
   					color: @default-text;
@@ -26,13 +47,6 @@
 
   			input[type=radio] {
   			    .round-radio;
-
-				&:checked {
-					&.intention {background-color: @intention-color; border-color: @intention-color;}
-					&.offer {background-color: @offer-color; border-color: @offer-color;}
-					&.request {background-color: @request-color; border-color: @request-color;}
-					color: red;
-				}
   			}
   		}
   	}
@@ -86,7 +100,9 @@
   			&.done {
   				button {
   					.rounded-button;
+  					float: right;
   				}
+  				padding-right: 0;
   			}
   		}
   	}
