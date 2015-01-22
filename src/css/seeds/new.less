@@ -62,14 +62,39 @@
 
   		.add-meta {
   			.make-sm-column(3);
-  			.seed-meta-text;
+  			.seed-body-text;
   			padding-top: 1.5*@std-padding;
   			padding-bottom: 1.5*@std-padding;
+
+  			a {
+  				line-height: @default-button-height;
+  				.remove-link-display(@nonactive-text);
+  				&:hover {
+  					cursor: pointer;
+  					color: @default-text;
+  				}
+
+  				i {
+  					padding-right: @std-padding/2;
+  				}
+  			}
+
+  			&.duration, &.members {
+  				visibility: hidden;
+  			}
+
+  			&.done {
+  				button {
+  					.rounded-button;
+  				}
+  			}
   		}
   	}
 
-    .save {
-      .rounded-button;
-    }
+  	.notifications {
+  		i {
+  			color: @hylo-green;
+  		}
+  	}
   }
 }
