@@ -1,4 +1,6 @@
 .comments {
+  margin-left: 115px;
+
   .loading {
     padding: @std-padding;
   }
@@ -100,7 +102,7 @@
     }
 
     textarea, .mentio-editor {
-      padding: 0;
+      padding: 0 0 5px;
       width: 81%;
       position: relative;
       top: 3px;
@@ -115,6 +117,10 @@
 
 //downsize the comment margins on mobile
 @media (max-width: @screen-xs-max) {
+  .comments {
+    margin-left: 0;
+  }
+
   .comments .comment {
 
     &:first-child {

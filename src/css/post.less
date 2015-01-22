@@ -3,6 +3,7 @@
 .single-post {
   margin-top: @std-padding * 2;
   @media (max-width: @screen-xs-max) {
+    margin-top: @std-padding;
     padding: 0;
   }
 
@@ -251,6 +252,12 @@
       float: right;
       top: 8px;
       color: @link-color;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      .fulfill-link {
+        visibility: hidden;
+      }
     }
 
     .thank-link, .delete-link {
