@@ -9,7 +9,6 @@
   .post {
     .full-media {
       display: inline-block;
-      width: 100%;
       margin: 10px 0 5px;
     }
 
@@ -108,11 +107,16 @@
     }
   }
 
-  .media {
+  .media, .full-media {
     width: 100%;
+    border: 2px solid @border-light;
+  }
+
+  .media {
     .fluid-height(56.25%); // 16:9
     background-size: cover;
     background-position: top center;
+    background-repeat: no-repeat;
     margin: 10px 0 0;
   }
 
