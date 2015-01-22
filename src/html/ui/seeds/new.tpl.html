@@ -38,12 +38,12 @@
     </div>
 
     <div class="bottom-bar">
-      <div class="add-meta">Duration</div>
-      <div class="add-meta">Add Members</div>
-      <div class="add-meta"><a ng-click="addImage()">Attach Image</a></div>
-      <div class="add-meta">
+      <div class="add-meta duration"><a>Duration</a></div>
+      <div class="add-meta members"><a>Add Members</a></div>
+      <div class="add-meta image"><a ng-click="addImage()"><i class="icon-add-photo"></i>Attach Image</a></div>
+      <div class="add-meta done">
         <button type="button" class="save" ng-click="save()" ng-disabled="saving">
-          <i class="icon-big-check"></i>
+          <i class="icon-little-check"></i>
           <span ng-if="saving">Saving...</span>
           <span ng-hide="saving">Plant Seed</span>
         </button>
@@ -51,16 +51,14 @@
     </div>
 
     <div class="notifications">
-      Notifications will go here.
-    </div>
-
-    <div ng-if="addingImage">Please wait...</div>
-    <div ng-if="imageUrl">
-      Added image:
-      <br/>
-      <a ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}" width="100" style="display:inline-block"/></a>
-      <br/>
-      <a ng-click="removeImage()">remove</a>
+      <div ng-if="addingImage">Please wait...</div>
+      <div ng-if="imageUrl">
+        <i class="icon-little-check"></i> Added image:
+        <br/>
+        <a ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}" width="100" style="display:inline-block"/></a>
+        <br/>
+        <a ng-click="removeImage()">remove</a>
+      </div>
     </div>
   </div>
 </div>

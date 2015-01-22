@@ -29,6 +29,9 @@
 }
 
 /* Mixins for our app */
+
+@default-button-height: 32px;
+
 .rounded-button() {
   .proxima-nova-regular;
   font-size: 14px;
@@ -39,7 +42,7 @@
   border: 1px solid @light-gray;
   border-radius: 15px;
   display: inline-block;
-  height: 32px;
+  height: @default-button-height;
   line-height: 30px;
   padding: 0px 15px;
   outline: none;
