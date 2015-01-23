@@ -4,6 +4,10 @@
   .main-col {
   	.make-sm-column(8);
   	.make-sm-column-offset(2);
+  	@media (max-width: @screen-xs-max) {
+  		padding-right: @std-padding*2;
+  		padding-left: @std-padding*2;
+  	}
 
   	.select-type {
   		.make-row;
@@ -22,7 +26,7 @@
 
   			&.intention {
   				.make-radio-color(@intention-color);
-  				padding-left: 0;
+  				@media (min-width: @screen-sm) { padding-left: 0;}
   			}
   			&.offer {
   				.make-radio-color(@offer-color);
@@ -31,7 +35,13 @@
   			&.request {
   				.make-radio-color(@request-color);
   				text-align: right;
-  				padding-right: 0;
+  				@media (min-width: @screen-sm) { padding-right: 0;}
+  			}
+
+  			@media (max-width: @screen-xs-max) {
+  				&.intention, &.offer, &.request {
+  					text-align: left;
+  				}
   			}
 
   			&.active {
@@ -77,8 +87,13 @@
   		.add-meta {
   			.make-sm-column(3);
   			.seed-body-text;
-  			padding-top: 1.5*@std-padding;
-  			padding-bottom: 1.5*@std-padding;
+  			padding-top: @std-padding;
+  			padding-bottom: @std-padding;
+  			@media (max-width: @screen-xs-max) {
+  				padding-top: @std-padding/2;
+  				padding-bottom: @std-padding/2;
+  				text-align: center;
+  			}
 
   			a {
   				line-height: @default-button-height;
@@ -95,12 +110,18 @@
 
   			&.duration, &.members {
   				visibility: hidden;
+  				@media (max-width: @screen-xs-max) {
+  					display: none;
+  				}
   			}
 
   			&.done {
   				button {
-  					.rounded-button;
-  					float: right;
+  					.rounded-button-dark;
+  					@media (min-width: @screen-sm) {
+  						float: right;
+  						.rounded-button;
+  					}
   				}
   				padding-right: 0;
   			}
