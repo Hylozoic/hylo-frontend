@@ -1,7 +1,4 @@
 .profile {
-  &.angular-app {
-    overflow: hidden;
-  }
   .banner {
     .dark-background-gradient;
 
@@ -172,11 +169,9 @@
 
   @media (min-width: @screen-sm) {
     .sidebar, .tab-content {
-      height: 61.5vh;
-      overflow: auto;
+      min-height: 61.5vh !important;
     }
   }
-
 
   .sidebar {
     .make-sm-column(3);
