@@ -2,9 +2,9 @@ var filepickerUpload = require('../../services/filepickerUpload');
 
 // the newCurrentUser dependency will change once the rest of
 // the app is switched over to using the new User API
-var dependencies = ['$scope', '$analytics', 'newCurrentUser', 'growl'];
-dependencies.push(function($scope, $analytics, newCurrentUser, growl) {
-  var user = $scope.user = newCurrentUser,
+var dependencies = ['$scope', '$analytics', 'currentUser', 'growl'];
+dependencies.push(function($scope, $analytics, currentUser, growl) {
+  var user = $scope.user = currentUser,
     editData = $scope.editData = _.pick(user, [
       'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
       'twitter_name', 'linkedin_url', 'facebook_url'
