@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state', 'currentUser',
-  function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state, currentUser) {
+angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', '$state',
+  function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics, $state) {
 
     $scope.state = $state;
 
@@ -28,7 +28,7 @@ angular.module("hyloControllers").controller('CommunityCtrl', ['$scope', 'Post',
       });
     };
 
-    if (!currentUser.finishedOnboarding) {
+    if (!$scope.currentUser.finishedOnboarding) {
       $timeout(startOnboarding, 100)
     }
   }]);

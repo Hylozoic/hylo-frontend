@@ -1,0 +1,65 @@
+<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+  <div class="navbar-header">
+    <i class="icon-hylo-script" ng-click="close()"></i>
+  </div>
+  <div class="navbar-center" href="#">New Seed</div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
+
+<div class="main-content">
+  <div class="main-col">
+
+    <div class="select-type">
+      <div class="option intention" ng-class="{active: seedType==='intention'}">
+        <label>
+          <input type="radio" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
+            Intention
+        </label>
+      </div>
+      <div class="option offer" ng-class="{active: seedType==='offer'}">
+        <label>
+          <input type="radio" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
+            Offer
+        </label>
+      </div>
+      <div class="option request" ng-class="{active: seedType==='request'}">
+        <label>
+          <input type="radio" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
+            Request
+        </label>
+      </div>
+    </div>
+
+    <div class="edit-content">
+      <div class="title">Seed Title</div>
+      <input type="text" class="form-control" ng-model="title"/>
+      <div class="title">Description</div>
+      <textarea rows="3" class="form-control" ng-model="description" placeholder="Why, when, where, what do you need?"> </textarea>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="add-meta duration"><a>Duration</a></div>
+      <div class="add-meta members"><a>Add Members</a></div>
+      <div class="add-meta image"><a ng-click="addImage()"><i class="icon-add-photo"></i>Attach Image</a></div>
+      <div class="add-meta done">
+        <button type="button" class="save" ng-click="save()" ng-disabled="saving">
+          <i class="icon-little-check"></i>
+          <span ng-if="saving">Saving...</span>
+          <span ng-hide="saving">Plant Seed</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="notifications">
+      <div ng-if="addingImage">Please wait...</div>
+      <div ng-if="testNotification"><i class="icon-little-check"></i> Test Notification </div>
+      <div ng-if="imageUrl">
+        <i class="icon-little-check"></i> Added image:
+        <br/>
+        <a ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}" width="100" style="display:inline-block"/></a>
+        <br/>
+        <a ng-click="removeImage()">remove</a>
+      </div>
+    </div>
+  </div>
+</div>

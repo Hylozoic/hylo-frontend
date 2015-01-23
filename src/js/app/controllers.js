@@ -8,9 +8,7 @@ require('./controllers/community');
 require('./controllers/fulfillModal');
 require('./controllers/network');
 require('./controllers/onboarding');
-require('./controllers/profile_settings');
 require('./controllers/search');
-require('./controllers/view_post');
 
 require('./controllers/community_settings')(angularModule);
 require('./controllers/profile')(angularModule);
@@ -18,3 +16,6 @@ require('./controllers/profile/edit')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);
 require('./controllers/user/settings')(angularModule);
+
+require('./controllers/NewSeedCtrl')(angularModule);
+require('./controllers/seeds/SeedCtrl')(angularModule);

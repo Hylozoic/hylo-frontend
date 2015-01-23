@@ -6,6 +6,17 @@
     margin-top: @std-padding;
     padding: 0;
   }
+
+  .post {
+    .full-media {
+      display: inline-block;
+      margin: 10px 0 5px;
+    }
+
+    .media {
+      display: none;
+    }
+  }
 }
 
 .post {
@@ -95,6 +106,22 @@
       .seed-body-text;
       padding-top: 5px;
     }
+  }
+
+  .media, .full-media {
+    width: 100%;
+  }
+
+  .media {
+    .fluid-height(56.25%); // 16:9
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    margin: 10px 0 0;
+  }
+
+  .full-media {
+    display: none;
   }
 
   .show-more-btn {
