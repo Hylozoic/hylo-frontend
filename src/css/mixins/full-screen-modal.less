@@ -72,23 +72,7 @@
     }
 
     input[type=checkbox] {
-      -webkit-appearance: none;
-      border: 2px solid @default-border;
-      padding: 11px;
-      border-radius: 15px;
-      margin: 0;
-      display: inline-block;
-      position: relative;
-      .proxima-nova(100);
-
-      &:checked:after {
-        content: '\2714';
-        font-size: 16px;
-        position: absolute;
-        top: 2px;
-        left: 4px;
-        color: @text-gray;
-      }
+      .round-checkbox();
     }
 
     button {

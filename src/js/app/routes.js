@@ -16,19 +16,18 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         template: "<div ui-view='main'></div>",
         resolve: {
           // Use the resource to fetch data from the server
-          currentUser: ['CurrentUser', function(CurrentUser) {
+          oldCurrentUser: ['CurrentUser', function(CurrentUser) {
             return CurrentUser.get().$promise;
           }],
           // user info has to be fetched from the new API for editing on
           // the new profile. eventually the old CurrentUser will be replaced
           // with this one.
-          newCurrentUser: ['User', function(User) {
+          currentUser: ['User', function(User) {
             return User.current().$promise;
           }]
         },
-        controller: ['$rootScope', 'currentUser', function($rootScope, currentUser) {
-          // Set the currentUser into rootScope to be used in templates across the app
-          $rootScope.currentUser = currentUser;
+        controller: ['$rootScope', 'oldCurrentUser', function($rootScope, oldCurrentUser) {
+          $rootScope.currentUser = oldCurrentUser;
         }]
       }).
       state('home', {
@@ -85,6 +84,21 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
+      state('newSeed', {
+        url: '/c/:community/new-seed',
+        parent: 'main',
+        views: {
+          "main": {
+            templateUrl: '/ui/seeds/new.tpl.html',
+            controller: 'NewSeedCtrl'
+          }
+        },
+        resolve: {
+          community: ['Community', '$stateParams', function(Community, $stateParams) {
+            return Community.get({id: $stateParams.community}).$promise;
+          }]
+        }
+      }).
       state('userSettings', {
         url: '/settings',
         parent: 'main',
@@ -102,9 +116,9 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
             return parseInt(currentUser.id) == parseInt($stateParams.id);
           }],
-          user: ['User', 'editable', '$stateParams', 'newCurrentUser', function(User, editable, $stateParams, newCurrentUser) {
+          user: ['User', 'editable', '$stateParams', 'currentUser', function(User, editable, $stateParams, currentUser) {
             if (editable) {
-              return newCurrentUser;
+              return currentUser;
             } else {
               return User.get({id: $stateParams.id}).$promise;
             }
@@ -163,8 +177,8 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         parent: 'main',
         views: {
           "main": {
-            templateUrl: '/ui/app/view_post.tpl.html',
-            controller: 'ViewPostCtrl'
+            templateUrl: '/ui/seeds/show.tpl.html',
+            controller: 'SeedCtrl'
           }
         }
       }).

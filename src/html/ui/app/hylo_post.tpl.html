@@ -17,6 +17,10 @@
 
     <div class="post-header" ng-click="onCommentIconClick()">
       <span class="title" seed-text="post.name"></span>
+      <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
+      <a ui-sref="post.comments({community: post.communitySlug, postId: post.id})"
+        ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">
+      </a>
       <div ng-if="isPostText" class="post-description">
         <div class="unpad-last-p" ng-bind-html="truncatedPostText"></div>
         <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>

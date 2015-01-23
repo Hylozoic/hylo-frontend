@@ -1,5 +1,13 @@
 var path = require('path');
 
+/*
+ * options:
+ *   path:     the S3 folder under which the file will be saved
+ *   convert:  image conversion settings (see filepicker docs)
+ *   success:  a success callback, which receives the new file's url as an argument
+ *   failure:  a failure callback, which receives the error as an argument
+ *
+ */
 module.exports = function(opts) {
   var pickOptions = {
     mimetype: 'image/*',
