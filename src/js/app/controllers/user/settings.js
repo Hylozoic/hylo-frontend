@@ -1,7 +1,7 @@
-var dependencies = ['$scope', 'growl', '$analytics', '$state', 'newCurrentUser', 'Community'];
-dependencies.push(function($scope, growl, $analytics, $state, newCurrentUser, Community) {
+var dependencies = ['$scope', 'growl', '$analytics', '$state', 'currentUser', 'Community'];
+dependencies.push(function($scope, growl, $analytics, $state, currentUser, Community) {
 
-  var user = $scope.user = newCurrentUser,
+  var user = $scope.user = currentUser,
     editing = $scope.editing = {},
     edited = $scope.edited = {};
 
