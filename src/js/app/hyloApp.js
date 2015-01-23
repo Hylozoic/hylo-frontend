@@ -4,7 +4,7 @@ angular.module('hyloApp', [
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
   'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io', "perfect_scrollbar",
-  'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features"
+  'hylo.seeds', 'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
 ])
 
 .factory('$exceptionHandler', ['$log', function ($log) {
