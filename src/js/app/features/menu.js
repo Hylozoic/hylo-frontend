@@ -81,7 +81,7 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
         if (!MenuService.state.expanded) {
           queryNotifications()
         }
-      }, 10000);
+      }, 30000);
     }
     // Bootstrap the notificationInterval
     startNotificationInterval();
