@@ -34,7 +34,7 @@ directive('contenteditable', ['$sce', '$filter', function($sce, $filter) {
 
       //update mediumEditor when ngModel updates
       ngModel.$render = function() {
-        mediumEditor.value(ngModel.$viewValue);
+        if (mediumEditor) mediumEditor.value(ngModel.$viewValue);
       };
 
       var mediumEditor = new Medium({
