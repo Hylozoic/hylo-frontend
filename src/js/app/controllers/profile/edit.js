@@ -22,6 +22,7 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
 
     user.update(saveData, function() {
       _.extend(user, saveData);
+      $analytics.eventTrack('My Profile: Saved Changes');
       $scope.cancel();
     });
   };
@@ -35,6 +36,7 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
       editData[type].unshift(event.target.value);
       event.target.value = '';
       edited[type] = true;
+      $analytics.eventTrack('My Profile: Edit: Add to Profile', {item_type: type});
     }
     return true;
   };
@@ -80,18 +82,23 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
       'Enter your Twitter username, or leave blank:',
       editData.twitter_name
     );
-    if (response) editData.twitter_name = response;
+    if (response) {
+      editData.twitter_name = response;
+      $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Twitter'});
+    }
   };
 
   $scope.changeFacebook = function() {
     if (editData.facebook_url) {
       if (confirm('Choose OK to remove your Facebook information.')) {
         editData.facebook_url = null;
+        $analytics.eventTrack('My Profile: Edit: Remove Social Media Link from Profile', {provider: 'Facebook'});
       }
     } else {
       FB.login(function() {
         FB.api('/me', function(resp) {
           editData.facebook_url = resp.link;
+          $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Facebook'});
         })
       })
     }
@@ -101,6 +108,8 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     if (editData.linkedin_url) {
       if (confirm('Choose OK to remove your LinkedIn information.')) {
         editData.linkedin_url = null;
+        $analytics.eventTrack('My Profile: Edit: Remove Social Media Link from Profile', {provider: 'LinkedIn'});
+
       }
     } else {
       var left = document.documentElement.clientWidth/2 - 520/2;
@@ -112,6 +121,7 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
   $scope.finishLinkedinChange = function(url) {
     editData.linkedin_url = url;
     $scope.linkedinDialog.close();
+    $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
   };
 
 });
