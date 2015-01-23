@@ -21,6 +21,8 @@ require('angulartics');
 require('bootstrap-select');
 require('filepicker');
 require('jquery.dotdotdot');
+require('newrelic-timing');
+require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
 require('ngInfiniteScroll');
 require('perfect-scrollbar');
