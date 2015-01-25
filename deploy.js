@@ -18,8 +18,11 @@ var currentGitSha = function() {
   return _command("git show|head -n1|awk '{print $2}'");
 };
 
-var gitUser = function() {
-  return _command("git config user.email")
+var username = function() {
+  var user = _command("git config user.email");
+  if (user == '')
+    user = process.env.DEPLOY_USER;
+  return user;
 };
 
 var Deployer = function(app, done, log) {
@@ -30,7 +33,6 @@ var Deployer = function(app, done, log) {
   this.log = log;
   this.version = currentGitHash();
   this.gitSha = currentGitSha();
-  this.gitUser = gitUser();
 
   if (!process.env.HEROKU_API_TOKEN) {
     this.log.errorlns("HEROKU_API_TOKEN is not set");
@@ -156,7 +158,7 @@ Deployer.prototype.notifyRollbar = function(callback) {
     // Pass data via Buffers
     revision: this.gitSha,
     environment: this.herokuEnv.APPLICATION_ENV,
-    local_username: this.gitUser
+    local_username: username()
   };
   request.post({url:'https://api.rollbar.com/api/1/deploy/',
       formData: formData},
