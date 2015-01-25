@@ -10,19 +10,19 @@ angular.module('hyloApp', [
 .factory('$exceptionHandler', ['$log', function ($log) {
   return function (exception, cause) {
     // Pass off the error to the default error handler
-    // on the AngualrJS logger. This will output the
+    // on the AngularJS logger. This will output the
     // error to the console (and let the application
     // keep running normally for the user).
-    $log.error.apply( $log, arguments );
+    $log.error.apply($log, arguments);
 
-    try {
-      if (hyloEnv.isProd) {
-        Rollbar.error("Client-Error", exception);
+    if (hyloEnv.isProd) {
+      try {
+        Rollbar.error(exception);
+      } catch (loggingError) {
+        // For Developers - log the log-failure.
+        $log.warn("Error logging failed");
+        $log.log(loggingError);
       }
-    } catch ( loggingError ) {
-      // For Developers - log the log-failure.
-      $log.warn( "Error logging failed" );
-      $log.log( loggingError );
     }
   };
 }])
