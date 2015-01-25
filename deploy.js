@@ -142,7 +142,6 @@ Deployer.prototype.uploadSourceMap = function(callback) {
             console.error('upload failed:', err);
             this.fail(result.message);
           }
-          console.log('Upload successful!  Rollbar responded with:', body);
           callback();
         }.bind(this)
   );
@@ -163,10 +162,8 @@ Deployer.prototype.notifyRollbar = function(callback) {
       formData: formData},
     function optionalCallback(err, httpResponse, body) {
       if (err || body.err > 0) {
-        console.error('notify rollbar failed:', err);
         this.fail(result.message);
       }
-      console.log('Rollbar notified successfuly!');
       callback();
     }.bind(this)
   );
