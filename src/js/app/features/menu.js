@@ -53,54 +53,12 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   };
 }])
 
-.controller('MenuCtrl', ['$scope', '$state', '$interval', '$timeout', 'Notification', '$idle', '$window', 'MenuService',
-  function($scope, $state, $interval, $timeout, Notification, $idle, $window, MenuService) {
-
-    // Query for notifications every set interval
-    $scope.notifications = [];
+.controller('MenuCtrl', ['$scope', '$state', '$timeout', 'MenuService',
+  function($scope, $state, $timeout, MenuService) {
 
     $scope.state = MenuService.state;
     $scope.setMenuState = MenuService.setMenuState;
     $scope.keepMenuOpen = MenuService.keepMenuOpen;
-
-    var queryNotifications = function() {
-      Notification.query({}, function(notifications) {
-        $scope.notifications = notifications;
-      });
-    }
-
-    queryNotifications();
-
-    var notificationInterval;
-    var startNotificationInterval = function() {
-      // Cancel the notificationInterval if one exists already;
-      if (notificationInterval) {
-        $interval.cancel(notificationInterval);
-      }
-      notificationInterval = $interval(function() {
-        if (!MenuService.state.expanded) {
-          queryNotifications()
-        }
-      }, 30000);
-    }
-    // Bootstrap the notificationInterval
-    startNotificationInterval();
-
-    $scope.$on('$idleTimeout', function() {
-      $interval.cancel(notificationInterval);
-    })
-
-    $scope.$on('$idleEnd', function() {
-      startNotificationInterval();
-      // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
-    });
-
-    $idle.watch();
-
-    $scope.markread = function(notification) {
-      notification.read = true;
-      Notification.markRead({id: notification.id})
-    }
 
   }])
 
