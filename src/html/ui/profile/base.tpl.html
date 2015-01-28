@@ -22,6 +22,13 @@
           <a ng-href="{{user.linkedin_url}}" ng-if="user.linkedin_url" ng-click="clickedSocialLink('linkedin', user.linkedin_url)" target="_blank">
             <i class="icon-linkedin"></i>
           </a>
+          <a class="message" ui-sref="editProfile"
+            ng-if="editable && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
+              <i class="icon-twitter"></i>
+              <i class="icon-facebook"></i>
+              <i class="icon-linkedin"></i>
+              &nbsp;&nbsp;Add social media links.
+          </a>
         </span>
       </div>
       <div class="bio">

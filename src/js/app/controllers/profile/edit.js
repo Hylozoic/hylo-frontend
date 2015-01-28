@@ -90,8 +90,10 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
       'Enter your Twitter username, or leave blank:',
       editData.twitter_name
     );
+
+    editData.twitter_name = response;
+
     if (response) {
-      editData.twitter_name = response;
       $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Twitter'});
     }
   };
