@@ -4,3 +4,4 @@
 
 <h3>Affiliations</h3>
 <div ng-repeat="org in user.organizations" class="list-entry">{{org}}</div>
+<div><a class="message" ui-sref="editProfile" ng-if="editable && user.organizations.length < 1">Add an affiliation.</a></div>
