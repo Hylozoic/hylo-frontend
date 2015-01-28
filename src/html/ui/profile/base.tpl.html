@@ -24,7 +24,11 @@
           </a>
         </span>
       </div>
-      <div class="bio">{{user.bio}}</div>
+      <div class="bio">
+        <a class="message" ui-sref="editProfile" ng-if="editable && !user.bio">
+          <i class="icon-edit" title="icon-edit"></i> Add a bio.</a>
+        {{user.bio}}
+      </div>
     </div>
   </div>
 </div>
