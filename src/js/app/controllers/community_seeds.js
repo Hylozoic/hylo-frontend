@@ -75,10 +75,6 @@ angular.module("hyloControllers").controller('CommunitySeedsCtrl',
         }
 
         var firstLoad = $scope.posts.length < $scope.limit;
-        if (!firstLoad) {
-          $analytics.eventTrack('Posts: Load more in Feed', {community_id: $scope.community.slug});
-        }
-
         if (doReset) {
           $scope.posts = [];
         }
