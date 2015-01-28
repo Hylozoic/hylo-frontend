@@ -137,6 +137,17 @@
       color: white;
       text-decoration: none;
 
+      &.message {
+        font-size: 13px;
+        color: @nonactive-text;
+
+        i {
+          color: black;
+          -webkit-text-stroke: 1px @faint-gray;
+          opacity: .6;
+        }
+      }
+
       @media (max-width: @screen-xs-max) {
         margin: 0 @std-padding/2;
       }
