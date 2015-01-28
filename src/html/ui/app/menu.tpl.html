@@ -42,28 +42,7 @@
       </a>
     </li>
 
-    <li class="no-link notifications-item" ng-click="setMenuState(true, true)">
-      <i class="icon-notifications"></i>
-      <span class="only-expanded">Notifications</span>
-    </li>
   </ul>
-
-  <perfect-scrollbar class="scroller" fit-height-to-parent>
-    <ul class="list-unstyled only-expanded" id="notifications" >
-      <li ng-repeat="notification in notifications">
-        <a ng-class="{unread: !notification.read}" class="notification" ng-click="markread(notification)" ui-sref="post.comments({community: notification.communitySlug, postId: notification.postId})">
-          <div back-img="::notification.avatar" class="avatar notificationAvatar"></div>
-          <div class="notification-info">
-            <div class="actor-action"><span class="actor">{{::notification.actor}}</span> <span class="action" ng-bind="::notification.action"></span></div>
-            <div class="itemName"><span ng-bind="::notification.itemName"></span></div>
-            <div class="timestamp" ng-bind="::notification.timestamp|fromNow"></div>
-          </div>
-          <div class="notification-border clearfix"></div>
-        </a>
-      </li>
-    </ul>
-  </perfect-scrollbar>
-
 
   <div class="only-expanded footerLinks">
     <i class="icon-hylo-script footer-icon"></i>

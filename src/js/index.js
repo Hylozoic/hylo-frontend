@@ -25,12 +25,10 @@ require('newrelic-timing');
 require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
 require('ngInfiniteScroll');
-require('perfect-scrollbar');
 require('ment.io');
 /* End Bower Components */
 
 /* Manually installed components */
-require('./angular/angular-perfect-scrollbar');
 require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');

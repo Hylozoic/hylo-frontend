@@ -18,18 +18,6 @@ factory('OldUser', ['$resource',
       });
   }]).
 
-factory('Notification', ['$resource',
-  function($resource) {
-    return $resource('/notifications/:id',
-      {
-        id: "@id"
-      },{
-        markRead: {
-          method: "POST"
-        }
-      });
-  }]).
-
 factory("Post", ["$resource",
   function($resource) {
     return $resource("/posts/:listController:id/:postController:userId",
