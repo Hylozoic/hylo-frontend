@@ -86,6 +86,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
         }, function() {
           $scope.createDisabled = false;
           growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
+          $analytics.eventTrack('Post: Comment: Adding a Comment Failed.', {post_id: $scope.post.id});
         });
       }
     };
