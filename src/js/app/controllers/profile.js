@@ -1,5 +1,5 @@
-var dependencies = ['$scope', '$analytics', 'User', 'user', 'editable', 'posts'];
-dependencies.push(function($scope, $analytics, User, user, editable, posts) {
+var dependencies = ['$scope', '$analytics', 'User', 'user', 'editable', 'posts', 'growl'];
+dependencies.push(function($scope, $analytics, User, user, editable, posts, growl) {
   $scope.user = user;
   $scope.editable = editable;
   $scope.posts = posts;
