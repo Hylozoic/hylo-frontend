@@ -9,7 +9,9 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
       'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
       'twitter_name', 'linkedin_url', 'facebook_url'
     ]),
-    edited = {};
+    edited = {},
+    bio = editData.bio;
+
 
   $scope.save = function() {
     if (editData.banner_url === require('../../services/defaultUserBanner')) {
@@ -17,8 +19,14 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     }
 
     var saveData = _.clone(editData);
+
+    if (saveData.bio != bio) $analytics.eventTrack('My Profile: Updated Bio');
+
     if (!edited.skills) delete saveData.skills;
+    else analytics.eventTrack('My Profile: Updated Skills');
+
     if (!edited.organizations) delete saveData.organizations;
+    else analytics.eventTrack('My Profile: Updated Affiliations');
 
     user.update(saveData, function() {
       _.extend(user, saveData);
@@ -123,7 +131,6 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     $scope.linkedinDialog.close();
     $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
   };
-
 });
 
 module.exports = function(angularModule) {
