@@ -140,11 +140,14 @@
       &.message {
         font-size: 13px;
         color: @nonactive-text;
+        opacity: .7;
 
         i {
-          color: black;
-          -webkit-text-stroke: 1px @faint-gray;
-          opacity: .6;
+          color: @nonactive-text;
+        }
+
+        &:hover {
+          text-decoration: underline;
         }
       }
 
