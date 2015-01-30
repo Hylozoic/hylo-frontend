@@ -23,10 +23,10 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     if (saveData.bio != bio) $analytics.eventTrack('My Profile: Updated Bio');
 
     if (!edited.skills) delete saveData.skills;
-    else analytics.eventTrack('My Profile: Updated Skills');
+    else $analytics.eventTrack('My Profile: Updated Skills');
 
     if (!edited.organizations) delete saveData.organizations;
-    else analytics.eventTrack('My Profile: Updated Affiliations');
+    else $analytics.eventTrack('My Profile: Updated Affiliations');
 
     user.update(saveData, function() {
       _.extend(user, saveData);
