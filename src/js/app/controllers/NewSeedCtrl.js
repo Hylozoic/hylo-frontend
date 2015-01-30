@@ -10,6 +10,7 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     request: "I'm looking for"
   };
 
+  // TODO get multiple placeholders to work
   var placeholders = {
     intention: "Add more detail about this intention. What help do you need to make it happen?",
     offer: 'Add more detail about this offer. Is it in limited supply? Do you wish to be compensated?',
