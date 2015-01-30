@@ -8,149 +8,160 @@
   		padding-right: @std-padding*2;
   		padding-left: @std-padding*2;
   	}
-
-  	.select-type {
-  		.make-row;
-  		border-bottom: 2px solid @default-border;
-  		padding-bottom: @std-padding/2;
-
-  		.option {
-  			.make-sm-column(4);
-
-  			.make-radio-color(@color) {
-  				input[type=radio]:checked {
-  					background-color: @color;
-  					border-color: @color;
-  				}
-  			}
-
-  			&.intention {
-  				.make-radio-color(@intention-color);
-  				@media (min-width: @screen-sm) { padding-left: 0;}
-  			}
-  			&.offer {
-  				.make-radio-color(@offer-color);
-  				text-align: center;
-  			}
-  			&.request {
-  				.make-radio-color(@request-color);
-  				text-align: right;
-  				@media (min-width: @screen-sm) { padding-right: 0;}
-  			}
-
-  			@media (max-width: @screen-xs-max) {
-  				&.intention, &.offer, &.request {
-  					text-align: left;
-  				}
-  			}
-
-  			&.active {
-  				label {
-  					color: @default-text;
-  				}
-  			}
-
-  			label {
-  				.large-header;
-  				color: @nonactive-text;
-  			}
-
-  			input[type=radio] {
-  			    .round-radio;
-  			}
-  		}
-  	}
-
-  	.edit-content {
-  		.make-row;
-
-  		@media (max-width: @screen-xs-max) {
-  			padding-left: @std-padding;
-  			padding-right: @std-padding;
-  		}
-  		.title {
-  			.medium-title-text;
-  			font-weight: 600;
-  			margin-top: @std-padding*2;
-  			margin-bottom: @std-padding/2;
-  		}
-  		input, textarea {
-  			margin-bottom: @std-padding;
-  			.proxima-nova-regular;
-  			font-size: 18px;
-  			width: 100%;
-  			border: 1px solid @default-border;
-  		}
-  	}
-
-  	.bottom-bar {
-  		.make-row;
-  		border-top: 2px solid @default-border;
-  		border-bottom: 2px solid @default-border;
-  		margin-top: @std-padding;
-  		margin-bottom: @std-padding;
-
-  		.add-meta {
-  			.make-sm-column(3);
-  			.seed-body-text;
-  			padding-top: @std-padding;
-  			padding-bottom: @std-padding;
-  			@media (max-width: @screen-xs-max) {
-  				padding-top: @std-padding/2;
-  				padding-bottom: @std-padding/2;
-  				text-align: center;
-  			}
-
-  			a {
-  				line-height: @default-button-height;
-  				.remove-link-display(@nonactive-text);
-  				@media (max-width: @screen-xs-max) {
-	  				color: @default-text;
-	  			}
-  				&:hover {
-  					cursor: pointer;
-  					color: @default-text;
-  				}
-
-  				i {
-  					padding-right: @std-padding/2;
-  				}
-  			}
-
-  			&.duration, &.members {
-  				visibility: hidden;
-  				@media (max-width: @screen-xs-max) {
-  					display: none;
-  				}
-  			}
-
-  			&.image {
-	  			text-align: center;
-	  		}
-
-  			&.done {
-  				button {
-  					.rounded-button-dark;
-  					@media (min-width: @screen-sm) {
-  						float: right;
-  						.rounded-button;
-  					}
-  				}
-  				padding-right: 0;
-  			}
-  		}
-  	}
-
-  	.notifications {
-  		.make-row;
-
-  		@media (max-width: @screen-xs-max) {
-  			padding-left: @std-padding;
-  			padding-right: @std-padding;
-  		}
-  		i {
-  			color: @hylo-green;
-  		}
-  	}
   }
+
+	.select-type {
+		.make-row;
+		border-bottom: 2px solid @default-border;
+		padding-bottom: @std-padding/2;
+
+		.option {
+			.make-sm-column(4);
+
+			.make-radio-color(@color) {
+				input[type=radio]:checked {
+					background-color: @color;
+					border-color: @color;
+				}
+			}
+
+			&.intention {
+				.make-radio-color(@intention-color);
+				@media (min-width: @screen-sm) { padding-left: 0;}
+			}
+			&.offer {
+				.make-radio-color(@offer-color);
+				text-align: center;
+			}
+			&.request {
+				.make-radio-color(@request-color);
+				text-align: right;
+				@media (min-width: @screen-sm) { padding-right: 0;}
+			}
+
+			@media (max-width: @screen-xs-max) {
+				&.intention, &.offer, &.request {
+					text-align: left;
+				}
+			}
+
+			&.active {
+				label {
+					color: @default-text;
+				}
+			}
+
+			label {
+				.large-header;
+				color: @nonactive-text;
+			}
+
+			input[type=radio] {
+			    .round-radio;
+			}
+		}
+	}
+
+	.edit-content {
+		.make-row;
+
+		@media (max-width: @screen-xs-max) {
+			padding-left: @std-padding;
+			padding-right: @std-padding;
+		}
+		.title {
+			.medium-title-text;
+			font-weight: 600;
+			margin-top: @std-padding*2;
+			margin-bottom: @std-padding/2;
+		}
+		input, textarea {
+			margin-bottom: @std-padding;
+			.proxima-nova-regular;
+			font-size: 18px;
+			width: 100%;
+			border: 1px solid @default-border;
+		}
+	}
+
+	.bottom-bar {
+		.make-row;
+		border-top: 2px solid @default-border;
+		border-bottom: 2px solid @default-border;
+		margin-top: @std-padding;
+		margin-bottom: @std-padding;
+
+		.add-meta {
+			.make-sm-column(3);
+			.seed-body-text;
+			padding-top: @std-padding;
+			padding-bottom: @std-padding;
+			@media (max-width: @screen-xs-max) {
+				padding-top: @std-padding/2;
+				padding-bottom: @std-padding/2;
+				text-align: center;
+			}
+
+			a {
+				line-height: @default-button-height;
+				.remove-link-display(@nonactive-text);
+				@media (max-width: @screen-xs-max) {
+  				color: @default-text;
+  			}
+				&:hover {
+					cursor: pointer;
+					color: @default-text;
+				}
+
+				i {
+					padding-right: @std-padding/2;
+				}
+			}
+
+			&.duration, &.members {
+				visibility: hidden;
+				@media (max-width: @screen-xs-max) {
+					display: none;
+				}
+			}
+
+			&.image {
+  			text-align: center;
+  		}
+
+			&.done {
+				button {
+					.rounded-button-dark;
+					@media (min-width: @screen-sm) {
+						float: right;
+						.rounded-button;
+					}
+				}
+				padding-right: 0;
+			}
+		}
+	}
+
+	.notifications {
+		.make-row;
+
+		@media (max-width: @screen-xs-max) {
+			padding-left: @std-padding;
+			padding-right: @std-padding;
+		}
+		i {
+			color: @hylo-green;
+		}
+	}
+
+  .edit-seed-content {
+    .mentio-editor {
+      height: 120px;
+    }
+
+    .Medium-placeholder {
+      border-radius: 4px;
+    }
+  }
+
 }
