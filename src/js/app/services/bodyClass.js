@@ -4,18 +4,29 @@
 // add the state name, but also the parent's name if
 // the state is a sub-view
 //
-module.exports = function(angularModule) {
 
-  angularModule.factory('$bodyClass', ['$state', function($state) {
-    return function() {
-      var name = $state.current.name;
+var extractClassName = function(stateName) {
+  if (stateName.match(/\./)) {
+    return [stateName.split('.', 1)[0], stateName.replace('.', '-')];
+  }
+  return stateName;
+};
 
-      if (name.match(/\./)) {
-        return [name.split('.', 1)[0], name.replace('.', '-')];
-      }
+var extractClassNameFn = function(stateName) {
+  return function() {
+    return extractClassName(stateName);
+  };
+};
 
-      return name;
-    };
-  }]);
+module.exports = {
+  extractClassName: extractClassName,
+  extractClassNameFn: extractClassNameFn,
 
+  service: function(angularModule) {
+    angularModule.factory('$bodyClass', ['$state', function($state) {
+      return function() {
+        return extractClassName($state.current.name);
+      };
+    }]);
+  }
 };

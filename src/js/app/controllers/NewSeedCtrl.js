@@ -1,8 +1,8 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var dependencies = ['$scope', 'currentUser', 'community', 'Seed', 'growl', '$analytics'];
-dependencies.push(function($scope, currentUser, community, Seed, growl, $analytics) {
+var dependencies = ['$scope', 'currentUser', 'community', 'Seed', 'growl', '$analytics', 'UserMentions'];
+dependencies.push(function($scope, currentUser, community, Seed, growl, $analytics, UserMentions) {
 
   var prefixes = {
     intention: "I'd like to create",
@@ -10,9 +10,16 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     request: "I'm looking for"
   };
 
+  var placeholders = {
+    intention: "Add more detail about this intention. What help do you need to make it happen?",
+    offer: 'Add more detail about this offer. Is it in limited supply? Do you wish to be compensated?',
+    request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?'
+  };
+
   $scope.switchSeedType = function(seedType) {
   	$scope.seedType = seedType;
     $scope.title = prefixes[seedType] + ' ';
+    $scope.descriptionPlaceholder = placeholders[seedType];
   };
 
   $scope.switchSeedType('intention');
@@ -67,6 +74,14 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
       growl.addErrorMessage(err.data);
     });
   };
+
+  $scope.searchPeople = function(query) {
+    UserMentions.searchPeople(query, community).then(function(people) {
+      $scope.people = people;
+    });
+  };
+
+  $scope.getPeopleTextRaw = UserMentions.userTextRaw;
 
 });
 

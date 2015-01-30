@@ -99,9 +99,13 @@ angular.module('hyloApp', [
       }
     );
 
+    var bodyClass = require('./services/bodyClass');
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       MenuService.setMenuState(false, false);
       guiders.hideAll();
+
+      $rootScope.$bodyClass = bodyClass.extractClassNameFn(toState.name);
     });
 
     // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
