@@ -1,3 +1,5 @@
+var linkify = require('html-linkify');
+
 angular.module("hyloDirectives").directive('hyloPost', ["Post",
   '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
   '$timeout', '$window', '$analytics', '$sce',
@@ -236,9 +238,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
       };
 
       $scope.showMore = function($event) {
-        $scope['short'] = false;
         $scope.truncated = false;
-        setText();
+        setText(true);
         $event.stopPropagation();
         $event.preventDefault();
       };
@@ -249,20 +250,20 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
         }
       };
 
-      var setText = function() {
+      var setText = function(fullLength) {
         var text = $scope.post.description;
 
         if (text == null) {
           text = "";
         }
 
-        var truncate = $scope['short'] && text.length > 400;
-
-        if (truncate) {
+        if (!fullLength && text.length > 400) {
           var cutoff = text.indexOf(' ', 395);
           text = text.substring(0, cutoff) + '... ';
           $scope.truncated = true;
         }
+
+        text = linkify(text, {escape: false, attributes: {target: '_blank'}});
 
         $scope.truncatedPostText = $sce.trustAsHtml(text);
 
@@ -323,7 +324,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
 
         $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
-        setText();
+        setText(false);
 
         unwatchPost();
       };
