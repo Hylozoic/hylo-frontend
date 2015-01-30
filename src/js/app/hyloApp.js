@@ -105,6 +105,9 @@ angular.module('hyloApp', [
       MenuService.setMenuState(false, false);
       guiders.hideAll();
 
+      // this is kind of a hack to get the new state's class on the body before
+      // it's rendered. otherwise, directives that depend on having elements sized
+      // correctly (ahem Medium.js) will get the wrong info.
       $rootScope.$bodyClass = bodyClass.extractClassNameFn(toState.name);
     });
 
