@@ -15,7 +15,7 @@
       </ul>
     </span>
 
-    <div class="post-header" ng-click="onCommentIconClick()">
+    <div class="post-header">
       <span class="title" seed-text="post.name"></span>
       <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
       <a ui-sref="post.comments({community: post.communitySlug, postId: post.id})"
