@@ -1,4 +1,5 @@
-var linkify = require('html-linkify');
+var linkify = require('html-linkify'),
+  truncate = require('html-truncate');
 
 angular.module("hyloDirectives").directive('hyloPost', ["Post",
   '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
@@ -252,21 +253,16 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
 
       var setText = function(fullLength) {
         var text = $scope.post.description;
-
-        if (text == null) {
-          text = "";
-        }
-
-        if (!fullLength && text.length > 400) {
-          var cutoff = text.indexOf(' ', 395);
-          text = text.substring(0, cutoff) + '... ';
-          $scope.truncated = true;
-        }
+        if (text == null) text = "";
 
         text = linkify(text, {escape: false, attributes: {target: '_blank'}});
 
-        $scope.truncatedPostText = $sce.trustAsHtml(text);
+        if (!fullLength && text.length > 400) {
+          text = truncate(text, 397);
+          $scope.truncated = true;
+        }
 
+        $scope.truncatedPostText = $sce.trustAsHtml(text);
         $scope.isPostText = text.length > 0;
       };
 
