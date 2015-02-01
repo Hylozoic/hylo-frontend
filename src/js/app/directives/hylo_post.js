@@ -50,35 +50,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
         });
       };
 
-      $scope.gotoPost = function($event) {
-        if ($event.target) {
-            // Check to see if we are clicking an embedded link...if so, then open the link instead of opening the post.
-          if (!$($event.target).hasClass("post-header") && $($event.target).is("a")) {
-            // If a hashtag link, then just return
-            if ($($event.target).hasClass("hashtag")) {
-              return true;
-            }
-            var href = $event.target.href;
-            if (href) {
-              $window.open(href, '_blank');
-              $event.stopPropagation();
-              $event.preventDefault();
-              return false;
-            }
-          }
-          if ($($event.target).hasClass("delete")) {
-            $event.stopPropagation();
-            $event.preventDefault();
-            return false;
-          }
-        }
-        $scope.isCommentsCollapsed = false;
-
-        $event.stopPropagation();
-        $event.preventDefault();
-        return false;
-      };
-
       $scope.gotoSinglePost = function() {
         $analytics.eventTrack('Post: Load Single Post', {post_id: $scope.post.id});
         $state.go('post.comments', {community: $scope.post.communitySlug, postId: $scope.post.id})
@@ -128,33 +99,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
       $scope.$on("decipher.tags.removed", function(event, args) {
         $scope.followersToAdd.splice($scope.followersToAdd.indexOf(args.tag), 1);
       });
-
-//      $scope.$on("decipher.tags.keyup", function(event, args) {
-//        $http.get('/users/typeahead', {
-//          params: {postId: $scope.post.id, q: args.value}
-//        }).then(function(res) {
-//          $scope.potentialFollowers = res.data;
-//        });
-//
-//      });
-
-
-//      $scope.typeaheadUsers = [];
-
-//      $scope.typeahead = function(viewValue) {
-//        if (!viewValue || viewValue.trim().length == 0) {
-//          return [];
-//        }
-//        return $http.get('/users/typeahead', {
-//          params: {postId: $scope.post.id, q: viewValue}
-//        }).then(function(res){
-//          var users = [];
-//          angular.forEach(res.data, function(item){
-//            users.push(item);
-//          });
-//          return users;
-//        });
-//      };
 
       $scope.editingFollowers = false;
 
@@ -254,7 +198,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
         var text = $scope.post.description;
         if (text == null) text = "";
 
-        text = require('../services/RichText').present(text);
+        text = require('../services/RichText').present(text, $scope.post.communitySlug);
 
         if (!fullLength && text.length > 400) {
           text = truncate(text, 397);

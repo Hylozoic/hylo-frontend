@@ -191,6 +191,11 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
       state('search', {
         url: "/c/:community/search?q",
         parent: 'main',
+        resolve: {
+          query: ['$stateParams', function($stateParams) {
+            return $stateParams.q;
+          }]
+        },
         views: {
           "main": {
             templateUrl: '/ui/app/search.tpl.html',
