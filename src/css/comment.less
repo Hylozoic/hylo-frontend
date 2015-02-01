@@ -4,16 +4,17 @@
   .loading {
     padding: @std-padding;
   }
-  background-color: @faint-gray;
-  border: 1px solid @border-lightest;
-  border-top: none;
 
   .comment:last-of-type {
     margin-bottom: 25px;
   }
 
   .comment {
-    margin-bottom: 18px;
+    padding-bottom: 18px;
+    background-color: @faint-gray;
+    border-right: 1px solid @border-lightest;
+    border-left: 1px solid @border-lightest;
+
 
     //add padding to top of comments
     &:first-child {
@@ -81,6 +82,7 @@
   background-color: white;
   position: relative;
   padding: 6px 0;
+  border: 1px solid @border-lightest;
   .seed-body-text;
 
   .avatar {
@@ -141,7 +143,6 @@
     }
   }
   .add-comment {
-    margin-top: 8px;
 
     .avatar {
       margin-left: 8px;
@@ -157,5 +158,14 @@
         margin-top: 12px;
       }
     }
+  }
+}
+
+.comment-btn {
+  margin-top: 3px;
+  text-align: center;
+
+  button {
+    .rounded-button-dark;
   }
 }

@@ -142,4 +142,6 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     $scope.getPeopleTextRaw = UserMentions.userTextRaw;
 
+    $scope.initialCommentText = '<p>&nbsp;</p>';
+
   }]);
