@@ -1,5 +1,4 @@
-var linkify = require('html-linkify'),
-  truncate = require('html-truncate');
+var truncate = require('html-truncate');
 
 angular.module("hyloDirectives").directive('hyloPost', ["Post",
   '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
@@ -255,7 +254,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
         var text = $scope.post.description;
         if (text == null) text = "";
 
-        text = linkify(text, {escape: false, attributes: {target: '_blank'}});
+        text = require('../services/RichText').present(text);
 
         if (!fullLength && text.length > 400) {
           text = truncate(text, 397);
