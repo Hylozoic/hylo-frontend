@@ -1,5 +1,6 @@
-angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScope', '$timeout', 'Post', "$log", '$stateParams', 'growl', '$q', '$http', '$location', '$analytics',
-  function($scope, $rootScope, $timeout, Post, $log, $stateParams, growl, $q, $http, $location, $analytics) {
+angular.module("hyloControllers").controller('SearchCtrl', [
+  '$scope', '$rootScope', '$timeout', 'Post', "$log", 'growl', '$q', '$http', '$location', '$analytics', 'query',
+  function($scope, $rootScope, $timeout, Post, $log, growl, $q, $http, $location, $analytics, query) {
 
     $scope.postType = "all";
     $scope.postSort = "top";
@@ -8,7 +9,7 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
     $scope.limit = 12;
 
     $scope.posts = [];
-    $scope.searchQuery = $stateParams.q;
+    $scope.searchQuery = query;
 
     // Initially Disabled Infinite Scroll
     $scope.disableInfiniteScroll = true;
@@ -55,10 +56,9 @@ angular.module("hyloControllers").controller('SearchCtrl', ['$scope', '$rootScop
       $scope.disableInfiniteScroll = true;
       $scope.searching = true;
 
-      $http.get('/posts', {
+      $http.get('/noo/community/' + $scope.community.id + "/seeds", {
         params: {
           q: $scope.searchQuery,
-          community: $rootScope.community.slug,
           postType: $scope.postType,
           sort: $scope.postSort,
           start: $scope.start,
