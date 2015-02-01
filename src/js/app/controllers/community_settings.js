@@ -99,6 +99,17 @@ module.exports = function(angularModule) {
         }
       };
 
+      $scope.toggle = function(field) {
+        console.log(field);
+        if ($scope.community[field] === undefined) {
+          console.log('undefined');
+          $scope.community[field] = false;
+        }
+        console.dir($scope.community);
+        console.log($scope.community[field]);
+        $scope.community[field] = !$scope.community[field];
+      }
+
       $scope.removeModerator = function(userId) {
         var user = _.find($scope.moderators, function(user) { return user.id == userId }),
           confirmText = "Are you sure you wish to remove " + user.name + "'s moderator powers?";

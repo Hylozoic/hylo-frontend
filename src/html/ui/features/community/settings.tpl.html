@@ -65,6 +65,17 @@
           <button type="button" ng-click="changeBanner()">Change</button>
         </div>
       </div>
+      <div class="row set-invite-permissions">
+        <div class="col-sm-6">
+          <label>Who can invite others?</label>
+          <p>Coming soon! Check to allow anyone to invite new members to your community.</p>
+        </div>
+        <div class="col-sm-6 value">
+          <span ng-if="community[anyone_can_invite]">Anyone&nbsp;</span>
+          <span ng-if="!community[anyone_can_invite]">Only moderators&nbsp;</span>
+          <input type="checkbox" ng-model="community[anyone_can_invite]" disabled="true" ng-click="toggle('anyone_can_invite')"/>
+        </div>
+      </div>
     </div>
 
     <div class="row section-label" ng-click="expand2 = !expand2">
@@ -80,7 +91,7 @@
           <div class="col-xs-6">
             <label>
               <input type="checkbox" ng-model="inviteAsModerator"/>
-              Invite them to be moderators
+              &nbsp;Invite them to be moderators
             </label>
           </div>
           <div class="col-xs-6 right">
