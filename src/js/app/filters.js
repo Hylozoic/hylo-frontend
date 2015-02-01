@@ -20,30 +20,6 @@ filter('linkyShort', [ '$sanitize', function($sanitize) {
   }
 }]).
 
-/**
- * A filter to convert urls in text as anchors, but don't match existing anchor urls.
- * Also adds the protocol to urls that don't contain one.
- */
-filter('linkyDontMatchExistingAnchors', [ '$sanitize', function($sanitize) {
-  return function(text) {
-    if (!text) return text;
-    var replacePattern2 = /((?:(?:ht|f)tps?:\/\/|www)[^<>\]]+?(?![^<>\]]*([>]|<\/))(?=[\s!,?\]]|$))/gm;
-    var replacedText = text.replace(replacePattern2, function (match, $1) {
-      // add protocol if needed
-      url = $1;
-
-      if (!/^(?:f|ht)tps?\:\/\//.test($1)) {
-        url = "http://" + $1;
-      }
-
-      return '<a href="' + url + '" target="_blank">' + $1 + '</a>'
-    });
-
-    //returns the text result
-    return replacedText;
-  }
-}]).
-
 filter('hashtag', [ '$sce', function($sce) {
   return function(text) {
     if (!text) return text;
