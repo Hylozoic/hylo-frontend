@@ -1,11 +1,11 @@
 var truncate = require('html-truncate');
 
-angular.module("hyloDirectives").directive('hyloPost', ["Post",
+angular.module("hyloDirectives").directive('hyloPost', ["Post", 'Seed',
   '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
-  '$timeout', '$window', '$analytics', '$sce',
-  function(Post,
+  '$timeout', '$window', '$analytics', '$sce', 'growl',
+  function(Post, Seed,
            $filter, $state, $rootScope, $log, $modal, $http,
-           $timeout, $window, $analytics, $sce) {
+           $timeout, $window, $analytics, $sce, growl) {
   return {
     restrict: 'E',
     scope: {
@@ -146,14 +146,22 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
             $scope.potentialFollowers = res.data;
           });
         } else { // Save added followers
-          _.each($scope.followersToAdd, function(follower) {
-            if (!_.findWhere($scope.followers, {value: follower.value})) {
-              $scope.followers.push(follower);
-              Post.addFollower({id: $scope.post.id, followerId: follower.value});
-            }
+          Seed.addFollowers({
+            id: $scope.post.id,
+            userIds: _.pluck($scope.followersToAdd, 'value'),
+            communityId: $rootScope.community.id
+          }, function() {
+            _.each($scope.followersToAdd, function(follower) {
+              if (!_.findWhere($scope.followers, {value: follower.value})) {
+                $scope.followers.push(follower);
+              }
+            });
+            $scope.followersToAdd = [];
+          }, function(err) {
+            growl.addErrorMessage(err.data);
           });
-          $scope.followersToAdd = [];
         }
+
         $scope.editingFollowers = isEditing;
       };
 
@@ -231,18 +239,8 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
       };
 
       var initialize = function() {
-        var loadFollowers = function() {
-          if ($scope.post.followersLoaded) {
-            $scope.followers = $scope.post.followers;
-            $scope.$watchCollection("followers", checkIsFollowing);
-          } else {
-            Post.followers({id: $scope.post.id}).$promise.then(function(value) {
-                  $scope.followers = value;
-                  $scope.$watchCollection("followers", checkIsFollowing);
-                }
-            );
-          }
-        };
+        $scope.followers = $scope.post.followers;
+        $scope.$watchCollection("followers", checkIsFollowing);
 
         if ($scope.isCommentsCollapsed) {
           var unwatchCommentsCollapsed = $scope.$watch("isCommentsCollapsed",
@@ -252,8 +250,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post",
               }
           });
         }
-
-        loadFollowers();
 
         // Determines if this post is deletable by currentUser. (is their post OR a moderator)
         $scope.canDelete = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||

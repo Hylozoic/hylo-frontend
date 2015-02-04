@@ -27,23 +27,10 @@ factory("Post", ["$resource",
           postController: "@postController"
         },
         {
-          forUser: {
-            method: "GET",
-            isArray: true,
-            params: {
-              listController: "user"
-            }
-          },
           vote: {
             method: "POST",
             params: {
               postController: "vote"
-            }
-          },
-          comment: {
-            method: "POST",
-            params: {
-              postController: "comment"
             }
           },
           getComments: {
@@ -51,25 +38,6 @@ factory("Post", ["$resource",
             isArray: true,
             params: {
               postController: "comments"
-            }
-          },
-          followers: {
-            method: "GET",
-            isArray: true,
-            params: {
-              postController: "followers"
-            }
-          },
-          addFollower: {
-            method: "POST",
-            params: {
-              postController: "addfollower"
-            }
-          },
-          removeFollower: {
-            method: "POST",
-            params: {
-              postController: "removefollower"
             }
           },
           follow: {
@@ -102,6 +70,12 @@ factory("Seed", ["$resource",
         method: "POST",
         params: {
           action: "comment"
+        }
+      },
+      addFollowers: {
+        method: 'POST',
+        params: {
+          action: 'followers'
         }
       }
     })
