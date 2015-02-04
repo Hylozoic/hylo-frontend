@@ -324,8 +324,8 @@
 
 .round-input {
   -webkit-appearance: none;
-  border: 2px solid @default-border;
-  border-radius: 15px;
+  border: 1px solid @button-border;
+  border-radius: 25px;
   outline: none;
   margin: 0;
   display: inline-block;
@@ -335,20 +335,22 @@
 
 .round-radio() {
   .round-input;
-  padding: 7px;
+  padding: 10px;
 }
 
 .round-checkbox() {
   .round-input;
-  padding: 11px;
+  padding: 15px;
 
-  &:checked:after {
-    content: '\2714';
-    font-size: 16px;
-    position: absolute;
-    top: 2px;
-    left: 4px;
-    color: @text-gray;
+  &:checked {
+    &:after {
+      content: '\2713';
+      font-size: 20px;
+      position: absolute;
+      top: 2px;
+      left: 8px;
+      color: @default-text;
+    }
   }
 }
 
