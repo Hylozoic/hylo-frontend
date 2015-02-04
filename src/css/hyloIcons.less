@@ -1,5 +1,5 @@
 /* How to update file:
-	Step 1: Make sure that icons files and styles.css have been renamed since the previous version. 
+	Step 1: Make sure that icons files and styles.css have been renamed since the previous version.
 	        Files are on dropbox in Crowdscale/Product/Icons
 	Step 2: Copy and Paste contents (leave last shadow box stuff in tact)
 	Step 3: Replate first @font-face src: url with the renamed version of the current file
@@ -9,8 +9,12 @@
 	It should now load the new fonts!
 */
 
+/*TODO: Replace the variable for icon-font-family on each re-deploy.
+This variable is used to make the big check icon visible for checkboxes */
+@icon-font-family: 'HyloCore11-26-14';
+
 @font-face {
-	font-family: 'HyloCore11-26-14';
+	font-family: @icon-font-family;
 	src: url('http://d3ngex8q79bk55.cloudfront.net/fonts/HyloCore11-26-14.eot');
 }
 @font-face {
