@@ -45,7 +45,13 @@ dependencies.push(function($resource) {
     },
     removeModerator: function(params, success, error) {
       return Community.removeModerator(_.extend({id: this.id}, params), success, error);
-    }
+    },
+    update: function(params, success, error) {
+      return Community.save(_.extend({id: this.id}, params), success, error);
+    },
+    invite: function(params, success, error) {
+      return Community.invite(_.extend({id: this.id}, params), success, error);
+    },
   });
 
   return Community;

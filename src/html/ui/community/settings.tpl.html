@@ -83,11 +83,17 @@
     <div class="section invite" collapse="!expand2">
       <div class="setting-item">
         <div class="full-column">
+          <label>Subject</label>
+          <input type="text" class="form-control" ng-model="invitationSubject"/>
+          <label>Message</label>
+          <textarea class="form-control" ng-model="invitationText"></textarea>
+
+          <label>Recipients</label>
           <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
         </div>
         <div class="main-column">
           <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>
-          <label for="inviteAsModerator">Invite them to be moderators</label>
+          <label for="inviteAsModerator">Invite recipients to be moderators</label>
         </div>
         <div class="side-column">
           <button type="button" ng-click="invite()">

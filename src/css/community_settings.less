@@ -24,7 +24,7 @@
   }
 
   .invite {
-    label {
+    label[for="inviteAsModerator"] {
       font-weight: normal;
       font-size: 14px;
       line-height: 32px;
@@ -46,6 +46,13 @@
       display: block;
       width: 100%;
       margin-bottom: 10px;
+    }
+    textarea {
+      margin-bottom: 10px;
+      height: 180px;
+      @media (max-width: @screen-xs-max) {
+        height: 40vh;
+      }
     }
     .note {
       .seed-meta-text;
