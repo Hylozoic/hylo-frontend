@@ -10,7 +10,6 @@ require('./controllers/network');
 require('./controllers/onboarding');
 require('./controllers/search');
 
-require('./controllers/community_settings')(angularModule);
 require('./controllers/profile')(angularModule);
 require('./controllers/profile/edit')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
@@ -19,3 +18,4 @@ require('./controllers/user/settings')(angularModule);
 
 require('./controllers/NewSeedCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
+require('./controllers/community/CommunitySettingsCtrl')(angularModule);
