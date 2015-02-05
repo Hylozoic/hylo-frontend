@@ -3,8 +3,7 @@ angular.module("hyloDirectives").directive('embeddedComments', ["Post", '$filter
     return {
       restrict: 'E',
       scope: {
-        post: '=', // the post to generate markup for as a bi-directional model.  See http://docs.angularjs.org/api/ng.$compile
-        followPost: '&followFn'
+        post: '=' // the post to generate markup for as a bi-directional model.  See http://docs.angularjs.org/api/ng.$compile
       },
       controller: 'CommentsCtrl',
       templateUrl: "/ui/app/comments.tpl.html",
