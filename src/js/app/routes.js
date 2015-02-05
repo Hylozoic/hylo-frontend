@@ -42,7 +42,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         parent: "main",
         views: {
           "main": {
-            templateUrl: '/ui/features/community/base.tpl.html',
+            templateUrl: '/ui/community/base.tpl.html',
             controller: 'CommunityCtrl'
           }
         }
@@ -51,7 +51,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/about',
         views: {
           "tab": {
-            templateUrl: '/ui/features/community/about.tpl.html',
+            templateUrl: '/ui/community/about.tpl.html',
             controller: 'AboutCommunityCtrl'
           }
         }
@@ -60,7 +60,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/members',
         views: {
           "tab": {
-            templateUrl: '/ui/features/community/members.tpl.html',
+            templateUrl: '/ui/community/members.tpl.html',
             controller: 'CommunityUsersCtrl'
           }
         }
@@ -70,7 +70,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         parent: 'main',
         views: {
           "main": {
-            templateUrl: '/ui/features/community/createCommunity.tpl.html',
+            templateUrl: '/ui/community/createCommunity.tpl.html',
             controller: 'CreateCommunityCtrl'
           }
         }
@@ -79,7 +79,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         url: '/c/:community/settings',
         views: {
           "": {
-            templateUrl: '/ui/features/community/settings.tpl.html',
+            templateUrl: '/ui/community/settings.tpl.html',
             controller: 'CommunitySettingsCtrl'
           }
         }
