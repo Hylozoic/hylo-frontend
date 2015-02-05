@@ -7,6 +7,8 @@ module.exports = function(angularModule) {
     "$scope", '$timeout', '$state', '$log', '$analytics', 'community',
     function ($scope, $timeout, $state, $log, $analytics, community) {
 
+      $scope.community = community;
+
       $scope.close = function() {
         $state.go('community', {community: community.slug});
       };
