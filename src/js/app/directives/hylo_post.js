@@ -118,16 +118,12 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", 'Seed',
         }
       };
 
-      $scope.followPost = function() {
-        Post.follow({id: $scope.post.id}, function(res) {
-          $scope.followers.push(res);
-        });
-      };
-
       $scope.toggleJoinPost = function() {
         if (!$scope.isFollowing) {
           $analytics.eventTrack('Post: Join: Follow', {post_id: $scope.post.id});
-          $scope.followPost();
+          Post.follow({id: $scope.post.id}, function(res) {
+            $scope.followers.push(res);
+          });
         } else {
           Post.unfollow({id: $scope.post.id}, function(res) {
             $analytics.eventTrack('Post: Join: Unfollow', {post_id: $scope.post.id});

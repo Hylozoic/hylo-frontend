@@ -70,8 +70,8 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       var content = $scope.commentText;
       if (content && content.trim().length > 0) {
         $scope.createDisabled = true;
-        Seed.comment({id: $scope.post.id, text: $scope.commentText.trim()}, function(value, responseHeaders) {
-          $scope.post.comments.push(value);
+        Seed.comment({id: $scope.post.id, text: $scope.commentText.trim()}, function(comment, responseHeaders) {
+          $scope.post.comments.push(comment);
 
           $scope.commentText = '';
           $scope.post.numComments++;
@@ -82,7 +82,12 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
           $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id});
 
-          $scope.followPost();
+          if (!_.findWhere($scope.post.followers, {value: comment.user.id})) {
+            var user = comment.user;
+            user.value = user.id;
+            $scope.post.followers.push(user);
+          }
+
         }, function() {
           $scope.createDisabled = false;
           growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
