@@ -84,31 +84,27 @@
         <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
       </div>
     </div>
-    <div class="row section invite" collapse="!expand2">
-      <div class="col-sm-12">
-        <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
-        <div class="row">
-          <div class="col-xs-6">
-            <label>
-              <input type="checkbox" ng-model="inviteAsModerator"/>
-              &nbsp;Invite them to be moderators
-            </label>
-          </div>
-          <div class="col-xs-6 right">
-            <button type="button" ng-click="invite()">
-              <span ng-show="submitting">
-                <i class="icon-duration"></i>
-                Sending...
-              </span>
-              <span ng-hide="submitting">
-                <i class="icon-big-check"></i>
-                Send Invite
-              </span>
-            </button>
-          </div>
+    <div class="section invite" collapse="!expand2">
+      <div class="setting-item">
+        <div class="full-column">
+          <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+        </div>
+        <div class="main-column">
+          <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>
+          <label for="inviteAsModerator">Invite them to be moderators</label>
+        </div>
+        <div class="side-column">
+          <button type="button" ng-click="invite()">
+            <span ng-show="submitting">
+              Sending...
+            </span>
+            <span ng-hide="submitting">
+              Send Invite
+            </span>
+          </button>
         </div>
 
-        <div ng-show="inviteResults" class="results">
+        <div ng-show="inviteResults" class="results full-column">
           <h3>Results</h3>
           <table>
             <tr ng-repeat="result in inviteResults">
@@ -120,7 +116,10 @@
           </table>
         </div>
 
-        <p class="note">If you would like to invite many people at once, please <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.</p>
+        <div class="full-column note">
+          If you would like to invite many people at once, please
+          <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.
+        </div>
       </div>
     </div>
 
