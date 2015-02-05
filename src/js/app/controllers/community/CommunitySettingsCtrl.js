@@ -1,20 +1,21 @@
-var filepickerUpload = require('../services/filepickerUpload');
+var filepickerUpload = require('../../services/filepickerUpload'),
+  format = require('util').format;
 
 module.exports = function(angularModule) {
 
   angularModule.controller("CommunitySettingsCtrl", [
-    "$scope", '$timeout', '$state', '$log', '$analytics', 'Community',
-    function ($scope, $timeout, $state, $log, $analytics, Community) {
+    "$scope", '$timeout', '$state', '$log', '$analytics', 'community',
+    function ($scope, $timeout, $state, $log, $analytics, community) {
 
       $scope.close = function() {
-        $state.go('community', {community: $scope.community.slug});
+        $state.go('community', {community: community.slug});
       };
 
       $scope.editing = {};
       $scope.edited = {};
 
       $scope.edit = function(field) {
-        $scope.edited[field] = $scope.community[field];
+        $scope.edited[field] = community[field];
         $scope.editing[field] = true;
       };
 
@@ -24,12 +25,12 @@ module.exports = function(angularModule) {
 
       $scope.saveEdit = function(field) {
         $scope.editing[field] = false;
-        var data = {id: $scope.community.id};
+        var data = {};
         data[field] = $scope.edited[field];
-        Community.save(data, function() {
-          $scope.community[field] = $scope.edited[field];
+        community.update(data, function() {
+          community[field] = $scope.edited[field];
           $analytics.eventTrack('Community: Changed ' + field, {
-            community_id: $scope.community.slug,
+            community_id: community.slug,
             moderator_id: $scope.currentUser.id
           });
         });
@@ -41,12 +42,12 @@ module.exports = function(angularModule) {
             path: opts.path,
             convert: opts.convert,
             success: function(url) {
-              var data = {id: $scope.community.id};
+              var data = {id: community.id};
               data[opts.fieldName] = url;
-              Community.save(data, function() {
-                $scope.community[opts.fieldName] = url;
+              community.update(data, function() {
+                community[opts.fieldName] = url;
                 $analytics.eventTrack('Community: Changed ' + opts.humanName, {
-                  community_id: $scope.community.slug,
+                  community_id: community.slug,
                   moderator_id: $scope.currentUser.id
                 });
               });
@@ -54,7 +55,7 @@ module.exports = function(angularModule) {
             failure: function(error) {
               growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
               $analytics.eventTrack('Community: Failed to Change ' + opts.humanName, {
-                community_id: $scope.community.slug,
+                community_id: community.slug,
                 moderator_id: $scope.currentUser.id
               });
             }
@@ -76,12 +77,27 @@ module.exports = function(angularModule) {
         convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
       });
 
+      $scope.invitationSubject = format("Join %s on Hylo", community.name);
+
+      $scope.invitationText = format("%s is using Hylo, a new kind of social network " +
+        "that's designed to help communities and organizations create things together.\n\n" +
+        "We're surrounded by incredible people, skills, and resources. But it can be hard to know whom " +
+        "to connect with, for what, and when. Often the things we need most are closer than we think.\n\n" +
+        "Hylo makes it easy to discover the abundant skills, resources, and opportunities in your communities " +
+        "that might otherwise go unnoticed. Together, we can create whatever we can imagine.",
+        community.name);
+
       $scope.invite = function() {
         if ($scope.submitting) return;
         $scope.submitting = true;
         $scope.inviteResults = null;
 
-        Community.invite({id: $scope.community.id, emails: $scope.emails, moderator: $scope.inviteAsModerator})
+        community.invite({
+          emails: $scope.emails,
+          subject: $scope.invitationSubject,
+          message: $scope.invitationText,
+          moderator: $scope.inviteAsModerator
+        })
         .$promise.then(function(resp) {
           $scope.inviteResults = resp.results;
           $scope.emails = '';
@@ -95,19 +111,19 @@ module.exports = function(angularModule) {
       $scope.toggleModerators = function() {
         $scope.expand3 = !$scope.expand3;
         if (!$scope.moderators) {
-          $scope.moderators = $scope.community.moderators();
+          $scope.moderators = community.moderators();
         }
       };
 
       $scope.toggle = function(field) {
         console.log(field);
-        if ($scope.community[field] === undefined) {
+        if (community[field] === undefined) {
           console.log('undefined');
-          $scope.community[field] = false;
+          community[field] = false;
         }
-        console.dir($scope.community);
-        console.log($scope.community[field]);
-        $scope.community[field] = !$scope.community[field];
+        console.dir(community);
+        console.log(community[field]);
+        community[field] = !community[field];
       }
 
       $scope.removeModerator = function(userId) {
@@ -115,7 +131,7 @@ module.exports = function(angularModule) {
           confirmText = "Are you sure you wish to remove " + user.name + "'s moderator powers?";
 
         if (confirm(confirmText)) {
-          $scope.community.removeModerator({user_id: userId}, function() {
+          community.removeModerator({user_id: userId}, function() {
             $scope.moderators = $scope.moderators.filter(function(user) {
               return user.id != userId;
             });
@@ -124,12 +140,12 @@ module.exports = function(angularModule) {
       };
 
       $scope.findMembers = function(search) {
-        return $scope.community.members({search: search}).$promise;
+        return community.members({search: search}).$promise;
       };
 
       $scope.addModerator = function(item, model, label) {
         $scope.selectedMember = null;
-        $scope.community.addModerator({user_id: item.id}, function() {
+        community.addModerator({user_id: item.id}, function() {
           $scope.moderators.push(item);
         })
       }
