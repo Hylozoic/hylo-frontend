@@ -31,11 +31,20 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
 
   $scope.addImage = function() {
     $scope.addingImage = true;
+
+    function finish() {
+      $scope.addingImage = false;
+      $scope.$apply();
+    }
+
     filepickerUpload({
       path: format('user/%s/seeds', currentUser.id),
       success: function(url) {
-        $scope.addingImage = false;
         $scope.imageUrl = url;
+        finish();
+      },
+      failure: function(err) {
+        finish();
       }
     })
   };
