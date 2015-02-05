@@ -80,7 +80,9 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
           closeCommenting();
 
-          $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id});
+          $analytics.eventTrack('Post: Comment: Add', {post_id: $scope.post.id, has_mention: $scope.hasMention});
+
+          $scope.hasMention = false;
 
           if (!_.findWhere($scope.post.followers, {value: comment.user.id})) {
             var user = comment.user;
@@ -145,7 +147,11 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       });
     };
 
-    $scope.getPeopleTextRaw = UserMentions.userTextRaw;
+    $scope.getPeopleTextRaw = function(user) {
+      $analytics.eventTrack('Post: Comment: @-mention: Lookup', {query: user.name} );
+      $scope.hasMention = true;
+      return UserMentions.userTextRaw(user);
+    }
 
     $scope.initialCommentText = '<p>&nbsp;</p>';
 
