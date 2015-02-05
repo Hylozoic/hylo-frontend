@@ -64,8 +64,10 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
           $analytics.eventTrack('Profile: Changed ' + opts.humanName, {user_id: user.id});
         },
         failure: function(error) {
-          growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
-          $analytics.eventTrack('Profile: Failed to Change ' + opts.humanName, {user_id: user.id});
+          if (error.code != 101) {
+            growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
+            $analytics.eventTrack('Profile: Failed to Change ' + opts.humanName, {user_id: user.id});
+          }
         }
       });
     };
