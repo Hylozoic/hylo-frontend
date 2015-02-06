@@ -5,14 +5,6 @@ factory('CurrentUser', ['$resource',
     return $resource('/current_user', {});
   }]).
 
-factory('OldUser', ['$resource',
-  function($resource) {
-    return $resource('/users/:id',
-      {
-        id: "@id"
-      });
-  }]).
-
 factory("Post", ["$resource",
   function($resource) {
     return $resource("/posts/:listController:id/:postController:userId",
