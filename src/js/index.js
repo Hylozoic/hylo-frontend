@@ -35,8 +35,6 @@ require('./angular/angulartics-segmentio');
 require('./jquery/guiders');
 require('./jquery/draggable-background');
 
-Medium = require('medium.js/medium');
-
 require('./app/hyloApp');
 
 // FIXME: the code that depends upon the existence of this global
