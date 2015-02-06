@@ -10,7 +10,7 @@ module.exports = function(angularModule) {
       $scope.community = community;
 
       $scope.close = function() {
-        $state.go('community', {community: community.slug});
+        $state.go('community.seeds', {community: community.slug});
       };
 
       $scope.editing = {};

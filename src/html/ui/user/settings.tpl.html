@@ -67,7 +67,7 @@
     <div class="section communities" collapse="!expand2">
       <div class="setting-item" ng-repeat="membership in user.memberships track by $index">
         <div class="main-column">
-          <label><a ui-sref="community({community: membership.community.slug})">{{membership.community.name}}</a></label>
+          <label><a ui-sref="community.seeds({community: membership.community.slug})">{{membership.community.name}}</a></label>
           <div class="summary">Joined: {{membership.date_joined | date:'longDate'}}</div>
         </div>
         <div class="side-column"><a ng-click="leaveCommunity(membership.community_id, $index)">Leave</a></div>

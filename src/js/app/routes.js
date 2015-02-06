@@ -26,7 +26,7 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
             return User.current().$promise;
           }]
         },
-        controller: ['$rootScope', 'oldCurrentUser', function($rootScope, oldCurrentUser) {
+        controller: ['$rootScope', 'oldCurrentUser', '$stateParams', function($rootScope, oldCurrentUser, $stateParams) {
           $rootScope.currentUser = oldCurrentUser;
         }]
       }).
@@ -38,31 +38,67 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
         }
       }).
       state('community', {
+        abstract: true,
         url: '/c/:community',
-        parent: "main",
+        parent: 'main',
         views: {
           "main": {
+            template: "<div ui-view='community'></div>"
+          },
+        },
+        resolve: {
+          community: ['Community', '$stateParams', '$rootScope', function(Community, $stateParams, $rootScope) {
+            var promise = Community.get({id: $stateParams.community}).$promise;
+            promise.then(function(community) {
+              $rootScope.community = community;
+            });
+            return promise;
+          }]
+        }
+      }).
+      state('community.home', {
+        abstract: true,
+        parent: 'community',
+        views: {
+          community: {
             templateUrl: '/ui/community/base.tpl.html',
             controller: 'CommunityCtrl'
           }
         }
       }).
+      state('community.seeds', {
+        url: '',
+        parent: 'community.home',
+        views: {
+          tab: {
+            templateUrl: '/ui/community/seeds.tpl.html',
+            controller: 'CommunitySeedsCtrl'
+          }
+        }
+      }).
       state('community.about', {
         url: '/about',
+        parent: 'community.home',
         views: {
-          "tab": {
+          tab: {
             templateUrl: '/ui/community/about.tpl.html',
-            controller: 'AboutCommunityCtrl'
+            controller: 'CommunityAboutCtrl'
           }
         }
       }).
       state('community.members', {
         url: '/members',
+        parent: 'community.home',
         views: {
-          "tab": {
+          tab: {
             templateUrl: '/ui/community/members.tpl.html',
-            controller: 'CommunityUsersCtrl'
+            controller: 'CommunityMembersCtrl'
           }
+        },
+        resolve: {
+          members: ['community', 'OldUser', function(community, OldUser) {
+            return OldUser.query({community: community.slug}).$promise;
+          }]
         }
       }).
       state('createCommunity', {
@@ -75,33 +111,22 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('communitySettings', {
-        url: '/c/:community/settings',
+      state('community.settings', {
+        url: '/settings',
         views: {
-          "": {
+          community: {
             templateUrl: '/ui/community/settings.tpl.html',
             controller: 'CommunitySettingsCtrl'
           }
-        },
-        resolve: {
-          community: ['Community', '$stateParams', function(Community, $stateParams) {
-            return Community.get({id: $stateParams.community}).$promise;
-          }]
         }
       }).
-      state('newSeed', {
-        url: '/c/:community/new-seed',
-        parent: 'main',
+      state('community.newSeed', {
+        url: '/new-seed',
         views: {
-          "main": {
+          "community": {
             templateUrl: '/ui/seeds/new.tpl.html',
             controller: 'NewSeedCtrl'
           }
-        },
-        resolve: {
-          community: ['Community', '$stateParams', function(Community, $stateParams) {
-            return Community.get({id: $stateParams.community}).$promise;
-          }]
         }
       }).
       state('userSettings', {
@@ -193,16 +218,15 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           singlePost: true
         }
       }).
-      state('search', {
-        url: "/c/:community/search?q",
-        parent: 'main',
+      state('community.search', {
+        url: "/search?q",
         resolve: {
           query: ['$stateParams', function($stateParams) {
             return $stateParams.q;
           }]
         },
         views: {
-          "main": {
+          "community": {
             templateUrl: '/ui/app/search.tpl.html',
             controller: 'SearchCtrl'
           }

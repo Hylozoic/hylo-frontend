@@ -252,7 +252,7 @@ angular.module("hylo.createCommunity", [])
             $analytics.eventTrack('Community: Created New Community', {community_id: value.slug});
             // Invoke scope function
 
-            $state.go("community", {community: value.slug});
+            $state.go("community.seeds", {community: value.slug});
 
           }, function (responseValue) {
             $log.error("error", responseValue);
