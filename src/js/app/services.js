@@ -2,12 +2,7 @@ var angularModule = angular.module('hyloServices', ['ngResource']).
 
 factory('CurrentUser', ['$resource',
   function($resource) {
-    return $resource('/current_user', {}, {
-      savePrefs: {
-        method: "POST",
-        params: {prefs: true}
-      }
-    });
+    return $resource('/current_user', {});
   }]).
 
 factory('OldUser', ['$resource',

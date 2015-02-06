@@ -1,22 +1,21 @@
-var dependencies = ['$scope', 'OldUser', '$timeout', '$analytics', 'community'];
-dependencies.push(function($scope, OldUser, $timeout, $analytics, community) {
+var dependencies = ['$scope', '$timeout', '$analytics', 'community'];
+dependencies.push(function($scope, $timeout, $analytics, community) {
 
   $scope.community = community;
 
-  var queryFn = function() {
+  var queryFn = function(initial) {
     $scope.searching = true;
-    $analytics.eventTrack('Members: Query', {community_id: community.slug, query: $scope.searchQuery});
-    OldUser.query({
-      q: $scope.searchQuery,
-      community: community.slug
-    }, function(value) {
+    if (!initial) {
+      $analytics.eventTrack('Members: Query', {community_id: community.slug, query: $scope.searchQuery});
+    }
+    community.members({search: $scope.searchQuery}, function(users) {
       $scope.searching = false;
-      $scope.users = value;
+      $scope.users = users;
       $scope.usersLoaded = true;
     });
   };
 
-  queryFn();
+  queryFn(true);
 
   var queryPromise;
   $scope.queryTimeout = function() {
