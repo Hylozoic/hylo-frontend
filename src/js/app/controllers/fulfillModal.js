@@ -1,5 +1,5 @@
-angular.module("hyloControllers").controller('FulfillModalCtrl', ['$scope', '$rootScope', '$modalInstance', 'OldUser', 'Post', '$log',
-  function($scope, $rootScope, $modalInstance, OldUser, Post, $log) {
+angular.module("hyloControllers").controller('FulfillModalCtrl', ['$scope', '$rootScope', '$modalInstance', 'Post', '$log',
+  function($scope, $rootScope, $modalInstance, Post, $log) {
     $scope.addContributors = function () {
       Post.markFulfilled({id: $scope.post.id, contributors: $scope.contributors}, function(res) {
         $scope.post.fulfilled = true;
@@ -20,14 +20,14 @@ angular.module("hyloControllers").controller('FulfillModalCtrl', ['$scope', '$ro
     $scope.potentialContributors = [];
 
     // Build list of potential contributors
-    OldUser.query({community: $rootScope.community.slug}, function(res) {
+    $rootScope.community.members({}, function(res) {
 
       // build the list of possible contributors as:
       // (All posts' community members).map(ngTag elements with a bit for topContributor) - curUser
       var allUsers = _.map(res, function(user) {
         return {value: user.id, // Map users to ngTag elements
           name: user.name,
-          avatar: user.avatar,
+          avatar: user.avatar_url,
           topContributor: _.contains($scope.topContributors, user.id) // Set topContributor to true if they are contained in topContributors list
         }
       });
