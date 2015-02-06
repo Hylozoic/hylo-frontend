@@ -1,6 +1,6 @@
-var dependencies = ['$scope', 'Seed', '$stateParams', '$state', 'growl'];
-dependencies.push(function($scope, Seed, $stateParams, $state, growl) {
-  $scope.post = Seed.get({id: $stateParams.postId});
+var dependencies = ['$scope', 'Seed', '$state', 'growl', 'seed'];
+dependencies.push(function($scope, Seed, $state, growl, seed) {
+  $scope.post = seed;
 
   $scope.postdeleted = function(deletedPost) {
     growl.addSuccessMessage("Seed has been removed: " + deletedPost.name, {ttl: 5000});

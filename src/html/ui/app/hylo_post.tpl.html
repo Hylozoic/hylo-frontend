@@ -18,7 +18,7 @@
     <div class="post-header">
       <span class="title" seed-text="post.name"></span>
       <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
-      <a ui-sref="post.comments({community: post.communitySlug, postId: post.id})"
+      <a ui-sref="seed({community: post.communitySlug, seedId: post.id})"
         ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">
       </a>
       <div ng-if="isPostText" class="post-description">
@@ -29,7 +29,7 @@
 
     <div class="post-context">
       <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-      <a class="timestamp" ui-sref="post.comments({community: post.communitySlug, postId: post.id})">{{::post.creationDate | fromNow}}</a>
+      <a class="timestamp" ui-sref="seed({community: post.communitySlug, seedId: post.id})">{{::post.creationDate | fromNow}}</a>
       <div class="followers">
         <span ng-if="followers.length > 0 && !onlyAuthorFollowing">
           <!-- Add yourself as a follower -->

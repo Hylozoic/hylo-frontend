@@ -197,18 +197,20 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
           }
         }
       }).
-      state('post', {
-        url: '/c/:community/s/:postId',
-        parent: 'main',
+      state('seed', {
+        url: '/s/:seedId',
+        parent: 'community',
         views: {
-          "main": {
+          "community": {
             templateUrl: '/ui/seeds/show.tpl.html',
             controller: 'SeedCtrl'
           }
-        }
-      }).
-      state('post.comments', {
-        url: '/comments',
+        },
+        resolve: {
+          seed: ['Seed', '$stateParams', function(Seed, $stateParams) {
+            return Seed.get({id: $stateParams.seedId}).$promise;
+          }]
+        },
         data: {
           singlePost: true
         }
