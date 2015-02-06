@@ -1,8 +1,7 @@
-var dependencies = ['$scope', 'OldUser', '$timeout', '$analytics', 'community', 'members'];
-dependencies.push(function($scope, OldUser, $timeout, $analytics, community, members) {
+var dependencies = ['$scope', 'OldUser', '$timeout', '$analytics', 'community'];
+dependencies.push(function($scope, OldUser, $timeout, $analytics, community) {
 
   $scope.community = community;
-  $scope.users = members;
 
   var queryFn = function() {
     $scope.searching = true;
@@ -17,10 +16,11 @@ dependencies.push(function($scope, OldUser, $timeout, $analytics, community, mem
     });
   };
 
+  queryFn();
+
   var queryPromise;
   $scope.queryTimeout = function() {
     $timeout.cancel(queryPromise);
-
     queryPromise = $timeout(queryFn, 750);
   };
 });
