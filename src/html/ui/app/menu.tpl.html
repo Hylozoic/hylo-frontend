@@ -8,7 +8,7 @@
     <li class="current-community" ng-click="setMenuState(true, true)">
       <div class="image-item">
         <div class="image-item-icon" back-img="community.avatar_url"></div>
-        <a class="only-expanded" ui-sref="community({community: community.slug})">{{community.name}}</a>
+        <a class="only-expanded" ui-sref="community.seeds({community: community.slug})">{{community.name}}</a>
       </div>
     </li>
 
@@ -21,10 +21,10 @@
     </li>
 
     <li class="sub-group" ng-show="state.membershipsExpanded" ng-repeat="membership in currentUser.memberships">
-      <a ng-if="::membership.role == 1" ui-sref="communitySettings({community: membership.slug})" class="open-settings only-expanded only-hover">
+      <a ng-if="::membership.role == 1" ui-sref="community.settings({community: membership.slug})" class="open-settings only-expanded only-hover">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="community({community: membership.slug})" ui-sref-active="current">
+      <a ui-sref="community.seeds({community: membership.slug})" ui-sref-active="current">
         <div class="image-item">
           <div class="image-item-icon" back-img="::membership.avatar"></div>
           <span class="only-expanded">{{::membership.name}}</span>

@@ -1,10 +1,6 @@
 var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 
 require('./controllers/comments');
-require('./controllers/community_about');
-require('./controllers/community_seeds');
-require('./controllers/community_users');
-require('./controllers/community');
 require('./controllers/fulfillModal');
 require('./controllers/network');
 require('./controllers/onboarding');
@@ -18,4 +14,9 @@ require('./controllers/user/settings')(angularModule);
 
 require('./controllers/NewSeedCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
+
+require('./controllers/community/CommunityCtrl')(angularModule);
 require('./controllers/community/CommunitySettingsCtrl')(angularModule);
+require('./controllers/community/CommunityAboutCtrl')(angularModule);
+require('./controllers/community/CommunitySeedsCtrl')(angularModule);
+require('./controllers/community/CommunityMembersCtrl')(angularModule);

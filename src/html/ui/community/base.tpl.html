@@ -8,15 +8,15 @@
       <div class="banner-communityName" ng-bind="::community.name"></div>
 
       <div class="banner-menu">
-        <a ui-sref="." ng-class="{selected: state.current.name === 'community'}">
+        <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds'}">
           SEEDS
           <div class="triangle"></div>
         </a>
-        <a ui-sref=".members" ng-class="{selected: state.current.name === 'community.members'}">
+        <a ui-sref="community.members" ng-class="{selected: $state.current.name === 'community.members'}">
           MEMBERS
           <div class="triangle"></div>
         </a>
-        <a ui-sref=".about" ng-class="{selected: state.current.name === 'community.about'}">
+        <a ui-sref="community.about" ng-class="{selected: $state.current.name === 'community.about'}">
           ABOUT
           <div class="triangle"></div>
         </a>
@@ -24,8 +24,6 @@
 
     </div>
   </div>
-  <div ui-view="tab">
-    <ng-include ng-if="state.current.name === 'community'" src="'/ui/community/seeds.tpl.html'"></ng-include>
-  </div>
+  <div ui-view="tab"></div>
 
 </div>

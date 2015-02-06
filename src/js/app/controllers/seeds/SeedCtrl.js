@@ -4,7 +4,7 @@ dependencies.push(function($scope, Seed, $stateParams, $state, growl) {
 
   $scope.postdeleted = function(deletedPost) {
     growl.addSuccessMessage("Seed has been removed: " + deletedPost.name, {ttl: 5000});
-    $state.go("community", {community: deletedPost.communitySlug});
+    $state.go("community.seeds", {community: deletedPost.communitySlug});
   }
 });
 

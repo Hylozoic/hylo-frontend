@@ -26,7 +26,7 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
   $scope.switchSeedType('intention');
 
   $scope.close = function() {
-    $scope.$state.go('community', {community: community.slug});
+    $scope.$state.go('community.seeds', {community: community.slug});
   };
 
   $scope.addImage = function() {

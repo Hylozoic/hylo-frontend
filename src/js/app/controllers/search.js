@@ -1,6 +1,8 @@
 angular.module("hyloControllers").controller('SearchCtrl', [
-  '$scope', '$rootScope', '$timeout', 'Post', "$log", 'growl', '$q', '$http', '$location', '$analytics', 'query',
-  function($scope, $rootScope, $timeout, Post, $log, growl, $q, $http, $location, $analytics, query) {
+  '$scope', '$timeout', 'Post', "$log", 'growl', '$q', '$http', '$location', '$analytics', 'query', 'community',
+  function($scope, $timeout, Post, $log, growl, $q, $http, $location, $analytics, query, community) {
+
+    $scope.community = community;
 
     $scope.postType = "all";
     $scope.postSort = "top";
@@ -56,7 +58,7 @@ angular.module("hyloControllers").controller('SearchCtrl', [
       $scope.disableInfiniteScroll = true;
       $scope.searching = true;
 
-      $http.get('/noo/community/' + $scope.community.id + "/seeds", {
+      $http.get('/noo/community/' + community.id + "/seeds", {
         params: {
           q: $scope.searchQuery,
           postType: $scope.postType,
@@ -68,16 +70,16 @@ angular.module("hyloControllers").controller('SearchCtrl', [
         responseType: 'json'
       }).success(function(posts) {
         if ($scope.searchQuery) {
-          $analytics.eventTrack('Search: Filter', {query: $scope.searchQuery, community_id: $rootScope.community.slug})
+          $analytics.eventTrack('Search: Filter', {query: $scope.searchQuery, community_id: community.slug})
         }
 
         var firstLoad = $scope.posts.length < $scope.limit;
 
         if (!firstLoad) {
-          $analytics.eventTrack('Posts: Load more in Search', {community_id: $rootScope.community.slug});
+          $analytics.eventTrack('Posts: Load more in Search', {community_id: community.slug});
         }
         else {
-          $analytics.eventTrack('Search: Load Search Page', {community_id: $rootScope.community.slug});
+          $analytics.eventTrack('Search: Load Search Page', {community_id: community.slug});
         }
 
         // Push posts to stack

@@ -116,31 +116,17 @@ angular.module('hyloApp', [
     $rootScope.navigated = false;
     $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
       if (from.name) { $rootScope.navigated = true; }
+
+      if (!$rootScope.community) {
+        $rootScope.community = Community.default();
+      }
     });
 
     var currentSlug;
 
-    //$stateParams is not set up yet at this point
-    var locationMatchCommunity = window.location.toString().match(/c\/([^\/#\?]*)/);
-    if (locationMatchCommunity != null) {
-      currentSlug = locationMatchCommunity[1];
-      $rootScope.community = Community.get({id: currentSlug});
-    } else {
-      $rootScope.community = Community.default();
-    }
-
     // Set a variable so we can watch for param changes
     $rootScope.$state = $state;
     $rootScope.$bodyClass = $bodyClass;
-
-    $rootScope.$watch("$state.params.community", function(slug) {
-      if (angular.isDefined(slug) && slug != currentSlug) {
-        $rootScope.community = Community.get({id: slug}, function(community) {
-          $rootScope.community = community;
-          currentSlug = slug;
-        });
-      }
-    });
 
     // If there exists a growl message to display, then growl it.
     // Useful for displaying a growl message after storing it in the Play! flash scope.
