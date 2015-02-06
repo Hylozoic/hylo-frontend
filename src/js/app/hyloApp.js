@@ -1,3 +1,12 @@
+require('./auth_module');
+require('./filters');
+require('./directives');
+require('./directives/hylo_post');
+require('./directives/embeddedComments');
+require('./features/features');
+require('./controllers');
+require('./services');
+
 var app = angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
