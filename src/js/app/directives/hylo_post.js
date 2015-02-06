@@ -50,11 +50,6 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", 'Seed',
         });
       };
 
-      $scope.gotoSinglePost = function() {
-        $analytics.eventTrack('Post: Load Single Post', {post_id: $scope.post.id});
-        $state.go('post.comments', {community: $scope.post.communitySlug, postId: $scope.post.id})
-      };
-
       var voteText = "click to <i class='icon-following'></i> me.";
       var unvoteText = "click to un-<i class='icon-following'></i> me.";
 
@@ -251,7 +246,7 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", 'Seed',
         $scope.canDelete = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||
               ($rootScope.community && $rootScope.community.canModerate);
 
-        $scope.postUrl = $state.href("post.comments", {community: $scope.post.communitySlug, postId: $scope.post.id});
+        $scope.postUrl = $state.href("seed", {community: $scope.post.communitySlug, seedId: $scope.post.id});
 
         $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
