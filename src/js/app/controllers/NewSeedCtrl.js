@@ -76,12 +76,13 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     });
 
     seed.$save(function() {
-      $analytics.eventTrack('Add Post');
+      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
       $scope.close();
       growl.addSuccessMessage('Seed created!');
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);
+      $analytics.eventTrack('Add Post Failed');
     });
   };
 
@@ -91,8 +92,11 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     });
   };
 
-  $scope.getPeopleTextRaw = UserMentions.userTextRaw;
-
+  $scope.getPeopleTextRaw = function(user) {
+    $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name} );
+    $scope.hasMention = true;
+    return UserMentions.userTextRaw(user);
+  }
 });
 
 module.exports = function(angularModule) {
