@@ -346,14 +346,16 @@
 
   @media (max-width: @screen-xs-max) {
     position: absolute;
-    top: 50px;
-    height: 85vh;
+    z-index: 3;
+    padding-top: 50px;
+    height: 100vh;
 
     &.collapsed {
       display: none;
     }
 
     &.expanded {
+      border-right: none;
       &, ul {
        width: 100%;
        max-width: 100%;
@@ -368,6 +370,10 @@
 }
 
 .mobile-nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 4;
   margin-bottom: 0px;
   .navbar-brand {
     padding: 8px 15px;
