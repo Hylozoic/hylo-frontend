@@ -44,9 +44,7 @@ require('./app/directives/hylo_post');
 require('./app/directives/embeddedComments');
 
 require('./app/features/features');
-
 require('./app/controllers');
-require('./app/routes');
 require('./app/services');
 
 require('./app/hyloApp');
