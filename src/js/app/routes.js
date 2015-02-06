@@ -94,11 +94,6 @@ angular.module('hyloRoutes', ['ui.router']).config(['$stateProvider', '$urlRoute
             templateUrl: '/ui/community/members.tpl.html',
             controller: 'CommunityMembersCtrl'
           }
-        },
-        resolve: {
-          members: ['community', 'OldUser', function(community, OldUser) {
-            return OldUser.query({community: community.slug}).$promise;
-          }]
         }
       }).
       state('createCommunity', {
