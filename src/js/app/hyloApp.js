@@ -1,13 +1,19 @@
-angular.module('hyloApp', [
+var app = angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
-  'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'hyloRoutes',
+  'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
   'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io',
   'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
-])
+]);
 
-.factory('$exceptionHandler', ['$log', function ($log) {
+app.config(require('./routes'))
+.config(['$urlRouterProvider', function($urlRouterProvider) {
+  // remove trailing slashes from paths
+  $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
+}]);
+
+app.factory('$exceptionHandler', ['$log', function ($log) {
   return function (exception, cause) {
     // Pass off the error to the default error handler
     // on the AngularJS logger. This will output the
@@ -25,18 +31,15 @@ angular.module('hyloApp', [
       }
     }
   };
-}])
+}]);
 
-.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider', '$urlRouterProvider',
-  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider, $urlRouterProvider) {
+app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
+  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
     $locationProvider.html5Mode(true);
     growlProvider.globalTimeToLive(5000);
 
     $idleProvider.idleDuration(45); // in seconds
     $idleProvider.warningDuration(1); // in seconds
-
-    // remove trailing slashes from paths
-    $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
 
     // Disable bootstrap UI animations
     $tooltipProvider.options({
@@ -77,9 +80,9 @@ angular.module('hyloApp', [
 
     $httpProvider.interceptors.push('myHttpInterceptor');
 
-  }])
+  }]);
 
-.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
+app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
   function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
 
     $rootScope.$on('$stateChangeError',
