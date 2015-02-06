@@ -37,16 +37,6 @@ require('./jquery/draggable-background');
 
 Medium = require('medium.js/medium');
 
-require('./app/auth_module');
-require('./app/filters');
-require('./app/directives');
-require('./app/directives/hylo_post');
-require('./app/directives/embeddedComments');
-
-require('./app/features/features');
-require('./app/controllers');
-require('./app/services');
-
 require('./app/hyloApp');
 
 // FIXME: the code that depends upon the existence of this global
