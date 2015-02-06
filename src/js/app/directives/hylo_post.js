@@ -152,9 +152,12 @@ angular.module("hyloDirectives").directive('hyloPost', ["Post", 'Seed',
                 $scope.followers.push(follower);
               }
             });
+            $analytics.eventTrack('Followers: Add Followers', {num_followers: $scope.followersToAdd.length});
             $scope.followersToAdd = [];
+
           }, function(err) {
             growl.addErrorMessage(err.data);
+            $analytics.eventTrack('Followers: Failed to Add Followers');
           });
         }
 
