@@ -50,7 +50,8 @@ factory("Post", ["$resource",
 
 factory("Seed", ["$resource",
   function($resource) {
-    return $resource("/noo/seed/:id/:action", {
+
+    var Seed = $resource("/noo/seed/:id/:action", {
       id: '@id'
     }, {
       comment: {
@@ -65,7 +66,16 @@ factory("Seed", ["$resource",
           action: 'followers'
         }
       }
-    })
+    });
+
+    // let's make things a bit more OO around here
+    _.extend(Seed.prototype, {
+      update: function(params, success, error) {
+        return Seed.save(_.extend({id: this.id}, params), success, error);
+      },
+    });
+
+    return Seed;
   }]);
 
 require('./services/user')(angularModule);

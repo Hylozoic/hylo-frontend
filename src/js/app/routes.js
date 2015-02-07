@@ -82,10 +82,28 @@ var communityStates = function(stateProvider) {
     url: '/new-seed',
     views: {
       "community": {
-        templateUrl: '/ui/seeds/new.tpl.html',
-        controller: 'NewSeedCtrl'
+        templateUrl: '/ui/seeds/edit.tpl.html',
+        controller: 'SeedEditCtrl'
       }
+    },
+    resolve: {
+      seed: function() { return null; }
     }
+  })
+  .state('community.editSeed', {
+    url: '/s/:seedId/edit',
+    views: {
+      community: {
+        templateUrl: '/ui/seeds/edit.tpl.html',
+        controller: 'SeedEditCtrl'
+      }
+    },
+    resolve: {
+      seed: ['Seed', '$stateParams', function(Seed, $stateParams) {
+        return Seed.get({id: $stateParams.seedId}).$promise;
+      }]
+    }
+
   })
   .state('seed', {
     url: '/s/:seedId',
