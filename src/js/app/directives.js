@@ -1,8 +1,5 @@
 var angularModule = angular.module('hyloDirectives', ['ngResource', 'hyloFilters']);
 
-require('./directives/contenteditable')(angularModule);
-require('./directives/hylo_post')(angularModule);
-
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {
     element.bind("keydown keypress", function(event) {
@@ -223,3 +220,5 @@ directive('fitHeightToParent', function() {
   };
 });
 
+require('./directives/contenteditable')(angularModule);
+require('./directives/hylo_post')(angularModule);

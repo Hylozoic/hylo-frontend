@@ -1,9 +1,10 @@
 var truncate = require('html-truncate');
 
-var dependencies = ["Post", 'Seed', '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
-  '$timeout', '$window', '$analytics', '$sce', 'growl'];
+var dependencies = [
+"Post", 'Seed', '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
+'$timeout', '$window', '$analytics', '$sce', 'growl',
 
-dependencies.push(function(Post, Seed, $filter, $state, $rootScope, $log, $modal, $http,
+function(Post, Seed, $filter, $state, $rootScope, $log, $modal, $http,
   $timeout, $window, $analytics, $sce, growl) {
 
   var controller = function($scope, $element) {
@@ -271,7 +272,8 @@ dependencies.push(function(Post, Seed, $filter, $state, $rootScope, $log, $modal
     templateUrl: "/ui/app/hylo_post.tpl.html",
     replace: true
   };
-});
+
+}];
 
 module.exports = function(angularModule) {
   angularModule.directive('hyloPost', dependencies);
