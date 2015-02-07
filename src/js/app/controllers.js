@@ -12,7 +12,7 @@ require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);
 require('./controllers/user/settings')(angularModule);
 
-require('./controllers/NewSeedCtrl')(angularModule);
+require('./controllers/SeedEditCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);

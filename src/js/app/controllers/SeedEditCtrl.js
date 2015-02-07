@@ -1,8 +1,8 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var dependencies = ['$scope', 'currentUser', 'community', 'Seed', 'growl', '$analytics', 'UserMentions'];
-dependencies.push(function($scope, currentUser, community, Seed, growl, $analytics, UserMentions) {
+var dependencies = ['$scope', 'currentUser', 'community', 'Seed', 'growl', '$analytics', 'UserMentions', 'seed', '$state'];
+dependencies.push(function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state) {
 
   var prefixes = {
     intention: "I'd like to create",
@@ -22,8 +22,6 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     $scope.title = prefixes[seedType] + ' ';
     $scope.descriptionPlaceholder = placeholders[seedType];
   };
-
-  $scope.switchSeedType('intention');
 
   $scope.close = function() {
     $scope.$state.go('community.seeds', {community: community.slug});
@@ -62,20 +60,33 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     return !invalidTitle;
   }
 
-  $scope.save = function() {
-    if (!validate()) return;
-
-    $scope.saving = true;
-
-    var seed = new Seed({
+  var update = function() {
+    seed.update({
       name: $scope.title,
       description: $scope.description,
-      postType: $scope.seedType,
+      type: $scope.seedType,
+      communityId: community.id,
+    }, function() {
+      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention});
+      $state.go('seed', {community: community.slug, seedId: seed.id});
+      growl.addSuccessMessage('Seed updated.');
+    }, function(err) {
+      $scope.saving = false;
+      growl.addErrorMessage(err.data);
+      $analytics.eventTrack('Edit Post Failed');
+    });
+  };
+
+  var create = function() {
+    var newSeed = new Seed({
+      name: $scope.title,
+      description: $scope.description,
+      type: $scope.seedType,
       communityId: community.id,
       imageUrl: $scope.imageUrl
     });
 
-    seed.$save(function() {
+    newSeed.$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
       $scope.close();
       growl.addSuccessMessage('Seed created!');
@@ -84,6 +95,13 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
       growl.addErrorMessage(err.data);
       $analytics.eventTrack('Add Post Failed');
     });
+  };
+
+  $scope.save = function() {
+    if (!validate()) return;
+
+    $scope.saving = true;
+    $scope.editing ? update() : create();
   };
 
   $scope.searchPeople = function(query) {
@@ -96,9 +114,25 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name} );
     $scope.hasMention = true;
     return UserMentions.userTextRaw(user);
+  };
+
+
+  if (seed) {
+    $scope.editing = true;
+    $scope.switchSeedType(seed.type);
+    $scope.title = seed.name;
+
+    if (seed.description.substring(0, 3) === '<p>') {
+      $scope.description = seed.description;
+    } else {
+      $scope.description = format('<p>%s</p>', seed.description);
+    }
+  } else {
+    $scope.switchSeedType('intention');
   }
+
 });
 
 module.exports = function(angularModule) {
-  angularModule.controller('NewSeedCtrl', dependencies);
+  angularModule.controller('SeedEditCtrl', dependencies);
 }

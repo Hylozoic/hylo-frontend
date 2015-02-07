@@ -10,9 +10,7 @@ dependencies.push(function($sce, $filter) {
 
       function read() {
         var html = element.html();
-        // When we clear the content editable the browser leaves a <br> behind
-        // If strip-br attribute is provided then we strip this out
-        if (attrs.stripBr && html === '<br>') {
+        if (html === '<br>' || html === '<p>&nbsp;</p>') {
           html = '';
         }
 
@@ -46,7 +44,8 @@ dependencies.push(function($sce, $filter) {
         scope.$apply(read);
       });
 
-      read(); // initialize
+      // commenting this out because it prevents setting an initial value with ng-model
+      // read();
     }
   };
 });

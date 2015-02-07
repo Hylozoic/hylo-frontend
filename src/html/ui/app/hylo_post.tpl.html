@@ -6,11 +6,14 @@
   </a>
 
   <div class="post-container">
-    <span class="post-options dropdown" dropdown ng-show="canDelete">
+    <span class="post-options dropdown" dropdown ng-show="canEdit">
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
         <li>
-          <a class="post-option" ng-click="delete(comment)">Delete</a>
+          <a class="post-option" ui-sref="community.editSeed({community: post.communitySlug, seedId: post.id})">Edit</a>
+        </li>
+        <li>
+          <a class="post-option" ng-click="delete()">Delete</a>
         </li>
       </ul>
     </span>

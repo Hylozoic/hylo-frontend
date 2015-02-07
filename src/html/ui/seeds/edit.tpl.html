@@ -2,7 +2,7 @@
   <div class="navbar-header">
     <i class="icon-hylo-script" ng-click="close()"></i>
   </div>
-  <div class="navbar-center" href="#">New Seed</div>
+  <div class="navbar-center" href="#">{{editing ? 'Edit' : 'New'}} Seed</div>
   <a class="navbar-right close" ng-click="close()">&times;</a>
 </nav>
 
@@ -12,19 +12,19 @@
     <div class="select-type">
       <div class="option intention" ng-class="{active: seedType==='intention'}">
         <label>
-          <input type="radio" name="seedTypeSelector" value="intention" ng-click="switchSeedType('intention')" checked>
+          <input type="radio" ng-checked="seedType==='intention'" ng-click="switchSeedType('intention')">
             Intention
         </label>
       </div>
       <div class="option offer" ng-class="{active: seedType==='offer'}">
         <label>
-          <input type="radio" name="seedTypeSelector" value="offer" ng-click="switchSeedType('offer')">
+          <input type="radio" ng-checked="seedType==='offer'" ng-click="switchSeedType('offer')">
             Offer
         </label>
       </div>
       <div class="option request" ng-class="{active: seedType==='request'}">
         <label>
-          <input type="radio" name="seedTypeSelector" value="request" ng-click="switchSeedType('request')">
+          <input type="radio" ng-checked="seedType==='request'" ng-click="switchSeedType('request')">
             Request
         </label>
       </div>
@@ -32,7 +32,7 @@
 
     <div class="edit-content">
       <div class="title">Seed Title</div>
-      <input type="text" class="form-control" ng-model="title"/>
+      <input type="text" class="form-control" ng-model="title" autofocus='true'/>
       <div class="title">Description</div>
 
       <div ng-model="description" autocomplete="off" contenteditable="true"
@@ -56,7 +56,7 @@
         <button type="button" class="save" ng-click="save()" ng-disabled="saving">
           <i class="icon-little-check"></i>
           <span ng-if="saving">Saving...</span>
-          <span ng-hide="saving">Plant Seed</span>
+          <span ng-hide="saving">{{editing ? 'Save Changes' : 'Plant Seed'}}</span>
         </button>
       </div>
     </div>
