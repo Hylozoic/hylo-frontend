@@ -63,8 +63,8 @@ app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '
         'responseError': function(rejection) {
           var requestTo = rejection.config ? rejection.config.url : "N/A";
           if (rejection.status == 403) {
-            Rollbar.error("Client 403 Error", {page: rejection.config.url});
-            growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
+            Rollbar.error("403: " + rejection.config.url);
+            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (403)", {ttl: 5000});
           } else if (rejection.status == 500) {
             if (!hyloEnv.isProd) {
               if (rejection.headers()['content-type'] === "text/html") {
@@ -74,12 +74,12 @@ app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '
               }
               console.log(rejection, rejection.data);
             } else {
-              growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
+              growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (500)", {ttl: 5000});
             }
           } else if (rejection.status == 404) {
             $log.error("404 ResponseError", rejection);
-            Rollbar.error("Client 404 Error", {page: rejection.config.url});
-            growl.addErrorMessage("Oops!  Something bad happened. The Hylo team has been notified.", {ttl: 5000});
+            Rollbar.error("404: " + rejection.config.url);
+            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (404)", {ttl: 5000});
           }
           return $q.reject(rejection);
         }
@@ -96,16 +96,16 @@ app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$wi
     $rootScope.$on('$stateChangeError',
       function(event, toState, toParams, fromState, fromParams, error) {
         if (!hyloEnv.isProd) {
-          console.error("$stateChangeError Occurred", event, toState, toParams, fromState, fromParams, error)
+          console.error("$stateChangeError", event, toState, toParams, fromState, fromParams, error);
         } else {
-          Rollbar.error("$stateChangeError Occurred", {
+          Rollbar.error("$stateChangeError", {
             toState: toState,
             toParams: toParams,
             fromState: fromState,
             fromParams: fromParams,
             error: error
           });
-          growl.addErrorMessage("Oops! There was an error trying to perform your requested action. The Hylo team has been notified.", {ttl: 5000});
+          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (SCE)", {ttl: 5000});
         }
       }
     );
