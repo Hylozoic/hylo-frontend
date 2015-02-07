@@ -39,6 +39,7 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
       path: format('user/%s/seeds', currentUser.id),
       success: function(url) {
         $scope.imageUrl = url;
+        $scope.imageRemoved = false;
         finish();
       },
       failure: function(err) {
@@ -49,6 +50,7 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
 
   $scope.removeImage = function() {
     delete $scope.imageUrl;
+    $scope.imageRemoved = true;
   };
 
   var validate = function() {
@@ -60,13 +62,8 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     return !invalidTitle;
   }
 
-  var update = function() {
-    seed.update({
-      name: $scope.title,
-      description: $scope.description,
-      type: $scope.seedType,
-      communityId: community.id,
-    }, function() {
+  var update = function(data) {
+    seed.update(data, function() {
       $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention});
       $state.go('seed', {community: community.slug, seedId: seed.id});
       growl.addSuccessMessage('Seed updated.');
@@ -77,16 +74,8 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     });
   };
 
-  var create = function() {
-    var newSeed = new Seed({
-      name: $scope.title,
-      description: $scope.description,
-      type: $scope.seedType,
-      communityId: community.id,
-      imageUrl: $scope.imageUrl
-    });
-
-    newSeed.$save(function() {
+  var create = function(data) {
+    new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
       $scope.close();
       growl.addSuccessMessage('Seed created!');
@@ -101,7 +90,15 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     if (!validate()) return;
 
     $scope.saving = true;
-    $scope.editing ? update() : create();
+    var data = {
+      name: $scope.title,
+      description: $scope.description,
+      type: $scope.seedType,
+      communityId: community.id,
+      imageUrl: $scope.imageUrl,
+      imageRemoved: $scope.imageRemoved
+    };
+    $scope.editing ? update(data) : create(data);
   };
 
   $scope.searchPeople = function(query) {
@@ -116,11 +113,13 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
     return UserMentions.userTextRaw(user);
   };
 
-
   if (seed) {
     $scope.editing = true;
     $scope.switchSeedType(seed.type);
     $scope.title = seed.name;
+    if (seed.media[0]) {
+      $scope.imageUrl = seed.media[0].url;
+    }
 
     if (seed.description.substring(0, 3) === '<p>') {
       $scope.description = seed.description;
