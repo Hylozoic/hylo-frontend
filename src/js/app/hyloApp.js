@@ -77,7 +77,6 @@ app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '
               growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (500)", {ttl: 5000});
             }
           } else if (rejection.status == 404) {
-            $log.error("404 ResponseError", rejection);
             Rollbar.error("404: " + rejection.config.url);
             growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (404)", {ttl: 5000});
           }
