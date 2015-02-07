@@ -1,7 +1,6 @@
 require('./auth_module');
 require('./filters');
 require('./directives');
-require('./directives/hylo_post');
 require('./directives/embeddedComments');
 require('./features/features');
 require('./controllers');
