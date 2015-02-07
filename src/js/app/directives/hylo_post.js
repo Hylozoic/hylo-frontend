@@ -1,5 +1,8 @@
 var truncate = require('html-truncate');
 
+// n.b. when i split this up and did "dependencies.push" as we've been doing
+// with controllers, it broke Angular's minification.
+
 var dependencies = [
 "Post", 'Seed', '$filter', '$state', '$rootScope', '$log', '$modal', '$http',
 '$timeout', '$window', '$analytics', '$sce', 'growl',
