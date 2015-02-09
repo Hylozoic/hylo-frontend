@@ -23,11 +23,11 @@ dependencies.push(function($resource) {
       method: 'POST'
     },
     removeModerator: {
-      url: '/noo/community/:id/moderator/:user_id',
+      url: '/noo/community/:id/moderator/:userId',
       method: 'DELETE'
     },
     removeMember: {
-      url: '/noo/community/:id/member/:user_id',
+      url: '/noo/community/:id/member/:userId',
       method: 'DELETE'
     }
   });

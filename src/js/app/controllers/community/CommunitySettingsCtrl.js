@@ -133,7 +133,7 @@ module.exports = function(angularModule) {
           confirmText = "Are you sure you wish to remove " + user.name + "'s moderator powers?";
 
         if (confirm(confirmText)) {
-          community.removeModerator({user_id: userId}, function() {
+          community.removeModerator({userId: userId}, function() {
             $scope.moderators = $scope.moderators.filter(function(user) {
               return user.id != userId;
             });
@@ -147,7 +147,7 @@ module.exports = function(angularModule) {
 
       $scope.addModerator = function(item, model, label) {
         $scope.selectedMember = null;
-        community.addModerator({user_id: item.id}, function() {
+        community.addModerator({userId: item.id}, function() {
           $scope.moderators.push(item);
         })
       }
