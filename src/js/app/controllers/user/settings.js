@@ -58,7 +58,7 @@ dependencies.push(function($scope, growl, $analytics, $state, currentUser, Commu
     if (!confirm('Are you sure you want to leave this community?'))
       return;
 
-    Community.removeMember({id: communityId, user_id: user.id}, function() {
+    Community.removeMember({id: communityId, userId: user.id}, function() {
       user.memberships.splice(index, 1);
     }, function(err) {
       growl.addErrorMessage(err.data);
