@@ -223,6 +223,11 @@
       position: relative;
       text-decoration: none;
 
+      @media (min-width: @screen-sm) {
+        min-height: 100px;
+      }
+
+
       &.selected {
         background-color: @dark-accent;
       }
@@ -235,16 +240,16 @@
 
       .count {
         border: 1px solid @link-color;
-        @size: 50px;
+        @size: 27px;
         width: @size;
         height: @size;
         .border-radius(@size/2);
         margin: 10px auto @std-padding;
         text-align: center;
-        font-size: 30px;
+        font-size: 12px;
         font-weight: 100;
         color: @link-color;
-        line-height: 50px;
+        line-height: 30px;
       }
     }
 

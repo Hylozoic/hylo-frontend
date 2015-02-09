@@ -154,15 +154,26 @@ var profileStates = function(stateProvider) {
         } else {
           return User.get({id: $stateParams.id}).$promise;
         }
-      },
-      posts: function(user) {
-        return user.seeds().$promise;
       }
     },
     views: {
       'main': {
         templateUrl: '/ui/profile/base.tpl.html',
         controller: 'ProfileCtrl'
+      }
+    }
+  })
+  .state('profile.seeds', {
+    url: '/seeds',
+    resolve: {
+      posts: /*@ngInject*/ function(user) {
+        return user.seeds().$promise;
+      }]
+    },
+    views: {
+      'tab': {
+        templateUrl: '/ui/profile/seeds.tpl.html',
+        controller: 'ProfileSeedsCtrl'
       }
     }
   })
