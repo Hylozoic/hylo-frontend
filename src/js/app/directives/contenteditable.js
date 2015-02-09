@@ -1,7 +1,6 @@
 var Medium = require('medium.js/medium');
 
-var dependencies = ['$sce', '$filter'];
-dependencies.push(function($sce, $filter) {
+var directive = function($sce, $filter, $timeout) {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
@@ -25,13 +24,13 @@ dependencies.push(function($sce, $filter) {
       var mediumEditor = new Medium({
         element: angular.element(element)[0],
         mode: Medium.partialMode,
-        placeholder: attrs.placeholder,
+        // placeholder: attrs.placeholder,
         autoHR: false,
         pasteAsText: true,
         pasteEventHandler: function(e) {
-            e.preventDefault();
-            var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
-            document.execCommand('insertText', false, text);
+          e.preventDefault();
+          var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
+          document.execCommand('insertText', false, text);
         }
       });
 
@@ -48,8 +47,8 @@ dependencies.push(function($sce, $filter) {
       // read();
     }
   };
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.directive('contenteditable', dependencies);
-}
+  angularModule.directive('contenteditable', directive);
+};
