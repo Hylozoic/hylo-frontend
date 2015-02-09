@@ -8,7 +8,7 @@ module.exports = function(angularModule) {
 
       searchPeople: function(query, community) {
         var peopleList = [];
-        return community.members({search: query}).$promise.then(function (items) {
+        return community.members({search: query, limit: 5}).$promise.then(function (items) {
           angular.forEach(items, function(item) {
             if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
               peopleList.push(item);
