@@ -217,6 +217,7 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
     return $location.path();
   });
 
+  // handle old single-post links
   $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
 
   $stateProvider
