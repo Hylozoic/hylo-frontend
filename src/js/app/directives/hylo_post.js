@@ -1,6 +1,5 @@
 var truncate = require('html-truncate');
 
-// @ngInject
 var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, $http, $timeout, $window, $analytics, $sce, growl) {
 
   var controller = function($scope, $element) {
