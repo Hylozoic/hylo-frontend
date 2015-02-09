@@ -217,6 +217,8 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
     return $location.path();
   });
 
+  $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
+
   $stateProvider
     .state("404", {
       templateUrl: '/ui/app/404.tpl.html'
