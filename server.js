@@ -1,6 +1,9 @@
-var http       = require('http');
-var static     = require('node-static');
-var fileServer = new static.Server('./dist');
+var http = require('http'),
+  static = require('node-static'),
+  fileServer = new static.Server('./dist'),
+  _ = require('lodash'),
+  url = require('url'),
+  util = require('util');
 
 var proxy = function(req, res, upstream, port) {
   req.headers.host = upstream;
@@ -41,6 +44,20 @@ module.exports = function(opts) {
     nodeUpstreamPort = parseInt(nodeUpstream[1] || '80');
 
   var server = http.createServer(function(req, res) {
+
+    var u = url.parse(req.url);
+
+    if (_.contains(['/', '/app'], u.pathname)) {
+      u.pathname = u.pathname.replace(/\/$/, '');
+      u.pathname = util.format('/pages%s/index.html', u.pathname);
+      req.url = url.format(u);
+
+      fileServer.serve(req, res, function(err, result) {
+        opts.log.writeln(req.connection.remoteAddress + ' L ' + req.method + ' ' + req.url);
+      });
+
+      return;
+    }
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
