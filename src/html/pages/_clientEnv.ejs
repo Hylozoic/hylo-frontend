@@ -1,0 +1,29 @@
+<script type="text/javascript">
+  <%# these can be written in at compile time -%>
+
+  window.hyloEnv = {
+    isProd: <%= process.env.NODE_ENV == 'production' %>,
+    environment: '<%= process.env.NODE_ENV %>',
+    s3: {
+      bucket: '<%= process.env.AWS_S3_BUCKET %>',
+      cloudfrontHost: '<%= process.env.AWS_S3_CONTENT_URL %>'
+    },
+    fb: {appId: '<%= process.env.FB_CLIENTID %>'},
+    rollbar: {token: '<%= process.env.ROLLBAR_CLIENT_TOKEN %>'},
+    segment: {key: '<%= process.env.SEGMENT_IO_KEY %>'},
+    filepicker: {key: '<%= process.env.FILEPICKER_API_KEY %>'}
+  };
+
+  <% if (false) { // these need to be injected per-request -%>
+  hyloEnv.currentUser = {
+    id: @currentUser.get.getId,
+    email: "@currentUser.get.getEmail",
+    name: "@currentUser.get.getName",
+    firstName: "@currentUser.get.getFirstName",
+    lastName: "@currentUser.get.getLastName",
+    provider: "@currentUser.get.getProviders.headOption.getOrElse("N/A").toString",
+    created: @Option(currentUser.get.getDateCreated).map(date => date.getTime).getOrElse(scala.xml.Unparsed("''"))
+  };
+  <% } -%>
+
+</script>
