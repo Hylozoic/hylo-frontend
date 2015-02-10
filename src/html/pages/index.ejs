@@ -3,6 +3,7 @@
 <head>
 <title>Hylo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
 <%- include('_newrelic') %>
 <%- include('_clientEnv') %>
@@ -14,7 +15,7 @@ window.analytics.page(); // segment.io
 </script>
 <script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
 <script type="text/javascript">try { Typekit.load ( ) ; } catch ( e ) { }</script>
-<link href='<%= process.env.CSS_BUNDLE_URL %>' rel="stylesheet">
+<link href='<%= cssBundleUrl %>' rel="stylesheet">
 
 </head>
 
