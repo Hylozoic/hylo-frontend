@@ -28,7 +28,7 @@
     width: 100%;
     z-index: 1000;
     border-radius: 0;
-    top: 40px;
+    top: 0;
     -webkit-transition-property: background-color, color;
     -moz-transition-property: background-color, color;
     -o-transition-property: background-color, color;
@@ -38,6 +38,14 @@
     -moz-transition-duration: 0.5s;
     -o-transition-duration: 0.5s;
     transition-duration: 0.5s;
+
+    &.transparent {
+      border: 1px solid transparent;
+      background-color: transparent;
+      &, .navbar-brand, a {
+        color: white !important;
+      }
+    }
   }
 
   .graph-img {

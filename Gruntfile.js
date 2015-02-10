@@ -35,6 +35,18 @@ module.exports = function(grunt) {
         }
       }
     },
+    ejs: {
+      dev: {
+        options: grunt.util._.merge(require('./helpers'), {
+          // pass variables to templates here
+        }),
+        src: ['pages/**/!(_)*.ejs'],
+        cwd: 'src/html',
+        dest: 'dist/',
+        expand: true,
+        ext: '.html'
+      }
+    },
     extract_sourcemap: {
       prod: {
         files: {
@@ -62,6 +74,13 @@ module.exports = function(grunt) {
       }
     },
     sync: {
+      img: {
+        files: [
+          {cwd: 'src/img', src: ['**'], dest: 'dist/img/'}
+        ],
+        updateAndDelete: true,
+        verbose: true
+      },
       ui: {
         files: [
           {cwd: 'src/html/ui/', src: ['**'], dest: 'dist/ui/'}
@@ -101,6 +120,14 @@ module.exports = function(grunt) {
         files: ['src/css/**/*'],
         tasks: ['less', 'notify:css']
       },
+      img: {
+        files: ['src/img/**/*'],
+        tasks: ['sync:img']
+      },
+      pages: {
+        files: ['src/html/pages/**/*'],
+        tasks: ['ejs']
+      },
       ui: {
         files: ['src/html/ui/**/*'],
         tasks: ['sync:ui']
@@ -136,7 +163,7 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'sync', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'ejs', 'sync', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
     require('./server')({
