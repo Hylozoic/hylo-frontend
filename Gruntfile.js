@@ -37,12 +37,18 @@ module.exports = function(grunt) {
     },
     ejs: {
       dev: {
-        options: grunt.util._.merge(require('./helpers'), {
-          // pass variables to templates here
-        }),
-        src: ['pages/**/!(_)*.ejs'],
-        cwd: 'src/html',
-        dest: 'dist/',
+        options: require('./templateEnv')('development'),
+        src: ['**/!(_)*.ejs'],
+        cwd: 'src/html/pages',
+        dest: 'dist/dev',
+        expand: true,
+        ext: '.html'
+      },
+      deploy: {
+        options: require('./templateEnv')(grunt.option('to')),
+        src: ['**/!(_)*.ejs'],
+        cwd: 'src/html/pages',
+        dest: 'dist/deploy',
         expand: true,
         ext: '.html'
       }
@@ -76,7 +82,14 @@ module.exports = function(grunt) {
     sync: {
       img: {
         files: [
-          {cwd: 'src/img', src: ['**'], dest: 'dist/img/'}
+          {cwd: 'src/img', src: ['**'], dest: 'dist/dev/img/'}
+        ],
+        updateAndDelete: true,
+        verbose: true
+      },
+      imgDeploy: {
+        files: [
+          {cwd: 'src/img', src: ['**'], dest: 'dist/deploy/img/'}
         ],
         updateAndDelete: true,
         verbose: true
@@ -122,11 +135,11 @@ module.exports = function(grunt) {
       },
       img: {
         files: ['src/img/**/*'],
-        tasks: ['sync:img']
+        tasks: ['sync:imgDev']
       },
       pages: {
         files: ['src/html/pages/**/*'],
-        tasks: ['ejs']
+        tasks: ['ejs:dev']
       },
       ui: {
         files: ['src/html/ui/**/*'],
@@ -163,7 +176,8 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'ejs', 'sync', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'ejs:dev', 'sync', 'serve', 'watch']);
+  grunt.registerTask('deploy', ['ejs:deploy', 'sync:imgDeploy', 'upload']);
 
   grunt.registerTask('serve', function() {
     require('./server')({
@@ -174,8 +188,14 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('deploy', function(env) {
-    require('./deploy')(env, this.async(), grunt.log);
+  grunt.registerTask('upload', function() {
+    var app;
+    if (grunt.option('to') == 'staging') {
+      app = 'hylo-staging';
+    } else if (grunt.option('to') == 'production') {
+      app = 'hylo';
+    }
+    require('./deploy')(app, this.async(), grunt.log);
   });
 
   grunt.registerTask('clean', function() {

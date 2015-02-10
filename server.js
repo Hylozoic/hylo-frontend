@@ -49,7 +49,7 @@ module.exports = function(opts) {
 
     if (_.contains(['/', '/app'], u.pathname)) {
       u.pathname = u.pathname.replace(/\/$/, '');
-      u.pathname = util.format('/pages%s/index.html', u.pathname);
+      u.pathname = util.format('/dev%s/index.html', u.pathname);
       req.url = url.format(u);
 
       fileServer.serve(req, res, function(err, result) {

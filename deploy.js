@@ -1,21 +1,16 @@
 var async = require('async'),
-  _ = require('lodash');
-
-var fs = require('fs');
-var request = require('request');
+  _ = require('lodash'),
+  dir = require('node-dir'),
+  fs = require('fs'),
+  heroku = require('./deploy/heroku'),
+  mime = require('mime'),
+  request = require('request'),
+  util = require('util');
 
 require('shelljs/global');
 
 var _command = function(cmd) {
   return exec(cmd, {silent: true}).output.replace(/\n/, '');
-};
-
-var currentGitHash = function() {
-  return _command("git show|head -n1|awk '{print $2}'|cut -c -8");
-};
-
-var currentGitSha = function() {
-  return _command("git show|head -n1|awk '{print $2}'");
 };
 
 var username = function() {
@@ -31,14 +26,8 @@ var Deployer = function(app, done, log) {
   this.bundleExts = ['js', 'css'];
   this.bundlePaths = {};
   this.log = log;
-  this.version = currentGitHash();
-  this.gitSha = currentGitSha();
-
-  if (!process.env.HEROKU_API_TOKEN) {
-    this.log.errorlns("HEROKU_API_TOKEN is not set");
-  }
-  var heroku = new (require('heroku-client'))({token: process.env.HEROKU_API_TOKEN});
-  this.herokuConfig = heroku.apps(app).configVars();
+  this.version = require('./deploy/version')(8);
+  this.herokuConfig = heroku.config(app);
 };
 
 Deployer.prototype.fail = function(err) {
@@ -80,15 +69,17 @@ Deployer.prototype.upload = function(done) {
     }, done);
   }.bind(this);
 
+  var version = this.version;
+
   async.series([
     function js(done) {
       var contents = cat('dist/bundle.min.js'),
-        path = 'assets/bundle-' + this.version + '.min.js';
+        path = 'assets/bundle-' + version + '.min.js';
       this.bundlePaths.js = path;
 
       contents = contents.replace(
         'sourceMappingURL=bundle.min.js.map',
-        'sourceMappingURL=bundle-' + this.version + '.min.js.map'
+        'sourceMappingURL=bundle-' + version + '.min.js.map'
       );
 
       upload(path, contents, 'application/x-javascript', done);
@@ -103,7 +94,7 @@ Deployer.prototype.upload = function(done) {
 
     function css(done) {
       var contents = cat('dist/bundle.min.css'),
-        path = 'assets/bundle-' + this.version + '.min.css';
+        path = 'assets/bundle-' + version + '.min.css';
       this.bundlePaths.css = path;
 
       // fix image paths
@@ -113,13 +104,26 @@ Deployer.prototype.upload = function(done) {
       );
 
       upload(path, contents, 'text/css', done);
+    }.bind(this),
+
+    function pages(done) {
+      dir.files('dist/deploy', function(err, files) {
+        if (err) throw err;
+        async.each(files, function(filename, next) {
+          var contents = fs.readFileSync(filename),
+            path = filename.replace(/^dist\/deploy/, 'assets/' + version);
+
+          upload(path, contents, mime.lookup(filename), next);
+        }, done);
+      });
     }.bind(this)
+
   ], done);
 
 };
 
 Deployer.prototype.uploadSourceMap = function(callback) {
-  this.log.subhead('uploading source map');
+  this.log.subhead('uploading source map to Rollbar');
 
   var formData = {
     // Pass a simple key-value pair
@@ -137,54 +141,59 @@ Deployer.prototype.uploadSourceMap = function(callback) {
       }
     }
   };
-  request.post({url:'https://api.rollbar.com/api/1/sourcemap',
-        formData: formData},
-        function optionalCallback(err, httpResponse, body) {
-          if (err || body.err > 0) {
-            console.error('upload failed:', err);
-            this.fail(result.message);
-          }
-          callback();
-        }.bind(this)
-  );
+  request.post({
+    url: 'https://api.rollbar.com/api/1/sourcemap',
+    formData: formData
+  }, function (err, httpResponse, body) {
+    if (err || body.err > 0) {
+      console.error('upload failed:', err);
+      this.fail(result.message);
+    }
+    callback();
+  }.bind(this));
 };
 
 Deployer.prototype.notifyRollbar = function(callback) {
   this.log.subhead('Notifying Rollbar of deploy');
 
   var formData = {
-    // Pass a simple key-value pair
     access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
-    // Pass data via Buffers
-    revision: this.gitSha,
+    revision: require('./deploy/version')(),
     environment: this.herokuEnv.APPLICATION_ENV,
     local_username: username()
   };
-  request.post({url:'https://api.rollbar.com/api/1/deploy/',
-      formData: formData},
-    function optionalCallback(err, httpResponse, body) {
+  request.post({
+    url:'https://api.rollbar.com/api/1/deploy/',
+    formData: formData
+  }, function (err, httpResponse, body) {
       if (err || body.err > 0) {
         this.fail(result.message);
       }
       callback();
-    }.bind(this)
-  );
+    }.bind(this));
 };
 
 Deployer.prototype.updateEnv = function(callback) {
-  this.log.subhead('updating ENV on ' + this.app);
+  var nodeApp = this.app.replace('hylo', 'hylo-node'),
+    version = this.version;
 
-    newVars = {
-      JS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.js,
-      CSS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.css,
-      BUNDLE_VERSION: this.version
-    };
+  this.log.subhead(util.format('updating ENV on %s and %s', this.app, nodeApp));
+
+  newVars = {
+    JS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.js,
+    CSS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.css,
+    BUNDLE_VERSION: this.version
+  };
 
   _.forIn(newVars, function(val, key) {
     this.log.writeln(key + ': ' + val);
   }.bind(this));
 
-  this.herokuConfig.update(newVars, callback);
+  this.herokuConfig.update(newVars, function(err) {
+    if (err) throw err;
+    var nodeConfig = heroku.config(nodeApp);
+    nodeConfig.update({BUNDLE_VERSION: version}, callback);
+  });
 };
 
 module.exports = function(app, done, log) {
