@@ -16,7 +16,12 @@ window.analytics.page(); // segment.io
 <script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
 <script type="text/javascript">try { Typekit.load ( ) ; } catch ( e ) { }</script>
 <link href='<%= cssBundleUrl %>' rel="stylesheet">
-
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+  $.get('/noo/user/status', function(resp) {
+    if (resp.signedIn) window.location = '/app';
+  });
+</script>
 </head>
 
 <body class="home-page">
@@ -119,7 +124,6 @@ window.analytics.page(); // segment.io
     </ul>
   </footer>
 
-  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -147,9 +151,6 @@ window.analytics.page(); // segment.io
     /* Create HTML5 element for IE */
     document.createElement("section");
 
-    $.get('/noo/user/status', function(resp) {
-      if (resp.signedIn) window.location = '/app';
-    })
   </script>
 
 </body>
