@@ -220,6 +220,9 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
   // handle old single-post links
   $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
 
+  // handle alternate name of starting route
+  $urlRouterProvider.when('/', '/app');
+
   $stateProvider
     .state("404", {
       templateUrl: '/ui/app/404.tpl.html'
@@ -243,11 +246,15 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         $rootScope.currentUser = oldCurrentUser;
       }]
     })
-    .state('home', {
-      url: '/',
-      // redirects to hylo-play which resolves the URL to a community.
-      onEnter: function reloadCtrl() {
-        window.location.replace('/');
+    .state('home', /*@ngInject*/ {
+      url: '/app',
+      resolve: {
+        defaultCommunity: function(Community) {
+          return Community.default().$promise;
+        }
+      },
+      onEnter: function(defaultCommunity) {
+        window.location.replace('/c/' + defaultCommunity.slug);
       }
     })
     .state('userSettings', {
