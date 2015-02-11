@@ -1,12 +1,11 @@
-var dependencies = ['$scope', '$analytics', 'User', 'user', 'editable', 'posts', 'growl'];
-dependencies.push(function($scope, $analytics, User, user, editable, posts, growl) {
+var controller = function($scope, $analytics, User, user, isSelf, posts, growl) {
   $scope.user = user;
-  $scope.editable = editable;
+  $scope.isSelf = isSelf;
   $scope.posts = posts;
   $scope.hasPosts = posts.length > 0;
 
   $analytics.eventTrack('Member Profiles: Loaded a profile', {user_id: $scope.user.id});
-  if ($scope.editable) $analytics.eventTrack('Member Profiles: Loaded Own Profile');
+  if (isSelf) $analytics.eventTrack('Member Profiles: Loaded Own Profile');
 
   if (!user.banner_url) {
     user.banner_url = require('../services/defaultUserBanner');
@@ -26,8 +25,12 @@ dependencies.push(function($scope, $analytics, User, user, editable, posts, grow
     $analytics.eventTrack('Member Profiles: Clicked a Social Media link', {'network': network, 'url': url});
   };
 
-});
+  $scope.trackEmail = function() {
+    $analytics.eventTrack('Member Profiles: Clicked Email Button', {user_id: $scope.user.id});
+  }
+
+};
 
 module.exports = function(angularModule) {
-  angularModule.controller('ProfileCtrl', dependencies);
+  angularModule.controller('ProfileCtrl', controller);
 };

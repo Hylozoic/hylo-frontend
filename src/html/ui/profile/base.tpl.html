@@ -1,8 +1,9 @@
 <div class="banner">
   <div class="background" back-img="user.banner_url"></div>
   <div class="buttons">
-    <a class="settings" ui-sref="userSettings" ng-if="editable">Settings</a>
-    <a class="edit" ui-sref="editProfile" ng-if="editable">Edit profile</a>
+    <a ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">Send a message</a>
+    <a ui-sref="userSettings" ng-if="isSelf">Settings</a>
+    <a ui-sref="editProfile" ng-if="isSelf">Edit profile</a>
   </div>
   <div class="banner-content">
     <div class="avatar-column">
@@ -23,7 +24,7 @@
             <i class="icon-linkedin"></i>
           </a>
           <a class="message" ui-sref="editProfile"
-            ng-if="editable && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
+            ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
               <i class="icon-twitter"></i>
               <i class="icon-facebook"></i>
               <i class="icon-linkedin"></i>
@@ -32,7 +33,7 @@
         </span>
       </div>
       <div class="bio">
-        <a class="message" ui-sref="editProfile" ng-if="editable && !user.bio">
+        <a class="message" ui-sref="editProfile" ng-if="isSelf && !user.bio">
           <i class="icon-edit" title="icon-edit"></i> Add a bio.</a>
         {{user.bio}}
       </div>
