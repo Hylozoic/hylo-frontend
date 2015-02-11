@@ -2,4 +2,4 @@ deployment:
   production:
     branch: master
     commands:
-      - grunt bundle deploy:hylo
+      - "grunt bundle deploy --to=production"
