@@ -136,7 +136,7 @@ module.exports = function(grunt) {
       },
       img: {
         files: ['src/img/**/*'],
-        tasks: ['sync:imgDev']
+        tasks: ['sync:img']
       },
       pages: {
         files: ['src/html/pages/**/*'],
