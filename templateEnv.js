@@ -1,5 +1,4 @@
-var format = require('util').format,
-  version = require('./deploy/version')(8);
+var format = require('util').format;
 
 module.exports = function(env) {
 
@@ -14,7 +13,8 @@ module.exports = function(env) {
     };
   }
 
-  var host = process.env.AWS_S3_CONTENT_URL;
+  var host = process.env.AWS_S3_CONTENT_URL,
+    version = process.env.BUNDLE_VERSION;
 
   return {
     environment: env,

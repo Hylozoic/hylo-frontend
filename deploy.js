@@ -26,7 +26,7 @@ var Deployer = function(app, done, log) {
   this.bundleExts = ['js', 'css'];
   this.bundlePaths = {};
   this.log = log;
-  this.version = process.env.BUNDLE_VERSION = require('./deploy/version')(8);
+  this.version = process.env.BUNDLE_VERSION;
 
   this.awsContentUrlPrefix = process.env.AWS_S3_CONTENT_URL + '/';
 };
@@ -198,6 +198,9 @@ var api = {
   setupEnv: function(target, log, done) {
     log.subhead('setting up environment variables for deploy');
 
+    process.env.BUNDLE_VERSION = require('./deploy/version')(8);
+    log.writeln('BUNDLE_VERSION: ' + process.env.BUNDLE_VERSION);
+
     var appName = api.appName(target),
       keys = [
         'APPLICATION_ENV',
@@ -210,7 +213,7 @@ var api = {
         'SEGMENT_IO_KEY'
       ];
 
-    log.writeln(util.format('fetching from %s: %s', appName, keys));
+    log.writeln(util.format('fetching from %s: %s', appName, keys.join(', ')));
 
     heroku.config(appName).info(function(err, vars) {
       _.extend(process.env, _.pick(vars, keys));
