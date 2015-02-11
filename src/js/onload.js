@@ -1,6 +1,6 @@
-if (!window.hyloEnv) hyloEnv = {onUser: []};
-
 hyloEnv.onUser(function(user) {
+
+  // segment
   analytics.identify(user.id, {
     email: user.email,
     firstName: user.first_name,
@@ -9,8 +9,15 @@ hyloEnv.onUser(function(user) {
     provider: user.linkedAccounts[0].provider_key,
     created: user.date_created
   });
-});
 
+  // rollbar
+  _rollbarConfig.payload.person = {
+    id: user.id,
+    username: user.name,
+    email: user.email
+  };
+
+});
 
 // Zopim
 if (hyloEnv.isProd) {
