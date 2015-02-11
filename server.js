@@ -36,12 +36,15 @@ var proxy = function(req, res, upstream, port) {
 
 var staticPathList = [
   '',
-  '/app'
+  '/app',
+  '/about',
+  '/about/team',
+  '/about/careers',
+  '/about/contact',
+  '/policies/terms-of-service'
 ];
 
 var appPathPrefixes = [
-  /^$/,
-  /^\/app/,
   /^\/c\//,
   /^\/u\//,
   /^\/settings/,
@@ -61,38 +64,46 @@ module.exports = function(opts) {
   var server = http.createServer(function(req, res) {
 
     var u = url.parse(req.url),
-      originalUrl = req.url;
+      originalUrl = req.url,
+      target = '';
+
+    var log = function(target) {
+      opts.log.writeln('%s %s %s %s', req.connection.remoteAddress, req.method, originalUrl, target);
+    };
 
     u.pathname = u.pathname.replace(/\/$/, '');
 
-    if (_.any(appPathPrefixes, u.pathname.match.bind(u.pathname))) {
-      if (_.contains(staticPathList, u.pathname)) {
-        u.pathname = util.format('/dev%s/index.html', u.pathname);
-      } else {
-        u.pathname = '/dev/app/index.html';
-      }
+    // static pages
+    if (_.contains(staticPathList, u.pathname)) {
+      u.pathname = util.format('/dev%s/index.html', u.pathname);
       req.url = url.format(u);
+      target = '→ ' + u.pathname;
+    }
 
-      fileServer.serve(req, res, function(err, result) {
-        opts.log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + originalUrl + ' → ' + u.pathname);
-      });
+    // alternate paths to Angular base page
+    if (_.any(appPathPrefixes, u.pathname.match.bind(u.pathname))) {
+      u.pathname = '/dev/app/index.html';
+      req.url = url.format(u);
+      target = '→ ' + u.pathname;
+    }
+
+    // pages and API endpoints in node app
+    if (req.url.match(/^\/(noo|admin)/)) {
+      proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
+      log('→ Node');
       return;
     }
 
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        if (req.url.match(/^\/(noo|admin)/)) {
-          proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
-          opts.log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + originalUrl + ' → N');
-        } else {
-          proxy(req, res, upstreamHost, upstreamPort);
-          opts.log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + originalUrl + ' → P');
-        }
-
+        req.url = originalUrl;
+        proxy(req, res, upstreamHost, upstreamPort);
+        log('→ Play');
       } else {
-        opts.log.writeln(req.connection.remoteAddress + ' ' + req.method + ' ' + originalUrl);
+        log(target);
       }
     });
+
   }).listen(opts.port);
 
   opts.log.writeln(
