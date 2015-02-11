@@ -4,6 +4,7 @@
   window.hyloEnv = {
     isProd: <%= environment == 'production' %>,
     environment: '<%= environment %>',
+    version: '<%= process.env.BUNDLE_VERSION %>',
     s3: {
       bucket: '<%= process.env.AWS_S3_BUCKET %>',
       cloudfrontHost: '<%= process.env.AWS_S3_CONTENT_URL %>'
