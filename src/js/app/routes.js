@@ -258,7 +258,10 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         }
       },
       onEnter: function(defaultCommunity) {
-        window.location.replace('/c/' + defaultCommunity.slug);
+        if (defaultCommunity.slug)
+          window.location.replace('/c/' + defaultCommunity.slug);
+        else
+          window.location = '/invitecode';
       }
     })
     .state('userSettings', {
