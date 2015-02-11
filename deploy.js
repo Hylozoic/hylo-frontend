@@ -26,7 +26,7 @@ var Deployer = function(app, done, log) {
   this.bundleExts = ['js', 'css'];
   this.bundlePaths = {};
   this.log = log;
-  this.version = require('./deploy/version')(8);
+  this.version = process.env.BUNDLE_VERSION = require('./deploy/version')(8);
 
   this.awsContentUrlPrefix = process.env.AWS_S3_CONTENT_URL + '/';
 };
