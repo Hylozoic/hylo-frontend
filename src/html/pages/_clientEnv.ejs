@@ -12,19 +12,16 @@
     fb: {appId: '<%= process.env.FB_CLIENTID %>'},
     rollbar: {token: '<%= process.env.ROLLBAR_CLIENT_TOKEN %>'},
     segment: {key: '<%= process.env.SEGMENT_IO_KEY %>'},
-    filepicker: {key: '<%= process.env.FILEPICKER_API_KEY %>'}
+    filepicker: {key: '<%= process.env.FILEPICKER_API_KEY %>'},
+    onUser: function(fn) {
+      hyloEnv.onUserCallbacks.push(fn);
+    },
+    provideUser: function(user) {
+      _.each(hyloEnv.onUserCallbacks, function(fn, i) {
+        fn.call(user, user);
+      });
+    },
+    onUserCallbacks: []
   };
-
-  <% if (false) { // these need to be injected per-request -%>
-  hyloEnv.currentUser = {
-    id: @currentUser.get.getId,
-    email: "@currentUser.get.getEmail",
-    name: "@currentUser.get.getName",
-    firstName: "@currentUser.get.getFirstName",
-    lastName: "@currentUser.get.getLastName",
-    provider: "@currentUser.get.getProviders.headOption.getOrElse("N/A").toString",
-    created: @Option(currentUser.get.getDateCreated).map(date => date.getTime).getOrElse(scala.xml.Unparsed("''"))
-  };
-  <% } -%>
 
 </script>

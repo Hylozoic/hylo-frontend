@@ -24,7 +24,7 @@ dependencies.push(function($scope, $analytics, User, user, editable, posts, grow
 
   $scope.clickedSocialLink = function(network, url) {
     $analytics.eventTrack('Member Profiles: Clicked a Social Media link', {'network': network, 'url': url});
-  }
+  };
 
 });
 

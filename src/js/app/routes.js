@@ -239,7 +239,11 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         // the new profile. eventually the old CurrentUser will be replaced
         // with this one.
         currentUser: ['User', function(User) {
-          return User.current().$promise;
+          var promise = User.current().$promise;
+          promise.then(function(user) {
+            window.hyloEnv.provideUser(user);
+          });
+          return promise;
         }]
       },
       controller: ['$rootScope', 'oldCurrentUser', '$stateParams', function($rootScope, oldCurrentUser, $stateParams) {
