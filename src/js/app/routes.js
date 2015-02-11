@@ -145,20 +145,20 @@ var profileStates = function(stateProvider) {
   .state('profile', {
     parent: 'main',
     url: '/u/:id',
-    resolve: {
-      editable: ['currentUser', '$stateParams', function(currentUser, $stateParams) {
-        return parseInt(currentUser.id) == parseInt($stateParams.id);
-      }],
-      user: ['User', 'editable', '$stateParams', 'currentUser', function(User, editable, $stateParams, currentUser) {
-        if (editable) {
+    resolve: /*@ngInject*/ {
+      isSelf: function(currentUser, $stateParams) {
+        return parseInt(currentUser.id) === parseInt($stateParams.id);
+      },
+      user: function(User, isSelf, $stateParams, currentUser) {
+        if (isSelf) {
           return currentUser;
         } else {
           return User.get({id: $stateParams.id}).$promise;
         }
-      }],
-      posts: ['user', function(user) {
+      },
+      posts: function(user) {
         return user.seeds().$promise;
-      }]
+      }
     },
     views: {
       'main': {
