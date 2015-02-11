@@ -1,5 +1,5 @@
-<div class="toolbar community-members-toolbar">
-  <div class="col-sm-6 col-sm-offset-3">
+<div class="toolbar">
+  <div>
     <div class="row">
       <div class="toolbar-left">
         <a class="invite" ui-sref="community.settings({community: community.slug})" ng-if="community.canModerate">
@@ -17,18 +17,23 @@
   <div class="clearfix"></div>
 </div>
 
-<div class="col-sm-6 col-sm-offset-3">
-  <div class="row">
-    <div ng-repeat="user in users | orderBy:'name'" class="member">
-      <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
-      <div class="member-info">
-        <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
-        <div class="skills">Skills: &nbsp;<span ng-bind="::user.skills.join(', ')"></span>&nbsp;</div>
-        <div class="affiliations">Affiliations: &nbsp;<span ng-bind="::user.organizations.join(', ')"></span>&nbsp;</div>
+<div class="member-list">
+  <div ng-repeat="user in users | orderBy:'name'" class="member">
+    <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
+    <div class="member-info">
+      <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
+      <div class="skills">
+        <div class="label-column">Skills</div>
+        <div class="value">{{ ::truncate(user.skills) }}</div>
+      </div>
+      <div class="affiliations">
+        <div class="label-column">Affiliations</div>
+        <div class="value">{{ ::truncate(user.organizations) }}</div>
       </div>
     </div>
-    <div ng-if="users.length == 0" class="no-match">
-      No members matched your search terms.
-    </div>
+  </div>
+
+  <div ng-if="users.length == 0" class="no-match">
+    No members matched your search terms.
   </div>
 </div>
