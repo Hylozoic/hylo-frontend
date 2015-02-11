@@ -192,6 +192,8 @@ module.exports = function(grunt) {
     var done = this.async();
 
     deploy.setupEnv(grunt.option('to'), grunt.log, function() {
+
+      // delay the requiring of templateEnv until after env vars are loaded
       grunt.config.merge({
         ejs: {
           deploy: {
@@ -199,6 +201,7 @@ module.exports = function(grunt) {
           }
         }
       });
+
       grunt.task.run('ejs:deploy');
       grunt.task.run('sync:imgDeploy');
       grunt.task.run('upload');
