@@ -1,17 +1,16 @@
-if (!window.hyloEnv) hyloEnv = {};
+if (!window.hyloEnv) hyloEnv = {onUser: []};
 
-var currentUser = hyloEnv.currentUser;
-
-if (currentUser) {
-  analytics.identify(currentUser.id, {
-    email: currentUser.email,
-    firstName: currentUser.firstName,
-    lastName: currentUser.lastName,
-    name: currentUser.name,
-    provider: currentUser.provider,
-    created: currentUser.created
+hyloEnv.onUser(function(user) {
+  analytics.identify(user.id, {
+    email: user.email,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    name: user.name,
+    provider: user.linkedAccounts[0].provider_key,
+    created: user.date_created
   });
-}
+});
+
 
 // Zopim
 if (hyloEnv.isProd) {
@@ -26,12 +25,12 @@ if (hyloEnv.isProd) {
     $.src='//v2.zopim.com/?1xg3kCDzmdR6YP4N2pijAkN8yitxHFrJ';z.t=+new Date;$.
     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 
-    if (currentUser) {
+    hyloEnv.onUser(function(user) {
       $zopim(function() {
-        $zopim.livechat.setName(currentUser.name);
-        $zopim.livechat.setEmail(currentUser.email);
+        $zopim.livechat.setName(user.name);
+        $zopim.livechat.setEmail(user.email);
       });
-    }
+    });
   }
 }
 

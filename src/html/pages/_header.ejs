@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<base href="/">
+
+<%- include('_newrelic') %>
+<%- include('_clientEnv') %>
+<%- include('_rollbar') %>
+<%- include('_segment') %>
+<%- include('_favicon') %>
+
+<script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="https://js.balancedpayments.com/1.1/balanced.js"></script>
+
+<link href="<%= cssBundleUrl %>" rel="stylesheet">
+<title>Hylo</title>
+</head>
+
+<body class="angular-app hylo-auth waiting-for-angular" ng-class="$bodyClass()" ng-strict-di>

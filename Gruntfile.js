@@ -1,5 +1,7 @@
 require('dotenv').load();
 
+var deploy = require('./deploy');
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -35,6 +37,23 @@ module.exports = function(grunt) {
         }
       }
     },
+    ejs: {
+      dev: {
+        options: require('./templateEnv')('development'),
+        src: ['**/!(_)*.ejs'],
+        cwd: 'src/html/pages',
+        dest: 'dist/dev',
+        expand: true,
+        ext: '.html'
+      },
+      deploy: {
+        src: ['**/!(_)*.ejs'],
+        cwd: 'src/html/pages',
+        dest: 'dist/deploy',
+        expand: true,
+        ext: '.html'
+      }
+    },
     extract_sourcemap: {
       prod: {
         files: {
@@ -62,6 +81,20 @@ module.exports = function(grunt) {
       }
     },
     sync: {
+      img: {
+        files: [
+          {cwd: 'src/img', src: ['**'], dest: 'dist/dev/img/'}
+        ],
+        updateAndDelete: true,
+        verbose: true
+      },
+      imgDeploy: {
+        files: [
+          {cwd: 'src/img', src: ['**'], dest: 'dist/deploy/img/'}
+        ],
+        updateAndDelete: true,
+        verbose: true
+      },
       ui: {
         files: [
           {cwd: 'src/html/ui/', src: ['**'], dest: 'dist/ui/'}
@@ -101,6 +134,14 @@ module.exports = function(grunt) {
         files: ['src/css/**/*'],
         tasks: ['less', 'notify:css']
       },
+      img: {
+        files: ['src/img/**/*'],
+        tasks: ['sync:img']
+      },
+      pages: {
+        files: ['src/html/pages/**/*'],
+        tasks: ['ejs:dev']
+      },
       ui: {
         files: ['src/html/ui/**/*'],
         tasks: ['sync:ui']
@@ -136,7 +177,7 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'sync', 'serve', 'watch']);
+  grunt.registerTask('dev', ['browserify', 'less', 'ejs:dev', 'sync', 'serve', 'watch']);
 
   grunt.registerTask('serve', function() {
     require('./server')({
@@ -147,8 +188,29 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('deploy', function(env) {
-    require('./deploy')(env, this.async(), grunt.log);
+  grunt.registerTask('deploy', function() {
+    var done = this.async();
+
+    deploy.setupEnv(grunt.option('to'), grunt.log, function() {
+
+      // delay the requiring of templateEnv until after env vars are loaded
+      grunt.config.merge({
+        ejs: {
+          deploy: {
+            options: require('./templateEnv')(grunt.option('to'))
+          }
+        }
+      });
+
+      grunt.task.run('ejs:deploy');
+      grunt.task.run('sync:imgDeploy');
+      grunt.task.run('upload');
+      done();
+    });
+  })
+
+  grunt.registerTask('upload', function() {
+    deploy.run(grunt.option('to'), this.async(), grunt.log);
   });
 
   grunt.registerTask('clean', function() {
