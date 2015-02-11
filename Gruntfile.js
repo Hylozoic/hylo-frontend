@@ -1,5 +1,7 @@
 require('dotenv').load();
 
+var deploy = require('./deploy');
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -45,7 +47,6 @@ module.exports = function(grunt) {
         ext: '.html'
       },
       deploy: {
-        options: require('./templateEnv')(grunt.option('to')),
         src: ['**/!(_)*.ejs'],
         cwd: 'src/html/pages',
         dest: 'dist/deploy',
@@ -177,7 +178,6 @@ module.exports = function(grunt) {
   grunt.registerTask('bundleCss', ['less', 'cssmin']);
   grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
   grunt.registerTask('dev', ['browserify', 'less', 'ejs:dev', 'sync', 'serve', 'watch']);
-  grunt.registerTask('deploy', ['ejs:deploy', 'sync:imgDeploy', 'upload']);
 
   grunt.registerTask('serve', function() {
     require('./server')({
@@ -188,14 +188,26 @@ module.exports = function(grunt) {
     });
   });
 
+  grunt.registerTask('deploy', function() {
+    var done = this.async();
+
+    deploy.setupEnv(grunt.option('to'), grunt.log, function() {
+      grunt.config.merge({
+        ejs: {
+          deploy: {
+            options: require('./templateEnv')(grunt.option('to'))
+          }
+        }
+      });
+      grunt.task.run('ejs:deploy');
+      grunt.task.run('sync:imgDeploy');
+      grunt.task.run('upload');
+      done();
+    });
+  })
+
   grunt.registerTask('upload', function() {
-    var app;
-    if (grunt.option('to') == 'staging') {
-      app = 'hylo-staging';
-    } else if (grunt.option('to') == 'production') {
-      app = 'hylo';
-    }
-    require('./deploy')(app, this.async(), grunt.log);
+    deploy.run(grunt.option('to'), this.async(), grunt.log);
   });
 
   grunt.registerTask('clean', function() {
