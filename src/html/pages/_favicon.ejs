@@ -1,0 +1,12 @@
+<%
+var path;
+switch (environment) {
+  case 'production':
+    path = 'favicon'; break;
+  case 'staging':
+    path = 'faviconStaging'; break;
+  default:
+    path = 'faviconDev';
+}
+%>
+<link rel="shortcut icon" type="image/png" href="<%= imageUrl(path + '.png') %>">
