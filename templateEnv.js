@@ -14,12 +14,7 @@ module.exports = function(env) {
     };
   }
 
-  var host;
-  if (env === 'staging') {
-    host = process.env.STAGING_S3_CONTENT_HOST;
-  } else if (env === 'production') {
-    host = process.env.PRODUCTION_S3_CONTENT_HOST;
-  }
+  var host = process.env.AWS_S3_CONTENT_URL;
 
   return {
     environment: env,

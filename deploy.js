@@ -27,7 +27,8 @@ var Deployer = function(app, done, log) {
   this.bundlePaths = {};
   this.log = log;
   this.version = require('./deploy/version')(8);
-  this.herokuConfig = heroku.config(app);
+
+  this.awsContentUrlPrefix = process.env.AWS_S3_CONTENT_URL + '/';
 };
 
 Deployer.prototype.fail = function(err) {
@@ -35,33 +36,19 @@ Deployer.prototype.fail = function(err) {
   this.done(false);
 };
 
-Deployer.prototype.getAWSKeys = function(callback) {
-  this.log.subhead('fetching AWS credentials for ' + this.app);
-
-  this.herokuConfig.info(function(err, vars) {
-    this.herokuEnv = _.pick(vars,
-      'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET',
-      'AWS_S3_CONTENT_URL', 'CONTENT_URL', 'ROLLBAR_SERVER_TOKEN',
-      'DOMAIN', 'APPLICATION_ENV');
-    callback(err);
-
-    this.awsContentUrlPrefix = this.herokuEnv.AWS_S3_CONTENT_URL + '/';
-  }.bind(this));
-};
-
 Deployer.prototype.upload = function(done) {
   this.log.subhead('uploading to S3');
 
   var s3 = new (require('aws-sdk')).S3({
-    accessKeyId: this.herokuEnv.AWS_ACCESS_KEY,
-    secretAccessKey: this.herokuEnv.AWS_SECRET_KEY
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_KEY
   });
 
   var upload = function(path, contents, type, done) {
     this.log.writeln(path);
 
     s3.putObject({
-      Bucket: this.herokuEnv.AWS_S3_BUCKET,
+      Bucket: process.env.AWS_S3_BUCKET,
       Key: path,
       Body: contents,
       ACL: 'public-read',
@@ -100,7 +87,7 @@ Deployer.prototype.upload = function(done) {
       // fix image paths
       contents = contents.replace(
         /url\((['"])*\//g,
-        'url($1' + this.herokuEnv.CONTENT_URL + '/'
+        'url($1' + process.env.CONTENT_URL + '/'
       );
 
       upload(path, contents, 'text/css', done);
@@ -127,7 +114,7 @@ Deployer.prototype.uploadSourceMap = function(callback) {
 
   var formData = {
     // Pass a simple key-value pair
-    access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
+    access_token: process.env.ROLLBAR_SERVER_TOKEN,
     // Pass data via Buffers
     version: this.version,
     minified_url: this.awsContentUrlPrefix + this.bundlePaths.js,
@@ -154,12 +141,12 @@ Deployer.prototype.uploadSourceMap = function(callback) {
 };
 
 Deployer.prototype.notifyRollbar = function(callback) {
-  this.log.subhead('Notifying Rollbar of deploy');
+  this.log.subhead('notifying Rollbar of deploy');
 
   var formData = {
-    access_token: this.herokuEnv.ROLLBAR_SERVER_TOKEN,
+    access_token: process.env.ROLLBAR_SERVER_TOKEN,
     revision: require('./deploy/version')(),
-    environment: this.herokuEnv.APPLICATION_ENV,
+    environment: process.env.APPLICATION_ENV,
     local_username: username()
   };
   request.post({
@@ -189,27 +176,65 @@ Deployer.prototype.updateEnv = function(callback) {
     this.log.writeln(key + ': ' + val);
   }.bind(this));
 
-  this.herokuConfig.update(newVars, function(err) {
+  heroku.config(this.app).update(newVars, function(err) {
     if (err) throw err;
     var nodeConfig = heroku.config(nodeApp);
     nodeConfig.update({BUNDLE_VERSION: version}, callback);
   });
 };
 
-module.exports = function(app, done, log) {
-  var deployer = new Deployer(app, done, log);
+var api = {
 
-  async.series([
-    deployer.getAWSKeys.bind(deployer),
-    deployer.upload.bind(deployer),
-    deployer.uploadSourceMap.bind(deployer),
-    deployer.notifyRollbar.bind(deployer),
-    deployer.updateEnv.bind(deployer)
-  ], function(err) {
-    if (err) {
-      deployer.fail(err);
-    } else {
-      done();
+  appName: function(target) {
+    var name;
+    if (target == 'staging') {
+      name = 'hylo-staging';
+    } else if (target == 'production') {
+      name = 'hylo';
     }
-  });
+    return name;
+  },
+
+  setupEnv: function(target, log, done) {
+    log.subhead('setting up environment variables for deploy');
+
+    var appName = api.appName(target),
+      keys = [
+        'APPLICATION_ENV',
+        'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET', 'AWS_S3_CONTENT_URL',
+        'CONTENT_URL',
+        'DOMAIN',
+        'FB_CLIENTID',
+        'FILEPICKER_API_KEY',
+        'ROLLBAR_CLIENT_TOKEN', 'ROLLBAR_SERVER_TOKEN',
+        'SEGMENT_IO_KEY'
+      ];
+
+    log.writeln(util.format('fetching from %s: %s', appName, keys));
+
+    heroku.config(appName).info(function(err, vars) {
+      _.extend(process.env, _.pick(vars, keys));
+      done(err);
+    });
+  },
+
+  run: function(target, done, log) {
+    var deployer = new Deployer(api.appName(target), done, log);
+
+    async.series([
+      deployer.upload.bind(deployer),
+      deployer.uploadSourceMap.bind(deployer),
+      deployer.notifyRollbar.bind(deployer),
+      deployer.updateEnv.bind(deployer)
+    ], function(err) {
+      if (err) {
+        deployer.fail(err);
+      } else {
+        done();
+      }
+    });
+  }
+
 };
+
+module.exports = api;
