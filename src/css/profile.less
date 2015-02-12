@@ -1,14 +1,16 @@
 .profile {
+
+  a.button {
+    @media (max-width: @screen-xs-max) {.rounded-button;}
+    @media (min-width: @screen-sm) {.rounded-button-clear;}
+  }
+
   .banner {
     .dark-background-gradient;
 
     div.buttons {
       @media (max-width: @screen-xs-max) {
         padding-top: 5px;
-      }
-      a {
-        @media (max-width: @screen-xs-max) {.rounded-button;}
-        @media (min-width: @screen-sm) {.rounded-button-clear;}
       }
     }
 
@@ -102,6 +104,11 @@
       font-size: 24px;
       color: white;
       margin-bottom: 10px;
+    }
+
+    a.button {
+      top: -4px;
+      position: relative;
     }
 
     @media (max-width: @screen-xs-max) {

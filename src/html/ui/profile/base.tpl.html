@@ -1,9 +1,8 @@
 <div class="banner">
   <div class="background" back-img="user.banner_url"></div>
   <div class="buttons">
-    <a ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">Send a message</a>
-    <a ui-sref="userSettings" ng-if="isSelf">Settings</a>
-    <a ui-sref="editProfile" ng-if="isSelf">Edit profile</a>
+    <a class="button" ui-sref="userSettings" ng-if="isSelf">Settings</a>
+    <a class="button" ui-sref="editProfile" ng-if="isSelf">Edit profile</a>
   </div>
   <div class="banner-content">
     <div class="avatar-column">
@@ -31,6 +30,7 @@
               &nbsp;&nbsp;Add social media links.
           </a>
         </span>
+        <a class="button" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">Send a message</a>
       </div>
       <div class="bio">
         <a class="message" ui-sref="editProfile" ng-if="isSelf && !user.bio">
