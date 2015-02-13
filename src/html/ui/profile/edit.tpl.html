@@ -3,7 +3,7 @@
   <div class="buttons">
     <a class="edit-banner" ng-click="changeBanner()">
       <i class="icon-add-background"></i>
-      Change Banner
+      Change Background
     </a>
     <a class="cancel" ng-click="cancel()">Cancel</a>
     <a class="save" ng-click="save()">Save</a>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="info-column">
-      <span class="name">{{user.name | uppercase}}</span>
+      <span class="name">{{user.name}}</span>
       <span class="social-media">
         <i class="icon-twitter" ng-click="changeTwitter()">
           <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
@@ -34,8 +34,8 @@
 </div>
 
 <div class="main-content">
-  <div class="edit-skills">
-    <h3>Skills</h3>
+  <div class="about">
+    <div class="section-header">Skills I can share</div>
     <input type="text" maxlength="200"
       placeholder="Type here to add a skill, then press enter."
       ng-keypress="add($event, 'skills')"/>
@@ -46,7 +46,7 @@
       </li>
     </ul>
 
-    <h3>Affiliations</h3>
+    <div class="section-header">Affiliations</div>
     <input type="text" maxlength="200"
       placeholder="Type here to add an affiliation, then press enter."
       ng-keypress="add($event, 'organizations')"/>

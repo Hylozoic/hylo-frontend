@@ -1,0 +1,194 @@
+/* Styles and cutomizations for main profile view only */
+.profile {
+  .banner {
+    .dark-background-gradient;
+
+    div.buttons {
+      @media (max-width: @screen-xs-max) {
+        padding-top: 5px;
+      }
+      a {
+        @media (max-width: @screen-xs-max) {.rounded-button;}
+        @media (min-width: @screen-sm) {.rounded-button-clear;}
+      }
+    }
+
+    .banner-content {
+      .info-column {
+        @media (max-width: @screen-xs-max) {
+          margin: 0;
+
+          .name {
+            margin: 0;
+          }
+
+          .social-media a {
+            margin: 0 1px;
+          }
+        }
+      }
+    }
+
+    .send-message i {
+      &, &:hover {color: white;}
+      font-size: 20px;
+      top: 2px;
+      position: relative;
+    }
+  }
+
+  #main-container .main-content {
+    .make-row;
+    border-bottom: 1px solid @default-border;
+    margin-bottom: @std-padding;
+  }
+
+ .info-column {
+    @media (min-width: @screen-sm) {
+      padding-left: 3*@std-padding;
+    }
+  }
+
+  .tab-content {
+    .make-sm-column(8);
+    .make-md-column(6);
+
+    @media (min-width: @screen-sm) {
+      padding-top: @std-padding*2;
+      padding-left: @std-padding*3;
+      border-left: 1px solid @default-border;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      padding-top: @std-padding;
+    }
+
+    .feed-item {
+      border-bottom: 1px solid @default-border;
+      padding-bottom: @std-padding+5;
+      margin-bottom: @std-padding+5;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+
+      .summary {
+        .seed-meta-text();
+        line-height: 1.8;
+
+        .seed {
+          text-transform: capitalize;
+        }
+      }
+      .title {
+        .seed-title-text();
+        cursor: pointer;
+      }
+    }
+
+    .empty-content {
+      color: @text-light-gray;
+      font-style: italic;
+    }
+  }
+
+  @media (min-width: @screen-sm) {
+    .sidebar, .tab-content {
+      min-height: 61.5vh !important;
+    }
+  }
+
+  .sidebar {
+    .make-sm-column(3);
+
+
+    h3 {
+      .small-bold-title-text;
+    }
+
+    .tabs {
+      .make-row;
+      @media (max-width: @screen-xs-max) {
+        border: 1px solid @default-border;
+        margin-top: 15px;
+      }
+    }
+
+    .tab {
+      .make-xs-column(4);
+      .make-sm-column(12);
+      display: block;
+      text-align: center;
+      position: relative;
+      text-decoration: none;
+
+      @media (min-width: @screen-sm) {
+        min-height: 100px;
+      }
+
+
+      &.selected {
+        background-color: @dark-accent;
+      }
+
+      h3 {
+        // TODO should this go into a mixin?
+        @media (max-width: @screen-xs-max) { letter-spacing: 1px; }
+        color: @default-text;
+      }
+
+      .count {
+        border: 1px solid @link-color;
+        @size: 27px;
+        width: @size;
+        height: @size;
+        .border-radius(@size/2);
+        margin: 10px auto @std-padding;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 100;
+        color: @link-color;
+        line-height: 28px;
+      }
+    }
+
+    .user-info-mobile {
+      text-align: center;
+      .visible-xs-block;
+    }
+
+    .user-info {
+      .hidden-xs;
+    }
+  }
+
+  //hacking post display for profile
+  .post {
+
+    @media (max-width: @screen-xs-max) {
+      margin: 0;
+      margin-top: -15px;
+    }
+    .user {
+      visibility: hidden;
+    }
+
+    .post-container {
+      margin-left: 0;
+      @media (max-width: @screen-xs-max) {
+        padding: 0;
+
+        .post-options {
+          top: 0;
+        }
+      }
+    }
+
+    .comments {
+      margin-left: 0;
+      .comment-placeholder {
+        @media (max-width: @screen-xs-max) {max-height: 20px; }
+      }
+    }
+  }
+}
