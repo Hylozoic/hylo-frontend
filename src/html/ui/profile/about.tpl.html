@@ -1,10 +1,10 @@
 <div class="about">
 	<div class="section-header">What I am doing</div>
-	<a class="message" ui-sref="editProfile" ng-if="!user.description">
+	<a class="message" ui-sref="editProfile" ng-if="!user.work">
 	  <span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
 	  <span ng-if="!editable">This member has not filled anything in yet.</span>
 	 </a>
-	<div class="about-entry">{{user.description}}</div>
+	<div class="about-entry">{{user.work}}</div>
 
 	<div class="section-header">Skills I can share</div>
 	<div ng-repeat="skill in user.skills" class="list-entry">{{skill}}</div>
