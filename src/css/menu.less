@@ -370,8 +370,10 @@
 }
 
 .mobile-nav {
-  position: absolute;
-  top: 0;
+  @media (min-width: @screen-sm) {
+    position: absolute;
+    top: 0;
+  }
   width: 100%;
   z-index: 4;
   margin-bottom: 0px;
