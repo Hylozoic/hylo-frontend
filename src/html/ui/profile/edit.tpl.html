@@ -28,16 +28,24 @@
           <i class="status" ng-class="editData.linkedin_url ? 'icon-big-check' : 'icon-add-01'"></i>
         </i>
       </span>
-      <textarea ng-model="editData.bio" placeholder="Type here to add a short statement about yourself. Maximum 175 characters."></textarea>
     </div>
   </div>
 </div>
 
 <div class="main-content">
   <div class="about">
+    <div class="section-header">Short Bio <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.bio" placeholder="Tell us about yourself by typing here..." maxlength="175"></textarea>
+
+    <div class="section-header">What I'm doing <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.work" placeholder="Tell us what you are working on by typing here..." maxlength="175"></textarea>
+
+    <div class="section-header">What I'd like to do <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.intention" placeholder="Tell us about yourself by typing here..." maxlength="175"></textarea>
+
     <div class="section-header">Skills I can share</div>
     <input type="text" maxlength="200"
-      placeholder="Type here to add a skill, then press enter."
+      placeholder="Add skills by typing here then pressing enter..."
       ng-keypress="add($event, 'skills')"/>
     <ul>
       <li ng-repeat="skill in editData.skills">
@@ -48,7 +56,7 @@
 
     <div class="section-header">Affiliations</div>
     <input type="text" maxlength="200"
-      placeholder="Type here to add an affiliation, then press enter."
+      placeholder="Add groups you are affiliated with by typing here then pressing enter..."
       ng-keypress="add($event, 'organizations')"/>
     <ul>
       <li ng-repeat="org in editData.organizations">
@@ -56,5 +64,18 @@
         <a class="close" ng-click="remove(org, 'organizations')">&times;</a>
       </li>
     </ul>
+
+    <div class="section-header">Phone</div>
+    <textarea ng-model="editData.phone" placeholder="Add your phone number by typing here then pressing enter..." maxlength="100"></textarea>
+
+    <div class="section-header">Email</div>
+    <textarea ng-model="editData.email" placeholder="Add your email address by typing here then pressing enter..." maxlength="100"></textarea>
+
+    <div class="section-header">Website</div>
+    <textarea ng-model="editData.website" placeholder="Add your website URL by typing here then pressing enter..." maxlength="100"></textarea>
+
+    <div class="section-header">Additional Information</div>
+    <textarea ng-model="editData.additionalInfo" placeholder="Is there anything else you would like to share with the other members of your community?" maxlength="1000"></textarea>
+
   </div>
 </div>

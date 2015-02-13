@@ -13,18 +13,16 @@
       }
     }
 
-    .banner-content {
-      .info-column {
-        @media (max-width: @screen-xs-max) {
+    .info-column {
+      @media (max-width: @screen-xs-max) {
+        margin: 0;
+
+        .name {
           margin: 0;
+        }
 
-          .name {
-            margin: 0;
-          }
-
-          .social-media a {
-            margin: 0 1px;
-          }
+        .social-media a {
+          margin: 0 1px;
         }
       }
     }
@@ -41,12 +39,6 @@
     .make-row;
     border-bottom: 1px solid @default-border;
     margin-bottom: @std-padding;
-  }
-
- .info-column {
-    @media (min-width: @screen-sm) {
-      padding-left: 3*@std-padding;
-    }
   }
 
   .tab-content {

@@ -10,6 +10,11 @@
 		&:first-child {
 			margin-top: 0px;
 		}
+
+		.helper-text {
+			.proxima-nova-regular;
+			font-size: 16px;
+		}
 	}
 
 	.list-entry {
@@ -36,6 +41,7 @@
       padding: 5px 0;
       color: @default-text;
       .close {
+      	color: @readable-text;
         @media (min-width: @screen-sm) {
           position: absolute;
           top: 4px;
@@ -43,4 +49,21 @@
         }
       }
     }
+
+    textarea, li {
+    	.proxima-nova-regular;
+    	font-size: 14px;
+    	color: @readable-text;
+    }
+
+    //Style placeholder text (cross browser compatible)
+    .placeholder-attributes() {
+    	color: @nonactive-text;
+    	font-style: italic;
+    	font-size: 14px;
+    }
+    ::-webkit-input-placeholder { .placeholder-attributes;}
+	:-moz-placeholder { .placeholder-attributes;}
+	::-moz-placeholder { .placeholder-attributes;}
+	:-ms-input-placeholder { .placeholder-attributes;}
 }
