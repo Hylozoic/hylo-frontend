@@ -74,6 +74,9 @@
   .banner-content {
     position: absolute;
     bottom: 0;
+    @media (min-width: @screen-sm) {
+      bottom: 3*@std-padding;
+    }
     width: 100%;
   }
 
@@ -84,7 +87,6 @@
     .avatar {
       .user-avatar-lg;
       position: relative;
-      top: -15px;
       margin: 0 auto;
       @media (max-width: @screen-xs-max) {
         .user-avatar();
@@ -98,6 +100,9 @@
   .info-column {
     .make-sm-column(6);
     margin-top: 10px;
+    @media (min-width: @screen-sm) {
+      padding-left: 3*@std-padding;
+    }
 
     .name {
       .large-header();
@@ -114,19 +119,21 @@
     }
 
     @media (max-width: @screen-xs-max) {
-      span {
-        display: block;
+      span, div {
         text-align: center;
       }
     }
 
     .bio {
-      .proxima-nova(100);
+      .proxima-nova-semibold;
+      font-size: 16px;
       color: @nonactive-text;
       line-height: 1.8;
       @media (max-width: @screen-xs-max) {
+        .proxima-nova-regular;
+        font-size: 13px;
         line-height: 1.2;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         max-height: 46px;
         overflow: hidden;
         text-align: center;
