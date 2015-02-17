@@ -102,20 +102,21 @@
       .make-row;
       @media (max-width: @screen-xs-max) {
         border: 1px solid @default-border;
-        margin-top: 15px;
       }
     }
 
     .tab {
-      .make-xs-column(4);
+      .make-xs-column(3);
       .make-sm-column(12);
+      min-height: 102px;
       display: block;
       text-align: center;
       position: relative;
       text-decoration: none;
 
-      @media (min-width: @screen-sm) {
-        min-height: 100px;
+      //fix to make text labels on tabs appear with centered text
+      @media (max-width: @screen-xs-max) {
+        padding: 0;
       }
 
 

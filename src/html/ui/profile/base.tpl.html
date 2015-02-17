@@ -43,11 +43,8 @@
 
 <div class="main-content">
   <div class="sidebar">
-    <div class="user-info-mobile">
-      <ng-include src="'/ui/profile/about.tpl.html'"></ng-include>
-    </div>
     <div class="tabs">
-      <a class="tab hidden-xs" ui-sref="." ng-class="{selected: $state.current.name === 'profile'}">
+      <a class="tab" ui-sref="." ng-class="{selected: $state.current.name === 'profile'}">
         <h3><br />ABOUT</h3>
       </a>
       <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
