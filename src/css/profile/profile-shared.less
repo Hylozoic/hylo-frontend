@@ -125,8 +125,7 @@
       width: 21px;
       height: 21px;
       text-align: center;
-      @media (min-width: @screen-sm)
-      {
+      @media (min-width: @screen-sm) {
         padding-left: @std-padding/4;
         padding-right: @std-padding/4;
 
@@ -161,5 +160,8 @@
   .message {
     color: @nonactive-text;
     font-style: italic;
+  }
+  a.message {
+    cursor: pointer;
   }
 }
