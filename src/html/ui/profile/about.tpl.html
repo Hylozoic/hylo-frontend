@@ -1,43 +1,73 @@
 <div class="about">
 	<div class="section-header">What I am doing</div>
-	<a class="message" ui-sref="editProfile" ng-if="!user.work">
-	  <span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
-	  <span ng-if="!editable">This member has not filled anything in yet.</span>
-	 </a>
+	<span ng-if="!user.work">
+		<a class="message" >
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
+	</span>
 	<div class="about-entry">{{user.work}}</div>
 
+	<div class="section-header">What I'd like to do</div>
+	<span ng-if="!user.intention">
+		<a class="message" >
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
+	</span>
+	<div class="about-entry">{{user.intention}}</div>
+
 	<div class="section-header">Skills I can share</div>
+	<span  ng-if="user.skills.length < 1">
+		<a class="message" >
+			<span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add a skill.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not added any skills yet.</span>
+	</span>
 	<div ng-repeat="skill in user.skills" class="list-entry">{{skill}}</div>
-	<a class="message" ui-sref="editProfile" ng-if="user.skills.length < 1">
-		<span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add a skill.</span>
-		<span ng-if="!editable">This member has not added any skills yet.</span>
-	</a>
 
 	<div class="section-header">Affiliations</div>
+	<span ng-if="user.organizations.length < 1">
+		<a class="message">
+			<span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add an affiliation.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not added any affiliations yet.</span>
+	</span>
 	<div ng-repeat="org in user.organizations" class="list-entry">{{org}}</div>
-	<a class="message" ui-sref="editProfile" ng-if="user.organizations.length < 1">
-		<span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add an affiliation.</span>
-		<span ng-if="!editable">This member has not added any affiliations yet.</span>
-	</a>
 
 	<div class="section-header">Phone</div>
-	<a class="message" ui-sref="editProfile" ng-if="!user.phone">
-	  <span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add your phone number.</span>
-	  <span ng-if="!editable">This member has not filled in a phone number yet.</span>
-	 </a>
+	<span ng-if="!user.phone">
+		<a class="message">
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your phone number.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled in a phone number yet.</span>
+	</span>
 	<div class="about-entry">{{user.phone}}</div>
 
 	<div class="section-header">Email</div>
-	<a class="message" ui-sref="editProfile" ng-if="!user.email">
-	  <span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add your email address.</span>
-	  <span ng-if="!editable">This member has not filled in an email address yet.</span>
-	 </a>
+	<span ng-if="!user.email">
+		<a class="message">
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your email address.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled in an email address yet.</span>
+	</span>
 	<div class="about-entry">{{user.email}}</div>
 
 	<div class="section-header">Website</div>
-	<a class="message" ui-sref="editProfile" ng-if="!user.website">
-	  <span ng-if="editable"><i class="icon-edit" title="icon-edit"></i> Add your website url.</span>
-	  <span ng-if="!editable">This member has not filled in a website yet.</span>
-	 </a>
+	<span ng-if="!user.website">
+		<a class="message">
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your website url.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled in a website yet.</span>
+	</span>
 	<div class="about-entry">{{user.website}}</div>
+
+	<div class="section-header">Additional Information</div>
+	<span ng-if="!user.addionalInfo">
+		<a class="message">
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add anything else you want other people to know about you here.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
+	</span>
+	<div class="about-entry">{{user.addionalInfo}}</div>
 </div>
