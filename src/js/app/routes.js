@@ -257,9 +257,9 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
           return Community.default().$promise;
         }
       },
-      onEnter: function(defaultCommunity) {
+      onEnter: function(defaultCommunity, $state) {
         if (defaultCommunity.slug)
-          window.location.replace('/c/' + defaultCommunity.slug);
+          $state.go('community.seeds', {community: defaultCommunity.slug});
         else
           window.location = '/invitecode';
       }
