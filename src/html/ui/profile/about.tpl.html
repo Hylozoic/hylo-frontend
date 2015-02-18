@@ -36,31 +36,31 @@
 	<div ng-repeat="org in user.organizations" class="list-entry">{{org}}</div>
 
 	<div class="section-header">Phone</div>
-	<span ng-if="!user.phone">
+	<span ng-if="!user.phones">
 		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your phone number.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled in a phone number yet.</span>
 	</span>
-	<div class="about-entry">{{user.phone}}</div>
+	<div ng-repeat="phone in user.phones" class="list-entry">{{phone}}</div>
 
 	<div class="section-header">Email</div>
-	<span ng-if="!user.email">
+	<span ng-if="!user.emails">
 		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your email address.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled in an email address yet.</span>
 	</span>
-	<div class="about-entry">{{user.email}}</div>
+	<div ng-repeat="email in user.emails" class="list-entry">{{email}}</div>
 
 	<div class="section-header">Website</div>
-	<span ng-if="!user.website">
+	<span ng-if="!user.websites">
 		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add your website url.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled in a website yet.</span>
 	</span>
-	<div class="about-entry">{{user.website}}</div>
+	<div ng-repeat="websites in user.websitess" class="list-entry">{{websites}}</div>
 
 	<div class="section-header">Additional Information</div>
 	<span ng-if="!user.extraInfo">

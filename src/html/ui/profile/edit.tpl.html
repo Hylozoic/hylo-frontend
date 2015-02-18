@@ -66,13 +66,34 @@
     </ul>
 
     <div class="section-header">Phone</div>
-    <textarea ng-model="editData.phone" placeholder="Add your phone number by typing here then pressing enter..." maxlength="100"></textarea>
+    <input type="text" maxlength="200"
+      placeholder="Add a phone number by typing here then pressing enter..."
+      ng-keypress="add($event, 'phones')"/>
+    <ul>
+      <li ng-repeat="phone in editData.phones">
+        {{phone}} <a class="close" ng-click="remove(phone, 'phones')">&times;</a>
+      </li>
+    </ul>
 
     <div class="section-header">Email</div>
-    <textarea ng-model="editData.email" placeholder="Add your email address by typing here then pressing enter..." maxlength="100"></textarea>
+    <input type="text" maxlength="200"
+      placeholder="Add a email address by typing here then pressing enter..."
+      ng-keypress="add($event, 'emails')"/>
+    <ul>
+      <li ng-repeat="email in editData.emails">
+        {{email}} <a class="close" ng-click="remove(email, 'emails')">&times;</a>
+      </li>
+    </ul>
 
     <div class="section-header">Website</div>
-    <textarea ng-model="editData.website" placeholder="Add your website URL by typing here then pressing enter..." maxlength="100"></textarea>
+    <input type="text" maxlength="200"
+      placeholder="Add a website URL by typing here then pressing enter..."
+      ng-keypress="add($event, 'websites')"/>
+    <ul>
+      <li ng-repeat="website in editData.websites">
+        {{website}} <a class="close" ng-click="remove(website, 'websites')">&times;</a>
+      </li>
+    </ul>
 
     <div class="section-header">Additional Information</div>
     <textarea ng-model="editData.extraInfo" placeholder="Is there anything else you would like to share with the other members of your community?" maxlength="1000"></textarea>
