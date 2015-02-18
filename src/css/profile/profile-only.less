@@ -13,19 +13,31 @@
       }
     }
 
-    .info-column {
-      @media (max-width: @screen-xs-max) {
-        margin: 0;
-
-        .name {
+      .info-column {
+        @media (max-width: @screen-xs-max) {
           margin: 0;
+
+          .name {
+            margin: 0;
+          }
         }
 
-        .social-media a {
-          margin: 0 1px;
+        .social-media {
+          a {
+            margin: 0 1px;
+          }
+          i {
+            @media (min-width: @screen-sm) {
+              margin-left: @std-padding/4;
+              margin-right: @std-padding/4;
+
+              &:first-child {
+                margin-left: @std-padding;
+              }
+            }
+          }
         }
       }
-    }
 
     .send-message i {
       &, &:hover {color: white;}
