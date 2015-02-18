@@ -63,11 +63,11 @@
 	<div class="about-entry">{{user.website}}</div>
 
 	<div class="section-header">Additional Information</div>
-	<span ng-if="!user.addionalInfo">
+	<span ng-if="!user.extraInfo">
 		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add anything else you want other people to know about you here.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
 	</span>
-	<div class="about-entry">{{user.addionalInfo}}</div>
+	<div class="about-entry">{{user.extraInfo}}</div>
 </div>
