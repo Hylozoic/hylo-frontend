@@ -227,28 +227,27 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
     .state("404", {
       templateUrl: '/ui/app/404.tpl.html'
     })
-    .state('main', {
+    .state('main', /*@ngInject*/ {
       abstract: true,
       template: "<div ui-view='main'></div>",
       resolve: {
-        // Use the resource to fetch data from the server
-        oldCurrentUser: ['CurrentUser', function(CurrentUser) {
+        oldCurrentUser: function(CurrentUser) {
           return CurrentUser.get().$promise;
-        }],
+        },
         // user info has to be fetched from the new API for editing on
         // the new profile. eventually the old CurrentUser will be replaced
         // with this one.
-        currentUser: ['User', function(User) {
+        currentUser: function(User) {
           var promise = User.current().$promise;
           promise.then(function(user) {
             window.hyloEnv.provideUser(user);
           });
           return promise;
-        }]
+        }
       },
-      controller: ['$rootScope', 'oldCurrentUser', '$stateParams', function($rootScope, oldCurrentUser, $stateParams) {
+      controller: function($rootScope, oldCurrentUser, $stateParams) {
         $rootScope.currentUser = oldCurrentUser;
-      }]
+      }
     })
     .state('home', /*@ngInject*/ {
       url: '/app',
