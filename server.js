@@ -46,6 +46,7 @@ var staticPathList = [
 
 var appPathPrefixes = [
   /^\/c\//,
+  /^\/h\//,
   /^\/u\//,
   /^\/settings/,
   /^\/edit-profile/,
