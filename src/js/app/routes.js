@@ -207,6 +207,66 @@ var profileStates = function(stateProvider) {
   });
 }
 
+var onboardingStates = function(stateProvider) {
+  stateProvider
+  .state('onboarding', {
+    abstract: true,
+    parent: 'main',
+    resolve: {
+      onboardingData: function(currentUser) {
+        return _.extend(currentUser.onboarding, {
+          community: currentUser.memberships[0].community,
+          leader: {
+            name: 'Timothy Leary',
+            avatar_url: 'http://consciousthinkers.billyojai.com/wp-content/uploads/2013/07/Timothy-Leary.jpg'
+          },
+          message: 'My advice to people today is as follows: if you take the game of life seriously, '+
+            'if you take your nervous system seriously, if you take your sense organs seriously, if you '+
+            'take the energy process seriously, you must turn on, tune in, and drop out.'
+        });
+      }
+    },
+    views: {
+      main: {
+        template: "<div ui-view='onboarding'></div>"
+      },
+    },
+  })
+  .state('onboarding.start', {
+    url: '/h/onboarding/start',
+    views: {
+      onboarding: {
+        templateUrl: '/ui/onboarding/start.tpl.html',
+        controller: function(onboardingData, $scope) {
+          $scope.onboarding = onboardingData;
+        }
+      }
+    }
+  })
+  .state('onboarding.seeds', {
+    url: '/h/onboarding/seeds',
+    views: {
+      onboarding: {
+        templateUrl: '/ui/onboarding/seeds.tpl.html',
+        controller: function(onboardingData, $scope) {
+          $scope.onboarding = onboardingData;
+        }
+      }
+    }
+  })
+  .state('onboarding.seeds2', {
+    url: '/h/onboarding/seeds/2',
+    views: {
+      onboarding: {
+        templateUrl: '/ui/onboarding/seeds2.tpl.html',
+        controller: function(onboardingData, $scope) {
+          $scope.onboarding = onboardingData;
+        }
+      }
+    }
+  });
+}
+
 var dependencies = ['$stateProvider', '$urlRouterProvider'];
 dependencies.push(function($stateProvider, $urlRouterProvider) {
 
@@ -238,15 +298,21 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         // the new profile. eventually the old CurrentUser will be replaced
         // with this one.
         currentUser: function(User) {
-          var promise = User.current().$promise;
-          promise.then(function(user) {
-            window.hyloEnv.provideUser(user);
-          });
-          return promise;
+          return User.current().$promise;
         }
       },
-      controller: function($rootScope, oldCurrentUser, $stateParams) {
+      onEnter: function(currentUser, $state) {
+        window.hyloEnv.provideUser(currentUser);
+      },
+      controller: function($rootScope, oldCurrentUser, currentUser, $state) {
         $rootScope.currentUser = oldCurrentUser;
+
+        var onboarding = (currentUser && currentUser.onboarding);
+        if (_.any(onboarding) && !onboarding.status.completed) {
+          var nextStateName = 'onboarding.' + onboarding.status.step;
+          if ($state.$current.name != nextStateName)
+            $state.go(nextStateName);
+        }
       }
     })
     .state('home', /*@ngInject*/ {
@@ -265,7 +331,7 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
       url: '/settings',
       parent: 'main',
       views: {
-        "main": {
+        main: {
           templateUrl: '/ui/user/settings.tpl.html',
           controller: 'UserSettingsCtrl'
         }
@@ -273,8 +339,9 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
     })
     .state('network', {
       url: "/n/:network",
+      parent: 'main',
       views: {
-        "": {
+        main: {
           templateUrl: '/ui/app/network.tpl.html',
           controller: 'NetworkCtrl'
         }
@@ -283,6 +350,7 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
 
     communityStates($stateProvider);
     profileStates($stateProvider);
+    onboardingStates($stateProvider);
 
 });
 
