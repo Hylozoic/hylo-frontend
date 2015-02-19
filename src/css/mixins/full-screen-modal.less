@@ -13,12 +13,22 @@
       background: white;
       @media (max-width: @screen-xs-max) {
         padding: 0;
+        overflow-x: hidden;
       }
     }
   }
 
   nav {
     margin: 0 -@std-padding @std-padding !important;
+    height: 64px;
+
+    @media (max-width: @screen-xs-max) {
+      height: 50px;
+
+      &.mobile-nav {
+        display: none !important;
+      }
+    }
   }
 
   form {
@@ -38,10 +48,20 @@
       margin-top: 13px;
       font-size: 12px;
     }
+
+    @media (max-width: @screen-xs-max) {
+      margin: 0 -@std-padding;
+      padding: @std-padding;
+    }
   }
 
   .main-content {
     .make-row;
+
+    @media (max-width: @screen-xs-max) {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   .all-sections {
@@ -112,10 +132,6 @@
     }
     .navbar-right {
       padding-right: @std-padding*2;
-    }
-    .section-label, .section {
-      padding-left: @std-padding;
-      padding-right: @std-padding;
     }
   }
 }
