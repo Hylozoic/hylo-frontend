@@ -131,10 +131,4 @@ app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$wi
     $rootScope.$state = $state;
     $rootScope.$bodyClass = $bodyClass;
 
-    // If there exists a growl message to display, then growl it.
-    // Useful for displaying a growl message after storing it in the Play! flash scope.
-    if ($window._hylo_angular_growl_msg && $window._hylo_angular_growl_msg != "") {
-      _.defer(function() { growl.addSuccessMessage($window._hylo_angular_growl_msg, {ttl: 5000}) });
-    }
-
   }]);
