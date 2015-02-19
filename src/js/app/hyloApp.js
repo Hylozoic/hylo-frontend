@@ -65,7 +65,6 @@ app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '
           if (rejection.status == 403) {
             Rollbar.error("403: " + rejection.config.url);
             growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (403)", {ttl: 5000});
-            window.location = '/login';
           } else if (rejection.status == 500) {
             if (!hyloEnv.isProd) {
               if (rejection.headers()['content-type'] === "text/html") {
