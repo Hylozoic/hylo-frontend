@@ -250,17 +250,15 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('home', /*@ngInject*/ {
+      parent: 'main',
       url: '/app',
-      resolve: {
-        defaultCommunity: function(Community) {
-          return Community.default().$promise;
-        }
-      },
-      onEnter: function(defaultCommunity, $state) {
-        if (defaultCommunity.slug)
-          $state.go('community.seeds', {community: defaultCommunity.slug});
-        else
+      onEnter: function(currentUser, $state) {
+        var membership = (currentUser && currentUser.memberships[0]);
+        if (membership) {
+          $state.go('community.seeds', {community: membership.community.slug});
+        } else {
           window.location = '/invitecode';
+        }
       }
     })
     .state('userSettings', {
