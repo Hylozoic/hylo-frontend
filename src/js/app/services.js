@@ -81,4 +81,5 @@ factory("Seed", ["$resource",
 require('./services/user')(angularModule);
 require('./services/community')(angularModule);
 require('./services/bodyClass').service(angularModule);
+require('./services/onboarding')(angularModule);
 require('./services/popupDone');

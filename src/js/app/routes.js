@@ -103,7 +103,6 @@ var communityStates = function(stateProvider) {
         return Seed.get({id: $stateParams.seedId}).$promise;
       }]
     }
-
   })
   .state('seed', {
     url: '/s/:seedId',
@@ -205,27 +204,13 @@ var profileStates = function(stateProvider) {
       }
     }
   });
-}
+};
 
 var onboardingStates = function(stateProvider) {
   stateProvider
   .state('onboarding', {
     abstract: true,
     parent: 'main',
-    resolve: {
-      onboardingData: function(currentUser) {
-        return _.extend(currentUser.onboarding, {
-          community: currentUser.memberships[0].community,
-          leader: {
-            name: 'Timothy Leary',
-            avatar_url: 'http://consciousthinkers.billyojai.com/wp-content/uploads/2013/07/Timothy-Leary.jpg'
-          },
-          message: 'My advice to people today is as follows: if you take the game of life seriously, '+
-            'if you take your nervous system seriously, if you take your sense organs seriously, if you '+
-            'take the energy process seriously, you must turn on, tune in, and drop out.'
-        });
-      }
-    },
     views: {
       main: {
         template: "<div ui-view='onboarding'></div>"
@@ -237,8 +222,8 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/start.tpl.html',
-        controller: function(onboardingData, $scope) {
-          $scope.onboarding = onboardingData;
+        controller: function(onboarding, $scope) {
+          $scope.onboarding = onboarding;
         }
       }
     }
@@ -248,8 +233,8 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/seeds.tpl.html',
-        controller: function(onboardingData, $scope) {
-          $scope.onboarding = onboardingData;
+        controller: function(onboarding, $scope) {
+          $scope.onboarding = onboarding;
         }
       }
     }
@@ -259,13 +244,24 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/seeds2.tpl.html',
-        controller: function(onboardingData, $scope) {
-          $scope.onboarding = onboardingData;
+        controller: function(onboarding, $scope) {
+          $scope.onboarding = onboarding;
+        }
+      }
+    }
+  })
+  .state('community.seeds.onboarding', {
+    url: '/onboarding',
+    views: {
+      overlay: {
+        templateUrl: '/ui/onboarding/communityOverlay.tpl.html',
+        controller: function(onboarding, $scope) {
+          $scope.onboarding = onboarding;
         }
       }
     }
   });
-}
+};
 
 var dependencies = ['$stateProvider', '$urlRouterProvider'];
 dependencies.push(function($stateProvider, $urlRouterProvider) {
@@ -299,19 +295,22 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         // with this one.
         currentUser: function(User) {
           return User.current().$promise;
+        },
+        onboarding: function(currentUser, Onboarding) {
+          var onboardingData = (currentUser && currentUser.onboarding);
+          if (!_.any(onboardingData)) return null;
+          return new Onboarding(onboardingData, currentUser);
         }
       },
       onEnter: function(currentUser, $state) {
         window.hyloEnv.provideUser(currentUser);
       },
-      controller: function($rootScope, oldCurrentUser, currentUser, $state) {
+      controller: function($rootScope, oldCurrentUser, currentUser, $state, onboarding) {
         $rootScope.currentUser = oldCurrentUser;
 
-        var onboarding = (currentUser && currentUser.onboarding);
-        if (_.any(onboarding) && !onboarding.status.completed) {
-          var nextStateName = 'onboarding.' + onboarding.status.step;
-          if ($state.$current.name != nextStateName)
-            $state.go(nextStateName);
+        if (onboarding && !onboarding.isComplete()) {
+          if ($state.$current.name != onboarding.currentState())
+            onboarding.resume();
         }
       }
     })

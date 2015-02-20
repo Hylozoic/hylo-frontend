@@ -4,7 +4,9 @@
 
     <p>Examples TBD.</p>
 
-    <a class="button" ui-sref="onboarding.start">What now?</a>
-    <a ui-sref="onboarding.seeds">Back</a>
+    <p>{{onboarding.data.leader.name}} creates them and you should too.</p>
+
+    <a class="button" ng-click="onboarding.goNext()">Create a seed?</a>
+    <a ng-click="onboarding.goBack()" ng-show="onboarding">Back</a>
   </div>
 </div>
