@@ -1,4 +1,4 @@
-<div class="overlay" fade-if="hideOverlay">
+<div class="overlay" animate-if="hideOverlay" animation="fade-out">
   <div class="main-content">
     <div class="all-sections">
       <h2>Congratulations!</h2>
@@ -9,9 +9,9 @@
 
       <p>Scroll down past it to see what other community members are sharing or seeking.</p>
 
-      <div class="center"><a class="button" ng-click="hideOverlay = true">Got it!</a></div>
+      <div class="center"><a class="button" ng-click="onboarding.continue(); hideOverlay = true">Got it!</a></div>
 
-      <a ng-click="onboarding.goBack()">Back</a>
+      <a ng-click="onboarding.goBack(); hideOverlay = true">Back</a>
     </div>
   </div>
 </div>

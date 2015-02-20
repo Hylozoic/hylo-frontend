@@ -1,5 +1,9 @@
-var dependencies = ['$scope', 'Post', 'growl', '$timeout', '$http', '$q', '$modal', '$analytics', 'community'];
-dependencies.push(function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics, community) {
+var controller = function($scope, Post, growl, $timeout, $http, $q, $modal, $analytics, community, onboarding) {
+
+  $scope.onboarding = onboarding;
+  if (onboarding && onboarding.currentStep() === 'community') {
+    onboarding.showOverlay('community');
+  }
 
   $scope.community = community;
 
@@ -112,8 +116,8 @@ dependencies.push(function($scope, Post, growl, $timeout, $http, $q, $modal, $an
   };
 
 
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.controller('CommunitySeedsCtrl', dependencies);
+  angularModule.controller('CommunitySeedsCtrl', controller);
 };

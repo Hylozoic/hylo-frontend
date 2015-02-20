@@ -8,7 +8,7 @@
       <div class="banner-communityName" ng-bind="::community.name"></div>
 
       <div class="banner-menu">
-        <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds'}">
+        <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds' || $state.current.name === 'community.seeds.onboarding'}">
           SEEDS
           <div class="triangle"></div>
         </a>

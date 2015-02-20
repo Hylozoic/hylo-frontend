@@ -5,6 +5,11 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   $scope.onboarding = onboarding;
 
+  // onboarding mode is not the same as the presence of the onboarding object --
+  // it should not be enabled, e.g., when someone is still in onboarding but is
+  // editing the seed they just created or creating a 2nd one
+  $scope.onboardingMode = (onboarding && onboarding.currentStep() === 'newSeed');
+
   var prefixes = {
     intention: "I'd like to create",
     offer: "I'd like to share",
@@ -78,7 +83,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   var create = function(data) {
     new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
-      if (onboarding) {
+      if ($scope.onboardingMode) {
         onboarding.goNext();
       } else {
         $scope.close();
