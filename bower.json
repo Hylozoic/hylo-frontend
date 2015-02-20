@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "dependencies": {
     "bootstrap": "3.3.1",
-    "angular": "1.3.3",
-    "angular-animate": "1.3.3",
+    "angular": "1.3.13",
+    "angular-animate": "1.3.13",
     "angular-elastic": "2.4.0",
     "angular-growl": "0.4.0",
     "angular-http-auth": "1.2.1",
-    "angular-mocks": "1.3.3",
-    "angular-route": "1.3.3",
-    "angular-resource": "1.3.3",
-    "angular-sanitize": "1.3.3",
-    "angular-touch": "1.3.3",
+    "angular-mocks": "1.3.13",
+    "angular-route": "1.3.13",
+    "angular-resource": "1.3.13",
+    "angular-sanitize": "1.3.13",
+    "angular-touch": "1.3.13",
     "angular-ui-router": "0.2.13",
     "angular-wizard": "0.4.0",
     "angulartics": "0.17.1",
@@ -27,11 +27,12 @@
     "underscore": "1.6.0",
     "ment.io": "0.9.22",
     "medium.js": "~1.0.1",
-    "newrelic-timing": "~0.4.0"
+    "newrelic-timing": "~0.4.0",
+    "gsap": "~1.15.1"
   },
   "private": true,
   "resolutions": {
-    "angular": "1.3.3",
+    "angular": "1.3.13",
     "jquery": "2.1.1"
   }
 }

@@ -78,8 +78,12 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   var create = function(data) {
     new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
-      onboarding ? onboarding.goNext() : $scope.close();
-      growl.addSuccessMessage('Seed created!');
+      if (onboarding) {
+        onboarding.goNext();
+      } else {
+        $scope.close();
+        growl.addSuccessMessage('Seed created!');
+      }
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);

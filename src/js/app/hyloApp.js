@@ -15,6 +15,8 @@ var app = angular.module('hyloApp', [
   'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
 ]);
 
+require('./animations')(app);
+
 app.config(require('./routes'))
 .config(['$urlRouterProvider', function($urlRouterProvider) {
   // remove trailing slashes from paths

@@ -32,7 +32,7 @@ var factory = function($resource, $state) {
     // TODO real data
     _.extend(this.data, {
       status: {
-        step: 'community'
+        step: 'start'
       },
       community: user.memberships[0].community,
       leader: {
