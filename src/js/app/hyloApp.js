@@ -125,8 +125,6 @@ app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$wi
       }
     });
 
-    var currentSlug;
-
     // Set a variable so we can watch for param changes
     $rootScope.$state = $state;
     $rootScope.$bodyClass = $bodyClass;
