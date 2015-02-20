@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="//cdn.optimizely.com/js/2520710496.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,18 +9,14 @@
 
 <%- include('_newrelic') %>
 <%- include('_clientEnv') %>
-<%- include('_rollbar') %>
 <%- include('_segment') %>
 <%- include('_favicon') %>
 
 <script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<script type="text/javascript" src="https://js.balancedpayments.com/1.1/balanced.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <link href="<%= cssBundleUrl %>" rel="stylesheet">
 <title>Hylo</title>
 </head>
 
-<body class="angular-app hylo-auth waiting-for-angular" ng-class="$bodyClass()" ng-strict-di>
-
-<%# If making changes, please be aware that this file is being used in mutliple places, including the about section %>
+<body class="home-page">
