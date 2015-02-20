@@ -1,5 +1,5 @@
 $ = jQuery = require('jquery');
-_          = require('underscore');
+_          = require('lodash');
 moment     = require('moment');
 
 require('./onload');
