@@ -1,9 +1,6 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-// the newCurrentUser dependency will change once the rest of
-// the app is switched over to using the new User API
-var dependencies = ['$scope', '$analytics', 'currentUser', 'growl'];
-dependencies.push(function($scope, $analytics, currentUser, growl) {
+var controller = function($scope, $analytics, currentUser, growl, onboarding) {
   var user = $scope.user = currentUser,
     editData = $scope.editData = _.pick(user, [
       'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
@@ -11,7 +8,6 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     ]),
     edited = {},
     bio = editData.bio;
-
 
   $scope.save = function() {
     if (editData.banner_url === require('../../services/defaultUserBanner')) {
@@ -31,7 +27,13 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     user.update(saveData, function() {
       _.extend(user, saveData);
       $analytics.eventTrack('My Profile: Saved Changes');
-      $scope.cancel();
+
+      if (onboarding && onboarding.currentStep() === 'profile') {
+        onboarding.goNext();
+      } else {
+        $scope.cancel();
+      }
+
     });
   };
 
@@ -135,8 +137,8 @@ dependencies.push(function($scope, $analytics, currentUser, growl) {
     $scope.linkedinDialog.close();
     $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
   };
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.controller('ProfileEditCtrl', dependencies);
+  angularModule.controller('ProfileEditCtrl', controller);
 };

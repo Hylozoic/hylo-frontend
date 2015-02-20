@@ -17,11 +17,13 @@ angularModule.directive('ngEnter', function() {
   };
 }).
 
-directive('fadeIf', function($animate) {
+directive('animateIf', function($animate) {
   return function(scope, element, attrs) {
-    scope.$watch(attrs.fadeIf, function(val) {
+    scope.$watch(attrs.animateIf, function(val) {
       if (val) {
-        $animate.addClass(element, 'fade');
+        $animate.addClass(element, attrs.animation);
+      } else if (val === false) {
+        $animate.removeClass(element, attrs.animation);
       }
     })
   }

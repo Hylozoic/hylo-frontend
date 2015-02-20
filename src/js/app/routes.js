@@ -249,17 +249,6 @@ var onboardingStates = function(stateProvider) {
         }
       }
     }
-  })
-  .state('community.seeds.onboarding', {
-    url: '/onboarding',
-    views: {
-      overlay: {
-        templateUrl: '/ui/onboarding/communityOverlay.tpl.html',
-        controller: function(onboarding, $scope) {
-          $scope.onboarding = onboarding;
-        }
-      }
-    }
   });
 };
 
@@ -308,10 +297,8 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
       controller: function($rootScope, oldCurrentUser, currentUser, $state, onboarding) {
         $rootScope.currentUser = oldCurrentUser;
 
-        if (onboarding && !onboarding.isComplete()) {
-          if ($state.$current.name != onboarding.currentState())
-            onboarding.resume();
-        }
+        if (onboarding && !onboarding.isComplete())
+          onboarding.resume();
       }
     })
     .state('home', /*@ngInject*/ {

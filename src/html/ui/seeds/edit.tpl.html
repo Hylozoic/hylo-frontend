@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default navbar-hylo-create" role="navigation">
   <div class="navbar-header">
-    <i class="icon-hylo-script" ng-click="close()" ng-hide="onboarding"></i>
+    <i class="icon-hylo-script" ng-click="close()" ng-hide="onboardingMode"></i>
   </div>
   <div class="navbar-center" href="#">{{editing ? 'Edit' : 'New'}} Seed</div>
-  <a class="navbar-right close" ng-click="close()" ng-hide="onboarding">&times;</a>
+  <a class="navbar-right close" ng-click="close()" ng-hide="onboardingMode">&times;</a>
 </nav>
 
 <div class="main-content">
@@ -76,7 +76,7 @@
 
     <div class="notifications"></div>
 
-    <a ng-click="onboarding.goBack()" ng-show="onboarding">Back</a>
-    <a ng-click="onboarding.goNext()" ng-show="onboarding">Skip</a>
+    <a ng-click="onboarding.goBack()" ng-show="onboardingMode">Back</a>
+    <a ng-click="onboarding.goNext()" ng-show="onboardingMode">Skip</a>
   </div>
 </div>

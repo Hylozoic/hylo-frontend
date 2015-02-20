@@ -26,7 +26,7 @@
   }
 }
 
-.community-seeds-onboarding .overlay {
+.overlay {
   .full-screen-modal;
   position: fixed;
   top: 0;
@@ -42,11 +42,23 @@
   font-size: 14px;
 
   a.button {
-    .rounded-button;
+    .rounded-button-clear;
   }
 
   .center {
     text-align: center;
   }
+}
 
+#announcer a {
+  position: fixed;
+  width: 100%;
+  padding: @std-padding;
+  z-index: 6;
+  background-color: @hylo-teal;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+  display: none;
 }
