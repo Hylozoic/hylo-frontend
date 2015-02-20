@@ -26,6 +26,8 @@ require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
 require('ngInfiniteScroll');
 require('ment.io');
+require('gsap/src/uncompressed/TweenLite');
+require('gsap/src/uncompressed/plugins/CSSPlugin');
 /* End Bower Components */
 
 /* Manually installed components */

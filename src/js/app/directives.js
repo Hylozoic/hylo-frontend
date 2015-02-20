@@ -17,6 +17,16 @@ angularModule.directive('ngEnter', function() {
   };
 }).
 
+directive('fadeIf', function($animate) {
+  return function(scope, element, attrs) {
+    scope.$watch(attrs.fadeIf, function(val) {
+      if (val) {
+        $animate.addClass(element, 'fade');
+      }
+    })
+  }
+}).
+
 // https://gist.github.com/kirkstrobeck/599664399dbc23968741
 directive('autofocus', function ($timeout) {
   return {
