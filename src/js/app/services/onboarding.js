@@ -28,37 +28,28 @@ var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 
 
 var factory = function($timeout, $rootScope, $resource, $state) {
 
-  var Onboarding = function(data, user) {
-    this.resource = $resource('/noo/user/:userId/onboarding', {});
-    this.data = data;
-    this.user = user;
+  var Onboarding = function(user) {
+    // this is used in templates
+    this.community = user.memberships[0].community;
 
-    // TODO real data
-    _.extend(this.data, {
-      status: {
-        step: 'profile'
-      },
-      community: user.memberships[0].community,
-      leader: {
-        name: 'Timothy Leary',
-        avatar_url: 'http://consciousthinkers.billyojai.com/wp-content/uploads/2013/07/Timothy-Leary.jpg'
-      },
-      message: 'My advice to people today is as follows: if you take the game of life seriously, '+
-        'if you take your nervous system seriously, if you take your sense organs seriously, if you '+
-        'take the energy process seriously, you must turn on, tune in, and drop out.'
-    });
+    // for internal use only
+    this._user = user;
+    this._resource = $resource('/noo/user/:userId/onboarding', {});
+    this._status = user.onboarding.status;
 
+    // TESTING
+    var params = require('querystring').parse(location.search.replace(/^\?/, ''));
+    if (params.obs) {
+      _.merge(this._status, {step: params.obs});
+    }
   };
 
   _.extend(Onboarding.prototype, {
     isComplete: function() {
-      return this.data.status.step === 'done';
+      return this._status.step === 'done';
     },
     currentStep: function() {
-      return this.data.status.step;
-    },
-    currentState: function() {
-      return steps[this.currentStep()].state;
+      return this._status.step;
     },
     showOverlay: function(name) {
       $rootScope.$emit('overlay:load', {
@@ -83,7 +74,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
           break;
 
         case 'profileSaved':
-          this.data.status.step = 'done';
+          this._status.step = 'done';
           break;
       }
     },
@@ -94,7 +85,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       // TODO maybe only do this if within the first few steps?
       // i.e. once we get to community step, we can allow open-ended
       // exploration and only continue onboarding through non-modal prompts
-      if ($state.$current.name !== this.currentState())
+      if ($state.$current.name !== steps[this.currentStep()].state)
         this._goDelta(0);
     },
     goNext: function() {
@@ -111,13 +102,13 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       var params;
       // FIXME code smell
       if (_.include(['newSeed', 'community'], name)) {
-        params = {community: this.data.community.slug};
+        params = {community: this.community.slug};
       } else if (_.include(['profile', 'profileSaved'], name)) {
-        params = {id: this.user.id};
+        params = {id: this._user.id};
       } else {
         params = {};
       }
-      this.data.status.step = name;
+      this._status.step = name;
       return $state.go(steps[name].state, params);
     }
   });

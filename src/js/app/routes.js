@@ -288,7 +288,7 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
         onboarding: function(currentUser, Onboarding) {
           var onboardingData = (currentUser && currentUser.onboarding);
           if (!_.any(onboardingData)) return null;
-          return new Onboarding(onboardingData, currentUser);
+          return new Onboarding(currentUser);
         }
       },
       onEnter: function(currentUser, $state) {
