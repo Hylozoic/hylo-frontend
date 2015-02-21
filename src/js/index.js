@@ -43,6 +43,8 @@ require('./app/hyloApp');
 // should be rewritten
 window.guiders = $.guiders;
 
+filepicker.setKey(hyloEnv.filepicker.key);
+
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['hyloApp']);
 });
