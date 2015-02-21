@@ -7,7 +7,14 @@ hyloEnv.onUser(function(user) {
     lastName: user.last_name,
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
-    created: user.date_created
+    created: user.date_created,
+    createdAt: user.date_created
+  }, {
+    integrations: {
+      Intercom: {
+        user_hash: '<%= OpenSSL::HMAC.hexdigest("sha256", "fwnUBkiU2spjAlzNPDNCJhoI4iBQ66ap6XOnTznL", user.id) %>'
+      }
+    }
   });
 
   // rollbar
