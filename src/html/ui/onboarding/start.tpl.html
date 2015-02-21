@@ -4,11 +4,11 @@
 
     <p>Discover the people, skills, and resources all around you. Together, we can create anything we can imagine.</p>
 
-    <p>You've been invited by {{onboarding.data.leader.name}} to join your community at {{onboarding.data.community.name}}.</p>
+    <p>You've been invited by {{onboarding.community.leader.name}} to join your community at {{onboarding.community.name}}.</p>
 
     <div class="leader-message">
-      <img ng-src="{{onboarding.data.leader.avatar_url}}">
-      <p>{{onboarding.data.message}}</p>
+      <img ng-src="{{onboarding.community.leader.avatar_url}}">
+      <p>{{onboarding.community.welcome_message}}</p>
     </div>
 
     <a class="button" ng-click="onboarding.goNext()">Get started</a>
