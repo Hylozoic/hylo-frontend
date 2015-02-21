@@ -3,7 +3,6 @@ var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 require('./controllers/comments');
 require('./controllers/fulfillModal');
 require('./controllers/network');
-require('./controllers/onboarding');
 require('./controllers/search');
 
 require('./controllers/profile')(angularModule);
