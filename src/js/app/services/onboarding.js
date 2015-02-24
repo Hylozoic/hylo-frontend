@@ -28,13 +28,14 @@ var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 
 
 var factory = function($timeout, $rootScope, $resource, $state) {
 
+  var OnboardingResource = $resource('/noo/user/:userId/onboarding', {userId: '@userId'});
+
   var Onboarding = function(user) {
     // this is used in templates
     this.community = user.memberships[0].community;
 
     // for internal use only
     this._user = user;
-    this._resource = $resource('/noo/user/:userId/onboarding', {});
     this._status = user.onboarding.status;
 
     // TESTING
@@ -96,9 +97,15 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     },
     _goDelta: function(delta) {
       var next = stepOrder[_.indexOf(stepOrder, this.currentStep()) + delta];
-      this._go(next);
+      this._go(next, delta != 0);
     },
-    _go: function(name) {
+    _go: function(name, update) {
+      this._status.step = name;
+
+      if (update) {
+        OnboardingResource.save({userId: this._user.id, step: name});
+      }
+
       var params;
       // FIXME code smell
       if (_.include(['newSeed', 'community'], name)) {
@@ -108,7 +115,6 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       } else {
         params = {};
       }
-      this._status.step = name;
       return $state.go(steps[name].state, params);
     }
   });
