@@ -86,6 +86,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
 
         case 'profileSaved':
           this._status.step = 'done';
+          OnboardingResource.save({userId: this._user.id, step: 'done'});
           break;
       }
     },
