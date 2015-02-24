@@ -121,9 +121,9 @@ Deployer.prototype.uploadSourceMap = function(callback) {
     // Pass optional meta-data with an 'options' object with style: {value: DATA, options: OPTIONS}
     // See the `form-data` README for more information about options: https://github.com/felixge/node-form-data
     source_map: {
-      value:  fs.createReadStream('dist/bundle.min.js.map'),
+      value:  fs.createReadStream('dist/deploy/bundle.min.js.map'),
       options: {
-        filename: 'dist/bundle.min.js.map',
+        filename: 'dist/deploy/bundle.min.js.map',
         contentType: 'application/octet-stream'
       }
     }
@@ -134,7 +134,7 @@ Deployer.prototype.uploadSourceMap = function(callback) {
   }, function (err, httpResponse, body) {
     if (err || body.err > 0) {
       console.error('upload failed:', err);
-      this.fail(result.message);
+      this.fail(err.message);
     }
     callback();
   }.bind(this));
