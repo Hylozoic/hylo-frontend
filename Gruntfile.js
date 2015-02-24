@@ -1,7 +1,8 @@
 require('dotenv').load();
 
 var deploy = require('./deploy'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  format = require('util').format;
 
 module.exports = function(grunt) {
 
@@ -10,6 +11,14 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dist/bundle.css': ['src/css/index.less']
+        },
+        options: {
+          rootpath: "/dev/"
+        }
+      },
+      deploy: {
+        files: {
+          'dist/deploy/bundle.css': ['src/css/index.less']
         }
       },
       styleguide: {
@@ -21,7 +30,7 @@ module.exports = function(grunt) {
     cssmin: {
       deploy: {
         files: {
-          'dist/bundle.min.css': ['dist/bundle.css']
+          'dist/deploy/bundle.min.css': ['dist/deploy/bundle.css']
         }
       }
     },
@@ -35,6 +44,17 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/bundle.js': ['src/js/index.js']
+        }
+      },
+      deploy: {
+        options: {
+          browserifyOptions: {
+            debug: true
+          },
+          transform: ['debowerify']
+        },
+        files: {
+          'dist/deploy/bundle.js': ['src/js/index.js']
         }
       }
     },
@@ -61,14 +81,14 @@ module.exports = function(grunt) {
     extract_sourcemap: {
       deploy: {
         files: {
-          'dist': ['dist/bundle.js']
+          'dist/deploy': ['dist/deploy/bundle.js']
         }
       }
     },
     ngAnnotate: {
       deploy: {
         files: {
-          'dist/bundle-annotated.js': ['dist/bundle.js']
+          'dist/deploy/bundle-annotated.js': ['dist/deploy/bundle.js']
         }
       }
     },
@@ -76,11 +96,11 @@ module.exports = function(grunt) {
       deploy: {
         options: {
           sourceMap: true,
-          sourceMapIn: 'dist/bundle.js.map',
+          sourceMapIn: 'dist/deploy/bundle.js.map',
           sourceMapIncludeSources: true
         },
         files: {
-          'dist/bundle.min.js': ['dist/bundle-annotated.js']
+          'dist/deploy/bundle.min.js': ['dist/deploy/bundle-annotated.js']
         }
       }
     },
@@ -118,7 +138,7 @@ module.exports = function(grunt) {
       deploy: {
         cwd: 'dist/deploy/ui',
         src: '**/*.html',
-        dest: 'dist/bundle-annotated.js',
+        dest: 'dist/deploy/bundle-annotated.js',
         options: {
           append: true,
           module: 'hyloApp',
@@ -183,7 +203,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('dev', [
-    'browserify',
+    'browserify:dev',
     'less',
     'sync:img',
     'sync:ui',
@@ -204,15 +224,25 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', function() {
-    var done = this.async();
+    var done = this.async(),
+      target = grunt.option('to');
 
-    deploy.setupEnv(grunt.option('to'), grunt.log, function() {
+    deploy.setupEnv(target, grunt.log, function() {
 
       // delay the requiring of templateEnv until after env vars are loaded
+      var templateEnv = require('./templateEnv')(target);
+
       grunt.config.merge({
         ejs: {
           deploy: {
-            options: require('./templateEnv')(grunt.option('to'))
+            options: templateEnv
+          }
+        },
+        less: {
+          deploy: {
+            options: {
+              rootpath: templateEnv.rootPath
+            }
           }
         }
       });
@@ -221,12 +251,12 @@ module.exports = function(grunt) {
         'clean',
         'copy:deploy',
         'ejs:deploy',
-        'browserify',
+        'browserify:deploy',
         'extract_sourcemap',
         'ngAnnotate',
         'ngtemplates',
         'uglify',
-        'less:dev',
+        'less:deploy',
         'cssmin'
       ], function(task) {
         grunt.task.run(task);

@@ -60,7 +60,7 @@ Deployer.prototype.upload = function(done) {
 
   async.series([
     function js(done) {
-      var contents = cat('dist/bundle.min.js'),
+      var contents = cat('dist/deploy/bundle.min.js'),
         path = 'assets/bundle-' + version + '.min.js';
       this.bundlePaths.js = path;
 
@@ -73,14 +73,14 @@ Deployer.prototype.upload = function(done) {
     }.bind(this),
 
     function jsMap(done) {
-      var contents = cat('dist/bundle.min.js.map'),
+      var contents = cat('dist/deploy/bundle.min.js.map'),
         path = this.bundlePaths.js + '.map';
 
       upload(path, contents, 'application/json', done);
     }.bind(this),
 
     function css(done) {
-      var contents = cat('dist/bundle.min.css'),
+      var contents = cat('dist/deploy/bundle.min.css'),
         path = 'assets/bundle-' + version + '.min.css';
       this.bundlePaths.css = path;
 
