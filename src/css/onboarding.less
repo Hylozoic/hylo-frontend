@@ -30,6 +30,9 @@
     border-color: white;
   }
 
+  .footer {
+    margin-top: @std-padding;
+  }
 }
 
 .onboarding-start {
@@ -91,10 +94,6 @@
   .request .dot {
     background-color: @request-color;
   }
-
-  .footer {
-    margin-top: @std-padding * 2;
-  }
 }
 
 .onboarding-seeds2 {
@@ -122,6 +121,7 @@
 }
 
 // TODO these should go in their own files
+
 .overlay {
   .full-screen-modal;
   position: fixed;
@@ -131,11 +131,15 @@
   height: 100%;
   z-index: 5;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: white;
   padding-top: @std-padding;
 
   font-size: 14px;
+
+  h2 {
+    margin-top: 30px;
+  }
 
   a.button {
     .rounded-button-clear;
@@ -143,6 +147,22 @@
 
   .center {
     text-align: center;
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    &.merkaba {
+      background-image: url('img/merkaba.png');
+      background-size: auto 90%;
+      background-position: center -80px;
+      background-repeat: no-repeat;
+      opacity: 0.07;
+    }
   }
 }
 
