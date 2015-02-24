@@ -1,0 +1,48 @@
+<div class="main-content">
+  <div class="all-sections">
+    <p>You might request information...</p>
+
+    <img class="example" src="<%= imageUrl('onboarding/iho/request1.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/request1_m.jpg') %>"/>
+
+    <p>...or a recommendation.</p>
+
+    <img class="example" src="<%= imageUrl('onboarding/iho/request2.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/request2_m.jpg') %>"/>
+
+    <p>You might offer your culinary talents...</p>
+
+    <img class="example" src="<%= imageUrl('onboarding/iho/offer1.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/offer1_m.jpg') %>"/>
+
+    <p>...or your professional skills.</p>
+
+    <img class="example" src="<%= imageUrl('onboarding/iho/offer2.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/offer2_m.jpg') %>"/>
+
+    <p>You might intend to create an interest group...</p>
+
+    <img class="example" src="<%= imageUrl('onboarding/iho/intention1.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/intention1_m.jpg') %>"/>
+
+    <p>...or something more open-ended.</p>
+
+    <img class="example" src="http://lorempixel.com/290/164?baz"/>
+    <img class="example mobile" src="http://lorempixel.com/290/164?baz"/>
+
+    <p>When we <strong>Request</strong> what we need, <strong>Offer</strong> what we have, and share our <strong>Intentions</strong>, magic happens. Those seeds can sprout into conversation and collaboration.</p>
+
+    <h3>Creating your first seed</h3>
+
+    <p>In the next step, you'll get to create your first seed. We encourage you to create an Offer. If you're not sure what to offer, remember that it can be any thing, service, knowledge, or experience, drawing from your personal or professional life.</p>
+
+    <p>Think of this as a way of introducing yourself--what's something that you can offer that might surprise or delight your fellow community members?</p>
+
+    <p ng-if="onboarding.canSkipSeedForm()">(You can skip the next step, since you've already created a seed.)</p>
+
+    <div class="center">
+      <a class="button" ng-click="onboarding.goNext()">Create your first seed</a>
+    </div>
+    <a ng-click="onboarding.goBack()" ng-show="onboarding">Back</a>
+  </div>
+</div>

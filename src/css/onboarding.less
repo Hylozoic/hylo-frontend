@@ -1,10 +1,6 @@
 .onboarding {
   .full-screen-modal;
-  font-size: 14px;
-
-  a.button {
-    .rounded-button;
-  }
+  .seed-body-text;
 
   .main-content {
     padding: 30px 0;
@@ -13,9 +9,7 @@
   .center {
     text-align: center;
   }
-}
 
-.onboarding-start {
   #content > .container-fluid {
     background-color: @hylo-teal;
     color: white;
@@ -30,6 +24,15 @@
   h4 {
     line-height: 1.4;
   }
+
+  a.button {
+    .rounded-button-clear;
+    border-color: white;
+  }
+
+}
+
+.onboarding-start {
 
   .logos {
     border-top: 1px solid white;
@@ -56,11 +59,6 @@
     }
   }
 
-  a.button {
-    .rounded-button-clear;
-    border-color: white;
-  }
-
   .leader-message {
     margin-bottom: @std-padding;
     img {
@@ -73,7 +71,54 @@
     }
     overflow: hidden;
   }
+}
 
+.onboarding-seeds {
+  .dot {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    border-radius: 22px;
+    border: 1px solid white;
+    margin-right: 5px;
+  }
+  .intention .dot {
+    background-color: @intention-color;
+  }
+  .offer .dot {
+    background-color: @offer-color;
+  }
+  .request .dot {
+    background-color: @request-color;
+  }
+
+  .footer {
+    margin-top: @std-padding * 2;
+  }
+}
+
+.onboarding-seeds2 {
+  img.example {
+    margin-bottom: 15px;
+    max-width: 100%;
+
+    @media (max-width: @screen-xs-max) {
+      display: none;
+    }
+
+    &.mobile {
+      display: none;
+      @media (max-width: @screen-xs-max) {
+        display: block;
+      }
+    }
+  }
+
+  h3 {
+    border-top: 1px solid white;
+    margin-top: @std-padding * 2;
+    padding-top: @std-padding * 2;
+  }
 }
 
 // TODO these should go in their own files
