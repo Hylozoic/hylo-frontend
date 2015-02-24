@@ -1,31 +1,82 @@
 .onboarding {
   .full-screen-modal;
+  font-size: 14px;
 
   a.button {
     .rounded-button;
   }
 
   .main-content {
-    padding-top: 30px;
+    padding: 30px 0;
+  }
+
+  .center {
+    text-align: center;
+  }
+}
+
+.onboarding-start {
+  #content > .container-fluid {
+    background-color: @hylo-teal;
+    color: white;
+  }
+
+  h3, h4 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: @std-padding;
+  }
+
+  h4 {
+    line-height: 1.4;
+  }
+
+  .logos {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    margin-bottom: @std-padding * 2;
+  }
+
+  .logo {
+    width: 180px;
+    margin-top: 8px;
+  }
+
+  .logotype {
+    width: 270px;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .logo {
+      width: 110px;
+      margin-top: 3px;
+    }
+    .logotype {
+      width: 150px;
+    }
+  }
+
+  a.button {
+    .rounded-button-clear;
+    border-color: white;
   }
 
   .leader-message {
-    padding: @std-padding 0;
     margin-bottom: @std-padding;
-    border-top: 1px solid @light-gray;
-    border-bottom: 1px solid @light-gray;
     img {
       .user-avatar;
       float: left;
-      margin-right: @std-padding;
+      margin: 0 @std-padding @std-padding 0;
     }
     div {
       overflow: hidden;
     }
     overflow: hidden;
   }
+
 }
 
+// TODO these should go in their own files
 .overlay {
   .full-screen-modal;
   position: fixed;
