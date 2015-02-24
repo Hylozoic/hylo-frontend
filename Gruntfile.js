@@ -204,7 +204,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', [
     'browserify:dev',
-    'less',
+    'less:dev',
     'sync:img',
     'sync:ui',
     'ejs:pages',
