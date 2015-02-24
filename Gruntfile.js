@@ -149,14 +149,14 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['src/js/**/*'],
-        tasks: ['browserify', 'notify:js'],
+        tasks: ['browserify:dev', 'notify:js'],
         options: {
           spawn: false
         }
       },
       css: {
         files: ['src/css/**/*'],
-        tasks: ['less', 'notify:css']
+        tasks: ['less:dev', 'notify:css']
       },
       img: {
         files: ['src/img/**/*'],
