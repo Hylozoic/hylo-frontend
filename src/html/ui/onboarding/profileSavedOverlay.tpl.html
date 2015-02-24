@@ -1,4 +1,4 @@
-<div class="overlay" animate-if="hideOverlay" animation="fade-out">
+<div class="overlay onboarding-profile-saved" animate-if="hideOverlay" animation="fade-out">
   <div class="background merkaba"></div>
   <div class="main-content">
     <div class="all-sections">
@@ -6,7 +6,21 @@
 
       <p>Your profile's looking great.</p>
 
-      <p>You can click the icon at the top {{menuPosition}} to open a menu, which lets you navigate between your profile, the communities you're in, and other parts of Hylo.</p>
+      <p class="hidden-xs">You can click this icon in the upper left:</p>
+
+      <p class="center"><img ng-src="{{onboarding.community.avatar_url}}" class="community-avatar hidden-xs"/></p>
+
+      <p class="visible-xs">You can click this icon in the upper right:</p>
+
+      <p class="center visible-xs">
+        <button type="button" class="navbar-toggle collapsed">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </p>
+
+      <p>...to open a menu, which lets you navigate between your profile, the communities you're in, and other parts of Hylo.</p>
 
       <div class="center"><a class="button" ng-click="onboarding.continue(); hideOverlay = true">All done!</a></div>
 
