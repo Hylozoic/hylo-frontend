@@ -49,6 +49,9 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     isComplete: function() {
       return this._status.step === 'done';
     },
+    canSkipSeedForm: function() {
+      return !!this._status.can_skip_seed_form;
+    },
     currentStep: function() {
       return this._status.step;
     },

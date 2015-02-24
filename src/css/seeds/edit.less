@@ -83,7 +83,7 @@
 		margin-bottom: @std-padding;
 
 		.add-meta {
-			.make-sm-column(3);
+			.make-sm-column(6);
 			.seed-body-text;
 			padding-top: @std-padding;
 			padding-bottom: @std-padding;
@@ -117,7 +117,9 @@
 			}
 
 			&.image {
-  			text-align: center;
+				@media (min-width: @screen-sm) {
+					padding-left: 0;
+				}
   		}
 
 			&.done {
@@ -126,9 +128,16 @@
 					@media (min-width: @screen-sm) {
 						float: right;
 						.rounded-button;
+						margin-left: 5px;
+					}
+					&.skip {
+						.rounded-button;
+						margin-left: 5px;
 					}
 				}
-				padding-right: 0;
+				@media (min-width: @screen-sm) {
+					padding-right: 0;
+				}
 			}
 		}
 
@@ -168,4 +177,5 @@
       border-radius: 4px;
     }
   }
+
 }
