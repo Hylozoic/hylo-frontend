@@ -52,6 +52,13 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     canSkipSeedForm: function() {
       return !!this._status.can_skip_seed_form;
     },
+    markSeedCreated: function() {
+      this._status.seed_created = true;
+      this.goNext();
+    },
+    isSeedCreated: function() {
+      return !!this._status.seed_created;
+    },
     currentStep: function() {
       return this._status.step;
     },

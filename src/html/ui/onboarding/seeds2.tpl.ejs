@@ -20,15 +20,15 @@
     <img class="example" src="<%= imageUrl('onboarding/iho/offer2.jpg') %>"/>
     <img class="example mobile" src="<%= imageUrl('onboarding/iho/offer2_m.jpg') %>"/>
 
-    <p>You might intend to create an interest group...</p>
+    <p>You might intend to create a simple interest group...</p>
 
     <img class="example" src="<%= imageUrl('onboarding/iho/intention1.jpg') %>"/>
     <img class="example mobile" src="<%= imageUrl('onboarding/iho/intention1_m.jpg') %>"/>
 
-    <p>...or something more open-ended.</p>
+    <p>...or gather support for a broader vision.</p>
 
-    <img class="example" src="http://lorempixel.com/290/164?baz"/>
-    <img class="example mobile" src="http://lorempixel.com/290/164?baz"/>
+    <img class="example" src="<%= imageUrl('onboarding/iho/intention2.jpg') %>"/>
+    <img class="example mobile" src="<%= imageUrl('onboarding/iho/intention2_m.jpg') %>"/>
 
     <p>When we <strong>Request</strong> what we need, <strong>Offer</strong> what we have, and share our <strong>Intentions</strong>, magic happens. Those seeds can sprout into conversation and collaboration.</p>
 
@@ -40,7 +40,7 @@
 
     <p ng-if="onboarding.canSkipSeedForm()">(You can skip the next step, since you've already created a seed.)</p>
 
-    <div class="center">
+    <div class="center footer">
       <a class="button" ng-click="onboarding.goNext()">Create your first seed</a>
     </div>
     <a ng-click="onboarding.goBack()" ng-show="onboarding">Back</a>
