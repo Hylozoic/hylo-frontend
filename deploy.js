@@ -94,7 +94,7 @@ Deployer.prototype.upload = function(done) {
     }.bind(this),
 
     function pages(done) {
-      dir.files('dist/deploy', function(err, files) {
+      dir.files('dist/deploy/pages', function(err, files) {
         if (err) throw err;
         async.each(files, function(filename, next) {
           var contents = fs.readFileSync(filename),

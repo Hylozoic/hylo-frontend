@@ -1,6 +1,7 @@
 require('dotenv').load();
 
-var deploy = require('./deploy');
+var deploy = require('./deploy'),
+  _ = require('lodash');
 
 module.exports = function(grunt) {
 
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
       }
     },
     cssmin: {
-      prod: {
+      deploy: {
         files: {
           'dist/bundle.min.css': ['dist/bundle.css']
         }
@@ -38,38 +39,41 @@ module.exports = function(grunt) {
       }
     },
     ejs: {
-      dev: {
+      pages: {
         options: require('./templateEnv')('development'),
-        src: ['**/!(_)*.ejs'],
-        cwd: 'src/html/pages',
-        dest: 'dist/dev',
-        expand: true,
-        ext: '.html'
+        files: [
+          {expand: true, cwd: 'src/html/pages', src: ['**/!(_)*.ejs'], dest: 'dist/dev', ext: '.html'}
+        ]
+      },
+      ui: {
+        options: require('./templateEnv')('development'),
+        files: [
+          {expand: true, cwd: 'src/html/ui', src: ['**/!(_)*.ejs'], dest: 'dist/ui', ext: '.tpl.html'}
+        ]
       },
       deploy: {
-        src: ['**/!(_)*.ejs'],
-        cwd: 'src/html/pages',
-        dest: 'dist/deploy',
-        expand: true,
-        ext: '.html'
+        files: [
+          {expand: true, cwd: 'src/html/pages', src: ['**/!(_)*.ejs'], dest: 'dist/deploy/pages', ext: '.html'},
+          {expand: true, cwd: 'src/html/ui', src: ['**/!(_)*.ejs'], dest: 'dist/deploy/ui', ext: '.tpl.html'}
+        ]
       }
     },
     extract_sourcemap: {
-      prod: {
+      deploy: {
         files: {
           'dist': ['dist/bundle.js']
         }
       }
     },
     ngAnnotate: {
-      prod: {
+      deploy: {
         files: {
           'dist/bundle-annotated.js': ['dist/bundle.js']
         }
       }
     },
     uglify: {
-      prod: {
+      deploy: {
         options: {
           sourceMap: true,
           sourceMapIn: 'dist/bundle.js.map',
@@ -88,18 +92,10 @@ module.exports = function(grunt) {
         updateAndDelete: true,
         verbose: true
       },
-      imgDeploy: {
-        files: [
-          {cwd: 'src/img', src: ['**'], dest: 'dist/deploy/img/'}
-        ],
-        updateAndDelete: true,
-        verbose: true
-      },
       ui: {
         files: [
-          {cwd: 'src/html/ui/', src: ['**'], dest: 'dist/ui/'}
+          {cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/ui/'}
         ],
-        updateAndDelete: true,
         verbose: true
       },
       styleguide: {
@@ -108,17 +104,25 @@ module.exports = function(grunt) {
         ],
         updateAndDelete: true,
         verbose: true
+      },
+    },
+    copy: {
+      deploy: {
+        files: [
+          {expand: true, cwd: 'src/img', src: ['**'], dest: 'dist/deploy/pages/img/'},
+          {expand: true, cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/deploy/ui/'}
+        ],
       }
     },
     ngtemplates: {
-      dev: {
-        cwd: 'src/html',
+      deploy: {
+        cwd: 'dist/deploy/ui',
         src: '**/*.html',
         dest: 'dist/bundle-annotated.js',
         options: {
           append: true,
           module: 'hyloApp',
-          prefix: '/'
+          prefix: '/ui'
         }
       }
     },
@@ -140,11 +144,15 @@ module.exports = function(grunt) {
       },
       pages: {
         files: ['src/html/pages/**/*'],
-        tasks: ['ejs:dev']
+        tasks: ['ejs:pages']
       },
       ui: {
-        files: ['src/html/ui/**/*'],
+        files: ['src/html/ui/**/*.html'],
         tasks: ['sync:ui']
+      },
+      uiEjs: {
+        files: ['src/html/ui/**/*.ejs'],
+        tasks: ['ejs:ui']
       },
       styleguide: {
         files: ['src/html/styleguide/**/*'],
@@ -174,10 +182,17 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('bundleJs', ['browserify', 'extract_sourcemap', 'ngAnnotate', 'ngtemplates', 'uglify']);
-  grunt.registerTask('bundleCss', ['less', 'cssmin']);
-  grunt.registerTask('bundle', ['bundleJs', 'bundleCss']);
-  grunt.registerTask('dev', ['browserify', 'less', 'ejs:dev', 'sync', 'serve', 'watch']);
+  grunt.registerTask('dev', [
+    'browserify',
+    'less',
+    'sync:img',
+    'sync:ui',
+    'ejs:pages',
+    'ejs:ui',
+    'sync:styleguide',
+    'serve',
+    'watch'
+  ]);
 
   grunt.registerTask('serve', function() {
     require('./server')({
@@ -188,7 +203,7 @@ module.exports = function(grunt) {
     });
   });
 
-  grunt.registerTask('deploy', function() {
+  grunt.registerTask('build', function() {
     var done = this.async();
 
     deploy.setupEnv(grunt.option('to'), grunt.log, function() {
@@ -202,12 +217,26 @@ module.exports = function(grunt) {
         }
       });
 
-      grunt.task.run('ejs:deploy');
-      grunt.task.run('sync:imgDeploy');
-      grunt.task.run('upload');
+      _.each([
+        'clean',
+        'copy:deploy',
+        'ejs:deploy',
+        'browserify',
+        'extract_sourcemap',
+        'ngAnnotate',
+        'ngtemplates',
+        'uglify',
+        'less:dev',
+        'cssmin'
+      ], function(task) {
+        grunt.task.run(task);
+      });
+
       done();
     });
-  })
+  });
+
+  grunt.registerTask('deploy', ['build', 'upload']);
 
   grunt.registerTask('upload', function() {
     deploy.run(grunt.option('to'), this.async(), grunt.log);
