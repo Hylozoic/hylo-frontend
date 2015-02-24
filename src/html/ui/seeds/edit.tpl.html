@@ -49,9 +49,6 @@
     </div>
 
     <div class="bottom-bar">
-      <div class="add-meta duration"><a>Duration</a></div>
-      <div class="add-meta members"><a>Add Members</a></div>
-
       <div class="add-meta image">
         <a ng-click="addImage()">
           <i class="icon-add-photo"></i>
@@ -66,6 +63,9 @@
       </div>
 
       <div class="add-meta done">
+        <button ng-click="onboarding.goNext()" ng-show="onboardingMode && onboarding.canSkipSeedForm()" class="skip">
+          Skip
+        </button>
         <button type="button" class="save" ng-click="save()" ng-disabled="saving">
           <i class="icon-little-check"></i>
           <span ng-if="saving">Saving...</span>
@@ -77,6 +77,6 @@
     <div class="notifications"></div>
 
     <a ng-click="onboarding.goBack()" ng-show="onboardingMode">Back</a>
-    <a ng-click="onboarding.goNext()" ng-show="onboardingMode">Skip</a>
+
   </div>
 </div>
