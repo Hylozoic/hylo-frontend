@@ -15,6 +15,8 @@ var app = angular.module('hyloApp', [
   'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
 ]);
 
+require('./animations')(app);
+
 app.config(require('./routes'))
 .config(['$urlRouterProvider', function($urlRouterProvider) {
   // remove trailing slashes from paths
@@ -124,8 +126,6 @@ app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$wi
         $rootScope.community = Community.default();
       }
     });
-
-    var currentSlug;
 
     // Set a variable so we can watch for param changes
     $rootScope.$state = $state;

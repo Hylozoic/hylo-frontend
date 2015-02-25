@@ -43,18 +43,16 @@
 
   <div ng-hide="loginMode" id="content">
     <ng-include src="'/ui/app/nav.tpl.html'"></ng-include>
-    <div ui-view class="container-fluid"></div>
+    <ng-include src="'/ui/shared/announcer.tpl.html'"></ng-include>
+    <ng-include src="'/ui/shared/overlay.tpl.html'"></ng-include>
+    <div ui-view class="container-fluid" id="main-container"></div>
   </div>
 
   <ng-include src="'/ui/app/menu.tpl.html'"></ng-include>
 
 </div>
 <div growl></div>
+
 <script type="text/javascript" src="<%= jsBundleUrl %>"></script>
-
-<script>
-  filepicker.setKey(hyloEnv.filepicker.key);
-</script>
-
 </body>
 </html>

@@ -1,8 +1,14 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var dependencies = ['$scope', 'currentUser', 'community', 'Seed', 'growl', '$analytics', 'UserMentions', 'seed', '$state'];
-dependencies.push(function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding) {
+
+  $scope.onboarding = onboarding;
+
+  // onboarding mode is not the same as the presence of the onboarding object --
+  // it should not be enabled, e.g., when someone is still in onboarding but is
+  // editing the seed they just created or creating a 2nd one
+  $scope.onboardingMode = (onboarding && onboarding.currentStep() === 'newSeed');
 
   var prefixes = {
     intention: "I'd like to create",
@@ -24,7 +30,7 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
   };
 
   $scope.close = function() {
-    $scope.$state.go('community.seeds', {community: community.slug});
+    $state.go('community.seeds', {community: community.slug});
   };
 
   $scope.addImage = function() {
@@ -77,8 +83,12 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
   var create = function(data) {
     new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
-      $scope.close();
-      growl.addSuccessMessage('Seed created!');
+      if ($scope.onboardingMode) {
+        onboarding.markSeedCreated();
+      } else {
+        $scope.close();
+        growl.addSuccessMessage('Seed created!');
+      }
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);
@@ -127,11 +137,12 @@ dependencies.push(function($scope, currentUser, community, Seed, growl, $analyti
       $scope.description = format('<p>%s</p>', seed.description);
     }
   } else {
-    $scope.switchSeedType('intention');
+    var defaultType = (onboarding ? 'offer' : 'intention');
+    $scope.switchSeedType(defaultType);
   }
 
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.controller('SeedEditCtrl', dependencies);
+  angularModule.controller('SeedEditCtrl', directive);
 }

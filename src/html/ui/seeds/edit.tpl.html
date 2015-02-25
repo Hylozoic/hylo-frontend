@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default navbar-hylo-create" role="navigation">
   <div class="navbar-header">
-    <i class="icon-hylo-script" ng-click="close()"></i>
+    <i class="icon-hylo-script" ng-click="close()" ng-hide="onboardingMode"></i>
   </div>
   <div class="navbar-center" href="#">{{editing ? 'Edit' : 'New'}} Seed</div>
-  <a class="navbar-right close" ng-click="close()">&times;</a>
+  <a class="navbar-right close" ng-click="close()" ng-hide="onboardingMode">&times;</a>
 </nav>
 
 <div class="main-content">
@@ -49,9 +49,6 @@
     </div>
 
     <div class="bottom-bar">
-      <div class="add-meta duration"><a>Duration</a></div>
-      <div class="add-meta members"><a>Add Members</a></div>
-
       <div class="add-meta image">
         <a ng-click="addImage()">
           <i class="icon-add-photo"></i>
@@ -66,6 +63,9 @@
       </div>
 
       <div class="add-meta done">
+        <button ng-click="onboarding.goNext()" ng-show="onboardingMode && onboarding.canSkipSeedForm()" class="skip">
+          Skip
+        </button>
         <button type="button" class="save" ng-click="save()" ng-disabled="saving">
           <i class="icon-little-check"></i>
           <span ng-if="saving">Saving...</span>
@@ -75,5 +75,8 @@
     </div>
 
     <div class="notifications"></div>
+
+    <a ng-click="onboarding.goBack()" ng-show="onboardingMode">Back</a>
+
   </div>
 </div>

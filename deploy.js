@@ -60,7 +60,7 @@ Deployer.prototype.upload = function(done) {
 
   async.series([
     function js(done) {
-      var contents = cat('dist/bundle.min.js'),
+      var contents = cat('dist/deploy/bundle.min.js'),
         path = 'assets/bundle-' + version + '.min.js';
       this.bundlePaths.js = path;
 
@@ -73,14 +73,14 @@ Deployer.prototype.upload = function(done) {
     }.bind(this),
 
     function jsMap(done) {
-      var contents = cat('dist/bundle.min.js.map'),
+      var contents = cat('dist/deploy/bundle.min.js.map'),
         path = this.bundlePaths.js + '.map';
 
       upload(path, contents, 'application/json', done);
     }.bind(this),
 
     function css(done) {
-      var contents = cat('dist/bundle.min.css'),
+      var contents = cat('dist/deploy/bundle.min.css'),
         path = 'assets/bundle-' + version + '.min.css';
       this.bundlePaths.css = path;
 
@@ -94,7 +94,7 @@ Deployer.prototype.upload = function(done) {
     }.bind(this),
 
     function pages(done) {
-      dir.files('dist/deploy', function(err, files) {
+      dir.files('dist/deploy/pages', function(err, files) {
         if (err) throw err;
         async.each(files, function(filename, next) {
           var contents = fs.readFileSync(filename),
@@ -121,9 +121,9 @@ Deployer.prototype.uploadSourceMap = function(callback) {
     // Pass optional meta-data with an 'options' object with style: {value: DATA, options: OPTIONS}
     // See the `form-data` README for more information about options: https://github.com/felixge/node-form-data
     source_map: {
-      value:  fs.createReadStream('dist/bundle.min.js.map'),
+      value:  fs.createReadStream('dist/deploy/bundle.min.js.map'),
       options: {
-        filename: 'dist/bundle.min.js.map',
+        filename: 'dist/deploy/bundle.min.js.map',
         contentType: 'application/octet-stream'
       }
     }
@@ -134,7 +134,7 @@ Deployer.prototype.uploadSourceMap = function(callback) {
   }, function (err, httpResponse, body) {
     if (err || body.err > 0) {
       console.error('upload failed:', err);
-      this.fail(result.message);
+      this.fail(err.message);
     }
     callback();
   }.bind(this));

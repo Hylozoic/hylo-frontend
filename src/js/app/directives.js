@@ -17,6 +17,18 @@ angularModule.directive('ngEnter', function() {
   };
 }).
 
+directive('animateIf', function($animate) {
+  return function(scope, element, attrs) {
+    scope.$watch(attrs.animateIf, function(val) {
+      if (val) {
+        $animate.addClass(element, attrs.animation);
+      } else if (val === false) {
+        $animate.removeClass(element, attrs.animation);
+      }
+    })
+  }
+}).
+
 // https://gist.github.com/kirkstrobeck/599664399dbc23968741
 directive('autofocus', function ($timeout) {
   return {
