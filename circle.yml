@@ -2,4 +2,4 @@ deployment:
   production:
     branch: master
     commands:
-      - "grunt bundle deploy --to=production"
+      - "grunt deploy --to=production"
