@@ -1,5 +1,5 @@
 $ = jQuery = require('jquery');
-_          = require('underscore');
+_          = require('lodash');
 moment     = require('moment');
 
 require('./onload');
@@ -26,6 +26,8 @@ require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
 require('ngInfiniteScroll');
 require('ment.io');
+require('gsap/src/uncompressed/TweenLite');
+require('gsap/src/uncompressed/plugins/CSSPlugin');
 /* End Bower Components */
 
 /* Manually installed components */
@@ -40,6 +42,8 @@ require('./app/hyloApp');
 // FIXME: the code that depends upon the existence of this global
 // should be rewritten
 window.guiders = $.guiders;
+
+filepicker.setKey(hyloEnv.filepicker.key);
 
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['hyloApp']);

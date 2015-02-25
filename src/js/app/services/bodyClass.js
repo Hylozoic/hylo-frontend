@@ -7,7 +7,7 @@
 
 var extractClassName = function(stateName) {
   if (stateName.match(/\./)) {
-    return [stateName.split('.', 1)[0], stateName.replace('.', '-')];
+    return [stateName.split('.', 1)[0], stateName.replace(/\./g, '-')];
   }
   return stateName;
 };
