@@ -7,6 +7,7 @@ hyloEnv.onUser(function(user) {
     lastName: user.last_name,
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
+    createdAt: user.date_created,
     created: user.date_created
   });
 
@@ -16,50 +17,6 @@ hyloEnv.onUser(function(user) {
     username: user.name,
     email: user.email
   };
-
-  //intercom
-  window.intercomSettings = {
-    name: user.name,
-    email: user.email,
-    created_at: user.date_created,
-    app_id: "wwelodje",
-    user_hash:  'hash_hmac("sha256", $user->email, "wn5VnqcseKp5ihXlonHGmvukuI9R4HSb34K6CFFo")'
-  };
-
-  (function(){
-    var w=window;
-    var ic=w.Intercom;
-    if(typeof ic==="function"){
-      ic('reattach_activator');
-      ic('update',intercomSettings);
-    }
-    else {
-      var d=document;
-      var i=function() {
-        i.c(arguments)
-      };
-      i.q=[];
-      i.c=function(args) {
-        i.q.push(args)
-      };
-      w.Intercom=i;
-      function l(){
-        var s=d.createElement('script');
-        s.type='text/javascript';
-        s.async=true;
-        s.src='https://widget.intercom.io/widget/wwelodje';
-        var x=d.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s,x);
-      }
-      if(w.attachEvent){
-        w.attachEvent('onload',l);
-      }
-      else {
-        w.addEventListener('load',l,false);
-      }
-    }
-  })()
-
 });
 
 
