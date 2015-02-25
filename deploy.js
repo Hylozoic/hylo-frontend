@@ -98,7 +98,7 @@ Deployer.prototype.upload = function(done) {
         if (err) throw err;
         async.each(files, function(filename, next) {
           var contents = fs.readFileSync(filename),
-            path = filename.replace(/^dist\/deploy/, 'assets/' + version);
+            path = filename.replace(/^dist\/deploy\/pages/, 'assets/' + version);
 
           upload(path, contents, mime.lookup(filename), next);
         }, done);
