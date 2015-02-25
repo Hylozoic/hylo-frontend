@@ -222,7 +222,7 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/start.tpl.html',
-        controller: function(onboarding, $scope) {
+        controller: /*@ngInject*/ function(onboarding, $scope) {
           $scope.onboarding = onboarding;
         }
       }
@@ -233,7 +233,7 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/seeds.tpl.html',
-        controller: function(onboarding, $scope) {
+        controller: /*@ngInject*/ function(onboarding, $scope) {
           $scope.onboarding = onboarding;
         }
       }
@@ -244,7 +244,7 @@ var onboardingStates = function(stateProvider) {
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/seeds2.tpl.html',
-        controller: function(onboarding, $scope) {
+        controller: /*@ngInject*/ function(onboarding, $scope) {
           $scope.onboarding = onboarding;
         }
       }
