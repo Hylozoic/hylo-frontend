@@ -46,5 +46,5 @@ window.guiders = $.guiders;
 filepicker.setKey(hyloEnv.filepicker.key);
 
 angular.element(document).ready(function() {
-  angular.bootstrap(document, ['hyloApp']);
+  angular.bootstrap(document, ['hyloApp'], {strictDi: true});
 });
