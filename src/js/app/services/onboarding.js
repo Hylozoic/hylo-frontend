@@ -42,6 +42,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     var params = require('querystring').parse(location.search.replace(/^\?/, ''));
     if (params.obs) {
       _.merge(this._status, {step: params.obs});
+      this.allowBack = true;
     }
   };
 

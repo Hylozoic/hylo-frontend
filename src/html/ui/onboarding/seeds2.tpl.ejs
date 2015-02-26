@@ -43,6 +43,6 @@
     <div class="center footer">
       <a class="button" ng-click="onboarding.goNext()">Create your first seed</a>
     </div>
-    <a ng-click="onboarding.goBack()" ng-show="onboarding">Back</a>
+    <a ng-click="onboarding.goBack()" ng-show="onboarding && onboarding.allowBack">Back</a>
   </div>
 </div>
