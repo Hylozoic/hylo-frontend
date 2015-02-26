@@ -1,11 +1,11 @@
 module.exports = function(angularModule) {
-  angularModule.animation('.fade-out', function() {
+  angularModule.animation('.fade-in', function() {
     return {
       addClass: function(element, className) {
-        TweenLite.to(element, 0.5, {opacity: 0, display: 'none'});
+        TweenLite.to(element, 0.8, {opacity: 1, display: 'block'});
       },
       removeClass: function(element, className) {
-        TweenLite.to(element, 0.5, {opacity: 1, display: 'block'});
+        TweenLite.to(element, 0.8, {opacity: 0, display: 'none'});
       }
     };
   })

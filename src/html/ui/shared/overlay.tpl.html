@@ -1,4 +1,5 @@
-<div ng-controller="OverlayCtrl" class="container-fluid">
+<div ng-controller="OverlayCtrl" class="container-fluid overlay" animate-if="showOverlay" animation="fade-in">
+  <div class="background merkaba"></div>
   <ng-include ng-if="overlay === 'onboarding.community'" src="'/ui/onboarding/communityOverlay.tpl.html'"></ng-include>
   <ng-include ng-if="overlay === 'onboarding.profile'" src="'/ui/onboarding/profileOverlay.tpl.html'"></ng-include>
   <ng-include ng-if="overlay === 'onboarding.profileSaved'" src="'/ui/onboarding/profileSavedOverlay.tpl.html'"></ng-include>

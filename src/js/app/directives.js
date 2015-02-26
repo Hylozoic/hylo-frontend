@@ -37,7 +37,7 @@ directive('animateIf', function($animate) {
     scope.$watch(attrs.animateIf, function(val) {
       if (val) {
         $animate.addClass(element, attrs.animation);
-      } else if (val === false) {
+      } else {
         $animate.removeClass(element, attrs.animation);
       }
     })

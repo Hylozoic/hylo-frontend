@@ -65,8 +65,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     showOverlay: function(name) {
       $rootScope.$emit('overlay:load', {
         overlay: 'onboarding.' + name,
-        onboarding: this,
-        hideOverlay: false
+        onboarding: this
       });
     },
     continue: function() {
