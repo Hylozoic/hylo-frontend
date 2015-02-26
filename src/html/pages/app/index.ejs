@@ -19,7 +19,7 @@
 <title>Hylo</title>
 </head>
 
-<body class="angular-app hylo-auth waiting-for-angular" ng-class="$bodyClass()">
+<body class="angular-app waiting-for-angular" curtain hylo-auth ng-class="$bodyClass()">
 
 <div id="initializing-panel">
   <div class="spinner">
@@ -30,7 +30,7 @@
 
 <div id="content-outer">
 
-  <div ng-show="loginMode" id="login-holder">
+  <div ng-hide="loggedIn" id="login-holder">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div ng-hide="loginMode" id="content">
+  <div ng-show="loggedIn" id="content">
     <ng-include src="'/ui/app/nav.tpl.html'"></ng-include>
     <ng-include src="'/ui/shared/announcer.tpl.html'"></ng-include>
     <ng-include src="'/ui/shared/overlay.tpl.html'"></ng-include>
