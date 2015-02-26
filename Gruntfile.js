@@ -35,27 +35,17 @@ module.exports = function(grunt) {
       }
     },
     browserify: {
-      dev: {
-        options: {
-          browserifyOptions: {
-            debug: true
-          },
-          transform: ['debowerify']
+      options: {
+        browserifyOptions: {
+          debug: true
         },
-        files: {
-          'dist/bundle-pre-annotation.js': ['src/js/index.js']
-        }
+        transform: ['browserify-ngannotate', 'debowerify']
+      },
+      dev: {
+        files: {'dist/bundle.js': ['src/js/index.js']}
       },
       deploy: {
-        options: {
-          browserifyOptions: {
-            debug: true
-          },
-          transform: ['debowerify']
-        },
-        files: {
-          'dist/deploy/bundle.js': ['src/js/index.js']
-        }
+        files: {'dist/deploy/bundle.js': ['src/js/index.js']}
       }
     },
     ejs: {
@@ -85,18 +75,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    ngAnnotate: {
-      dev: {
-        files: {
-          'dist/bundle.js': ['dist/bundle-pre-annotation.js']
-        }
-      },
-      deploy: {
-        files: {
-          'dist/deploy/bundle-annotated.js': ['dist/deploy/bundle.js']
-        }
-      }
-    },
     uglify: {
       deploy: {
         options: {
@@ -105,7 +83,7 @@ module.exports = function(grunt) {
           sourceMapIncludeSources: true
         },
         files: {
-          'dist/deploy/bundle.min.js': ['dist/deploy/bundle-annotated.js']
+          'dist/deploy/bundle.min.js': ['dist/deploy/bundle.js']
         }
       }
     },
@@ -143,7 +121,7 @@ module.exports = function(grunt) {
       deploy: {
         cwd: 'dist/deploy/ui',
         src: '**/*.html',
-        dest: 'dist/deploy/bundle-annotated.js',
+        dest: 'dist/deploy/bundle.js',
         options: {
           append: true,
           module: 'hyloApp',
@@ -154,7 +132,7 @@ module.exports = function(grunt) {
     watch: {
       js: {
         files: ['src/js/**/*'],
-        tasks: ['browserify:dev', 'ngAnnotate:dev', 'notify:js'],
+        tasks: ['browserify:dev', 'notify:js'],
         options: {
           spawn: false
         }
@@ -209,7 +187,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', [
     'browserify:dev',
-    'ngAnnotate:dev',
     'less:dev',
     'sync:img',
     'sync:ui',
@@ -259,7 +236,6 @@ module.exports = function(grunt) {
         'ejs:deploy',
         'browserify:deploy',
         'extract_sourcemap',
-        'ngAnnotate:deploy',
         'ngtemplates',
         'uglify',
         'less:deploy',
