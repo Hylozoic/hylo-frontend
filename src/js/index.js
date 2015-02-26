@@ -16,7 +16,6 @@ require('angular-resource');
 require('angular-sanitize');
 require('angular-touch');
 require('angular-ui-router');
-require('angular-wizard');
 require('angulartics');
 require('bootstrap-select');
 require('filepicker');

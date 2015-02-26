@@ -7,7 +7,7 @@ require('./controllers');
 require('./services');
 
 var app = angular.module('hyloApp', [
-  'ngRoute', 'ngResource', 'mgo-angular-wizard', 'ngAnimate', 'ngSanitize', 'ngIdle',
+  'ngRoute', 'ngResource', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
