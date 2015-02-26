@@ -27,6 +27,7 @@ require('ngInfiniteScroll');
 require('ment.io');
 require('gsap/src/uncompressed/TweenLite');
 require('gsap/src/uncompressed/plugins/CSSPlugin');
+// require('gsap/src/uncompressed/easing/EasePack');
 /* End Bower Components */
 
 /* Manually installed components */

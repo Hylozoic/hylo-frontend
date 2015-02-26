@@ -1,31 +1,28 @@
-<div class="overlay" animate-if="hideOverlay" animation="fade-out">
-  <div class="background merkaba"></div>
-  <div class="main-content">
-    <div class="all-sections" ng-switch="onboarding.isSeedCreated()">
+<div class="main-content">
+  <div class="all-sections" ng-switch="onboarding.isSeedCreated()">
 
-      <div ng-switch-when="true">
-        <h2 class="center">Congratulations!</h2>
+    <div ng-switch-when="true">
+      <h2 class="center">Congratulations!</h2>
 
-        <p>You've planted your first seed in {{onboarding.community.name}}. You can see it here, on your community's feed. Other members of your community can also see it and comment on it.</p>
+      <p>You've planted your first seed in {{onboarding.community.name}}. You can see it here, on your community's feed. Other members of your community can also see it and comment on it.</p>
 
-        <p>To edit your seed, just click <i class="icon-down" title="icon-down-new"></i> in its upper right corner and select "Edit".</p>
+      <p>To edit your seed, just click <i class="icon-down" title="icon-down-new"></i> in its upper right corner and select "Edit".</p>
 
-        <p>Scroll down past it to see what other community members are sharing or seeking.</p>
-      </div>
-
-      <div ng-switch-when="false">
-        <h2 class="center">This is your community's feed.</h2>
-
-        <p>Here you can see all the seeds that people have created in your community, and comment on the ones that interest you.</p>
-
-        <p>If you comment on a seed, or click "Join", you will receive email notifications for updates on that seed. (You can always disable this later.)</p>
-
-        <p>Scroll down to see more seeds. Or click "Members" to browse a list of all members.</p>
-      </div>
-
-      <div class="center"><a class="button" ng-click="onboarding.continue(); hideOverlay = true">Got it!</a></div>
-
-      <a ng-click="onboarding.goBack(); hideOverlay = true">Back</a>
+      <p>Scroll down past it to see what other community members are sharing or seeking.</p>
     </div>
+
+    <div ng-switch-when="false">
+      <h2 class="center">This is your community's feed.</h2>
+
+      <p>Here you can see all the seeds that people have created in your community, and comment on the ones that interest you.</p>
+
+      <p>If you comment on a seed, or click "Join", you will receive email notifications for updates on that seed. (You can always disable this later.)</p>
+
+      <p>Scroll down to see more seeds. Or click "Members" to browse a list of all members.</p>
+    </div>
+
+    <div class="center"><a class="button" ng-click="onboarding.continue(); hide()">Got it!</a></div>
+
+    <a ng-click="onboarding.goBack(); hide()">Back</a>
   </div>
 </div>

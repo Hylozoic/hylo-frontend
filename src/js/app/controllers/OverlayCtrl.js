@@ -1,17 +1,24 @@
 var controller = function($scope, $rootScope, $timeout) {
 
-  $rootScope.$on('overlay:load', function(event, data) {
-    // reset overlay in case we somehow navigate back to it
-    // after it's been closed once
-    $scope.overlay = null;
-    $scope.hideOverlay = false;
+  $scope.showOverlay = false;
 
+  $rootScope.$on('overlay:load', function(event, data) {
+    $scope.overlay = data.overlay;
+
+    // wait for ng-include to take effect
     $timeout(function() {
+      // load arbitrary scope data
       _.each(_.keys(data), function(key) {
-        $scope[key] = data[key];
+        if (key != 'overlay') $scope[key] = data[key];
       });
-    }, 0);
+
+      $scope.showOverlay = true;
+    });
   });
+
+  $scope.hide = function () {
+    $scope.showOverlay = false;
+  };
 
 };
 
