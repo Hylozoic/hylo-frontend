@@ -17,7 +17,8 @@ module.exports = function(angularModule) {
         $timeout(function() { TweenLite.to(element, 0.5, {top: 0}) }, 0);
       },
       removeClass: function(element, className) {
-        TweenLite.to(element, 0.5, {top: -element.outerHeight()});
+        element.css('top', -element.outerHeight());
+        // TweenLite.to(element, 0.5, {top: -element.outerHeight()});
       }
     };
   });
