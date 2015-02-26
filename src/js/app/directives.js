@@ -17,6 +17,21 @@ angularModule.directive('ngEnter', function() {
   };
 }).
 
+directive('curtain', function($rootScope) {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      $rootScope.$on('curtain:raise', function() {
+        element.removeClass('waiting-for-angular');
+      });
+
+      $rootScope.$on('curtain:lower', function() {
+        element.addClass('waiting-for-angular');
+      });
+    }
+  };
+}).
+
 directive('animateIf', function($animate) {
   return function(scope, element, attrs) {
     scope.$watch(attrs.animateIf, function(val) {
