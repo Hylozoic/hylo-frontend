@@ -91,14 +91,13 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       }
     },
     resume: function() {
-      if (this.currentStep() === 'done')
-        return;
-
       // TODO maybe only do this if within the first few steps?
       // i.e. once we get to community step, we can allow open-ended
       // exploration and only continue onboarding through non-modal prompts
-      if ($state.$current.name !== steps[this.currentStep()].state)
-        this._goDelta(0);
+      if (this.currentStep() === 'done' || $state.$current.name === steps[this.currentStep()].state)
+        return;
+
+      this._goDelta(0);
     },
     goNext: function() {
       this._goDelta(1);
