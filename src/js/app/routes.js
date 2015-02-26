@@ -291,10 +291,10 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
           return new Onboarding(currentUser);
         }
       },
-      onEnter: function(currentUser, $state) {
+      onEnter: function(currentUser) {
         window.hyloEnv.provideUser(currentUser);
       },
-      controller: function($rootScope, oldCurrentUser, currentUser, $state, onboarding) {
+      controller: function($rootScope, oldCurrentUser, onboarding) {
         $rootScope.currentUser = oldCurrentUser;
 
         if (onboarding && !onboarding.isComplete())
