@@ -111,11 +111,10 @@
       position: relative;
       text-decoration: none;
 
-      //fix to make text labels on tabs appear with centered text
       @media (max-width: @screen-xs-max) {
         padding: 0;
+        min-height: 115px;
       }
-
 
       &.selected {
         background-color: @dark-accent;
@@ -129,16 +128,16 @@
 
       .count {
         border: 1px solid @link-color;
-        @size: 27px;
+        @size: 40px;
         width: @size;
         height: @size;
-        .border-radius(@size/2);
+        border-radius: @size;
+        line-height: @size;
         margin: 10px auto @std-padding;
         text-align: center;
         font-size: 20px;
         font-weight: 100;
         color: @link-color;
-        line-height: 28px;
       }
     }
 
