@@ -26,7 +26,7 @@ var steps = {
 
 var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 'profileSaved', 'done'];
 
-var factory = function($timeout, $rootScope, $resource, $state) {
+var factory = function($timeout, $rootScope, $resource, $state, $analytics) {
 
   var OnboardingResource = $resource('/noo/user/:userId/onboarding', {userId: '@userId'});
 
@@ -53,7 +53,8 @@ var factory = function($timeout, $rootScope, $resource, $state) {
     canSkipSeedForm: function() {
       return !!this._status.can_skip_seed_form;
     },
-    markSeedCreated: function() {
+    markSeedCreated: function(type) {
+      this._track('Add Seed', {type: type});
       this._status.seed_created = true;
       this.goNext();
     },
@@ -97,6 +98,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       if (this.currentStep() === 'done' || $state.$current.name === steps[this.currentStep()].state)
         return;
 
+      this._track('Resume', {from: $state.$current.name, to: steps[this.currentStep()].state});
       this._goDelta(0);
     },
     goNext: function() {
@@ -110,6 +112,7 @@ var factory = function($timeout, $rootScope, $resource, $state) {
       this._go(next, delta != 0);
     },
     _go: function(name, update) {
+      this._track('Step: ' + name);
       this._status.step = name;
 
       if (update) {
@@ -126,6 +129,12 @@ var factory = function($timeout, $rootScope, $resource, $state) {
         params = {};
       }
       return $state.go(steps[name].state, params);
+    },
+    _track: function(name, params) {
+      $analytics.eventTrack('Onboarding: ' + name, _.merge({
+        user_id: this._user.id,
+        new_user: this._status.new_user
+      }, params));
     }
   });
 
