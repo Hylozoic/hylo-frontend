@@ -69,14 +69,14 @@
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled in a website yet.</span>
 	</span>
-	<div ng-repeat="websites in user.websitess" class="list-entry">{{websites}}</div>
+	<div ng-repeat="websites in user.websites" class="list-entry">{{websites}}</div>
 
 	<div class="section-header">Additional Information</div>
-	<span ng-if="!user.extraInfo">
+	<span ng-if="!user.extra_info">
 		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add anything else you want other people to know about you here.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
 	</span>
-	<div class="about-entry">{{user.extraInfo}}</div>
+	<div class="about-entry">{{user.extra_info}}</div>
 </div>
