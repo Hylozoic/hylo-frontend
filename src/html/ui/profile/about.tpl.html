@@ -1,7 +1,16 @@
 <div class="about">
-	<div class="section-header">What I am doing</div>
+	<div class="section-header visible-xs mobile-first">About me</div>
+	<span ng-if="!user.bio" class="visible-xs">
+		<a class="message">
+		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add a brief bio.</span>
+		</a>
+		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
+	</span>
+	<div class="about-entry visible-xs">{{user.bio}}</div>
+
+	<div class="section-header desktop-first">What I am doing</div>
 	<span ng-if="!user.work">
-		<a class="message" >
+		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
@@ -10,7 +19,7 @@
 
 	<div class="section-header">What I'd like to do</div>
 	<span ng-if="!user.intention">
-		<a class="message" >
+		<a class="message">
 		  <span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add what you are working on.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not filled anything in yet.</span>
@@ -18,8 +27,8 @@
 	<div class="about-entry">{{user.intention}}</div>
 
 	<div class="section-header">Skills I can share</div>
-	<span  ng-if="user.skills.length < 1">
-		<a class="message" >
+	<span ng-if="user.skills.length < 1">
+		<a class="message">
 			<span ng-if="editable" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add a skill.</span>
 		</a>
 		<span ng-if="!editable" class="message"> This member has not added any skills yet.</span>

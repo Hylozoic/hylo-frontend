@@ -40,13 +40,16 @@
   }
 
   .main-content {
-    @media (min-wdith: @screen-sm ) {margin-top: -3*@std-padding;}
     padding-bottom: 3*@std-padding;
   }
 
   .about {
     .make-sm-column(6);
     .make-sm-column-offset(3);
+
+    @media (min-width: @screen-sm) {
+      padding-left: @std-padding * 2;
+    }
 
     .section-header {
       color: @default-text;
