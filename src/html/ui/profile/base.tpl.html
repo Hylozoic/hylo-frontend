@@ -11,7 +11,7 @@
 
     <div class="info-column">
       <div class="title">
-        <span class="name">{{user.name | uppercase}}</span>
+        <span class="name">{{user.name}}</span>
         <span class="social-media">
           <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" ng-click="clickedSocialLink('twitter', twitterUrl())" target="_blank">
             <i class="icon-twitter"></i>
@@ -28,13 +28,14 @@
               <i class="icon-twitter"></i>
               <i class="icon-facebook"></i>
               <i class="icon-linkedin"></i>
-              &nbsp;&nbsp;Add social media links.
+              <span class="hidden-xs">&nbsp;&nbsp;Add social media links.</span>
           </a>
         </span>
       </div>
-      <div class="bio">
+      <div class="bio hidden-xs">
         <a class="message" ui-sref="editProfile" ng-if="isSelf && !user.bio">
-          <i class="icon-edit" title="icon-edit"></i> Add a bio.</a>
+          <i class="icon-edit" title="icon-edit"></i> Say a little bit about yourself.
+        </a>
         {{user.bio}}
       </div>
     </div>
@@ -43,11 +44,11 @@
 
 <div class="main-content">
   <div class="sidebar">
-    <div class="user-info-mobile">
-      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
-    </div>
     <div class="tabs">
       <a class="tab" ui-sref="." ng-class="{selected: $state.current.name === 'profile'}">
+        <h3><br />ABOUT</h3>
+      </a>
+      <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
         <h3>SEEDS PLANTED</h3>
         <div class="count">{{user.seed_count}}</div>
       </a>
@@ -61,11 +62,8 @@
         <div class="count">{{user.thank_count}}</div>
       </a>
     </div>
-    <div class="user-info">
-      <ng-include src="'/ui/profile/skills.tpl.html'"></ng-include>
-    </div>
   </div>
   <div class="tab-content" ui-view="tab">
-    <ng-include ng-if="$state.current.name === 'profile'" src="'/ui/profile/seeds.tpl.html'"></ng-include>
+    <ng-include ng-if="$state.current.name === 'profile'" src="'/ui/profile/about.tpl.html'"></ng-include>
   </div>
 </div>
