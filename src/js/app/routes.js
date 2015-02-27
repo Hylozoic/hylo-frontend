@@ -168,7 +168,7 @@ var profileStates = function(stateProvider) {
     resolve: {
       posts: /*@ngInject*/ function(user) {
         return user.seeds().$promise;
-      }]
+      }
     },
     views: {
       'tab': {
