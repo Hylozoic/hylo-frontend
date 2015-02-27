@@ -1,7 +1,7 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope) {
 
   $scope.onboarding = onboarding;
 
@@ -30,6 +30,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   };
 
   $scope.close = function() {
+    $rootScope.seedEditProgress = null;
     $state.go('community.seeds', {community: community.slug});
   };
 
@@ -123,6 +124,14 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     return UserMentions.userTextRaw(user);
   };
 
+  $scope.storeProgress = function() {
+    $rootScope.seedEditProgress = {
+      title: $scope.title,
+      description: $scope.description,
+      type: $scope.seedType
+    };
+  };
+
   if (seed) {
     $scope.editing = true;
     $scope.switchSeedType(seed.type);
@@ -136,6 +145,11 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     } else {
       $scope.description = format('<p>%s</p>', seed.description);
     }
+  } else if ($rootScope.seedEditProgress) {
+    $scope.switchSeedType($rootScope.seedEditProgress.type);
+    $scope.title = $rootScope.seedEditProgress.title;
+    $scope.description = $rootScope.seedEditProgress.description;
+
   } else {
     var defaultType = (onboarding ? 'offer' : 'intention');
     $scope.switchSeedType(defaultType);
