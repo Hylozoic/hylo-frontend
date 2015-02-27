@@ -33,6 +33,24 @@
   .footer {
     margin-top: @std-padding;
   }
+
+  .dot {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    border-radius: 22px;
+    border: 1px solid white;
+    margin-right: 5px;
+  }
+  .intention .dot {
+    background-color: @intention-color;
+  }
+  .offer .dot {
+    background-color: @offer-color;
+  }
+  .request .dot {
+    background-color: @request-color;
+  }
 }
 
 .onboarding-start {
@@ -73,26 +91,6 @@
       overflow: hidden;
     }
     overflow: hidden;
-  }
-}
-
-.onboarding-seeds {
-  .dot {
-    width: 23px;
-    height: 23px;
-    display: inline-block;
-    border-radius: 22px;
-    border: 1px solid white;
-    margin-right: 5px;
-  }
-  .intention .dot {
-    background-color: @intention-color;
-  }
-  .offer .dot {
-    background-color: @offer-color;
-  }
-  .request .dot {
-    background-color: @request-color;
   }
 }
 
