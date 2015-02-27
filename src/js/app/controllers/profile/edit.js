@@ -3,7 +3,8 @@ var filepickerUpload = require('../../services/filepickerUpload');
 var controller = function($scope, $analytics, currentUser, growl, onboarding) {
   var user = $scope.user = currentUser,
     editData = $scope.editData = _.pick(user, [
-      'bio', 'skills', 'organizations', 'avatar_url', 'banner_url',
+      'bio', 'work', 'intention', 'extra_info', 'avatar_url', 'banner_url',
+      'skills', 'organizations', 'phones', 'emails', 'websites',
       'twitter_name', 'linkedin_url', 'facebook_url'
     ]),
     edited = {},
