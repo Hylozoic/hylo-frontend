@@ -1,0 +1,176 @@
+/* Styles shared across main profile view & edit profile view */
+.profile, .editProfile {
+  .banner {
+    .make-row;
+    height: 38.2vh;
+    position: relative;
+
+    .background {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: -2;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .buttons {
+      position: absolute;
+      right: 0;
+      padding: @std-padding;
+      > a {
+        @media (min-width: @screen-sm) {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  .banner-content {
+    position: absolute;
+    bottom: 0;
+    @media (min-width: @screen-sm) {
+      bottom: 3*@std-padding;
+    }
+    width: 100%;
+  }
+
+  .avatar-column {
+    .make-sm-column(3);
+    text-align: center;
+
+    .avatar {
+      .user-avatar-lg;
+      position: relative;
+      margin: 0 auto;
+      @media (max-width: @screen-xs-max) {
+        .user-avatar();
+        position: relative;
+        top: 0;
+      }
+      border: 2px solid white;
+    }
+  }
+
+  .info-column {
+    .make-sm-column(6);
+    margin-top: 10px;
+
+    .name {
+      .large-header();
+      color: @hylo-white;
+      text-transform: capitalize;
+      font-size: 40px;
+      line-height: 1em;
+      @media (max-width: @screen-xs-max) {
+        font-size: 32px;
+      }
+    }
+
+    @media (min-width: @screen-sm) {
+      padding-left: 2*@std-padding;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      padding-bottom: @std-padding;
+
+      &, span, div {
+        text-align: center;
+      }
+    }
+
+    .bio {
+      .proxima-nova-regular;
+      font-size: 16px;
+      color: @nonactive-text;
+      line-height: 1.2;
+      padding-top: 10px;
+      @media (max-width: @screen-xs-max) {
+        .proxima-nova-regular;
+        padding-top: 0px;
+        font-size: 13px;
+        margin-bottom: 5px;
+        max-height: 46px;
+        overflow: hidden;
+        text-align: center;
+      }
+    }
+  }
+
+  .social-media {
+    @media (min-width: @screen-sm) {
+      margin-left: 10px;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      display: block;
+      padding-left: 4px;
+      padding-top: 6px;
+    }
+
+    > a, > i {
+      display: inline-block;
+      margin-left: 15px;
+      margin-right: 6px;
+      position: relative;
+      font-size: 16px;
+      color: white;
+      text-decoration: none;
+
+      &.message {
+        font-size: 13px;
+        color: @nonactive-text;
+        opacity: .7;
+
+        i {
+          color: @nonactive-text;
+          font-size: 18px;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        margin: 0 @std-padding/2;
+      }
+    }
+
+    i {
+      width: 21px;
+      height: 21px;
+      text-align: center;
+    }
+
+    .status {
+      position: absolute;
+      display: block;
+      top: -27px;
+      left: 0;
+      font-size: 10px;
+      border-radius: 11px;
+      border: 1px solid @border-lightest;
+      color: @text-medium-dark;
+      background-color: white;
+      line-height: 21px;
+      &.icon-big-check {
+        color: @hylo-teal;
+      }
+    }
+  }
+
+  .main-content {
+    .make-row;
+  }
+
+  //Shared style for message to fill in info
+  .message {
+    color: @nonactive-text;
+    font-style: italic;
+  }
+  a.message {
+    cursor: pointer;
+  }
+}

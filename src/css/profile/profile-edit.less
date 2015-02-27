@@ -1,0 +1,86 @@
+/* Styles and customizations for edit profile view only */
+
+.editProfile {
+
+  .banner div.buttons a {
+    .rounded-button;
+  }
+
+  .icon-edit-profile-photo {
+    width: 136px;
+    line-height: 130px;
+    color: white;
+    opacity: 0.8;
+    font-size: 38px;
+    padding-left: 3px;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  .banner {
+    .light-background-gradient;
+
+    .info-column .name, .social-media > i {
+      color: @default-text;
+    }
+  }
+
+  .cancel, .edit-banner {
+    .rounded-button;
+  }
+
+  .save {
+    .rounded-button-dark;
+  }
+
+  textarea {
+    .borderless-text-input;
+    color: @text-medium-dark;
+    height: 3em;
+    width: 100%;
+  }
+
+  .main-content {
+    padding-bottom: 3*@std-padding;
+  }
+
+  .about {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+
+    @media (min-width: @screen-sm) {
+      padding-left: @std-padding * 2;
+    }
+
+    .section-header {
+      color: @default-text;
+    }
+  }
+
+  //Customize Edit Profile for Mobile
+  @media (max-width: @screen-xs-max) {
+    .icon-edit-profile-photo {
+      width: 60px;
+      line-height: 52px;
+      font-size: 30px;
+    }
+
+    .banner {
+      height: auto;
+
+      .buttons {
+        padding: @std-padding 0;
+        text-align: center;
+        position: static;
+      }
+    }
+
+    .banner-content {
+      position: static;
+    }
+
+    .social-media {
+      margin-top: 32px;
+    }
+  }
+
+}

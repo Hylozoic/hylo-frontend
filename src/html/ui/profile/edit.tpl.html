@@ -3,7 +3,7 @@
   <div class="buttons">
     <a class="edit-banner" ng-click="changeBanner()">
       <i class="icon-add-background"></i>
-      Change Banner
+      Change Background
     </a>
     <a class="cancel" ng-click="cancel()">Cancel</a>
     <a class="save" ng-click="save()">Save</a>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="info-column">
-      <span class="name">{{user.name | uppercase}}</span>
+      <span class="name">{{user.name}}</span>
       <span class="social-media">
         <i class="icon-twitter" ng-click="changeTwitter()">
           <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
@@ -28,16 +28,24 @@
           <i class="status" ng-class="editData.linkedin_url ? 'icon-big-check' : 'icon-add-01'"></i>
         </i>
       </span>
-      <textarea ng-model="editData.bio" placeholder="Type here to add a short statement about yourself. Maximum 175 characters."></textarea>
     </div>
   </div>
 </div>
 
 <div class="main-content">
-  <div class="edit-skills">
-    <h3>Skills</h3>
+  <div class="about">
+    <div class="section-header">About me <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.bio" placeholder="Tell us about yourself by typing here..." maxlength="175"></textarea>
+
+    <div class="section-header">What I'm doing <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.work" placeholder="Tell us what you are working on by typing here..." maxlength="175"></textarea>
+
+    <div class="section-header">What I'd like to do <span class="helper-text">(175 characters max)</span></div>
+    <textarea ng-model="editData.intention" placeholder="Tell us about yourself by typing here..." maxlength="175"></textarea>
+
+    <div class="section-header">Skills I can share</div>
     <input type="text" maxlength="200"
-      placeholder="Type here to add a skill, then press enter."
+      placeholder="Add skills by typing here then pressing enter..."
       ng-keypress="add($event, 'skills')"/>
     <ul>
       <li ng-repeat="skill in editData.skills">
@@ -46,9 +54,9 @@
       </li>
     </ul>
 
-    <h3>Affiliations</h3>
+    <div class="section-header">Affiliations</div>
     <input type="text" maxlength="200"
-      placeholder="Type here to add an affiliation, then press enter."
+      placeholder="Add groups you are affiliated with by typing here then pressing enter..."
       ng-keypress="add($event, 'organizations')"/>
     <ul>
       <li ng-repeat="org in editData.organizations">
@@ -56,5 +64,39 @@
         <a class="close" ng-click="remove(org, 'organizations')">&times;</a>
       </li>
     </ul>
+
+    <div class="section-header">Phone</div>
+    <input type="text" maxlength="200"
+      placeholder="Add a phone number by typing here then pressing enter..."
+      ng-keypress="add($event, 'phones')"/>
+    <ul>
+      <li ng-repeat="phone in editData.phones">
+        {{phone}} <a class="close" ng-click="remove(phone, 'phones')">&times;</a>
+      </li>
+    </ul>
+
+    <div class="section-header">Email</div>
+    <input type="text" maxlength="200"
+      placeholder="Add a email address by typing here then pressing enter..."
+      ng-keypress="add($event, 'emails')"/>
+    <ul>
+      <li ng-repeat="email in editData.emails">
+        {{email}} <a class="close" ng-click="remove(email, 'emails')">&times;</a>
+      </li>
+    </ul>
+
+    <div class="section-header">Website</div>
+    <input type="text" maxlength="200"
+      placeholder="Add a website URL by typing here then pressing enter..."
+      ng-keypress="add($event, 'websites')"/>
+    <ul>
+      <li ng-repeat="website in editData.websites">
+        {{website}} <a class="close" ng-click="remove(website, 'websites')">&times;</a>
+      </li>
+    </ul>
+
+    <div class="section-header">Additional Information</div>
+    <textarea ng-model="editData.extra_info" placeholder="Is there anything else you would like to share with the other members of your community?" maxlength="1000"></textarea>
+
   </div>
 </div>
