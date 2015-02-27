@@ -101,11 +101,15 @@ module.exports = function(angularModule) {
           moderator: $scope.inviteAsModerator
         })
         .$promise.then(function(resp) {
+          $analytics.eventTrack('Invited Members', {email_addresses: $scope.emails});
+          if ($scope.inviteAsModerator)
+            $analytics.eventTrack('Make Moderators', {email_addresses: $scope.emails});
           $scope.inviteResults = resp.results;
           $scope.emails = '';
           $scope.submitting = false;
         }, function() {
           alert('Something went wrong. Please check the emails you entered for typos.');
+          $analytics.eventTrack('Inviting Members Failed', {email_addresses: $scope.emails});
           $scope.submitting = false;
         });
       };
@@ -120,11 +124,8 @@ module.exports = function(angularModule) {
       $scope.toggle = function(field) {
         console.log(field);
         if (community[field] === undefined) {
-          console.log('undefined');
           community[field] = false;
         }
-        console.dir(community);
-        console.log(community[field]);
         community[field] = !community[field];
       }
 
@@ -149,6 +150,7 @@ module.exports = function(angularModule) {
         $scope.selectedMember = null;
         community.addModerator({userId: item.id}, function() {
           $scope.moderators.push(item);
+          $analytics.eventTrack('Make Moderator', {user_id: item.id, user_name: item.name});
         })
       }
 
