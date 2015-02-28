@@ -1,4 +1,14 @@
-var removeTrailingSlash = require('../../src/js/app/services/removeTrailingSlash');
+var removeTrailingSlash;
+
+require('../../src/js/app/services/removeTrailingSlash')({
+  config: function(callback) {
+    callback({
+      rule: function(method) {
+        removeTrailingSlash = method;
+      }
+    })
+  }
+});
 
 // mock the $location service
 var location = function(path) {
