@@ -26,17 +26,14 @@
         <i class="icon-mail"></i>
       </a>
       <social-media user="user" page="'directory'"> </social-media>
-      <div class="skills">
+      <div class="bio" ng-if="user.bio">
+        <div class="full-column"> {{user.bio}}</div>
+      </div>
+      <div class="skills" ng-if="!user.bio && user.skills.length > 0">
         <div class="label-column">Skills</div>
         <div class="value">{{ ::truncate(user.skills) }}</div>
       </div>
-      <div class="affiliations">
-        <div class="label-column">Affiliations</div>
-        <div class="value">{{ ::truncate(user.organizations) }}</div>
-      </div>
-      {{user}}
     </div>
-    {{user}}
   </div>
 
   <div ng-if="users.length == 0" class="no-match">
