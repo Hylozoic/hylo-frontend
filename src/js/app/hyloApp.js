@@ -15,13 +15,10 @@ var app = angular.module('hyloApp', [
   'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
 ]);
 
+require('./routes')(app);
 require('./animations')(app);
-
-app.config(require('./routes'))
-.config(function ($urlRouterProvider) {
-  // remove trailing slashes from paths
-  $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
-});
+require('./services/removeTrailingSlash')(app);
+require('./services/myHttpInterceptor')(app);
 
 app.factory('$exceptionHandler', function ($log) {
   return function (exception, cause) {
@@ -43,51 +40,14 @@ app.factory('$exceptionHandler', function ($log) {
   };
 });
 
-app.config(function ($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
+app.config(function ($locationProvider, growlProvider, $idleProvider, $tooltipProvider) {
   $locationProvider.html5Mode(true);
   growlProvider.globalTimeToLive(5000);
 
   $idleProvider.idleDuration(45); // in seconds
   $idleProvider.warningDuration(1); // in seconds
 
-  // Disable bootstrap UI animations
-  $tooltipProvider.options({
-    animation: true
-  });
-
-  $provide.factory('myHttpInterceptor', function ($q, $log, $window, growl) {
-    return {
-      'requestError': function(rejection) {
-        return $q.reject(rejection);
-      },
-
-      'responseError': function(rejection) {
-        var requestTo = rejection.config ? rejection.config.url : "N/A";
-        if (rejection.status == 403) {
-          Rollbar.error("403: " + rejection.config.url);
-          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (403)", {ttl: 5000});
-        } else if (rejection.status == 500) {
-          if (!hyloEnv.isProd) {
-            if (rejection.headers()['content-type'] === "text/html") {
-              $("body").html(rejection.data);
-            } else {
-              growl.addErrorMessage("DEBUG: 500 Internal Server Error.\nRoute: " + rejection.config.url, {ttl: 15000});
-            }
-            console.log(rejection, rejection.data);
-          } else {
-            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (500)", {ttl: 5000});
-          }
-        } else if (rejection.status == 404) {
-          Rollbar.error("404: " + rejection.config.url);
-          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (404)", {ttl: 5000});
-        }
-        return $q.reject(rejection);
-      }
-    };
-  });
-
-  $httpProvider.interceptors.push('myHttpInterceptor');
-
+  $tooltipProvider.options({animation: true});
 });
 
 app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {

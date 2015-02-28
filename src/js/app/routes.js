@@ -1,4 +1,4 @@
-var communityStates = function(stateProvider) {
+var communityStates = function (stateProvider) {
   stateProvider
   .state('community', {
     abstract: true,
@@ -139,7 +139,7 @@ var communityStates = function(stateProvider) {
 
 };
 
-var profileStates = function(stateProvider) {
+var profileStates = function (stateProvider) {
   stateProvider
   .state('profile', {
     parent: 'main',
@@ -217,7 +217,7 @@ var profileStates = function(stateProvider) {
   });
 };
 
-var onboardingStates = function(stateProvider) {
+var onboardingStates = function (stateProvider) {
   stateProvider
   .state('onboarding', {
     abstract: true,
@@ -263,8 +263,7 @@ var onboardingStates = function(stateProvider) {
   });
 };
 
-var dependencies = ['$stateProvider', '$urlRouterProvider'];
-dependencies.push(function($stateProvider, $urlRouterProvider) {
+var routes = function ($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise(function($injector, $location){
     var state = $injector.get('$state');
@@ -349,6 +348,8 @@ dependencies.push(function($stateProvider, $urlRouterProvider) {
     profileStates($stateProvider);
     onboardingStates($stateProvider);
 
-});
+};
 
-module.exports = dependencies;
+module.exports = function (angularModule) {
+  angularModule.config(routes);
+};
