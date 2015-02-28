@@ -22,6 +22,10 @@
     <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
     <div class="member-info">
       <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
+      <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">
+        <i class="icon-mail"></i>
+      </a>
+      <social-media user="user" page="'directory'"> </social-media>
       <div class="skills">
         <div class="label-column">Skills</div>
         <div class="value">{{ ::truncate(user.skills) }}</div>
@@ -32,6 +36,7 @@
       </div>
       {{user}}
     </div>
+    {{user}}
   </div>
 
   <div ng-if="users.length == 0" class="no-match">

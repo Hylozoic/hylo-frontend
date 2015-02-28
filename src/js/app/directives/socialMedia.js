@@ -2,6 +2,8 @@ var directive = function($analytics) {
 
   var controller = function($scope, $element) {
 
+    console.dir($scope);
+
     $scope.twitterUrl = function() {
       return 'https://twitter.com/' + $scope.user.twitter_name;
     };
