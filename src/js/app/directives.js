@@ -2,7 +2,6 @@ var angularModule = angular.module('hyloDirectives', ['ngResource', 'hyloFilters
 
 require('./directives/contenteditable')(angularModule);
 require('./directives/hylo_post')(angularModule);
-require('./directives/socialMedia')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {
