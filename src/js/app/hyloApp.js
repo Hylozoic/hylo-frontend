@@ -71,7 +71,6 @@ app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window,
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     MenuService.setMenuState(false, false);
-    guiders.hideAll();
   });
 
   // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
