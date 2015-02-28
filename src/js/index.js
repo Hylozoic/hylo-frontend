@@ -34,14 +34,9 @@ require('gsap/src/uncompressed/plugins/CSSPlugin');
 require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');
-require('./jquery/guiders');
 require('./jquery/draggable-background');
 
 require('./app/hyloApp');
-
-// FIXME: the code that depends upon the existence of this global
-// should be rewritten
-window.guiders = $.guiders;
 
 filepicker.setKey(hyloEnv.filepicker.key);
 
