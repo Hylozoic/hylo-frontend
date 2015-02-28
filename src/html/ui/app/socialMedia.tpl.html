@@ -8,4 +8,7 @@
   <a ng-href="{{user.linkedin_url}}" ng-if="user.linkedin_url" ng-click="clickedSocialLink('linkedin', user.linkedin_url)" target="_blank">
     <i class="icon-linkedin"></i>
   </a>
+  <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">
+    <i class="icon-mail"></i>
+  </a>
 </span>

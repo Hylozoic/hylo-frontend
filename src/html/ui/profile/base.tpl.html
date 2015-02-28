@@ -12,16 +12,13 @@
     <div class="info-column">
       <div class="title">
         <span class="name">{{user.name}}</span>
-        <div class="member-links">
-          <social-media user="user" page="'members'"> </social-media>
-          <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()"><i class="icon-mail"></i></a>
-          <a class="message social-media-msg" ui-sref="editProfile" ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
-            <i class="icon-twitter"></i>
-            <i class="icon-facebook"></i>
-            <i class="icon-linkedin"></i>
-            <span class="hidden-xs">&nbsp;&nbsp;Add social media links.</span>
+        <social-media user="user" page="'members'"> </social-media>
+        <a class="message social-media-msg" ui-sref="editProfile" ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
+          <i class="icon-twitter"></i>
+          <i class="icon-facebook"></i>
+          <i class="icon-linkedin"></i>
+          <span class="hidden-xs">&nbsp;&nbsp;Add social media links.</span>
           </a>
-        </div>
       </div>
       <div class="bio hidden-xs">
         <a class="message" ui-sref="editProfile" ng-if="isSelf && !user.bio">

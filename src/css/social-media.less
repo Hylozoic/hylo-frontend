@@ -3,6 +3,7 @@
   @media (max-width: @screen-xs-max) {
     padding-left: 4px;
     padding-top: 6px;
+    display: block;
   }
 
   > a, > i {
@@ -11,14 +12,18 @@
     font-size: @social-media-icon-size;
     color: white;
     text-decoration: none;
-    margin-right: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+    max-width: 21px;
+
+    @media (max-width: @screen-xs-max) {
+      margin-right: 7px;
+      margin-right: 7px;
+    }
+
 
     @media (max-width: @screen-xs-max) {
       margin: 0 @std-padding/2;
-    }
-
-    &:first-child {
-      margin-left: @std-padding;
     }
   }
 
@@ -42,5 +47,21 @@
     &.icon-big-check {
       color: @hylo-teal;
     }
+  }
+}
+
+.send-message {
+  width: 21px;
+  margin-left: 0px;
+
+  i {
+    font-size: @social-media-icon-size+4;
+    color: @detail-text;
+    margin-left: @std-padding;
+    top: 3px;
+    position: relative;
+  }
+  &:hover, i:hover {
+    text-decoration: none;
   }
 }
