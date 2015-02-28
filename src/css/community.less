@@ -147,8 +147,26 @@
     .name {
       .medium-header;
       .remove-link-display;
+      font-size: 28px;
     }
-    .skills, .affiliations {
+    .social-media {
+      > a, > i {
+        color: @detail-text;
+        &:first-child {
+          margin-left: @std-padding;
+        }
+      }
+    }
+    .send-message {
+      i {
+        font-size: @social-media-icon-size+4;
+        color: @detail-text;
+        margin-left: @std-padding;
+        top: 3px;
+        position: relative;
+      }
+    }
+    .skills, .bio {
       .make-row;
       .seed-meta-text;
       .label-column {
