@@ -8,7 +8,6 @@ require('./onload');
 require('angular');
 require('angular-animate');
 require('angular-bootstrap-select');
-require('angular-elastic');
 require('angular-growl');
 require('angular-http-auth');
 require('angular-route');
