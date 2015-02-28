@@ -10,7 +10,7 @@ var app = angular.module('hyloApp', [
   'ngRoute', 'ngResource', 'ngAnimate', 'ngSanitize', 'ngIdle',
   'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
-  'ui.bootstrap', 'decipher.tags', 'monospaced.elastic', 'angular-bootstrap-select',
+  'ui.bootstrap', 'decipher.tags', 'angular-bootstrap-select',
   'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io',
   'hylo.createCommunity', "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
 ]);
