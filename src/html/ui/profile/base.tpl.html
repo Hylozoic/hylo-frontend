@@ -12,25 +12,14 @@
     <div class="info-column">
       <div class="title">
         <span class="name">{{user.name}}</span>
-        <span class="social-media">
-          <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" ng-click="clickedSocialLink('twitter', twitterUrl())" target="_blank">
-            <i class="icon-twitter"></i>
-          </a>
-          <a ng-href="{{user.facebook_url}}" ng-if="user.facebook_url" ng-click="clickedSocialLink('facebook', user.facebook_url)" target="_blank">
-            <i class="icon-facebook"></i>
-          </a>
-          <a ng-href="{{user.linkedin_url}}" ng-if="user.linkedin_url" ng-click="clickedSocialLink('linkedin', user.linkedin_url)" target="_blank">
-            <i class="icon-linkedin"></i>
-          </a>
-          <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()"><i class="icon-mail"></i></a>
-          <a class="message" ui-sref="editProfile"
-            ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
-              <i class="icon-twitter"></i>
-              <i class="icon-facebook"></i>
-              <i class="icon-linkedin"></i>
-              <span class="hidden-xs">&nbsp;&nbsp;Add social media links.</span>
-          </a>
-        </span>
+        <social-media> </social-media>
+        <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()"><i class="icon-mail"></i></a>
+        <a class="message social-media-msg" ui-sref="editProfile" ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
+          <i class="icon-twitter"></i>
+          <i class="icon-facebook"></i>
+          <i class="icon-linkedin"></i>
+          <span class="hidden-xs">&nbsp;&nbsp;Add social media links.</span>
+        </a>
       </div>
       <div class="bio hidden-xs">
         <a class="message" ui-sref="editProfile" ng-if="isSelf && !user.bio">
