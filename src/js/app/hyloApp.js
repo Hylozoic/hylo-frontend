@@ -18,12 +18,12 @@ var app = angular.module('hyloApp', [
 require('./animations')(app);
 
 app.config(require('./routes'))
-.config(['$urlRouterProvider', function($urlRouterProvider) {
+.config(function ($urlRouterProvider) {
   // remove trailing slashes from paths
   $urlRouterProvider.rule(require('./services/removeTrailingSlash'));
-}]);
+});
 
-app.factory('$exceptionHandler', ['$log', function ($log) {
+app.factory('$exceptionHandler', function ($log) {
   return function (exception, cause) {
     // Pass off the error to the default error handler
     // on the AngularJS logger. This will output the
@@ -41,94 +41,92 @@ app.factory('$exceptionHandler', ['$log', function ($log) {
       }
     }
   };
-}]);
+});
 
-app.config(['$locationProvider', 'growlProvider', '$httpProvider', '$provide', '$idleProvider', '$tooltipProvider',
-  function($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
-    $locationProvider.html5Mode(true);
-    growlProvider.globalTimeToLive(5000);
+app.config(function ($locationProvider, growlProvider, $httpProvider, $provide, $idleProvider, $tooltipProvider) {
+  $locationProvider.html5Mode(true);
+  growlProvider.globalTimeToLive(5000);
 
-    $idleProvider.idleDuration(45); // in seconds
-    $idleProvider.warningDuration(1); // in seconds
+  $idleProvider.idleDuration(45); // in seconds
+  $idleProvider.warningDuration(1); // in seconds
 
-    // Disable bootstrap UI animations
-    $tooltipProvider.options({
-      animation: true
-    });
+  // Disable bootstrap UI animations
+  $tooltipProvider.options({
+    animation: true
+  });
 
-    $provide.factory('myHttpInterceptor', ['$q', '$log', '$window', 'growl', function($q, $log, $window, growl) {
-      return {
-        'requestError': function(rejection) {
-          return $q.reject(rejection);
-        },
+  $provide.factory('myHttpInterceptor', function ($q, $log, $window, growl) {
+    return {
+      'requestError': function(rejection) {
+        return $q.reject(rejection);
+      },
 
-        'responseError': function(rejection) {
-          var requestTo = rejection.config ? rejection.config.url : "N/A";
-          if (rejection.status == 403) {
-            Rollbar.error("403: " + rejection.config.url);
-            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (403)", {ttl: 5000});
-          } else if (rejection.status == 500) {
-            if (!hyloEnv.isProd) {
-              if (rejection.headers()['content-type'] === "text/html") {
-                $("body").html(rejection.data);
-              } else {
-                growl.addErrorMessage("DEBUG: 500 Internal Server Error.\nRoute: " + rejection.config.url, {ttl: 15000});
-              }
-              console.log(rejection, rejection.data);
+      'responseError': function(rejection) {
+        var requestTo = rejection.config ? rejection.config.url : "N/A";
+        if (rejection.status == 403) {
+          Rollbar.error("403: " + rejection.config.url);
+          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (403)", {ttl: 5000});
+        } else if (rejection.status == 500) {
+          if (!hyloEnv.isProd) {
+            if (rejection.headers()['content-type'] === "text/html") {
+              $("body").html(rejection.data);
             } else {
-              growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (500)", {ttl: 5000});
+              growl.addErrorMessage("DEBUG: 500 Internal Server Error.\nRoute: " + rejection.config.url, {ttl: 15000});
             }
-          } else if (rejection.status == 404) {
-            Rollbar.error("404: " + rejection.config.url);
-            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (404)", {ttl: 5000});
+            console.log(rejection, rejection.data);
+          } else {
+            growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (500)", {ttl: 5000});
           }
-          return $q.reject(rejection);
+        } else if (rejection.status == 404) {
+          Rollbar.error("404: " + rejection.config.url);
+          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (404)", {ttl: 5000});
         }
-      };
-    }]);
-
-    $httpProvider.interceptors.push('myHttpInterceptor');
-
-  }]);
-
-app.run(['$rootScope', '$q', '$state', '$stateParams', 'Community', '$log', '$window', 'growl', 'MenuService', '$bodyClass',
-  function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
-
-    $rootScope.$on('$stateChangeError',
-      function(event, toState, toParams, fromState, fromParams, error) {
-        if (!hyloEnv.isProd) {
-          console.error("$stateChangeError", event, toState, toParams, fromState, fromParams, error);
-        } else {
-          Rollbar.error("$stateChangeError", {
-            toState: toState,
-            toParams: toParams,
-            fromState: fromState,
-            fromParams: fromParams,
-            error: error
-          });
-          growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (SCE)", {ttl: 5000});
-        }
+        return $q.reject(rejection);
       }
-    );
+    };
+  });
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      MenuService.setMenuState(false, false);
-      guiders.hideAll();
-    });
+  $httpProvider.interceptors.push('myHttpInterceptor');
 
-    // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
-    // TODO change to a Service method.
-    $rootScope.navigated = false;
-    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-      if (from.name) { $rootScope.navigated = true; }
+});
 
-      if (!$rootScope.community) {
-        $rootScope.community = Community.default();
+app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
+
+  $rootScope.$on('$stateChangeError',
+    function(event, toState, toParams, fromState, fromParams, error) {
+      if (!hyloEnv.isProd) {
+        console.error("$stateChangeError", event, toState, toParams, fromState, fromParams, error);
+      } else {
+        Rollbar.error("$stateChangeError", {
+          toState: toState,
+          toParams: toParams,
+          fromState: fromState,
+          fromParams: fromParams,
+          error: error
+        });
+        growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (SCE)", {ttl: 5000});
       }
-    });
+    }
+  );
 
-    // Set a variable so we can watch for param changes
-    $rootScope.$state = $state;
-    $rootScope.$bodyClass = $bodyClass;
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    MenuService.setMenuState(false, false);
+    guiders.hideAll();
+  });
 
-  }]);
+  // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
+  // TODO change to a Service method.
+  $rootScope.navigated = false;
+  $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+    if (from.name) { $rootScope.navigated = true; }
+
+    if (!$rootScope.community) {
+      $rootScope.community = Community.default();
+    }
+  });
+
+  // Set a variable so we can watch for param changes
+  $rootScope.$state = $state;
+  $rootScope.$bodyClass = $bodyClass;
+
+});
