@@ -9,13 +9,6 @@ var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
     user.banner_url = require('../services/defaultUserBanner');
   }
 
-  $scope.twitterUrl = function() {
-    return 'https://twitter.com/' + user.twitter_name;
-  };
-
-  $scope.clickedSocialLink = function(network, url) {
-    $analytics.eventTrack('Member Profiles: Clicked a Social Media link', {'network': network, 'url': url});
-  };
 
   $scope.trackEmail = function() {
     $analytics.eventTrack('Member Profiles: Clicked Email Button', {user_id: $scope.user.id});
