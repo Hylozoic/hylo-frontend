@@ -50,7 +50,9 @@ app.config(function ($locationProvider, growlProvider, $idleProvider, $tooltipPr
   $tooltipProvider.options({animation: true});
 });
 
-app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass) {
+app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass, clickthroughTracker) {
+
+  clickthroughTracker.track(location);
 
   $rootScope.$on('$stateChangeError',
     function(event, toState, toParams, fromState, fromParams, error) {
