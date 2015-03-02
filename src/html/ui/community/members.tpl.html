@@ -22,7 +22,12 @@
     <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
     <div class="member-info">
       <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
-      <social-media user="user" page="'directory'"> </social-media>
+      <div class="member-links">
+        <social-media user="user" page="'directory'"> </social-media>
+        <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">
+          <i class="icon-mail"></i>
+        </a>
+      </div>
       <div class="bio" ng-if="user.bio">
         <div class="full-column"> {{user.bio}}</div>
       </div>
