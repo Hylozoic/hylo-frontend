@@ -7,11 +7,9 @@ var directive = function($analytics) {
     };
 
     $scope.hasSocialMediaLink = function() {
-      var found = false;
       if ($scope.user.twitter_name || $scope.user.linkedin_url || $scope.user.facebook_url)
-        found = true;
-      if (found)  console.log('has link');
-      return found;
+        return true;
+      return false;
     }
 
     $scope.clickedSocialLink = function(network, url) {
@@ -23,7 +21,8 @@ var directive = function($analytics) {
     restrict: 'E',
     scope: {
       user: '=',
-      page: '='
+      page: '=',
+      isSelf: '='
     },
     templateUrl: "/ui/app/socialMedia.tpl.html",
     controller: controller
