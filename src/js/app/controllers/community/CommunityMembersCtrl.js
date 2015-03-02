@@ -2,6 +2,7 @@ var truncate = require('html-truncate');
 
 var directive = function($scope, $timeout, $analytics, community) {
   $scope.community = community;
+  console.log("members");
 
   var queryFn = function(initial) {
     $scope.searching = true;
