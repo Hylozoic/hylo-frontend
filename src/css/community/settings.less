@@ -23,59 +23,6 @@
     }
   }
 
-  .invite {
-    label[for="inviteAsModerator"] {
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 32px;
-      margin: 0 0 0 5px;
-      display: inline-block;
-      vertical-align: top;
-    }
-    .right {
-      text-align: right;
-      top: 12px;
-    }
-    button {
-      .rounded-button;
-    }
-    input[type="text"] {
-      .seed-body-text;
-      line-height: 30px;
-      &.placeholding { font-style: italic; }
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    textarea {
-      margin-bottom: 10px;
-      height: 180px;
-      @media (max-width: @screen-xs-max) {
-        height: 40vh;
-      }
-    }
-    .note {
-      .seed-meta-text;
-      margin-top: @std-padding;
-      text-align: center;
-      a {
-        text-decoration: underline;
-      }
-    }
-    .results {
-      h3 {
-        .seed-title-text;
-      }
-      td {
-        padding-right: @std-padding * 2;
-        .seed-body-text;
-        &.error {
-          color: @error-color;
-        }
-      }
-    }
-  }
-
   .appearance {
     label {
       .seed-title-text;
@@ -153,12 +100,6 @@
       margin-right: auto;
       margin-bottom: 10px;
       background-size: cover;
-    }
-  }
-
-  div.set-invite-permissions {
-    div * {
-      color:@nonactive-text;
     }
   }
 

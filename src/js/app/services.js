@@ -83,4 +83,5 @@ require('./services/community')(angularModule);
 require('./services/bodyClass').service(angularModule);
 require('./services/onboarding')(angularModule);
 require('./services/clickthroughTracker')(angularModule);
+require('./services/history')(angularModule);
 require('./services/popupDone');

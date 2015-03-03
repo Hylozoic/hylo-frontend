@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+  <div class="navbar-header">
+    <i class="icon-hylo-script" ng-click="close()"></i>
+  </div>
+  <div class="navbar-center" href="#">INVITE MEMBERS</div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
+
+<div class="main-content">
+  <div class="all-sections">
+
+    <div class="section invite">
+      <div class="setting-item">
+        <div class="full-column">
+          <label>Subject</label>
+          <input type="text" class="form-control" ng-model="invitationSubject"/>
+          <label>Message</label>
+          <textarea class="form-control" ng-model="invitationText"></textarea>
+
+          <label>Recipients</label>
+          <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+        </div>
+        <div class="main-column">
+          <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>
+          <label for="inviteAsModerator">Invite recipients to be moderators</label>
+        </div>
+        <div class="side-column">
+          <button type="button" ng-click="invite()">
+            <span ng-show="submitting">
+              Sending...
+            </span>
+            <span ng-hide="submitting">
+              Send Invite
+            </span>
+          </button>
+        </div>
+
+        <div ng-show="inviteResults" class="results full-column">
+          <h3>Results</h3>
+          <table>
+            <tr ng-repeat="result in inviteResults">
+              <td>{{result.email}}</td>
+              <td class="status" ng-class="{error: result.error}">
+                {{result.error ? result.error : "invitation sent!"}}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="full-column note">
+          If you would like to invite many people at once, please
+          <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
