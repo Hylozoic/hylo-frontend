@@ -78,6 +78,15 @@ var communityStates = function (stateProvider) {
       }
     }
   })
+  .state('community.invite', {
+    url: '/invite',
+    views: {
+      community: {
+        templateUrl: '/ui/community/invite.tpl.html',
+        controller: 'CommunityInviteCtrl'
+      }
+    }
+  })
   .state('community.newSeed', {
     url: '/new-seed',
     views: {

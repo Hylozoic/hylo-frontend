@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="toolbar-left">
-        <a class="invite" ui-sref="community.settings({community: community.slug})" ng-if="community.canModerate">
+        <a class="invite" ui-sref="community.invite({community: community.slug})" ng-if="canInvite">
           <i class="icon-add-01"></i>
           <span class="hidden-xs">Invite Members</span>
         </a>
