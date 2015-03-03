@@ -20,6 +20,7 @@ var directive = function($analytics) {
 
   return {
     restrict: 'E',
+    replace: true,
     scope: {
       user: '=',
       page: '=',
