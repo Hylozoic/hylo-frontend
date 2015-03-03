@@ -6,7 +6,11 @@ var service = function ($analytics) {
       var params = qs.parse(location.search.replace(/^\?/, ''));
       if (!params.ctt) return;
 
-      $analytics.eventTrack('Clickthrough', {type: params.ctt, id: params.cti});
+      $analytics.eventTrack('Clickthrough', {
+        path: location.pathname,
+        type: params.ctt,
+        id: params.cti
+      });
 
       // remove the params to prevent double-counting events on page reload
       var newUrl = location.pathname,
