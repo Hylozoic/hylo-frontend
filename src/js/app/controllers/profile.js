@@ -9,11 +9,6 @@ var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
     user.banner_url = require('../services/defaultUserBanner');
   }
 
-
-  $scope.trackEmail = function() {
-    $analytics.eventTrack('Member Profiles: Clicked Email Button', {user_id: $scope.user.id});
-  };
-
   if (isSelf && onboarding) {
     var step = onboarding.currentStep();
     if (_.include(['profile', 'profileSaved'], step)) {

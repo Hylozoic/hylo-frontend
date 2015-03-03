@@ -1,19 +1,20 @@
 var directive = function($analytics) {
 
   var controller = function($scope, $element) {
-
     $scope.twitterUrl = function() {
       return 'https://twitter.com/' + $scope.user.twitter_name;
     };
 
     $scope.hasSocialMediaLink = function() {
-      if ($scope.user.twitter_name || $scope.user.linkedin_url || $scope.user.facebook_url)
-        return true;
-      return false;
-    }
+      return $scope.user.twitter_name || $scope.user.linkedin_url || $scope.user.facebook_url;
+    };
 
     $scope.clickedSocialLink = function(network, url) {
-      $analytics.eventTrack('Clicked a Social Media link', {'network': network, 'url': url, 'page': $scope.page});
+      $analytics.eventTrack('Clicked a Social Media link', {network: network, url: url, page: $scope.page});
+    };
+
+    $scope.trackEmail = function() {
+      $analytics.eventTrack('Clicked Email Button', {user_id: $scope.user.id, page: $scope.page});
     };
   };
 
