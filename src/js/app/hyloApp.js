@@ -50,7 +50,7 @@ app.config(function ($locationProvider, growlProvider, $idleProvider, $tooltipPr
   $tooltipProvider.options({animation: true});
 });
 
-app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window, growl, MenuService, $bodyClass, clickthroughTracker) {
+app.run(function($rootScope, $state, Community, growl, MenuService, $bodyClass, clickthroughTracker) {
 
   clickthroughTracker.track(location);
 
@@ -75,12 +75,7 @@ app.run(function($rootScope, $q, $state, $stateParams, Community, $log, $window,
     MenuService.setMenuState(false, false);
   });
 
-  // Determines if we came into a page from within the app, or directly from the URL.  Useful for back button logic.
-  // TODO change to a Service method.
-  $rootScope.navigated = false;
   $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-    if (from.name) { $rootScope.navigated = true; }
-
     if (!$rootScope.community) {
       $rootScope.community = Community.default();
     }

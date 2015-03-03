@@ -216,8 +216,7 @@ angular.module("hylo.createCommunity", [])
       }
 
     }])
-    .controller("CreateCommunityCtrl", ["$scope", '$timeout', '$analytics', '$state', '$log', 'CreateCommunityResource', 'CreateCommunityService', '$analytics',
-      function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $analytics) {
+    .controller("CreateCommunityCtrl", function ($scope, $timeout, $analytics, $state, $log, CreateCommunityResource, CreateCommunityService, $analytics, $history) {
 
         $scope.state = CreateCommunityService.getNewState(false);
 
@@ -237,10 +236,10 @@ angular.module("hylo.createCommunity", [])
         };
 
         $scope.cancel = function cancelCreate() {
-          if ($scope.navigated) { // If the rootscope 'navigated' boolean is true, then just go back TODO change to Service method
-            history.back();
-          } else { // Otherwise, go home
-            $state.go('home')
+          if ($history.isEmpty()) {
+            $state.go('home');
+          } else {
+            $history.back();
           }
         };
 
@@ -261,7 +260,7 @@ angular.module("hylo.createCommunity", [])
         }
 
       }
-    ])
+    )
 
     .factory("CreateCommunityResource", ["$resource",
       function($resource) {
