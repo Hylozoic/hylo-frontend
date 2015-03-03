@@ -112,8 +112,10 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
     } else {
       FB.login(function() {
         FB.api('/me', function(resp) {
-          editData.facebook_url = resp.link;
-          $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Facebook'});
+          $scope.$apply(function() {
+            editData.facebook_url = resp.link;
+            $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Facebook'});
+          });
         })
       })
     }
