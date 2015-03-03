@@ -28,6 +28,11 @@
             Request
         </label>
       </div>
+      <div class="description">
+        <span ng-if="seedType==='intention'">Intention: Something you’d like to create, and are looking for others to join you in.</span>
+        <span ng-if="seedType==='offer'">Offer: Something you have, (an idea, a skill, a resource, or an opportunity) that you’d like to share.</span>
+        <span ng-if="seedType==='request'">Request: Something (information, a skill, or a resource) that you are looking for.</span>
+      </div>
     </div>
 
     <div class="edit-content">

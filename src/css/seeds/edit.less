@@ -51,6 +51,11 @@
 			    .round-radio;
 			}
 		}
+
+		.description {
+			text-align: center;
+			font-style: italic;
+		}
 	}
 
 	.edit-content {
@@ -95,13 +100,13 @@
 
 			a {
 				line-height: @default-button-height;
-				.remove-link-display(@nonactive-text);
+				color: @default-text;
+
 				@media (max-width: @screen-xs-max) {
   				color: @default-text;
   			}
 				&:hover {
 					cursor: pointer;
-					color: @default-text;
 				}
 
 				i {
