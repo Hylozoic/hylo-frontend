@@ -1,5 +1,6 @@
 /* Styles shared across main profile view & edit profile view */
 .profile, .editProfile {
+
   .banner {
     .make-row;
     height: 38.2vh;
@@ -19,15 +20,16 @@
       position: absolute;
       right: 0;
       padding: @std-padding;
+      @media (max-width: @screen-xs-max) {
+        padding-top: 5px;
+      }
+
       > a {
+        .rounded-button;
         @media (min-width: @screen-sm) {
           margin-left: 5px;
+          .rounded-button-clear;
         }
-      }
-    }
-    .social-media {
-      @media (min-width: @screen-sm) {
-        margin-left: 10px;
       }
     }
   }
@@ -72,7 +74,7 @@
         font-size: 32px;
         padding-right: 0;
       }
-      padding-right: @std-padding;
+      padding-right: 30px;
     }
 
     @media (min-width: @screen-sm) {

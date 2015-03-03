@@ -13,10 +13,7 @@
       <div class="title">
         <span class="name">{{user.name}}</span>
         <div class="member-links">
-          <social-media user="user" page="'members'"> </social-media>
-          <a class="send-message" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">
-            <i class="icon-mail"></i>
-          </a>
+          <social-media user="user" page="'profile'" is-self="isSelf"></social-media>
           <a class="message social-media-msg hidden-xs" ui-sref="editProfile" ng-if="isSelf && !(user.twitter_name || user.facebook_url || user.linkedin_url)">
             <i class="icon-twitter"></i>
             <i class="icon-facebook"></i>
