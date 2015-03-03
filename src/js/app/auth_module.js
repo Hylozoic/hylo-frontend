@@ -10,7 +10,7 @@ angular.module('hylo-auth-module', ['http-auth-interceptor'])
 
       $scope.$on('event:auth-loginRequired', function() {
         $timeout(function() {
-          window.location.replace("/login");
+          window.location.replace("/login?next=" + location.pathname);
         }, 3000);
 
         $scope.loggedIn = false;

@@ -9,9 +9,11 @@ var interceptor = function ($httpProvider, $provide) {
       },
 
       responseError: function(rejection) {
-        Rollbar.error(format('%s: %s', rejection.status, rejection.config.url));
-        var message = format('Oops! An error occurred. The Hylo team has been notified. (%s)', rejection.status);
-        growl.addErrorMessage(message, {ttl: 5000});
+        if (_.include([403, 500], rejection.status)) {
+          Rollbar.error(format('%s: %s', rejection.status, rejection.config.url));
+          var message = format('Oops! An error occurred. The Hylo team has been notified. (%s)', rejection.status);
+          growl.addErrorMessage(message, {ttl: 5000});
+        }
         return $q.reject(rejection);
       }
     };
