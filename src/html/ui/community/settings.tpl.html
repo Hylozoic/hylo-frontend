@@ -1,5 +1,4 @@
 <nav class="navbar navbar-default navbar-hylo-create" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <i class="icon-hylo-script" ng-click="close()"></i>
   </div>
@@ -63,15 +62,13 @@
           <button type="button" ng-click="changeBanner()">Change</button>
         </div>
       </div>
-      <div class="setting-item set-invite-permissions">
+      <div class="setting-item invitation-permissions">
         <div class="main-column">
-          <label>Who can invite others?</label>
-          <p>Coming soon! Check to allow anyone to invite new members to your community.</p>
+          <label>Allow everyone to invite new members</label>
+          <p>If this is disabled, only moderators may send invitations to new members.</p>
         </div>
         <div class="side-column value">
-          <span ng-if="community[anyone_can_invite]">Anyone&nbsp;</span>
-          <span ng-if="!community[anyone_can_invite]">Only moderators&nbsp;</span>
-          <input type="checkbox" ng-model="community[anyone_can_invite]" disabled="true" ng-click="toggle('anyone_can_invite')"/>
+          <input type="checkbox" ng-model="community.settings.all_can_invite" ng-click="saveSetting('all_can_invite')"/>
         </div>
       </div>
     </div>
