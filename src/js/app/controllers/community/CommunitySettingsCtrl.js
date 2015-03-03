@@ -42,6 +42,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
 
   var imageChangeFn = function(opts) {
     return function() {
+      $scope.editing[opts.fieldName] = true;
       filepickerUpload({
         path: opts.path,
         convert: opts.convert,
@@ -50,6 +51,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
           data[opts.fieldName] = url;
           community.update(data, function() {
             community[opts.fieldName] = url;
+            $scope.editing[opts.fieldName] = false;
             $analytics.eventTrack('Community: Changed ' + opts.humanName, {
               community_id: community.slug,
               moderator_id: currentUser.id
@@ -57,6 +59,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
           });
         },
         failure: function(error) {
+          $scope.editing[opts.fieldName] = false;
           growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
           $analytics.eventTrack('Community: Failed to Change ' + opts.humanName, {
             community_id: community.slug,
