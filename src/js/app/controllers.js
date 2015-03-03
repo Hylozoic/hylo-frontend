@@ -20,6 +20,7 @@ require('./controllers/community/CommunitySettingsCtrl')(angularModule);
 require('./controllers/community/CommunityAboutCtrl')(angularModule);
 require('./controllers/community/CommunitySeedsCtrl')(angularModule);
 require('./controllers/community/CommunityMembersCtrl')(angularModule);
+require('./controllers/community/CommunityInviteCtrl')(angularModule);
 
 require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);

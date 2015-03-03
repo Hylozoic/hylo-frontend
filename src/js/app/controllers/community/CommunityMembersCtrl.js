@@ -1,7 +1,9 @@
 var truncate = require('html-truncate');
 
-var directive = function($scope, $timeout, $analytics, community) {
+var controller = function($scope, $timeout, $analytics, community) {
   $scope.community = community;
+
+  $scope.canInvite = community.canModerate || community.settings.all_can_invite;
 
   var queryFn = function(initial) {
     $scope.searching = true;
@@ -29,5 +31,5 @@ var directive = function($scope, $timeout, $analytics, community) {
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('CommunityMembersCtrl', directive);
+  angularModule.controller('CommunityMembersCtrl', controller);
 }
