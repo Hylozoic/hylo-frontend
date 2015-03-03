@@ -1,5 +1,4 @@
-var dependencies = ['$scope', 'growl', '$analytics', '$state', 'currentUser', 'Community'];
-dependencies.push(function($scope, growl, $analytics, $state, currentUser, Community) {
+var controller = function($scope, growl, $analytics, currentUser, Community, $history) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
@@ -8,7 +7,11 @@ dependencies.push(function($scope, growl, $analytics, $state, currentUser, Commu
   $analytics.eventTrack('User Settings: Viewed');
 
   $scope.close = function() {
-    $state.go('profile', {id: user.id});
+    if ($history.isEmpty()) {
+      $scope.$state.go('profile', {id: user.id});
+    } else {
+      $history.go(-1);
+    }
   };
 
   $scope.needsRevalidation = function() {
@@ -65,8 +68,8 @@ dependencies.push(function($scope, growl, $analytics, $state, currentUser, Commu
     });
   };
 
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.controller('UserSettingsCtrl', dependencies);
+  angularModule.controller('UserSettingsCtrl', controller);
 };
