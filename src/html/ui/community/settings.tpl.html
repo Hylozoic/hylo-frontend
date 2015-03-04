@@ -30,7 +30,7 @@
       </div>
       <div class="setting-item">
         <div class="main-column">
-          <label>Intention</label>
+          <label>Core Intention</label>
         </div>
         <div class="side-column value" ng-hide="editing.description">
           <p>{{community.description}}</p>
@@ -45,7 +45,7 @@
       <div class="setting-item">
         <div class="main-column">
           <label>Icon</label>
-          <p>This image appears next to your community's name. (Tip: Try a transparent PNG image.)</p>
+          <p class="help">This image appears next to your community's name. (Tip: Try a transparent PNG image.)</p>
         </div>
         <div class="side-column value">
           <div class="community-icon" back-img="community.avatar_url"></div>
@@ -58,7 +58,7 @@
       <div class="setting-item">
         <div class="main-column">
           <label>Banner</label>
-          <p>This image appears at the top of your community page. (Suggested size: 1400x500 pixels.)</p>
+          <p class="help">This image appears at the top of your community page. (Suggested size: 1400x500 pixels.)</p>
         </div>
         <div class="side-column value">
           <div class="community-banner" back-img="community.banner_url"></div>
@@ -71,7 +71,7 @@
       <div class="setting-item invitation-permissions">
         <div class="main-column">
           <label>Allow everyone to invite new members</label>
-          <p>If this is disabled, only moderators may send invitations to new members.</p>
+          <p class="help">If this is disabled, only moderators may send invitations to new members.</p>
         </div>
         <div class="side-column value">
           <input type="checkbox" ng-model="community.settings.all_can_invite" ng-click="saveSetting('all_can_invite')"/>
@@ -86,7 +86,11 @@
     <div class="section moderators" collapse="!expand3">
       <div class="setting-item">
         <div class="full-column">
-          <p>Moderators can invite new members and delete other members' seeds.</p>
+          <p>
+            Moderators can
+            <span ng-hide="community.settings.all_can_invite">invite new members and</span>
+            edit or delete other members' seeds.
+          </p>
 
           <div class="moderator" ng-repeat="user in moderators">
             <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
