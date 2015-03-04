@@ -16,19 +16,20 @@
   </div>
   <div class="clearfix"></div>
 </div>
-
 <div class="member-list">
   <div ng-repeat="user in users | orderBy:'name'" class="member">
     <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
     <div class="member-info">
       <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
-      <div class="skills">
+      <div class="member-links">
+        <social-media user="user" page="'members'"></social-media>
+      </div>
+      <div class="bio" ng-if="user.bio">
+        <div class="full-column"> {{user.bio}}</div>
+      </div>
+      <div class="skills" ng-if="!user.bio && user.skills.length > 0">
         <div class="label-column">Skills</div>
         <div class="value">{{ ::truncate(user.skills) }}</div>
-      </div>
-      <div class="affiliations">
-        <div class="label-column">Affiliations</div>
-        <div class="value">{{ ::truncate(user.organizations) }}</div>
       </div>
     </div>
   </div>
