@@ -64,7 +64,7 @@ var communityStates = function (stateProvider) {
     parent: 'main',
     views: {
       "main": {
-        templateUrl: '/ui/community/createCommunity.tpl.html',
+        templateUrl: '/ui/community/create.tpl.html',
         controller: 'NewCommunityCtrl'
       }
     }
