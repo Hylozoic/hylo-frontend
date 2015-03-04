@@ -2,8 +2,116 @@
   <div class="navbar-header">
     <i class="icon-hylo-script"></i>
   </div>
-  <div class="navbar-center">CREATE COMMUNITY</div>
-  <a class="navbar-right close" ng-click="cancel()">&times;</a>
+  <div class="navbar-center">CREATE A COMMUNITY</div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
 </nav>
 
-<ng-include src="'/ui/community/_communityForm.tpl.html'"></ng-include>
+<div class="main-content">
+  <div class="all-sections">
+
+    <form name="form" novalidate>
+      <p>Welcome! You're just minutes away from unlocking the creative potential of your community with Hylo. Just fill out the form below. All settings below can be changed later, except for the URL.</p>
+
+      <div class="section-label">Information</div>
+      <div class="section">
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Name</label>
+          </div>
+          <div class="main-column">
+            <input type="text" hylo-unique="name" name="name" ng-model="community.name" class="form-control" required />
+            <p class="help error" ng-if="form.submitted && form.name.$error.required">Please fill in this field.</p>
+            <p class="help error" ng-if="form.name.$error.unique">This name is already in use.</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Core Intention</label>
+          </div>
+          <div class="main-column">
+            <textarea name="description" ng-model="community.description" class="form-control" required />
+            <p class="help error" ng-if="form.submitted && form.description.$error.required">Please fill in this field.</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>URL</label>
+          </div>
+          <div class="main-column">
+            <div class="input-group">
+              <span class="input-group-addon">www.hylo.com/c/</span>
+              <input name="slug" ng-model="community.slug" force-lowercase class="form-control" hylo-unique="slug" ng-pattern="/^[a-z0-9-+]+$/" required />
+            </div>
+            <p class="help error" ng-if="form.submitted && form.slug.$error.required">Please fill in this field.</p>
+            <p class="help error" ng-if="form.submitted && form.slug.$error.pattern">Use letters, numbers, and hyphens only.</span>
+            <p class="help error" ng-if="form.slug.$error.unique">This URL is already in use.</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Invitation code</label>
+          </div>
+          <div class="main-column">
+            <input name="beta_access_code" type="text" hylo-unique="beta_access_code" ng-model="community.beta_access_code" class="form-control" required />
+            <p class="help">People can use this code to join your community. (You will also be able to send email invitations to people directly, which do not require this code.)</p>
+            <p class="help error" ng-if="form.submitted && form.beta_access_code.$error.required">Please fill in a code.</p>
+            <p class="help error" ng-if="form.beta_access_code.$error.unique">This code cannot be used; please choose another.</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>What kind of community is this?</label>
+          </div>
+          <div class="main-column">
+            <select name="category" ng-model="community.category" ng-options="id as value for (id, value) in categories" class="form-control" required>
+              <option value="">Pick one:</option>
+            </select>
+            <p class="help error" ng-if="form.submitted && form.category.$error.required">Please choose one.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Appearance</div>
+      <div class="section">
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Icon</label>
+          </div>
+          <div class="main-column">
+            <div class="community-icon" back-img="community.avatar_url"></div>
+            <button ng-click="changeIcon()">
+              <span ng-hide="uploading.avatar_url">Change</span>
+              <span ng-show="uploading.avatar_url">Please wait...</span>
+            </button>
+            <p class="help">This image appears next to your community's name. (Tip: Try a transparent PNG image.)</p>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Banner</label>
+          </div>
+          <div class="main-column">
+            <div class="banner" back-img="community.banner_url"></div>
+            <button ng-click="changeBanner()">
+              <span ng-hide="uploading.banner_url">Change</span>
+              <span ng-show="uploading.banner_url">Please wait...</span>
+            </button>
+            <p class="help">This image appears across the top of your community page. (Suggested size: 1400x500 pixels. <a href="http://cdn.hylo.com/misc/example_community_page.jpg" target="_blank">See an example.</a>)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section footer">
+        <button type="button" ng-click="submit(form)">Save</button>
+        <p class="help error" ng-if="form.submitted && form.$invalid">The information you provided has some errors; please see above.</p>
+      </div>
+
+    </form>
+
+  </div>
+</div>

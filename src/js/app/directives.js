@@ -143,14 +143,22 @@ directive('hyloUnique', ['$http', function ($http) {
     link: function (scope, elem, attrs, ctrl) {
       elem.on('blur', function (evt) {
         scope.$apply(function () {
-          var val = elem.val();
           var extraData = _.isEmpty(attrs.hyloUniqueExtra) ? null : attrs.hyloUniqueExtra;
-          var req = { "value": val, "dbField": attrs.hyloUnique, "extra": extraData}
-          var ajaxConfiguration = { method: 'POST', url: 'checkunique', data: req };
-          $http(ajaxConfiguration)
-              .success(function(data, status, headers, config) {
-                ctrl.$setValidity('unique', data.unique);
-              });
+
+          if (elem.val() == '') return;
+
+          $http({
+            method: 'POST',
+            url: '/noo/community/validate',
+            data: {
+              column: attrs.hyloUnique,
+              constraint: 'unique',
+              value: elem.val()
+            }
+          })
+          .success(function(data, status, headers, config) {
+            ctrl.$setValidity('unique', data.unique);
+          });
         });
       });
     }

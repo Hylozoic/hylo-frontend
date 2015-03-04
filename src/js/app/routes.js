@@ -60,12 +60,12 @@ var communityStates = function (stateProvider) {
     }
   })
   .state('createCommunity', {
-    url: '/create/community',
+    url: '/h/new-community',
     parent: 'main',
     views: {
       "main": {
         templateUrl: '/ui/community/createCommunity.tpl.html',
-        controller: 'CreateCommunityCtrl'
+        controller: 'NewCommunityCtrl'
       }
     }
   })

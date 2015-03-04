@@ -1,3 +1,47 @@
 .createCommunity {
   .full-screen-modal;
+  .seed-body-text;
+
+  form {
+    padding-bottom: 30px;
+
+    button {
+      .rounded-button;
+    }
+  }
+
+  .setting-item {
+    .side-column label {
+      padding-top: 6px;
+    }
+    p.help.error {
+      margin-bottom: 0;
+    }
+  }
+
+  .banner {
+    width: 100%;
+    .fluid-height(38%);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .community-icon {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  p.help {
+    margin-top: 5px;
+
+    &.error {
+      color: @error-color;
+    }
+  }
+
+  .footer {
+    text-align: right;
+  }
 }
