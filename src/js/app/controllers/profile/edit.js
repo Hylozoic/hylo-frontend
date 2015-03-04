@@ -44,7 +44,9 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
 
   $scope.add = function(event, type) {
     if (event.which == 13) {
-      editData[type].unshift(event.target.value);
+      if (!_.contains(editData[type], event.target.value))
+        editData[type].unshift(event.target.value);
+
       event.target.value = '';
       edited[type] = true;
       $analytics.eventTrack('My Profile: Edit: Add to Profile', {item_type: type});
