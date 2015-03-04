@@ -1,0 +1,14 @@
+<span class="social-media">
+  <a ng-href="{{twitterUrl()}}" ng-if="user.twitter_name" ng-click="clickedSocialLink('twitter', twitterUrl())" target="_blank">
+    <i class="icon-twitter"></i>
+  </a>
+  <a ng-href="{{user.facebook_url}}" ng-if="user.facebook_url" ng-click="clickedSocialLink('facebook', user.facebook_url)" target="_blank">
+    <i class="icon-facebook"></i>
+  </a>
+  <a ng-href="{{user.linkedin_url}}" ng-if="user.linkedin_url" ng-click="clickedSocialLink('linkedin', user.linkedin_url)" target="_blank">
+    <i class="icon-linkedin"></i>
+  </a>
+  <a class="send-message" ng-class="{lone: !hasSocialMediaLink()}" ng-href="mailto:{{user.public_email}}" target="_blank" ng-hide="isSelf" ng-click="trackEmail()">
+    <i class="icon-mail"></i>
+  </a>
+</span>

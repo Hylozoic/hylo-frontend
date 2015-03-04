@@ -3,33 +3,28 @@
   .banner {
     .dark-background-gradient;
 
-    div.buttons {
-      @media (max-width: @screen-xs-max) {
-        padding-top: 5px;
-      }
-      a {
-        @media (max-width: @screen-xs-max) {.rounded-button;}
-        @media (min-width: @screen-sm) {.rounded-button-clear;}
-      }
-    }
-
-    .info-column {
-      @media (max-width: @screen-xs-max) {
-        margin: 0;
-
-        .name {
-          margin: 0;
-        }
-      }
-    }
 
     .send-message i {
       &, &:hover {color: white;}
-      font-size: 20px;
-      top: 2px;
-      position: relative;
     }
   }
+
+  .social-media-msg {
+    font-size: 13px;
+    color: @nonactive-text;
+    opacity: .7;
+
+    i {
+      color: @nonactive-text;
+      font-size: @social-media-icon-size;
+      margin-right: 12px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
 
   #main-container .main-content {
     .make-row;

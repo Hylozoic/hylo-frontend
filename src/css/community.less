@@ -147,8 +147,15 @@
     .name {
       .medium-header;
       .remove-link-display;
+      font-size: 28px;
+      padding-right: @std-padding;
     }
-    .skills, .affiliations {
+    .social-media {
+      > a, > i {
+        color: @detail-text;
+      }
+    }
+    .skills, .bio {
       .make-row;
       .seed-meta-text;
       .label-column {
@@ -158,12 +165,16 @@
       .value {
         .make-sm-column(10);
       }
+      .full-column {
+        .make-sm-column(12);
+      }
     }
     @media (max-width: @screen-xs-max) {
       margin-left: @avatar-size-sm + @std-padding*2;
       margin-right: 5px;
       .name {
         .seed-title-text;
+        font-size: 22px;
       }
     }
   }
