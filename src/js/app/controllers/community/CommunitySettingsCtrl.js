@@ -60,6 +60,8 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
         },
         failure: function(error) {
           $scope.editing[opts.fieldName] = false;
+          if (FPError.code == 101) return;
+
           growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
           $analytics.eventTrack('Community: Failed to Change ' + opts.humanName, {
             community_id: community.slug,
