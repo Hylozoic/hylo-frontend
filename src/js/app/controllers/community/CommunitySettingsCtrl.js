@@ -60,6 +60,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
         },
         failure: function(error) {
           $scope.editing[opts.fieldName] = false;
+          $scope.$apply();
           if (FPError.code == 101) return;
 
           growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
