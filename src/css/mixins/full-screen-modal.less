@@ -31,18 +31,12 @@
     }
   }
 
-  form {
-    padding-bottom: 30px;
-
-    label {
-      text-transform: uppercase;
-    }
-  }
-
   .section-label {
     .medium-header;
     padding: @std-padding 0;
     border-bottom: 1px solid @border-light;
+    color: @default-text;
+
     .icon-right, .icon-down {
       float: right;
       margin-top: 13px;
@@ -87,6 +81,9 @@
 
       &.help {
         .seed-meta-text;
+        a {
+          color: @link-color;
+        }
       }
     }
 
