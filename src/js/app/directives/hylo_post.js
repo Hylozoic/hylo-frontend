@@ -190,8 +190,8 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
 
       text = require('../services/RichText').present(text, $scope.post.communitySlug);
 
-      if (!fullLength && text.length > 400) {
-        text = truncate(text, 397);
+      if (!fullLength && text.length > 300) {
+        text = truncate(text, 300);
         $scope.truncated = true;
       }
 
