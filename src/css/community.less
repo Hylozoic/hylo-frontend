@@ -156,17 +156,13 @@
       }
     }
     .skills, .bio {
-      .make-row;
       .seed-meta-text;
       .label-column {
-        .make-sm-column(2);
         .proxima-nova-semibold;
+        padding-right: @std-padding/2;
       }
-      .value {
-        .make-sm-column(10);
-      }
-      .full-column {
-        .make-sm-column(12);
+      .label-column, .value {
+        display: inline;
       }
     }
     @media (max-width: @screen-xs-max) {
