@@ -1,34 +1,28 @@
-angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", function($timeout, $window) {
-  var setMenuTimeout;
-
-  var state = {
-    expanded: false,
-    membershipsExpanded: false
-  }
+var factory = function($timeout) {
+  var menuTimeout, open = false, membershipsShown = false;
 
   var openMenu = function openMenu() {
-    state.expanded = true;
+    open = true;
   }
 
   var closeMenu = function closeMenu() {
-    state.expanded = false;
-    state.membershipsExpanded = false;
+    open = false;
+    membershipsShown = false;
   }
 
-  var setMenuState = function(isOpen, immediate, event) {
+  var setState = function(shouldOpen, immediate, event) {
     // If the menu state is not to be changed, then just exit
-    if (state.expanded === isOpen) {
+    if (open === shouldOpen)
       return;
-    }
 
-    $timeout.cancel(setMenuTimeout);
+    $timeout.cancel(menuTimeout);
 
     if (immediate) {
-      isOpen ? openMenu() : closeMenu();
+      shouldOpen ? openMenu() : closeMenu();
     } else {
-      setMenuTimeout = $timeout(function() {
-        isOpen ? openMenu() : closeMenu();
-      }, (isOpen ? 800 : 400));
+      menuTimeout = $timeout(function() {
+        shouldOpen ? openMenu() : closeMenu();
+      }, (shouldOpen ? 800 : 400));
     }
 
     if (event) {
@@ -42,26 +36,36 @@ angular.module("hylo.menu", []).factory('MenuService', ['$timeout', "$window", f
   };
 
   return {
-    state: state,
-    setMenuState: setMenuState,
-    toggleMenuState: function() {
-      setMenuState(!state.expanded, true);
+    keepOpen: function() {
+      $timeout.cancel(menuTimeout);
     },
-    keepMenuOpen: function() {
-      $timeout.cancel(setMenuTimeout);
+    isOpen: function() {
+      return open;
+    },
+    open: function() {
+      return setState(true, true);
+    },
+    toggle: function() {
+      return setState(!open, true);
+    },
+    closeSoon: function() {
+      return setState(false);
+    },
+    toggleMemberships: function() {
+      membershipsShown = !membershipsShown;
+    },
+    areMembershipsShown: function() {
+      return membershipsShown;
     }
   };
-}])
+};
 
-.controller('MenuCtrl', ['$scope', '$state', '$timeout', 'MenuService',
-  function($scope, $state, $timeout, MenuService) {
+var run = function($rootScope, Menu) {
+  $rootScope.$on('$stateChangeStart', function() {
+    Menu.closeSoon();
+  });
+};
 
-    $scope.state = MenuService.state;
-    $scope.setMenuState = MenuService.setMenuState;
-    $scope.keepMenuOpen = MenuService.keepMenuOpen;
-
-  }])
-
-.controller("MobileMenuCtrl", ['$scope', 'MenuService', function($scope, MenuService) {
-  $scope.toggleMenuState = MenuService.toggleMenuState;
-}]);
+module.exports = function(angularModule) {
+  angularModule.factory('Menu', factory).run(run);
+};

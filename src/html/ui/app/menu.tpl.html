@@ -1,11 +1,10 @@
 <div class="menu"
-  ng-controller="MenuCtrl"
-  ng-class="{expanded: state.expanded, collapsed: !state.expanded}"
-  ng-mouseenter="keepMenuOpen()"
-  ng-mouseleave="setMenuState(false)">
+  ng-class="{expanded: menu.isOpen(), collapsed: !menu.isOpen()}"
+  ng-mouseenter="menu.keepOpen()"
+  ng-mouseleave="menu.closeSoon()">
 
   <ul class="list-unstyled clearfix" id="menu-links">
-    <li class="current-community" ng-click="setMenuState(true, true)">
+    <li class="current-community" ng-click="menu.open()">
       <div class="image-item">
         <div class="image-item-icon" back-img="community.avatar_url"></div>
         <a class="only-expanded" ui-sref="community.seeds({community: community.slug})">{{community.name}}</a>
@@ -13,30 +12,30 @@
     </li>
 
     <li>
-      <a id="menu-community" ng-click="setMenuState(true, true); state.membershipsExpanded = !state.membershipsExpanded">
-        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : state.membershipsExpanded}"></i>
+      <a id="menu-community" ng-click="menu.toggleMemberships()">
+        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : menu.areMembershipsShown()}"></i>
         <i class="icon-communities-new"></i>
         <span class="only-expanded">Communities</span>
       </a>
     </li>
 
-    <li class="sub-group" ng-show="state.membershipsExpanded" ng-repeat="membership in currentUser.memberships">
-      <a ng-if="::membership.role == 1" ui-sref="community.settings({community: membership.slug})" class="open-settings only-expanded only-hover">
+    <li class="sub-group" ng-show="menu.areMembershipsShown()" ng-repeat="membership in menu.user.memberships">
+      <a ng-if="::membership.role == 1" ui-sref="community.settings({community: membership.community.slug})" class="open-settings only-expanded only-hover">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="community.seeds({community: membership.slug})" ui-sref-active="current">
+      <a ui-sref="community.seeds({community: membership.community.slug})" ui-sref-active="current">
         <div class="image-item">
-          <div class="image-item-icon" back-img="::membership.avatar"></div>
-          <span class="only-expanded">{{::membership.name}}</span>
+          <div class="image-item-icon" back-img="::membership.community.avatar_url"></div>
+          <span class="only-expanded">{{::membership.community.name}}</span>
         </div>
       </a>
     </li>
 
     <li>
-      <a ui-sref="userSettings({community: community.slug, id: currentUser.id})" class="open-settings">
+      <a ui-sref="userSettings({community: community.slug, id: menu.user.id})" class="open-settings">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="profile({id: currentUser.id})" id="menu-user" ui-sref-active="current">
+      <a ui-sref="profile({id: menu.user.id})" id="menu-user" ui-sref-active="current">
         <i class="icon-profile"></i>
         <span class="only-expanded">My Profile</span>
       </a>

@@ -28,29 +28,7 @@
   </div>
 </div>
 
-<div id="content-outer">
-
-  <div ng-hide="loggedIn" id="login-holder">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-          <h2>You need to log in first.</h2>
-          <p>Redirecting you to the login page...</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div ng-show="loggedIn" id="content">
-    <ng-include src="'/ui/app/nav.tpl.html'"></ng-include>
-    <ng-include src="'/ui/shared/announcer.tpl.html'"></ng-include>
-    <ng-include src="'/ui/shared/overlay.tpl.html'"></ng-include>
-    <div ui-view class="container-fluid" id="main-container"></div>
-  </div>
-
-  <ng-include src="'/ui/app/menu.tpl.html'"></ng-include>
-
-</div>
+<div id="content-outer" ui-view></div>
 <div growl></div>
 
 <script type="text/javascript" src="<%= jsBundleUrl %>"></script>

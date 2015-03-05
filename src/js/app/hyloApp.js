@@ -2,7 +2,6 @@ require('./auth_module');
 require('./filters');
 require('./directives');
 require('./directives/embeddedComments');
-require('./features/features');
 require('./controllers');
 require('./services');
 
@@ -12,11 +11,13 @@ var app = angular.module('hyloApp', [
   'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
   'ui.bootstrap', 'decipher.tags', 'angular-bootstrap-select',
   'angular-bootstrap-select.extra', 'angulartics', 'angulartics.segment.io',
-  "hylo.menu", "mentio", "hylo.features", 'newrelic-timing'
+  "mentio", 'newrelic-timing'
 ]);
 
 require('./routes')(app);
 require('./animations')(app);
+require('./features/menu')(app);
+require('./features/mentions/userMentions')(app);
 require('./services/removeTrailingSlash')(app);
 require('./services/myHttpInterceptor')(app);
 
@@ -50,7 +51,7 @@ app.config(function ($locationProvider, growlProvider, $idleProvider, $tooltipPr
   $tooltipProvider.options({animation: true});
 });
 
-app.run(function($rootScope, $state, Community, growl, MenuService, $bodyClass, clickthroughTracker) {
+app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughTracker) {
 
   clickthroughTracker.track(location);
 
@@ -70,10 +71,6 @@ app.run(function($rootScope, $state, Community, growl, MenuService, $bodyClass, 
       }
     }
   );
-
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    MenuService.setMenuState(false, false);
-  });
 
   $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
     if (!$rootScope.community) {
