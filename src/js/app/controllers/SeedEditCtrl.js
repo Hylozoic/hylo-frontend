@@ -113,8 +113,8 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   };
 
   $scope.searchPeople = function(query) {
-    UserMentions.searchPeople(query, community).then(function(people) {
-      $scope.people = people;
+    UserMentions.searchPeople(query, community).$promise.then(function(items) {
+      $scope.people = items;
     });
   };
 

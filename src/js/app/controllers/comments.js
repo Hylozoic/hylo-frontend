@@ -133,17 +133,9 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
       return $sce.trustAsHtml(text);
     };
 
-    $scope.people = [];
-
-    $scope.searchPeople = function(query) {
-      var peopleList = [];
-      $rootScope.community.members({search: query}).$promise.then(function (items) {
-        angular.forEach(items, function(item) {
-          if (item.name.toUpperCase().indexOf(query.toUpperCase()) >= 0) {
-            peopleList.push(item);
-          }
-        });
-        $scope.people = peopleList;
+    $scope.searchPeople = function(query, community) {
+      UserMentions.searchPeople(query, community).$promise.then(function(items) {
+        $scope.people = items;
       });
     };
 
