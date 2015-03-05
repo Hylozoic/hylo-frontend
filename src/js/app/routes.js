@@ -293,7 +293,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     })
     .state('main', /*@ngInject*/ {
       abstract: true,
-      template: "<div ui-view='main'></div>",
+      templateUrl: '/ui/shared/main.tpl.html',
       resolve: {
         oldCurrentUser: function(CurrentUser) {
           return CurrentUser.get().$promise;
@@ -313,11 +313,14 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       onEnter: function(currentUser) {
         window.hyloEnv.provideUser(currentUser);
       },
-      controller: function($rootScope, oldCurrentUser, onboarding) {
+      controller: function($scope, $rootScope, oldCurrentUser, currentUser, onboarding, Menu) {
         $rootScope.currentUser = oldCurrentUser;
 
         if (onboarding && !onboarding.isComplete())
           onboarding.resume();
+
+        $scope.menu = Menu;
+        $scope.menu.user = currentUser;
       }
     })
     .state('home', /*@ngInject*/ {
