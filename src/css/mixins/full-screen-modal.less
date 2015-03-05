@@ -76,16 +76,6 @@
       .seed-title-text;
       display: block;
     }
-    p {
-      .seed-body-text;
-
-      &.help {
-        .seed-meta-text;
-        a {
-          color: @link-color;
-        }
-      }
-    }
 
     input[type=checkbox] {
       .round-checkbox();
@@ -119,6 +109,17 @@
     .summary {
       .seed-meta-text;
       display: block;
+    }
+  }
+
+  p {
+    .seed-body-text;
+
+    &.help {
+      .seed-meta-text;
+      a {
+        color: @link-color;
+      }
     }
   }
 
