@@ -139,7 +139,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*'],
-        tasks: ['less:dev', 'notify:css']
+        tasks: ['less:dev', 'less:styleguide', 'notify:css']
       },
       img: {
         files: ['src/img/**/*'],
@@ -188,6 +188,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', [
     'browserify:dev',
     'less:dev',
+    'less:styleguide',
     'sync:img',
     'sync:ui',
     'ejs:pages',
