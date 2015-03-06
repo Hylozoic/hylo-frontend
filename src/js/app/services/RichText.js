@@ -1,5 +1,6 @@
 var linkify = require('html-linkify'),
-  format = require('util').format;
+  format = require('util').format,
+  truncate = require('html-truncate');
 
 module.exports = {
   present: function(text, communitySlug, maxlength) {
@@ -14,6 +15,9 @@ module.exports = {
 
     // link hashtags
     text = text.replace(/([^\w]|^)#(\w+)/g, format('$1<a href="/c/%s/search?q=%23$2">#$2</a>', communitySlug));
+
+    if (maxlength)
+      text = truncate(text, maxlength);
 
     return text;
   }

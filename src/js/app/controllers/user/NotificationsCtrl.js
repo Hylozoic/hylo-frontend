@@ -30,6 +30,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment) {
 
   $scope.markAllRead = function() {
     Activity.markAllRead();
+    currentUser.notification_count = 0;
     _.each($scope.activity, function(event) {
       event.unread = false;
     });
@@ -39,6 +40,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment) {
     if (event.unread) {
       Activity.save({id: event.id}, {unread: false});
       event.unread = false;
+      currentUser.notification_count -= 1;
     }
     $scope.$state.go('seed', {community: event.post.communities[0].slug, seedId: event.post.id});
   };
