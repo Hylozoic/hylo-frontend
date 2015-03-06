@@ -164,6 +164,11 @@
       .label-column, .value {
         display: inline;
       }
+      .value a {
+        &, &:hover {
+          color: @text-light-gray;
+        }
+      }
     }
     @media (max-width: @screen-xs-max) {
       margin-left: @avatar-size-sm + @std-padding*2;
