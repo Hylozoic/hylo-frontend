@@ -21,7 +21,7 @@
       </div>
 
       <div class="comment" ng-if="::!isEmpty(event.comment)">
-        <div bind-html-unsafe="::present(event.comment.comment_text, event.post.communities[0].slug)"></div>
+        <div bind-html-unsafe="::present(event.comment.comment_text, event.post.communities[0].slug, 200)"></div>
       </div>
 
       <div class="controls">
