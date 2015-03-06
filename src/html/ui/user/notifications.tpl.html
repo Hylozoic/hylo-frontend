@@ -1,0 +1,47 @@
+<div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Recent Activity</h1>
+
+    </div>
+    <div class="col-sm-6 corner">
+      <a ng-click="markAllRead()">Mark all as read</a>
+    </div>
+  </div>
+
+  <div class="notification" ng-repeat="event in activity" ng-class="{unread: event.unread}">
+
+    <a ui-sref="profile({id: event.actor.id})" back-img="event.actor.avatar_url" class="avatar"></a>
+
+    <div class="content">
+      <div class="title">
+        {{event.actor.name}} {{actionText(event)}}
+        "<a ng-click="visit(event)">{{truncate(event.post.name, 140)}}</a>"
+      </div>
+
+      <div class="comment" ng-if="::!isEmpty(event.comment)">
+        <div bind-html-unsafe="::present(event.comment.comment_text, event.post.communities[0].slug)"></div>
+      </div>
+
+      <div class="controls">
+        {{::event.created_at | fromNow}}
+        <span ng-if="::!isEmpty(event.comment)">
+          &nbsp;•&nbsp;
+          <span ng-hide="isThanked(event.comment)">
+            <a tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(event.comment)">Say "Thank you"</a>
+          </span>
+          <span ng-show="isThanked(event.comment)">
+            <a tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(event.comment)">
+              You thanked <span>{{::event.actor.name | firstName}}</span>
+            </a>
+          </span>
+          &nbsp;•&nbsp;
+          <a ng-click="visit(event)">Reply</a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
