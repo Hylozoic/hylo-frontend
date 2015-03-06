@@ -1,5 +1,5 @@
 <div class="menu"
-  ng-class="{expanded: menu.isOpen(), collapsed: !menu.isOpen()}"
+  ng-class="{expanded: menu.isOpen(), collapsed: !menu.isOpen(), 'new-notifications': menu.user.notification_count > 0}"
   ng-mouseenter="menu.keepOpen()"
   ng-mouseleave="menu.closeSoon()">
 
@@ -42,9 +42,12 @@
     </li>
 
     <li>
-      <a ui-sref="notifications">
+      <a id="menu-notifications" ui-sref="notifications">
         <i class="icon-notifications"></i>
-        <span>Notifications</span>
+        <span>
+          <span ng-if="menu.user.notification_count > 0">{{menu.user.notification_count}}</span>
+          Notifications
+        </span>
       </a>
     </li>
 
