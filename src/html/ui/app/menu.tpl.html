@@ -13,20 +13,20 @@
 
     <li>
       <a id="menu-community" ng-click="menu.toggleMemberships()">
-        <i class="only-expanded only-hover icon-down" ng-class="{'rotate' : menu.areMembershipsShown()}"></i>
+        <i class="only-hover icon-down" ng-class="{'rotate' : menu.areMembershipsShown()}"></i>
         <i class="icon-communities-new"></i>
-        <span class="only-expanded">Communities</span>
+        <span>Communities</span>
       </a>
     </li>
 
     <li class="sub-group" ng-show="menu.areMembershipsShown()" ng-repeat="membership in menu.user.memberships">
-      <a ng-if="::membership.role == 1" ui-sref="community.settings({community: membership.community.slug})" class="open-settings only-expanded only-hover">
+      <a ng-if="::membership.role == 1" ui-sref="community.settings({community: membership.community.slug})" class="open-settings only-hover">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="community.seeds({community: membership.community.slug})" ui-sref-active="current">
+      <a ui-sref="community.seeds({community: membership.community.slug})">
         <div class="image-item">
           <div class="image-item-icon" back-img="::membership.community.avatar_url"></div>
-          <span class="only-expanded">{{::membership.community.name}}</span>
+          <span>{{::membership.community.name}}</span>
         </div>
       </a>
     </li>
@@ -35,9 +35,16 @@
       <a ui-sref="userSettings({community: community.slug, id: menu.user.id})" class="open-settings">
         <i class="icon-settings"></i>
       </a>
-      <a ui-sref="profile({id: menu.user.id})" id="menu-user" ui-sref-active="current">
+      <a ui-sref="profile({id: menu.user.id})">
         <i class="icon-profile"></i>
-        <span class="only-expanded">My Profile</span>
+        <span>My Profile</span>
+      </a>
+    </li>
+
+    <li>
+      <a ui-sref="notifications">
+        <i class="icon-notifications"></i>
+        <span>Notifications</span>
       </a>
     </li>
 
@@ -46,7 +53,9 @@
   <div class="only-expanded footerLinks">
     <i class="icon-hylo-script footer-icon"></i>
     <br>
-    <a href="/about" target="_blank">About</a> | <a href="/policies/terms-of-service" target="_blank">Terms of Use</a> | <a href="/policies/privacy" target="_blank">Privacy Policy</a>
+    <a href="/about" target="_blank">About</a> |
+    <a href="/policies/terms-of-service" target="_blank">Terms of Use</a> |
+    <a href="/policies/privacy" target="_blank">Privacy Policy</a>
   </div>
 
   <a class="hylo-logo only-collapsed hidden-xs">
