@@ -135,7 +135,11 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
         }, function() {
           _.each($scope.followersToAdd, function(follower) {
             if (!_.findWhere($scope.followers, {value: follower.value})) {
-              $scope.followers.push(follower);
+              $scope.followers.push({
+                id: follower.value,
+                name: follower.name,
+                avatar_url: follower.avatar
+              });
             }
           });
           $analytics.eventTrack('Followers: Add Followers', {num_followers: $scope.followersToAdd.length});
