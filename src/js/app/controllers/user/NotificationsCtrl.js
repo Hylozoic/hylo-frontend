@@ -22,6 +22,9 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
 
       case 'follow':
         return 'joined';
+
+      case 'unfollow':
+        return 'left';
     };
   };
 
@@ -30,7 +33,9 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
   };
 
   $scope.hasBodyText = function(event) {
-    if (_.contains(['followAdd', 'follow'], event.action)) return false;
+    if (_.contains(['followAdd', 'follow', 'unfollow'], event.action))
+      return false;
+
     return !!(event.comment.comment_text || event.post.description);
   }
 

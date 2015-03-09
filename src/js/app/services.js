@@ -48,18 +48,6 @@ factory("Post", ["$resource",
               postController: "comments"
             }
           },
-          follow: {
-            method: "POST",
-            params: {
-              postController: "follow"
-            }
-          },
-          unfollow: {
-            method: "POST",
-            params: {
-              postController: "unfollow"
-            }
-          },
           markFulfilled: {
             method: "POST",
             params: {
@@ -85,6 +73,12 @@ factory("Seed", ["$resource",
         method: 'POST',
         params: {
           action: 'followers'
+        }
+      },
+      follow: {
+        method: 'POST',
+        params: {
+          action: 'follow'
         }
       }
     });
