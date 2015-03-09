@@ -103,17 +103,19 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
     };
 
     $scope.toggleJoinPost = function() {
+      var user = $rootScope.currentUser;
       if (!$scope.isFollowing) {
-        $analytics.eventTrack('Post: Join: Follow', {post_id: $scope.post.id});
-        Post.follow({id: $scope.post.id}, function(res) {
-          $scope.followers.push(res);
+        $analytics.eventTrack('Post: Join', {post_id: $scope.post.id});
+        $scope.followers.push({
+          id: '' + user.id,
+          name: user.name,
+          avatar_url: user.avatar
         });
+        Seed.follow({id: $scope.post.id});
       } else {
-        Post.unfollow({id: $scope.post.id}, function(res) {
-          $analytics.eventTrack('Post: Join: Unfollow', {post_id: $scope.post.id});
-          // remove the follower from list of followers.
-          $scope.followers = _.without($scope.followers, _.findWhere($scope.followers, {value: res.value}));
-        });
+        $analytics.eventTrack('Post: Leave', {post_id: $scope.post.id});
+        $scope.followers = _.without($scope.followers, _.findWhere($scope.followers, {id: '' + user.id}));
+        Seed.follow({id: $scope.post.id});
       }
     };
 
@@ -203,7 +205,7 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
       //get number of followers
       $scope.post.numFollowers = $scope.followers.length;
 
-      var meInFollowers = _.findWhere($scope.followers, {value: $rootScope.currentUser.id});
+      var meInFollowers = _.findWhere($scope.followers, {id: '' + $rootScope.currentUser.id + ''});
 
       if (meInFollowers) {
         $scope.followersNotMe = _.without($scope.followers, meInFollowers);
