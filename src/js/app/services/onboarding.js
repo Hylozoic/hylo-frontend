@@ -26,7 +26,7 @@ var steps = {
 
 var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 'profileSaved', 'done'];
 
-var factory = function($timeout, $rootScope, $resource, $state, $analytics) {
+var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
 
   var OnboardingResource = $resource('/noo/user/:userId/onboarding', {userId: '@userId'});
 
@@ -65,7 +65,7 @@ var factory = function($timeout, $rootScope, $resource, $state, $analytics) {
       return this._status.step;
     },
     showOverlay: function(name) {
-      $rootScope.$emit('overlay:load', {
+      Overlay.show({
         overlay: 'onboarding.' + name,
         onboarding: this
       });

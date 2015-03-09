@@ -1,8 +1,8 @@
-var controller = function($scope, $rootScope, $timeout) {
+var controller = function($scope, $rootScope, $timeout, Overlay) {
 
   $scope.showOverlay = false;
 
-  $rootScope.$on('overlay:load', function(event, data) {
+  var show = function(data) {
     $scope.overlay = data.overlay;
 
     // wait for ng-include to take effect
@@ -14,6 +14,16 @@ var controller = function($scope, $rootScope, $timeout) {
 
       $scope.showOverlay = true;
     });
+  };
+
+  var initialOverlayData = Overlay.storedData();
+  if (initialOverlayData) {
+    show(initialOverlayData);
+    Overlay.resetData();
+  }
+
+  $rootScope.$on('overlay:load', function(event, data) {
+    show(data);
   });
 
   $scope.hide = function () {
