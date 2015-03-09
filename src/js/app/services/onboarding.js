@@ -82,7 +82,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
                 self.goNext();
               }
             });
-          }, 10000);
+          }, 7000);
           break;
 
         case 'profileSaved':
