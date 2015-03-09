@@ -41,7 +41,7 @@
 
           <!-- List Names -->
           <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-            <a class="follower" ui-sref="profile({id: follower.value})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
+            <a class="follower" ui-sref="profile({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
             <span ng-if="!$last && followersNotMe.length == 2"> and </span>
           </span>
 
@@ -54,8 +54,8 @@
               </a>
               <ul class="dropdown-menu">
                 <li ng-repeat="user in followersNotMe.slice(2)">
-                  <a class="dropdown-list-user" ui-sref="profile({id: user.value})" ng-if="!user.hide">
-                    <div back-img="::user.avatar" class="avatar"></div>
+                  <a class="dropdown-list-user" ui-sref="profile({id: user.id})" ng-if="!user.hide">
+                    <div back-img="::user.avatar_url" class="avatar"></div>
                     <div class="name">{{::user.name}}</div>
                   </a>
                 </li>

@@ -1,5 +1,11 @@
 angular.module('hyloFilters', ['ngSanitize'])
 
+.filter('firstName', function() {
+  return function(name) {
+    return name.split(' ')[0];
+  }
+})
+
 .filter('fromNow', function() {
   return function(date) {
     return moment(date).fromNow();
