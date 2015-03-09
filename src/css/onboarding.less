@@ -12,7 +12,9 @@
 
   #content > .container-fluid {
     background-color: @hylo-teal;
-    color: white;
+    &, p {
+      color: white;
+    }
   }
 
   h3, h4 {
@@ -146,9 +148,11 @@
   z-index: 5;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.9);
-  color: white;
   padding-top: @std-padding;
   font-size: 14px;
+  &, p {
+    color: white;
+  }
 
   // for fade-in
   opacity: 0;
