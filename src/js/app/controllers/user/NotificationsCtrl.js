@@ -9,17 +9,30 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
   $scope.actionText = function(event) {
     switch(event.action) {
       case 'mention':
-        return 'mentioned you in a comment on';
+        if (_.isEmpty(event.comment))
+          return 'mentioned you in their ' + event.post.type;
+        else
+          return 'mentioned you in a comment on';
+
       case 'comment':
         return 'commented on';
+
       case 'followAdd':
         return 'added you to the ' + event.post.type;
+
+      case 'follow':
+        return 'joined';
     };
   };
 
   $scope.isThanked = function(comment) {
     return comment && comment.thanks && comment.thanks[0];
   };
+
+  $scope.hasBodyText = function(event) {
+    if (_.contains(['followAdd', 'follow'], event.action)) return false;
+    return !!(event.comment.comment_text || event.post.description);
+  }
 
   $scope.thank = function(comment) {
     if (_.isEmpty(comment.thanks)) {
@@ -51,8 +64,13 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
   };
 
   $scope.truncate = truncate;
-  $scope.present = require('../../services/RichText').present;
   $scope.isEmpty = _.isEmpty;
+
+  $scope.present = function(event) {
+    var present = require('../../services/RichText').present,
+      text = event.comment.comment_text || event.post.description;
+    return present(text, event.post.communities[0].slug, 200);
+  }
 };
 
 module.exports = function(angularModule) {
