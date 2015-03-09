@@ -48,18 +48,6 @@ factory("Post", ["$resource",
               postController: "comments"
             }
           },
-          follow: {
-            method: "POST",
-            params: {
-              postController: "follow"
-            }
-          },
-          unfollow: {
-            method: "POST",
-            params: {
-              postController: "unfollow"
-            }
-          },
           markFulfilled: {
             method: "POST",
             params: {
@@ -86,6 +74,12 @@ factory("Seed", ["$resource",
         params: {
           action: 'followers'
         }
+      },
+      follow: {
+        method: 'POST',
+        params: {
+          action: 'follow'
+        }
       }
     });
 
@@ -99,8 +93,13 @@ factory("Seed", ["$resource",
     return Seed;
   }]);
 
+// resources
 require('./services/user')(angularModule);
 require('./services/community')(angularModule);
+require('./services/Activity')(angularModule);
+require('./services/Comment')(angularModule);
+
+// other services
 require('./services/bodyClass').service(angularModule);
 require('./services/onboarding')(angularModule);
 require('./services/clickthroughTracker')(angularModule);

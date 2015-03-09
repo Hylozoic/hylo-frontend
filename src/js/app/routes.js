@@ -145,7 +145,6 @@ var communityStates = function (stateProvider) {
       }
     }
   });
-
 };
 
 var profileStates = function (stateProvider) {
@@ -352,6 +351,21 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         main: {
           templateUrl: '/ui/app/network.tpl.html',
           controller: 'NetworkCtrl'
+        }
+      }
+    })
+    .state('notifications', {
+      url: '/h/notifications',
+      parent: 'main',
+      views: {
+        main: {
+          templateUrl: '/ui/user/notifications.tpl.html',
+          controller: 'NotificationsCtrl'
+        }
+      },
+      resolve: {
+        activity: function(Activity) {
+          return Activity.query({limit: 50}).$promise;
         }
       }
     });

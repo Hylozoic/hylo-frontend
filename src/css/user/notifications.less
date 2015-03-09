@@ -1,0 +1,56 @@
+.notifications {
+  .seed-body-text;
+
+  h1 {
+    .section-title;
+    margin-top: 0;
+    margin-bottom: @std-padding * 2;
+    line-height: 18px;
+  }
+
+  .corner {
+    text-align: right;
+    line-height: 18px;
+  }
+
+  #main-container > div {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+    padding-top: @std-padding * 2;
+  }
+
+  .notification {
+    .make-row;
+    margin-bottom: @std-padding;
+    padding: @std-padding;
+    border-bottom: 1px solid @border-lightest;
+
+    &.unread {
+      background-color: fadeout(@link-color, 85%);
+    }
+
+    .avatar {
+      .user-avatar-sm;
+      float: left;
+      margin-right: @std-padding;
+    }
+
+    .content {
+      overflow: hidden;
+    }
+
+    .title {
+      overflow: hidden;
+      padding: 8px 0 @std-padding;
+    }
+
+    .body-text {
+      padding: 0 @std-padding 5px;
+    }
+
+    .controls {
+      color: @text-gray;
+      .seed-meta-text;
+    }
+  }
+}

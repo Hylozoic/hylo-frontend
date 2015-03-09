@@ -7,7 +7,7 @@
 
   @logo-height: 48px;
   @menu-padding-top: 15px;
-  @menu-width: 240px;
+  @menu-width: 260px;
 
   @icon-margin: 21px;
   @icon-width: 24px;
@@ -151,80 +151,6 @@
       }
     }
 
-    &.no-link {
-      padding: 7px @icon-margin;
-    }
-
-    .notification {
-      @notificationSpacing: 10px;
-      font-size: 12px;
-      .proxima-nova-regular;
-
-      .seed-meta-text;
-      letter-spacing: normal;
-      text-transform: none;
-      border-left: 4px solid transparent;
-      color: @expandedColor;
-      box-sizing: border-box;
-      width: 100%;
-      overflow: hidden;
-      background-color: @notificationBGColor;
-      padding: @notificationSpacing 10px 0px 19px;
-
-      &.unread {
-        background-color: #565656;
-        border-left: 4px solid @core-color;
-      }
-
-      .avatar {
-        .user-avatar-xs;
-        float: left;
-      }
-
-      .notification-info {
-        margin-left: 45px;
-      }
-
-      .notification-border {
-        padding-top: @notificationSpacing;
-        border-bottom: 1px solid #606060;
-        height: 1px;
-      }
-
-      &:hover {
-        .notification-border{
-          border-bottom: 1px solid @expandedHoverColor;
-        }
-      }
-
-      .actor-action {
-        line-height: 16px;
-      }
-
-      .timestamp {
-        padding-top: 6px;
-      }
-
-      .itemName {
-        padding-top: 6px;
-        font-style: italic;
-      }
-
-      .action {
-        line-height: 4px;
-      }
-
-      .actor {
-        .proxima-nova-bold;
-      }
-
-    }
-  }
-
-  #notifications {
-    margin-top: 0;
-    visibility: hidden;
-    padding-bottom: 45px;
   }
 
   &.collapsed {
@@ -241,10 +167,6 @@
 
     .community-name {
       display: table;
-    }
-
-    #notifications {
-      visibility: visible;
     }
 
     &, ul {
@@ -284,12 +206,6 @@
         background-color: @expandedSubColor;
         max-height: 300px;
       }
-
-      &.no-link {
-        color: @expandedColor;
-        background-color: @expandedBgColor;
-      }
-
     }
   }
 
@@ -363,6 +279,15 @@
     }
   }
 
+  &.new-notifications {
+    #menu-notifications {
+      color: @link-color;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
 }
 
 #menu-community {
@@ -379,9 +304,4 @@
     padding: 8px 15px;
     font-size: 38px;
   }
-}
-
-.scroller {
-  overflow-y: hidden;
-  position: relative;
 }

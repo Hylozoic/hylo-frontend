@@ -14,9 +14,9 @@
         <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
         <span ng-if="canDelete(comment)" ng-click="delete(comment)" class="visible-xs-inline"> &nbsp;•&nbsp; <a class="delete-link">delete</a> </span>
         <span ng-show="::(!commentOwner(comment))">
-          <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank You"</a></span>
+          <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank you"</a></span>
           <span ng-if="comment.isThanked">&nbsp;•&nbsp;
-            <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You Thanked <span>{{::comment.user.name}}</span></a>
+            <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You thanked <span>{{::comment.user.name | firstName}}</span></a>
           </span>
         </span>
       </div>
