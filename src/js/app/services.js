@@ -21,11 +21,6 @@ factory('Overlay', function($rootScope) {
   };
 }).
 
-factory('CurrentUser', ['$resource',
-  function($resource) {
-    return $resource('/current_user', {});
-  }]).
-
 factory("Post", ["$resource",
   function($resource) {
     return $resource("/posts/:listController:id/:postController:userId",

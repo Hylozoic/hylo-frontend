@@ -294,12 +294,6 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       abstract: true,
       templateUrl: '/ui/shared/main.tpl.html',
       resolve: {
-        oldCurrentUser: function(CurrentUser) {
-          return CurrentUser.get().$promise;
-        },
-        // user info has to be fetched from the new API for editing on
-        // the new profile. eventually the old CurrentUser will be replaced
-        // with this one.
         currentUser: function(User) {
           return User.current().$promise;
         },
@@ -312,8 +306,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       onEnter: function(currentUser) {
         window.hyloEnv.provideUser(currentUser);
       },
-      controller: function($scope, $rootScope, oldCurrentUser, currentUser, onboarding, Menu) {
-        $rootScope.currentUser = oldCurrentUser;
+      controller: function($scope, $rootScope, currentUser, onboarding, Menu) {
+        $rootScope.currentUser = currentUser;
 
         if (onboarding && !onboarding.isComplete())
           onboarding.resume();
