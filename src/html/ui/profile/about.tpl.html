@@ -33,7 +33,9 @@
 		</a>
 		<span ng-if="!isSelf" class="message"> This member has not added any skills yet.</span>
 	</span>
-	<div ng-repeat="skill in user.skills" class="list-entry">{{skill}}</div>
+	<ul class="clickable-list">
+		<li ng-repeat="skill in user.skills"><a ui-sref="community.search({community: $root.community.slug, q: skill})">{{skill}}</a></li>
+	</ul>
 
 	<div class="section-header">Affiliations</div>
 	<span ng-if="user.organizations.length < 1">
@@ -42,7 +44,9 @@
 		</a>
 		<span ng-if="!isSelf" class="message"> This member has not added any affiliations yet.</span>
 	</span>
-	<div ng-repeat="org in user.organizations" class="list-entry">{{org}}</div>
+	<ul class="clickable-list">
+		<li ng-repeat="org in user.organizations"><a ui-sref="community.search({community: $root.community.slug, q: org})">{{org}}</a></li>
+	</ul>
 
 	<div class="section-header">Phone</div>
 	<span ng-if="!user.phones">
