@@ -209,7 +209,7 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
       //get number of followers
       $scope.post.numFollowers = $scope.followers.length;
 
-      var meInFollowers = _.findWhere($scope.followers, {id: '' + $rootScope.currentUser.id + ''});
+      var meInFollowers = _.findWhere($scope.followers, {id: $rootScope.currentUser.id});
 
       if (meInFollowers) {
         $scope.followersNotMe = _.without($scope.followers, meInFollowers);
