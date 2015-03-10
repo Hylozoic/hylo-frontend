@@ -155,18 +155,19 @@
         color: @detail-text;
       }
     }
-    .skills, .bio {
-      .make-row;
+    .skills, .affiliations, .bio {
       .seed-meta-text;
-      .label-column {
-        .make-sm-column(2);
+      .title {
         .proxima-nova-semibold;
+        padding-right: @std-padding/2;
       }
-      .value {
-        .make-sm-column(10);
+      .title, .clickable-links {
+        display: inline;
       }
-      .full-column {
-        .make-sm-column(12);
+      .clickable-links a {
+        &, &:hover {
+          color: @text-light-gray;
+        }
       }
     }
     @media (max-width: @screen-xs-max) {
