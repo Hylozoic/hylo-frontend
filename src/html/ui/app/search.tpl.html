@@ -17,9 +17,12 @@
       <div class="seeds">
         <h3>Seeds</h3>
 
-        <div ng-repeat="seed in seeds track by seed.id">
+        <div ng-repeat="seed in results.seeds track by seed.id">
           <hylo-post post="seed" short="true" remove-fn="removeSeed(postToRemove)"></hylo-post>
         </div>
+        <a ng-if="remaining('seeds') > 0" ng-click="loadMore('seeds')" class="load-more">
+          Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})
+        </a>
 
         <div ng-if="!searching && seeds.length == 0">
           No seeds matched your search.
@@ -30,13 +33,16 @@
       <div class="people">
         <h3>People</h3>
 
-        <div class="person" ng-repeat="person in people track by person.id">
+        <div class="person" ng-repeat="person in results.people track by person.id">
           <a class="avatar" back-img="::person.avatar_url" ui-sref="profile({id: person.id})"></a>
           <div class="info">
             <a class="name" bind-html-unsafe="::name(person)" ui-sref="profile({id: person.id})"></a>
             <p class="blurb" bind-html-unsafe="::blurb(person)"></p>
           </div>
         </div>
+        <a ng-if="remaining('people') > 0" ng-click="loadMore('people')" class="load-more">
+          Load {{pageSize('people')}} more (out of {{remaining('people')}})
+        </a>
 
         <div ng-if="!searching && people.length == 0">
           No people matched your search.

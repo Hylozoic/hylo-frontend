@@ -1,31 +1,37 @@
 var format = require('util').format,
-  highlight = require('em-highlight');
+  highlight = require('em-highlight'),
+  pageSize = 5;
 
-var controller = function($scope, $history, searchCommunity, query, Search, growl) {
-  $scope.query = query || '';
+var controller = function($scope, $history, searchCommunity, initialQuery, Search, growl) {
+  $scope.query = initialQuery || '';
   $scope.searching = true;
-  $scope.seeds = [];
-  $scope.people = [];
+  $scope.results = {
+    seeds_total: 0,
+    people_total: 0,
+    seeds: [],
+    people: []
+  };
   var community = $scope.community = searchCommunity;
   var communityId = (community ? community.id : null);
 
-  var fetch = _.debounce(function(query) {
-    if (query.length <= 2) return;
-
-    var newUrl = format('%s?q=%s&c=',
-      location.pathname, query, (communityId ? communityId : ''));
-    window.history.replaceState({}, 'Hylo', newUrl);
+  var fetch = _.debounce(function() {
+    if ($scope.query.length <= 2) return;
 
     $scope.searching = true;
     Search.get({
-      q: query,
+      q: $scope.query,
       communityId: communityId,
       include: ['seeds', 'people'],
-      limit: 5
+      limit: pageSize
     }, function(results) {
-      $scope.seeds = results.seeds;
-      $scope.people = results.people;
+      $scope.results = results;
       $scope.searching = false;
+
+      // FIXME this would be handy for bookmarking but it causes strange
+      // behavior. i think ui-router is detecting a state change when it shouldn't.
+      // var newUrl = format('%s?q=%s&c=%s',
+      //   location.pathname, $scope.query, (communityId ? communityId : ''));
+      // window.history.replaceState({}, 'Hylo', newUrl);
     })
   }, 500);
 
@@ -66,6 +72,26 @@ var controller = function($scope, $history, searchCommunity, query, Search, grow
     }
     return person.bio || format('Skills: %s<br/>Affiliations: %s',
       person.skills.join(', '), person.organizations.join(', '));
+  };
+
+  $scope.remaining = function(type) {
+    return $scope.results[type + '_total'] - $scope.results[type].length;
+  };
+
+  $scope.pageSize = function(type) {
+    return Math.min($scope.remaining(type), pageSize);
+  };
+
+  $scope.loadMore = function(type) {
+    Search.get({
+      q: $scope.query,
+      communityId: communityId,
+      include: [type],
+      limit: pageSize,
+      offset: $scope.results[type].length
+    }, function(results) {
+      $scope.results[type] = $scope.results[type].concat(results[type]);
+    })
   };
 };
 

@@ -354,7 +354,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       url: "/h/search?q&c",
       parent: 'main',
       resolve: /*@ngInject*/ {
-        query: function($stateParams) {
+        initialQuery: function($stateParams) {
           return $stateParams.q;
         },
         searchCommunity: function($stateParams, Community) {
