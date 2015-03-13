@@ -4,6 +4,7 @@ body.search {
   .search-input {
     .proxima-nova-light;
     .borderless-text-input;
+    padding: 0;
     font-size: 40px;
     width: 100%;
     margin-bottom: @std-padding * 2;
@@ -14,18 +15,17 @@ body.search {
     padding-bottom: @std-padding;
     margin-bottom: @std-padding;
     border-bottom: 1px solid @border-lightest;
-  }
 
-  .seeds {
-    .make-sm-column(8);
-    @media (min-width: @screen-sm) {
-      padding-right: @std-padding * 2;
-
+    @media (max-width: @screen-xs-max) {
+      padding-left: @std-padding;
+      padding-right: @std-padding;
     }
   }
 
   .people {
     .make-sm-column(4);
+    .make-sm-column-push(8);
+
     .avatar {
       .user-avatar-sm;
       float: left;
@@ -40,10 +40,30 @@ body.search {
     .blurb {
       .seed-meta-text;
     }
+
+  }
+
+  .seeds {
+    .make-sm-column(8);
+    .make-sm-column-pull(4);
+
+    @media (min-width: @screen-sm) {
+      padding-right: @std-padding * 2;
+    }
+  }
+
+  .people, .seeds {
+    @media (max-width: @screen-xs-max) {
+      padding: 0;
+    }
   }
 
   .person {
     margin-bottom: @std-padding;
+
+    @media (max-width: @screen-xs-max) {
+      padding: 0 15px;
+    }
   }
 
   em.highlight {
@@ -54,6 +74,6 @@ body.search {
   .load-more {
     display: block;
     text-align: center;
-    margin-bottom: @std-padding;
+    margin-bottom: @std-padding * 2;
   }
 }
