@@ -1,18 +1,21 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in post.comments">
-    <div class="comment-delete "><a ng-if="canDelete(comment)" ng-click="delete(comment)" ><i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>&nbsp;</a></div>
+    <div class="comment-delete">
+      <a ng-if="::canDelete(comment)" ng-click="delete(comment)">
+        <i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>
+      </a>
+    </div>
+
     <a class="avatar" back-img="::comment.user.avatar" ui-sref="profile({id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
 
-      <div class="comment-text unpad-last-p" ng-bind-html="commentTextSafe(comment.text)">
-      </div>
+      <div class="comment-text unpad-last-p" ng-bind-html="::commentTextSafe(comment.text)"></div>
       <div class="controls">
         <a ui-sref="profile({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
         &nbsp;•&nbsp;
         <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
-        <span ng-if="canDelete(comment)" ng-click="delete(comment)" class="visible-xs-inline"> &nbsp;•&nbsp; <a class="delete-link">delete</a> </span>
         <span ng-show="::(!commentOwner(comment))">
           <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank you"</a></span>
           <span ng-if="comment.isThanked">&nbsp;•&nbsp;
