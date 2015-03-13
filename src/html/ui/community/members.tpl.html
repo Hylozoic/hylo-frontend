@@ -7,11 +7,10 @@
           <span class="hidden-xs">Invite Members</span>
         </a>
       </div>
-      <div class="search toolbar-right">
+      <a class="search toolbar-right" ui-sref="search({c: community.id})">
         <i class="icon-search"></i>
-        <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
-        <div loading-indicator ng-if="searching"></div>
-      </div>
+        Search
+      </a>
     </div>
   </div>
   <div class="clearfix"></div>
