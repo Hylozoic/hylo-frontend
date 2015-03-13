@@ -24,7 +24,7 @@
           Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})
         </a>
 
-        <div ng-if="!searching && seeds.length == 0">
+        <div ng-if="!searching && results.seeds.length == 0">
           No seeds matched your search.
         </div>
 
@@ -44,7 +44,7 @@
           Load {{pageSize('people')}} more (out of {{remaining('people')}})
         </a>
 
-        <div ng-if="!searching && people.length == 0">
+        <div ng-if="!searching && results.people.length == 0">
           No people matched your search.
         </div>
 
