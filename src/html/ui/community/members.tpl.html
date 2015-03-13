@@ -7,11 +7,10 @@
           <span class="hidden-xs">Invite Members</span>
         </a>
       </div>
-      <div class="search toolbar-right">
+      <a class="search toolbar-right" ui-sref="search({c: community.id})">
         <i class="icon-search"></i>
-        <input placeholder="by name, skill, or affiliation" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
-        <div loading-indicator ng-if="searching"></div>
-      </div>
+        Search
+      </a>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -31,7 +30,7 @@
         <div class="title">Skills:</div>
         <div class="clickable-links">
           <span ng-repeat="skill in user.skills track by $index">
-          <a ui-sref="community.search({community: community.slug, q: skill})">{{skill}}</a><span ng-if="$index < user.skills.length-1">,</span>
+          <a ui-sref="search({c: community.id, q: skill})">{{skill}}</a><span ng-if="$index < user.skills.length-1">,</span>
         </span>
         </div>
       </div>
@@ -39,7 +38,7 @@
         <div class="title">Affiliations:</div>
         <div class="clickable-links">
           <span ng-repeat="affiliation in user.organizations track by $index">
-          <a ui-sref="community.search({community: community.slug, q: affiliation})">{{affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
+          <a ui-sref="search({c: community.id, q: affiliation})">{{affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
         </span>
         </div>
       </div>

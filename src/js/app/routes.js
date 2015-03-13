@@ -9,14 +9,14 @@ var communityStates = function (stateProvider) {
         template: "<div ui-view='community'></div>"
       },
     },
-    resolve: {
-      community: ['Community', '$stateParams', '$rootScope', function(Community, $stateParams, $rootScope) {
+    resolve: /*@ngInject*/ {
+      community: function(Community, $stateParams, $rootScope) {
         var promise = Community.get({id: $stateParams.community}).$promise;
         promise.then(function(community) {
           $rootScope.community = community;
         });
         return promise;
-      }]
+      }
     }
   })
   .state('community.home', {
@@ -130,21 +130,8 @@ var communityStates = function (stateProvider) {
     data: {
       singlePost: true
     }
-  })
-  .state('community.search', {
-    url: "/search?q",
-    resolve: {
-      query: ['$stateParams', function($stateParams) {
-        return $stateParams.q;
-      }]
-    },
-    views: {
-      "community": {
-        templateUrl: '/ui/app/search.tpl.html',
-        controller: 'SearchCtrl'
-      }
-    }
   });
+
 };
 
 var profileStates = function (stateProvider) {
@@ -360,6 +347,25 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       resolve: {
         activity: function(Activity) {
           return Activity.query({limit: 50}).$promise;
+        }
+      }
+    })
+    .state('search', {
+      url: "/h/search?q&c",
+      parent: 'main',
+      resolve: /*@ngInject*/ {
+        initialQuery: function($stateParams) {
+          return $stateParams.q;
+        },
+        searchCommunity: function($stateParams, Community) {
+          if ($stateParams.c)
+            return Community.get({id: $stateParams.c}).$promise;
+        }
+      },
+      views: {
+        main: {
+          templateUrl: '/ui/app/search.tpl.html',
+          controller: 'SearchCtrl'
         }
       }
     });

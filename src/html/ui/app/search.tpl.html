@@ -1,20 +1,55 @@
-<div class="row search">
-  <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-    <h1>Search in {{community.slug}}: {{searchQuery}}</h1>
+<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+  <div class="navbar-header">
+    <i class="icon-hylo-script" ng-click="close()"></i>
+  </div>
+  <div class="navbar-center" href="#">
+    Search
+    <span ng-if="community">in {{community.name}}</span>
+  </div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
 
-    <div infinite-scroll="queryNow()"
-         infinite-scroll-distance="1"
-         infinite-scroll-disabled="disableInfiniteScroll">
-      <div ng-repeat="post in posts track by post.id">
-        <hylo-post post="post" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+<div class="main-content">
+  <div class="all-sections">
+
+    <input type="text" class="search-input" ng-model="query" placeholder="Type to search" autofocus/>
+
+    <div class="row">
+      <div class="people">
+        <h3>People</h3>
+
+        <div class="person" ng-repeat="person in results.people track by person.id">
+          <a class="avatar" back-img="::person.avatar_url" ui-sref="profile({id: person.id})"></a>
+          <div class="info">
+            <a class="name" bind-html-unsafe="::name(person)" ui-sref="profile({id: person.id})"></a>
+            <p class="blurb" bind-html-unsafe="::blurb(person)"></p>
+          </div>
+        </div>
+        <a ng-if="remaining('people') > 0" ng-click="loadMore('people')" class="load-more">
+          Load {{pageSize('people')}} more (out of {{remaining('people')}})
+        </a>
+
+        <div ng-if="!searching && results.people.length == 0">
+          No people matched your search.
+        </div>
+
       </div>
 
-      <div loading-indicator ng-if="searching"></div>
-    </div>
+      <div class="seeds">
+        <h3>Seeds</h3>
 
-    <div ng-if="noResults">
-      <h2 class="text-center" style="margin-top: 70px;">Hmm... we couldn't find you any seeds that matched your search.<br>
-        <small>If you're looking for people, skills or affiliations, search on the <a ui-sref="members({community: $root.community.slug})"><i class="icon-members"></i>&nbsp;Member&nbsp;page.</a></small></h2>
+        <div ng-repeat="seed in results.seeds track by seed.id">
+          <hylo-post post="seed" short="true" remove-fn="removeSeed(postToRemove)"></hylo-post>
+        </div>
+        <a ng-if="remaining('seeds') > 0" ng-click="loadMore('seeds')" class="load-more">
+          Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})
+        </a>
+
+        <div ng-if="!searching && results.seeds.length == 0">
+          No seeds matched your search.
+        </div>
+
+      </div>
     </div>
 
   </div>

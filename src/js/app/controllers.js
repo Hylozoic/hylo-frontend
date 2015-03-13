@@ -3,7 +3,6 @@ var angularModule = angular.module('hyloControllers', ['hyloFilters']);
 require('./controllers/comments');
 require('./controllers/fulfillModal');
 require('./controllers/network');
-require('./controllers/search');
 
 require('./controllers/profile')(angularModule);
 require('./controllers/profile/edit')(angularModule);
@@ -26,3 +25,4 @@ require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);
+require('./controllers/SearchCtrl')(angularModule);
