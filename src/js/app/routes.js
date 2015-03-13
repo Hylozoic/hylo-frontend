@@ -317,10 +317,12 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     .state('home', /*@ngInject*/ {
       parent: 'main',
       url: '/app',
-      onEnter: function(currentUser, $state) {
+      onEnter: function(currentUser, $state, $timeout) {
         var membership = (currentUser && currentUser.memberships[0]);
         if (membership) {
-          $state.go('community.seeds', {community: membership.community.slug});
+          $timeout(function() {
+            $state.go('community.seeds', {community: membership.community.slug});
+          });
         } else {
           window.location = '/invitecode';
         }
