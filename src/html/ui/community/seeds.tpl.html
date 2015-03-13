@@ -2,17 +2,13 @@
   <div class="toolbar community-seeds-toolbar">
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
       <div class="row">
-        <div ng-if="showSeedForm">
-          <hylo-seed-form on-success="addSeedSuccess(seed)" on-cancel="addSeedCancel()"></hylo-seed-form>
-        </div>
-
         <div class="col-md-12">
           <a id="community-addSeedButton" class="toolbar-left" ui-sref="community.newSeed">
             <i class="icon-add-01"></i>
             <span class="hidden-xs new-seed-label">New Seed</span>
           </a>
 
-          <div class="toolbar-right" ng-hide="showSeedForm">
+          <div class="toolbar-right">
             <select selectpicker ng-model="seedSort">
               <option value="recent">Recent</option>
               <option value="top">Top</option>
@@ -26,13 +22,9 @@
               <option value="request">Requests</option>
             </select>
 
-            <a class="search" ng-hide="showSeedForm" ng-click="searchSelected = !searchSelected">
+            <a class="search" ui-sref="search({c: community.id})">
               <i class="icon-search"></i>
             </a>
-            <div class="search-input" ng-show="searchSelected">
-              <input placeholder="Search" class="form-control input" type="text" ng-change="queryTimeout()" ng-model="searchQuery">
-              <div loading-indicator ng-if="searching"></div>
-            </div>
           </div>
         </div>
       </div>

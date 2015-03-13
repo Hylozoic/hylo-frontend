@@ -101,84 +101,6 @@ body.waiting-for-angular {
   min-width: 200px;
 }
 
-.filter-search-icon {
-  color: white;
-  font-size: 39px;
-  float: left;
-}
-
-.textfield-search-indicator {
-  position: absolute;
-  right: 25px;
-  top: 12px;
-  z-index: 2000;
-
-  .spinner {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@bubble-offset: 80px;
-
-.filter-query {
-  margin-left: @bubble-offset;
-  margin-bottom: 18px;
-  .query-input {
-  }
-}
-
-.filter-buttons {
-  margin-left: @bubble-offset;
-  margin-bottom: 18px;
-
-  @media (max-width: @screen-xs-max) {
-    margin-left: 0;
-  }
-
-  .post-type {
-    width: 68%;
-    margin-right: 2%;
-    float: left;
-  }
-  .post-sort {
-    width: 30%;
-  }
-
-  .btn {
-    border: none;
-    color: @text-gray;
-    padding: 0;
-    font-size: 12px;
-    text-align: center;
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    height: 24px;
-    line-height: 24px;
-
-    @media (max-width: @screen-xs-max) {
-      font-size: 10px;
-    }
-
-    &.active {
-      background-color: @light-gray;
-      color: white;
-      font-weight: 600;
-      box-shadow: none;
-      &.intention { border-bottom: 2px solid @intention-color; }
-      &.offer { border-bottom: 2px solid @offer-color; }
-      &.request { border-bottom: 2px solid @request-color; }
-    }
-  }
-}
-
-.post-type-style (@color) {
-  > .controls > .type {
-    color: @color;
-    .proxima-nova-regular;
-  }
-}
-
 //shared class for rounded button style
 .button-rounded, .button-rounded:hover {
   .rounded-button;
@@ -192,49 +114,6 @@ body.waiting-for-angular {
   padding: 0px 8px;
 }
 
-.bubble {
-  position: relative;
-  margin-left: @bubble-offset;
-  border-radius: 5px;
-  background-color: white;
-  word-wrap: break-word;
-  border: 1px solid @border-dark;
-
-  strong {
-    .proxima-nova-semibold;
-  }
-
-  &.intention { .post-type-style(@intention-color); }
-  &.request { .post-type-style(@request-color); }
-  &.offer { .post-type-style(@offer-color); }
-}
-
 textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [contenteditable].no-border:focus {
   .borderless-text-input;
-}
-
-.onboarding-modal {
-  h4 {
-    .proxima-nova-regular;
-    font-size: 30px;
-    color: @fulfillColor;
-  }
-
-  p {
-    .proxima-nova-light;
-    font-size: 14px;
-    margin: 30px 0px;
-    color: #333332
-  }
-
-  label {
-    .proxima-nova-regular;
-    font-size: 14px;
-    color: #000;
-  }
-
-  .btn-default {
-    margin-top: 8px;
-    margin-bottom: 14px;
-  }
 }

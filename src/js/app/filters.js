@@ -33,7 +33,7 @@ filter('hashtag', [ '$sce', function($sce) {
     var replacePattern = /^#([a-zA-Z0-9]+)|\s#([a-zA-Z0-9]+)/g;
     var replacedText = text.replace(replacePattern, function(hash) {
       var trimmedHash = hash.trim();
-      return '<a class="hashtag" ui-sref="community.search({community: $root.community.slug, q: \'' + trimmedHash + '\'})">'+hash+'</a>';
+      return '<a class="hashtag" ui-sref="search({community: $root.community.id, q: \'' + trimmedHash + '\'})">'+hash+'</a>';
     });
 
     var cleaned = $sce.trustAsHtml(replacedText);
