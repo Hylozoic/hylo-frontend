@@ -7,7 +7,7 @@ module.exports = function(angularModule) {
       },
 
       searchPeople: function(query, community) {
-        return Community.findMembers({id: community.id, search: query, limit: 5});
+        return Community.findMembers({id: community.id, autocomplete: query, limit: 5});
       }
 
     };
