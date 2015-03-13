@@ -1,32 +1,28 @@
-var truncate = require('html-truncate');
-
-var controller = function($scope, $timeout, $analytics, community) {
+var controller = function($scope, $timeout, $analytics, community, users, totalUsers) {
   $scope.community = community;
-
   $scope.canInvite = community.canModerate || community.settings.all_can_invite;
+  $scope.users = users;
+  $scope.totalUsers = totalUsers;
 
-  var queryFn = function(initial) {
-    $scope.searching = true;
-    if (!initial) {
-      $analytics.eventTrack('Members: Query', {community_id: community.slug, query: $scope.searchQuery});
-    }
-    community.members({search: $scope.searchQuery, with: ['skills', 'organizations']}, function(users) {
-      $scope.searching = false;
-      $scope.users = users;
-      $scope.usersLoaded = true;
+  $scope.loadMore = _.debounce(function() {
+    console.log('loading from offset ' + $scope.users.length);
+    $scope.loadMoreDisabled = true;
+
+    community.members({
+      with: ['skills', 'organizations'],
+      limit: 20,
+      offset: $scope.users.length
+    }, function(users) {
+      Array.prototype.push.apply($scope.users, users);
+
+      if ($scope.users.length < $scope.totalUsers)
+        $scope.loadMoreDisabled = false;
     });
-  };
 
-  queryFn(true);
+  }, 100);
 
-  var queryPromise;
-  $scope.queryTimeout = function() {
-    $timeout.cancel(queryPromise);
-    queryPromise = $timeout(queryFn, 750);
-  };
-
-  $scope.truncate = function(list) {
-    return truncate(list.join(', '), 100);
+  $scope.search = function(term) {
+    $scope.$state.go('search', {c: community.id, q: term});
   };
 };
 

@@ -57,6 +57,17 @@ var communityStates = function (stateProvider) {
         templateUrl: '/ui/community/members.tpl.html',
         controller: 'CommunityMembersCtrl'
       }
+    },
+    resolve: {
+      users: function(community) {
+        return community.members({
+          with: ['skills', 'organizations'],
+          limit: 20
+        }).$promise;
+      },
+      totalUsers: function(users) {
+        return users[0].total;
+      }
     }
   })
   .state('createCommunity', {
