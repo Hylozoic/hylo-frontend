@@ -93,6 +93,7 @@ require('./services/user')(angularModule);
 require('./services/community')(angularModule);
 require('./services/Activity')(angularModule);
 require('./services/Comment')(angularModule);
+require('./services/Search')(angularModule);
 
 // other services
 require('./services/bodyClass').service(angularModule);

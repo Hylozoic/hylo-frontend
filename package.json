@@ -21,6 +21,7 @@
     "debowerify": "latest",
     "dotenv": "^0.4.0",
     "ejs": "^2.2.4",
+    "em-highlight": "0.0.92",
     "grunt": "latest",
     "grunt-angular-templates": "latest",
     "grunt-browserify": "latest",
