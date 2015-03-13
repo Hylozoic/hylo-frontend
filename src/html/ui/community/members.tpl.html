@@ -15,37 +15,40 @@
   </div>
   <div class="clearfix"></div>
 </div>
-<div class="member-list">
+
+<div class="member-list"
+  infinite-scroll="loadMore()"
+  infinite-scroll-distance="1"
+  infinite-scroll-disabled="loadMoreDisabled"
+  infinite-scroll-immediate-check="false">
+
   <div ng-repeat="user in users | orderBy:'name'" class="member">
-    <a class="avatar" back-img="user.avatar_url" ui-sref="profile({id: user.id})"></a>
+    <a class="avatar" back-img="::user.avatar_url" ui-sref="profile({id: user.id})"></a>
     <div class="member-info">
-      <a class="name" ui-sref="profile({id: user.id})" ng-bind="::user.name"></a>
+      <a class="name" ui-sref="profile({id: user.id})">{{::user.name}}</a>
       <div class="member-links">
-        <social-media user="user" page="'members'"></social-media>
+        <social-media user="::user" page="'members'"></social-media>
       </div>
-      <div class="bio" ng-if="user.bio">
-        <div class="full-column"> {{user.bio}}</div>
+      <div class="bio" ng-if="::user.bio">
+        <div class="full-column">{{::user.bio}}</div>
       </div>
-      <div class="skills" ng-if="!user.bio && user.skills.length > 0">
+      <div class="skills" ng-if="::(!user.bio && user.skills.length > 0)">
         <div class="title">Skills:</div>
         <div class="clickable-links">
-          <span ng-repeat="skill in user.skills track by $index">
-          <a ui-sref="search({c: community.id, q: skill})">{{skill}}</a><span ng-if="$index < user.skills.length-1">,</span>
-        </span>
+          <span ng-repeat="skill in ::user.skills track by $index">
+            <a ng-click="search(skill)">{{::skill}}</a><span ng-if="$index < user.skills.length-1">,</span>
+          </span>
         </div>
       </div>
-      <div class="affiliations" ng-if="!user.bio && user.organizations.length > 0">
+      <div class="affiliations" ng-if="::(!user.bio && user.organizations.length > 0)">
         <div class="title">Affiliations:</div>
         <div class="clickable-links">
-          <span ng-repeat="affiliation in user.organizations track by $index">
-          <a ui-sref="search({c: community.id, q: affiliation})">{{affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
-        </span>
+          <span ng-repeat="affiliation in ::user.organizations track by $index">
+            <a ng-click="search(affiliation)">{{::affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
+          </span>
         </div>
       </div>
     </div>
   </div>
 
-  <div ng-if="users.length == 0" class="no-match">
-    No members matched your search terms.
-  </div>
 </div>
