@@ -1,4 +1,13 @@
+var RichText = require('./services/RichText'),
+  prettydate = require('pretty-date');
+
 angular.module('hyloFilters', ['ngSanitize'])
+
+.filter('richText', function($rootScope) {
+  return function(text) {
+    return RichText.present(text, {community: $rootScope.community.slug, skipWrap: true});
+  }
+})
 
 .filter('firstName', function() {
   return function(name) {
@@ -7,8 +16,8 @@ angular.module('hyloFilters', ['ngSanitize'])
 })
 
 .filter('fromNow', function() {
-  return function(date) {
-    return moment(date).fromNow();
+  return function(dateStr) {
+    return prettydate.format(new Date(dateStr));
   }
 }).
 
