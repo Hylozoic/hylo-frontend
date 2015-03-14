@@ -4,12 +4,14 @@
     padding: 0;
     width: 32px;
     text-align: center;
+    vertical-align: middle;
 
     i {
       font-weight: 600;
       top: 1px;
     }
   }
+
   #community-addSeedButton {
     .rounded-button;
     @media (max-width: @screen-xs-max) {
@@ -24,48 +26,19 @@
       top: 1px;
     }
   }
-  .bootstrap-select {
-    outline: 0;
-    .btn:focus {
-      outline: none !important;
-      outline: 0 auto -webkit-focus-ring-color !important;
-      outline-offset: 0px;
-    }
-    .dropdown-menu {
-      .seed-body-text;
-      li > a {
-        outline: none;
-      }
-    }
-    margin-bottom: 0 !important;
-    width: 120px !important;
-    margin-right: 10px;
-    @media (max-width: @screen-xs-max) {
-      width: 100px !important;
-      margin-right: 5px;
-    }
-    button {
-      border-color: @light-gray;
-      border-radius: 30px;
-      height: 32px;
-      line-height: 30px;
-      top: -1px;
-      padding-top: 0;
-    }
+
+  .button[dropdown-toggle] {
+    .rounded-button;
+    cursor: pointer;
+    margin-right: 5px;
   }
-  .search-input {
-    margin-top: 5px;
-    position: relative;
-    input {
-      .seed-body-text;
-    }
-    div[loading-indicator] {
-      position: absolute;
-      right: 7px;
-      top: 7px;
-      .spinner {
-        width: 20px;
-        height: 20px;
+
+  .dropdown-menu {
+    min-width: initial;
+    li {
+      padding: 4px 15px;
+      &:hover {
+        background-color: @faint-gray;
       }
     }
   }

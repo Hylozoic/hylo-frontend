@@ -33,8 +33,9 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 // Prevents backspace except in the case of textareas and text inputs to prevent user navigation.
-$(document).keydown(function (e) {
-  var preventKeyPress;
+document.addEventListener('keydown', function (e) {
+  var preventKeyPress = false;
+
   if (e.keyCode == 8) {
     var d = e.srcElement || e.target;
     switch (d.tagName.toUpperCase()) {
@@ -53,11 +54,6 @@ $(document).keydown(function (e) {
         break;
     }
   }
-  else
-    preventKeyPress = false;
 
-  if (preventKeyPress) {
-    console.log("preventing backspace");
-    e.preventDefault();
-  }
+  if (preventKeyPress) e.preventDefault();
 });

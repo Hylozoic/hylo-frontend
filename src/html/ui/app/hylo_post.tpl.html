@@ -19,7 +19,7 @@
     </span>
 
     <div class="post-header">
-      <span class="title" seed-text="post.name"></span>
+      <span class="title" ng-bind-html="post.name | richText | unsafe"></span>
       <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
       <a ui-sref="seed({community: post.communitySlug, seedId: post.id})"
         ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">

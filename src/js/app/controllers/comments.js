@@ -35,22 +35,10 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
     var closeCommenting = function() {
       $scope.commentOpen = false;
-      $($window).off("click.seedComment");
     };
 
     $scope.openCommenting = function() {
       $scope.commentOpen = true;
-
-      $($window).off("click.seedComment");
-      $timeout(function() {
-        $($window).on("click.seedComment", function (event) {
-          $scope.$apply(function() {
-            closeCommentOnOutsideClick(event, function() {
-              closeCommenting();
-            });
-          });
-        });
-      }, 0);
     };
 
     function closeCommentOnOutsideClick(event, callbackOnClose) {
@@ -129,7 +117,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     };
 
     $scope.commentTextSafe = function(commentText) {
-      var text = require('../services/RichText').present(commentText, $scope.post.communitySlug);
+      var text = require('../services/RichText').present(commentText, {community: $scope.post.communitySlug});
       return $sce.trustAsHtml(text);
     };
 
