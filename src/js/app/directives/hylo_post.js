@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, $http, $timeout, $window, $analytics, $sce, growl) {
+var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
@@ -160,18 +160,9 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
     };
 
     $scope['delete'] = function() {
-      var modalInstance = $modal.open({
-        templateUrl: '/ui/app/confirm_post_deletion.tpl.html',
-        controller: function($scope, $modalInstance, postName) {
-          $scope.postName = postName;
-        },
-        resolve: {
-          postName: function () {
-            return $scope.post.name;
-          }
-        }
-      });
-      modalInstance.result.then(function() {
+      $dialog.confirm({
+        message: 'Are you sure you want to remove "' + $scope.post.name + '"? This cannot be undone.'
+      }).then(function() {
         $scope.removeFn({postToRemove: $scope.post});
         new Post($scope.post).$remove({});
       });
@@ -201,7 +192,7 @@ var directive = function(Post, Seed, $filter, $state, $rootScope, $log, $modal, 
         $scope.truncated = true;
       }
 
-      $scope.truncatedPostText = $sce.trustAsHtml(text);
+      $scope.truncatedPostText = text;
       $scope.isPostText = text.length > 0;
     };
 
