@@ -4,7 +4,6 @@ require('./onload');
 require('angular-animate');
 require('angular-growl');
 require('angular-http-auth');
-require('angular-route');
 require('angular-resource');
 require('angular-sanitize');
 require('angular-touch');

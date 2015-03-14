@@ -8,7 +8,6 @@
     "angular-growl": "0.4.0",
     "angular-http-auth": "1.2.1",
     "angular-mocks": "1.3.13",
-    "angular-route": "1.3.13",
     "angular-resource": "1.3.13",
     "angular-sanitize": "1.3.13",
     "angular-touch": "1.3.13",
