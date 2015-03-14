@@ -58,7 +58,7 @@ var communityStates = function (stateProvider) {
         controller: 'CommunityMembersCtrl'
       }
     },
-    resolve: {
+    resolve: /*@ngInject*/ {
       users: function(community) {
         return community.members({
           with: ['skills', 'organizations'],
