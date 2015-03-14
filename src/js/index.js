@@ -4,7 +4,6 @@ moment     = require('moment');
 require('./onload');
 
 /* Bower Components */
-require('angular');
 require('angular-animate');
 require('angular-growl');
 require('angular-http-auth');
