@@ -85,16 +85,6 @@ directive('seedText', ['$sce', '$compile', '$filter', '$parse', function($sce, $
     }
 }]).
 
-directive('dotdotdot', ['$timeout', function($timeout) {
-  return {
-    link: function linkDotDotDot(scope, element) {
-      scope.$watch(function() {
-        element.dotdotdot({watch: true});
-      });
-    }
-  };
-}]).
-
 directive('backImg', [function() {
   function link(scope, element, attrs) {
     scope.$watch(attrs.backImg, function(value) {
