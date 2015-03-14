@@ -28,19 +28,6 @@ var controller = function($scope, Post, growl, $timeout, $http, $q, $modal, $ana
     $scope.resetQuery();
   }, 750, {leading: false});
 
-
-  $scope.$watch("seedFilter", function () {
-    if (!$scope.postLoaded) return;
-    $analytics.eventTrack('Posts: Filter by Type', {filter_by: $scope.seedFilter, community_id: community.id});
-    $scope.resetQuery();
-  });
-
-  $scope.$watch("seedSort", function() {
-    if (!$scope.postLoaded) return;
-    $analytics.eventTrack('Posts: Sort', {sort_by: $scope.seedSort, community_id: community.id});
-    $scope.resetQuery();
-  });
-
   $scope.query = function(doReset) {
 
     // Cancel any outstanding queries
@@ -56,8 +43,8 @@ var controller = function($scope, Post, growl, $timeout, $http, $q, $modal, $ana
     $http.get('/noo/community/' + community.id + "/seeds", {
       params: {
         q: $scope.searchQuery,
-        postType: $scope.seedFilter,
-        sort: $scope.seedSort,
+        postType: $scope.selected.filter.value,
+        sort: $scope.selected.sort.value,
         start: $scope.start,
         limit: $scope.limit
       },
@@ -91,15 +78,40 @@ var controller = function($scope, Post, growl, $timeout, $http, $q, $modal, $ana
     });
   };
 
-  $scope.query();
-
   $scope.remove = function(postToRemove) {
     growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
     $analytics.eventTrack('Post: Remove a Seed', {post_name: postToRemove.name, post_id: postToRemove.id});
     $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
   };
 
+  $scope.selectOptions = {
+    sort: [
+      {label: 'Recent', value: 'recent'},
+      {label: 'Top', value: 'top'}
+    ],
+    filter: [
+      {label: 'All Seeds', value: 'all'},
+      {label: 'Intentions', value: 'intention'},
+      {label: 'Offers', value: 'offer'},
+      {label: 'Requests', value: 'request'}
+    ]
+  };
 
+  $scope.selected = {
+    sort: $scope.selectOptions.sort[0],
+    filter: $scope.selectOptions.filter[0]
+  };
+
+  $scope.select = function(type, value) {
+    $scope.selected[type] = _.find(
+      $scope.selectOptions[type],
+      function(x) { return x.value === value }
+    );
+
+    $scope.resetQuery();
+  };
+
+  $scope.query();
 };
 
 module.exports = function(angularModule) {

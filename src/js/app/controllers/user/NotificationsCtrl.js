@@ -74,7 +74,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
   $scope.present = function(event) {
     var present = require('../../services/RichText').present,
       text = event.comment.comment_text || event.post.description;
-    return present(text, event.post.communities[0].slug, 200);
+    return present(text, {community: event.post.communities[0].slug, maxlength: 200});
   }
 };
 

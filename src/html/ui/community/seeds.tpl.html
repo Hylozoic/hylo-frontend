@@ -9,18 +9,29 @@
           </a>
 
           <div class="toolbar-right">
-            <select selectpicker ng-model="seedSort">
-              <option value="recent">Recent</option>
-              <option value="top">Top</option>
-              <!--<option value="magic">Serendipity</option>-->
-            </select>
+            <div class="btn-group" dropdown>
+              <a class="button" dropdown-toggle>
+                {{selected.sort.label}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="option in selectOptions.sort" ng-click="select('sort', option.value)">
+                  {{option.label}}
+                </li>
+              </ul>
+            </div>
 
-            <select id="filter-seed-type" selectpicker ng-model="seedFilter">
-              <option value="all">All Seeds</option>
-              <option value="intention">Intentions</option>
-              <option value="offer">Offers</option>
-              <option value="request">Requests</option>
-            </select>
+            <div class="btn-group" dropdown>
+              <a class="button" dropdown-toggle>
+                {{selected.filter.label}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="option in selectOptions.filter" ng-click="select('filter', option.value)">
+                  {{option.label}}
+                </li>
+              </ul>
+            </div>
 
             <a class="search" ui-sref="search({c: community.id})">
               <i class="icon-search"></i>

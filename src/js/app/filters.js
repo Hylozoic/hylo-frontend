@@ -1,4 +1,12 @@
+var RichText = require('./services/RichText');
+
 angular.module('hyloFilters', ['ngSanitize'])
+
+.filter('richText', function($rootScope) {
+  return function(text) {
+    return RichText.present(text, {community: $rootScope.community.slug, skipWrap: true});
+  }
+})
 
 .filter('firstName', function() {
   return function(name) {
