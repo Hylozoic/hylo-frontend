@@ -1,4 +1,4 @@
-var controller = function($scope, growl, $analytics, currentUser, Community, $history) {
+var controller = function($scope, growl, $analytics, currentUser, Community, $history, $dialog) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
@@ -58,14 +58,13 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
   };
 
   $scope.leaveCommunity = function(communityId, index) {
-    if (!confirm('Are you sure you want to leave this community?'))
-      return;
-
-    Community.removeMember({id: communityId, userId: user.id}, function() {
-      user.memberships.splice(index, 1);
-    }, function(err) {
-      growl.addErrorMessage(err.data);
-    });
+    $dialog.confirm({
+      message: 'Are you sure you want to leave this community?'
+    }).then(function() {
+      Community.leave({id: communityId}, function() {
+        user.memberships.splice(index, 1);
+      });
+    })
   };
 
 };

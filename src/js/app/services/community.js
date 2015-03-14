@@ -29,6 +29,10 @@ dependencies.push(function($resource) {
     removeMember: {
       url: '/noo/community/:id/member/:userId',
       method: 'DELETE'
+    },
+    leave: {
+      url: '/noo/membership/:id',
+      method: 'DELETE'
     }
   });
 
@@ -52,6 +56,9 @@ dependencies.push(function($resource) {
     invite: function(params, success, error) {
       return Community.invite({id: this.id}, params, success, error);
     },
+    removeMember: function(params, success, error) {
+      return Community.removeMember(_.extend({id: this.id}, params), success, error);
+    }
   });
 
   return Community;
