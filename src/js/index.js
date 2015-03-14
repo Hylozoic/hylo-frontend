@@ -1,5 +1,3 @@
-moment     = require('moment');
-
 require('./onload');
 
 /* Bower Components */
