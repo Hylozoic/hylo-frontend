@@ -117,3 +117,24 @@ body.waiting-for-angular {
 textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [contenteditable].no-border:focus {
   .borderless-text-input;
 }
+
+.modal-body {
+  .seed-body-text;
+}
+
+.modal-footer {
+  .button {
+    margin-left: 5px;
+    &.cancel {
+      .rounded-button;
+    }
+    &.confirm {
+      .rounded-button-dark;
+    }
+  }
+}
+
+.modal-backdrop {
+  height: 100%;
+  position: fixed;
+}
