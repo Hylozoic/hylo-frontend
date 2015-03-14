@@ -64,9 +64,6 @@ var communityStates = function (stateProvider) {
           with: ['skills', 'organizations'],
           limit: 20
         }).$promise;
-      },
-      totalUsers: function(users) {
-        return users[0].total;
       }
     }
   })
