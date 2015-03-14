@@ -18,7 +18,6 @@ require('angular-ui-router');
 require('angulartics');
 require('bootstrap-select');
 require('filepicker');
-require('jquery.dotdotdot');
 require('newrelic-timing');
 require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
