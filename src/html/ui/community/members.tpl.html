@@ -25,6 +25,15 @@
   <div ng-repeat="user in users | orderBy:'name'" class="member">
     <a class="avatar" back-img="::user.avatar_url" ui-sref="profile({id: user.id})"></a>
     <div class="member-info">
+      <span class="caret-menu dropdown" dropdown ng-if="::canModerate">
+        <a class="dropdown-toggle" dropdown-toggle><i class="icon-down"></i></a>
+        <ul class="dropdown-menu">
+          <li>
+            <a ng-click="remove(user, $index)">Remove from this community</a>
+          </li>
+        </ul>
+      </span>
+
       <a class="name" ui-sref="profile({id: user.id})">{{::user.name}}</a>
       <div class="member-links">
         <social-media user="::user" page="'members'"></social-media>

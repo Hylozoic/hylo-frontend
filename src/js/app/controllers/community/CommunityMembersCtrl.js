@@ -1,11 +1,10 @@
-var controller = function($scope, $timeout, $analytics, community, users, totalUsers) {
+var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog) {
   $scope.community = community;
   $scope.canInvite = community.canModerate || community.settings.all_can_invite;
+  $scope.canModerate = community.canModerate;
   $scope.users = users;
-  $scope.totalUsers = totalUsers;
 
   $scope.loadMore = _.debounce(function() {
-    console.log('loading from offset ' + $scope.users.length);
     $scope.loadMoreDisabled = true;
 
     community.members({
@@ -15,7 +14,7 @@ var controller = function($scope, $timeout, $analytics, community, users, totalU
     }, function(users) {
       Array.prototype.push.apply($scope.users, users);
 
-      if ($scope.users.length < $scope.totalUsers)
+      if (users.length > 0 && $scope.users.length < users[0].total)
         $scope.loadMoreDisabled = false;
     });
 
@@ -24,6 +23,17 @@ var controller = function($scope, $timeout, $analytics, community, users, totalU
   $scope.search = function(term) {
     $scope.$state.go('search', {c: community.id, q: term});
   };
+
+  $scope.remove = function(user, index) {
+    $dialog.confirm({
+      message: 'Are you sure you want to remove ' + user.name + ' from this community?',
+    }).then(function() {
+      community.removeMember({userId: user.id}, function() {
+        $scope.users.splice(index, 1);
+      });
+    });
+  };
+
 };
 
 module.exports = function(angularModule) {
