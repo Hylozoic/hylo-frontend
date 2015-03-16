@@ -66,4 +66,5 @@ require('./services/onboarding')(angularModule);
 require('./services/clickthroughTracker')(angularModule);
 require('./services/history')(angularModule);
 require('./services/dialog')(angularModule);
+require('./services/Cache')(angularModule);
 require('./services/popupDone');

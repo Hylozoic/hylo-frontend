@@ -39,11 +39,21 @@ var communityStates = function (stateProvider) {
       }
     },
     resolve: /*@ngInject*/ {
-      firstSeedQuery: function(community, Seed) {
-        return Seed.queryForCommunity({
-          communityId: community.id,
-          limit: 10
-        }).$promise;
+      firstSeedQuery: function(community, Seed, Cache) {
+        var key = 'community.seeds:' + community.id,
+          cached = Cache.get(key);
+
+        if (cached) {
+          return cached;
+        } else {
+          return Seed.queryForCommunity({
+            communityId: community.id,
+            limit: 10
+          }).$promise.then(function(resp) {
+            Cache.set(key, resp, {maxAge: 10 * 60});
+            return resp;
+          });
+        }
       }
     }
   })
