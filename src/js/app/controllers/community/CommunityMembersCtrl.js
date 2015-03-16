@@ -5,6 +5,7 @@ var controller = function($scope, $timeout, $analytics, $modal, community, users
   $scope.users = users;
 
   $scope.loadMore = _.debounce(function() {
+    if ($scope.loadMoreDisabled) return;
     $scope.loadMoreDisabled = true;
 
     community.members({
@@ -18,7 +19,7 @@ var controller = function($scope, $timeout, $analytics, $modal, community, users
         $scope.loadMoreDisabled = false;
     });
 
-  }, 100);
+  }, 200);
 
   $scope.search = function(term) {
     $scope.$state.go('search', {c: community.id, q: term});
