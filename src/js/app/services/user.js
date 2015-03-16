@@ -13,10 +13,6 @@ dependencies.push(function($resource) {
     thanks: {
       url: '/noo/user/:id/thanks',
       isArray: true
-    },
-    seeds: {
-      url: '/noo/user/:id/seeds',
-      isArray: true
     }
   });
 

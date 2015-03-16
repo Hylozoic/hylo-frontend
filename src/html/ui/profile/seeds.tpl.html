@@ -1,7 +1,11 @@
-<div ng-repeat="post in posts">
-  <hylo-post post="post" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+<div ng-repeat="seed in seeds"
+     infinite-scroll="loadMore()"
+     infinite-scroll-distance="1"
+     infinite-scroll-disabled="loadMoreDisabled"
+     infinite-scroll-immediate-check="false">
+  <hylo-post post="seed" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
 </div>
 
-<div ng-if="!hasPosts" class="empty-content">
+<div ng-if="!hasSeeds" class="empty-content">
   {{user.firstName()}} has not created any seeds in your communities yet.
 </div>

@@ -44,12 +44,13 @@
   </div>
 
   <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 posts">
-    <div infinite-scroll="query()"
+    <div infinite-scroll="loadMore()"
          infinite-scroll-distance="1"
-         infinite-scroll-disabled="disableInfiniteScroll">
+         infinite-scroll-disabled="loadMoreDisabled"
+         infinite-scroll-immediate-check="false">
 
-      <div ng-repeat="post in posts track by post.id" class="row">
-        <hylo-post post="post" short="true" remove-fn="remove(postToRemove)">
+      <div ng-repeat="seed in seeds track by seed.id" class="row">
+        <hylo-post post="seed" short="true" remove-fn="remove(postToRemove)">
         </hylo-post>
       </div>
 

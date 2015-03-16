@@ -37,6 +37,14 @@ var communityStates = function (stateProvider) {
         templateUrl: '/ui/community/seeds.tpl.html',
         controller: 'CommunitySeedsCtrl'
       }
+    },
+    resolve: /*@ngInject*/ {
+      firstSeedQuery: function(community, Seed) {
+        return Seed.queryForCommunity({
+          communityId: community.id,
+          limit: 10
+        }).$promise;
+      }
     }
   })
   .state('community.about', {
@@ -169,8 +177,11 @@ var profileStates = function (stateProvider) {
   .state('profile.seeds', {
     url: '/seeds',
     resolve: {
-      posts: /*@ngInject*/ function(user) {
-        return user.seeds().$promise;
+      firstSeedQuery: /*@ngInject*/ function(Seed, user) {
+        return Seed.queryForUser({
+          userId: user.id,
+          limit: 10
+        }).$promise;
       }
     },
     views: {
