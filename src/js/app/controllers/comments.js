@@ -117,7 +117,7 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
     };
 
     $scope.commentTextSafe = function(commentText) {
-      var text = require('../services/RichText').present(commentText, {community: $scope.post.communitySlug});
+      var text = require('../services/RichText').present(commentText, {communityId: $scope.post.community.id});
       return $sce.trustAsHtml(text);
     };
 

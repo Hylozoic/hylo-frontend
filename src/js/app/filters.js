@@ -5,7 +5,7 @@ angular.module('hyloFilters', ['ngSanitize'])
 
 .filter('richText', function($rootScope) {
   return function(text) {
-    return RichText.present(text, {community: $rootScope.community.slug, skipWrap: true});
+    return RichText.present(text, {communityId: $rootScope.community.id, skipWrap: true});
   }
 })
 
