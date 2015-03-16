@@ -44,7 +44,7 @@ document.addEventListener('keydown', function (e) {
         break;
       case 'INPUT':
         preventKeyPress = d.readOnly || d.disabled ||
-        (d.attributes["type"] && $.inArray(d.attributes["type"].value.toLowerCase(), ["radio", "checkbox", "submit", "button"]) >= 0);
+        (d.attributes["type"] && _.contains(["radio", "checkbox", "submit", "button"], d.attributes["type"].value.toLowerCase()));
         break;
       case 'DIV':
         preventKeyPress = d.readOnly || d.disabled || !(d.attributes["contentEditable"] && d.attributes["contentEditable"].value == "true");
