@@ -8,7 +8,9 @@ hyloEnv.onUser(function(user) {
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
     createdAt: user.date_created,
-    created: user.date_created
+    created: user.date_created,
+    community_name: user.memberships[0].community.name,
+    community_id: user.memberships[0].community.id,
   });
 
   // rollbar
