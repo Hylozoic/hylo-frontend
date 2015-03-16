@@ -1,4 +1,4 @@
-var controller = function($scope, Seed, growl, $analytics, community, onboarding, firstSeedQuery) {
+var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstSeedQuery) {
 
   $scope.onboarding = onboarding;
   if (onboarding && onboarding.currentStep() === 'community') {
@@ -23,6 +23,11 @@ var controller = function($scope, Seed, growl, $analytics, community, onboarding
       $scope.seeds = _.uniq($scope.seeds.concat(resp.seeds), function(seed) {
         return seed.id;
       });
+
+      Cache.set('community.seeds:' + community.id, {
+        seeds: $scope.seeds,
+        seeds_total: resp.seeds_total
+      }, {maxAge: 10 * 60});
 
       if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
         $scope.loadMoreDisabled = false;
