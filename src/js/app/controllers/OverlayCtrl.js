@@ -12,7 +12,9 @@ var controller = function($scope, $rootScope, $timeout, Overlay) {
         if (key != 'overlay') $scope[key] = data[key];
       });
 
-      $scope.showOverlay = true;
+      $timeout(function() {
+        $scope.showOverlay = true;
+      });
     });
   };
 
