@@ -30,6 +30,10 @@ var factory = function() {
         return;
 
       return entry.value;
+    },
+
+    drop: function(key) {
+      delete this.store[key];
     }
 
   });

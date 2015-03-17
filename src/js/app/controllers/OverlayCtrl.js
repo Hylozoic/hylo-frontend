@@ -12,6 +12,10 @@ var controller = function($scope, $rootScope, $timeout, Overlay) {
         if (key != 'overlay') $scope[key] = data[key];
       });
 
+      // FIXME without this extra timeout, sometimes
+      // this happens before animateIf has a chance
+      // to set up its watch... maybe the directive
+      // could be written differently?
       $timeout(function() {
         $scope.showOverlay = true;
       });

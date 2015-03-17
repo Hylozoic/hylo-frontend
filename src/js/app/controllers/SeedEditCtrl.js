@@ -1,7 +1,7 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache) {
 
   $scope.onboarding = onboarding;
 
@@ -72,6 +72,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   var update = function(data) {
     seed.update(data, function() {
       $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention});
+      Cache.drop('community.seeds:' + community.id);
       $state.go('seed', {community: community.slug, seedId: seed.id});
       growl.addSuccessMessage('Seed updated.');
     }, function(err) {
@@ -84,6 +85,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   var create = function(data) {
     new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
+      Cache.drop('community.seeds:' + community.id);
       if ($scope.onboardingMode) {
         onboarding.markSeedCreated(data.type);
       } else {
