@@ -17,7 +17,7 @@ module.exports = {
     text = text.replace(/([^\w]|^)#(\w+)/g, format('$1<a href="/h/search?c=%s&q=%23$2">#$2</a>', opts.communityId));
 
     if (opts.maxlength)
-      text = truncate(text, maxlength);
+      text = truncate(text, opts.maxlength);
 
     return text;
   }
