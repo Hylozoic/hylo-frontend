@@ -71,7 +71,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   var update = function(data) {
     seed.update(data, function() {
-      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention});
+      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       Cache.drop('community.seeds:' + community.id);
       $state.go('seed', {community: community.slug, seedId: seed.id});
       growl.addSuccessMessage('Seed updated.');
@@ -84,7 +84,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   var create = function(data) {
     new Seed(data).$save(function() {
-      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
+      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       Cache.drop('community.seeds:' + community.id);
       if ($scope.onboardingMode) {
         onboarding.markSeedCreated(data.type);
