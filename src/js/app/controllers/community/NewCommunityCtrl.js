@@ -90,9 +90,11 @@ var controller = function ($scope, $timeout, $analytics, $analytics, $history, C
       return;
     }
 
+    $scope.saving = true;
     Community.save(community, function (membership) {
       $analytics.eventTrack('Create Community: Finished', {community_id: community.slug});
       currentUser.memberships = [membership].concat(currentUser.memberships);
+      $scope.saving = false;
       $scope.$state.go("community.seeds", {community: community.slug});
     });
   };
