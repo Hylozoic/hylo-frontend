@@ -13,11 +13,11 @@ module.exports = function(angularModule) {
     return {
       addClass: function(element, className) {
         element.css('display', 'block');
-        element.css('top', -element.outerHeight());
+        element.css('top', -element[0].clientHeight + 'px');
         $timeout(function() { TweenLite.to(element, 0.5, {top: 0}) }, 0);
       },
       removeClass: function(element, className) {
-        element.css('top', -element.outerHeight());
+        element.css('top', -element[0].clientHeight + 'px');
         // TweenLite.to(element, 0.5, {top: -element.outerHeight()});
       }
     };
