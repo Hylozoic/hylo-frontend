@@ -160,6 +160,8 @@ textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [cont
     margin-top: @vertical-padding + 1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    max-height: 60vh;
+    overflow-y: scroll;
 
     .disabled {
       color: @inactive-text;
@@ -203,6 +205,14 @@ textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [cont
     .dropdown-menu {
       left: initial;
       right: 0;
+    }
+  }
+
+  @media (max-width: @screen-xs-max) {
+    > div {
+      width: 25%;
+      margin: 0;
+      text-align: center;
     }
   }
 }
