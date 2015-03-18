@@ -1,4 +1,6 @@
 .full-screen-modal() {
+  .simple-page;
+
   #content {
     position: relative;
     z-index: 3;
@@ -19,111 +21,71 @@
   }
 
   nav {
+    border: none;
+    border-bottom: 2px solid #DCDCDC;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0 20px;
+    @media (max-width: @screen-xs-max) {
+      padding: 0 @std-padding;
+    }
+
+    .close {
+      .big-close;
+      margin-top: 7px;
+
+      &.navbar-right {
+        margin-right: -15px;
+      }
+    }
+
+    .icon-hylo-script {
+      font-size: 50px;
+      display: block;
+      margin: 7px 0 5px;
+      @media (max-width: @screen-xs-max) {
+        display: none;
+      }
+    }
+
+    .navbar-center {
+      .section-title;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+      text-align: center;
+      margin: auto;
+      padding-top: 22px;
+      height:100%;
+      z-index: -1;
+      @media (max-width: @screen-xs-max) {
+        text-align: left;
+        padding-top: 15px;
+      }
+
+    }
+
+    .btn {
+      margin-top: 14px;
+    }
+
+    .navbar-right {
+      margin-right: 0;
+    }
+
     margin: 0 -@std-padding @std-padding !important;
     height: 64px;
 
     @media (max-width: @screen-xs-max) {
       height: 50px;
-
-      &.mobile-nav {
-        display: none !important;
-      }
-    }
-
-    .close {
-      font-weight: normal;
-    }
-  }
-
-  .section-label {
-    .medium-header;
-    padding: @std-padding 0;
-    border-bottom: 1px solid @border-light;
-    color: @default-text;
-
-    .icon-right, .icon-down {
-      float: right;
-      margin-top: 13px;
-      font-size: 12px;
-    }
-
-    @media (max-width: @screen-xs-max) {
-      margin: 0 -@std-padding;
-      padding: @std-padding;
     }
   }
 
   .main-content {
-    .make-row;
-
     @media (max-width: @screen-xs-max) {
       margin-left: 0;
       margin-right: 0;
-    }
-  }
-
-  .all-sections {
-    .make-sm-column(6);
-    .make-sm-column-offset(3);
-
-    > p.section {
-      padding: @std-padding 0;
-    }
-  }
-
-  .setting-item {
-    .make-row;
-    padding-top: @std-padding;
-    padding-bottom: @std-padding;
-
-    label {
-      .seed-title-text;
-      display: block;
-    }
-
-    input[type=checkbox] {
-      .round-checkbox();
-    }
-
-    button {
-      .rounded-button;
-
-      &.main-action {
-        .rounded-button-dark;
-      }
-    }
-
-    .main-column {
-      .make-sm-column(8);
-      button {
-        margin-top: @std-padding/2;
-      }
-    }
-    .side-column {
-      .make-sm-column(4);
-
-      @media (min-width: @screen-sm) {
-        text-align: right;
-      }
-    }
-    .full-column {
-      .make-sm-column(12);
-    }
-
-    .summary {
-      .seed-meta-text;
-      display: block;
-    }
-  }
-
-  p {
-    .seed-body-text;
-
-    &.help {
-      .seed-meta-text;
-      a {
-        color: @link-color;
-      }
     }
   }
 
