@@ -10,10 +10,53 @@
 </div>
 
 <div ng-show="loggedIn" id="content">
-  <ng-include src="'/ui/app/nav.tpl.html'"></ng-include>
   <ng-include src="'/ui/shared/announcer.tpl.html'"></ng-include>
   <ng-include src="'/ui/shared/overlay.tpl.html'"></ng-include>
-  <div ui-view="main" class="container-fluid" id="main-container"></div>
-</div>
 
-<ng-include src="'/ui/app/menu.tpl.html'"></ng-include>
+  <div id="nav">
+
+    <div dropdown class="communities">
+      <a class="button" dropdown-toggle>
+        <i class="icon-communities-new"></i>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="membership in currentUser.memberships">
+          <a ui-sref="community.seeds({community: membership.community.slug})">
+            <div class="avatar" back-img="membership.community.avatar_url"></div>
+            {{membership.community.name}}
+          </a>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li>
+          <a class="disabled">Create a new community<br/>(coming soon)</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <a class="button" ui-sref="search">
+        <i class="icon-search"></i>
+      </a>
+    </div>
+
+    <div>
+      <a class="button" ui-sref="notifications">
+        <i class="icon-notifications"></i>
+      </a>
+    </div>
+
+    <div dropdown class="profile">
+      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url">
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a ui-sref="profile({id: currentUser.id})">Profile</a></li>
+        <li><a ui-sref="userSettings">Settings</a></li>
+        <li><a href="/noo/logout" target="_self" class="logout">Log out</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div ui-view="main" class="container-fluid" id="main-container"></div>
+
+</div>
