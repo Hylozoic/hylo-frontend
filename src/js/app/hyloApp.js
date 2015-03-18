@@ -39,14 +39,12 @@ app.factory('$exceptionHandler', function ($log) {
   };
 });
 
-app.config(function ($locationProvider, growlProvider, $idleProvider, $tooltipProvider) {
+app.config(function ($locationProvider, growlProvider, $idleProvider) {
   $locationProvider.html5Mode(true);
   growlProvider.globalTimeToLive(5000);
 
   $idleProvider.idleDuration(45); // in seconds
   $idleProvider.warningDuration(1); // in seconds
-
-  $tooltipProvider.options({animation: true});
 });
 
 app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughTracker) {
