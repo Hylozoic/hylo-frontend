@@ -1,0 +1,78 @@
+.settings-page() {
+  .simple-page;
+
+  .section-label {
+    .medium-header;
+    padding: @std-padding 0;
+    border-bottom: 1px solid @border-light;
+    color: @default-text;
+
+    .icon-right, .icon-down {
+      float: right;
+      margin-top: 13px;
+      font-size: 12px;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      margin: 0 -@std-padding;
+      padding: @std-padding;
+    }
+  }
+
+  .setting-item {
+    .make-row;
+    padding-top: @std-padding;
+    padding-bottom: @std-padding;
+
+    label {
+      .seed-title-text;
+      display: block;
+    }
+
+    input[type=checkbox] {
+      .round-checkbox();
+    }
+
+    button {
+      .rounded-button;
+
+      &.main-action {
+        .rounded-button-dark;
+      }
+    }
+
+    .main-column {
+      .make-sm-column(8);
+      button {
+        margin-top: @std-padding/2;
+      }
+    }
+    .side-column {
+      .make-sm-column(4);
+
+      @media (min-width: @screen-sm) {
+        text-align: right;
+      }
+    }
+    .full-column {
+      .make-sm-column(12);
+    }
+
+    .summary {
+      .seed-meta-text;
+      display: block;
+    }
+  }
+
+  p {
+    .seed-body-text;
+
+    &.help {
+      .seed-meta-text;
+      a {
+        color: @link-color;
+      }
+    }
+  }
+
+}
