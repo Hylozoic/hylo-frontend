@@ -34,14 +34,11 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       onEnter: function(currentUser) {
         window.hyloEnv.provideUser(currentUser);
       },
-      controller: function($scope, $rootScope, currentUser, onboarding, Menu) {
+      controller: function($scope, $rootScope, currentUser, onboarding) {
         $rootScope.currentUser = currentUser;
 
         if (onboarding && !onboarding.isComplete())
           onboarding.resume();
-
-        $scope.menu = Menu;
-        $scope.menu.user = currentUser;
       }
     })
     .state('home', /*@ngInject*/ {
