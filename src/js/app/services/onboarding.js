@@ -44,6 +44,19 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       _.merge(this._status, {step: params.obs});
       this.allowBack = true;
     }
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      $rootScope.$emit('announcer:hide');
+
+      if (this.currentStep() === 'community' && toState.name === 'profile' && toParams.id === this._user.id) {
+        if (this._announcerDelay) {
+          $timeout.cancel(this._announcerDelay);
+        }
+        this._setStep('profile', true);
+      }
+
+    }.bind(this));
+
   };
 
   _.extend(Onboarding.prototype, {
@@ -75,14 +88,15 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
       switch (this.currentStep()) {
         case 'community':
-          $timeout(function() {
-            $rootScope.$emit('announce', {
+          this._announcerDelay = $timeout(function() {
+            $rootScope.$emit('announcer:show', {
               text: "When you're ready, click here to visit your profile.",
               onclick: function() {
                 self.goNext();
-              }
+              },
+              className: 'point-to-profile'
             });
-          }, 7000);
+          }, 5000);
           break;
 
         case 'profileSaved':
@@ -112,12 +126,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       this._go(next, delta != 0);
     },
     _go: function(name, update) {
-      this._track('Step: ' + name);
-      this._status.step = name;
-
-      if (update) {
-        OnboardingResource.save({userId: this._user.id, step: name});
-      }
+      this._setStep(name, update);
 
       var params;
       // FIXME code smell
@@ -129,6 +138,14 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
         params = {};
       }
       return $state.go(steps[name].state, params);
+    },
+    _setStep: function(name, update) {
+      this._track('Step: ' + name);
+      this._status.step = name;
+
+      if (update) {
+        OnboardingResource.save({userId: this._user.id, step: name});
+      }
     },
     _track: function(name, params) {
       $analytics.eventTrack('Onboarding: ' + name, _.merge({
