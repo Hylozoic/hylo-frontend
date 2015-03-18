@@ -349,7 +349,7 @@ angular.module("templates/tag.html", []).run(["$templateCache", function($templa
 
                    // or if you want to get out of the text area
                  } else if (kcCancelInput.indexOf(evt.which) >=
-                            0 && !evt.isPropagationStopped()) {
+                            0) {
                    cancel();
                    scope.toggles.inputActive =
                    false;
