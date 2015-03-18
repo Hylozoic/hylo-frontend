@@ -16,7 +16,7 @@
   <div id="nav">
 
     <div dropdown class="communities">
-      <a class="button" dropdown-toggle>
+      <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom">
         <i class="icon-communities-new"></i>
       </a>
       <ul class="dropdown-menu" role="menu">
@@ -34,19 +34,19 @@
     </div>
 
     <div>
-      <a class="button" ui-sref="search">
+      <a class="button" ui-sref="search" tooltip="Search" tooltip-placement="bottom">
         <i class="icon-search"></i>
       </a>
     </div>
 
     <div>
-      <a class="button" ui-sref="notifications">
+      <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom">
         <i class="icon-notifications"></i>
       </a>
     </div>
 
     <div dropdown class="profile">
-      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url">
+      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom">
       </a>
       <ul class="dropdown-menu" role="menu">
         <li><a ui-sref="profile({id: currentUser.id})">Profile</a></li>
