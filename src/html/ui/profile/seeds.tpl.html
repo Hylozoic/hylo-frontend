@@ -1,9 +1,10 @@
-<div ng-repeat="seed in seeds"
-     infinite-scroll="loadMore()"
+<div infinite-scroll="loadMore()"
      infinite-scroll-distance="1"
      infinite-scroll-disabled="loadMoreDisabled"
      infinite-scroll-immediate-check="false">
-  <hylo-post post="seed" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+  <div ng-repeat="seed in seeds">
+    <hylo-post post="seed" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
+  </div>
 </div>
 
 <div ng-if="!hasSeeds" class="empty-content">

@@ -24,12 +24,22 @@ module.exports = function ($stateProvider) {
   })
   .state('profile.seeds', {
     url: '/seeds',
-    resolve: {
-      firstSeedQuery: /*@ngInject*/ function(Seed, user) {
-        return Seed.queryForUser({
-          userId: user.id,
-          limit: 10
-        }).$promise;
+    resolve: /*@ngInject*/ {
+      firstSeedQuery: function(Seed, Cache, user) {
+        var key = 'profile.seeds:' + user.id,
+          cached = Cache.get(key);
+
+        if (cached) {
+          return cached;
+        } else {
+          return Seed.queryForUser({
+            userId: user.id,
+            limit: 10
+          }).$promise.then(function(resp) {
+            Cache.set(key, resp, {maxAge: 10 * 60});
+            return resp;
+          });
+        }
       }
     },
     views: {

@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, growl, Seed, firstSeedQuery, user) {
+var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, Cache) {
 	$scope.seeds = firstSeedQuery.seeds;
 	$scope.hasSeeds = $scope.seeds.length > 0;
 
@@ -19,8 +19,15 @@ var controller = function($scope, $analytics, growl, Seed, firstSeedQuery, user)
     }, function(resp) {
       Array.prototype.push.apply($scope.seeds, resp.seeds);
 
-      if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
-        $scope.loadMoreDisabled = false;
+      Cache.set('profile.seeds:' + user.id, {
+        seeds: $scope.seeds,
+        seeds_total: resp.seeds_total
+      }, {maxAge: 10 * 60});
+
+      $timeout(function() {
+        if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
+          $scope.loadMoreDisabled = false;
+      });
     });
   }, 200);
 
