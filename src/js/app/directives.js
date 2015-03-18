@@ -18,6 +18,23 @@ angularModule.directive('ngEnter', function() {
   };
 }).
 
+directive('scrollClass', function($window) {
+  return function(scope, element, attrs) {
+    var threshold = parseInt(attrs.scrollClassThreshold),
+      className = attrs.scrollClass;
+
+    angular.element($window).bind('scroll', function() {
+      if (this.pageYOffset >= threshold && !element.hasClass(className)) {
+        element.addClass(className);
+        scope.$apply();
+      } else if (this.pageYOffset < threshold && element.hasClass(className)) {
+        element.removeClass(className);
+        scope.$apply();
+      }
+    });
+  }
+}).
+
 directive('curtain', function($rootScope) {
   return {
     restrict: 'A',
