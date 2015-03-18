@@ -9,8 +9,10 @@ require('./controllers/profile/edit')(angularModule);
 require('./controllers/profile/seeds')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);
+require('./controllers/support/SupportCtrl')(angularModule);
 require('./controllers/user/settings')(angularModule);
 require('./controllers/user/NotificationsCtrl')(angularModule);
+
 
 require('./controllers/SeedEditCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
