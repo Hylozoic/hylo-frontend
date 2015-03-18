@@ -1,16 +1,7 @@
-<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
-  <div class="navbar-header">
-    <i class="icon-hylo-script" ng-click="close()"></i>
-  </div>
-  <div class="navbar-center" href="#">
-    Search
-    <span ng-if="community">in {{community.name}}</span>
-  </div>
-  <a class="navbar-right close" ng-click="close()">&times;</a>
-</nav>
-
 <div class="main-content">
   <div class="all-sections">
+
+    <h1>Search <span ng-if="community">in {{community.name}}</span></h1>
 
     <input type="text" class="search-input" ng-model="query" placeholder="Type to search" autofocus/>
 

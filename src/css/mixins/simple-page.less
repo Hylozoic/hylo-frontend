@@ -1,0 +1,26 @@
+.simple-page() {
+  #nav {
+    margin-bottom: @std-padding * 2;
+  }
+
+  h1 {
+    .section-title;
+    margin-top: 0;
+    margin-bottom: @std-padding * 2;
+    line-height: 18px;
+  }
+
+  .main-content {
+    .make-row;
+  }
+
+  .all-sections {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+
+    > p.section {
+      padding: @std-padding 0;
+    }
+  }
+
+}

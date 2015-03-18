@@ -1,4 +1,6 @@
 .full-screen-modal() {
+  .simple-page;
+
   #content {
     position: relative;
     z-index: 3;
@@ -54,20 +56,9 @@
   }
 
   .main-content {
-    .make-row;
-
     @media (max-width: @screen-xs-max) {
       margin-left: 0;
       margin-right: 0;
-    }
-  }
-
-  .all-sections {
-    .make-sm-column(6);
-    .make-sm-column-offset(3);
-
-    > p.section {
-      padding: @std-padding 0;
     }
   }
 
