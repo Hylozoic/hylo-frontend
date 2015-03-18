@@ -22,6 +22,8 @@
 @ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 @ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 
+@import 'mixins/simple-page';
+@import 'mixins/settings-page';
 @import 'mixins/full-screen-modal';
 @import 'homepage';
 @import 'landingpage';
@@ -31,7 +33,7 @@
 @import "followers";
 @import "comment";
 @import "fulfill";
-@import 'navbar';
+@import 'nav';
 @import 'footer';
 @import 'angular/angular-growl';
 @import 'angular/angular-csp';
@@ -63,4 +65,11 @@ body {
   .proxima-nova-regular;
   font-size: 13px;
   color: @text-dark;
+}
+
+.navbar-brand {
+  padding: 8px 15px;
+  .icon-hylo-script {
+   font-size: 38px;
+  }
 }

@@ -11,7 +11,7 @@ var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
 
   if (isSelf && onboarding) {
     var step = onboarding.currentStep();
-    if (_.include(['profile', 'profileSaved'], step)) {
+    if (_.include(['profile'], step)) {
       onboarding.showOverlay(step);
     }
   }

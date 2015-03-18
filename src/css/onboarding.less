@@ -120,22 +120,6 @@
   }
 }
 
-.onboarding-profile-saved {
-  .community-avatar {
-    width: 60px;
-    height: 60px;
-  }
-
-  .navbar-toggle {
-    background-color: #ddd;
-    float: none;
-    margin-right: 0;
-    .icon-bar {
-      background-color: #888;
-    }
-  }
-}
-
 // TODO these should go in their own files
 
 .overlay {
@@ -198,4 +182,39 @@
   text-align: center;
   font-size: 15px;
   display: none;
+
+  .triangle {
+    display: none;
+  }
+
+  &.point-to-profile {
+    position: absolute;
+    margin-top: 58px;
+    right: @std-padding;
+    width: initial;
+    max-width: 50vw;
+    border-radius: 4px;
+
+    .triangle {
+      display: block;
+      position: absolute;
+      top: -10px;
+      right: 7px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid @hylo-teal;
+
+      @media (max-width: @screen-xs-max) {
+        right: 12.5vw;
+        margin-right: -(@std-padding + 10px);
+      }
+    }
+
+    &.scrolling {
+      position: fixed;
+      margin-top: 12px;
+    }
+  }
 }

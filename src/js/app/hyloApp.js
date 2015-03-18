@@ -15,7 +15,6 @@ var app = angular.module('hyloApp', [
 
 require('./routes')(app);
 require('./animations')(app);
-require('./features/menu')(app);
 require('./features/mentions/userMentions')(app);
 require('./services/removeTrailingSlash')(app);
 require('./services/myHttpInterceptor')(app);
