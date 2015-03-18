@@ -18,13 +18,10 @@ var steps = {
   },
   profile: {
     state: 'profile'
-  },
-  profileSaved: {
-    state: 'profile'
   }
 };
 
-var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 'profileSaved', 'done'];
+var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 'done'];
 
 var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
 
@@ -99,7 +96,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
           }, 5000);
           break;
 
-        case 'profileSaved':
+        case 'profile':
           this._status.step = 'done';
           OnboardingResource.save({userId: this._user.id, step: 'done'});
           break;
@@ -132,7 +129,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       // FIXME code smell
       if (_.include(['newSeed', 'community'], name)) {
         params = {community: this.community.slug};
-      } else if (_.include(['profile', 'profileSaved'], name)) {
+      } else if (_.include(['profile'], name)) {
         params = {id: this._user.id};
       } else {
         params = {};
