@@ -1,4 +1,4 @@
-var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog) {
+var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog, Cache) {
   $scope.community = community;
   $scope.canInvite = community.canModerate || community.settings.all_can_invite;
   $scope.canModerate = community.canModerate;
@@ -14,6 +14,8 @@ var controller = function($scope, $timeout, $analytics, $modal, community, users
       offset: $scope.users.length
     }, function(users) {
       Array.prototype.push.apply($scope.users, users);
+
+      Cache.set('community.members:' + community.id, $scope.users, {maxAge: 10 * 60});
 
       if (users.length > 0 && $scope.users.length < users[0].total)
         $scope.loadMoreDisabled = false;
