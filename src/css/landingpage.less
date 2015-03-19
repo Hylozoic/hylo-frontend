@@ -18,8 +18,9 @@
 .landing {
 
   .bg {
-    background-image: url(/assets/images/homepage/coworkingBg.jpg);
+    background-image: url(img/homepage/coworkingBg.jpg);
     background-size: cover;
+    background-position: center;
     opacity: 0.6;
     position: absolute;
     top: 0;
@@ -75,11 +76,13 @@
 
   #signup-login-tablet {
     .seed-body-text;
-
     background-color: white;
-    margin-top: 50px;
     border-radius: 5px;
-    margin-bottom: 10px;
+
+    margin: @std-padding 0;
+    @media (min-width: @screen-sm) {
+      margin-top: 15vh;
+    }
 
     &.invite-code {
       margin-top: 0px !important;
@@ -88,7 +91,7 @@
     &, h1 { .proxima-nova-regular; }
 
     > div {
-      padding: 25px;
+      padding: @std-padding;
     }
 
     h1 {
@@ -156,8 +159,9 @@
 
 .mainContainer {
   .bg {
-    background-image: url(/assets/images/placeholder-bg.jpg);
+    background-image: url(/img/homepage/coworkingBg.jpg);
     background-size: cover;
+    background-position: center;
     opacity: 0.6;
     top: 0;
     width: 100%;
