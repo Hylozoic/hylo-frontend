@@ -1,15 +1,12 @@
 <div class="main-content">
   <div class="all-sections">
 
-    <div class="row">
-      <div class="col-sm-6">
-        <h1>Recent Activity</h1>
-
-      </div>
-      <div class="col-sm-6 corner">
-        <a ng-click="markAllRead()">Mark all as read</a>
-      </div>
-    </div>
+    <a class="corner" ng-click="markAllRead()">
+      Mark all
+      <span class="hidden-xs">as</span>
+      read
+    </a>
+    <h1>Recent Activity</h1>
 
     <div class="notification" ng-repeat="event in activity" ng-class="{unread: event.unread}">
 
@@ -43,6 +40,10 @@
         </div>
       </div>
 
+    </div>
+
+    <div ng-if="activity.length == 0">
+      Activity on seeds you've joined, as well as comments or seeds that mention you by name, will appear here.
     </div>
 
   </div>
