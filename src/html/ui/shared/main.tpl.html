@@ -20,7 +20,7 @@
         <i class="icon-communities-new"></i>
       </a>
       <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="membership in currentUser.memberships">
+        <li ng-repeat="membership in currentUser.memberships|orderBy:'community.name'">
           <a ui-sref="community.seeds({community: membership.community.slug})">
             <div class="avatar" back-img="membership.community.avatar_url"></div>
             {{membership.community.name}}
