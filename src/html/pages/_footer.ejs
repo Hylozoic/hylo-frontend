@@ -17,7 +17,8 @@
 
 <script>
 $(document).ready(function(){
-  $(window).stellar({horizontalOffset: 0});
+	if (document.documentElement.clientWidth >= 480)
+	  $(window).stellar({horizontalOffset: 0});
 });
 
 /* Create HTML5 element for IE */
