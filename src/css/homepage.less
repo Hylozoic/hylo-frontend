@@ -8,6 +8,10 @@
   }
   h1 {
     font-size: 72px;
+    @media (max-width: @screen-xs-max) {
+      font-size: 60px;
+      padding: @std-padding;
+    }
   }
 
   h2 {
@@ -42,8 +46,20 @@
     &.transparent {
       border: 1px solid transparent;
       background-color: transparent;
-      &, .navbar-brand, a {
-        color: white !important;
+      @media (min-width: @screen-sm) {
+        &, .navbar-brand, a {
+          color: white !important;
+        }
+      }
+      @media (max-width: @screen-xs-max) {
+        .navbar-header {
+          &, a {
+            color: white !important;
+          }
+        }
+        .navbar-collapse {
+          background-color: white;
+        }
       }
     }
   }
@@ -57,8 +73,7 @@
   }
 
   .section-image {
-    width:  100px;
-    margin-top: -40px;
+    width: 100px;
     margin-bottom: 20px;
   }
 
@@ -66,6 +81,12 @@
     padding: 160px 0;
     color: white;
     background: url(img/homepage/coworkingBg.jpg) fixed;
+    @media (max-width: @screen-xs-max) {
+      padding: 10vh 0;
+      h1 {
+        font-size: 60px;
+      }
+    }
   }
 
   #section2 {
@@ -95,4 +116,30 @@
   #section7 {
   }
 
+  .testimonials {
+    margin-top: 25px;
+    .logo {
+      height: 110px;
+      margin: 15px;
+    }
+  }
+
+}
+
+.home-page, .about-page {
+  .parallax-section {
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    padding: 100px 0;
+    @media (max-width: @screen-xs-max) {
+      padding: 10vh 0;
+    }
+    background-size: cover !important;
+  }
+
+  footer {
+    margin-bottom: @std-padding;
+  }
 }
