@@ -30,16 +30,5 @@ module.exports = function ($stateProvider) {
         }
       }
     }
-  })
-  .state('onboarding.seeds2', {
-    url: '/h/onboarding/seeds/2',
-    views: {
-      onboarding: {
-        templateUrl: '/ui/onboarding/seeds2.tpl.html',
-        controller: /*@ngInject*/ function(onboarding, $scope) {
-          $scope.onboarding = onboarding;
-        }
-      }
-    }
   });
 };
