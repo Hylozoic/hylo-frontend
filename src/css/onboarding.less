@@ -2,19 +2,18 @@
   .full-screen-modal;
   .seed-body-text;
 
+  #main-container {
+    background: url(img/homepage/coworkingBg-faint.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+
   .main-content {
     padding: 30px 0;
   }
 
   .center {
     text-align: center;
-  }
-
-  #content > .container-fluid {
-    background-color: @hylo-teal;
-    &, p {
-      color: white;
-    }
   }
 
   h3, h4 {
@@ -28,8 +27,7 @@
   }
 
   a.button {
-    .rounded-button-clear;
-    border-color: white;
+    .rounded-button;
   }
 
   .footer {
@@ -53,23 +51,23 @@
   .request .dot {
     background-color: @request-color;
   }
+
+  .wrapper {
+    padding: @std-padding;
+    border: 1px solid @border-light;
+    margin-bottom: @std-padding;
+    background: white;
+  }
 }
 
 .onboarding-start {
 
-  .logos {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
-    margin-bottom: @std-padding * 2;
-  }
-
   .logo {
-    width: 180px;
-    margin-top: 8px;
-  }
-
-  .logotype {
-    width: 270px;
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    display: inline-block;
+    margin: @std-padding;
   }
 
   @media (max-width: @screen-xs-max) {
@@ -83,7 +81,11 @@
   }
 
   .leader-message {
-    margin-bottom: @std-padding;
+    border: 1px solid @border-light;
+    margin: @std-padding 0;
+    padding: @std-padding @std-padding 0;
+    background: white;
+
     img {
       .user-avatar;
       float: left;
@@ -93,30 +95,6 @@
       overflow: hidden;
     }
     overflow: hidden;
-  }
-}
-
-.onboarding-seeds2 {
-  img.example {
-    margin-bottom: 15px;
-    max-width: 100%;
-
-    @media (max-width: @screen-xs-max) {
-      display: none;
-    }
-
-    &.mobile {
-      display: none;
-      @media (max-width: @screen-xs-max) {
-        display: block;
-      }
-    }
-  }
-
-  h3 {
-    border-top: 1px solid white;
-    margin-top: @std-padding * 2;
-    padding-top: @std-padding * 2;
   }
 }
 

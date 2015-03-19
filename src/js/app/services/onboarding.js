@@ -7,9 +7,6 @@ var steps = {
   seeds: {
     state: 'onboarding.seeds',
   },
-  seeds2: {
-    state: 'onboarding.seeds2'
-  },
   newSeed: {
     state: 'community.newSeed'
   },
@@ -21,7 +18,7 @@ var steps = {
   }
 };
 
-var stepOrder = ['start', 'seeds', 'seeds2', 'newSeed', 'community', 'profile', 'done'];
+var stepOrder = ['start', 'seeds', 'newSeed', 'community', 'profile', 'done'];
 
 var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
 
@@ -117,6 +114,9 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
     },
     goBack: function() {
       this._goDelta(-1);
+    },
+    jump: function(name) {
+      this._go(name, true);
     },
     _goDelta: function(delta) {
       var next = stepOrder[_.indexOf(stepOrder, this.currentStep()) + delta];
