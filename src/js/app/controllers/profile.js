@@ -16,6 +16,13 @@ var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
     }
   }
 
+  $scope.normalizeUrl = function(url) {
+    if (url.substring(0, 4) === 'http')
+      return url;
+
+    return 'http://' + url;
+  };
+
 };
 
 module.exports = function(angularModule) {

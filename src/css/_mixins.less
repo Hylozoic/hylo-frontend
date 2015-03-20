@@ -151,6 +151,11 @@
   font-size: 24px;
 }
 
+.small-header() {
+  .proxima-nova-semibold;
+  font-size: 18px;
+}
+
 .seed-meta-text() {
   .proxima-nova-light;
   font-size: 13px;
@@ -391,4 +396,17 @@
       color: @default-text;
     }
   }
+}
+
+.styled-placeholders(@size) {
+  //Style placeholder text (cross browser compatible)
+  .placeholder-attributes() {
+    color: @detail-text;
+    font-style: italic;
+    font-size: @size;
+  }
+  ::-webkit-input-placeholder { .placeholder-attributes; }
+  :-moz-placeholder { .placeholder-attributes; }
+  ::-moz-placeholder { .placeholder-attributes; }
+  :-ms-input-placeholder { .placeholder-attributes; }
 }
