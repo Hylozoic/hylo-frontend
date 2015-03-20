@@ -2,7 +2,7 @@
   <div class="background" back-img="editData.banner_url"></div>
   <div class="buttons">
     <a class="edit-banner" ng-click="changeBanner()">
-      <i class="icon-add-background"></i>
+      <i class="icon-add-background hidden-xs"></i>
       Change Background
     </a>
     <a class="cancel" ng-click="cancel()">Cancel</a>
@@ -116,5 +116,9 @@
       <textarea ng-model="editData.extra_info" placeholder="Is there anything else you would like to share with the other members of your community?" maxlength="1000"></textarea>
     </section>
 
+    <div class="buttons">
+      <a class="cancel" ng-click="cancel()">Cancel</a>
+      <a class="save" ng-click="save()">Save</a>
+    </div>
   </div>
 </div>
