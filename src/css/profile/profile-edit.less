@@ -2,8 +2,27 @@
 
 .editProfile {
 
-  .banner div.buttons a {
-    .rounded-button;
+  .buttons a {
+    &.save {
+      .rounded-button-dark;
+    }
+  }
+
+
+  @media (max-width: @screen-xs-max) {
+    .main-content .buttons {
+      text-align: center;
+    }
+    .banner .buttons {
+      padding: 5px 0 @std-padding * 2;
+      text-align: center;
+      position: static;
+    }
+    .buttons a {
+      float: none !important;
+      display: inline-block !important;
+      margin: 0 !important;
+    }
   }
 
   .icon-edit-profile-photo {
@@ -22,14 +41,10 @@
     .info-column .name, .social-media > i {
       color: @default-text;
     }
-  }
 
-  .cancel, .edit-banner {
-    .rounded-button;
-  }
-
-  .save {
-    .rounded-button-dark;
+    @media (max-width: @screen-xs-max) {
+      height: auto;
+    }
   }
 
   textarea {
@@ -62,17 +77,6 @@
       width: 60px;
       line-height: 52px;
       font-size: 30px;
-    }
-
-    .banner {
-      height: auto;
-
-      .buttons {
-        padding-left: 0;
-        padding-right: 0;
-        text-align: center;
-        position: static;
-      }
     }
 
     .banner-content {
