@@ -48,8 +48,7 @@
     "node-dir": "^0.1.6",
     "pretty-date": "^0.2.0",
     "request": "latest",
-    "shelljs": "latest",
-    "uglifyify": "latest"
+    "shelljs": "latest"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",
