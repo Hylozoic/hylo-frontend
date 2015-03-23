@@ -44,20 +44,21 @@ require('./services/myHttpInterceptor')(app);
 
 app.factory('$exceptionHandler', function ($log) {
   return function (exception, cause) {
-    // Pass off the error to the default error handler
-    // on the AngularJS logger. This will output the
-    // error to the console (and let the application
-    // keep running normally for the user).
-    $log.error.apply($log, arguments);
+    if (!hyloEnv.isProd) {
+      throw exception;
+    }
 
-    if (hyloEnv.isProd) {
-      try {
-        Rollbar.error(exception);
-      } catch (loggingError) {
-        // For Developers - log the log-failure.
-        $log.warn("Error logging failed");
-        $log.log(loggingError);
-      }
+    try {
+      // Pass off the error to the default error handler
+      // on the AngularJS logger. This will output the
+      // error to the console (and let the application
+      // keep running normally for the user).
+      $log.error.apply($log, arguments);
+      Rollbar.error(exception);
+    } catch (loggingError) {
+      // For Developers - log the log-failure.
+      $log.warn("Error logging failed");
+      $log.log(loggingError);
     }
   };
 });
