@@ -11,7 +11,7 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: ['debowerify']
+      transform: ['browserify-ngannotate', 'debowerify']
     },
 
     // frameworks to use
@@ -54,6 +54,9 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],
+
+    // browserify takes a long time
+    browserNoActivityTimeout: 30000,
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
