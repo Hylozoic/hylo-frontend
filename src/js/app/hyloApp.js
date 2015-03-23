@@ -5,13 +5,36 @@ require('./directives/embeddedComments');
 require('./controllers');
 require('./services');
 
-var app = angular.module('hyloApp', [
-  'ngResource', 'ngAnimate', 'ngSanitize', 'ngIdle',
-  'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
-  'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
-  'ui.bootstrap', 'decipher.tags', 'angulartics', 'angulartics.segment.io',
-  "mentio", 'newrelic-timing'
-]);
+var dependencies = [
+  'angular-growl',
+  'angulartics',
+  'angulartics.segment.io',
+  'decipher.tags',
+  'http-auth-interceptor',
+  'hylo-auth-module',
+  'hyloControllers',
+  'hyloDirectives',
+  'hyloFilters',
+  'hyloServices',
+  'infinite-scroll',
+  'mentio',
+  'newrelic-timing',
+  'ngAnimate',
+  'ngIdle',
+  'ngResource',
+  'ngSanitize',
+  'ngTouch',
+  'ui.bootstrap',
+  'ui.router'
+];
+
+if (hyloEnv.environment == 'test') {
+  dependencies.push('ngMock');
+  dependencies.push('ngMockE2E');
+  dependencies.push('ngAnimateMock');
+}
+
+var app = angular.module('hyloApp', dependencies);
 
 require('./routes')(app);
 require('./animations')(app);

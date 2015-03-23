@@ -7,7 +7,7 @@
     "grunt-contrib-watch": "latest",
     "grunt-node-inspector": "^0.1.5",
     "karma": "^0.12.24",
-    "karma-bro": "^0.8.0",
+    "karma-browserify": "^4.0.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",

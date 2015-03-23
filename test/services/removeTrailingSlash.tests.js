@@ -1,14 +1,17 @@
 var removeTrailingSlash;
 
-require('../../src/js/app/services/removeTrailingSlash')({
-  config: function(callback) {
-    callback({
+var mockModule = {
+  config: function(args) {
+    // args[0] is annotation, args[1] is function
+    args[1]({
       rule: function(method) {
         removeTrailingSlash = method;
       }
     })
   }
-});
+};
+
+require('../../src/js/app/services/removeTrailingSlash')(mockModule);
 
 // mock the $location service
 var location = function(path) {
