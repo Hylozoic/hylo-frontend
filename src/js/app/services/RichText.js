@@ -14,7 +14,8 @@ module.exports = {
     text = linkify(text, {escape: false, attributes: {target: '_blank'}});
 
     // link hashtags
-    text = text.replace(/([^\w]|^)#(\w+)/g, format('$1<a href="/h/search?c=%s&q=%23$2">#$2</a>', opts.communityId));
+    // this is not ideal because it hardcodes the search path
+    text = text.replace(/([^\w]|^)#(\w+)/g, '$1<a href="/h/search?q=%23$2">#$2</a>');
 
     if (opts.maxlength)
       text = truncate(text, opts.maxlength);
