@@ -3,13 +3,18 @@
   "description": "A new kind of social network that helps real communities create, together.",
   "version": "1.0.0",
   "devDependencies": {
+    "chai": "^2.1.2",
     "grunt-contrib-watch": "latest",
     "grunt-node-inspector": "^0.1.5",
     "karma": "^0.12.24",
-    "karma-bro": "^0.8.0",
+    "karma-browserify": "^4.0.0",
+    "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",
+    "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-spec-reporter": "0.0.16",
+    "mocha": "^2.2.1",
     "node-static": "latest"
   },
   "dependencies": {
@@ -43,8 +48,7 @@
     "node-dir": "^0.1.6",
     "pretty-date": "^0.2.0",
     "request": "latest",
-    "shelljs": "latest",
-    "uglifyify": "latest"
+    "shelljs": "latest"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",

@@ -1,4 +1,4 @@
-var angularModule = angular.module('hyloControllers', ['hyloFilters']);
+var angularModule = angular.module('hyloControllers', []);
 
 require('./controllers/comments');
 require('./controllers/fulfillModal');

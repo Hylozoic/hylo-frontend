@@ -1,40 +1,63 @@
 require('./auth_module');
-require('./filters');
 require('./directives');
 require('./directives/embeddedComments');
 require('./controllers');
 require('./services');
 
-var app = angular.module('hyloApp', [
-  'ngResource', 'ngAnimate', 'ngSanitize', 'ngIdle',
-  'hyloServices', 'hyloDirectives', 'hyloFilters', 'hyloControllers', 'ui.router',
-  'angular-growl', 'http-auth-interceptor', 'hylo-auth-module', 'infinite-scroll', 'ngTouch',
-  'ui.bootstrap', 'decipher.tags', 'angulartics', 'angulartics.segment.io',
-  "mentio", 'newrelic-timing'
-]);
+var dependencies = [
+  'angular-growl',
+  'angulartics',
+  'angulartics.segment.io',
+  'decipher.tags',
+  'http-auth-interceptor',
+  'hylo-auth-module',
+  'hyloControllers',
+  'hyloDirectives',
+  'hyloServices',
+  'infinite-scroll',
+  'mentio',
+  'newrelic-timing',
+  'ngAnimate',
+  'ngIdle',
+  'ngResource',
+  'ngSanitize',
+  'ngTouch',
+  'ui.bootstrap',
+  'ui.router'
+];
+
+if (hyloEnv.environment == 'test') {
+  dependencies.push('ngMock');
+  dependencies.push('ngMockE2E');
+  dependencies.push('ngAnimateMock');
+}
+
+var app = angular.module('hyloApp', dependencies);
 
 require('./routes')(app);
 require('./animations')(app);
+require('./filters')(app);
 require('./features/mentions/userMentions')(app);
 require('./services/removeTrailingSlash')(app);
 require('./services/myHttpInterceptor')(app);
 
 app.factory('$exceptionHandler', function ($log) {
   return function (exception, cause) {
-    // Pass off the error to the default error handler
-    // on the AngularJS logger. This will output the
-    // error to the console (and let the application
-    // keep running normally for the user).
-    $log.error.apply($log, arguments);
+    if (!hyloEnv.isProd) {
+      throw exception;
+    }
 
-    if (hyloEnv.isProd) {
-      try {
-        Rollbar.error(exception);
-      } catch (loggingError) {
-        // For Developers - log the log-failure.
-        $log.warn("Error logging failed");
-        $log.log(loggingError);
-      }
+    try {
+      // Pass off the error to the default error handler
+      // on the AngularJS logger. This will output the
+      // error to the console (and let the application
+      // keep running normally for the user).
+      $log.error.apply($log, arguments);
+      Rollbar.error(exception);
+    } catch (loggingError) {
+      // For Developers - log the log-failure.
+      $log.warn("Error logging failed");
+      $log.log(loggingError);
     }
   };
 });
