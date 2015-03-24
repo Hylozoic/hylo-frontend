@@ -1,5 +1,4 @@
 require('./auth_module');
-require('./filters');
 require('./directives');
 require('./directives/embeddedComments');
 require('./controllers');
@@ -14,7 +13,6 @@ var dependencies = [
   'hylo-auth-module',
   'hyloControllers',
   'hyloDirectives',
-  'hyloFilters',
   'hyloServices',
   'infinite-scroll',
   'mentio',
@@ -38,6 +36,7 @@ var app = angular.module('hyloApp', dependencies);
 
 require('./routes')(app);
 require('./animations')(app);
+require('./filters')(app);
 require('./features/mentions/userMentions')(app);
 require('./services/removeTrailingSlash')(app);
 require('./services/myHttpInterceptor')(app);
