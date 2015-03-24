@@ -1,4 +1,4 @@
-var angularModule = angular.module('hyloDirectives', ['ngResource', 'hyloFilters']);
+var angularModule = angular.module('hyloDirectives', ['ngResource']);
 
 require('./directives/contenteditable')(angularModule);
 require('./directives/hylo_post')(angularModule);
