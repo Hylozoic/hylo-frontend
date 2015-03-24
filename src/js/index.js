@@ -30,5 +30,7 @@ require('./app/hyloApp');
 filepicker.setKey(hyloEnv.filepicker.key);
 
 if (hyloEnv.environment != 'test') {
-  angular.bootstrap(document.body, ['hyloApp'], {strictDi: true});
+  angular.element(document).ready(function() {
+    angular.bootstrap(document.body, ['hyloApp'], {strictDi: true});
+  });
 }
