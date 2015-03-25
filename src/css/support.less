@@ -5,6 +5,9 @@
 
 .faqs-page {
 	.section {
+		.make-sm-column(8);
+		.make-sm-column-push(2);
+
 		.section-title {
 			font-size: 30px;
 			line-height: 1;
@@ -30,8 +33,8 @@
 	}
 	.support-content {
 
-		.make-sm-column(8);
-		.make-sm-column-push(2);
+		.make-sm-column(6);
+		.make-sm-column-push(3);
 		padding-bottom: @std-padding*3;
 
 		h1 {
@@ -40,12 +43,14 @@
 			font-weight: 800;
 		}
 		h3 {
-			.section-title;
+			//.section-title;
+			.medium-header;
 			padding-top: @std-padding*2;
 		}
 
 		.question-title {
-			.small-title-text;
+			.small-header;
+			//.small-title-text;
 			padding-top: @std-padding;
 			padding-bottom: @std-padding/2;
 		}
