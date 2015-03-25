@@ -17,21 +17,39 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   $scope.editing = {};
   $scope.edited = {};
 
-  $scope.edit = function(field) {
+  $scope.edit = function(field, field2) {
     $scope.edited[field] = community[field];
     $scope.editing[field] = true;
+
+    if (field2) {
+      $scope.edited[field2] = community[field2];
+      $scope.editing[field2] = true;
+    }
   };
 
-  $scope.cancelEdit = function(field) {
+  $scope.cancelEdit = function(field, field2) {
     $scope.editing[field] = false;
+
+    if (field2) {
+      $scope.editing[field2] = false;
+    }
   };
 
-  $scope.saveEdit = function(field) {
+  $scope.saveEdit = function(field, field2) {
     $scope.editing[field] = false;
     var data = {};
+
     data[field] = $scope.edited[field];
+
+    if (field2 === 'leader') {
+      data.leader_id = $scope.edited.leader.id;
+    }
+
     community.update(data, function() {
       community[field] = $scope.edited[field];
+      if (field2) {
+        community[field2] = $scope.edited[field2];
+      }
       $analytics.eventTrack('Community: Changed Setting', {
         name: field,
         community_id: community.slug,
@@ -119,7 +137,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   };
 
   $scope.findMembers = function(search) {
-    return community.members({search: search}).$promise;
+    return community.members({autocomplete: search, limit: 5}).$promise;
   };
 
   $scope.addModerator = function(item, model, label) {
@@ -128,6 +146,10 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
       $scope.moderators.push(item);
       $analytics.eventTrack('Make Moderator', {user_id: item.id, user_name: item.name});
     })
+  };
+
+  $scope.setLeader = function(item) {
+    $scope.edited.leader = item;
   };
 
 };

@@ -72,20 +72,34 @@
         </div>
       </div>
 
-      <div class="setting-item">
+      <div class="setting-item welcome-message">
         <div class="full-column">
           <label>Welcome message</label>
           <p class="help">This is shown on the first screen that a new member sees.</p>
         </div>
         <div class="full-column value" ng-hide="editing.welcome_message">
+          <div class="avatar" back-img="community.leader.avatar_url"></div>
           <p>{{community.welcome_message}}</p>
-          <button type="button" ng-click="edit('welcome_message')">Change</button>
+          <button type="button" ng-click="edit('welcome_message', 'leader')">Change</button>
         </div>
         <div class="full-column edit" ng-show="editing.welcome_message">
           <textarea class="form-control" ng-model="edited.welcome_message" rows="4"></textarea>
-          <button type="button" ng-click="cancelEdit('welcome_message')">Cancel</button>
-          <button type="button" ng-click="saveEdit('welcome_message')">Save</button>
+
+          <p class="help">{{edited.leader.name}}'s image will be shown. Search for someone else:</p>
+          <input type="text" class="form-control" ng-model="selectedLeader"
+            typeahead="user.name for user in findMembers($viewValue)"
+            typeahead-min-length="2"
+            typeahead-template-url="/ui/shared/typeaheadUser.tpl.html"
+            typeahead-wait-ms="300"
+            typeahead-on-select="setLeader($item)"/>
+
+          <button type="button" ng-click="cancelEdit('welcome_message', 'leader')">Cancel</button>
+          <button type="button" ng-click="saveEdit('welcome_message', 'leader')">Save</button>
         </div>
+      </div>
+
+      <div class="setting-item">
+
       </div>
 
       <div class="setting-item invitation-permissions">
@@ -128,8 +142,6 @@
         </div>
       </div>
     </div>
-
-    <p class="section">The "Invite Members" section has been <a ui-sref="community.invite({community: community.slug})">moved</a>.</p>
 
   </div>
 </div>
