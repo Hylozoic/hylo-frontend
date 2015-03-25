@@ -3,21 +3,22 @@ var linkify = require('html-linkify'),
   truncate = require('html-truncate');
 
 module.exports = {
-  present: function(text, communitySlug, maxlength) {
+  present: function(text, opts) {
     if (!text) return '<p></p>';
 
     // wrap in a <p> tag
-    if (text.substring(0, 3) != '<p>')
+    if (!opts.skipWrap && text.substring(0, 3) != '<p>')
       text = format('<p>%s</p>', text);
 
     // make links
     text = linkify(text, {escape: false, attributes: {target: '_blank'}});
 
     // link hashtags
-    text = text.replace(/([^\w]|^)#(\w+)/g, format('$1<a href="/c/%s/search?q=%23$2">#$2</a>', communitySlug));
+    // this is not ideal because it hardcodes the search path
+    text = text.replace(/([^\w]|^)#(\w+)/g, '$1<a href="/h/search?q=%23$2">#$2</a>');
 
-    if (maxlength)
-      text = truncate(text, maxlength);
+    if (opts.maxlength)
+      text = truncate(text, opts.maxlength);
 
     return text;
   }

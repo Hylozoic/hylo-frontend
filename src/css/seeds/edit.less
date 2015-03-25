@@ -1,6 +1,14 @@
 .community-newSeed, .community-editSeed {
   .full-screen-modal;
 
+  .onboarding-text {
+  	.seed-body-text;
+  	margin-bottom: @std-padding;
+  	@media (min-width: @screen-sm) {
+      margin: 0 -@std-padding @std-padding;
+    }
+  }
+
 	.select-type {
 		.make-row;
 		border-bottom: 2px solid @default-border;
@@ -44,7 +52,7 @@
 
 			label {
 				.large-header;
-				color: @nonactive-text;
+				color: @inactive-text;
 			}
 
 			input[type=radio] {
@@ -52,9 +60,10 @@
 			}
 		}
 
-		.description {
-			text-align: center;
-			font-style: italic;
+		.help {
+		  @media (max-width: @screen-xs-max) {
+		  	padding: 0 @std-padding;
+		  }
 		}
 	}
 

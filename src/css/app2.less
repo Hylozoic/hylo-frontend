@@ -1,4 +1,3 @@
-@import 'menu.less';
 @import 'angular/charLimit';
 
 .spinner {
@@ -55,6 +54,7 @@
 body.angular-app {
   overflow: -moz-scrollbars-vertical;
   overflow-y: scroll;
+  min-height: 100vh;
 }
 
 #initializing-panel {
@@ -107,11 +107,7 @@ body.waiting-for-angular {
 }
 
 .button-rounded:hover {
-  background-color: @visible-gray-bkg;
-}
-
-.button-rounded.circle {
-  padding: 0px 8px;
+  background-color: @visible-gray-bg;
 }
 
 textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [contenteditable].no-border:focus {

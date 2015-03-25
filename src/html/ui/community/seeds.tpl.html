@@ -9,18 +9,29 @@
           </a>
 
           <div class="toolbar-right">
-            <select selectpicker ng-model="seedSort">
-              <option value="recent">Recent</option>
-              <option value="top">Top</option>
-              <!--<option value="magic">Serendipity</option>-->
-            </select>
+            <div class="btn-group" dropdown>
+              <a class="button" dropdown-toggle>
+                {{selected.sort.label}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="option in selectOptions.sort" ng-click="select('sort', option.value)">
+                  {{option.label}}
+                </li>
+              </ul>
+            </div>
 
-            <select id="filter-seed-type" selectpicker ng-model="seedFilter">
-              <option value="all">All Seeds</option>
-              <option value="intention">Intentions</option>
-              <option value="offer">Offers</option>
-              <option value="request">Requests</option>
-            </select>
+            <div class="btn-group" dropdown>
+              <a class="button" dropdown-toggle>
+                {{selected.filter.label}}
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="option in selectOptions.filter" ng-click="select('filter', option.value)">
+                  {{option.label}}
+                </li>
+              </ul>
+            </div>
 
             <a class="search" ui-sref="search({c: community.id})">
               <i class="icon-search"></i>
@@ -33,12 +44,13 @@
   </div>
 
   <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 posts">
-    <div infinite-scroll="query()"
+    <div infinite-scroll="loadMore()"
          infinite-scroll-distance="1"
-         infinite-scroll-disabled="disableInfiniteScroll">
+         infinite-scroll-disabled="loadMoreDisabled"
+         infinite-scroll-immediate-check="false">
 
-      <div ng-repeat="post in posts track by post.id" class="row">
-        <hylo-post post="post" short="true" remove-fn="remove(postToRemove)">
+      <div ng-repeat="seed in seeds track by seed.id" class="row">
+        <hylo-post post="seed" short="true" remove-fn="remove(postToRemove)">
         </hylo-post>
       </div>
 

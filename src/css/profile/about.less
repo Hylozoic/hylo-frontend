@@ -1,48 +1,19 @@
 /* Styles for the about section, shared across main profile view & edit profile view */
 .profile .about, .editProfile .about {
-  .section-header {
-    .proxima-nova-bold;
-    font-size: 18px;
-    line-height: 2;
-    color: @light-gray;
-    margin-top: @std-padding*2;
 
-    @media (max-width: @screen-xs-max) {
-      &.mobile-first {
-        margin-top: 0px;
+  section {
+    margin-bottom: 30px;
+
+    h2 {
+      .small-header;
+      line-height: 1.8em;
+      color: @readable-text;
+      margin: 0;
+
+      .help {
+        .seed-meta-text;
       }
     }
-    @media (min-width: @screen-sm) {
-      &.desktop-first {
-        margin-top: 0px;
-      }
-    }
-
-    .helper-text {
-      .proxima-nova-regular;
-      font-size: 16px;
-    }
-  }
-
-  .clickable-list {
-    li {
-      padding: 0;
-      a, a:hover {
-        .seed-body-text;
-      }
-    }
-  }
-
-  .list-entry, .about-entry {
-    .seed-body-text;
-  }
-
-  input[type="text"] {
-    .borderless-text-input;
-    width: 100%;
-    margin-bottom: @std-padding;
-    border-bottom: 1px solid @border-light;
-    line-height: 28px;
   }
 
   ul {
@@ -65,20 +36,40 @@
     }
   }
 
-  textarea, li {
-    .proxima-nova-regular;
-    font-size: 14px;
-    color: @readable-text;
+  .styled-placeholders(14px);
+}
+
+.profile .about {
+  section {
+    ul {
+      li {
+        padding: 0;
+        &, a, a:hover {
+          .seed-body-text;
+        }
+      }
+    }
+    .entry {
+      .seed-body-text;
+    }
+  }
+}
+
+.editProfile .about {
+
+  input[type="text"] {
+    .borderless-text-input;
+    width: 100%;
+    margin-bottom: @std-padding;
+    border-bottom: 1px solid @border-light;
+    line-height: 28px;
   }
 
-  //Style placeholder text (cross browser compatible)
-  .placeholder-attributes() {
-    color: @nonactive-text;
-    font-style: italic;
-    font-size: 14px;
+  textarea {
+    .seed-body-text;
+    @media (max-width: @screen-xs-max) {
+      min-height: 12vh;
+    }
   }
-  ::-webkit-input-placeholder { .placeholder-attributes;}
-  :-moz-placeholder { .placeholder-attributes;}
-  ::-moz-placeholder { .placeholder-attributes;}
-  :-ms-input-placeholder { .placeholder-attributes;}
+
 }

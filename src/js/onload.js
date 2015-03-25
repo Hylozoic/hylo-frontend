@@ -8,7 +8,9 @@ hyloEnv.onUser(function(user) {
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
     createdAt: user.date_created,
-    created: user.date_created
+    created: user.date_created,
+    community_name: user.memberships[0].community.name,
+    community_id: user.memberships[0].community.id,
   });
 
   // rollbar
@@ -33,8 +35,9 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 // Prevents backspace except in the case of textareas and text inputs to prevent user navigation.
-$(document).keydown(function (e) {
-  var preventKeyPress;
+document.addEventListener('keydown', function (e) {
+  var preventKeyPress = false;
+
   if (e.keyCode == 8) {
     var d = e.srcElement || e.target;
     switch (d.tagName.toUpperCase()) {
@@ -43,7 +46,7 @@ $(document).keydown(function (e) {
         break;
       case 'INPUT':
         preventKeyPress = d.readOnly || d.disabled ||
-        (d.attributes["type"] && $.inArray(d.attributes["type"].value.toLowerCase(), ["radio", "checkbox", "submit", "button"]) >= 0);
+        (d.attributes["type"] && _.contains(["radio", "checkbox", "submit", "button"], d.attributes["type"].value.toLowerCase()));
         break;
       case 'DIV':
         preventKeyPress = d.readOnly || d.disabled || !(d.attributes["contentEditable"] && d.attributes["contentEditable"].value == "true");
@@ -53,11 +56,6 @@ $(document).keydown(function (e) {
         break;
     }
   }
-  else
-    preventKeyPress = false;
 
-  if (preventKeyPress) {
-    console.log("preventing backspace");
-    e.preventDefault();
-  }
+  if (preventKeyPress) e.preventDefault();
 });

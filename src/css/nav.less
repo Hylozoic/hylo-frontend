@@ -1,0 +1,117 @@
+
+#nav {
+  @item-height: 34px;
+  @vertical-padding: 10px;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  padding: @vertical-padding @std-padding 0;
+  height: @item-height + @vertical-padding * 2;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid @border-light;
+
+  [dropdown] {
+    position: relative;
+    height: 32px;
+    vertical-align: top;
+    &.open {
+      a.button {
+        background-color: @light-gray;
+      }
+      .tooltip {
+        display: none !important;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    min-width: initial;
+    margin-top: @vertical-padding + 1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    max-height: 70vh;
+    overflow-y: scroll;
+
+    .disabled {
+      color: @inactive-text;
+      line-height: 1.4em;
+    }
+
+    a {
+      line-height: 42px;
+      padding: 0 20px;
+    }
+  }
+
+  a.button {
+    .circular-button(@item-height);
+    line-height: @item-height;
+  }
+
+  > div {
+    float: left;
+    display: block;
+    margin-right: 10px;
+  }
+
+  .avatar {
+    background-position: center;
+    background-size: cover;
+  }
+
+  .communities {
+    .avatar {
+      width: 32px;
+      height: 32px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    .dropdown-menu a {
+      padding-left: 10px;
+    }
+
+    .tooltip-inner {
+      margin-left: 52px;
+    }
+  }
+
+  .profile {
+    float: right;
+    margin-right: 0;
+
+    .dropdown-menu {
+      left: initial;
+      right: 0;
+    }
+
+    .tooltip-inner {
+      margin-left: -76px;
+    }
+  }
+
+  .tooltip {
+    max-width: none;
+  }
+
+  .tooltip-inner {
+    padding: 6px 10px;
+    max-width: none;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    padding: 10px 0;
+
+    > div {
+      width: 25%;
+      margin: 0;
+      text-align: center;
+    }
+
+    .tooltip {
+      display: none !important;
+    }
+  }
+}

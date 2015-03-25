@@ -1,29 +1,50 @@
 <div class="main-content">
   <div class="all-sections">
-    <h3>We share our skills, resources, and ideas by creating "seeds".</h3>
+    <h3>We share our skills, resources, and ideas by<br/>"planting seeds".</h3>
 
-    <p>Seeds are visible to everyone in the community. There are three kinds of seeds:</p>
+    <div class="wrapper">
+      <p>Seeds are visible to everyone in the community. There are three kinds of seeds:</p>
 
-    <h2 class="offer">
-      <span class="dot"></span>
-      Offer
-    </h2>
-    <p>Anything you have that you want to share. It could be any skill, item, information, or opportunity, from your professional or personal life.</p>
+      <h2 class="offer">
+        <span class="dot"></span>
+        Offer
+      </h2>
+      <p>Anything you have that you want to share. It could be any skill, item, information, or opportunity, from your professional or personal life.</p>
 
-    <h2 class="request">
-      <span class="dot"></span>
-      Request
-    </h2>
-    <p>Something you're looking for--again, any skill, item, information, or opportunity, whether personal or professional.</p>
+      <ul>
+        <li>"I'd like to offer a class in nonviolent communication."</li>
+        <li>"I'd like to share my graphic design skills."</li>
+        <li>"I'd like to share free tickets to tonight's game."</li>
+      </ul>
 
-    <h2 class="intention">
-      <span class="dot"></span>
-      Intention
-    </h2>
-    <p>A vision of something you'd like to create, with the support of your community.</p>
+      <h2 class="request">
+        <span class="dot"></span>
+        Request
+      </h2>
+      <p>Something you're looking for--again, any skill, item, information, or opportunity, whether personal or professional.</p>
+
+      <ul>
+        <li>"I'm looking for a good accountant to help me with my taxes."</li>
+        <li>"I'm looking for a jigsaw that I can borrow for a weekend."</li>
+        <li>"I'm looking for feedback on my latest blog post."</li>
+      </ul>
+
+      <h2 class="intention">
+        <span class="dot"></span>
+        Intention
+      </h2>
+      <p>A vision of something you'd like to create, with the support of your community.</p>
+
+      <ul>
+        <li>"I'd like to create a community garden."</li>
+        <li>"I'd like to start a Toastmasters group."</li>
+        <li>"I'd like to create a children's book about endangered jungle wildlife."</li>
+      </ul>
+    </div>
 
     <div class="center footer">
-      <a class="button" ng-click="onboarding.goNext()">Let's see some examples!</a>
+      <a class="button" ng-click="onboarding.goNext()">Create your own</a>
+      <a class="button" ng-click="onboarding.jump('community')">Not now</a>
     </div>
     <a ng-click="onboarding.goBack()" ng-show="onboarding && onboarding.allowBack">Back</a>
   </div>

@@ -27,7 +27,7 @@ module.exports = function(opts) {
     var blob = blobs[0],
       // trim the old path "orig/" and replace spaces
       filename = blob.key.substring(5).replace(/ /g, '_'),
-      convertStoreOptions = $.extend(storeOptions, {
+      convertStoreOptions = _.extend(storeOptions, {
         path: path.join(opts.path, filename)
       });
 

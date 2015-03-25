@@ -17,10 +17,10 @@
 </div>
 
 <div class="member-list"
-  infinite-scroll="loadMore()"
-  infinite-scroll-distance="1"
-  infinite-scroll-disabled="loadMoreDisabled"
-  infinite-scroll-immediate-check="false">
+     infinite-scroll="loadMore()"
+     infinite-scroll-distance="1"
+     infinite-scroll-disabled="loadMoreDisabled"
+     infinite-scroll-immediate-check="false">
 
   <div ng-repeat="user in users | orderBy:'name'" class="member">
     <a class="avatar" back-img="::user.avatar_url" ui-sref="profile({id: user.id})"></a>

@@ -1,13 +1,12 @@
-	<footer class="text-center">
-	  <ul class="footer-links">
-	    <li>&copy; Copyright 2015 Hylo Inc.</li>
-	    <li><a href="https://www.hylo.com/about">About</a></li>
-	    <li><a href="https://www.hylo.com/invitecode">Sign Up</a></li>
-	    <li><a href="https://www.hylo.com/policies/terms-of-service">Terms of Service</a></li>
-	  </ul>
-	  Powered By: <a href="https://mixpanel.com/f/partner">Mixpanel Analytics</a>
-	</footer>
-</div>
+<footer class="text-center">
+  <ul class="footer-links">
+    <li>&copy; Copyright 2015 Hylo Inc.</li>
+    <li><a href="https://www.hylo.com/about">About</a></li>
+    <li><a href="https://www.hylo.com/invitecode">Sign Up</a></li>
+    <li><a href="https://www.hylo.com/policies/terms-of-service">Terms of Service</a></li>
+  </ul>
+  Thanks to <a href="https://mixpanel.com/f/partner">Mixpanel</a>
+</footer>
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -18,7 +17,8 @@
 
 <script>
 $(document).ready(function(){
-  $(window).stellar({horizontalOffset: 0});
+	if (document.documentElement.clientWidth >= 480)
+	  $(window).stellar({horizontalOffset: 0});
 });
 
 /* Create HTML5 element for IE */
