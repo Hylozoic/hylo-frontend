@@ -68,15 +68,10 @@
     background-size: cover;
     display: inline-block;
     margin: @std-padding;
-  }
 
-  @media (max-width: @screen-xs-max) {
-    .logo {
-      width: 110px;
-      margin-top: 3px;
-    }
-    .logotype {
-      width: 150px;
+    @media (max-width: @screen-xs-max) {
+      width: 100px;
+      height: 100px;
     }
   }
 
@@ -91,10 +86,10 @@
       float: left;
       margin: 0 @std-padding @std-padding 0;
     }
-    div {
+
+    p.message {
       overflow: hidden;
     }
-    overflow: hidden;
   }
 }
 
@@ -181,7 +176,7 @@
     .triangle {
       display: block;
       position: absolute;
-      top: -10px;
+      top: -9px;
       right: 7px;
       width: 0;
       height: 0;

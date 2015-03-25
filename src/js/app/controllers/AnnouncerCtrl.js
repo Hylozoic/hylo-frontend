@@ -10,6 +10,7 @@ var controller = function($scope, $rootScope, Onboarding) {
   });
 
   $rootScope.$on('announcer:hide', function() {
+    $scope.className = null;
     $scope.active = false;
   })
 
