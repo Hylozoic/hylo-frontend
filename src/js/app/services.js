@@ -50,43 +50,7 @@ factory("Post", ["$resource",
             }
           }
         })
-}]).
-
-factory("Seed", ["$resource",
-  function($resource) {
-
-    var Seed = $resource("/noo/seed/:id/:action", {
-      id: '@id'
-    }, {
-      comment: {
-        method: "POST",
-        params: {
-          action: "comment"
-        }
-      },
-      addFollowers: {
-        method: 'POST',
-        params: {
-          action: 'followers'
-        }
-      },
-      follow: {
-        method: 'POST',
-        params: {
-          action: 'follow'
-        }
-      }
-    });
-
-    // let's make things a bit more OO around here
-    _.extend(Seed.prototype, {
-      update: function(params, success, error) {
-        return Seed.save(_.extend({id: this.id}, params), success, error);
-      },
-    });
-
-    return Seed;
-  }]);
+}]);
 
 // resources
 require('./services/user')(angularModule);
@@ -94,6 +58,7 @@ require('./services/community')(angularModule);
 require('./services/Activity')(angularModule);
 require('./services/Comment')(angularModule);
 require('./services/Search')(angularModule);
+require('./services/Seed')(angularModule);
 
 // other services
 require('./services/bodyClass').service(angularModule);
@@ -101,4 +66,5 @@ require('./services/onboarding')(angularModule);
 require('./services/clickthroughTracker')(angularModule);
 require('./services/history')(angularModule);
 require('./services/dialog')(angularModule);
+require('./services/Cache')(angularModule);
 require('./services/popupDone');

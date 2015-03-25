@@ -1,5 +1,5 @@
 body.search {
-  .full-screen-modal;
+  .simple-page;
 
   .search-input {
     .proxima-nova-light;
@@ -75,5 +75,12 @@ body.search {
     display: block;
     text-align: center;
     margin-bottom: @std-padding * 2;
+  }
+
+  .no-results {
+    @media (max-width: @screen-xs-max) {
+      padding-left: @std-padding;
+      padding-right: @std-padding;
+    }
   }
 }

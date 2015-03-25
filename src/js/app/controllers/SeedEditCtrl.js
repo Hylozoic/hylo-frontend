@@ -1,7 +1,7 @@
 var filepickerUpload = require('../services/filepickerUpload'),
   format = require('util').format;
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache) {
 
   $scope.onboarding = onboarding;
 
@@ -67,11 +67,17 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     if (invalidTitle) alert('Please fill in a title');
 
     return !invalidTitle;
-  }
+  };
+
+  var clearCache = function() {
+    Cache.drop('community.seeds:' + community.id);
+    Cache.drop('profile.seeds:' + currentUser.id);
+  };
 
   var update = function(data) {
     seed.update(data, function() {
-      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention});
+      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
+      clearCache();
       $state.go('seed', {community: community.slug, seedId: seed.id});
       growl.addSuccessMessage('Seed updated.');
     }, function(err) {
@@ -83,7 +89,8 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   var create = function(data) {
     new Seed(data).$save(function() {
-      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention});
+      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
+      clearCache();
       if ($scope.onboardingMode) {
         onboarding.markSeedCreated(data.type);
       } else {

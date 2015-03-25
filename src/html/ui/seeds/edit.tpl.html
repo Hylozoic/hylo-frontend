@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <i class="icon-hylo-script" ng-click="close()" ng-hide="onboardingMode"></i>
   </div>
@@ -8,6 +8,11 @@
 
 <div class="main-content">
   <div class="all-sections">
+    <div ng-if="onboardingMode" class="onboarding-text">
+      <p>Here, you can create your first seed. We encourage you to create an Offer. If you're not sure what to offer, remember that it can be any thing, service, knowledge, or experience, drawing from your personal or professional life.</p>
+
+      <p><strong>Think of this as a way of introducing yourself.</strong> What's something that you can offer that might surprise or delight your fellow community members?</p>
+    </div>
 
     <div class="select-type">
       <div class="option intention" ng-class="{active: seedType==='intention'}">
@@ -51,7 +56,7 @@
         mentio-select="getPeopleTextRaw(item)"
         mentio-typed-term="typedTerm">
       </div>
-      <p class="help">This seed will be visible only to other members of your community.</p>
+      <p class="help">This seed will be visible only to other members of your community. You can edit or remove it at any time.</p>
     </div>
 
     <div class="bottom-bar">
@@ -69,8 +74,8 @@
       </div>
 
       <div class="add-meta done">
-        <button ng-click="onboarding.goNext()" ng-show="onboardingMode && onboarding.canSkipSeedForm()" class="skip">
-          Skip
+        <button ng-click="onboarding.goNext()" ng-show="onboardingMode" class="skip">
+          Not Now
         </button>
         <button type="button" class="save" ng-click="save()" ng-disabled="saving">
           <i class="icon-little-check"></i>
@@ -79,10 +84,6 @@
         </button>
       </div>
     </div>
-
-    <div class="notifications"></div>
-
-    <a ng-click="storeProgress(); onboarding.goBack()" ng-show="onboardingMode">See instructions again</a>
 
   </div>
 </div>

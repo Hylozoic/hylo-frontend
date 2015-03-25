@@ -33,7 +33,7 @@
 
 @default-button-height: 32px;
 
-.rounded-button() {
+.rounded-button(@size: @default-button-height) {
   .proxima-nova-regular;
   font-size: 14px;
   text-decoration: none; //this removes hover effect
@@ -41,10 +41,10 @@
   background-color: white;
   cursor: pointer;
   border: 1px solid @light-gray;
-  border-radius: @default-button-height;
+  border-radius: @size;
   display: inline-block;
-  height: @default-button-height;
-  line-height: 30px;
+  height: @size;
+  line-height: @size - 2px;
   padding: 0px 15px;
   outline: none;
   > i {
@@ -69,6 +69,13 @@
   &:active {
     background-color: rgba(255, 255, 255, 0.3);
   }
+}
+
+.circular-button(@size: @default-button-height) {
+  .rounded-button(@size);
+  width: @size;
+  text-align: center;
+  padding: 0;
 }
 
 .transform (@rule) {
@@ -144,6 +151,11 @@
   font-size: 24px;
 }
 
+.small-header() {
+  .proxima-nova-semibold;
+  font-size: 18px;
+}
+
 .seed-meta-text() {
   .proxima-nova-light;
   font-size: 13px;
@@ -167,13 +179,13 @@
   .proxima-nova-regular;
   font-size: 18px;
   line-height: 20px;
-  color: @title-color;
+  color: @default-text;
 }
 
 .seed-body-text() {
   .proxima-nova-light;
   font-size: 15px;
-  color: @text-medium-dark;
+  color: @readable-text;
   line-height: 1.25em;
 }
 
@@ -215,7 +227,7 @@
 }
 
 .big-close() {
-  .proxima-nova-bold;
+  .proxima-nova-regular;
   &, &:hover { color: @default-text; }
   font-size: 42px;
   cursor: pointer;
@@ -384,4 +396,17 @@
       color: @default-text;
     }
   }
+}
+
+.styled-placeholders(@size) {
+  //Style placeholder text (cross browser compatible)
+  .placeholder-attributes() {
+    color: @detail-text;
+    font-style: italic;
+    font-size: @size;
+  }
+  ::-webkit-input-placeholder { .placeholder-attributes; }
+  :-moz-placeholder { .placeholder-attributes; }
+  ::-moz-placeholder { .placeholder-attributes; }
+  :-ms-input-placeholder { .placeholder-attributes; }
 }

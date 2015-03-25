@@ -72,8 +72,8 @@
   }
 
   @media (max-width: @screen-xs-max) {
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -113,7 +113,7 @@
 
     .comment-placeholder {
       font-style: italic;
-      color: @nonactive-text;
+      color: @inactive-text;
       top: -20px;
       max-height: 5px;
       position: relative;
@@ -127,11 +127,7 @@
 
 }
 
-//downsize the comment margins on mobile
 @media (max-width: @screen-xs-max) {
-  .comments {
-    margin-left: 0;
-  }
 
   .comments .comment {
 
@@ -177,5 +173,9 @@
 
   button {
     .rounded-button;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    margin-right: 5px;
   }
 }

@@ -1,3 +1,6 @@
 <div id="announcer" ng-controller="AnnouncerCtrl">
-<a ng-click="go()" animate-if="active" animation="drop-in">{{text}}</a>
+  <a ng-click="go()" ng-class="className" animate-if="active" animation="drop-in" scroll-class='scrolling' scroll-class-threshold='46'>
+    <div class="triangle"></div>
+    {{text}}
+  </a>
 </div>

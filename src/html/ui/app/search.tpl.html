@@ -1,16 +1,7 @@
-<nav class="navbar navbar-default navbar-hylo-create" role="navigation">
-  <div class="navbar-header">
-    <i class="icon-hylo-script" ng-click="close()"></i>
-  </div>
-  <div class="navbar-center" href="#">
-    Search
-    <span ng-if="community">in {{community.name}}</span>
-  </div>
-  <a class="navbar-right close" ng-click="close()">&times;</a>
-</nav>
-
 <div class="main-content">
   <div class="all-sections">
+
+    <h1>Search <span ng-if="community">in {{community.name}}</span></h1>
 
     <input type="text" class="search-input" ng-model="query" placeholder="Type to search" autofocus/>
 
@@ -29,7 +20,7 @@
           Load {{pageSize('people')}} more (out of {{remaining('people')}})
         </a>
 
-        <div ng-if="!searching && results.people.length == 0">
+        <div ng-if="!searching && results.people.length == 0" class="no-results">
           No people matched your search.
         </div>
 
@@ -45,7 +36,7 @@
           Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})
         </a>
 
-        <div ng-if="!searching && results.seeds.length == 0">
+        <div ng-if="!searching && results.seeds.length == 0" class="no-results">
           No seeds matched your search.
         </div>
 

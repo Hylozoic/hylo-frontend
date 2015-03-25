@@ -2,18 +2,17 @@
   <div class="all-sections">
 
     <div class="center">
-      <h3>Welcome to</h3>
+      <h3>Welcome to {{onboarding.community.name}}</h3>
+      <div class="logo" back-img="::onboarding.community.avatar_url"></div>
+      <div class="logo" back-img="'<%= imageUrl('logotype-teal-transparent.png') %>'"></div>
     </div>
 
-    <div class="center logos">
-      <img src="<%= imageUrl('merkaba.png') %>" class="logo"/>
-      <img src="<%= imageUrl('logotype-white-transparent.png') %>" class="logotype"/>
-
-      <h4>Discover the people, skills, and resources all around you. Together, we can create anything we can imagine.</h4>
+    <div class="center">
+      <h4>Discover the people, skills, and resources all around you with Hylo. Together, we can create anything we can imagine.</h4>
     </div>
 
     <div class="leader-message">
-      <p>Thank you for accepting {{onboarding.community.leader.name}}'s invitation to join the {{onboarding.community.name}} community on Hylo. Let's learn how it works.</p>
+      <p>Thank you for accepting {{onboarding.community.leader.name}}'s invitation to join {{onboarding.community.name}} on Hylo. Let's learn how it works.</p>
       <img ng-src="{{onboarding.community.leader.avatar_url}}"/>
       “{{onboarding.community.welcome_message}}”
     </div>

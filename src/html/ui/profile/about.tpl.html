@@ -1,114 +1,101 @@
 <div class="about">
-	<div class="section-header visible-xs mobile-first">About me</div>
-	<span ng-if="!user.bio" class="visible-xs">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile"><i class="icon-edit" title="icon-edit"></i> Add a brief bio.</span>
+	<section ng-if="user.bio || isSelf" class="visible-xs">
+		<h2>About me</h2>
+		<a class="message" ng-if="isSelf && !user.bio" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Tell us about yourself.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled anything in yet.</span>
-	</span>
-	<div class="about-entry visible-xs">{{user.bio}}</div>
+		<div class="entry">{{user.bio}}</div>
+	</section>
 
-	<div class="section-header desktop-first">What I am doing</div>
-	<span ng-if="!user.work">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add what you are working on.
-		  </span>
+	<section ng-if="user.work || isSelf">
+		<h2>What I am doing</h2>
+		<a class="message" ng-if="isSelf && !user.work" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Tell us what you're working on.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled anything in yet.</span>
-	</span>
-	<div class="about-entry">{{user.work}}</div>
+		<div class="entry">{{user.work}}</div>
+	</section>
 
-	<div class="section-header">What I'd like to do</div>
-	<span ng-if="!user.intention">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add what you are working on.
-		  </span>
+	<section ng-if="user.intention || isSelf">
+		<h2>What I would like to do</h2>
+		<a class="message" ng-if="isSelf && !user.intention" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Tell us about your goals and dreams.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled anything in yet.</span>
-	</span>
-	<div class="about-entry">{{user.intention}}</div>
+		<div class="entry">{{user.intention}}</div>
+	</section>
 
-	<div class="section-header">Skills I can share</div>
-	<span ng-if="user.skills.length < 1">
-		<a class="message">
-			<span ng-if="isSelf" ui-sref="editProfile">
-				<i class="icon-edit" title="icon-edit"></i>
-				Add a skill.
-			</span>
+	<section ng-if="user.skills.length > 0 || isSelf">
+		<h2>Skills I can share</h2>
+		<a class="message" ng-if="iself && user.skills.length == 0">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add your skills.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not added any skills yet.</span>
-	</span>
-	<ul class="clickable-list">
-		<li ng-repeat="skill in user.skills">
-			<a ui-sref="search({c: community.id, q: skill})">{{skill}}</a>
-		</li>
-	</ul>
+		<ul>
+			<li ng-repeat="skill in user.skills">
+				<a ui-sref="search({c: community.id, q: skill})">{{skill}}</a>
+			</li>
+		</ul>
+	</section>
 
-	<div class="section-header">Affiliations</div>
-	<span ng-if="user.organizations.length < 1">
-		<a class="message">
-			<span ng-if="isSelf" ui-sref="editProfile">
-				<i class="icon-edit" title="icon-edit"></i>
-				Add an affiliation.
-			</span>
+	<section ng-if="user.organizations.length > 0 || isSelf">
+		<h2>Affiliations</h2>
+		<a class="message" ng-if="iself && user.organizations.length == 0">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add your affiliations.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not added any affiliations yet.</span>
-	</span>
-	<ul class="clickable-list">
-		<li ng-repeat="org in user.organizations">
-			<a ui-sref="search({c: community.id, q: org})">{{org}}</a>
-		</li>
-	</ul>
+		<ul>
+			<li ng-repeat="org in user.organizations">
+				<a ui-sref="search({c: community.id, q: org})">{{org}}</a>
+			</li>
+		</ul>
+	</section>
 
-	<div class="section-header">Phone</div>
-	<span ng-if="!user.phones">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add your phone number.
-		  </span>
+	<section ng-if="user.phones.length > 0 || isSelf">
+		<h2>Phone numbers</h2>
+		<a class="message" ng-if="isSelf && user.phones.length == 0" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add your phone number(s).
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled in a phone number yet.</span>
-	</span>
-	<div ng-repeat="phone in user.phones" class="list-entry">{{phone}}</div>
+		<ul>
+			<li ng-repeat="phone in user.phones">{{phone}}</li>
+		</ul>
+	</section>
 
-	<div class="section-header">Email</div>
-	<span ng-if="!user.emails">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add your email address.
-		  </span>
+	<section ng-if="user.emails.length > 0 || isSelf">
+		<h2>Email addresses</h2>
+		<a class="message" ng-if="isSelf && user.emails.length == 0" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add your email address(es).
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled in an email address yet.</span>
-	</span>
-	<div ng-repeat="email in user.emails" class="list-entry">{{email}}</div>
+		<ul>
+			<li ng-repeat="email in user.emails">
+				<a target="_blank" ng-href="mailto:{{email}}">{{email}}</a>
+			</li>
+		</ul>
+	</section>
 
-	<div class="section-header">Website</div>
-	<span ng-if="!user.websites">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add your website url.
-		  </span>
+	<section ng-if="user.websites.length > 0 || isSelf">
+		<h2>Links</h2>
+		<a class="message" ng-if="isSelf && user.websites.length == 0" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add website links.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled in a website yet.</span>
-	</span>
-	<div ng-repeat="websites in user.websites" class="list-entry">{{websites}}</div>
+		<ul>
+			<li ng-repeat="website in user.websites">
+				<a target="_blank" ng-href="{{normalizeUrl(website)}}">{{website}}</a>
+			</li>
+		</ul>
+	</section>
 
-	<div class="section-header">Additional Information</div>
-	<span ng-if="!user.extra_info">
-		<a class="message">
-		  <span ng-if="isSelf" ui-sref="editProfile">
-		  	<i class="icon-edit" title="icon-edit"></i>
-		  	Add anything else you want other people to know about you here.
-		  </span>
+	<section ng-if="user.extra_info || isSelf">
+		<h2>What I would like to do</h2>
+		<a class="message" ng-if="isSelf && !user.extra_info" ui-sref="editProfile">
+			<i class="icon-edit" title="icon-edit"></i>
+			Add anything else you want other people to know about you here.
 		</a>
-		<span ng-if="!isSelf" class="message">This member has not filled anything in yet.</span>
-	</span>
-	<div class="about-entry">{{user.extra_info}}</div>
+		<div class="entry">{{user.extra_info}}</div>
+	</section>
+
 </div>

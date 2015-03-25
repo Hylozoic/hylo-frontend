@@ -1,10 +1,11 @@
-var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog) {
+var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog, Cache) {
   $scope.community = community;
   $scope.canInvite = community.canModerate || community.settings.all_can_invite;
   $scope.canModerate = community.canModerate;
   $scope.users = users;
 
   $scope.loadMore = _.debounce(function() {
+    if ($scope.loadMoreDisabled) return;
     $scope.loadMoreDisabled = true;
 
     community.members({
@@ -14,11 +15,13 @@ var controller = function($scope, $timeout, $analytics, $modal, community, users
     }, function(users) {
       Array.prototype.push.apply($scope.users, users);
 
+      Cache.set('community.members:' + community.id, $scope.users, {maxAge: 10 * 60});
+
       if (users.length > 0 && $scope.users.length < users[0].total)
         $scope.loadMoreDisabled = false;
     });
 
-  }, 100);
+  }, 200);
 
   $scope.search = function(term) {
     $scope.$state.go('search', {c: community.id, q: term});
