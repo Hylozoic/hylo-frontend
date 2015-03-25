@@ -37,6 +37,7 @@ var proxy = function(req, res, upstream, port) {
 var staticPathList = [
   '',
   '/app',
+  '/faq',
   '/about',
   '/about/team',
   '/about/careers',

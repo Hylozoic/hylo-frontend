@@ -75,6 +75,16 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('support', {
+      url: '/h/support',
+      parent: 'main',
+      views: {
+        main: {
+          templateUrl: '/ui/support/base.tpl.html',
+          controller: 'SupportCtrl'
+        }
+      }
+    })
     .state('notifications', {
       url: '/h/notifications',
       parent: 'main',
