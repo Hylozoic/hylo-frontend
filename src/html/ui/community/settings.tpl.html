@@ -15,33 +15,35 @@
     </div>
     <div class="section appearance" collapse="!expand1">
       <div class="setting-item">
-        <div class="main-column">
+        <div class="half-column">
           <label>Name</label>
-        </div>
-        <div class="side-column value" ng-hide="editing.name">
           <p>{{community.name}}</p>
+        </div>
+        <div class="half-column value" ng-hide="editing.name">
           <button type="button" ng-click="edit('name')">Change</button>
         </div>
-        <div class="side-column edit" ng-show="editing.name">
+        <div class="half-column edit" ng-show="editing.name">
           <input type="text" class="form-control" ng-model="edited.name"/>
           <button type="button" ng-click="cancelEdit('name')">Cancel</button>
           <button type="button" ng-click="saveEdit('name')">Save</button>
         </div>
       </div>
+
       <div class="setting-item">
-        <div class="main-column">
+        <div class="full-column">
           <label>Core Intention</label>
         </div>
-        <div class="side-column value" ng-hide="editing.description">
+        <div class="full-column value" ng-hide="editing.description">
           <p>{{community.description}}</p>
           <button type="button" ng-click="edit('description')">Change</button>
         </div>
-        <div class="side-column edit" ng-show="editing.description">
+        <div class="full-column edit" ng-show="editing.description">
           <textarea class="form-control" ng-model="edited.description" rows="4"></textarea>
           <button type="button" ng-click="cancelEdit('description')">Cancel</button>
           <button type="button" ng-click="saveEdit('description')">Save</button>
         </div>
       </div>
+
       <div class="setting-item">
         <div class="main-column">
           <label>Icon</label>
@@ -55,19 +57,37 @@
           </button>
         </div>
       </div>
+
       <div class="setting-item">
-        <div class="main-column">
+        <div class="full-column">
           <label>Banner</label>
           <p class="help">This image appears at the top of your community page. (Suggested size: 1400x500 pixels.)</p>
-        </div>
-        <div class="side-column value">
           <div class="community-banner" back-img="community.banner_url"></div>
-          <button type="button" ng-click="changeBanner()">
-            <span ng-hide="editing.banner_url">Change</span>
-            <span ng-show="editing.banner_url">Please wait...</span>
-          </button>
+          <div class="right">
+            <button type="button" ng-click="changeBanner()">
+              <span ng-hide="editing.banner_url">Change</span>
+              <span ng-show="editing.banner_url">Please wait...</span>
+            </button>
+          </div>
         </div>
       </div>
+
+      <div class="setting-item">
+        <div class="full-column">
+          <label>Welcome message</label>
+          <p class="help">This is shown on the first screen that a new member sees.</p>
+        </div>
+        <div class="full-column value" ng-hide="editing.welcome_message">
+          <p>{{community.welcome_message}}</p>
+          <button type="button" ng-click="edit('welcome_message')">Change</button>
+        </div>
+        <div class="full-column edit" ng-show="editing.welcome_message">
+          <textarea class="form-control" ng-model="edited.welcome_message" rows="4"></textarea>
+          <button type="button" ng-click="cancelEdit('welcome_message')">Cancel</button>
+          <button type="button" ng-click="saveEdit('welcome_message')">Save</button>
+        </div>
+      </div>
+
       <div class="setting-item invitation-permissions">
         <div class="main-column">
           <label>Allow everyone to invite new members</label>

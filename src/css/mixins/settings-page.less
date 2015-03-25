@@ -52,8 +52,27 @@
         text-align: right;
       }
     }
+    .value {
+      @media (min-width: @screen-sm) {
+        text-align: right;
+        p {
+          text-align: left;
+        }
+        button {
+          margin-left: 10px;
+        }
+      }
+    }
     .full-column {
       .make-sm-column(12);
+    }
+    .half-column {
+      .make-sm-column(6);
+    }
+    .right {
+      @media (min-width: @screen-sm) {
+        text-align: right;
+      }
     }
 
     .summary {
@@ -62,14 +81,14 @@
     }
   }
 
-  p {
+  p, span, div {
     .seed-body-text;
+  }
 
-    &.help {
-      .seed-meta-text;
-      a {
-        color: @link-color;
-      }
+  p.help {
+    .seed-meta-text;
+    a {
+      color: @link-color;
     }
   }
 
