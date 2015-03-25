@@ -134,7 +134,7 @@ module.exports = function(grunt) {
         files: ['src/js/**/*'],
         tasks: ['browserify:dev', 'notify:js'],
         options: {
-          spawn: false
+          spawn: true
         }
       },
       css: {
