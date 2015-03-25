@@ -14,12 +14,15 @@
       }
     }
     .community-icon {
-      width: 34px;
-      height: 34px;
+      width: 60px;
+      height: 60px;
       background-size: cover;
       vertical-align: middle;
       display: inline-block;
-      margin-right: 10px;
+      @media (max-width: @screen-xs-max) {
+        display: block;
+        margin-bottom: 10px;
+      }
     }
     .community-banner {
       display: block;
