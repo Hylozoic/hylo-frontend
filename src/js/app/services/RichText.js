@@ -4,6 +4,7 @@ var linkify = require('html-linkify'),
 
 module.exports = {
   present: function(text, opts) {
+    if (!opts) opts = {};
     if (!text) return '<p></p>';
 
     // wrap in a <p> tag
@@ -15,7 +16,7 @@ module.exports = {
 
     // link hashtags
     // this is not ideal because it hardcodes the search path
-    text = text.replace(/([^\w]|^)#(\w+)/g, '$1<a href="/h/search?q=%23$2">#$2</a>');
+    text = text.replace(/( |^)#(\w+)/g, '$1<a href="/h/search?q=%23$2">#$2</a>');
 
     if (opts.maxlength)
       text = truncate(text, opts.maxlength);
