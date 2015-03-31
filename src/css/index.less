@@ -1,76 +1,56 @@
-/* Global Styles */
 
-@import '../../bower_components/bootstrap/less/bootstrap';
-@import 'bootstrap/bootstrap-select';
+// 3rd-party libraries
+@import 'bower_components/bootstrap/less/bootstrap';
 @import (inline) '../../bower_components/medium.js/medium.css';
 @import 'ment.io/userMentions';
-@import '_colors';
-@import '_mixins';
-@import 'hyloIcons';
 
-// Custom Bootstrap Overrides
+// Bootstrap overrides
 .btn {
   .proxima-nova-regular;
 }
-@headings-font-family:    "proxima-nova",sans-serif;
+@headings-font-family: "proxima-nova", sans-serif;
 
-// other useful variables
+// other useful global variables
 @std-padding: floor(@grid-gutter-width / 2);
 
-// from easings.net
-@ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
-@ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-@ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
-
-@import 'mixins/simple-page';
-@import 'mixins/settings-page';
-@import 'mixins/full-screen-modal';
+// for static pages
+@import 'aboutpage';
 @import 'homepage';
 @import 'landingpage';
-@import 'support';
-@import 'aboutpage';
-@import 'app2';
-@import "followers";
-@import 'nav';
-@import 'footer';
-@import 'angular/angular-growl';
+
+// for angular app (mostly)
 @import 'angular/angular-csp';
-@import 'user/notifications';
-@import 'user/settings';
+@import 'angular/angular-growl';
+@import 'angular/charLimit';
+@import 'app2';
 @import 'community';
 @import 'community/create';
+@import 'community/invite';
 @import 'community/seeds';
 @import 'community/settings';
-@import 'community/invite';
-@import 'search';
+@import 'footer';
+@import 'mixins';
+@import 'mixins/full-screen-modal';
+@import 'mixins/settings-page';
+@import 'mixins/simple-page';
+@import 'nav';
+@import 'onboarding';
+@import 'profile/about';
+@import 'profile/profile-edit';
 @import 'profile/profile-only';
 @import 'profile/profile-shared';
-@import 'profile/profile-edit';
-@import 'profile/about';
+@import 'search';
 @import 'seeds/comment';
 @import 'seeds/edit';
+@import 'seeds/followers';
 @import 'seeds/fulfill';
 @import 'seeds/post';
-@import 'decipher-tags';
-@import 'dropdown';
-@import 'toolbar';
-@import 'onboarding';
-@import 'social-media';
-
-*[ng-click] {
-  cursor: pointer;
-}
-
-body {
-  background-color: white;
-  .proxima-nova-regular;
-  font-size: 13px;
-  color: @text-dark;
-}
-
-.navbar-brand {
-  padding: 8px 15px;
-  .icon-hylo-script {
-   font-size: 38px;
-  }
-}
+@import 'shared/colors';
+@import 'shared/decipher-tags';
+@import 'shared/dropdown';
+@import 'shared/icons';
+@import 'shared/social-media';
+@import 'shared/toolbar';
+@import 'support';
+@import 'user/notifications';
+@import 'user/settings';
