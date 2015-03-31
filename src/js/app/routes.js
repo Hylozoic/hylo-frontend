@@ -123,6 +123,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     require('./routes/community')($stateProvider);
     require('./routes/profile')($stateProvider);
     require('./routes/onboarding')($stateProvider);
+    require('./routes/home')($stateProvider);
 
 };
 
