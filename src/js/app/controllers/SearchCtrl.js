@@ -41,7 +41,7 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
 
   $scope.close = function() {
     if ($history.isEmpty()) {
-      $scope.$state.go('home');
+      $scope.$state.go('appEntry');
     } else {
       $history.go(-1);
     }
