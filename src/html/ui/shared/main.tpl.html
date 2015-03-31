@@ -15,7 +15,13 @@
 
   <div id="nav">
 
-    <div dropdown class="communities">
+    <div class="item home">
+      <a class="button" ui-sref="home" tooltip="Home" tooltip-placement="bottom">
+        <i class="icon-home"></i>
+      </a>
+    </div>
+
+    <div dropdown class="item communities">
       <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom">
         <i class="icon-communities-new"></i>
       </a>
@@ -33,28 +39,30 @@
       </ul>
     </div>
 
-    <div>
-      <a class="button" ui-sref="search" tooltip="Search" tooltip-placement="bottom">
-        <i class="icon-search"></i>
-      </a>
-    </div>
+    <div class="right">
+      <div class="item search">
+        <a class="button" ui-sref="search" tooltip="Search" tooltip-placement="bottom">
+          <i class="icon-search"></i>
+        </a>
+      </div><!-- inline-block space fix
 
-    <div>
-      <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom">
-        <i class="icon-notifications"></i>
-      </a>
-    </div>
+      --><div class="item notifications">
+        <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom">
+          <i class="icon-notifications"></i>
+        </a>
+      </div><!-- inline-block space fix
 
-    <div dropdown class="profile">
-      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom">
-      </a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a ui-sref="profile({id: currentUser.id})">Profile</a></li>
-        <li><a ui-sref="userSettings">Settings</a></li>
-        <li><a href="/noo/logout" target="_self" class="logout">Log out</a></li>
-        <li role="presentation" class="divider"></li>
-        <li><a ui-sref="support">Help</a></li>
-      </ul>
+      --><div dropdown class="item profile">
+        <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom">
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ui-sref="profile({id: currentUser.id})">Profile</a></li>
+          <li><a ui-sref="userSettings">Settings</a></li>
+          <li><a href="/noo/logout" target="_self" class="logout">Log out</a></li>
+          <li role="presentation" class="divider"></li>
+          <li><a ui-sref="support">Help</a></li>
+        </ul>
+      </div>
     </div>
 
   </div>

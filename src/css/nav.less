@@ -49,7 +49,7 @@
     line-height: @item-height;
   }
 
-  > div {
+  .item {
     float: left;
     display: block;
     margin-right: 10px;
@@ -92,6 +92,15 @@
 
     .tooltip-inner {
       margin-left: -76px;
+    }
+  }
+
+  .right {
+    float: right;
+    .item {
+      display: inline-block;
+      margin-right: 0;
+      margin-left: 10px;
     }
   }
 
