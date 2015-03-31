@@ -70,7 +70,7 @@ var controller = function ($scope, $timeout, $analytics, $analytics, $history, C
 
   $scope.close = function () {
     if ($history.isEmpty()) {
-      $scope.$state.go('home');
+      $scope.$state.go('appEntry');
     } else {
       $history.back();
     }

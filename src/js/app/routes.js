@@ -41,7 +41,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           onboarding.resume();
       }
     })
-    .state('home', /*@ngInject*/ {
+    .state('appEntry', /*@ngInject*/ {
       parent: 'main',
       url: '/app',
       onEnter: function(currentUser, $state, $timeout) {
