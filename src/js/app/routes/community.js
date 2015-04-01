@@ -5,7 +5,7 @@ module.exports = function ($stateProvider) {
     url: '/c/:community',
     parent: 'main',
     views: {
-      "main": {
+      main: {
         template: "<div ui-view='community'></div>"
       },
     },
@@ -126,7 +126,7 @@ module.exports = function ($stateProvider) {
   .state('community.newSeed', {
     url: '/new-seed',
     views: {
-      "community": {
+      community: {
         templateUrl: '/ui/seeds/edit.tpl.html',
         controller: 'SeedEditCtrl'
       }
@@ -153,7 +153,7 @@ module.exports = function ($stateProvider) {
     url: '/s/:seedId',
     parent: 'community',
     views: {
-      "community": {
+      community: {
         templateUrl: '/ui/seeds/show.tpl.html',
         controller: 'SeedCtrl'
       }
