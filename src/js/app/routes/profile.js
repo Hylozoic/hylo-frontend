@@ -26,7 +26,7 @@ module.exports = function ($stateProvider) {
     url: '/seeds',
     resolve: /*@ngInject*/ {
       firstSeedQuery: function(Seed, UserCache, user) {
-        return UserCache.fetchSeeds(user.id);
+        return UserCache.seeds.fetch(user.id);
       }
     },
     views: {

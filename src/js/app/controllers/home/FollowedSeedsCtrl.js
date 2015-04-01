@@ -1,9 +1,8 @@
-var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, isSelf, UserCache) {
-	$scope.seeds = firstSeedQuery.seeds;
-	$scope.hasSeeds = $scope.seeds.length > 0;
-  $scope.isSelf = isSelf;
+var controller = function($scope, $analytics, $timeout, growl, currentUser, firstSeedQuery, UserCache) {
+  $scope.seeds = firstSeedQuery.seeds;
+  $scope.hasSeeds = $scope.seeds.length > 0;
 
-	$scope.removePost = function(post) {
+  $scope.removePost = function(post) {
     growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});
     $analytics.eventTrack('Post: Remove a Seed', {post_name: post.name, post_id: post.id});
     $scope.seeds.splice($scope.seeds.indexOf(post), 1);
@@ -13,14 +12,13 @@ var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQu
     if ($scope.loadMoreDisabled) return;
     $scope.loadMoreDisabled = true;
 
-    Seed.queryForUser({
-      userId: user.id,
+    currentUser.followedSeeds({
       limit: 10,
       offset: $scope.seeds.length
     }, function(resp) {
       Array.prototype.push.apply($scope.seeds, resp.seeds);
 
-      UserCache.seeds.set(user.id, {
+      UserCache.followedSeeds.set(currentUser.id, {
         seeds: $scope.seeds,
         seeds_total: resp.seeds_total
       });
@@ -35,5 +33,5 @@ var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQu
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('SeedListCtrl', controller);
+  angularModule.controller('FollowedSeedsCtrl', controller);
 };

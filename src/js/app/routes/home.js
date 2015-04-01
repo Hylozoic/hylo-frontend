@@ -15,7 +15,7 @@ module.exports = function ($stateProvider) {
     url: '/h/my-seeds',
     resolve: {
       firstSeedQuery: function(UserCache, currentUser) {
-        return UserCache.fetchSeeds(currentUser.id);
+        return UserCache.seeds.fetch(currentUser.id);
       },
       user: function(currentUser) {
         return currentUser;
@@ -31,12 +31,15 @@ module.exports = function ($stateProvider) {
   })
   .state('home.following', {
     url: '/h/following',
+    resolve: {
+      firstSeedQuery: function(UserCache, currentUser) {
+        return UserCache.followedSeeds.fetch(currentUser);
+      }
+    },
     views: {
-      tab: /*@ngInject*/{
-        templateUrl: '/ui/seeds/list.tpl.html',
-        controller: function($scope) {
-
-        }
+      tab: {
+        templateUrl: '/ui/home/following-seeds.tpl.html',
+        controller: 'FollowedSeedsCtrl'
       }
     }
   })
