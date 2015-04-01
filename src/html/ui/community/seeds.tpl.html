@@ -49,11 +49,7 @@
          infinite-scroll-disabled="loadMoreDisabled"
          infinite-scroll-immediate-check="false">
 
-      <div ng-repeat="seed in seeds track by seed.id" class="row">
-        <hylo-post post="seed" short="true" remove-fn="remove(postToRemove)">
-        </hylo-post>
-      </div>
-
+      <hylo-post post="seed" short="true" remove-fn="remove(postToRemove)" ng-repeat="seed in seeds track by seed.id" class="row"></hylo-post>
     </div>
 
     <div loading-indicator ng-if="searching"></div>
