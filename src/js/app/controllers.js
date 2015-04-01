@@ -13,7 +13,7 @@ require('./controllers/support/SupportCtrl')(angularModule);
 require('./controllers/user/settings')(angularModule);
 require('./controllers/user/NotificationsCtrl')(angularModule);
 
-require('./controllers/SeedEditCtrl')(angularModule);
+require('./controllers/seeds/SeedEditCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);
