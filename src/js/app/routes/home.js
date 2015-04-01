@@ -13,7 +13,7 @@ module.exports = function ($stateProvider) {
   })
   .state('home.mySeeds', {
     url: '/h/my-seeds',
-    resolve: {
+    resolve: /*@ngInject*/{
       firstSeedQuery: function(UserCache, currentUser) {
         return UserCache.seeds.fetch(currentUser.id);
       },
@@ -31,7 +31,7 @@ module.exports = function ($stateProvider) {
   })
   .state('home.following', {
     url: '/h/following',
-    resolve: {
+    resolve: /*@ngInject*/{
       firstSeedQuery: function(UserCache, currentUser) {
         return UserCache.followedSeeds.fetch(currentUser);
       }
@@ -45,7 +45,7 @@ module.exports = function ($stateProvider) {
   })
   .state('home.allSeeds', {
     url: '/h/all-seeds',
-    resolve: {
+    resolve: /*@ngInject*/{
       firstSeedQuery: function(UserCache, currentUser) {
         return UserCache.allSeeds.fetch(currentUser);
       }
