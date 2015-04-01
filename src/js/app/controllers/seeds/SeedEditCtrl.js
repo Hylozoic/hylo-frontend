@@ -1,4 +1,4 @@
-var filepickerUpload = require('../services/filepickerUpload'),
+var filepickerUpload = require('../../services/filepickerUpload'),
   format = require('util').format;
 
 var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache, UserCache) {

@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, Cache) {
+var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, UserCache) {
 	$scope.seeds = firstSeedQuery.seeds;
 	$scope.hasSeeds = $scope.seeds.length > 0;
 
@@ -19,10 +19,10 @@ var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQu
     }, function(resp) {
       Array.prototype.push.apply($scope.seeds, resp.seeds);
 
-      Cache.set('profile.seeds:' + user.id, {
+      UserCache.setSeeds(user.id, {
         seeds: $scope.seeds,
         seeds_total: resp.seeds_total
-      }, {maxAge: 10 * 60});
+      });
 
       $timeout(function() {
         if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
@@ -34,5 +34,5 @@ var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQu
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('ProfileSeedsCtrl', controller);
+  angularModule.controller('SeedListCtrl', controller);
 };

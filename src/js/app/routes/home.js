@@ -1,4 +1,5 @@
 module.exports = function ($stateProvider) {
+
   $stateProvider
   .state('home', {
     abstract: true,
@@ -12,12 +13,18 @@ module.exports = function ($stateProvider) {
   })
   .state('home.mySeeds', {
     url: '/h/my-seeds',
+    resolve: {
+      firstSeedQuery: function(UserCache, currentUser) {
+        return UserCache.fetchSeeds(currentUser.id);
+      },
+      user: function(currentUser) {
+        return currentUser;
+      }
+    },
     views: {
-      tab: /*@ngInject*/{
-        template: 'my seeds',
-        controller: function($scope) {
-
-        }
+      tab: {
+        templateUrl: '/ui/seeds/list.tpl.html',
+        controller: 'SeedListCtrl'
       }
     }
   })
@@ -43,4 +50,5 @@ module.exports = function ($stateProvider) {
       }
     }
   });
+
 };

@@ -243,3 +243,31 @@
 
   }
 }
+
+.post-without-avatar() {
+  @media (max-width: @screen-xs-max) {
+    margin: 0;
+    margin-top: -15px;
+  }
+  .user {
+    visibility: hidden;
+  }
+
+  .post-container {
+    margin-left: 0;
+    @media (max-width: @screen-xs-max) {
+      padding: 0;
+
+      .post-options {
+        top: 0;
+      }
+    }
+  }
+
+  .comments {
+    margin-left: 0;
+    .comment-placeholder {
+      @media (max-width: @screen-xs-max) {max-height: 20px; }
+    }
+  }
+}

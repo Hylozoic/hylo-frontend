@@ -6,7 +6,6 @@ require('./controllers/network');
 
 require('./controllers/profile')(angularModule);
 require('./controllers/profile/edit')(angularModule);
-require('./controllers/profile/seeds')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);
 require('./controllers/support/SupportCtrl')(angularModule);
@@ -15,6 +14,7 @@ require('./controllers/user/NotificationsCtrl')(angularModule);
 
 require('./controllers/seeds/SeedEditCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
+require('./controllers/seeds/SeedListCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);
 require('./controllers/community/CommunitySettingsCtrl')(angularModule);

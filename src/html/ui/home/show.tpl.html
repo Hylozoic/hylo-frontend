@@ -1,15 +1,18 @@
 <div class="tabs">
-  <a ng-click="openTab('mySeeds')" ng-class="{active: selectedTab === 'mySeeds'}">
+  <a ui-sref="home.mySeeds" ng-class="{active: $state.current.name === 'home.mySeeds'}">
     My seeds
-    <div class="triangle"></div>
   </a>
-  <a ng-click="openTab('following')" ng-class="{active: selectedTab === 'following'}">
+  <a ui-sref="home.following" ng-class="{active: $state.current.name === 'home.following'}">
     Following
-    <div class="triangle"></div>
   </a>
-  <a ng-click="openTab('allSeeds')" ng-class="{active: selectedTab === 'allSeeds'}">
+  <a ui-sref="home.allSeeds" ng-class="{active: $state.current.name === 'home.allSeeds'}">
     All seeds
-    <div class="triangle"></div>
   </a>
 </div>
-<div ui-view="tab"></div>
+
+<div class="tab-content-wrapper">
+  <div class="main-content">
+    <div class="all-sections tab-content" ng-class="{{selectedTab}}" ui-view="tab">
+    </div>
+  </div>
+</div>
