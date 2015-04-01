@@ -1,5 +1,12 @@
 var controller = function($scope) {
-  $scope.value = 'DOLOR';
+
+  $scope.openTab = function(name) {
+    $scope.selectedTab = name;
+    $scope.$state.go('home.' + name);
+  };
+
+  $scope.openTab('mySeeds');
+
 };
 
 module.exports = function(angularModule) {
