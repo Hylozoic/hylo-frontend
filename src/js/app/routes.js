@@ -81,7 +81,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       views: {
         main: {
           templateUrl: '/ui/support/base.tpl.html',
-          controller: 'SupportCtrl'
+          controller: function() {}
         }
       }
     })
@@ -123,6 +123,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     require('./routes/community')($stateProvider);
     require('./routes/profile')($stateProvider);
     require('./routes/onboarding')($stateProvider);
+    require('./routes/home')($stateProvider);
 
 };
 

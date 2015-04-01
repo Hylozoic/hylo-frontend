@@ -1,0 +1,71 @@
+body.home {
+  .tabs {
+    .make-row;
+    border-bottom: 1px solid @border-light;
+    line-height: 53px;
+
+    > a {
+      display: block;
+      .make-sm-column(2);
+
+      &:first-child {
+        .make-sm-column-offset(3);
+      }
+
+      .medium-title-text;
+      text-align: center;
+      color: @text-light-gray;
+
+      .triangle {
+        display: none;
+      }
+
+      &, &:hover {
+        text-decoration: none;
+      }
+
+      &.active {
+        position: relative;
+        color: @default-text;
+
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          @side-length: 7px;
+          left: 50%;
+          width: @side-length * 2;
+          height: @side-length * 2;
+          margin-left: -@side-length;
+          bottom: -@side-length;
+          border-top: 1px solid @border-light;
+          border-left: 1px solid @border-light;
+          background-color: #fff;
+          transform: rotate(45deg);
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+        }
+      }
+
+      .make-xs-column(4);
+      @media (max-width: @screen-xs-max) {
+        line-height: initial;
+        padding: @std-padding;
+      }
+    }
+  }
+
+  .tab-content-wrapper {
+    .simple-page;
+    position: relative;
+    padding-top: @std-padding * 2;
+  }
+}
+
+.home-mySeeds {
+  .tab-content {
+    .post {
+      .post-without-avatar;
+    }
+  }
+}

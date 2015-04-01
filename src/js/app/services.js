@@ -67,4 +67,5 @@ require('./services/clickthroughTracker')(angularModule);
 require('./services/history')(angularModule);
 require('./services/dialog')(angularModule);
 require('./services/Cache')(angularModule);
+require('./services/UserCache')(angularModule);
 require('./services/popupDone');

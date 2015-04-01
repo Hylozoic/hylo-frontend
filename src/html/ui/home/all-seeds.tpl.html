@@ -1,0 +1,7 @@
+<ng-include src="'/ui/seeds/infinite-scroll.tpl.html'"></ng-include>
+<div ng-if="!hasSeeds" class="empty-content">
+  <p>
+    Your communities are completely devoid of seeds! You could be the first to unite people around a common vision.
+    <a ui-sref="community.seeds({community: defaultCommunity.slug})">Go plant a seed now!</a>
+  </p>
+</div>

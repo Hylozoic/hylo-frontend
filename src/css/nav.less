@@ -2,6 +2,12 @@
 #nav {
   @item-height: 34px;
   @vertical-padding: 10px;
+  @nav-item-count: 4;
+
+  .item.home {
+    display: none;
+  }
+
   // position: absolute;
   // top: 0;
   // left: 0;
@@ -49,7 +55,7 @@
     line-height: @item-height;
   }
 
-  > div {
+  .item {
     float: left;
     display: block;
     margin-right: 10px;
@@ -95,6 +101,15 @@
     }
   }
 
+  .right {
+    float: right;
+    .item {
+      display: inline-block;
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+
   .tooltip {
     max-width: none;
   }
@@ -107,9 +122,9 @@
   @media (max-width: @screen-xs-max) {
     padding: 10px 0;
 
-    > div {
-      width: 25%;
-      margin: 0;
+    .item {
+      width: unit(100/@nav-item-count, vw);
+      margin: 0 !important;
       text-align: center;
     }
 
