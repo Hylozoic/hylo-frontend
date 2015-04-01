@@ -1,4 +1,52 @@
-@import 'angular/charLimit';
+body {
+  background-color: white;
+  .proxima-nova-regular;
+  font-size: 13px;
+  color: @text-dark;
+
+  &.angular-app {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+    min-height: 100vh;
+  }
+
+  &.waiting-for-angular {
+    #content-outer {
+      display: none;
+    }
+    #initializing-panel {
+      display: block;
+      position:absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+
+      .spinner {
+        top: 45%;
+        margin: auto auto;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: @screen-xs-max) {
+  body, html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+*[ng-click] {
+  cursor: pointer;
+}
+
+.navbar-brand {
+  padding: 8px 15px;
+  .icon-hylo-script {
+   font-size: 38px;
+  }
+}
 
 .spinner {
   width: 35px;
@@ -51,40 +99,8 @@
   cursor: auto !important;
 }
 
-body.angular-app {
-  overflow: -moz-scrollbars-vertical;
-  overflow-y: scroll;
-  min-height: 100vh;
-}
-
 #initializing-panel {
   display: none;
-}
-
-body.waiting-for-angular {
-  #content-outer {
-    display: none;
-  }
-  #initializing-panel {
-    display: block;
-    position:absolute;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-
-    .spinner {
-      top: 45%;
-      margin: auto auto;
-    }
-  }
-}
-
-@media only screen and (max-width: @screen-xs-max) {
-  body, html {
-    width: 100%;
-    overflow-x: hidden;
-  }
 }
 
 #content-outer {
@@ -92,26 +108,13 @@ body.waiting-for-angular {
   position: relative;
 }
 
-.bold {
-  font-weight: 700;
-}
-
 //set the default dropdown menu width
 .dropdown-menu li {
   min-width: 200px;
 }
 
-//shared class for rounded button style
-.button-rounded, .button-rounded:hover {
-  .rounded-button;
-}
-
-.button-rounded:hover {
-  background-color: @visible-gray-bg;
-}
-
-textarea.no-border, textarea.no-border:focus, [contenteditable].no-border, [contenteditable].no-border:focus {
-  .borderless-text-input;
+textarea.no-border, [contenteditable].no-border {
+  &, &:focus { .borderless-text-input; }
 }
 
 .modal-body {

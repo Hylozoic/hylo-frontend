@@ -1,4 +1,4 @@
-var controller = function($scope, growl, $analytics, currentUser, Community, $history, $dialog) {
+var controller = function($scope, growl, $analytics, currentUser, Community, $history, $dialog, UserCache) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
@@ -63,6 +63,7 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
     }).then(function() {
       Community.leave({id: communityId}, function() {
         user.memberships.splice(index, 1);
+        UserCache.allSeeds.clear(currentUser.id);
       });
     })
   };

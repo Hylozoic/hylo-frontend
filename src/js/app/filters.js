@@ -3,7 +3,7 @@ var RichText = require('./services/RichText'),
 
 module.exports = function(angularModule) {
   angularModule
-  .filter('richText', function($rootScope) {
+  .filter('richText', function() {
     return function(text) {
       return RichText.present(text, {skipWrap: true});
     }

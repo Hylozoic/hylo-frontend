@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog) {
+var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog, UserCache) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
@@ -112,10 +112,12 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
           avatar_url: user.avatar
         });
         Seed.follow({id: $scope.post.id});
+        UserCache.followedSeeds.clear(user.id);
       } else {
         $analytics.eventTrack('Post: Leave', {post_id: $scope.post.id});
         $scope.followers = _.without($scope.followers, _.findWhere($scope.followers, {id: '' + user.id}));
         Seed.follow({id: $scope.post.id});
+        UserCache.followedSeeds.remove(user.id, $scope.post.id);
       }
     };
 

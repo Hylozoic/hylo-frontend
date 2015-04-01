@@ -1,0 +1,17 @@
+<div class="tabs">
+  <a ui-sref="home.mySeeds" ng-class="{active: $state.current.name === 'home.mySeeds'}">
+    My seeds
+  </a>
+  <a ui-sref="home.following" ng-class="{active: $state.current.name === 'home.following'}">
+    Seeds I joined
+  </a>
+  <a ui-sref="home.allSeeds" ng-class="{active: $state.current.name === 'home.allSeeds'}">
+    All seeds
+  </a>
+</div>
+
+<div class="tab-content-wrapper">
+  <div class="main-content">
+    <div class="all-sections tab-content" ui-view="tab"></div>
+  </div>
+</div>

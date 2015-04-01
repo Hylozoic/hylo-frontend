@@ -1,7 +1,7 @@
-var filepickerUpload = require('../services/filepickerUpload'),
+var filepickerUpload = require('../../services/filepickerUpload'),
   format = require('util').format;
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache, UserCache) {
 
   $scope.onboarding = onboarding;
 
@@ -71,7 +71,8 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   var clearCache = function() {
     Cache.drop('community.seeds:' + community.id);
-    Cache.drop('profile.seeds:' + currentUser.id);
+    UserCache.seeds.clear(currentUser.id);
+    UserCache.allSeeds.clear(currentUser.id);
   };
 
   var update = function(data) {
