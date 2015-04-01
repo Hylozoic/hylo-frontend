@@ -1,12 +1,4 @@
-<div infinite-scroll="loadMore()"
-     infinite-scroll-distance="1"
-     infinite-scroll-disabled="loadMoreDisabled"
-     infinite-scroll-immediate-check="false">
-  <div ng-repeat="seed in seeds">
-    <hylo-post post="seed" short="true" remove-fn="removePost(postToRemove)"></hylo-post>
-  </div>
-</div>
-
+<ng-include src="'/ui/seeds/infinite-scroll.tpl.html'"></ng-include>
 <div ng-if="!hasSeeds" class="empty-content">
   <p ng-if="isSelf">
     You haven't planted any seeds yet -- go to your community to do so!
