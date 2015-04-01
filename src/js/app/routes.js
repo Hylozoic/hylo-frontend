@@ -81,7 +81,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       views: {
         main: {
           templateUrl: '/ui/support/base.tpl.html',
-          controller: 'SupportCtrl'
+          controller: function() {}
         }
       }
     })
