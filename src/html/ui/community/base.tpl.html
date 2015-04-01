@@ -5,7 +5,10 @@
       <div id="innerImage" back-img="community.banner_url"> </div>
     </div>
     <div id="banner-text">
-      <div class="banner-communityName" ng-bind="::community.name"></div>
+      <div class="banner-communityName">
+        <div class="logo" back-img="::community.avatar_url"></div>
+        <span>{{::community.name}}</span>
+      </div>
 
       <div class="banner-menu">
         <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds' || $state.current.name === 'community.seeds.onboarding'}">
@@ -24,6 +27,6 @@
 
     </div>
   </div>
-  <div ui-view="tab"></div>
+  <div class="tab-content" ui-view="tab"></div>
 
 </div>
