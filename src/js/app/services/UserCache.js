@@ -1,3 +1,5 @@
+// FIXME: this cries out for DRYing
+
 var factory = function(Seed, User, Cache) {
 
   var api = {
@@ -27,6 +29,7 @@ var factory = function(Seed, User, Cache) {
         Cache.drop(api.seeds.key(userId));
       }
     },
+
     followedSeeds: {
       key: function(userId) {
         return 'user.followedSeeds:' + userId;
@@ -62,6 +65,32 @@ var factory = function(Seed, User, Cache) {
       },
       clear: function(userId) {
         Cache.drop(api.followedSeeds.key(userId));
+      }
+    },
+
+    allSeeds: {
+      key: function(userId) {
+        return 'user.allSeeds:' + userId;
+      },
+      fetch: function(user) {
+        var cached = Cache.get(api.allSeeds.key(user.id));
+
+        if (cached) {
+          return cached;
+        } else {
+          return user.allSeeds({
+            limit: 10
+          }).$promise.then(function(resp) {
+            api.allSeeds.set(user.id, resp);
+            return resp;
+          });
+        }
+      },
+      set: function(userId, data) {
+        Cache.set(api.allSeeds.key(userId), data, {maxAge: 10 * 60});
+      },
+      clear: function(userId) {
+        Cache.drop(api.allSeeds.key(userId));
       }
     }
   };

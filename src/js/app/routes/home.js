@@ -47,7 +47,7 @@ module.exports = function ($stateProvider) {
     url: '/h/all-seeds',
     resolve: {
       firstSeedQuery: function(UserCache, currentUser) {
-        return currentUser.allSeeds({limit: 10}).$promise;
+        return UserCache.allSeeds.fetch(currentUser);
       }
     },
     views: {
