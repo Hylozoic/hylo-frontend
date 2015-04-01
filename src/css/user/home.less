@@ -46,6 +46,12 @@ body.home {
           -ms-transform: rotate(45deg);
         }
       }
+
+      .make-xs-column(4);
+      @media (max-width: @screen-xs-max) {
+        line-height: initial;
+        padding: @std-padding;
+      }
     }
   }
 
