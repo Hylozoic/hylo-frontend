@@ -1,6 +1,7 @@
-var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, UserCache) {
+var controller = function($scope, $analytics, $timeout, growl, Seed, firstSeedQuery, user, isSelf, UserCache) {
 	$scope.seeds = firstSeedQuery.seeds;
 	$scope.hasSeeds = $scope.seeds.length > 0;
+  $scope.isSelf = isSelf;
 
 	$scope.removePost = function(post) {
     growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});

@@ -19,7 +19,8 @@ module.exports = function ($stateProvider) {
       },
       user: function(currentUser) {
         return currentUser;
-      }
+      },
+      isSelf: function() { return true }
     },
     views: {
       tab: {
@@ -32,7 +33,7 @@ module.exports = function ($stateProvider) {
     url: '/h/following',
     views: {
       tab: /*@ngInject*/{
-        template: 'following',
+        templateUrl: '/ui/seeds/list.tpl.html',
         controller: function($scope) {
 
         }
