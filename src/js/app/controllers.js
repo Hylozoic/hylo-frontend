@@ -25,6 +25,7 @@ require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/home/HomeCtrl')(angularModule);
 require('./controllers/home/FollowedSeedsCtrl')(angularModule);
+require('./controllers/home/AllSeedsCtrl')(angularModule);
 
 require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);

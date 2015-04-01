@@ -16,6 +16,9 @@ dependencies.push(function($resource) {
     },
     followedSeeds: {
       url: '/noo/user/:id/followed-seeds'
+    },
+    allSeeds: {
+      url: '/noo/user/:id/all-community-seeds'
     }
   });
 
@@ -35,6 +38,9 @@ dependencies.push(function($resource) {
     },
     followedSeeds: function(params, success, error) {
       return User.followedSeeds(_.extend({id: this.id}, params), success, error);
+    },
+    allSeeds: function(params, success, error) {
+      return User.allSeeds(_.extend({id: this.id}, params), success, error);
     },
     firstName: function() {
       return this.name.split(' ')[0];
