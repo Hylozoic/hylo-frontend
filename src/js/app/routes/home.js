@@ -45,12 +45,15 @@ module.exports = function ($stateProvider) {
   })
   .state('home.allSeeds', {
     url: '/h/all-seeds',
+    resolve: {
+      firstSeedQuery: function(UserCache, currentUser) {
+        return currentUser.allSeeds({limit: 10}).$promise;
+      }
+    },
     views: {
-      tab: /*@ngInject*/{
-        template: 'all seeds',
-        controller: function($scope) {
-
-        }
+      tab: {
+        templateUrl: '/ui/home/all-seeds.tpl.html',
+        controller: 'AllSeedsCtrl'
       }
     }
   });
