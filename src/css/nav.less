@@ -2,6 +2,12 @@
 #nav {
   @item-height: 34px;
   @vertical-padding: 10px;
+  @nav-item-count: 4;
+
+  .item.home {
+    display: none;
+  }
+
   // position: absolute;
   // top: 0;
   // left: 0;
@@ -117,7 +123,7 @@
     padding: 10px 0;
 
     .item {
-      width: 20vw;
+      width: unit(100/@nav-item-count, vw);
       margin: 0 !important;
       text-align: center;
     }
