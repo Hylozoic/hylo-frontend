@@ -1,4 +1,4 @@
-var controller = function($scope, $rootScope, $analytics, community) {
+var controller = function($scope, $analytics, community) {
 
   $scope.community = community;
 
