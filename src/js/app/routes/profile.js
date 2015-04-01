@@ -25,27 +25,14 @@ module.exports = function ($stateProvider) {
   .state('profile.seeds', {
     url: '/seeds',
     resolve: /*@ngInject*/ {
-      firstSeedQuery: function(Seed, Cache, user) {
-        var key = 'profile.seeds:' + user.id,
-          cached = Cache.get(key);
-
-        if (cached) {
-          return cached;
-        } else {
-          return Seed.queryForUser({
-            userId: user.id,
-            limit: 10
-          }).$promise.then(function(resp) {
-            Cache.set(key, resp, {maxAge: 10 * 60});
-            return resp;
-          });
-        }
+      firstSeedQuery: function(Seed, UserCache, user) {
+        return UserCache.fetchSeeds(user.id);
       }
     },
     views: {
       'tab': {
-        templateUrl: '/ui/profile/seeds.tpl.html',
-        controller: 'ProfileSeedsCtrl'
+        templateUrl: '/ui/seeds/list.tpl.html',
+        controller: 'SeedListCtrl'
       }
     }
   })

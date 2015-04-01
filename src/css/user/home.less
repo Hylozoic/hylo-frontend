@@ -22,6 +22,7 @@ body.home {
 
       &.active {
         position: relative;
+        color: @default-text;
 
         &:after {
           content: '';
@@ -41,9 +42,19 @@ body.home {
           -ms-transform: rotate(45deg);
         }
       }
-
     }
+  }
 
+  .tab-content-wrapper {
+    .simple-page;
+    position: relative;
+    padding-top: @std-padding * 2;
+  }
+
+  .tab-content {
+    .post {
+      .post-without-avatar;
+    }
   }
 
 }
