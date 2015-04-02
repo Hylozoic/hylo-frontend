@@ -2,7 +2,7 @@ var format = require('util').format;
 
 var interceptor = function ($httpProvider, $provide) {
 
-  $provide.factory('myHttpInterceptor', function ($q, $log, $window, growl) {
+  $provide.factory('myHttpInterceptor', function ($q, $log, $window, growl, $timeout) {
     return {
       requestError: function(rejection) {
         return $q.reject(rejection);
@@ -13,6 +13,12 @@ var interceptor = function ($httpProvider, $provide) {
           Rollbar.error(format('%s: %s', rejection.status, rejection.config.url));
           var message = format('Oops! An error occurred. The Hylo team has been notified. (%s)', rejection.status);
           growl.addErrorMessage(message, {ttl: 5000});
+
+          if (rejection.status == 403) {
+            $timeout(function() {
+              window.location = '/login';
+            }, 2000);
+          }
         }
         return $q.reject(rejection);
       }
