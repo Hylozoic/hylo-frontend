@@ -1,6 +1,6 @@
 <div class="comments">
 
-  <div class="comment" ng-repeat="comment in post.comments">
+  <div class="comment" ng-repeat="comment in post.comments" ng-class="{last: $last}">
     <div class="comment-delete">
       <a ng-if="::canDelete(comment)" ng-click="delete(comment)">
         <i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>
@@ -24,6 +24,7 @@
         </span>
       </div>
     </div>
+
   </div>
 
   <div ng-if="!post.commentsLoaded && post.numComments > 0" class="loading">Loading comments...</div>

@@ -150,7 +150,5 @@
     </div>
   </div>
 
-  <div ng-if="!isCommentsCollapsed">
-    <embedded-comments post="post"></embedded-comments>
-  </div>
+  <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
 </div>

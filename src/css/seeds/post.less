@@ -22,6 +22,10 @@
   margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
 
+  @media (max-width: @screen-xs-max) {
+    padding: 0 @std-padding;
+  }
+
   .user {
     text-decoration: none;
     position: absolute;
@@ -32,7 +36,6 @@
     @media (max-width: @screen-xs-max) {
       position: relative;
       width: initial;
-      padding: 0 10px;
     }
 
     .avatar {
@@ -58,20 +61,15 @@
 
   .post-container {
     margin-left: @user-width + 25;
-
     @media (max-width: @screen-xs-max) {
-      margin: 0;
-      padding: 0 10px;
+      margin-left: 0;
     }
   }
 
   .post-options {
     .corner-dropdown-menu;
-    top: 3px;
-
-    @media (max-width: @screen-xs-max) {
-      top: -27px;
-    }
+    top: 2px;
+    margin-left: 10px;
   }
 
   .post-header {
@@ -97,6 +95,10 @@
     background-position: top center;
     background-repeat: no-repeat;
     margin: 10px 0 0;
+    @media (max-width: @screen-xs-max) {
+      width: 100vw;
+      margin-left: -@std-padding;
+    }
   }
 
   .full-media {
@@ -209,12 +211,10 @@
       color: @link-color;
     }
 
-
     @media (max-width: @screen-xs-max) {
       border-top: 1px solid @border-lightest;
       border-bottom: 1px solid @border-lightest;
-      margin-left: -10px;
-      margin-right: -10px;
+      margin: 0 -@std-padding;
       height: 37px;
 
       > a {
@@ -245,27 +245,18 @@
 }
 
 .post-without-avatar() {
-  @media (max-width: @screen-xs-max) {
-    margin: 0;
-    margin-top: -15px;
-  }
   .user {
-    visibility: hidden;
+    display: none;
   }
 
-  .post-container {
+  .post-container, .comments {
     margin-left: 0;
-    @media (max-width: @screen-xs-max) {
-      .post-options {
-        top: 0;
-      }
-    }
   }
 
   .comments {
     margin-left: 0;
-    .comment-placeholder {
-      @media (max-width: @screen-xs-max) {max-height: 20px; }
+    @media (max-width: @screen-xs-max) {
+      margin-left: -@std-padding;
     }
   }
 }

@@ -1,5 +1,5 @@
 body.search {
-  .simple-page;
+  .simple-page(8);
 
   .search-input {
     .proxima-nova-light;
@@ -7,7 +7,10 @@ body.search {
     padding: 0;
     font-size: 40px;
     width: 100%;
-    margin-bottom: @std-padding * 2;
+    margin-bottom: @std-padding;
+    @media (min-width: @screen-sm) {
+      margin-top: @std-padding;
+    }
   }
 
   h3 {

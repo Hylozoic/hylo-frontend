@@ -1,4 +1,4 @@
-.simple-page() {
+.simple-page(@columns: 6) {
   h1 {
     .section-title;
     margin-top: 0;
@@ -11,8 +11,8 @@
   }
 
   .all-sections {
-    .make-sm-column(6);
-    .make-sm-column-offset(3);
+    .make-sm-column(@columns);
+    .make-sm-column-offset((12 - @columns) / 2);
 
     > p.section {
       padding: @std-padding 0;
