@@ -39,24 +39,24 @@
     <div class="comment-input">
       <form class="comment-form" >
         <div tabindex="-1"
-                  autocomplete="off"
-                  contenteditable="true"
-                  placeholder="Write a comment..."
+             autocomplete="off"
+             contenteditable="true"
+             placeholder="Write a comment..."
 
-                  mentio=""
-                  mentio-trigger-char="'@'"
-                  mentio-items="people"
-                  mentio-template-url="/ui/shared/people-mentions.tpl.html"
-                  mentio-search="searchPeople(term, post.community)"
-                  mentio-select="getPeopleTextRaw(item)"
-                  mentio-typed-term="typedTerm2"
+             mentio=""
+             mentio-trigger-char="'@'"
+             mentio-items="people"
+             mentio-template-url="/ui/shared/people-mentions.tpl.html"
+             mentio-search="searchPeople(term, post.community)"
+             mentio-select="getPeopleTextRaw(item)"
+             mentio-typed-term="typedTerm2"
 
-                  ng-disabled="createDisabled"
-                  ng-focus="openCommenting()"
-                  ng-model="commentText"
-                  class="mentio-editor no-border"
-                  ng-class="{'empty-comment': !commentText}"
-                  required>
+             ng-disabled="createDisabled"
+             ng-focus="openCommenting()"
+             ng-model="commentText"
+             class="mentio-editor no-border"
+             ng-class="{'empty-comment': !commentText}"
+             required>
         </div>
       </form>
       <div class="comment-placeholder" ng-hide="commentOpen || commentText"> Type a comment. Type @ to mention others.</div>
