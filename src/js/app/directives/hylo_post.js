@@ -236,7 +236,7 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
       $scope.canEdit = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||
             ($rootScope.community && $rootScope.community.canModerate);
 
-      $scope.postUrl = $state.href("seed", {community: $scope.post.communitySlug, seedId: $scope.post.id});
+      $scope.postUrl = $state.href("seed", {community: $scope.post.community.slug, seedId: $scope.post.id});
 
       $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
@@ -259,7 +259,6 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     restrict: 'E',
     scope: {
       post: '=', // the post to generate markup for as a bi-directional model.  See http://docs.angularjs.org/api/ng.$compile
-      'short': '@',
       'removeFn': '&'
     },
     controller: controller,
