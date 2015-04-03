@@ -5,20 +5,18 @@
     padding: @std-padding;
   }
 
-  .comment:last-of-type {
-    margin-bottom: 25px;
-  }
-
   .comment {
     padding-bottom: 18px;
     background-color: @faint-gray;
     border-right: 1px solid @border-lightest;
     border-left: 1px solid @border-lightest;
 
-
-    //add padding to top of comments
     &:first-child {
       padding-top: 22px;
+    }
+
+    &.last {
+      border-bottom: 1px solid @border-lightest;
     }
 
     .avatar {
@@ -72,8 +70,7 @@
   }
 
   @media (max-width: @screen-xs-max) {
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 -@std-padding;
   }
 }
 
@@ -83,6 +80,7 @@
   position: relative;
   padding: 6px 0;
   border: 1px solid @border-lightest;
+  border-top: none;
   .seed-body-text;
 
   .avatar {
@@ -114,10 +112,13 @@
     .comment-placeholder {
       font-style: italic;
       color: @inactive-text;
-      top: -20px;
-      max-height: 5px;
-      position: relative;
+      top: 3px;
+      position: absolute;
       z-index: 0;
+
+      @media (max-width: @screen-xs-max) {
+        top: -4px;
+      }
     }
   }
 
