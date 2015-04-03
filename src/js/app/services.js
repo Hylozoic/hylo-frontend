@@ -24,26 +24,21 @@ factory('Overlay', function($rootScope) {
 factory("Post", ["$resource",
   function($resource) {
     return $resource("/posts/:listController:id/:postController:userId",
-        {
-          id: "@id",
-          listController: "@listController",
-          postController: "@postController"
-        },
-        {
-          vote: {
-            method: "POST",
-            params: {
-              postController: "vote"
-            }
-          },
-          getComments: {
-            method: "GET",
-            isArray: true,
-            params: {
-              postController: "comments"
-            }
+      {
+        id: "@id",
+        listController: "@listController",
+        postController: "@postController"
+      },
+      {
+        getComments: {
+          method: "GET",
+          isArray: true,
+          params: {
+            postController: "comments"
           }
-        })
+        }
+      }
+    );
 }]);
 
 // resources
