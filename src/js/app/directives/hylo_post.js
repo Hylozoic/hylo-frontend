@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog, UserCache) {
+var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog, UserCache, Community) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
@@ -15,20 +15,12 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     $scope.markFulfilled = function() {
-      var modalScope = $rootScope.$new(true);
-      // Map the top contributors as all the unique commentors on the post
-      modalScope.topContributors = _.map(
-        _.uniq(_.pluck($scope.comments, 'user'), false, _.property("id")), _.property('id')
-      );
-
-      modalScope.post = $scope.post;
-
       var modalInstance = $modal.open({
         templateUrl: '/ui/app/fulfillModal.tpl.html',
         controller: "FulfillmentCtrl",
         keyboard: false,
         backdrop: 'static',
-        scope: modalScope
+        scope: $scope
       });
 
       modalInstance.result.then(function (selectedItem) {
@@ -72,8 +64,6 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     $scope.followers = []; // list of current followers
-
-    $scope.potentialFollowers = []; // List of all members that can potentially follow a post
     $scope.followersToAdd = []; // builds an array of followers to add after hitting the "complete" button
 
     $scope.$on("decipher.tags.added", function(event, args) {
@@ -122,43 +112,32 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     $scope.toggleEditFollowers = function() {
-      var isEditing = !$scope.editingFollowers;
-      if (isEditing) { // populate potential followers
-        $http.get('/users/getpossiblefollowers', {
-          params: {postId: $scope.post.id, q: ""}
-        }).then(function(res){
-          $scope.potentialFollowers = res.data;
-        });
-      } else { // Save added followers
-        Seed.addFollowers({
-          id: $scope.post.id,
-          userIds: _.pluck($scope.followersToAdd, 'value'),
-          communityId: $rootScope.community.id
-        }, function() {
-          _.each($scope.followersToAdd, function(follower) {
-            if (!_.findWhere($scope.followers, {value: follower.value})) {
-              $scope.followers.push({
-                id: follower.value,
-                name: follower.name,
-                avatar_url: follower.avatar
-              });
-            }
-          });
-          $analytics.eventTrack('Followers: Add Followers', {num_followers: $scope.followersToAdd.length});
-          $scope.followersToAdd = [];
-        }, function(err) {
-          growl.addErrorMessage(err.data);
-          $analytics.eventTrack('Followers: Failed to Add Followers');
-        });
-      }
+      $scope.editingFollowers = !$scope.editingFollowers;
+      if ($scope.editingFollowers) return;
 
-      $scope.editingFollowers = isEditing;
+      // save new followers
+      Seed.addFollowers({
+        id: $scope.post.id,
+        userIds: _.difference(
+          _.pluck($scope.followersToAdd, 'id'),
+          _.map($scope.post.followers, function(u) { return parseInt(u.id) })
+        )
+      }, function() {
+        _.each($scope.followersToAdd, function(follower) {
+          if (!_.findWhere($scope.followers, {id: follower.id + ''})) {
+            $scope.followers.push(follower);
+          }
+        });
+        $analytics.eventTrack('Followers: Add Followers', {num_followers: $scope.followersToAdd.length});
+        $scope.followersToAdd = [];
+      }, function(err) {
+        growl.addErrorMessage(err.data);
+        $analytics.eventTrack('Followers: Failed to Add Followers');
+      });
     };
 
-    $scope.typeaheadOpts = {
-      minLength: 1,
-      templateUrl: '/ui/app/typeahead-tag-user.tpl.html',
-      waitMs: 100
+    $scope.findMembers = function(search) {
+      return Community.findMembers({id: $scope.post.community.id, autocomplete: search, limit: 5}).$promise;
     };
 
     $scope['delete'] = function() {

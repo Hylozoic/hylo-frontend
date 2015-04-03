@@ -127,13 +127,21 @@
     </div>
 
     <div ng-if="editingFollowers" class="add-followers">
-      <div class="add-label">Add Members:</div>
+      <div class="add-label">Add Members</div>
       <div class="add-tags">
-        <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-          model="followersToAdd"
-          typeahead-options="typeaheadOpts"
-          src="b as b.name for b in potentialFollowers">
-        </tags>
+        <tags-input ng-model="followersToAdd"
+                    add-from-autocomplete-only="true"
+                    display-property="name"
+                    key-property="id"
+                    replace-spaces-with-dashes="false"
+                    placeholder="Search for people by name"
+                    template="/ui/shared/ngTagsInput/tag-user.tpl.html">
+          <auto-complete source="findMembers($query)"
+                         display-property="name"
+                         min-length="2"
+                         template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
+          </auto-complete>
+        </tags-input>
       </div>
     </div>
 
