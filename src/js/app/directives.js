@@ -3,6 +3,7 @@ var angularModule = angular.module('hyloDirectives', ['ngResource']);
 require('./directives/contenteditable')(angularModule);
 require('./directives/hylo_post')(angularModule);
 require('./directives/socialMedia')(angularModule);
+require('./directives/seeMore')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {

@@ -24,14 +24,14 @@
       <a ui-sref="seed({community: post.community.slug, seedId: post.id})"
         ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">
       </a>
-      <div ng-if="isPostText" class="post-description">
-        <div class="unpad-last-p" ng-bind-html="truncatedPostText | unsafe"></div>
-        <span ng-click="showMore($event)" ng-if='truncated' class="show-more-btn">Show More</span>
+      <div ng-if="hasDescription" class="post-description">
+        <see-more contents="description" truncated="truncated" expand="showMore()"></see-more>
       </div>
     </div>
 
     <div class="post-context">
-      <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
+      <span class="post-type" ng-class="::post.type">{{::post.type | uppercase}}</span>
+      &nbsp;•&nbsp;
       <a class="timestamp" ui-sref="seed({community: post.community.slug, seedId: post.id})">
         {{::post.creation_date | fromNow}}<!--
       --></a>
