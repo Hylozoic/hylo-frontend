@@ -10,16 +10,15 @@
     <a class="avatar" back-img="::comment.user.avatar" ui-sref="profile({id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
-
       <div class="comment-text unpad-last-p" ng-bind-html="::commentTextSafe(comment.text)"></div>
       <div class="controls">
         <a ui-sref="profile({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
-        &nbsp;•&nbsp;
+        •
         <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
         <span ng-show="::(!commentOwner(comment))">
-          <span ng-if="!comment.isThanked">&nbsp;•&nbsp; Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">"Thank you"</a></span>
-          <span ng-if="comment.isThanked">&nbsp;•&nbsp;
-            <a class="thank-link" tooltip='click to take back your "Thank You"' tooltip-popup-delay="500" ng-click="thank(comment)">You thanked <span>{{::comment.user.name | firstName}}</span></a>
+          <span ng-if="!comment.isThanked">• Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">thanks</a></span>
+          <span ng-if="comment.isThanked">•
+            <a class="thank-link" tooltip='click to take back your thanks' tooltip-popup-delay="500" ng-click="thank(comment)">You thanked <span>{{::comment.user.name | firstName}}</span></a>
           </span>
         </span>
       </div>
@@ -32,12 +31,10 @@
   <div class="add-comment">
     <!-- FIXME why doesn't this work without $root? -->
 
-    <div class="comment-avatar">
-      <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentText}"></a>
-    </div>
+    <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentText}"></a>
 
     <div class="comment-input">
-      <form class="comment-form" >
+      <form class="comment-form">
         <div tabindex="-1"
              autocomplete="off"
              contenteditable="true"
@@ -59,7 +56,7 @@
              required>
         </div>
       </form>
-      <div class="comment-placeholder" ng-hide="commentOpen || commentText"> Type a comment. Type @ to mention others.</div>
+      <div class="placeholder" ng-hide="commentOpen || commentText"> Type a comment. Type @ to mention others.</div>
     </div>
   </div>
   <div class="comment-btn"><button type="button" ng-show="commentText" tabindex="1" ng-disabled="commentText.length <= initialCommentText.length" class="btn btn-sm comment-btn" ng-click="create()">Comment</button></div>
