@@ -33,12 +33,12 @@
 
 @default-button-height: 32px;
 
-.rounded-button(@size: @default-button-height) {
+.rounded-button(@size: @default-button-height, @background-color: white) {
   .proxima-nova-regular;
   font-size: 14px;
   text-decoration: none; //this removes hover effect
   color: @text-dark;
-  background-color: white;
+  background-color: @background-color;
   cursor: pointer;
   border: 1px solid @light-gray;
   border-radius: @size;
@@ -52,14 +52,13 @@
     top: 1px;
   }
   &:active {
-    background-color: @faint-gray;
+    background-color: darken(@background-color, 20%);
   }
 }
 
-.rounded-button-dark {
-  .rounded-button;
+.rounded-button-dark(@size: @default-button-height, @background-color: @dark-gray) {
+  .rounded-button(@size, @background-color);
   color: white;
-  background-color: @dark-gray;
 }
 
 .rounded-button-clear {
