@@ -59,6 +59,12 @@ body.home {
     .simple-page;
     position: relative;
     padding-top: @std-padding * 2;
+
+    @media (max-width: @screen-xs-max) {
+      .all-sections {
+        padding: 0;
+      }
+    }
   }
 }
 
