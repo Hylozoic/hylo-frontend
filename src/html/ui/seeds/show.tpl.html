@@ -1,3 +1,8 @@
+<a class="nav-title" ui-sref="community.seeds({community: post.community.slug})">
+  <i class="logo" back-img="::post.community.avatar_url"></i><!--
+  --><span>{{::post.community.name}}</span>
+</a>
+
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 single-post">
     <hylo-post post="post" remove-fn="postdeleted(postToRemove)"></hylo-post>

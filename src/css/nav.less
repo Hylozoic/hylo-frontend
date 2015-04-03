@@ -1,11 +1,11 @@
+@nav-item-height: 34px;
+@nav-vertical-padding: 10px;
 
 #nav {
-  @item-height: 34px;
-  @vertical-padding: 10px;
   @nav-item-count: 5;
 
-  padding: @vertical-padding @std-padding 0;
-  height: @item-height + @vertical-padding * 2;
+  padding: @nav-vertical-padding @std-padding 0;
+  height: @nav-item-height + @nav-vertical-padding * 2;
   width: 100%;
   background-color: white;
   border-bottom: 1px solid @border-light;
@@ -26,7 +26,7 @@
 
   .dropdown-menu {
     min-width: initial;
-    margin-top: @vertical-padding + 1px;
+    margin-top: @nav-vertical-padding + 1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     max-height: 70vh;
@@ -44,8 +44,8 @@
   }
 
   a.button {
-    .circular-button(@item-height);
-    line-height: @item-height;
+    .circular-button(@nav-item-height);
+    line-height: @nav-item-height;
   }
 
   .item {
@@ -122,4 +122,53 @@
       display: none !important;
     }
   }
+}
+
+.nav-title {
+  display: block;
+  position: absolute;
+  top: @nav-vertical-padding;
+  left: 50vw;
+  margin-left: -30vw;
+  width: 60vw;
+  text-align: center;
+  vertical-align: middle;
+  line-height: @nav-item-height;
+  .section-title;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &, &:hover {
+    text-decoration: none;
+  }
+
+  .logo {
+    width: @nav-item-height;
+    height: @nav-item-height;
+    background-size: cover;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    position: static;
+    width: 100%;
+    margin-left: 0;
+    padding: @std-padding 0;
+    text-align: left;
+    white-space: initial;
+
+    .logo {
+      float: left;
+    }
+
+    span {
+      display: block;
+      overflow: hidden;
+      line-height: initial;
+    }
+  }
+
 }
