@@ -66,21 +66,12 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     $scope.followers = []; // list of current followers
     $scope.followersToAdd = []; // builds an array of followers to add after hitting the "complete" button
 
-    $scope.$on("decipher.tags.added", function(event, args) {
-      $scope.followersToAdd.push(args.tag);
-    });
-
-    $scope.$on("decipher.tags.removed", function(event, args) {
-      $scope.followersToAdd.splice($scope.followersToAdd.indexOf(args.tag), 1);
-    });
-
     $scope.editingFollowers = false;
 
     $scope.isFollowing = false;
     $scope.joinPostText = "";
 
     $scope.onlyAuthorFollowing = false;
-
 
     var toggleJoinPostText = function() {
       if ($scope.isFollowing) {

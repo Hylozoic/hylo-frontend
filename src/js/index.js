@@ -22,7 +22,6 @@ require('ngInfiniteScroll');
 /* End Bower Components */
 
 /* Manually installed components */
-require('./angular/angular-tags-0.2.10-tpls');
 require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');
 
