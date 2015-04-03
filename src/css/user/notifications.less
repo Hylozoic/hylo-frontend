@@ -1,9 +1,15 @@
 .notifications {
   .simple-page;
 
-  .corner {
-    float: right;
-    line-height: 20px;
+  .buttons {
+    @media (min-width: @screen-sm) {
+      margin-top: @std-padding;
+      text-align: right;
+      width: 100%;
+    }
+    a {
+      .rounded-button;
+    }
   }
 
   .notification {
