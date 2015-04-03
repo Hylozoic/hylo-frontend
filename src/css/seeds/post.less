@@ -1,14 +1,19 @@
 .single-post {
+  .make-sm-column(6);
+  .make-sm-column-offset(3);
   margin-top: @std-padding * 2;
+
   @media (max-width: @screen-xs-max) {
     margin-top: @std-padding;
-    padding: 0;
   }
 
   .post {
+    .make-row;
+
     .full-media {
-      display: inline-block;
-      margin: 10px 0 5px;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
 
     .media {
@@ -17,8 +22,9 @@
   }
 }
 
+@post-avatar-margin: @avatar-size-default + @std-padding * 2;
+
 .post {
-  @user-width: 90px;
   margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
 
@@ -29,7 +35,7 @@
   .user {
     text-decoration: none;
     position: absolute;
-    width: @user-width;
+    width: @avatar-size-default;
     vertical-align: top;
     display: block;
 
@@ -60,7 +66,7 @@
   }
 
   .post-container {
-    margin-left: @user-width + 25;
+    margin-left: @post-avatar-margin;
     @media (max-width: @screen-xs-max) {
       margin-left: 0;
     }
@@ -95,14 +101,17 @@
     background-position: top center;
     background-repeat: no-repeat;
     margin: 10px 0 0;
-    @media (max-width: @screen-xs-max) {
-      width: 100vw;
-      margin-left: -@std-padding;
-    }
   }
 
   .full-media {
     display: none;
+  }
+
+  .media, .full-media {
+    @media (max-width: @screen-xs-max) {
+      width: 100vw;
+      margin-left: -@std-padding;
+    }
   }
 
   .show-more-btn {
