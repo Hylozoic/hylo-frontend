@@ -33,7 +33,7 @@
     <div class="post-context">
       <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
       <a class="timestamp" ui-sref="seed({community: post.community.slug, seedId: post.id})">
-        {{::post.creationDate | fromNow}}<!--
+        {{::post.last_updated | fromNow}}<!--
       --></a>
       <span class="community">
         in <a ui-sref="community.seeds({community: post.community.slug})">{{::post.community.name}}</a>
@@ -109,7 +109,7 @@
       <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Add members you would like to notify about this Seed" class="num-followers" ng-class="{'link-selected': editingFollowers}">
         <i ng-if="!editingFollowers" class="icon-add-member"></i>
         <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
-        <span class="num">{{post.numFollowers}}</span>
+        <span class="num">{{post.followers.length}}</span>
       </a>
       <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
         <i ng-if="isCommentsCollapsed" class="icon-comment"></i>

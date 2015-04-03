@@ -169,9 +169,6 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     var checkIsFollowing = function() {
-      //get number of followers
-      $scope.post.numFollowers = $scope.followers.length;
-
       var meInFollowers = _.findWhere($scope.followers, {id: $rootScope.currentUser.id});
 
       if (meInFollowers) {
