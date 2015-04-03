@@ -8,7 +8,6 @@ var dependencies = [
   'angular-growl',
   'angulartics',
   'angulartics.segment.io',
-  'decipher.tags',
   'http-auth-interceptor',
   'hylo-auth-module',
   'hyloControllers',
