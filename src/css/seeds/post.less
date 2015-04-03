@@ -166,15 +166,6 @@
       }
     }
 
-    @media (max-width: @screen-xs-max) {
-      border-top: 1px solid @border-lightest;
-      border-bottom: 1px solid @border-lightest;
-      margin-left: -10px;
-      margin-right: -10px;
-      padding-left: 23px;
-      padding-bottom: 2px;
-    }
-
     > a {
       cursor: pointer;
       margin-right: 15px;
@@ -218,9 +209,25 @@
       color: @link-color;
     }
 
+
     @media (max-width: @screen-xs-max) {
+      border-top: 1px solid @border-lightest;
+      border-bottom: 1px solid @border-lightest;
+      margin-left: -10px;
+      margin-right: -10px;
+      height: 37px;
+
+      > a {
+        display: block;
+        float: left;
+        padding: 5px 0;
+        width: 23.5vw !important;
+        text-align: center;
+        margin: 0;
+      }
+
       .fulfill-link {
-        visibility: hidden;
+        display: none;
       }
     }
 
