@@ -1,12 +1,13 @@
+<div class="nav-title">Recent Activity</div>
+
 <div class="main-content">
   <div class="all-sections">
 
-    <a class="corner" ng-click="markAllRead()">
-      Mark all
-      <span class="hidden-xs">as</span>
-      read
-    </a>
-    <h1>Recent Activity</h1>
+    <div class="buttons">
+      <a ng-click="markAllRead()">
+        Mark all as read
+      </a>
+    </div>
 
     <div class="notification" ng-repeat="event in activity" ng-class="{unread: event.unread}">
 
