@@ -1,7 +1,6 @@
 var angularModule = angular.module('hyloControllers', []);
 
 require('./controllers/comments');
-require('./controllers/fulfillModal');
 require('./controllers/network');
 
 require('./controllers/profile')(angularModule);
@@ -30,4 +29,4 @@ require('./controllers/home/AllSeedsCtrl')(angularModule);
 require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);
 require('./controllers/SearchCtrl')(angularModule);
-
+require('./controllers/FulfillmentCtrl')(angularModule);

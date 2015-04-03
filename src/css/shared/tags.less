@@ -62,3 +62,56 @@
   margin-top: 8px;
   min-height: 28px;
 }
+
+tags-input {
+
+  .tags {
+    .tag-item, .input {
+      line-height: @avatar-size-xs + 4px;
+      height: @avatar-size-xs + 8px;
+    }
+
+    .tag-item {
+      background: white !important;
+
+      i, span {
+        vertical-align: middle;
+      }
+
+      .avatar {
+        .user-avatar-xs;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .name {
+        .seed-body-text;
+      }
+
+      &.selected {
+        background: @link-color !important;
+        color: white;
+      }
+    }
+  }
+
+  .suggestion-item {
+    .avatar {
+      .user-avatar-xs;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .name {
+      .seed-body-text;
+      margin-left: 6px;
+      line-height: 33px;
+      display: inline-block;
+    }
+
+    &.selected .name {
+      color: white;
+    }
+  }
+
+}

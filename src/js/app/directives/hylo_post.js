@@ -25,7 +25,7 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
 
       var modalInstance = $modal.open({
         templateUrl: '/ui/app/fulfillModal.tpl.html',
-        controller: "FulfillModalCtrl",
+        controller: "FulfillmentCtrl",
         keyboard: false,
         backdrop: 'static',
         scope: modalScope

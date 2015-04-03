@@ -5,25 +5,23 @@
   <p>Who helped you fulfill your request? Tag “contributors” so they gain reputation for helping you.</p>
 
   <label>Contributors</label>
-  <tags options="{tagTemplateUrl: '/ui/app/tags_user.tpl.html'}"
-        model="contributors"
-        typeahead-options="typeaheadOpts"
-        src="b as b.name for b in potentialContributors"></tags>
 
-  <div ng-if="(potentialContributors|filter: {topContributor: true}).length > 0" style="margin-bottom: 20px;">
-    <label>Add Top Contributors</label>
-    <div class="row">
-      <div class="col-md-4" ng-repeat="topContributor in potentialContributors | filter: {topContributor: true} ">
-        <div class="top-contributor-item" ng-click="selectTopContributor(topContributor)" ng-class="{selected: topContributor.selected}">
-          <i back-img="topContributor.avatar" class="avatar"></i>
-          <div>{{topContributor.name}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <tags-input ng-model="contributors"
+              add-from-autocomplete-only="true"
+              display-property="name"
+              key-property="id"
+              replace-spaces-with-dashes="false"
+              placeholder="Search for people by name"
+              template="/ui/shared/ngTagsInput/tag-user.tpl.html">
+    <auto-complete source="findMembers($query)"
+                   display-property="name"
+                   min-length="2"
+                   template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
+    </auto-complete>
+  </tags-input>
 
   <div class="text-center">
-    <a class="add" ng-click="addContributors()">
+    <a class="add" ng-click="save()">
       <i class="icon-complete"></i> Add Contributors
     </a>
   </div>

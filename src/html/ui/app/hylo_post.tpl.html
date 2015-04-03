@@ -90,7 +90,7 @@
             <ul class="dropdown-menu">
               <li ng-repeat="user in post.contributors.slice(2)">
                 <a class="dropdown-list-user" ui-sref="profile({id: user.id})">
-                  <div back-img="::user.avatar" class="avatar"></div>
+                  <div back-img="::user.avatar_url" class="avatar"></div>
                   <div class="name">{{::user.name}}</div>
                 </a>
               </li>
