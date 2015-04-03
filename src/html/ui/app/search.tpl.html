@@ -30,7 +30,7 @@
         <h3>Seeds</h3>
 
         <div ng-repeat="seed in results.seeds track by seed.id">
-          <hylo-post post="seed" short="true" remove-fn="removeSeed(postToRemove)"></hylo-post>
+          <hylo-post post="seed" remove-fn="removeSeed(postToRemove)"></hylo-post>
         </div>
         <a ng-if="remaining('seeds') > 0" ng-click="loadMore('seeds')" class="load-more">
           Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})

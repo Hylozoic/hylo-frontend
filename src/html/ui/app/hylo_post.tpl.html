@@ -10,7 +10,7 @@
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
         <li>
-          <a class="post-option" ui-sref="community.editSeed({community: post.communitySlug, seedId: post.id})">Edit</a>
+          <a class="post-option" ui-sref="community.editSeed({community: post.community.slug, seedId: post.id})">Edit</a>
         </li>
         <li>
           <a class="post-option" ng-click="delete()">Delete</a>
@@ -21,7 +21,7 @@
     <div class="post-header">
       <span class="title" ng-bind-html="post.name | richText | unsafe"></span>
       <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
-      <a ui-sref="seed({community: post.communitySlug, seedId: post.id})"
+      <a ui-sref="seed({community: post.community.slug, seedId: post.id})"
         ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">
       </a>
       <div ng-if="isPostText" class="post-description">
@@ -32,9 +32,12 @@
 
     <div class="post-context">
       <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
-      <a class="timestamp" ui-sref="seed({community: post.communitySlug, seedId: post.id})">
-        {{::post.creationDate | fromNow}}
-      </a>
+      <a class="timestamp" ui-sref="seed({community: post.community.slug, seedId: post.id})">
+        {{::post.creationDate | fromNow}}<!--
+      --></a>
+      <span class="community">
+        in <a ui-sref="community.seeds({community: post.community.slug})">{{::post.community.name}}</a>
+      </span>
     </div>
 
     <div class="followers">
