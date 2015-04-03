@@ -42,12 +42,6 @@ factory("Post", ["$resource",
             params: {
               postController: "comments"
             }
-          },
-          markFulfilled: {
-            method: "POST",
-            params: {
-              postController: "markfulfilled"
-            }
           }
         })
 }]);

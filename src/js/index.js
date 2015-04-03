@@ -17,6 +17,7 @@ require('ment.io');
 require('newrelic-timing');
 require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
+require('ng-tags-input');
 require('ngInfiniteScroll');
 /* End Bower Components */
 

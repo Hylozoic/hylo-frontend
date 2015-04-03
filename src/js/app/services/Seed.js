@@ -28,6 +28,10 @@ var factory = function($resource) {
     queryForUser: {
       method: 'GET',
       url: '/noo/user/:userId/seeds'
+    },
+    fulfill: {
+      method: 'POST',
+      url: '/noo/seed/:id/fulfill'
     }
   });
 
@@ -36,6 +40,9 @@ var factory = function($resource) {
     update: function(params, success, error) {
       return Seed.save(_.extend({id: this.id}, params), success, error);
     },
+    fulfill: function(params, success, error) {
+      return Seed.fulfill(_.extend({id: this.id}, params), success, error);
+    }
   });
 
   return Seed;

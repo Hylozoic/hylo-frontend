@@ -19,7 +19,8 @@
     "ment.io": "0.9.22",
     "medium.js": "~1.0.1",
     "newrelic-timing": "~0.4.0",
-    "gsap": "~1.15.1"
+    "gsap": "~1.15.1",
+    "ng-tags-input": "~2.3.0"
   },
   "private": true,
   "resolutions": {
