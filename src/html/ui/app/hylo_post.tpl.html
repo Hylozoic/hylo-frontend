@@ -33,11 +33,12 @@
     <div class="post-context">
       <span class="post-type" ng-class="::post.postType">{{::post.postType | uppercase}}</span>
       <a class="timestamp" ui-sref="seed({community: post.community.slug, seedId: post.id})">
-        {{::post.last_updated | fromNow}}<!--
+        {{::post.creation_date | fromNow}}<!--
       --></a>
       <span class="community">
         in <a ui-sref="community.seeds({community: post.community.slug})">{{::post.community.name}}</a>
       </span>
+      &nbsp;•&nbsp; active {{::post.last_updated | fromNow}}
     </div>
 
     <div class="followers">
