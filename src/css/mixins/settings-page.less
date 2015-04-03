@@ -1,4 +1,5 @@
 .settings-page() {
+
   .section-label {
     .medium-header;
     padding: @std-padding 0;
@@ -39,6 +40,10 @@
       }
     }
 
+    p {
+      .seed-body-text;
+    }
+
     .main-column {
       .make-sm-column(8);
       button {
@@ -74,18 +79,13 @@
         text-align: right;
       }
     }
-
     .summary {
       .seed-meta-text;
       display: block;
     }
   }
 
-  p, span, div {
-    .seed-body-text;
-  }
-
-  p.help {
+  .help {
     .seed-meta-text;
     a {
       color: @link-color;
