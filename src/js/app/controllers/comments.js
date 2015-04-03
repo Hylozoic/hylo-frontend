@@ -72,10 +72,8 @@ angular.module("hyloControllers").controller('CommentsCtrl', ['$scope', '$http',
 
           $scope.hasMention = false;
 
-          if (!_.findWhere($scope.post.followers, {value: comment.user.id})) {
-            var user = comment.user;
-            user.value = user.id;
-            $scope.post.followers.push(user);
+          if (!_.findWhere($scope.post.followers, {id: comment.user.id + ''})) {
+            $scope.post.followers.push(comment.user);
           }
 
         }, function() {
