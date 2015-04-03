@@ -140,11 +140,8 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
       });
     };
 
-    $scope.showMore = function($event) {
-      $scope.truncated = false;
+    $scope.showMore = function() {
       setText(true);
-      $event.stopPropagation();
-      $event.preventDefault();
     };
 
     $scope.openFollowers = function(isOpen) {
@@ -159,13 +156,15 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
 
       text = require('../services/RichText').present(text, {communityId: $scope.post.community.id});
 
-      if (!fullLength && text.length > 300) {
-        text = truncate(text, 300);
+      if (!fullLength && text.length > 140) {
+        text = truncate(text, 140);
         $scope.truncated = true;
+      } else {
+        $scope.truncated = false;
       }
 
-      $scope.truncatedPostText = text;
-      $scope.isPostText = text.length > 0;
+      $scope.description = text;
+      $scope.hasDescription = text.length > 0;
     };
 
     var checkIsFollowing = function() {
