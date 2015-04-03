@@ -36,16 +36,13 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
 
     //Voting is the same thing as "liking"
     $scope.vote = function() {
-      var thisPost = $scope.post;
-      var newVoteState = true; // TODO allow de-voting: !thisPost.myVote;
+      var post = $scope.post;
+      post.myVote = !post.myVote;
+      post.votes += (post.myVote ? 1 : -1);
+      $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
 
-      thisPost.myVote = !thisPost.myVote;
-      $scope.voteTooltipText = thisPost.myVote ? unvoteText : voteText;
-
-      Post.vote({id: thisPost.id}, function(value, responseHeaders) {
-        thisPost.votes = value.numVotes;
-        thisPost.myVote = value.myVote;
-        $analytics.eventTrack('Post: Like', {post_id: $scope.post.id, state: (thisPost.myVote ? 'on' : 'off')})
+      Seed.vote({id: post.id}, function() {
+        $analytics.eventTrack('Post: Like', {post_id: $scope.post.id, state: (post.myVote ? 'on' : 'off')})
       });
     };
 

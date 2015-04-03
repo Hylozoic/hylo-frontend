@@ -32,6 +32,10 @@ var factory = function($resource) {
     fulfill: {
       method: 'POST',
       url: '/noo/seed/:id/fulfill'
+    },
+    vote: {
+      method: 'POST',
+      url: '/noo/seed/:id/vote'
     }
   });
 
@@ -42,6 +46,9 @@ var factory = function($resource) {
     },
     fulfill: function(params, success, error) {
       return Seed.fulfill(_.extend({id: this.id}, params), success, error);
+    },
+    vote: function(params, success, error) {
+      return Seed.vote(_.extend({id: this.id}, params), success, error);
     }
   });
 
