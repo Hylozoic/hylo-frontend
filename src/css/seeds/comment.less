@@ -6,23 +6,27 @@
   }
 
   .comment {
-    padding-bottom: 18px;
+    padding-top: @std-padding;
     background-color: @faint-gray;
     border-right: 1px solid @border-lightest;
     border-left: 1px solid @border-lightest;
 
-    &:first-child {
-      padding-top: 22px;
-    }
-
     &.last {
       border-bottom: 1px solid @border-lightest;
+      padding-bottom: @std-padding;
     }
 
     .avatar {
       .user-avatar-sm;
-      position: absolute;
-      margin-left: 18px;
+      margin: 0 @std-padding;
+      float: left;
+    }
+
+    .comment-content {
+      overflow: hidden;
+      padding-right: 30px;
+      max-width: 100%;
+      word-wrap: break-word;
     }
 
     .comment-delete {
@@ -49,7 +53,7 @@
       .seed-body-text;
     }
 
-    .comment-content .controls {
+    .controls {
       .seed-meta-text;
       line-height: 1.4;
       padding-top: 6px;
@@ -61,12 +65,6 @@
       }
     }
 
-    .comment-content {
-      .add-avatar-margin(@avatar-size-sm+45, false);
-      padding-right: 40px;
-      max-width: 100%;
-      word-wrap: break-word;
-    }
   }
 
   @media (max-width: @screen-xs-max) {
@@ -75,7 +73,6 @@
 }
 
 .add-comment {
-
   background-color: white;
   position: relative;
   padding: 6px 0;
@@ -85,12 +82,12 @@
 
   .avatar {
     .user-avatar-sm;
-    position: absolute;
-    margin-left: 17px;
+    margin: 0 @std-padding;
+    float: left;
   }
 
   .comment-input {
-    .add-avatar-margin(@avatar-size-sm+45);
+    overflow: hidden;
     display: block;
     margin-top: 5px;
     min-height: 28px;
@@ -109,15 +106,15 @@
       z-index: 10;
     }
 
-    .comment-placeholder {
+    .placeholder {
       font-style: italic;
       color: @inactive-text;
-      top: 3px;
+      top: 14px;
       position: absolute;
       z-index: 0;
 
       @media (max-width: @screen-xs-max) {
-        top: -4px;
+        top: 3px;
       }
     }
   }
@@ -131,33 +128,30 @@
 @media (max-width: @screen-xs-max) {
 
   .comments .comment {
+    padding: @std-padding @std-padding 0;
 
-    &:first-child {
-      padding-top: 12px;
+    &.last {
+      padding-bottom: @std-padding;
     }
 
     .avatar {
       .user-avatar-xs;
-      position: static;
-      float: left;
-      margin: 0 8px 8px 8px;
-
+      margin-left: 0;
     }
     .comment-content {
-      padding-left: 10px;
-      padding-right: 10px;
-      margin: 0;
+      padding-right: 0;
     }
   }
+
   .add-comment {
 
     .avatar {
-      margin-left: 8px;
+      margin-left: @std-padding;
       .user-avatar-xs;
     }
 
     .comment-input {
-      margin-left: 42px;
+      margin-left: @avatar-size-xs + @std-padding * 2;
       margin-top: 2px;
 
       button {
