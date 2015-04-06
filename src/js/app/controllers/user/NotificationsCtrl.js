@@ -5,6 +5,9 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
   $scope.activity = activity;
 
   $analytics.eventTrack('Notifications: View');
+  currentUser.update({new_notification_count: 0}, function() {
+    currentUser.new_notification_count = 0;
+  });
 
   $scope.actionText = function(event) {
     switch(event.action) {

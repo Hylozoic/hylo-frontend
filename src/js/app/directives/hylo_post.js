@@ -42,7 +42,10 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
       $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
 
       Seed.vote({id: post.id}, function() {
-        $analytics.eventTrack('Post: Like', {post_id: $scope.post.id, state: (post.myVote ? 'on' : 'off')})
+        $analytics.eventTrack('Post: Like', {
+          post_id: post.id,
+          state: (post.myVote ? 'on' : 'off')
+        });
       });
     };
 

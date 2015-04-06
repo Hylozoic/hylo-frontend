@@ -49,6 +49,7 @@
       <!-- inline-block space fix
 
       --><div class="item notifications">
+        <div class="badge" ng-if="currentUser.new_notification_count > 0">{{currentUser.new_notification_count}}</div>
         <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom">
           <i class="icon-notifications"></i>
         </a>
