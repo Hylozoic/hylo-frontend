@@ -109,6 +109,32 @@
     max-width: none;
   }
 
+  .notifications {
+    position: relative;
+  }
+
+  .badge {
+    @size: 22px;
+    background-color: #f00;
+    color: white;
+    width: @size;
+    height: @size;
+    line-height: @size;
+    border-radius: @size;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+    top: -2px;
+    right: -5px;
+    font-weight: normal;
+
+    @media (max-width: @screen-xs-max) {
+      right: auto;
+      left: 50%;
+      margin-left: 2px;
+    }
+  }
+
   @media (max-width: @screen-xs-max) {
     padding: 10px 0;
 

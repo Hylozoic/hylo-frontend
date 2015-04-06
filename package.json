@@ -54,8 +54,8 @@
     "postinstall": "node_modules/.bin/bower install",
     "prune": "bower prune",
     "start": "grunt dev",
-    "start-node-local": "grunt dev --node-upstream=localhost:1337",
-    "start-local": "grunt dev --upstream=localhost:9000 --node-upstream=localhost:1337",
+    "start-local": "npm run dev",
+    "dev": "grunt dev --upstream=localhost:9000 --node-upstream=localhost:1337",
     "test": "karma start karma.config.js"
   },
   "repository": {
