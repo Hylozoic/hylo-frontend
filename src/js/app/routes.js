@@ -44,7 +44,10 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     .state('appEntry', /*@ngInject*/ {
       parent: 'main',
       url: '/app',
-      onEnter: function(currentUser, $state, $timeout) {
+      onEnter: function(currentUser, $state, $timeout, onboarding) {
+        if (onboarding && !onboarding.isComplete())
+          return;
+
         var membership = (currentUser && currentUser.memberships[0]);
         if (membership) {
           $timeout(function() {

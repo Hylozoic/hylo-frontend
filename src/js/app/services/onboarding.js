@@ -7,9 +7,6 @@ var steps = {
   seeds: {
     state: 'onboarding.seeds',
   },
-  newSeed: {
-    state: 'community.newSeed'
-  },
   community: {
     state: 'community.seeds'
   },
@@ -18,7 +15,7 @@ var steps = {
   }
 };
 
-var stepOrder = ['start', 'seeds', 'newSeed', 'community', 'profile', 'done'];
+var stepOrder = ['start', 'seeds', 'community', 'profile', 'done'];
 
 var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
 
@@ -69,6 +66,9 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       return !!this._status.seed_created;
     },
     currentStep: function() {
+      if (!_.contains(stepOrder, this._status.step))
+        return 'community';
+
       return this._status.step;
     },
     showOverlay: function(name) {
