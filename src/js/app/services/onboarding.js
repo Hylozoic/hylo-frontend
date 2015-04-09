@@ -72,16 +72,37 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       return this._status.step;
     },
     showOverlay: function(name) {
-      Overlay.show({
+      var scope = {
         overlay: 'onboarding.' + name,
         onboarding: this
-      });
+      };
+      if (name === 'community') {
+        scope.conversationStep = 1;
+      }
+      Overlay.show(scope);
     },
-    continue: function() {
+    continue: function(data) {
       var self = this;
 
       switch (this.currentStep()) {
         case 'community':
+
+          var cleanup = function(string) {
+            if (!string) return;
+
+            return _.chain(string.split(','))
+              .map(function(x) { return x.trim(); })
+              .reject(function(x) { return x == '' })
+              .uniq().value();
+          }, input = {
+            skills: cleanup(data.skills),
+            organizations: cleanup(data.organizations)
+          };
+
+          if (_.isEmpty(input.skills)) delete input.skills;
+          if (_.isEmpty(input.organizations)) delete input.organizations;
+          if (!_.isEmpty(input)) this._user.update(input);
+
           this._announcerDelay = $timeout(function() {
             $rootScope.$emit('announcer:show', {
               text: "When you're ready, click here to visit your profile.",
@@ -90,7 +111,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
               },
               className: 'point-to-profile'
             });
-          }, 5000);
+          }, 3000);
           break;
 
         case 'profile':
