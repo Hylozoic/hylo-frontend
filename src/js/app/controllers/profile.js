@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
+var controller = function($scope, $analytics, user, isSelf, growl) {
   $scope.user = user;
   $scope.isSelf = isSelf;
 
@@ -7,13 +7,6 @@ var controller = function($scope, $analytics, user, isSelf, growl, onboarding) {
 
   if (!user.banner_url) {
     user.banner_url = require('../services/defaultUserBanner');
-  }
-
-  if (isSelf && onboarding) {
-    var step = onboarding.currentStep();
-    if (_.include(['profile'], step)) {
-      onboarding.showOverlay(step);
-    }
   }
 
   $scope.normalizeUrl = function(url) {

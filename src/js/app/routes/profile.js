@@ -13,6 +13,12 @@ module.exports = function ($stateProvider) {
         } else {
           return User.get({id: $stateParams.id}).$promise;
         }
+      },
+      showOverlay: function(isSelf, onboarding) {
+        // hack -- this is only here so it shows before the controller's other content appears
+        if (isSelf && onboarding && onboarding.currentStep() === 'profile') {
+          onboarding.showOverlay('profile');
+        }
       }
     },
     views: {
