@@ -1,10 +1,6 @@
 var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstSeedQuery) {
 
   $scope.onboarding = onboarding;
-  if (onboarding && onboarding.currentStep() === 'community') {
-    onboarding.showOverlay('community');
-  }
-
   $scope.community = community;
   $scope.seeds = firstSeedQuery.seeds;
   $scope.loadMoreDisabled = $scope.seeds.length >= firstSeedQuery.seeds_total;

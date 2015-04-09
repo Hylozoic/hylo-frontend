@@ -54,6 +54,12 @@ module.exports = function ($stateProvider) {
             return resp;
           });
         }
+      },
+      showOverlay: function(onboarding) {
+        // hack -- this is only here so it shows before the controller's other content appears
+        if (onboarding && onboarding.currentStep() === 'community') {
+          onboarding.showOverlay('community');
+        }
       }
     }
   })
