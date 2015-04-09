@@ -1,31 +1,28 @@
 <div class="main-content">
-  <div class="all-sections" ng-switch="onboarding.isSeedCreated()">
+  <div class="all-sections">
 
-    <div ng-switch-when="true">
-      <h2 class="center">Congratulations!</h2>
+    <h2 class="center">Welcome!</h2>
 
+    <div ng-show="conversationStep == 1">
       <div class="wrapper">
-        <p>You've planted your first seed in {{onboarding.community.name}}. You can see it here, on your community's feed. Other members of your community can also see it and comment on it.</p>
-
-        <p>To edit your seed, just click <i class="icon-down" title="icon-down-new"></i> in its upper right corner and select "Edit".</p>
-
-        <p>Scroll down past it to see what other community members are sharing or seeking.</p>
+        <p>Before you get started, tell us a little about yourself.</p>
+        <p>What groups or organizations are you a part of?</p>
+        <textarea class="form-control" ng-model="organizations" placeholder="List names, separated by commas"></textarea>
+      </div>
+      <div class="right">
+        <a class="button" ng-click="conversationStep = 2">Next</a>
       </div>
     </div>
 
-    <div ng-switch-when="false">
-      <h2 class="center">This is your community's feed.</h2>
-
+    <div ng-show="conversationStep == 2">
       <div class="wrapper">
-        <p>Here you can see all the seeds that people have created in your community, and comment on the ones that interest you.</p>
-
-        <p>If you comment on a seed, or click "Join", you will receive email notifications for updates on that seed. (You can always disable this later.)</p>
-
-        <p>Scroll down to see more seeds. Or click "Members" to browse a list of all members.</p>
+        <p>Thanks! Are there any skills, passions, or hobbies you'd like to be known for in your community?</p>
+        <textarea class="form-control" ng-model="skills" placeholder="List skills, passions, and hobbies, separated by commas"></textarea>
+      </div>
+      <div class="right">
+        <a class="button" ng-click="onboarding.continue({skills: skills, organizations: organizations}); hide()">Next</a>
       </div>
     </div>
-
-    <div class="center"><a class="button" ng-click="onboarding.continue(); hide()">Got it!</a></div>
 
     <a ng-click="onboarding.goBack(); hide()" ng-show="onboarding.allowBack">Back</a>
   </div>
