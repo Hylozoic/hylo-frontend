@@ -82,8 +82,6 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       Overlay.show(scope);
     },
     continue: function(data) {
-      var self = this;
-
       switch (this.currentStep()) {
         case 'community':
 
@@ -99,8 +97,18 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             organizations: cleanup(data.organizations)
           };
 
-          if (_.isEmpty(input.skills)) delete input.skills;
-          if (_.isEmpty(input.organizations)) delete input.organizations;
+          if (_.isEmpty(input.skills)) {
+            delete input.skills;
+          } else {
+            this._track('Add Skills');
+          }
+
+          if (_.isEmpty(input.organizations)) {
+            delete input.organizations;
+          } else {
+            this._track('Add Affiliations');
+          }
+
           if (!_.isEmpty(input)) this._user.update(input);
 
           this._announcerDelay = $timeout(function() {
