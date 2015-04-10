@@ -1,6 +1,5 @@
 var angularModule = angular.module('hyloControllers', []);
 
-require('./controllers/comments');
 require('./controllers/network');
 
 require('./controllers/profile')(angularModule);
@@ -13,6 +12,7 @@ require('./controllers/user/NotificationsCtrl')(angularModule);
 require('./controllers/seeds/SeedEditCtrl')(angularModule);
 require('./controllers/seeds/SeedCtrl')(angularModule);
 require('./controllers/seeds/SeedListCtrl')(angularModule);
+require('./controllers/seeds/CommentsCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);
 require('./controllers/community/CommunitySettingsCtrl')(angularModule);

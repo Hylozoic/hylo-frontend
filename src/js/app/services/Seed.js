@@ -36,6 +36,10 @@ var factory = function($resource) {
     vote: {
       method: 'POST',
       url: '/noo/seed/:id/vote'
+    },
+    findComments: {
+      url: '/noo/seed/:id/comments',
+      isArray: true
     }
   });
 
@@ -49,6 +53,9 @@ var factory = function($resource) {
     },
     vote: function(params, success, error) {
       return Seed.vote(_.extend({id: this.id}, params), success, error);
+    },
+    findComments: function(params, success, error) {
+      return Seed.findComments(_.extend({id: this.id}, params), success, error);
     }
   });
 

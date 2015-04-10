@@ -7,18 +7,20 @@
       </a>
     </div>
 
-    <a class="avatar" back-img="::comment.user.avatar" ui-sref="profile({id: comment.user.id})"></a>
+    <a class="avatar" back-img="::comment.user.avatar_url" ui-sref="profile({id: comment.user.id})"></a>
 
     <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
-      <div class="comment-text unpad-last-p" ng-bind-html="::commentTextSafe(comment.text)"></div>
+      <div class="comment-text unpad-last-p" ng-bind-html="::comment.comment_text | richText | unsafe"></div>
       <div class="controls">
         <a ui-sref="profile({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
         •
-        <span class="timestamp">{{::comment.timestamp | fromNow}}</span>
+        <span class="timestamp">{{::comment.date_commented | fromNow}}</span>
         <span ng-show="::(!commentOwner(comment))">
-          <span ng-if="!comment.isThanked">• Say <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">thanks</a></span>
+          <span ng-if="!comment.isThanked">•
+            <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">Say thanks</a>
+          </span>
           <span ng-if="comment.isThanked">•
-            <a class="thank-link" tooltip='click to take back your thanks' tooltip-popup-delay="500" ng-click="thank(comment)">You thanked <span>{{::comment.user.name | firstName}}</span></a>
+            <a class="thank-link" tooltip='click to take back your thanks' tooltip-popup-delay="500" ng-click="thank(comment)">You thanked {{::comment.user.name | firstName}}</a>
           </span>
         </span>
       </div>
@@ -26,19 +28,18 @@
 
   </div>
 
-  <div ng-if="!post.commentsLoaded && post.numComments > 0" class="loading">Loading comments...</div>
+  <div ng-if="loading" class="loading">Loading comments...</div>
 
   <div class="add-comment">
     <!-- FIXME why doesn't this work without $root? -->
 
-    <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentText}"></a>
+    <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentInput}"></a>
 
     <div class="comment-input">
       <form class="comment-form">
         <div tabindex="-1"
              autocomplete="off"
              contenteditable="true"
-             placeholder="Write a comment..."
 
              mentio=""
              mentio-trigger-char="'@'"
@@ -49,15 +50,16 @@
              mentio-typed-term="typedTerm2"
 
              ng-disabled="createDisabled"
-             ng-focus="openCommenting()"
-             ng-model="commentText"
+             ng-focus="commenting = true"
+             ng-blur="commenting = false"
+             ng-model="commentInput"
              class="mentio-editor no-border"
-             ng-class="{'empty-comment': !commentText}"
+             ng-class="{'empty-comment': !commentInput}"
              required>
         </div>
       </form>
-      <div class="placeholder" ng-hide="commentOpen || commentText"> Type a comment. Type @ to mention others.</div>
+      <div class="placeholder" ng-hide="commenting || commentInput.length > 0"> Type a comment. Type @ to mention others.</div>
     </div>
   </div>
-  <div class="comment-btn"><button type="button" ng-show="commentText" tabindex="1" ng-disabled="commentText.length <= initialCommentText.length" class="btn btn-sm comment-btn" ng-click="create()">Comment</button></div>
+  <div class="comment-btn"><button type="button" ng-show="commentInput" tabindex="1" ng-disabled="commentInput.length == 0" class="btn btn-sm comment-btn" ng-click="create()">Comment</button></div>
 </div>
