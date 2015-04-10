@@ -117,16 +117,17 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             $rootScope.$emit('announcer:show', {
               text: "When you're ready, click here to visit your profile.",
               onclick: function() {
-                self.goNext();
+                self._goDelta(0);
               },
               className: 'point-to-profile'
             });
           }, 3000);
+
+          this._setStep('profile', true);
           break;
 
         case 'profile':
-          this._status.step = 'done';
-          OnboardingResource.save({userId: this._user.id, step: 'done'});
+          this._setStep('done', true);
           break;
       }
     },
