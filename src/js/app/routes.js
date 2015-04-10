@@ -36,18 +36,12 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       },
       controller: function($scope, $rootScope, currentUser, onboarding) {
         $rootScope.currentUser = currentUser;
-
-        if (onboarding && !onboarding.isComplete())
-          onboarding.resume();
       }
     })
     .state('appEntry', /*@ngInject*/ {
       parent: 'main',
       url: '/app',
       onEnter: function(currentUser, $state, $timeout, onboarding) {
-        if (onboarding && !onboarding.isComplete())
-          return;
-
         var membership = (currentUser && currentUser.memberships[0]);
         if (membership) {
           $timeout(function() {
