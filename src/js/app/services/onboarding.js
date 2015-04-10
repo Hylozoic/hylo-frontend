@@ -82,6 +82,8 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       Overlay.show(scope);
     },
     continue: function(data) {
+      var self = this;
+
       switch (this.currentStep()) {
         case 'community':
 
