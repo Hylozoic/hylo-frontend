@@ -1,4 +1,9 @@
 .community-seeds-toolbar {
+  > div {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+  }
+
   .search {
     .rounded-button;
     padding: 0;
@@ -44,7 +49,39 @@
   }
 }
 
+.community-seeds {
+  .reminder {
+    width: 100%;
+    overflow: hidden;
+    padding: @std-padding 0;
+    background-color: @hylo-teal;
+    .seed-title-text;
+    &, a { color: white; }
+    line-height: 32px;
+
+    > div {
+      .make-sm-column(6);
+      .make-sm-column-offset(3);
+    }
+
+    .button {
+      .rounded-button-clear;
+    }
+
+    .right {
+      float: right;
+    }
+
+    @media (max-width: @screen-xs-max) {
+      padding: @std-padding;
+    }
+  }
+}
+
 .posts {
+  .make-sm-column(6);
+  .make-sm-column-offset(3);
+
   padding-top: 25px;
   @media (max-width: @screen-xs-max) {
     padding-top: 15px;
