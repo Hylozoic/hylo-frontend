@@ -84,7 +84,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       views: {
         main: {
           templateUrl: '/ui/support/base.tpl.html',
-          controller: function() {}
+          controller: function($anchorScroll) {
+            $anchorScroll();
+          }
         }
       }
     })
