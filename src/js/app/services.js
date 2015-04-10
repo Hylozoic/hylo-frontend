@@ -28,15 +28,6 @@ factory("Post", ["$resource",
         id: "@id",
         listController: "@listController",
         postController: "@postController"
-      },
-      {
-        getComments: {
-          method: "GET",
-          isArray: true,
-          params: {
-            postController: "comments"
-          }
-        }
       }
     );
 }]);
