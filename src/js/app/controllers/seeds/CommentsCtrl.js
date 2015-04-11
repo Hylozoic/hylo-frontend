@@ -18,7 +18,7 @@ var controller = function($scope, $http, Post, $log, $rootScope, $modal, growl, 
   };
 
   $scope.commentOwner = function(comment) {
-    return $rootScope.currentUser.id == comment.user.id;
+    return $rootScope.currentUser && $rootScope.currentUser.id == comment.user.id;
   };
 
   $scope.create = function() {

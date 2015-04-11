@@ -23,10 +23,10 @@ module.exports = {
   extractClassNameFn: extractClassNameFn,
 
   service: function(angularModule) {
-    angularModule.factory('$bodyClass', ['$state', function($state) {
+    angularModule.factory('$bodyClass', function($state) {
       return function() {
         return extractClassName($state.current.name);
       };
-    }]);
+    });
   }
 };
