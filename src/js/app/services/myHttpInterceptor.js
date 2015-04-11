@@ -9,17 +9,14 @@ var interceptor = function ($httpProvider, $provide) {
       },
 
       responseError: function(rejection) {
-        if (_.include([403, 500], rejection.status)) {
+        if (rejection.status == 403) {
+          window.location = '/login?next=' + location.pathname;
+        } else if (rejection.status == 500) {
           Rollbar.error(format('%s: %s', rejection.status, rejection.config.url));
           var message = format('Oops! An error occurred. The Hylo team has been notified. (%s)', rejection.status);
           growl.addErrorMessage(message, {ttl: 5000});
-
-          if (rejection.status == 403) {
-            $timeout(function() {
-              window.location = '/login';
-            }, 2000);
-          }
         }
+
         return $q.reject(rejection);
       }
     };

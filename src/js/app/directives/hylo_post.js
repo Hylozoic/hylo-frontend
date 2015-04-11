@@ -7,9 +7,11 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     $scope.voteTooltipText = "";
     $scope.followersNotMe = [];
 
+    var currentUser = $rootScope.currentUser;
+
     $scope.isPostOwner = function() {
       if ($scope.post.user) {
-        return $scope.post.user.id == $rootScope.currentUser.id;
+        return currentUser && $scope.post.user.id == currentUser.id;
       }
       return false;
     };
@@ -84,7 +86,9 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     $scope.toggleJoinPost = function() {
-      var user = $rootScope.currentUser;
+      var user = currentUser;
+      if (!user) return;
+
       if (!$scope.isFollowing) {
         $analytics.eventTrack('Post: Join', {post_id: $scope.post.id});
         $scope.followers.push({
@@ -168,7 +172,9 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     };
 
     var checkIsFollowing = function() {
-      var meInFollowers = _.findWhere($scope.followers, {id: $rootScope.currentUser.id});
+      var meInFollowers = (currentUser
+        ? _.findWhere($scope.followers, {id: currentUser.id})
+        : null);
 
       if (meInFollowers) {
         $scope.followersNotMe = _.without($scope.followers, meInFollowers);
@@ -199,7 +205,7 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
       }
 
       // Determines if this post is editable by currentUser. (is their post OR a moderator)
-      $scope.canEdit = ($rootScope.currentUser && $scope.post.user.id == $rootScope.currentUser.id) ||
+      $scope.canEdit = (currentUser && $scope.post.user.id == currentUser.id) ||
             ($rootScope.community && $rootScope.community.canModerate);
 
       $scope.postUrl = $state.href("seed", {community: $scope.post.community.slug, seedId: $scope.post.id});

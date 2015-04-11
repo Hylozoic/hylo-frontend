@@ -30,9 +30,7 @@
 
   <div ng-if="loading" class="loading">Loading comments...</div>
 
-  <div class="add-comment">
-    <!-- FIXME why doesn't this work without $root? -->
-
+  <div class="add-comment" ng-if="::$root.currentUser">
     <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentInput}"></a>
 
     <div class="comment-input">
