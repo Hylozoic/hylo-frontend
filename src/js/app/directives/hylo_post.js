@@ -212,7 +212,7 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
 
       $scope.voteTooltipText = $scope.post.myVote ? unvoteText : voteText;
 
-      setText(false);
+      setText($scope.startExpanded);
 
       unwatchPost();
     };
@@ -231,7 +231,8 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $t
     restrict: 'E',
     scope: {
       post: '=', // the post to generate markup for as a bi-directional model.  See http://docs.angularjs.org/api/ng.$compile
-      'removeFn': '&'
+      removeFn: '&',
+      startExpanded: '='
     },
     controller: controller,
     templateUrl: "/ui/app/hylo_post.tpl.html",
