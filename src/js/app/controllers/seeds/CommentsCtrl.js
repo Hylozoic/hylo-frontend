@@ -22,8 +22,7 @@ var controller = function($scope, $http, Post, $log, $rootScope, $modal, growl, 
   };
 
   $scope.create = function() {
-    var content = $scope.commentInput;
-    if (content && content.trim().length > 0) {
+    if ($scope.commentLength() > 0) {
       $scope.createDisabled = true;
       Seed.comment({id: post.id, text: $scope.commentInput.trim()}, function(comment) {
         post.comments.push(comment);
@@ -90,6 +89,9 @@ var controller = function($scope, $http, Post, $log, $rootScope, $modal, growl, 
     return UserMentions.userTextRaw(user);
   };
 
+  $scope.commentLength = function() {
+    return angular.element('<div>' + ($scope.commentInput || '') + '</div>').text().length;
+  }
 };
 
 module.exports = function(angularModule) {
