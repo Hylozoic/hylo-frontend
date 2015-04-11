@@ -56,13 +56,13 @@
              required>
         </div>
       </form>
-      <div class="placeholder" ng-hide="commenting || commentInput.length > 0">
+      <div class="placeholder" ng-hide="commenting || commentLength() > 0">
         Type a comment. Type @ to mention others.
       </div>
     </div>
   </div>
   <div class="comment-btn">
-    <button type="button" ng-show="commentInput" tabindex="1" ng-disabled="commentInput.length == 0" class="btn btn-sm comment-btn" ng-click="create()">Comment</button>
+    <button type="button" ng-show="commentLength() > 0" tabindex="1" class="btn btn-sm comment-btn" ng-click="create()">Comment</button>
   </div>
 
 </div>
