@@ -89,6 +89,15 @@ var controller = function($scope, $http, Post, $log, $rootScope, $modal, growl, 
     $scope.hasMention = true;
     return UserMentions.userTextRaw(user);
   };
+
+  $scope.startCommenting = function() {
+    $scope.commenting = true;
+  };
+
+  $scope.stopCommenting = function() {
+    $scope.commenting = false;
+  };
+
 };
 
 module.exports = function(angularModule) {

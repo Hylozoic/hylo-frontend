@@ -48,16 +48,20 @@
              mentio-typed-term="typedTerm2"
 
              ng-disabled="createDisabled"
-             ng-focus="commenting = true"
-             ng-blur="commenting = false"
+             ng-focus="startCommenting()"
+             ng-blur="stopCommenting()"
              ng-model="commentInput"
              class="mentio-editor no-border"
              ng-class="{'empty-comment': !commentInput}"
              required>
         </div>
       </form>
-      <div class="placeholder" ng-hide="commenting || commentInput.length > 0"> Type a comment. Type @ to mention others.</div>
+      <div class="placeholder" ng-hide="commenting || commentInput.length > 0">
+        Type a comment. Type @ to mention others.
+      </div>
     </div>
   </div>
-  <div class="comment-btn"><button type="button" ng-show="commentInput" tabindex="1" ng-disabled="commentInput.length == 0" class="btn btn-sm comment-btn" ng-click="create()">Comment</button></div>
+  <div class="comment-btn">
+    <button type="button" ng-show="commenting || commentInput.length > 0" tabindex="1" ng-disabled="commentInput.length == 0" class="btn btn-sm comment-btn" ng-click="create()">Comment</button>
+  </div>
 </div>
