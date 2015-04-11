@@ -52,6 +52,14 @@
     float: left;
     display: block;
     margin-right: 10px;
+
+    &.public-only {
+      display: none !important;
+    }
+
+    &.about {
+      line-height: @nav-item-height;
+    }
   }
 
   .avatar {
@@ -146,6 +154,21 @@
 
     .tooltip {
       display: none !important;
+    }
+
+    .item.about {
+      margin-right: @std-padding !important;
+    }
+  }
+
+
+
+  &.public {
+    .item {
+      display: none;
+      &.public-only {
+        display: inline-block !important;
+      }
     }
   }
 }
