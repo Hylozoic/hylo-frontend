@@ -1,4 +1,7 @@
 hyloEnv.onUser(function(user) {
+  if (!user) return;
+
+  var membership = user.memberships[0];
 
   // segment
   analytics.identify(user.id, {
@@ -9,8 +12,8 @@ hyloEnv.onUser(function(user) {
     provider: user.linkedAccounts[0].provider_key,
     createdAt: user.date_created,
     created: user.date_created,
-    community_name: user.memberships[0].community.name,
-    community_id: user.memberships[0].community.id,
+    community_name: (membership ? membership.community.name : undefined),
+    community_id: (membership ? membership.community.id : undefined),
   });
 
   // rollbar

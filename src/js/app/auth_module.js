@@ -1,23 +1,17 @@
 angular.module('hylo-auth-module', ['http-auth-interceptor'])
-.directive('hyloAuth', function($timeout) {
+.directive('hyloAuth', function($timeout, $rootScope) {
   return {
     restrict: 'A',
     link: function($scope, $elem, $attrs) {
       //once Angular is started, remove class:
       $elem.removeClass('waiting-for-angular');
 
-      $scope.loggedIn = true;
-
       $scope.$on('event:auth-loginRequired', function() {
-        $timeout(function() {
-          window.location.replace("/login?next=" + location.pathname);
-        }, 3000);
-
-        $scope.loggedIn = false;
+        window.location = "/login?next=" + location.pathname;
       });
 
       $scope.$on('event:auth-loginConfirmed', function() {
-        $scope.loggedIn = true;
+        $rootScope.loggedIn = true;
       });
     }
   }
