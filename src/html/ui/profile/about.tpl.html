@@ -28,7 +28,7 @@
 
 	<section ng-if="user.skills.length > 0 || isSelf">
 		<h2>Skills I can share</h2>
-		<a class="message" ng-if="iself && user.skills.length == 0">
+		<a class="message" ng-if="isSelf && user.skills.length == 0" ui-sref="editProfile">
 			<i class="icon-edit" title="icon-edit"></i>
 			Add your skills.
 		</a>
@@ -40,10 +40,10 @@
 	</section>
 
 	<section ng-if="user.organizations.length > 0 || isSelf">
-		<h2>Affiliations</h2>
-		<a class="message" ng-if="iself && user.organizations.length == 0">
+		<h2>Groups and organizations</h2>
+		<a class="message" ng-if="isSelf && user.organizations.length == 0" ui-sref="editProfile">
 			<i class="icon-edit" title="icon-edit"></i>
-			Add your affiliations.
+			Add groups and organizations you belong to.
 		</a>
 		<ul>
 			<li ng-repeat="org in user.organizations">
