@@ -68,11 +68,11 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
       }).join(', ');
 
     } else if (_.any(person.organizations, function(org) { return !!org.match(pattern); })) {
-      return 'Affiliations: ' + _.map(person.organizations, function(org) {
+      return 'Groups: ' + _.map(person.organizations, function(org) {
         return highlight.find(org, query);
       }).join(', ');
     }
-    return person.bio || format('Skills: %s<br/>Affiliations: %s',
+    return person.bio || format('Skills: %s<br/>Groups: %s',
       person.skills.join(', '), person.organizations.join(', '));
   };
 

@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="affiliations" ng-if="::(!user.bio && user.organizations.length > 0)">
-        <div class="title">Affiliations:</div>
+        <div class="title">Groups:</div>
         <div class="clickable-links">
           <span ng-repeat="affiliation in ::user.organizations track by $index">
             <a ng-click="search(affiliation)">{{::affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
