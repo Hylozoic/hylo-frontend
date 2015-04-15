@@ -1,6 +1,5 @@
 require('./auth_module');
 require('./directives');
-require('./directives/embeddedComments');
 require('./controllers');
 require('./services');
 

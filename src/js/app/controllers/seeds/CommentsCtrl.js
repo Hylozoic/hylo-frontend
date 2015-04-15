@@ -1,4 +1,4 @@
-var controller = function($scope, $http, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
+var controller = function($scope, Post, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
   $q, Seed, $sce, $filter, UserMentions, Comment) {
 
   var post = $scope.post;
