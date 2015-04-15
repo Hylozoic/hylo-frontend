@@ -135,7 +135,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       // TODO maybe only do this if within the first few steps?
       // i.e. once we get to community step, we can allow open-ended
       // exploration and only continue onboarding through non-modal prompts
-      if (this.currentStep() === 'done' || $state.$current.name === steps[this.currentStep()].state)
+      if (_.include(['profile', 'done'], this.currentStep()) || $state.$current.name === steps[this.currentStep()].state)
         return;
 
       this._track('Resume', {from: $state.$current.name, to: steps[this.currentStep()].state});
