@@ -3,16 +3,14 @@
 
   #content {
     position: relative;
-    z-index: 3;
+    overflow: visible;
+  }
+
+  #nav {
+    display: none;
   }
 
   #main-container {
-    position: fixed;
-    overflow-y: auto;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
     background-color: white;
     @media (max-width: @screen-xs-max) {
       padding: 0;
@@ -21,21 +19,35 @@
   }
 
   nav {
+    @nav-height: 64px;
+    @nav-height-mobile: 50px;
+
     border: none;
     border-bottom: 2px solid #DCDCDC;
     background-color: transparent;
     border-radius: 0;
     padding: 0 20px;
+    margin: 0 -@std-padding @std-padding !important;
+    height: @nav-height;
+    line-height: @nav-height;
+
     @media (max-width: @screen-xs-max) {
+      height: @nav-height-mobile;
+      line-height: @nav-height-mobile;
       padding: 0 @std-padding;
     }
 
     .close {
       .big-close;
-      margin-top: 7px;
+      position: relative;
+      z-index: 2;
+      margin-right: -15px;
+      margin-top: (@nav-height - 50) / 2;
+      padding-right: @std-padding*2;
 
-      &.navbar-right {
-        margin-right: -15px;
+      @media (max-width: @screen-xs-max) {
+        margin-top: 0;
+        top: -2px;
       }
     }
 
@@ -56,45 +68,18 @@
       top: 0;
       text-align: center;
       margin: auto;
-      padding-top: 22px;
-      height:100%;
-      z-index: -1;
       @media (max-width: @screen-xs-max) {
         text-align: left;
-        padding-top: 15px;
+        padding-left: @std-padding*2;
+        padding-top: 0;
       }
-
-    }
-
-    .btn {
-      margin-top: 14px;
-    }
-
-    .navbar-right {
-      margin-right: 0;
-    }
-
-    margin: 0 -@std-padding @std-padding !important;
-    height: 64px;
-
-    @media (max-width: @screen-xs-max) {
-      height: 50px;
     }
   }
 
-  .main-content {
+  .all-sections {
     @media (max-width: @screen-xs-max) {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  @media (max-width: @screen-xs-max) {
-    .navbar-center {
-      padding-left: @std-padding*2;
-    }
-    .navbar-right {
-      padding-right: @std-padding*2;
+      padding-left: @std-padding * 2;
+      padding-right: @std-padding * 2;
     }
   }
 }
