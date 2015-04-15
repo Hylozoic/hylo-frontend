@@ -11,8 +11,10 @@
   }
 
   .all-sections {
-    .make-sm-column(@columns);
-    .make-sm-column-offset((12 - @columns) / 2);
+    .make-sm-column(@columns + 2);
+    .make-sm-column-offset((10 - @columns) / 2);
+    .make-md-column(@columns);
+    .make-md-column-offset((12 - @columns) / 2);
 
     > p.section {
       padding: @std-padding 0;
