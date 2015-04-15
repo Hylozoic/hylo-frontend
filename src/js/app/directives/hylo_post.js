@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
+var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
@@ -140,7 +140,7 @@ var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $timeout,
         message: 'Are you sure you want to remove "' + $scope.post.name + '"? This cannot be undone.'
       }).then(function() {
         $scope.removeFn({postToRemove: $scope.post});
-        new Post($scope.post).$remove({});
+        new Seed($scope.post).$remove({});
       });
     };
 

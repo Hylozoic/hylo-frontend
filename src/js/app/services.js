@@ -19,18 +19,7 @@ factory('Overlay', function($rootScope) {
       return storedData;
     }
   };
-}).
-
-factory("Post", ["$resource",
-  function($resource) {
-    return $resource("/posts/:listController:id/:postController:userId",
-      {
-        id: "@id",
-        listController: "@listController",
-        postController: "@postController"
-      }
-    );
-}]);
+});
 
 // resources
 require('./services/user')(angularModule);
