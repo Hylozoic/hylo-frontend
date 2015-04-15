@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $http, $timeout, $analytics, growl, $dialog, UserCache, Community) {
+var directive = function(Post, Seed, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = ($state.current.data && $state.current.data.singlePost) ? false : true;
