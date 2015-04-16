@@ -20,7 +20,8 @@
     "medium.js": "~1.0.1",
     "newrelic-timing": "~0.4.0",
     "gsap": "~1.15.1",
-    "ng-tags-input": "~2.3.0"
+    "ng-tags-input": "~2.3.0",
+    "angular-ui-bootstrap-bower": "~0.12.1"
   },
   "private": true,
   "resolutions": {
