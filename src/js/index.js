@@ -7,6 +7,8 @@ require('angular-http-auth');
 require('angular-resource');
 require('angular-sanitize');
 require('angular-touch');
+require('angular-ui-bootstrap-bower/ui-bootstrap');
+require('angular-ui-bootstrap-bower/ui-bootstrap-tpls');
 require('angular-ui-router');
 require('angulartics');
 require('filepicker');
@@ -22,7 +24,6 @@ require('ngInfiniteScroll');
 /* End Bower Components */
 
 /* Manually installed components */
-require('./angular/ui-bootstrap-tpls-0.12.0-enhanced');
 require('./angular/angulartics-segmentio');
 
 require('./app/hyloApp');
