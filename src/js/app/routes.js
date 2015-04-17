@@ -4,7 +4,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise(function($injector, $location){
     var state = $injector.get('$state');
     Rollbar.warning("404 Error: " + $location.path());
-    state.go('404');
+    state.go('notFound');
     return $location.path();
   });
 
@@ -15,7 +15,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.when('/', '/app');
 
   $stateProvider
-    .state("404", {
+    .state('notFound', {
       templateUrl: '/ui/app/404.tpl.html'
     })
     .state('main', /*@ngInject*/ {

@@ -9,24 +9,14 @@ var extractClassName = function(stateName) {
   if (stateName.match(/\./)) {
     return [stateName.split('.', 1)[0], stateName.replace(/\./g, '-')];
   }
+
   return stateName;
 };
 
-var extractClassNameFn = function(stateName) {
-  return function() {
-    return extractClassName(stateName);
-  };
-};
-
-module.exports = {
-  extractClassName: extractClassName,
-  extractClassNameFn: extractClassNameFn,
-
-  service: function(angularModule) {
-    angularModule.factory('$bodyClass', function($state) {
-      return function() {
-        return extractClassName($state.current.name);
-      };
-    });
-  }
+module.exports = function(angularModule) {
+  angularModule.factory('$bodyClass', function($state) {
+    return function() {
+      return extractClassName($state.current.name);
+    };
+  });
 };
