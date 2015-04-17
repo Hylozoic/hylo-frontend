@@ -1,4 +1,3 @@
-require('./auth_module');
 require('./directives');
 require('./controllers');
 require('./services');
@@ -7,8 +6,6 @@ var dependencies = [
   'angular-growl',
   'angulartics',
   'angulartics.segment.io',
-  'http-auth-interceptor',
-  'hylo-auth-module',
   'hyloControllers',
   'hyloDirectives',
   'hyloServices',
@@ -75,8 +72,19 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
 
   $rootScope.$on('$stateChangeError',
     function(event, toState, toParams, fromState, fromParams, error) {
+      if (error && _.include([401, 403], error.status)) {
+        $state.go('login', {next: {state: toState, params: toParams}});
+        return;
+      }
+
+      // the part of the code that caused this should be prepared to
+      // handle it (e.g. login attempt with invalid password)
+      if (error && error.status == 422) {
+        return;
+      }
+
       if (!hyloEnv.isProd) {
-        console.error("$stateChangeError", event, toState, toParams, fromState, fromParams, error);
+        console.error(error);
       } else {
         Rollbar.error("$stateChangeError", {
           toState: toState,
@@ -91,7 +99,7 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
   );
 
   $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-    if (!$rootScope.community) {
+    if (to.name !== 'login' && !$rootScope.community) {
       $rootScope.community = Community.default();
     }
   });
@@ -99,5 +107,4 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
   // Set a variable so we can watch for param changes
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
-
 });

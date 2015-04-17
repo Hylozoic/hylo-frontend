@@ -1,0 +1,76 @@
+.login {
+  .simple-page(4);
+  .seed-body-text;
+
+  .all-sections {
+    @media (min-width: @screen-sm) {
+      margin-top: @std-padding;
+    }
+  }
+
+  .button {
+    .rounded-button;
+  }
+
+  p.help {
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    &.error {
+      color: @error-color;
+    }
+  }
+
+  div.error {
+    border-radius: @border-radius-base; // from bootstrap
+    color: @error-color;
+    padding: @std-padding;
+    margin-top: @std-padding;
+    margin-bottom: @std-padding;
+    background-color: @state-danger-bg; // from bootstrap
+  }
+
+  .service-buttons {
+    margin-bottom: @std-padding * 2;
+  }
+
+  .service-buttons a {
+    width: 31.33%;
+    background-size: 28px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    color: white;
+    box-sizing: border-box;
+    padding-left: 48px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 36px;
+    vertical-align: middle;
+    display: block;
+    float: left;
+  }
+
+  .google {
+    background-color: #5b5b5b;
+    background-image: url(img/google.png);
+  }
+
+  .facebook {
+    background-color: #464b9a;
+    background-image: url(img/facebook.png);
+    margin: 0 3%;
+  }
+
+  .linkedin {
+    background-color: #4272b6;
+    background-image: url(img/linkedin.png);
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .footer {
+    margin-top: @std-padding;
+  }
+}

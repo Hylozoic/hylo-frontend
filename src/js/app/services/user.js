@@ -19,6 +19,10 @@ dependencies.push(function($resource) {
     },
     allSeeds: {
       url: '/noo/user/:id/all-community-seeds'
+    },
+    login: {
+      url: '/noo/login',
+      method: 'POST'
     }
   });
 
