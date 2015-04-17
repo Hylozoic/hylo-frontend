@@ -98,12 +98,6 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
     }
   );
 
-  $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-    if (!_.include(['login', 'appEntry'], to.name) && !$rootScope.community) {
-      $rootScope.community = Community.default();
-    }
-  });
-
   // Set a variable so we can watch for param changes
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
