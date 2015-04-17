@@ -74,7 +74,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           });
         }
       },
-      templateUrl: '/ui/shared/login.tpl.html',
+      templateUrl: '/ui/user/login.tpl.html',
       controller: 'LoginCtrl'
     })
     .state('userSettings', {
