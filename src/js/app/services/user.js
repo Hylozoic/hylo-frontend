@@ -51,6 +51,11 @@ dependencies.push(function($resource) {
     },
     firstName: function() {
       return this.name.split(' ')[0];
+    },
+    canModerate: function(community) {
+      return !!_.find(this.memberships, function(membership) {
+        return membership.community.id == community.id && membership.role == 1;
+      });
     }
   });
 

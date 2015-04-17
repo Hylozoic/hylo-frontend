@@ -13,8 +13,8 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   }
 
   $scope.canDelete = function(comment) {
-    return ($rootScope.currentUser && comment.user.id == $rootScope.currentUser.id) ||
-      ($rootScope.community && $rootScope.community.canModerate);
+    var user = $rootScope.currentUser;
+    return user && (comment.user.id == user.id || user.canModerate(post.community));
   };
 
   $scope.commentOwner = function(comment) {

@@ -204,9 +204,8 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
         });
       }
 
-      // Determines if this post is editable by currentUser. (is their post OR a moderator)
-      $scope.canEdit = (currentUser && $scope.post.user.id == currentUser.id) ||
-            ($rootScope.community && $rootScope.community.canModerate);
+      $scope.canEdit = currentUser &&
+        ($scope.post.user.id == currentUser.id || currentUser.canModerate($scope.post.community));
 
       $scope.postUrl = $state.href("seed", {community: $scope.post.community.slug, seedId: $scope.post.id});
 

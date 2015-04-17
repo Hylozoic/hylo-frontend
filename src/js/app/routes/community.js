@@ -11,11 +11,7 @@ module.exports = function ($stateProvider) {
     },
     resolve: /*@ngInject*/ {
       community: function(Community, $stateParams, $rootScope) {
-        var promise = Community.get({id: $stateParams.community}).$promise;
-        promise.then(function(community) {
-          $rootScope.community = community;
-        });
-        return promise;
+        return Community.get({id: $stateParams.community}).$promise;
       }
     }
   })
