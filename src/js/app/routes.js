@@ -49,20 +49,33 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           $timeout(function() {
             $state.go('community.seeds', {community: membership.community.slug});
           });
-        } else {
+        } else if (currentUser) {
           window.location = '/invitecode';
+        } else {
+          $timeout(function() {
+            $state.go('login');
+          })
         }
       }
     })
     .state('login', {
       url: '/h/login',
-      parent: 'main',
-      views: {
-        main: {
-          templateUrl: 'ui/shared/login.tpl.html',
-          controller: 'LoginCtrl'
+      resolve: {
+        loggedIn: function(User, $timeout, $state) {
+          return User.status().$promise.then(function(res) {
+            return res.signedIn;
+          });
         }
-      }
+      },
+      onEnter: function(loggedIn, $timeout, $state) {
+        if (loggedIn) {
+          $timeout(function() {
+            $state.go('appEntry');
+          });
+        }
+      },
+      templateUrl: 'ui/shared/login.tpl.html',
+      controller: 'LoginCtrl'
     })
     .state('userSettings', {
       url: '/settings',
