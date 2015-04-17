@@ -4,7 +4,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise(function($injector, $location){
     var state = $injector.get('$state');
     Rollbar.warning("404 Error: " + $location.path());
-    state.go('404');
+    state.go('notFound');
     return $location.path();
   });
 
@@ -15,7 +15,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.when('/', '/app');
 
   $stateProvider
-    .state("404", {
+    .state('notFound', {
       templateUrl: '/ui/app/404.tpl.html'
     })
     .state('main', /*@ngInject*/ {
@@ -49,10 +49,33 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           $timeout(function() {
             $state.go('community.seeds', {community: membership.community.slug});
           });
-        } else {
+        } else if (currentUser) {
           window.location = '/invitecode';
+        } else {
+          $timeout(function() {
+            $state.go('login');
+          })
         }
       }
+    })
+    .state('login', {
+      url: '/h/login',
+      resolve: {
+        loggedIn: function(User, $timeout, $state) {
+          return User.status().$promise.then(function(res) {
+            return res.signedIn;
+          });
+        }
+      },
+      onEnter: function(loggedIn, $timeout, $state) {
+        if (loggedIn) {
+          $timeout(function() {
+            $state.go('appEntry');
+          });
+        }
+      },
+      templateUrl: '/ui/shared/login.tpl.html',
+      controller: 'LoginCtrl'
     })
     .state('userSettings', {
       url: '/settings',

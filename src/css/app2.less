@@ -3,29 +3,19 @@ body {
   .proxima-nova-regular;
   font-size: 13px;
   color: @text-dark;
+  min-height: 100vh;
 
-  &.angular-app {
-    overflow: -moz-scrollbars-vertical;
-    overflow-y: scroll;
-    min-height: 100vh;
-  }
+  #curtain {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-  &.waiting-for-angular {
-    #content {
-      display: none;
-    }
-    #initializing-panel {
-      display: block;
-      position:absolute;
-      top:0;
-      left:0;
-      width: 100%;
-      height: 100%;
-
-      .spinner {
-        top: 45%;
-        margin: auto auto;
-      }
+    .spinner {
+      top: 45%;
+      margin: auto auto;
     }
   }
 }
@@ -99,10 +89,6 @@ body {
   cursor: auto !important;
 }
 
-#initializing-panel {
-  display: none;
-}
-
 // set the default dropdown menu width
 .dropdown-menu li {
   min-width: 200px;
@@ -131,4 +117,25 @@ textarea.no-border, [contenteditable].no-border {
 .modal-backdrop {
   height: 100%;
   position: fixed;
+}
+
+.notFound {
+  .seed-body-text;
+  .simple-page(4);
+  padding-top: 16vh;
+  background: url(img/homepage/coworkingBg-faint.jpg);
+  background-position: top right;
+  background-size: 212%;
+
+  .hylo-definition {
+    border-top: 1px solid @border-light;
+    margin-top: 8vh;
+    padding-top: 8vh;
+    .icon-hylo-script {
+      display: block;
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: @std-padding;
+    }
+  }
 }

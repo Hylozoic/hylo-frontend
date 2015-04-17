@@ -1,17 +1,10 @@
 var format = require('util').format;
 
-var interceptor = function ($httpProvider, $provide) {
-
-  $provide.factory('myHttpInterceptor', function ($q, $log, $window, growl, $timeout) {
+var config = function ($httpProvider) {
+  $httpProvider.interceptors.push(function ($q, growl) {
     return {
-      requestError: function(rejection) {
-        return $q.reject(rejection);
-      },
-
       responseError: function(rejection) {
-        if (rejection.status == 403) {
-          window.location = '/login?next=' + location.pathname;
-        } else if (rejection.status == 500) {
+        if (!_.include([401, 403, 422], rejection.status)) {
           Rollbar.error(format('%s: %s', rejection.status, rejection.config.url));
           var message = format('Oops! An error occurred. The Hylo team has been notified. (%s)', rejection.status);
           growl.addErrorMessage(message, {ttl: 5000});
@@ -21,11 +14,8 @@ var interceptor = function ($httpProvider, $provide) {
       }
     };
   });
-
-  $httpProvider.interceptors.push('myHttpInterceptor');
-
 };
 
 module.exports = function (angularModule) {
-  angularModule.config(interceptor);
+  angularModule.config(config);
 };

@@ -30,3 +30,4 @@ require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);
 require('./controllers/SearchCtrl')(angularModule);
 require('./controllers/FulfillmentCtrl')(angularModule);
+require('./controllers/LoginCtrl')(angularModule);
