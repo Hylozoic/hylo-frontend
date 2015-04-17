@@ -54,6 +54,16 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('login', {
+      url: '/h/login',
+      parent: 'main',
+      views: {
+        main: {
+          templateUrl: 'ui/shared/login.tpl.html',
+          controller: 'LoginCtrl'
+        }
+      }
+    })
     .state('userSettings', {
       url: '/settings',
       parent: 'main',

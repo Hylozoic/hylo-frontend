@@ -3,29 +3,19 @@ body {
   .proxima-nova-regular;
   font-size: 13px;
   color: @text-dark;
+  min-height: 100vh;
 
-  &.angular-app {
-    overflow: -moz-scrollbars-vertical;
-    overflow-y: scroll;
-    min-height: 100vh;
-  }
+  #curtain {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-  &.waiting-for-angular {
-    #content {
-      display: none;
-    }
-    #initializing-panel {
-      display: block;
-      position:absolute;
-      top:0;
-      left:0;
-      width: 100%;
-      height: 100%;
-
-      .spinner {
-        top: 45%;
-        margin: auto auto;
-      }
+    .spinner {
+      top: 45%;
+      margin: auto auto;
     }
   }
 }
@@ -97,10 +87,6 @@ body {
 
 .container-fluid {
   cursor: auto !important;
-}
-
-#initializing-panel {
-  display: none;
 }
 
 // set the default dropdown menu width
