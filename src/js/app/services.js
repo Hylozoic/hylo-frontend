@@ -30,7 +30,7 @@ require('./services/Search')(angularModule);
 require('./services/Seed')(angularModule);
 
 // other services
-require('./services/bodyClass').service(angularModule);
+require('./services/bodyClass')(angularModule);
 require('./services/onboarding')(angularModule);
 require('./services/clickthroughTracker')(angularModule);
 require('./services/history')(angularModule);

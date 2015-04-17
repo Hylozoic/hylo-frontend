@@ -99,7 +99,7 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
   );
 
   $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-    if (to.name !== 'login' && !$rootScope.community) {
+    if (!_.include(['login', 'appEntry'], to.name) && !$rootScope.community) {
       $rootScope.community = Community.default();
     }
   });
