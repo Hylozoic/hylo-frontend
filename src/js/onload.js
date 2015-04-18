@@ -6,8 +6,6 @@ hyloEnv.onUser(function(user) {
   // segment
   analytics.identify(user.id, {
     email: user.email,
-    firstName: user.first_name,
-    lastName: user.last_name,
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
     createdAt: user.date_created,

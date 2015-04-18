@@ -34,7 +34,7 @@ var controller = function($scope, $stateParams, $analytics, User) {
     $scope.passwordLoginError = null;
     if (form.$invalid) return;
 
-    User.login($scope.user).$promise.then(function(user) {
+    User.login($scope.user).$promise.then(function() {
       if ($stateParams.next) {
         $scope.$state.go($stateParams.next.state, $stateParams.next.params);
       } else {

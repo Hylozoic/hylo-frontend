@@ -31,3 +31,4 @@ require('./controllers/OverlayCtrl')(angularModule);
 require('./controllers/SearchCtrl')(angularModule);
 require('./controllers/FulfillmentCtrl')(angularModule);
 require('./controllers/user/LoginCtrl')(angularModule);
+require('./controllers/user/SignupCtrl')(angularModule);

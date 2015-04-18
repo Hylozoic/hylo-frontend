@@ -50,7 +50,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
             $state.go('community.seeds', {community: membership.community.slug});
           });
         } else if (currentUser) {
-          window.location = '/invitecode';
+          $timeout(function() {
+            $state.go('home');
+          });
         } else {
           $timeout(function() {
             $state.go('login');
@@ -76,6 +78,11 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       },
       templateUrl: '/ui/user/login.tpl.html',
       controller: 'LoginCtrl'
+    })
+    .state('signup', {
+      url: '/h/signup',
+      templateUrl: 'ui/user/signup.tpl.html',
+      controller: 'SignupCtrl'
     })
     .state('userSettings', {
       url: '/settings',
