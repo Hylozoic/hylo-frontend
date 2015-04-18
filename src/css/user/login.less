@@ -1,4 +1,4 @@
-.login {
+.login-signup-page() {
   .simple-page(4);
   .seed-body-text;
   background: url(img/homepage/coworkingBg-faint.jpg);
@@ -10,6 +10,10 @@
 
     @media (max-width: @screen-xs-max) {
       padding: 0 @std-padding * 2;
+    }
+
+    > p, > div, > form > p, > form > div {
+      .make-row;
     }
   }
 
@@ -34,6 +38,18 @@
     margin-bottom: @std-padding;
     background-color: @state-danger-bg; // from bootstrap
   }
+
+  .right {
+    text-align: right;
+  }
+
+  .footer {
+    margin-top: @std-padding;
+  }
+}
+
+.login {
+  .login-signup-page;
 
   .service-buttons {
     margin-bottom: @std-padding * 2;
@@ -80,13 +96,5 @@
   .linkedin {
     background-color: #4272b6;
     background-image: url(img/linkedin.png);
-  }
-
-  .right {
-    text-align: right;
-  }
-
-  .footer {
-    margin-top: @std-padding;
   }
 }

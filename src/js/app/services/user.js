@@ -24,6 +24,10 @@ dependencies.push(function($resource) {
       url: '/noo/login',
       method: 'POST'
     },
+    signup: {
+      url: '/noo/user',
+      method: 'POST'
+    },
     status: {
       url: '/noo/user/status'
     }
