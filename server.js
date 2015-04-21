@@ -89,18 +89,11 @@ module.exports = function(opts) {
       target = '→ ' + u.pathname;
     }
 
-    // pages and API endpoints in node app
-    if (req.url.match(/^\/(noo|admin)/)) {
-      proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
-      log('→ Node');
-      return;
-    }
-
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
         req.url = originalUrl;
-        proxy(req, res, upstreamHost, upstreamPort);
-        log('→ Play');
+        proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
+        log('→ Node');
       } else {
         log(target);
       }
