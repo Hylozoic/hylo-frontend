@@ -16,10 +16,18 @@
              placeholder="Invitation code"
              ng-keyup="$event.which == 13 && submit(form)"
              required/>
-      <p class="help error" ng-if="form.submitted && form.code.$error.required">Please fill in this field.</p>
+      <p class="help error" ng-if="form.submitted || usingService && form.code.$error.required">Please fill in this field.</p>
     </div>
 
-    <p>Next, enter your name, email address, and the password you would like to use:</p>
+    <p>Next, connect one of these services with Hylo to finish signing up.</p>
+
+    <div class="service-buttons">
+      <a ng-click="useService('google', form)" class="google">Google</a>
+      <a ng-click="useService('facebook', form)" class="facebook">Facebook</a>
+      <a ng-click="useService('linkedin', form)" class="linkedin">LinkedIn</a>
+    </div>
+
+    <p>Or, enter your name, email address, and the password you would like to use.</p>
 
     <div class="form-group">
       <input type="name"
@@ -63,9 +71,9 @@
   </form>
 
   <div class="footer">
-    <a ui-sref="login">Already signed up? Log in</a>
-    &nbsp;•&nbsp;
-    <a>Need help?</a>
+    <a ui-sref="login">Already signed up? Log in!</a>
+    <!-- &nbsp;•&nbsp;
+    <a onclick="Intercom('showNewMessage', 'I need help logging in! The problem is:')">Need help?</a> -->
   </div>
 
 </div>

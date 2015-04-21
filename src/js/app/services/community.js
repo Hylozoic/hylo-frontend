@@ -33,6 +33,10 @@ dependencies.push(function($resource) {
     leave: {
       url: '/noo/membership/:id',
       method: 'DELETE'
+    },
+    validate: {
+      url: '/noo/community/validate',
+      method: 'POST'
     }
   });
 
