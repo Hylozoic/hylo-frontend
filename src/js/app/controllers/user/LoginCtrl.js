@@ -23,6 +23,10 @@ var handleError = function(err, $scope, $analytics) {
   } else if (msg === 'email not found') {
     $scope.passwordLoginError = 'The email address you entered was not recognized.';
     $analytics.eventTrack('Login failure', {email: $scope.user.email, cause: 'bad email'});
+
+  } else {
+    $scope.signupError = msg;
+    $analytics.eventTrack('Login failure', {email: $scope.user.email, cause: msg});
   }
 };
 

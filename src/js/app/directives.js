@@ -87,6 +87,7 @@ directive('hyloUnique', ['$http', function ($http) {
 
           if (elem.val() == '') return;
 
+          // FIXME don't use $http directly
           $http({
             method: 'POST',
             url: '/noo/community/validate',
