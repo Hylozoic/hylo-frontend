@@ -1,5 +1,17 @@
+var uuid = require('node-uuid');
+
 hyloEnv.onUser(function(user) {
-  if (!user) return;
+  if (!user) {
+    // Intercom only initializes after a call to #identify:
+    // https://segment.com/docs/integrations/intercom/
+    //
+    // but this isn't the right approach yet, because then we end up
+    // with one person's activity split across two users (pre- and post-login).
+    // i'm waiting for a response from Intercom support about this.
+    //
+    // analytics.identify(uuid.v4());
+    return;
+  }
 
   var membership = user.memberships[0];
 
