@@ -60,8 +60,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('login', {
-      url: '/h/login',
+    .state('loginSignup', {
+      abstract: true,
       resolve: {
         loggedIn: function(User, $timeout, $state) {
           return User.status().$promise.then(function(res) {
@@ -74,15 +74,31 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           $timeout(function() {
             $state.go('appEntry');
           });
+        } else {
+          window.hyloEnv.provideUser(null);
         }
       },
-      templateUrl: '/ui/user/login.tpl.html',
-      controller: 'LoginCtrl'
+      template: '<div ui-view="loginSignup"></div>'
+    })
+    .state('login', {
+      url: '/h/login',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/login.tpl.html',
+          controller: 'LoginCtrl'
+        }
+      }
     })
     .state('signup', {
       url: '/h/signup',
-      templateUrl: 'ui/user/signup.tpl.html',
-      controller: 'SignupCtrl'
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: 'ui/user/signup.tpl.html',
+          controller: 'SignupCtrl'
+        }
+      }
     })
     .state('userSettings', {
       url: '/settings',
