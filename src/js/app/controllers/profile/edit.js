@@ -65,13 +65,17 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
         path: opts.path,
         convert: opts.convert,
         success: function(url) {
-          editData[opts.fieldName] = url;
-          $analytics.eventTrack('Profile: Changed ' + opts.humanName, {user_id: user.id});
+          $scope.$apply(function() {
+            editData[opts.fieldName] = url;
+            $analytics.eventTrack('Profile: Changed ' + opts.humanName, {user_id: user.id});
+          });
         },
         failure: function(error) {
           if (error.code != 101) {
-            growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
-            $analytics.eventTrack('Profile: Failed to Change ' + opts.humanName, {user_id: user.id});
+            $scope.$apply(function() {
+              growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
+              $analytics.eventTrack('Profile: Failed to Change ' + opts.humanName, {user_id: user.id});
+            });
           }
         }
       });
@@ -114,6 +118,7 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
     } else {
       FB.login(function() {
         FB.api('/me', function(resp) {
+          // TODO store linked account
           $scope.$apply(function() {
             editData.facebook_url = resp.link;
             $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'Facebook'});
