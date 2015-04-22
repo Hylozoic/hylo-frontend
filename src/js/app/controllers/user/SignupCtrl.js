@@ -42,25 +42,30 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
     });
   };
 
-  $scope.useThirdPartyAuth = function(service, form) {
+  $scope.validateCode = function(form) {
     $scope.authStarted = true;
     if (!_.isEmpty(form.code.$error)) return;
 
-    // validate community code
     Community.validate({
       column: 'beta_access_code',
       constraint: 'exists',
-      value: form.code.$modelValue,
+      value: form.code.$viewValue,
       store_value: true
     }, function(resp) {
-      if (!resp.exists) {
+      if (resp.exists) {
+        $scope.validCode = true;
+        $scope.signupError = null;
+      } else {
         handleError({data: 'bad code'}, $scope, $analytics);
-        return;
+        $scope.validCode = false;
       }
-
-      $scope.authDialog = ThirdPartyAuth.openPopup(service);
     });
+  };
 
+  $scope.useThirdPartyAuth = function(service, form) {
+    $scope.authStarted = true;
+    if (!_.isEmpty(form.code.$error) || $scope.signupError) return;
+    $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
 
   $scope.finishThirdPartyAuth = function() {
