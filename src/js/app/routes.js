@@ -95,7 +95,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       parent: 'loginSignup',
       views: {
         loginSignup: {
-          templateUrl: 'ui/user/signup.tpl.html',
+          templateUrl: '/ui/user/signup.tpl.html',
           controller: 'SignupCtrl'
         }
       }
