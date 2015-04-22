@@ -19,7 +19,7 @@ window.popupDone = function(opts) {
 
   } else if (opts.context == 'google') {  // controllers/user/{Login,Signup}Ctrl.js
     var node = document.querySelector('[ui-view="loginSignup"]');
-    angular.element(node).scope().finishServiceSignup();
+    angular.element(node).scope().finishThirdPartyAuth(opts.error);
 
   }
 
