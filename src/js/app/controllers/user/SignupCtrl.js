@@ -68,9 +68,15 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
 
-  $scope.finishThirdPartyAuth = function() {
+  $scope.finishThirdPartyAuth = function(error) {
     $scope.authDialog.close();
-    $scope.$state.go('onboarding.start');
+    if (error) {
+      handleError({data: error}, $scope, $analytics);
+      $scope.$apply();
+    } else {
+      $scope.$state.go('onboarding.start');
+    }
+
   };
 
 };

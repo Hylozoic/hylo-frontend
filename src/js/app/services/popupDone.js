@@ -13,14 +13,15 @@
 
 window.popupDone = function(opts) {
 
-  if (opts.context == 'linkedin') {       // controllers/profile/edit.js
+  if (opts.context == 'linkedin') {
+    // controllers/profile/edit.js
     var node = document.querySelector('[ui-view="main"]');
     angular.element(node).scope().finishLinkedinChange(opts.url);
 
-  } else if (opts.context == 'google') {  // controllers/user/{Login,Signup}Ctrl.js
+  } else if (_.include(['google', 'facebook'], opts.context)) {
+    // controllers/user/{Login,Signup}Ctrl.js
     var node = document.querySelector('[ui-view="loginSignup"]');
     angular.element(node).scope().finishThirdPartyAuth(opts.error);
-
   }
 
 };
