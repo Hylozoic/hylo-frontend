@@ -19,8 +19,8 @@ var factory = function() {
         );
 
       } else if (service === 'facebook') {
-        var width = 420,
-          height = 480,
+        var width = 560,
+          height = 520,
           left = document.documentElement.clientWidth/2 - width/2,
           top = document.documentElement.clientHeight/2 - height/2;
 
