@@ -10,7 +10,9 @@
 // if you want to add more use cases, define a new value for the 'context'
 // key of the options argument, and create a new if-clause. also mention
 // in a comment which controller is being called.
-
+//
+// don't forget to use $scope.$apply() as necessary in the controller method!
+//
 window.popupDone = function(opts) {
 
   if (opts.context == 'linkedin-profile') {
