@@ -14,7 +14,6 @@
              ng-model="user.code"
              class="form-control"
              placeholder="Invitation code"
-             ng-keyup="$event.which == 13 && submit(form)"
              ng-blur="validateCode(form)"
              required/>
       <p class="help error" ng-if="form.submitted || authStarted && form.code.$error.required">Please fill in this field.</p>

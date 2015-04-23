@@ -143,9 +143,11 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
   };
 
   $scope.finishLinkedinChange = function(url) {
-    editData.linkedin_url = url;
-    $scope.linkedinDialog.close();
-    $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
+    $scope.$apply(function() {
+      editData.linkedin_url = url;
+      $scope.linkedinDialog.close();
+      $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
+    });
   };
 };
 
