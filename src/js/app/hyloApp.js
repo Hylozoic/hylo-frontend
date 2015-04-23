@@ -1,3 +1,5 @@
+var format = require('util').format;
+
 require('./directives');
 require('./controllers');
 require('./services');
@@ -73,7 +75,7 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
   $rootScope.$on('$stateChangeError',
     function(event, toState, toParams, fromState, fromParams, error) {
       if (error && _.include([401, 403], error.status)) {
-        $state.go('login', {next: {state: toState, params: toParams}});
+        $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});
         return;
       }
 

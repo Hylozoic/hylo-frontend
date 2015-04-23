@@ -34,6 +34,16 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
+var finishLogin = function($scope, $stateParams) {
+  if ($stateParams.next) {
+    $scope.$apply(function() {
+      history.pushState(null, null, $stateParams.next);
+    });
+  } else {
+    $scope.$state.go('appEntry');
+  }
+}
+
 var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth) {
   $scope.user = {};
 
@@ -43,11 +53,7 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
     if (form.$invalid) return;
 
     User.login($scope.user).$promise.then(function() {
-      if ($stateParams.next) {
-        $scope.$state.go($stateParams.next.state, $stateParams.next.params);
-      } else {
-        $scope.$state.go('appEntry');
-      }
+      finishLogin($scope, $stateParams);
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
@@ -63,9 +69,9 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
       handleError({data: error}, $scope, $analytics);
       $scope.$apply();
     } else {
-      $scope.$state.go('appEntry');
+      finishLogin($scope, $stateParams);
     }
-  }
+  };
 };
 
 module.exports = function(angularModule) {
