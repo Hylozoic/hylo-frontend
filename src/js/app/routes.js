@@ -81,7 +81,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       template: '<div ui-view="loginSignup"></div>'
     })
     .state('login', {
-      url: '/h/login',
+      url: '/h/login?next',
       parent: 'loginSignup',
       views: {
         loginSignup: {
