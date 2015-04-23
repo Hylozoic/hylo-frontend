@@ -13,12 +13,12 @@
 
 window.popupDone = function(opts) {
 
-  if (opts.context == 'linkedin') {
+  if (opts.context == 'linkedin-profile') {
     // controllers/profile/edit.js
     var node = document.querySelector('[ui-view="main"]');
     angular.element(node).scope().finishLinkedinChange(opts.url);
 
-  } else if (_.include(['google', 'facebook'], opts.context)) {
+  } else if (opts.context === 'oauth') {
     // controllers/user/{Login,Signup}Ctrl.js
     var node = document.querySelector('[ui-view="loginSignup"]');
     angular.element(node).scope().finishThirdPartyAuth(opts.error);

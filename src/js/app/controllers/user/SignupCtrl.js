@@ -64,15 +64,16 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
 
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
-    if (!_.isEmpty(form.code.$error) || $scope.signupError) return;
+    if (!_.isEmpty(form.code.$error)) return;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
 
   $scope.finishThirdPartyAuth = function(error) {
     $scope.authDialog.close();
     if (error) {
-      handleError({data: error}, $scope, $analytics);
-      $scope.$apply();
+      $scope.$apply(function() {
+        handleError({data: error}, $scope, $analytics);
+      });
     } else {
       $scope.$state.go('onboarding.start');
     }
