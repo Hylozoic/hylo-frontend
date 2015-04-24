@@ -14,10 +14,6 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
     }
   };
 
-  $scope.needsRevalidation = function() {
-    return user.provider_key == 'password';
-  };
-
   $scope.edit = function(field) {
     edited[field] = user[field];
     editing[field] = true;
@@ -36,12 +32,6 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
       user[field] = edited[field];
       $analytics.eventTrack('User Settings: Changed ' + field, {user_id: user.id});
       growl.addSuccessMessage('Saved change.');
-      if (field === 'email' && $scope.needsRevalidation()) {
-        growl.addSuccessMessage('Reloading...')
-        setTimeout(function() {
-          window.location = '/accounts/unverified';
-        }, 3000);
-      }
     }, function(err) {
       growl.addErrorMessage(err.data);
     });
