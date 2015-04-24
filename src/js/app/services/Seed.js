@@ -21,6 +21,13 @@ var factory = function($resource) {
         action: 'follow'
       }
     },
+    unfollow: {
+      method: 'POST',
+      params: {
+        action: 'follow',
+        force: 'unfollow'
+      }
+    },
     queryForCommunity: {
       method: 'GET',
       url: '/noo/community/:communityId/seeds'
@@ -56,6 +63,9 @@ var factory = function($resource) {
     },
     findComments: function(params, success, error) {
       return Seed.findComments(_.extend({id: this.id}, params), success, error);
+    },
+    unfollow: function(params, success, error) {
+      return Seed.unfollow(_.extend({id: this.id}, params), success, error);
     }
   });
 

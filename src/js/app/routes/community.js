@@ -152,7 +152,7 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('seed', {
-    url: '/s/:seedId',
+    url: '/s/:seedId?action',
     parent: 'community',
     views: {
       community: {
