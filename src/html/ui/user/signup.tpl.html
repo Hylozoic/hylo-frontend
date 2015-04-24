@@ -8,14 +8,16 @@
     <p>We are currently in private beta with a number of pilot communities.</p>
     <p>If you are a member of one of these communities, you should have received an invitation code from your community manager. Please enter it below:</p>
 
-    <div class="form-group" ng-class="{'has-success': validCode}">
+    <div class="form-group has-feedback"
+         ng-class="{'has-success': isCodeValid, 'has-error': !isCodeValid && validationDone}">
       <input type="text"
              name="code"
              ng-model="user.code"
              class="form-control"
              placeholder="Invitation code"
-             ng-blur="validateCode(form)"
+             ng-keyup="validateCode(form)"
              required/>
+      <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
       <p class="help error" ng-if="form.submitted || authStarted && form.code.$error.required">Please fill in this field.</p>
     </div>
 

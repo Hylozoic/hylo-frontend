@@ -44,7 +44,7 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
     });
   };
 
-  $scope.validateCode = function(form) {
+  $scope.validateCode = _.debounce(function(form) {
     $scope.authStarted = true;
     if (!_.isEmpty(form.code.$error)) return;
 
@@ -55,18 +55,22 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
       store_value: true
     }, function(resp) {
       if (resp.exists) {
-        $scope.validCode = true;
+        $scope.isCodeValid = true;
         $scope.signupError = null;
       } else {
-        handleError({data: 'bad code'}, $scope, $analytics);
-        $scope.validCode = false;
+        $scope.isCodeValid = false;
       }
+      $scope.validationDone = true;
     });
-  };
+  }, 250);
 
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
     if (!_.isEmpty(form.code.$error)) return;
+    if (!$scope.isCodeValid) {
+      handleError({data: 'bad code'}, $scope, $analytics);
+      return;
+    }
     $scope.serviceUsed = service;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
