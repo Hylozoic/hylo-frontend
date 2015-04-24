@@ -103,12 +103,14 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             delete input.skills;
           } else {
             this._track('Add Skills');
+            this._user.skills = input.skills;
           }
 
           if (_.isEmpty(input.organizations)) {
             delete input.organizations;
           } else {
             this._track('Add Affiliations');
+            this._user.organizations = input.organizations;
           }
 
           if (!_.isEmpty(input)) this._user.update(input);
