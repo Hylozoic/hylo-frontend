@@ -1,5 +1,5 @@
 var controller = function($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Seed, $sce, $filter, UserMentions, Comment) {
+  $q, Seed, $sce, $filter, UserMentions, Comment, $dialog) {
 
   var post = $scope.post;
 
@@ -60,10 +60,9 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   };
 
   $scope['delete'] = function(comment) {
-    var modalInstance = $modal.open({
-      templateUrl: '/ui/app/confirm_comment_deletion.tpl.html'
-    });
-    modalInstance.result.then(function() {
+    $dialog.confirm({
+      message: 'Are you sure you want to remove this comment? This cannot be undone.'
+    }).then(function() {
       growl.addSuccessMessage("Comment deleted.", {ttl: 5000});
       Comment.delete({id: comment.id}, function() {
         $analytics.eventTrack('Post: Comment: Delete', {
