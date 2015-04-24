@@ -34,7 +34,8 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
-var finishLogin = function($scope, $stateParams) {
+var finishLogin = function($scope, $analytics, $stateParams) {
+  $analytics.eventTrack('Login success', {provider: $scope.serviceUsed || 'password'});
   if ($stateParams.next) {
     $scope.$apply(function() {
       history.pushState(null, null, $stateParams.next);
@@ -45,6 +46,7 @@ var finishLogin = function($scope, $stateParams) {
 }
 
 var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth) {
+  $analytics.eventTrack('Login start');
   $scope.user = {};
 
   $scope.submit = function(form) {
@@ -53,23 +55,25 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
     if (form.$invalid) return;
 
     User.login($scope.user).$promise.then(function() {
-      finishLogin($scope, $stateParams);
+      finishLogin($scope, $analytics, $stateParams);
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
   };
 
   $scope.useThirdPartyAuth = function(service) {
+    $scope.serviceUsed = service;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
 
   $scope.finishThirdPartyAuth = function(error) {
     $scope.authDialog.close();
     if (error) {
-      handleError({data: error}, $scope, $analytics);
-      $scope.$apply();
+      $scope.$apply(function() {
+        handleError({data: error}, $scope, $analytics);
+      });
     } else {
-      finishLogin($scope, $stateParams);
+      finishLogin($scope, $analytics, $stateParams);
     }
   };
 };
