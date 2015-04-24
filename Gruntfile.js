@@ -185,7 +185,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('dev', [
+  grunt.registerTask('dev-start', [
     'browserify:dev',
     'less:dev',
     'less:styleguide',
@@ -193,7 +193,11 @@ module.exports = function(grunt) {
     'sync:ui',
     'ejs:pages',
     'ejs:ui',
-    'sync:styleguide',
+    'sync:styleguide'
+  ]);
+
+  grunt.registerTask('dev', [
+    'dev-start',
     'serve',
     'watch'
   ]);
