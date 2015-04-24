@@ -100,6 +100,16 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
+    .state('forgotPassword', {
+      url: '/h/forgot-password',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/forgot-password.tpl.html',
+          controller: 'ForgotPasswordCtrl'
+        }
+      }
+    })
     .state('userSettings', {
       url: '/settings',
       parent: 'main',

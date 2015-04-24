@@ -30,6 +30,10 @@ dependencies.push(function($resource) {
     },
     status: {
       url: '/noo/user/status'
+    },
+    requestPasswordChange: {
+      url: '/noo/user/password',
+      method: 'POST'
     }
   });
 

@@ -30,13 +30,21 @@
     }
   }
 
-  div.error {
-    border-radius: @border-radius-base; // from bootstrap
-    color: @error-color;
+  div.error, div.success {
+    border-radius: @border-radius-base;
     padding: @std-padding;
     margin-top: @std-padding;
     margin-bottom: @std-padding;
-    background-color: @state-danger-bg; // from bootstrap
+  }
+
+  div.error {
+    background-color: @state-danger-bg;
+    color: @error-color;
+  }
+
+  div.success {
+    background-color: @state-success-bg;
+    color: @alert-success-text;
   }
 
   .right {
@@ -95,6 +103,17 @@
   }
 }
 
-.login {
+.login, .signup, .forgotPassword {
   .login-signup-page;
+}
+
+.signup {
+  @media (min-width: @screen-sm) {
+    .form-group.email {
+      padding-right: @std-padding/2;
+    }
+    .form-group.password {
+      padding-left: @std-padding/2;
+    }
+  }
 }
