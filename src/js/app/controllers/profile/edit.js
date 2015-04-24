@@ -136,16 +136,18 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
 
       }
     } else {
-      var left = document.documentElement.clientWidth/2 - 520/2;
+      var left = document.documentElement.clientWidth/2 - 200;
       $scope.linkedinDialog = window.open('/noo/linkedin/authorize', 'linkedinAuth',
         'width=400, height=625, titlebar=no, toolbar=no, menubar=no, left=' + left);
     }
   };
 
   $scope.finishLinkedinChange = function(url) {
-    editData.linkedin_url = url;
-    $scope.linkedinDialog.close();
-    $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
+    $scope.$apply(function() {
+      editData.linkedin_url = url;
+      $scope.linkedinDialog.close();
+      $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
+    });
   };
 };
 

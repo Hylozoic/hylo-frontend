@@ -1,4 +1,4 @@
-var controller = function($scope, growl, $analytics, currentUser, Community, $history, $dialog, UserCache) {
+var controller = function($scope, growl, $stateParams, $analytics, currentUser, Community, $history, $dialog, UserCache) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
@@ -6,16 +6,17 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
 
   $analytics.eventTrack('User Settings: Viewed');
 
+  if ($stateParams.expand === 'password') {
+    $scope.expand1 = true;
+    editing.password = true;
+  }
+
   $scope.close = function() {
     if ($history.isEmpty()) {
       $scope.$state.go('profile', {id: user.id});
     } else {
       $history.go(-1);
     }
-  };
-
-  $scope.needsRevalidation = function() {
-    return user.provider_key == 'password';
   };
 
   $scope.edit = function(field) {
@@ -36,12 +37,6 @@ var controller = function($scope, growl, $analytics, currentUser, Community, $hi
       user[field] = edited[field];
       $analytics.eventTrack('User Settings: Changed ' + field, {user_id: user.id});
       growl.addSuccessMessage('Saved change.');
-      if (field === 'email' && $scope.needsRevalidation()) {
-        growl.addSuccessMessage('Reloading...')
-        setTimeout(function() {
-          window.location = '/accounts/unverified';
-        }, 3000);
-      }
     }, function(err) {
       growl.addErrorMessage(err.data);
     });

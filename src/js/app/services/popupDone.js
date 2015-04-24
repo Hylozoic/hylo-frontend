@@ -10,13 +10,20 @@
 // if you want to add more use cases, define a new value for the 'context'
 // key of the options argument, and create a new if-clause. also mention
 // in a comment which controller is being called.
-
+//
+// don't forget to use $scope.$apply() as necessary in the controller method!
+//
 window.popupDone = function(opts) {
 
-  // controllers/profile/edit.js
-  if (opts.context == 'linkedin') {
+  if (opts.context == 'linkedin-profile') {
+    // controllers/profile/edit.js
     var node = document.querySelector('[ui-view="main"]');
     angular.element(node).scope().finishLinkedinChange(opts.url);
+
+  } else if (opts.context === 'oauth') {
+    // controllers/user/{Login,Signup}Ctrl.js
+    var node = document.querySelector('[ui-view="loginSignup"]');
+    angular.element(node).scope().finishThirdPartyAuth(opts.error);
   }
 
 };

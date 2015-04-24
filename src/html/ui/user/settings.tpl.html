@@ -9,29 +9,33 @@
     </div>
     <div class="section email" collapse="!expand1">
     	<div class="setting-item">
-      	<div class="main-column" ng-hide="editing.email">
+      	<div class="half-column">
       		<label>Your Email</label>
       		<p>{{user.email}}</p>
     		</div>
-      	<div class="side-column" ng-hide="editing.email">
+      	<div class="half-column value" ng-hide="editing.email">
           <button type="button" ng-click="edit('email')">Change</button>
         </div>
-        <div class="full-column" ng-show="editing.email">
-          <label>Your Email</label>
+        <div class="half-column value" ng-show="editing.email">
           <input type="text" ng-model="edited.email" class="form-control"/>
           <div class="buttons">
-            <p ng-show="needsRevalidation()" class="help">
-              You will have to re-validate your email address after changing it.
-            </p>
             <button type="button" ng-click="cancelEdit('email')">Cancel</button>
             <button type="button" class="main-action" ng-click="saveEdit('email')">Save</button>
           </div>
         </div>
     	</div>
     	<div class="setting-item">
-      	<div class="main-column"><label>Your Password</label></div>
-      	<div class="side-column">
-          <a class="change-password" href="/accounts/password/change" target="_self">Change</a>
+      	<div class="half-column"><label>Your Password</label></div>
+      	<div class="half-column value" ng-hide="editing.password">
+          <a class="change-password" ng-click="edit('password')">Change</a>
+        </div>
+        <div class="half-column value" ng-show="editing.password">
+          <p class="help">Enter a new password.</p>
+          <input type="password" ng-model="edited.password" class="form-control"/>
+          <div class="buttons">
+            <button type="button" ng-click="cancelEdit('password')">Cancel</button>
+            <button type="button" class="main-action" ng-click="saveEdit('password')">Save</button>
+          </div>
         </div>
     	</div>
     	<div class="setting-item">

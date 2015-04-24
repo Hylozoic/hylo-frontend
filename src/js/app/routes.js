@@ -50,7 +50,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
             $state.go('community.seeds', {community: membership.community.slug});
           });
         } else if (currentUser) {
-          window.location = '/invitecode';
+          $timeout(function() {
+            $state.go('home');
+          });
         } else {
           $timeout(function() {
             $state.go('login');
@@ -58,8 +60,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('login', {
-      url: '/h/login',
+    .state('loginSignup', {
+      abstract: true,
       resolve: {
         loggedIn: function(User, $timeout, $state) {
           return User.status().$promise.then(function(res) {
@@ -72,13 +74,44 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           $timeout(function() {
             $state.go('appEntry');
           });
+        } else {
+          window.hyloEnv.provideUser(null);
         }
       },
-      templateUrl: '/ui/user/login.tpl.html',
-      controller: 'LoginCtrl'
+      template: '<div ui-view="loginSignup"></div>'
+    })
+    .state('login', {
+      url: '/h/login?next',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/login.tpl.html',
+          controller: 'LoginCtrl'
+        }
+      }
+    })
+    .state('signup', {
+      url: '/h/signup',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/signup.tpl.html',
+          controller: 'SignupCtrl'
+        }
+      }
+    })
+    .state('forgotPassword', {
+      url: '/h/forgot-password',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/forgot-password.tpl.html',
+          controller: 'ForgotPasswordCtrl'
+        }
+      }
     })
     .state('userSettings', {
-      url: '/settings',
+      url: '/settings?expand',
       parent: 'main',
       views: {
         main: {
