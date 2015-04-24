@@ -26,9 +26,11 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
-var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
+var controller = function($scope, $analytics, User, Community, ThirdPartyAuth, Invitation) {
   $analytics.eventTrack('Signup start');
   $scope.user = {};
+
+  $scope.invitation = Invitation.storedData();
 
   $scope.submit = function(form) {
     form.submitted = true;
@@ -45,6 +47,8 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
   };
 
   $scope.validateCode = _.debounce(function(form) {
+    if ($scope.invitation) return;
+
     $scope.authStarted = true;
     $scope.validationDone = false;
     if (!_.isEmpty(form.code.$error)) return;
@@ -67,10 +71,12 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
 
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
-    if (!_.isEmpty(form.code.$error)) return;
-    if (!$scope.isCodeValid) {
-      handleError({data: 'bad code'}, $scope, $analytics);
-      return;
+    if (form.code) {
+      if (!_.isEmpty(form.code.$error)) return;
+      if (!$scope.isCodeValid) {
+        handleError({data: 'bad code'}, $scope, $analytics);
+        return;
+      }
     }
     $scope.serviceUsed = service;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);

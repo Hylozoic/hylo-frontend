@@ -1,27 +1,30 @@
 <div class="all-sections">
-  <h1 class="row">Sign up for Hylo</h1>
+  <h1 class="row">Sign up for Hylo {{invitation ? 'to join ' + invitation.community.name : ''}}</h1>
 
   <form name="form" novalidate>
 
     <div class="error" ng-show="signupError">{{signupError}}</div>
 
-    <p>We are currently in private beta with a number of pilot communities.</p>
-    <p>If you are a member of one of these communities, you should have received an invitation code from your community manager. Please enter it below:</p>
+    <div ng-if="!invitation">
+      <p>We are currently in private beta with a number of pilot communities.</p>
+      <p>If you are a member of one of these communities, you should have received an invitation code from your community manager. Please enter it below:</p>
 
-    <div class="form-group has-feedback"
-         ng-class="{'has-success': isCodeValid, 'has-error': !isCodeValid && validationDone}">
-      <input type="text"
-             name="code"
-             ng-model="user.code"
-             class="form-control"
-             placeholder="Invitation code"
-             ng-keyup="validateCode(form)"
-             required/>
-      <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
-      <p class="help error" ng-if="form.submitted && form.code.$error.required">Please fill in this field.</p>
+      <div class="form-group has-feedback"
+           ng-class="{'has-success': isCodeValid, 'has-error': !isCodeValid && validationDone}">
+        <input type="text"
+               name="code"
+               ng-model="user.code"
+               class="form-control"
+               placeholder="Invitation code"
+               ng-keyup="validateCode(form)"
+               required/>
+        <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
+        <p class="help error" ng-if="form.submitted && form.code.$error.required">Please fill in this field.</p>
+      </div>
     </div>
 
-    <p>Next, connect one of these services with Hylo to finish signing up.</p>
+    <p ng-hide="invitation">Next, connect one of these services with Hylo to finish signing up.</p>
+    <p ng-show="invitation">Connect one of these services with Hylo.</p>
 
     <div class="service-buttons">
       <a ng-click="useThirdPartyAuth('google', form)" class="google">Google</a>
@@ -29,7 +32,7 @@
       <a ng-click="useThirdPartyAuth('linkedin', form)" class="linkedin">LinkedIn</a>
     </div>
 
-    <p>Or, enter your name, email address, and the password you would like to use.</p>
+    <p><strong>Or</strong>, enter your name, email address, and the password you would like to use.</p>
 
     <div class="form-group">
       <input type="name"

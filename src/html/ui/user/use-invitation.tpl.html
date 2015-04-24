@@ -1,0 +1,26 @@
+  <div class="all-sections">
+    <div ng-show="error">
+      <h1>Hmm.</h1>
+    </div>
+
+    <div ng-show="waiting">
+      Please wait...
+    </div>
+
+    <div ng-show="error == 'bad link'">
+      The invitation link you used is not valid. Please contact us at <a href="mailto:support@hylo.com">support@hylo.com</a> for assistance.
+    </div>
+
+    <div ng-show="error == 'used link'">
+      <p>That invitation link has already been used.</p>
+      <p>Would you like to <a href="/h/login">log in</a>?</p>
+      <p>Please contact us at <a href="mailto:support@hylo.com">support@hylo.com</a> if you need assistance.</p>
+    </div>
+
+    <div ng-show="error" class="hylo-definition">
+      <a href="/" class="icon"><i class="icon-hylo-script"></i></a>
+
+      <p>Short for <strong>hylozoism</strong> (from the Greek <em>hylē</em>, “matter” and <em>zōē</em>, “life”):</p>
+      <p>The philosophical doctrine holding that all matter (including the universe as a whole) is alive and conscious.</p>
+    </div>
+  </div>

@@ -42,6 +42,7 @@ var staticPathList = [
   '/about/team',
   '/about/careers',
   '/about/contact',
+  '/error',
   '/policies/terms-of-service'
 ];
 
@@ -51,7 +52,8 @@ var appPathPrefixes = [
   /^\/u\//,
   /^\/settings/,
   /^\/edit-profile/,
-  /^\/create\/community/
+  /^\/create\/community/,
+  /^\/community\/invite/
 ];
 
 module.exports = function(opts) {

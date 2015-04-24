@@ -11,6 +11,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   // handle old single-post links
   $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
 
+  // handle old invitation links
+  $urlRouterProvider.when('/community/invite/:token', '/h/use-invitation?token');
+
   // handle alternate name of starting route
   $urlRouterProvider.when('/', '/app');
 
@@ -91,7 +94,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('signup', {
-      url: '/h/signup',
+      url: '/h/signup?mode',
       parent: 'loginSignup',
       views: {
         loginSignup: {
@@ -107,6 +110,27 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         loginSignup: {
           templateUrl: '/ui/user/forgot-password.tpl.html',
           controller: 'ForgotPasswordCtrl'
+        }
+      }
+    })
+    .state('useInvitation', /*@ngInject*/{
+      url: '/h/use-invitation?token',
+      parent: 'loginSignup',
+      views: {
+        loginSignup: {
+          templateUrl: '/ui/user/use-invitation.tpl.html',
+          controller: function($scope, Invitation, $stateParams, $state) {
+            Invitation.use({token: $stateParams.token}, function(resp) {
+              if (resp.error) {
+                $scope.error = resp.error;
+              } else if (resp.signup) {
+                Invitation.store(resp);
+                $state.go('signup');
+              } else {
+                $state.go('appEntry');
+              }
+            });
+          }
         }
       }
     })

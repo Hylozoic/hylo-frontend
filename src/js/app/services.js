@@ -28,6 +28,7 @@ require('./services/Activity')(angularModule);
 require('./services/Comment')(angularModule);
 require('./services/Search')(angularModule);
 require('./services/Seed')(angularModule);
+require('./services/Invitation')(angularModule);
 
 // other services
 require('./services/bodyClass')(angularModule);
