@@ -27,6 +27,7 @@ var handleError = function(err, $scope, $analytics) {
 };
 
 var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
+  $analytics.eventTrack('Signup start');
   $scope.user = {};
 
   $scope.submit = function(form) {
@@ -36,6 +37,7 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
 
     User.signup(_.merge({}, $scope.user, {login: true}))
     .$promise.then(function(user) {
+      $analytics.eventTrack('Signup success', {provider: 'password'});
       $scope.$state.go('onboarding.start');
     }, function(err) {
       handleError(err, $scope, $analytics);
@@ -65,19 +67,20 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
     if (!_.isEmpty(form.code.$error)) return;
+    $scope.serviceUsed = service;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
 
   $scope.finishThirdPartyAuth = function(error) {
-    $scope.authDialog.close();
-    if (error) {
-      $scope.$apply(function() {
+    $scope.$apply(function() {
+      $scope.authDialog.close();
+      if (error) {
         handleError({data: error}, $scope, $analytics);
-      });
-    } else {
-      $scope.$state.go('onboarding.start');
-    }
-
+      } else {
+        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed});
+        $scope.$state.go('onboarding.start');
+      }
+    });
   };
 
 };
