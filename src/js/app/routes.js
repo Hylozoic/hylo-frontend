@@ -111,7 +111,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('userSettings', {
-      url: '/settings',
+      url: '/settings?expand',
       parent: 'main',
       views: {
         main: {
