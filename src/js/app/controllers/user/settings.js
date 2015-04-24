@@ -1,10 +1,15 @@
-var controller = function($scope, growl, $analytics, currentUser, Community, $history, $dialog, UserCache) {
+var controller = function($scope, growl, $stateParams, $analytics, currentUser, Community, $history, $dialog, UserCache) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
     edited = $scope.edited = {};
 
   $analytics.eventTrack('User Settings: Viewed');
+
+  if ($stateParams.expand === 'password') {
+    $scope.expand1 = true;
+    editing.password = true;
+  }
 
   $scope.close = function() {
     if ($history.isEmpty()) {
