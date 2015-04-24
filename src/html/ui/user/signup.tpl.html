@@ -18,7 +18,7 @@
              ng-keyup="validateCode(form)"
              required/>
       <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
-      <p class="help error" ng-if="form.submitted || authStarted && form.code.$error.required">Please fill in this field.</p>
+      <p class="help error" ng-if="form.submitted && form.code.$error.required">Please fill in this field.</p>
     </div>
 
     <p>Next, connect one of these services with Hylo to finish signing up.</p>

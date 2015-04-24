@@ -46,6 +46,7 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth) {
 
   $scope.validateCode = _.debounce(function(form) {
     $scope.authStarted = true;
+    $scope.validationDone = false;
     if (!_.isEmpty(form.code.$error)) return;
 
     Community.validate({
