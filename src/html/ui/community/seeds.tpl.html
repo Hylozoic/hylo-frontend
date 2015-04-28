@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-12">
-        <a id="community-addSeedButton" class="toolbar-left" ui-sref="community.newSeed">
+        <a id="community-addSeedButton" class="toolbar-left" ui-sref="community.newSeed" ng-hide="community.readonly">
           <i class="icon-add-01"></i>
           <span class="hidden-xs new-seed-label">New Seed</span>
         </a>
@@ -64,8 +64,8 @@
 
   <div loading-indicator ng-if="searching"></div>
 
-  <div ng-if="::postLoaded && !searching && posts.length == 0">
-    <h2 style="text-align: center;">There are no seeds to display.</h2>
+  <div ng-if="seeds.length == 0">
+    <h3 style="text-align: center;">There are no posts to display.</h3>
   </div>
 </div>
 

@@ -3,6 +3,14 @@
 
 <div id="nav" ng-class="{public: !$root.currentUser}">
 
+  <div class="item public-only hylo-icon">
+    <a href="/" target="_self"><i class="icon-hylo-script"></i></a>
+  </div>
+
+  <div class="item public-only text-link">
+    <a href="/about" target="_self">About</a>
+  </div>
+
   <div class="item home">
     <a class="button" ui-sref="home.allSeeds" tooltip="Home" tooltip-placement="bottom">
       <i class="icon-home"></i>
@@ -55,8 +63,12 @@
       </ul>
     </div>
 
-    <div class="item public-only about">
-      <a href="/about" target="_self">About Hylo</a>
+    <div class="item public-only text-link">
+      <a ui-sref="login">Log in</a>
+    </div>
+
+    <div class="item public-only text-link">
+      <a ui-sref="signup">Sign up</a>
     </div>
   </div>
 
