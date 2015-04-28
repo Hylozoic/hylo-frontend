@@ -11,7 +11,7 @@ var steps = {
     state: 'community.seeds'
   },
   profile: {
-    state: 'profile'
+    state: 'profile.seeds'
   }
 };
 
