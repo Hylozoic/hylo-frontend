@@ -54,7 +54,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           });
         } else if (currentUser) {
           $timeout(function() {
-            $state.go('home');
+            $state.go('home.allSeeds');
+            Rollbar.error('User without community', {user_id: currentUser.id});
           });
         } else {
           $timeout(function() {
