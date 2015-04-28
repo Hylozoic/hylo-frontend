@@ -39,7 +39,7 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
   };
 
   $scope.cancel = function() {
-    $scope.$state.go('profile', {id: user.id});
+    $scope.$state.go('profile.seeds', {id: user.id});
   };
 
   $scope.add = function(event, type) {

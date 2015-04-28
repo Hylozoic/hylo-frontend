@@ -3,6 +3,7 @@ module.exports = function ($stateProvider) {
   .state('profile', {
     parent: 'main',
     url: '/u/:id',
+    abstract: true,
     resolve: /*@ngInject*/ {
       isSelf: function(currentUser, $stateParams) {
         return currentUser && parseInt(currentUser.id) === parseInt($stateParams.id);
@@ -22,15 +23,10 @@ module.exports = function ($stateProvider) {
       }
     },
     views: {
-      'main': {
+      main: {
         templateUrl: '/ui/profile/base.tpl.html',
         controller: 'ProfileCtrl'
       }
-    },
-    onEnter: /*@ngInject*/ function(user, $state, $timeout) {
-      $timeout(function() {
-        $state.go('profile.seeds', {id: user.id})
-      });
     }
   })
   .state('profile.about', {

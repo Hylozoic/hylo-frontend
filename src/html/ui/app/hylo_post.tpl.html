@@ -1,6 +1,6 @@
 <div class="post" analytics-id="{{::post.id}}">
 
-  <a class="user" ui-sref="profile({id: post.user.id})">
+  <a class="user" ui-sref="profile.seeds({id: post.user.id})">
     <div back-img="post.user.avatar" class="avatar"></div>
     <div class="name">{{::post.user.name}}</div>
   </a>
@@ -49,7 +49,7 @@
 
         <!-- List Names -->
         <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-          <a class="follower" ui-sref="profile({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
+          <a class="follower" ui-sref="profile.seeds({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
           <span ng-if="!$last && followersNotMe.length == 2"> and </span>
         </span>
 
@@ -62,7 +62,7 @@
             </a>
             <ul class="dropdown-menu">
               <li ng-repeat="user in followersNotMe.slice(2)">
-                <a class="dropdown-list-user" ui-sref="profile({id: user.id})" ng-if="!user.hide">
+                <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})" ng-if="!user.hide">
                   <div back-img="::user.avatar_url" class="avatar"></div>
                   <div class="name">{{::user.name}}</div>
                 </a>
@@ -78,7 +78,7 @@
       Fulfilled
       <span ng-if="::post.contributors.length > 0">
         with contributions from
-        <a class="contributor" ui-sref="profile({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
+        <a class="contributor" ui-sref="profile.seeds({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
           <span>{{::user.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span>
         </a>
         <span ng-if="::post.contributors.length > 2">
@@ -90,7 +90,7 @@
 
             <ul class="dropdown-menu">
               <li ng-repeat="user in post.contributors.slice(2)">
-                <a class="dropdown-list-user" ui-sref="profile({id: user.id})">
+                <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})">
                   <div back-img="::user.avatar_url" class="avatar"></div>
                   <div class="name">{{::user.name}}</div>
                 </a>
