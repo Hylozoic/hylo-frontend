@@ -24,10 +24,10 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
         return 'added you to the ' + event.post.type;
 
       case 'follow':
-        return 'joined';
+        return 'followed';
 
       case 'unfollow':
-        return 'left';
+        return 'stopped following';
     };
   };
 

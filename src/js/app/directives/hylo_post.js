@@ -73,10 +73,10 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
     var toggleJoinPostText = function() {
       if ($scope.isFollowing) {
         $scope.joinPostTooltipText = "Stop receiving notifications";
-        $scope.joinPostText = "Leave";
+        $scope.joinPostText = "Unfollow";
       } else {
         $scope.joinPostTooltipText = "Receive notifications";
-        $scope.joinPostText = "Join";
+        $scope.joinPostText = "Follow";
       }
     };
 
