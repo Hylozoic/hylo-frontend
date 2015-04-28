@@ -43,7 +43,6 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
 
     //Voting is the same thing as "liking"
     $scope.vote = function() {
-      var post = post;
       post.myVote = !post.myVote;
       post.votes += (post.myVote ? 1 : -1);
       $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
