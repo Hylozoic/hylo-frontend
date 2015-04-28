@@ -1,14 +1,23 @@
 @nav-item-height: 34px;
 @nav-vertical-padding: 10px;
+@nav-height: @nav-item-height + @nav-vertical-padding * 2;
+
+#nav-pad {
+  height: @nav-height;
+  width: 100%;
+}
 
 #nav {
   @nav-item-count: 5;
 
   padding: @nav-vertical-padding @std-padding 0;
-  height: @nav-item-height + @nav-vertical-padding * 2;
+  height: @nav-height;
   width: 100%;
   background-color: white;
   border-bottom: 1px solid @border-light;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 
   [dropdown] {
     position: relative;
