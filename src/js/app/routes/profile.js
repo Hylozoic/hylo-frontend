@@ -26,6 +26,20 @@ module.exports = function ($stateProvider) {
         templateUrl: '/ui/profile/base.tpl.html',
         controller: 'ProfileCtrl'
       }
+    },
+    onEnter: /*@ngInject*/ function(user, $state, $timeout) {
+      $timeout(function() {
+        $state.go('profile.seeds', {id: user.id})
+      });
+    }
+  })
+  .state('profile.about', {
+    url: '/about',
+    views: {
+      tab: {
+        templateUrl: '/ui/profile/about.tpl.html',
+        controller: function() {}
+      }
     }
   })
   .state('profile.seeds', {
@@ -36,7 +50,7 @@ module.exports = function ($stateProvider) {
       }
     },
     views: {
-      'tab': {
+      tab: {
         templateUrl: '/ui/seeds/list.tpl.html',
         controller: 'SeedListCtrl'
       }
@@ -50,7 +64,7 @@ module.exports = function ($stateProvider) {
       }]
     },
     views: {
-      'tab': {
+      tab: {
         templateUrl: '/ui/profile/contributions.tpl.html',
         controller: 'ProfileContributionsCtrl'
       }
@@ -64,7 +78,7 @@ module.exports = function ($stateProvider) {
       }]
     },
     views: {
-      'tab': {
+      tab: {
         templateUrl: '/ui/profile/thanks.tpl.html',
         controller: 'ProfileThanksCtrl'
       }

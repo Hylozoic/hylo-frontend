@@ -34,7 +34,7 @@
 <div class="main-content">
   <div class="sidebar">
     <div class="tabs">
-      <a class="tab" ui-sref="." ng-class="{selected: $state.current.name === 'profile'}">
+      <a class="tab" ui-sref=".about" ng-class="{selected: $state.current.name === 'profile.about'}">
         <h3><br />ABOUT</h3>
       </a>
       <a class="tab" ui-sref=".seeds" ng-class="{selected: $state.current.name === 'profile.seeds'}">
@@ -53,6 +53,5 @@
     </div>
   </div>
   <div class="tab-content" ui-view="tab">
-    <ng-include ng-if="$state.current.name === 'profile'" src="'/ui/profile/about.tpl.html'"></ng-include>
   </div>
 </div>
