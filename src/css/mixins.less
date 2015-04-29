@@ -36,8 +36,10 @@
 .rounded-button(@size: @default-button-height, @background-color: white) {
   .proxima-nova-regular;
   font-size: 14px;
-  text-decoration: none; //this removes hover effect
-  color: @text-dark;
+  &, &:hover {
+    text-decoration: none;
+    color: @text-dark;
+  }
   background-color: @background-color;
   cursor: pointer;
   border: 1px solid @light-gray;

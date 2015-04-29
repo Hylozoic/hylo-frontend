@@ -195,6 +195,20 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           controller: 'SearchCtrl'
         }
       }
+    })
+    .state('newSeed', {
+      url: '/h/new-seed',
+      parent: 'main',
+      views: {
+        main: {
+          templateUrl: '/ui/seeds/edit.tpl.html',
+          controller: 'SeedEditCtrl'
+        }
+      },
+      resolve: {
+        seed: function() { return null; },
+        community: function() { return null; }
+      }
     });
 
     require('./routes/community')($stateProvider);

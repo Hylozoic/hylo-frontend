@@ -1,4 +1,45 @@
+.add-new-seed {
+  .rounded-button;
+  &, &:hover {
+    text-decoration: none;
+  }
+  i {
+    font-size: 12px;
+    font-weight: 100;
+  }
+  .new-seed-label {
+    position: relative;
+    top: 1px;
+  }
+}
+
+.has-rounded-dropdowns() {
+  .button[dropdown-toggle] {
+    .rounded-button;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .dropdown-menu {
+    min-width: initial;
+    li {
+      padding: 4px 15px;
+      &:hover {
+        background-color: @faint-gray;
+      }
+    }
+  }
+}
+
 .community-seeds-toolbar {
+  .has-rounded-dropdowns;
+
+  .add-new-seed {
+    @media (max-width: @screen-xs-max) {
+      padding: 0 7px;
+    }
+  }
+
   > div {
     .make-sm-column(6);
     .make-sm-column-offset(3);
@@ -14,37 +55,6 @@
     i {
       font-weight: 600;
       top: 1px;
-    }
-  }
-
-  #community-addSeedButton {
-    .rounded-button;
-    @media (max-width: @screen-xs-max) {
-      padding: 0 7px;
-    }
-    i {
-      font-size: 12px;
-      font-weight: 100;
-    }
-    .new-seed-label {
-      position: relative;
-      top: 1px;
-    }
-  }
-
-  .button[dropdown-toggle] {
-    .rounded-button;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-
-  .dropdown-menu {
-    min-width: initial;
-    li {
-      padding: 4px 15px;
-      &:hover {
-        background-color: @faint-gray;
-      }
     }
   }
 }

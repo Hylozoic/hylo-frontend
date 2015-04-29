@@ -43,8 +43,8 @@
     <div class="edit-content">
       <div class="title">Seed Title</div>
       <input type="text" class="form-control" ng-model="title"/>
-      <div class="title">Description</div>
 
+      <div class="title">Description</div>
       <div ng-model="description" autocomplete="off" contenteditable="true"
         class="mentio-editor form-control elastic"
         placeholder="Add more detail here."
@@ -56,6 +56,24 @@
         mentio-select="getPeopleTextRaw(item)"
         mentio-typed-term="typedTerm">
       </div>
+
+      <div ng-if="shouldPickCommunity">
+        <div class="title">Community</div>
+
+        <div class="btn-group" dropdown>
+          <a class="button" dropdown-toggle>
+            {{community.name}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="option in communityOptions" ng-click="pickCommunity(option.id)">
+              {{option.name}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
       <p class="help">This seed will be visible only to other members of your community. You can edit or remove it at any time.</p>
     </div>
 

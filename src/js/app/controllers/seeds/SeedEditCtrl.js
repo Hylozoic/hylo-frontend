@@ -107,8 +107,8 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   $scope.save = function() {
     if (!validate()) return;
-
     $scope.saving = true;
+
     var data = {
       name: $scope.title,
       description: $scope.description,
@@ -162,6 +162,21 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     var defaultType = (onboarding ? 'offer' : 'intention');
     $scope.switchSeedType(defaultType);
   }
+
+  if (!community) {
+    $scope.shouldPickCommunity = true;
+    $scope.communityOptions = _.map(currentUser.memberships, function(membership) {
+      return _.pick(membership.community, 'id', 'name', 'slug');
+    });
+    community = $scope.community = $scope.communityOptions[0];
+
+    $scope.pickCommunity = function(id) {
+      community = $scope.community = _.find($scope.communityOptions, function(x) {
+        return x.id == id;
+      });
+    };
+  }
+
 
 };
 
