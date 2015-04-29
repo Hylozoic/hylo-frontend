@@ -16,6 +16,7 @@ module.exports = function ($stateProvider) {
         templateUrl: '/ui/onboarding/start.tpl.html',
         controller: /*@ngInject*/ function(onboarding, $scope) {
           $scope.onboarding = onboarding;
+          onboarding.trackStep('start');
         }
       }
     }

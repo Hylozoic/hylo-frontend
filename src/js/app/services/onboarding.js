@@ -15,6 +15,15 @@ var steps = {
   }
 };
 
+var sanitize = function(string) {
+  if (!string) return;
+
+  return _.chain(string.split(','))
+    .map(function(x) { return x.trim(); })
+    .reject(function(x) { return x == '' })
+    .uniq().value();
+};
+
 var stepOrder = ['start', 'seeds', 'community', 'profile', 'done'];
 
 var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
@@ -51,19 +60,8 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
   };
 
   _.extend(Onboarding.prototype, {
-    isComplete: function() {
-      return this._status.step === 'done';
-    },
-    canSkipSeedForm: function() {
-      return !!this._status.can_skip_seed_form;
-    },
-    markSeedCreated: function(type) {
-      this._track('Add Seed', {type: type});
-      this._status.seed_created = true;
-      this.goNext();
-    },
-    isSeedCreated: function() {
-      return !!this._status.seed_created;
+    trackStep: function(name) {
+      return this._track('Step: ' + name);
     },
     currentStep: function() {
       if (!_.contains(stepOrder, this._status.step))
@@ -86,19 +84,13 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
       switch (this.currentStep()) {
         case 'community':
-
-          var cleanup = function(string) {
-            if (!string) return;
-
-            return _.chain(string.split(','))
-              .map(function(x) { return x.trim(); })
-              .reject(function(x) { return x == '' })
-              .uniq().value();
-          }, input = {
-            skills: cleanup(data.skills),
-            organizations: cleanup(data.organizations)
+          // process responses to prompts
+          var input = {
+            skills: sanitize(data.skills),
+            organizations: sanitize(data.organizations)
           };
 
+          // add skills to front-end
           if (_.isEmpty(input.skills)) {
             delete input.skills;
           } else {
@@ -106,6 +98,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             this._user.skills = input.skills;
           }
 
+          // add organizations to front-end
           if (_.isEmpty(input.organizations)) {
             delete input.organizations;
           } else {
@@ -113,7 +106,9 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             this._user.organizations = input.organizations;
           }
 
-          if (!_.isEmpty(input)) this._user.update(input);
+          // save data to back-end
+          if (!_.isEmpty(input))
+            this._user.update(input);
 
           this._announcerDelay = $timeout(function() {
             $rootScope.$emit('announcer:show', {
@@ -132,14 +127,6 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
           this._setStep('done', true);
           break;
       }
-    },
-    resume: function() {
-      if (_.include(['profile', 'done'], this.currentStep())
-        || $state.$current.name === steps[this.currentStep()].state)
-        return;
-
-      this._track('Resume', {from: $state.$current.name, to: steps[this.currentStep()].state});
-      this._goDelta(0);
     },
     goNext: function() {
       this._goDelta(1);
@@ -169,7 +156,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       return $state.go(steps[name].state, params);
     },
     _setStep: function(name, update) {
-      this._track('Step: ' + name);
+      this.trackStep(name);
       this._status.step = name;
 
       if (update) {

@@ -2,14 +2,7 @@ var filepickerUpload = require('../../services/filepickerUpload'),
   format = require('util').format;
 
 var directive = function($scope, currentUser, community, Seed, growl, $analytics, $history,
-  UserMentions, seed, $state, onboarding, $rootScope, Cache, UserCache) {
-
-  $scope.onboarding = onboarding;
-
-  // onboarding mode is not the same as the presence of the onboarding object --
-  // it should not be enabled, e.g., when someone is still in onboarding but is
-  // editing the seed they just created or creating a 2nd one
-  $scope.onboardingMode = (onboarding && onboarding.currentStep() === 'newSeed');
+  UserMentions, seed, $state, $rootScope, Cache, UserCache) {
 
   var prefixes = {
     intention: "I'd like to create",
@@ -97,12 +90,8 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     new Seed(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
-      if ($scope.onboardingMode) {
-        onboarding.markSeedCreated(data.type);
-      } else {
-        $scope.close();
-        growl.addSuccessMessage('Seed created!');
-      }
+      $scope.close();
+      growl.addSuccessMessage('Seed created!');
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);
@@ -164,8 +153,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     $scope.description = $rootScope.seedEditProgress.description;
 
   } else {
-    var defaultType = ($scope.onboardingMode ? 'offer' : 'intention');
-    $scope.switchSeedType(defaultType);
+    $scope.switchSeedType('intention');
   }
 
   if (!community) {
