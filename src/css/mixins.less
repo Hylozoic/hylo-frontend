@@ -403,3 +403,22 @@
   ::-moz-placeholder { .placeholder-attributes; }
   :-ms-input-placeholder { .placeholder-attributes; }
 }
+
+.has-rounded-dropdowns() {
+  .button[dropdown-toggle] {
+    .rounded-button;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .dropdown-menu {
+    min-width: initial;
+    li {
+      padding: 4px 15px;
+      &:hover {
+        background-color: @faint-gray;
+      }
+    }
+  }
+}
+
