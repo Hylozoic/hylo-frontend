@@ -60,12 +60,16 @@
 
 .rounded-button-dark(@size: @default-button-height, @background-color: @dark-gray) {
   .rounded-button(@size, @background-color);
-  color: white;
+  &, &:hover {
+    color: white;
+  }
 }
 
 .rounded-button-clear {
   .rounded-button;
-  color: white;
+  &, &:hover {
+    color: white;
+  }
   background-color: transparent;
   border: 1px solid white;
   &:active {
