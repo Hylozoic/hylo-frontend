@@ -1,7 +1,8 @@
 var filepickerUpload = require('../../services/filepickerUpload'),
   format = require('util').format;
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, UserMentions, seed, $state, onboarding, $rootScope, Cache, UserCache) {
+var directive = function($scope, currentUser, community, Seed, growl, $analytics, $history,
+  UserMentions, seed, $state, onboarding, $rootScope, Cache, UserCache) {
 
   $scope.onboarding = onboarding;
 
@@ -31,7 +32,11 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   $scope.close = function() {
     $rootScope.seedEditProgress = null;
-    $state.go('community.seeds', {community: community.slug});
+    if ($history.isEmpty()) {
+      $state.go('community.seeds', {community: community.slug});
+    } else {
+      $history.go(-1);
+    }
   };
 
   $scope.addImage = function() {

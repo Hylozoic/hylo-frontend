@@ -24,7 +24,7 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/seeds/list.tpl.html',
+        templateUrl: '/ui/home/my-seeds.tpl.html',
         controller: 'SeedListCtrl'
       }
     }
