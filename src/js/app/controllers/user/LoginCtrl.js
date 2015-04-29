@@ -37,9 +37,7 @@ var handleError = function(err, $scope, $analytics) {
 var finishLogin = function($scope, $analytics, $stateParams) {
   $analytics.eventTrack('Login success', {provider: $scope.serviceUsed || 'password'});
   if ($stateParams.next) {
-    $scope.$apply(function() {
-      history.pushState(null, null, $stateParams.next);
-    });
+    history.pushState(null, null, $stateParams.next);
   } else {
     $scope.$state.go('appEntry');
   }
@@ -68,13 +66,13 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
 
   $scope.finishThirdPartyAuth = function(error) {
     $scope.authDialog.close();
-    if (error) {
-      $scope.$apply(function() {
+    $scope.$apply(function() {
+      if (error) {
         handleError({data: error}, $scope, $analytics);
-      });
-    } else {
-      finishLogin($scope, $analytics, $stateParams);
-    }
+      } else {
+        finishLogin($scope, $analytics, $stateParams);
+      }
+    });
   };
 };
 
