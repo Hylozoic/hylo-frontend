@@ -164,7 +164,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     $scope.description = $rootScope.seedEditProgress.description;
 
   } else {
-    var defaultType = (onboarding ? 'offer' : 'intention');
+    var defaultType = ($scope.onboardingMode ? 'offer' : 'intention');
     $scope.switchSeedType(defaultType);
   }
 
