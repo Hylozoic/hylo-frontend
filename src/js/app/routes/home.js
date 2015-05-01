@@ -56,6 +56,17 @@ module.exports = function ($stateProvider) {
         controller: 'AllSeedsCtrl'
       }
     }
+  })
+  .state('home.projects', {
+    url: '/h/my-projects',
+    views: {
+      tab: {
+        templateUrl: '/ui/home/projects.tpl.html',
+        controller: /*@ngInject*/ function($scope) {
+
+        }
+      }
+    }
   });
 
 };

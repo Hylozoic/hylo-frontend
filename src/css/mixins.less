@@ -282,40 +282,6 @@
   position: initial;
 }
 
-// mixin to add a margin to some element positioned next to an avatar
-.add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
-  margin-left: @size;
-
-  & when (@use-properties = true) {
-    float: none;
-    display: inline-block;
-    position: relative;
-  }
-
-}
-
-@avatar-margin-xs-default: @avatar-size-xs + 10;
-@avatar-margin-sm-default: @avatar-size-sm + 30;
-@avatar-margin-md-default: @avatar-size-default + 30;
-@avatar-margin-lg-default: @avatar-size-lg + 30;
-
-//mixins for adding margins at various avatar sizes
-.avatar-margin-xs(@use-properties: true, @add-margin: 10) {
-  .add-avatar-margin(@avatar-size-xs+@add-margin, @use-properties);
-}
-
-.avatar-margin-sm(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-sm+@add-margin, @use-properties);
-}
-
-.avatar-margin-med(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-default+@add-margin, @use-properties);
-}
-
-.avatar-margin-lg(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-lg+@add-margin, @use-properties);
-}
-
 //helper to remove link display properties from an element
 .remove-link-display(@color: @default-text) {
   &, &:hover {

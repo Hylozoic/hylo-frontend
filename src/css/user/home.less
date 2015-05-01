@@ -6,17 +6,15 @@ body.home {
 
     > a {
       display: block;
-      .make-sm-column(3);
+      .make-xs-column(3);
       .make-md-column(2);
-
-      &:first-child {
-        .make-sm-column-offset(1.5);
-        .make-md-column-offset(3);
-      }
-
       .medium-title-text;
       text-align: center;
       color: @text-light-gray;
+
+      &:first-child {
+        .make-md-column-offset(2);
+      }
 
       .triangle {
         display: none;
@@ -24,6 +22,14 @@ body.home {
 
       &, &:hover {
         text-decoration: none;
+      }
+
+      @media (max-width: @screen-xs-max) {
+        .small-title-text;
+        padding: @std-padding 0;
+        line-height: initial;
+        padding-left: 0;
+        padding-right: 0;
       }
 
       &.active {
@@ -48,12 +54,6 @@ body.home {
           -ms-transform: rotate(45deg);
         }
       }
-
-      .make-xs-column(4);
-      @media (max-width: @screen-xs-max) {
-        line-height: initial;
-        padding: @std-padding;
-      }
     }
   }
 
@@ -66,15 +66,13 @@ body.home {
   .post {
     .make-row;
   }
-}
 
-.home-allSeeds, .home-mySeeds {
-  .add-new-seed {
+  .add-new {
     position: relative;
     top: -@std-padding;
   }
 
-  .add-new-seed, .empty-content {
+  .add-new, .empty-content {
     @media (min-width: @screen-sm) {
       margin-left: -@std-padding;
     }
