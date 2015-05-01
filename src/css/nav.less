@@ -1,6 +1,7 @@
 @nav-item-height: 34px;
 @nav-vertical-padding: 10px;
 @nav-height: @nav-item-height + @nav-vertical-padding * 2;
+@nav-z-index: 3;
 
 #nav-pad {
   height: @nav-height;
@@ -17,7 +18,7 @@
   border-bottom: 1px solid @border-light;
   position: fixed;
   top: 0;
-  z-index: 3;
+  z-index: @nav-z-index;
 
   [dropdown] {
     position: relative;
@@ -212,6 +213,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: @nav-z-index;
 
   &, &:hover {
     text-decoration: none;
