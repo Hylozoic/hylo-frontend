@@ -86,6 +86,7 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
       }
 
       if (!hyloEnv.isProd) {
+        console.error('$stateChangeError en route to ' + toState.name);
         console.error(error);
       } else {
         Rollbar.error("$stateChangeError", {
@@ -100,7 +101,6 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
     }
   );
 
-  // Set a variable so we can watch for param changes
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
 });

@@ -1,4 +1,4 @@
-.newProject {
+.newProject, .editProject {
   margin-bottom: @std-padding*4;
 
   .simple-page;
@@ -27,7 +27,7 @@
   }
 
   .details {
-    height: 8em;
+    height: 12em;
     overflow-y: auto;
   }
 
@@ -36,4 +36,16 @@
     display: inline-block;
   }
 
+}
+
+body.project {
+  .summary-wrapper {
+    background-color: @faint-gray;
+    .make-row;
+  }
+
+  .summary {
+    .make-sm-column(8);
+    .make-sm-column-offset(2);
+  }
 }

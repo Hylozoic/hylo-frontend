@@ -33,3 +33,5 @@ require('./controllers/FulfillmentCtrl')(angularModule);
 require('./controllers/user/LoginCtrl')(angularModule);
 require('./controllers/user/SignupCtrl')(angularModule);
 require('./controllers/user/ForgotPasswordCtrl')(angularModule);
+
+require('./controllers/project/ProjectEditCtrl')(angularModule);
