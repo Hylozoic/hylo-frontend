@@ -253,15 +253,18 @@
   margin-left: 0;
 }
 
-//mixin to size an avatar and add display properties
-.user-avatar(@size: @avatar-size-default) {
-  @avatar-size: 60px;
+.image-div(@size) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: @size;
   width: @size;
-  border-radius: @size/2;
+}
+
+//mixin to size an avatar and add display properties
+.user-avatar(@size: @avatar-size-default) {
+  .image-div(@size);
+  border-radius: @size;
 }
 
 //classes to use the avatar at various sizes
