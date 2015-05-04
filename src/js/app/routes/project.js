@@ -26,7 +26,17 @@ module.exports = function ($stateProvider) {
       main: {
         templateUrl: '/ui/project/show.tpl.html',
         controller: /*@ngInject*/ function($scope, project) {
+          var truncate = require('html-truncate');
+
           $scope.project = project;
+          $scope.isCreator = true;
+          $scope.selectedTab = 'requests';
+          $scope.details = truncate(project.details, 420);
+          $scope.truncatedDetails = $scope.details !== project.details;
+          $scope.showFullDetails = function() {
+            $scope.details = project.details;
+            $scope.truncatedDetails = false;
+          }
         }
       }
     }

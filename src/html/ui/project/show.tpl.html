@@ -1,12 +1,66 @@
 <div class="summary-wrapper">
   <div class="summary">
-    <a ui-sref="editProject({slug: project.slug})">Edit project</a>
-    <h1>Project title: {{project.title}}</h1>
-    <h2>{{project.intention}}</h2>
-    <div ng-bind-html="project.details | unsafe"></div>
+    <a ng-show="isCreator" class="edit-button" ui-sref="editProject({slug: project.slug})">Edit project</a>
+    <h1>{{project.title}}</h1>
+
+    <div class="columns">
+      <div class="main-column">
+        <div class="media"></div>
+        <h3 class="intention">{{project.intention}}</h3>
+        <see-more class="details" contents="details" truncated="truncatedDetails" expand="showFullDetails()">
+        </see-more>
+
+      </div>
+      <div class="side-column">
+        <div ng-show="isCreator">
+          <h2>Hi {{project.user.name | firstName}}!</h2>
+          <p>Get started on your project by adding requests and contributors below.</p>
+        </div>
+        <div ng-hide="isCreator">
+          <h2>6 Open Requests</h2>
+          <p>See how you can contribute by checking out the requests below.</p>
+          <a class="engage-button">See Requests</a>
+        </div>
+
+        <ul>
+          <li>
+            <a class="avatar icon" back-img="project.user.avatar_url"></a>
+            <div>Created by <strong>{{project.user.name}}</strong></div>
+          </li>
+          <li>
+            <div class="community icon" back-img="project.community.avatar_url"></div>
+            <div>Based out of <strong>{{project.community.name}}</strong></div>
+          </li>
+          <li>
+            <div class="icon" back-img="'http://lorempixel.com/33/33/cats'"></div>
+            <div>
+              <strong>Visibility Indicator</strong>
+              <br/>
+              This project is yadda yadda
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 </div>
-<div class="tabs">
 
+<div class="tabs-wrapper">
+  <ul class="tabs">
+    <li ng-class="{active: selectedTab === 'requests'}" ng-click="selectedTab = 'requests'">
+      <h2>Requests</h2>
+      <p ng-show="isCreator">Ask for what you need</p>
+      <p ng-hide="isCreator">See how you can help</p>
+    </li><!--
+    <--></--><li ng-class="{active: selectedTab === 'contributors'}" ng-click="selectedTab = 'contributors'">
+      <h2>Contributors</h2>
+      <p ng-show="isCreator">Get people involved</p>
+      <p ng-hide="isCreator">See who's involved</p>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae iste nemo, vero eius architecto libero nobis recusandae neque, mollitia enim quibusdam! Optio quos asperiores magni quae veritatis eos sunt fuga.
 </div>
