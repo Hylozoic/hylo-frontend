@@ -36,23 +36,7 @@ body.home {
         position: relative;
         color: @default-text;
 
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          @side-length: 7px;
-          left: 50%;
-          width: @side-length * 2;
-          height: @side-length * 2;
-          margin-left: -@side-length;
-          bottom: -@side-length;
-          border-top: 1px solid @border-light;
-          border-left: 1px solid @border-light;
-          background-color: #fff;
-          transform: rotate(45deg);
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-        }
+        .has-bottom-triangle;
       }
     }
   }
