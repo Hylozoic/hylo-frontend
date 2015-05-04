@@ -20,10 +20,15 @@ body {
   }
 }
 
-@media only screen and (max-width: @screen-xs-max) {
+@media (max-width: @screen-xs-max) {
   body, html {
     width: 100%;
     overflow-x: hidden;
+  }
+
+  #intercom-container .intercom-launcher {
+    bottom: 10px !important;
+    right: 10px !important;
   }
 }
 

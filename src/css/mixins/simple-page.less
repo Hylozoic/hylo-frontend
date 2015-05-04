@@ -19,6 +19,12 @@
     > p.section {
       padding: @std-padding 0;
     }
+
+    // avoid overlapping the intercom button
+    @media (max-width: @screen-xs-max) {
+      margin-bottom: 70px;
+    }
+
   }
 
 }
