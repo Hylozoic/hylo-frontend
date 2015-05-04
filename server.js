@@ -34,7 +34,7 @@ var proxy = function(req, res, upstream, port) {
   });
 };
 
-var staticPathList = [
+var staticPages = [
   '',
   '/app',
   '/faq',
@@ -42,69 +42,54 @@ var staticPathList = [
   '/about/team',
   '/about/careers',
   '/about/contact',
-  '/error',
-  '/policies/terms-of-service'
-];
-
-var appPathPrefixes = [
-  /^\/c\//,
-  /^\/h\//,
-  /^\/u\//,
-  /^\/settings/,
-  /^\/edit-profile/,
-  /^\/create\/community/,
-  /^\/community\/invite/
 ];
 
 module.exports = function(opts) {
 
   var upstream = opts.upstream.split(':'),
     upstreamHost = upstream[0],
-    upstreamPort = parseInt(upstream[1] || '80'),
-    nodeUpstream = opts.nodeUpstream.split(':'),
-    nodeUpstreamHost = nodeUpstream[0],
-    nodeUpstreamPort = parseInt(nodeUpstream[1] || '80');
+    upstreamPort = parseInt(upstream[1] || '80');
 
   var server = http.createServer(function(req, res) {
 
     var u = url.parse(req.url),
       originalUrl = req.url,
-      target = '';
+      changePathname = function(value) {
+        u.pathname = value;
+        req.url = url.format(u);
+      },
+      log = function(resolution) {
+        opts.log.writeln('%s %s %s %s', req.connection.remoteAddress, req.method, originalUrl, resolution);
+      };
 
-    var log = function(target) {
-      opts.log.writeln('%s %s %s %s', req.connection.remoteAddress, req.method, originalUrl, target);
-    };
-
+    // remove leading slash
     u.pathname = u.pathname.replace(/\/$/, '');
 
+    // Node API
+    if (_.any(['/noo', '/admin'], function(p) { return _.startsWith(u.pathname, p); })) {
+      proxy(req, res, upstreamHost, upstreamPort);
+      log('→ Node');
+      return;
+    }
+
     // static pages
-    if (_.contains(staticPathList, u.pathname)) {
-      u.pathname = util.format('/dev%s/index.html', u.pathname);
-      req.url = url.format(u);
-      target = '→ ' + u.pathname;
+    if (_.contains(staticPages, u.pathname)) {
+      changePathname(util.format('/dev%s/index.html', u.pathname));
     }
 
-    // alternate paths to Angular base page
-    if (_.any(appPathPrefixes, u.pathname.match.bind(u.pathname))) {
-      u.pathname = '/dev/app/index.html';
-      req.url = url.format(u);
-      target = '→ ' + u.pathname;
-    }
-
+    // all local assets
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        req.url = originalUrl;
-        proxy(req, res, nodeUpstreamHost, nodeUpstreamPort);
-        log('→ Node');
+        // assume it's an Angular route
+        changePathname('/dev/app/index.html');
+        fileServer.serve(req, res);
+        log('→ ' + u.pathname);
       } else {
-        log(target);
+        log('');
       }
     });
 
   }).listen(opts.port);
 
-  opts.log.writeln(
-    'listening on port ' + opts.port + ', proxying ' + upstreamHost + ':' + upstreamPort +
-    ' and ' + nodeUpstreamHost + ':' + nodeUpstreamPort
-  );
+  opts.log.writeln(util.format('listening on port %s, proxying %s:%s', opts.port, upstreamHost, upstreamPort));
 };

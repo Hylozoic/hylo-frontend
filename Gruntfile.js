@@ -206,8 +206,7 @@ module.exports = function(grunt) {
     require('./server')({
       log: grunt.log,
       port: parseInt(grunt.option('port') || 3001),
-      upstream: grunt.option('upstream') || 'hylo-dev.herokuapp.com',
-      nodeUpstream: grunt.option('node-upstream') || 'hylo-node-dev.herokuapp.com'
+      upstream: grunt.option('upstream')
     });
   });
 
