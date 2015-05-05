@@ -14,7 +14,7 @@ var categories = {
   'other': 'Other'
 };
 
-var controller = function ($scope, $timeout, $analytics, $analytics, $history, Community, growl, currentUser) {
+var controller = function ($scope, $timeout, $analytics, $history, Community, growl, currentUser) {
 
   $scope.categories = categories;
   $scope.uploading = {};
