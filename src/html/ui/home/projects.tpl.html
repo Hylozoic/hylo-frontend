@@ -3,3 +3,12 @@
   <span class="new-seed-label">New Project</span>
 </a>
 
+<div class="projects" masonry='{"itemSelector": ".project-wrapper", "percentPosition": true, "transitionDuration": 0}'>
+  <div class="project-wrapper" ng-repeat="project in projects track by $index">
+    <div class="project">
+      <h3>{{project.title}}</h3>
+
+      <a ui-sref="project({slug: project.slug})">View</a>
+    </div>
+  </div>
+</div>

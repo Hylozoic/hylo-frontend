@@ -5,6 +5,7 @@ require('./directives/hylo_post')(angularModule);
 require('./directives/socialMedia')(angularModule);
 require('./directives/seeMore')(angularModule);
 require('./directives/embeddedComments')(angularModule);
+require('./directives/masonry')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {

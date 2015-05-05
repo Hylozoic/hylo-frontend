@@ -59,11 +59,20 @@ module.exports = function ($stateProvider) {
   })
   .state('home.projects', {
     url: '/h/my-projects',
+    resolve: {
+      projects: function(Project) {
+        return Project.query({context: 'mine'}).$promise;
+      }
+    },
     views: {
       tab: {
         templateUrl: '/ui/home/projects.tpl.html',
-        controller: /*@ngInject*/ function($scope) {
-
+        controller: /*@ngInject*/ function($scope, projects) {
+          $scope.projects = projects.concat([
+            {id: 134, title: 'Community Garden'},
+            {id: 902, title: 'Offers and needs market workshop'},
+            {id: 788, title: 'Contact Improv Jam'}
+          ]);
         }
       }
     }
