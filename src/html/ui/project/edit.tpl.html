@@ -8,13 +8,15 @@
     </div>
 
     <div>
+      <div class="counter">{{60 - project.title.length}}/60</div>
       <label>Project title</label>
-      <input type="text" class="form-control" ng-model="project.title" placeholder="What is your project called?"/>
+      <input type="text" class="form-control" ng-model="project.title" placeholder="What is your project called?" maxlength="60"/>
     </div>
 
     <div>
+      <div class="counter">{{200 - project.intention.length}}/200</div>
       <label>Short summary of your intention</label>
-      <input type="text" class="form-control" ng-model="project.intention" placeholder="What do you want to create?">
+      <input type="text" class="form-control" ng-model="project.intention" placeholder="What do you want to create?" maxlength="200">
     </div>
 
     <div>
