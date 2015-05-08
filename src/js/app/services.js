@@ -29,6 +29,7 @@ require('./services/Comment')(angularModule);
 require('./services/Search')(angularModule);
 require('./services/Seed')(angularModule);
 require('./services/Invitation')(angularModule);
+require('./services/Project')(angularModule);
 
 // other services
 require('./services/bodyClass')(angularModule);

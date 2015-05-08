@@ -1,0 +1,86 @@
+<div class="nav-title">{{project.id ? 'Edit' : 'Create a'}} Project</div>
+
+<div class="main-content">
+  <div class="all-sections">
+    <div class="header">
+      <a class="button save" ng-click="save()">Save Draft</a>
+      <p>Everything amazing in the world begins with a story of what might be. Tell us the story of what you want to create, and how it could become real. In the next steps, you'll be able to make requests and invite people to contribute.</p>
+    </div>
+
+    <div>
+      <div class="counter">{{60 - project.title.length}}/60</div>
+      <label>Project title</label>
+      <input type="text" class="form-control" ng-model="project.title" placeholder="What is your project called?" maxlength="60"/>
+    </div>
+
+    <div>
+      <div class="counter">{{200 - project.intention.length}}/200</div>
+      <label>Short summary of your intention</label>
+      <input type="text" class="form-control" ng-model="project.intention" placeholder="What do you want to create?" maxlength="200">
+    </div>
+
+    <div>
+      <label>Project details</label>
+      <div ng-model="project.details"
+        autocomplete="off"
+        contenteditable="true"
+        class="form-control details"
+        placeholder="Provide more detail about the project, and why it is important to you.">
+      </div>
+    </div>
+
+    <div class="media">
+      <label>Photo or Video</label>
+      <p class="help">A picture is worth a thousand words, and a video can help you communicate the impact of your project even more effectively.</p>
+
+      <div ng-show="project.image_url" class="image-thumbnail">
+        <img ng-src="{{project.image_url}}"/>
+      </div>
+
+      <input type="text" ng-model="project.video_url" class="form-control" placeholder="Add a link to YouTube or Vimeo"/>
+      &nbsp;or&nbsp;
+      <a class="button" ng-class="{disabled: addingImage}" ng-click="addImage()">
+        <span ng-hide="addingImage">Add a photo</span>
+        <span ng-show="addingImage">Please wait...</span>
+      </a>
+
+    </div>
+
+    <div>
+      <label>Community</label>
+      <p class="help">Which of your communities will support this project the most?</p>
+      <div class="btn-group" dropdown>
+        <a class="button" dropdown-toggle>
+          {{project.community.name}}
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="community in communities" ng-click="project.community = community">
+            {{community.name}}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div>
+      <label>Project visibility</label>
+      <p class="help">Control who can see and contribute to this project. "Only the community" means that only community members may see and comment on it. "Anyone" means that the project is visible to anyone who has the link, and they may sign up for Hylo to join the project or comment on it.</p>
+      <div class="btn-group" dropdown>
+        <a class="button" dropdown-toggle>
+          {{pickedVisibility().label}}
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="option in visibilityOptions" ng-click="project.visibility = option.value">
+            {{option.label}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a class="button" ng-click="save()">Save Draft</a>
+    </div>
+  </div>
+</div>

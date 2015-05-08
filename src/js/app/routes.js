@@ -215,6 +215,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     require('./routes/profile')($stateProvider);
     require('./routes/onboarding')($stateProvider);
     require('./routes/home')($stateProvider);
+    require('./routes/project')($stateProvider);
 
 };
 

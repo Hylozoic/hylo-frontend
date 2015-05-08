@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 require('./directives');
 require('./controllers');
 require('./services');
@@ -39,27 +37,6 @@ require('./features/mentions/userMentions')(app);
 require('./services/removeTrailingSlash')(app);
 require('./services/myHttpInterceptor')(app);
 
-app.factory('$exceptionHandler', function ($log) {
-  return function (exception, cause) {
-    if (!hyloEnv.isProd) {
-      throw exception;
-    }
-
-    try {
-      // Pass off the error to the default error handler
-      // on the AngularJS logger. This will output the
-      // error to the console (and let the application
-      // keep running normally for the user).
-      $log.error.apply($log, arguments);
-      Rollbar.error(exception);
-    } catch (loggingError) {
-      // For Developers - log the log-failure.
-      $log.warn("Error logging failed");
-      $log.log(loggingError);
-    }
-  };
-});
-
 app.config(function ($locationProvider, growlProvider, $idleProvider) {
   $locationProvider.html5Mode(true);
   growlProvider.globalTimeToLive(5000);
@@ -86,6 +63,7 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
       }
 
       if (!hyloEnv.isProd) {
+        console.error('$stateChangeError en route to ' + toState.name);
         console.error(error);
       } else {
         Rollbar.error("$stateChangeError", {
@@ -100,7 +78,6 @@ app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughT
     }
   );
 
-  // Set a variable so we can watch for param changes
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
 });

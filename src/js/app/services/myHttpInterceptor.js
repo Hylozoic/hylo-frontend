@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 var config = function ($httpProvider) {
   $httpProvider.interceptors.push(function ($q, growl) {
     return {

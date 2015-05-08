@@ -152,7 +152,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       var text = post.description;
       if (text == null) text = "";
 
-      text = require('../services/RichText').present(text, {communityId: post.community.id});
+      text = require('../services/RichText').present(text);
 
       if (!fullLength && text.length > 140) {
         text = truncate(text, 140);

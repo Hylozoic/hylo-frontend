@@ -56,6 +56,10 @@
   &:active {
     background-color: darken(@background-color, 20%);
   }
+
+  &.disabled {
+    opacity: 0.4;
+  }
 }
 
 .rounded-button-dark(@size: @default-button-height, @background-color: @dark-gray) {
@@ -253,15 +257,18 @@
   margin-left: 0;
 }
 
-//mixin to size an avatar and add display properties
-.user-avatar(@size: @avatar-size-default) {
-  @avatar-size: 60px;
+.image-div(@size) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: @size;
   width: @size;
-  border-radius: @size/2;
+}
+
+//mixin to size an avatar and add display properties
+.user-avatar(@size: @avatar-size-default) {
+  .image-div(@size);
+  border-radius: @size;
 }
 
 //classes to use the avatar at various sizes
@@ -280,40 +287,6 @@
 .user-avatar-block() {
   display: block;
   position: initial;
-}
-
-// mixin to add a margin to some element positioned next to an avatar
-.add-avatar-margin(@size: @avatar-size-default + 30, @use-properties: true) {
-  margin-left: @size;
-
-  & when (@use-properties = true) {
-    float: none;
-    display: inline-block;
-    position: relative;
-  }
-
-}
-
-@avatar-margin-xs-default: @avatar-size-xs + 10;
-@avatar-margin-sm-default: @avatar-size-sm + 30;
-@avatar-margin-md-default: @avatar-size-default + 30;
-@avatar-margin-lg-default: @avatar-size-lg + 30;
-
-//mixins for adding margins at various avatar sizes
-.avatar-margin-xs(@use-properties: true, @add-margin: 10) {
-  .add-avatar-margin(@avatar-size-xs+@add-margin, @use-properties);
-}
-
-.avatar-margin-sm(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-sm+@add-margin, @use-properties);
-}
-
-.avatar-margin-med(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-default+@add-margin, @use-properties);
-}
-
-.avatar-margin-lg(@use-properties: true, @add-margin: 30) {
-  .add-avatar-margin(@avatar-size-lg+@add-margin, @use-properties);
 }
 
 //helper to remove link display properties from an element
@@ -426,3 +399,22 @@
   }
 }
 
+.has-bottom-triangle() {
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    @side-length: 7px;
+    left: 50%;
+    width: @side-length * 2;
+    height: @side-length * 2;
+    margin-left: -@side-length;
+    bottom: -@side-length;
+    border-top: 1px solid @border-light;
+    border-left: 1px solid @border-light;
+    background-color: #fff;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+  }
+}

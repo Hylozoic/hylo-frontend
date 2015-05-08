@@ -1,3 +1,7 @@
+// because i use this so damn often, let's just make it a global.
+// at least until we get ES6 template strings up in here
+window.format = require('util').format;
+
 require('./onload');
 
 /* Bower Components */

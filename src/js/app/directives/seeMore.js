@@ -5,6 +5,7 @@ var directive = function($compile) {
     link: function(scope, element, attrs) {
       scope.$watch('contents', function(contents) {
         element.empty();
+        if (!contents) return;
 
         if (scope.truncated) {
           var el = angular.element(contents);

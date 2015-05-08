@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 var handleError = function(err, $scope, $analytics) {
   var msg = err.data, email = $scope.user.email;
   if (!msg) {

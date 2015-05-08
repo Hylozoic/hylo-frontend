@@ -5,6 +5,8 @@ require('./directives/hylo_post')(angularModule);
 require('./directives/socialMedia')(angularModule);
 require('./directives/seeMore')(angularModule);
 require('./directives/embeddedComments')(angularModule);
+require('./directives/masonry')(angularModule);
+require('./directives/anguvideo')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {
@@ -65,10 +67,13 @@ directive('backImg', [function() {
   function link(scope, element, attrs) {
     scope.$watch(attrs.backImg, function(value) {
       if (!value) return;
-      var url = value;
-      element.css({
-        'background-image': 'url(' + url +')'
-      });
+      var style;
+      if (attrs.backImgGradient) {
+        style = format('%s, url(%s)', attrs.backImgGradient, value);
+      } else {
+        style = format('url(%s)', value);
+      }
+      element.css({'background-image': style});
     });
   }
 

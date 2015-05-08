@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 var factory = function() {
 
   return {
