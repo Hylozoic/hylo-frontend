@@ -5,7 +5,7 @@
 
     <div class="columns">
       <div class="main-column">
-        <div class="media"></div>
+        <div ng-if="project.image_url" class="media" back-img="project.image_url"></div>
         <h3 class="intention">{{project.intention}}</h3>
         <see-more class="details" contents="details" truncated="truncatedDetails" expand="showFullDetails()">
         </see-more>

@@ -1,3 +1,6 @@
+var filepickerUpload = require('../../services/filepickerUpload'),
+  format = require('util').format;
+
 var controller = function($scope, currentUser, Project, project) {
 
   $scope.communities = _.map(currentUser.memberships, function(membership) {
@@ -33,6 +36,26 @@ var controller = function($scope, currentUser, Project, project) {
     Project.save(attrs, function(project) {
       $scope.$state.go('project', {slug: project.slug});
     });
+  };
+
+  $scope.addImage = function() {
+    if ($scope.addingImage) return;
+    $scope.addingImage = true;
+
+    var finish = function() {
+      $scope.addingImage = false;
+      $scope.$apply();
+    };
+
+    filepickerUpload({
+      path: format('user/%s/projects', currentUser.id),
+      success: function(url) {
+        project.image_url = url;
+        finish();
+      },
+      failure: finish
+    });
+
   };
 
 };
