@@ -57,7 +57,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('home.projects', {
+  .state('home.projects', /*@ngInject*/ {
     url: '/h/my-projects',
     resolve: {
       projects: function(Project) {
@@ -67,7 +67,7 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/home/projects.tpl.html',
-        controller: /*@ngInject*/ function($scope, projects) {
+        controller: function($scope, projects) {
           $scope.projects = projects;
         }
       }
