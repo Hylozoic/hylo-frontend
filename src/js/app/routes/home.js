@@ -68,11 +68,7 @@ module.exports = function ($stateProvider) {
       tab: {
         templateUrl: '/ui/home/projects.tpl.html',
         controller: /*@ngInject*/ function($scope, projects) {
-          $scope.projects = projects.concat([
-            {id: 134, title: 'Community Garden'},
-            {id: 902, title: 'Offers and needs market workshop'},
-            {id: 788, title: 'Contact Improv Jam'}
-          ]);
+          $scope.projects = projects;
         }
       }
     }

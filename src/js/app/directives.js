@@ -1,3 +1,5 @@
+var format = require('util').format;
+
 var angularModule = angular.module('hyloDirectives', ['ngResource']);
 
 require('./directives/contenteditable')(angularModule);
@@ -66,10 +68,13 @@ directive('backImg', [function() {
   function link(scope, element, attrs) {
     scope.$watch(attrs.backImg, function(value) {
       if (!value) return;
-      var url = value;
-      element.css({
-        'background-image': 'url(' + url +')'
-      });
+      var style;
+      if (attrs.backImgGradient) {
+        style = format('%s, url(%s)', attrs.backImgGradient, value);
+      } else {
+        style = format('url(%s)', value);
+      }
+      element.css({'background-image': style});
     });
   }
 

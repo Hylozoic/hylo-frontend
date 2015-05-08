@@ -31,12 +31,13 @@ module.exports = function ($stateProvider) {
           $scope.project = project;
           $scope.isCreator = true;
           $scope.selectedTab = 'requests';
-          $scope.details = truncate(project.details, 420);
-          $scope.truncatedDetails = $scope.details !== project.details;
+
+          $scope.details = truncate(project.details || '', 420);
+          $scope.truncatedDetails = project.details && $scope.details !== project.details;
           $scope.showFullDetails = function() {
             $scope.details = project.details;
             $scope.truncatedDetails = false;
-          }
+          };
         }
       }
     }

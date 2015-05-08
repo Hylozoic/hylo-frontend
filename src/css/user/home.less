@@ -71,43 +71,36 @@ body.home {
   }
 }
 
-.home-projects {
+.has-project-cards() {
   // all the margin weirdness below
   // is so we play nice with Masonry
 
-  .projects {
-    margin-left: -@std-padding*1.5;
-    margin-right: -@std-padding*1.5;
+  margin-left: -@std-padding*1.5;
+  margin-right: -@std-padding*1.5;
 
-    opacity: 0;
-    &.layout-complete {
-      opacity: 1;
-    }
+  // hide until Masonry is done
+  opacity: 0;
+  &.layout-complete {
+    opacity: 1;
+  }
 
-    @media (max-width: @screen-xs-max) {
-      margin-left: -@std-padding/2;
-      margin-right: -@std-padding/2;
-    }
+  @media (max-width: @screen-xs-max) {
+    margin-left: -@std-padding/2;
+    margin-right: -@std-padding/2;
   }
 
   .project-wrapper {
     .make-sm-column(6);
-    padding-left: 7.5px;
-    padding-right: 7.5px;
+    padding-left: @std-padding/2;
+    padding-right: @std-padding/2;
     margin-bottom: @std-padding;
 
     @media (max-width: @screen-xs-max) {
       position: static !important;
     }
   }
+}
 
-  .project {
-    border-radius: 4px;
-    border: 1px solid @border-light;
-    padding: @std-padding;
-
-    h3 {
-      margin-top: 0;
-    }
-  }
+.home-projects .projects {
+  .has-project-cards;
 }
