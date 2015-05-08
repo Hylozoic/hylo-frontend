@@ -1,3 +1,33 @@
+.has-project-cards() {
+  // all the margin weirdness below
+  // is so we play nice with Masonry
+
+  margin-left: -@std-padding*1.5;
+  margin-right: -@std-padding*1.5;
+
+  // hide until Masonry is done
+  opacity: 0;
+  &.layout-complete {
+    opacity: 1;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    margin-left: -@std-padding/2;
+    margin-right: -@std-padding/2;
+  }
+
+  .project-wrapper {
+    .make-sm-column(6);
+    padding-left: @std-padding/2;
+    padding-right: @std-padding/2;
+    margin-bottom: @std-padding;
+
+    @media (max-width: @screen-xs-max) {
+      position: static !important;
+    }
+  }
+}
+
 .newProject, .editProject {
   margin-bottom: @std-padding*4;
 
@@ -84,6 +114,12 @@ body.project {
       .fluid-height(61.8%);
       background-size: cover;
       background-position: center;
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .intention {
@@ -202,7 +238,7 @@ body.project {
   &.has-image {
     > a {
       color: white;
-      text-shadow: 0 1px 2px #000;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
       background-size: cover;
       background-position: center;
     }

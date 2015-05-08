@@ -6,6 +6,7 @@ require('./directives/socialMedia')(angularModule);
 require('./directives/seeMore')(angularModule);
 require('./directives/embeddedComments')(angularModule);
 require('./directives/masonry')(angularModule);
+require('./directives/anguvideo')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {

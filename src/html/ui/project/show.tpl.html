@@ -6,6 +6,7 @@
     <div class="columns">
       <div class="main-column">
         <div ng-if="project.image_url" class="media" back-img="project.image_url"></div>
+        <anguvideo ng-if="project.video_url" class="media" ng-model="project.video_url"></anguvideo>
         <h3 class="intention">{{project.intention}}</h3>
         <see-more class="details" contents="details" truncated="truncatedDetails" expand="showFullDetails()">
         </see-more>

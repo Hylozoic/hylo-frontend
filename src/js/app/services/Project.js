@@ -1,9 +1,15 @@
 var factory = function($resource) {
-  return $resource('/noo/project/:slug', {
+  var Project = $resource('/noo/project/:slug', {
     slug: '@slug'
   }, {
 
   });
+
+  _.extend(Project.prototype, {
+    // TBD
+  });
+
+  return Project;
 };
 
 module.exports = function(angularModule) {

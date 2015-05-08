@@ -71,36 +71,6 @@ body.home {
   }
 }
 
-.has-project-cards() {
-  // all the margin weirdness below
-  // is so we play nice with Masonry
-
-  margin-left: -@std-padding*1.5;
-  margin-right: -@std-padding*1.5;
-
-  // hide until Masonry is done
-  opacity: 0;
-  &.layout-complete {
-    opacity: 1;
-  }
-
-  @media (max-width: @screen-xs-max) {
-    margin-left: -@std-padding/2;
-    margin-right: -@std-padding/2;
-  }
-
-  .project-wrapper {
-    .make-sm-column(6);
-    padding-left: @std-padding/2;
-    padding-right: @std-padding/2;
-    margin-bottom: @std-padding;
-
-    @media (max-width: @screen-xs-max) {
-      position: static !important;
-    }
-  }
-}
-
 .home-projects .projects {
   .has-project-cards;
 }
