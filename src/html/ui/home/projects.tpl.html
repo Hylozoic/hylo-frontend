@@ -5,10 +5,12 @@
 
 <div class="projects" masonry='{"itemSelector": ".project-wrapper", "percentPosition": true, "transitionDuration": 0}'>
   <div class="project-wrapper" ng-repeat="project in projects">
-    <div class="project-card" ng-class="{'has-image': !!(project.image_url || project.thumbnail_url)}">
-      <a ui-sref="project({slug: project.slug})"
-         back-img="(project.image_url || project.thumbnail_url)"
-         back-img-gradient="linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5))">
+
+    <div class="project-card" ng-click="$state.go('project', {slug: project.slug})">
+      <div class="image"
+           ng-if="(project.image_url || project.thumbnail_url)"
+           back-img="(project.image_url || project.thumbnail_url)"></div>
+      <div class="content">
         <h3>{{project.title}}</h3>
         <p>{{project.intention}}</p>
         <p>
@@ -26,7 +28,8 @@
           {{project.open_request_count}}
           request{{project.open_request_count == 1 ? '' : 's'}}
         </span>
-      </a>
+      </div>
     </div>
+
   </div>
 </div>
