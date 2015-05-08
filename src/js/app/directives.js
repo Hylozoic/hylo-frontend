@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 var angularModule = angular.module('hyloDirectives', ['ngResource']);
 
 require('./directives/contenteditable')(angularModule);

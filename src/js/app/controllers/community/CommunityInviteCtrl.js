@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 var controller = function($scope, $analytics, community, $history) {
   $scope.community = community;
 

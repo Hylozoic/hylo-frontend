@@ -1,5 +1,3 @@
-var format = require('util').format;
-
 require('./directives');
 require('./controllers');
 require('./services');
