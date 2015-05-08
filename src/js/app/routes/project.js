@@ -1,3 +1,5 @@
+var truncate = require('html-truncate');
+
 module.exports = function ($stateProvider) {
 
   $stateProvider
@@ -5,7 +7,7 @@ module.exports = function ($stateProvider) {
     url: '/new-project',
     parent: 'main',
     resolve: {
-      project: function() {}
+      project: function() { return null }
     },
     views: {
       main: {
@@ -14,7 +16,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('project', {
+  .state('project', /*@ngInject*/ {
     url: '/project/:slug',
     parent: 'main',
     resolve: {
@@ -25,9 +27,7 @@ module.exports = function ($stateProvider) {
     views: {
       main: {
         templateUrl: '/ui/project/show.tpl.html',
-        controller: /*@ngInject*/ function($scope, project) {
-          var truncate = require('html-truncate');
-
+        controller: function($scope, project) {
           $scope.project = project;
           $scope.isCreator = true;
           $scope.selectedTab = 'requests';
@@ -46,7 +46,7 @@ module.exports = function ($stateProvider) {
     url: '/project/:slug/edit',
     parent: 'main',
     resolve: {
-      project: function(Project, $stateParams) {
+      project: /*@ngInject*/ function(Project, $stateParams) {
         return Project.get({slug: $stateParams.slug}).$promise;
       }
     },
