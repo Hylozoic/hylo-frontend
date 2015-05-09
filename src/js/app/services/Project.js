@@ -17,6 +17,9 @@ var factory = function($resource) {
     },
     isPublished: function() {
       return !!this.published_at;
+    },
+    isPublic: function() {
+      return this.visibility === 1;
     }
   });
 
