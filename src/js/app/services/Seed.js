@@ -42,14 +42,14 @@ var factory = function($resource) {
     },
     fulfill: {
       method: 'POST',
-      url: '/noo/seed/:id/fulfill'
+      url: '/noo/post/:id/fulfill'
     },
     vote: {
       method: 'POST',
-      url: '/noo/seed/:id/vote'
+      url: '/noo/post/:id/vote'
     },
     findComments: {
-      url: '/noo/seed/:id/comments',
+      url: '/noo/post/:id/comments',
       isArray: true
     }
   });
