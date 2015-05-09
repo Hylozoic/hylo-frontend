@@ -35,8 +35,8 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: /*@ngInject*/ {
-      firstSeedQuery: function(community, Seed, Cache) {
-        var key = 'community.seeds:' + community.id,
+      firstPostQuery: function(community, Seed, Cache) {
+        var key = 'community.posts:' + community.id,
           cached = Cache.get(key);
 
         if (cached) {

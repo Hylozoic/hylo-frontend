@@ -91,12 +91,12 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
           avatar_url: user.avatar
         });
         Seed.follow({id: post.id});
-        UserCache.followedSeeds.clear(user.id);
+        UserCache.followedPosts.clear(user.id);
       } else {
         $analytics.eventTrack('Post: Leave', {post_id: post.id});
         post.followers = _.without(post.followers, _.findWhere(post.followers, {id: '' + user.id}));
         Seed.follow({id: post.id});
-        UserCache.followedSeeds.remove(user.id, post.id);
+        UserCache.followedPosts.remove(user.id, post.id);
       }
     };
 

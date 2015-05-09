@@ -3,12 +3,12 @@
 var factory = function(Seed, User, Cache) {
 
   var api = {
-    seeds: {
+    posts: {
       key: function(userId) {
-        return 'user.seeds:' + userId;
+        return 'user.posts:' + userId;
       },
       fetch: function(userId) {
-        var cached = Cache.get(api.seeds.key(userId));
+        var cached = Cache.get(api.posts.key(userId));
 
         if (cached) {
           return cached;
@@ -17,80 +17,80 @@ var factory = function(Seed, User, Cache) {
             userId: userId,
             limit: 10
           }).$promise.then(function(resp) {
-            api.seeds.set(userId, resp);
+            api.posts.set(userId, resp);
             return resp;
           });
         }
       },
       set: function(userId, data) {
-        Cache.set(api.seeds.key(userId), data, {maxAge: 10 * 60});
+        Cache.set(api.posts.key(userId), data, {maxAge: 10 * 60});
       },
       clear: function(userId) {
-        Cache.drop(api.seeds.key(userId));
+        Cache.drop(api.posts.key(userId));
       }
     },
 
-    followedSeeds: {
+    followedPosts: {
       key: function(userId) {
-        return 'user.followedSeeds:' + userId;
+        return 'user.followedPosts:' + userId;
       },
       fetch: function(user) {
-        var cached = Cache.get(api.followedSeeds.key(user.id));
+        var cached = Cache.get(api.followedPosts.key(user.id));
 
         if (cached) {
           return cached;
         } else {
-          return user.followedSeeds({
+          return user.followedPosts({
             limit: 10
           }).$promise.then(function(resp) {
-            api.followedSeeds.set(user.id, resp);
+            api.followedPosts.set(user.id, resp);
             return resp;
           });
         }
       },
       set: function(userId, data) {
-        Cache.set(api.followedSeeds.key(userId), data, {maxAge: 10 * 60});
+        Cache.set(api.followedPosts.key(userId), data, {maxAge: 10 * 60});
       },
       remove: function(userId, seedId) {
-        var data = Cache.get(api.followedSeeds.key(userId));
+        var data = Cache.get(api.followedPosts.key(userId));
         if (!data) return;
 
-        var post = _.find(data.seeds, function(seed) {
+        var post = _.find(data.posts, function(seed) {
           return seed.id == seedId;
         });
         if (!post) return;
 
-        data.seeds.splice(data.seeds.indexOf(post), 1);
-        data.seeds_total -= 1;
+        data.posts.splice(data.posts.indexOf(post), 1);
+        data.posts_total -= 1;
       },
       clear: function(userId) {
-        Cache.drop(api.followedSeeds.key(userId));
+        Cache.drop(api.followedPosts.key(userId));
       }
     },
 
-    allSeeds: {
+    allPosts: {
       key: function(userId) {
-        return 'user.allSeeds:' + userId;
+        return 'user.allPosts:' + userId;
       },
       fetch: function(user) {
-        var cached = Cache.get(api.allSeeds.key(user.id));
+        var cached = Cache.get(api.allPosts.key(user.id));
 
         if (cached) {
           return cached;
         } else {
-          return user.allSeeds({
+          return user.allPosts({
             limit: 10
           }).$promise.then(function(resp) {
-            api.allSeeds.set(user.id, resp);
+            api.allPosts.set(user.id, resp);
             return resp;
           });
         }
       },
       set: function(userId, data) {
-        Cache.set(api.allSeeds.key(userId), data, {maxAge: 10 * 60});
+        Cache.set(api.allPosts.key(userId), data, {maxAge: 10 * 60});
       },
       clear: function(userId) {
-        Cache.drop(api.allSeeds.key(userId));
+        Cache.drop(api.allPosts.key(userId));
       }
     }
   };

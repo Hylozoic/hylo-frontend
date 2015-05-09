@@ -68,9 +68,9 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   };
 
   var clearCache = function() {
-    Cache.drop('community.seeds:' + community.id);
-    UserCache.seeds.clear(currentUser.id);
-    UserCache.allSeeds.clear(currentUser.id);
+    Cache.drop('community.posts:' + community.id);
+    UserCache.posts.clear(currentUser.id);
+    UserCache.allPosts.clear(currentUser.id);
   };
 
   var update = function(data) {

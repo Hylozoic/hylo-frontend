@@ -70,7 +70,7 @@ module.exports = function ($stateProvider) {
     url: '',
     resolve: {
       requests: function(Seed, project) {
-        return Seed.queryForProject({projectId: project.id}).$promise;
+        return Seed.queryForProject({projectId: project.id, limit: 10}).$promise;
       }
     },
     views: {
@@ -96,9 +96,9 @@ module.exports = function ($stateProvider) {
               });
 
               // FIXME this is copied from SeedEditCtrl
-              Cache.drop('community.seeds:' + project.community.id);
-              UserCache.seeds.clear(currentUser.id);
-              UserCache.allSeeds.clear(currentUser.id);
+              Cache.drop('community.posts:' + project.community.id);
+              UserCache.posts.clear(currentUser.id);
+              UserCache.allPosts.clear(currentUser.id);
 
               // FIXME this is slow
               $scope.posts = Seed.queryForProject({projectId: project.id});
@@ -116,6 +116,8 @@ module.exports = function ($stateProvider) {
             $analytics.eventTrack('Post: Remove', {post_name: post.name, post_id: post.id});
             $scope.posts.splice($scope.posts.indexOf(post), 1);
           };
+
+          $scope.loadMore = function() {};
 
         }
       }

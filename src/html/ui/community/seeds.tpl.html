@@ -42,7 +42,7 @@
   <div class="clearfix"></div>
 </div>
 
-<div ng-if="currentUser.seed_count == 0" class="reminder">
+<div ng-if="currentUser.post_count == 0" class="reminder">
   <div>
     <div class="row">
       <div class="right">
@@ -59,12 +59,12 @@
        infinite-scroll-disabled="loadMoreDisabled"
        infinite-scroll-immediate-check="false">
 
-    <hylo-post post="seed" remove-fn="remove(postToRemove)" ng-repeat="seed in seeds track by seed.id" class="row"></hylo-post>
+    <hylo-post post="post" remove-fn="remove(postToRemove)" ng-repeat="post in posts track by post.id" class="row"></hylo-post>
   </div>
 
   <div loading-indicator ng-if="searching"></div>
 
-  <div ng-if="seeds.length == 0">
+  <div ng-if="posts.length == 0">
     <h3 style="text-align: center;">There are no posts to display.</h3>
   </div>
 </div>

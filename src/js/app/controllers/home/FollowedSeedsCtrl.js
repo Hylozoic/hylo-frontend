@@ -1,11 +1,11 @@
-var controller = function($scope, $analytics, $timeout, growl, currentUser, firstSeedQuery, UserCache) {
-  $scope.seeds = firstSeedQuery.seeds;
-  $scope.hasSeeds = $scope.seeds.length > 0;
+var controller = function($scope, $analytics, $timeout, growl, currentUser, firstPostQuery, UserCache) {
+  $scope.posts = firstPostQuery.posts;
+  $scope.hasSeeds = $scope.posts.length > 0;
 
   $scope.removePost = function(post) {
     growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});
     $analytics.eventTrack('Post: Remove', {post_name: post.name, post_id: post.id});
-    $scope.seeds.splice($scope.seeds.indexOf(post), 1);
+    $scope.posts.splice($scope.posts.indexOf(post), 1);
   };
 
   $scope.loadMore = _.debounce(function() {
@@ -14,17 +14,17 @@ var controller = function($scope, $analytics, $timeout, growl, currentUser, firs
 
     currentUser.followedSeeds({
       limit: 10,
-      offset: $scope.seeds.length
+      offset: $scope.posts.length
     }, function(resp) {
-      Array.prototype.push.apply($scope.seeds, resp.seeds);
+      Array.prototype.push.apply($scope.posts, resp.posts);
 
-      UserCache.followedSeeds.set(currentUser.id, {
-        seeds: $scope.seeds,
-        seeds_total: resp.seeds_total
+      UserCache.followedPosts.set(currentUser.id, {
+        posts: $scope.posts,
+        posts_total: resp.posts_total
       });
 
       $timeout(function() {
-        if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
+        if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
           $scope.loadMoreDisabled = false;
       });
     });

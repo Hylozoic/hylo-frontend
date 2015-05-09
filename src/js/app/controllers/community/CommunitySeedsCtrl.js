@@ -1,9 +1,9 @@
-var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstSeedQuery) {
+var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstPostQuery) {
 
   $scope.onboarding = onboarding;
   $scope.community = community;
-  $scope.seeds = firstSeedQuery.seeds;
-  $scope.loadMoreDisabled = $scope.seeds.length >= firstSeedQuery.seeds_total;
+  $scope.posts = firstPostQuery.posts;
+  $scope.loadMoreDisabled = $scope.posts.length >= firstPostQuery.posts_total;
 
   $scope.loadMore = _.debounce(function() {
     if ($scope.loadMoreDisabled) return;
@@ -12,20 +12,20 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
     Seed.queryForCommunity({
       communityId: community.id,
       limit: 10,
-      offset: $scope.seeds.length,
+      offset: $scope.posts.length,
       type: $scope.selected.filter.value,
       sort: $scope.selected.sort.value
     }, function(resp) {
-      $scope.seeds = _.uniq($scope.seeds.concat(resp.seeds), function(seed) {
+      $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(seed) {
         return seed.id;
       });
 
-      Cache.set('community.seeds:' + community.id, {
-        seeds: $scope.seeds,
-        seeds_total: resp.seeds_total
+      Cache.set('community.posts:' + community.id, {
+        posts: $scope.posts,
+        posts_total: resp.posts_total
       }, {maxAge: 10 * 60});
 
-      if (resp.seeds.length > 0 && $scope.seeds.length < resp.seeds_total)
+      if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
         $scope.loadMoreDisabled = false;
     });
   }, 200);
@@ -33,7 +33,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
   $scope.remove = function(postToRemove) {
     growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
     $analytics.eventTrack('Post: Remove', {post_name: postToRemove.name, post_id: postToRemove.id});
-    $scope.seeds.splice($scope.seeds.indexOf(postToRemove), 1);
+    $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
   };
 
   $scope.selectOptions = {
@@ -60,7 +60,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
       function(x) { return x.value === value }
     );
 
-    $scope.seeds = [];
+    $scope.posts = [];
     $scope.loadMoreDisabled = false;
     $scope.loadMore();
   };

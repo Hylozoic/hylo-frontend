@@ -1,6 +1,6 @@
 var factory = function($resource) {
 
-  var Seed = $resource("/noo/seed/:id/:action", {
+  var Seed = $resource("/noo/post/:id/:action", {
     id: '@id'
   }, {
     comment: {
@@ -30,11 +30,11 @@ var factory = function($resource) {
     },
     queryForCommunity: {
       method: 'GET',
-      url: '/noo/community/:communityId/seeds'
+      url: '/noo/community/:communityId/posts'
     },
     queryForUser: {
       method: 'GET',
-      url: '/noo/user/:userId/seeds'
+      url: '/noo/user/:userId/posts'
     },
     queryForProject: {
       method: 'GET',

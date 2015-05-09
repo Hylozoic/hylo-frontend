@@ -58,7 +58,7 @@ var controller = function($scope, growl, $stateParams, $analytics, currentUser, 
     }).then(function() {
       Community.leave({id: communityId}, function() {
         user.memberships.splice(index, 1);
-        UserCache.allSeeds.clear(currentUser.id);
+        UserCache.allPosts.clear(currentUser.id);
       });
     })
   };

@@ -6,9 +6,9 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
   $scope.query = initialQuery || '';
   $scope.searching = true;
   $scope.results = {
-    seeds_total: 0,
+    posts_total: 0,
     people_total: 0,
-    seeds: [],
+    posts: [],
     people: []
   };
   var community = $scope.community = searchCommunity;
@@ -23,7 +23,7 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
     Search.get({
       q: $scope.query,
       communityId: communityId,
-      include: ['seeds', 'people'],
+      include: ['posts', 'people'],
       limit: pageSize
     }, function(results) {
       $scope.results = results;
@@ -49,7 +49,7 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
 
   $scope.removeSeed = function(seed) {
     growl.addSuccessMessage("That seed has been removed.", {ttl: 5000});
-    $scope.seeds.splice($scope.seeds.indexOf(seed), 1);
+    $scope.posts.splice($scope.posts.indexOf(seed), 1);
   };
 
   $scope.name = function(person) {

@@ -14,8 +14,8 @@ module.exports = function ($stateProvider) {
   .state('home.mySeeds', {
     url: '/h/my-seeds',
     resolve: /*@ngInject*/{
-      firstSeedQuery: function(UserCache, currentUser) {
-        return UserCache.seeds.fetch(currentUser.id);
+      firstPostQuery: function(UserCache, currentUser) {
+        return UserCache.posts.fetch(currentUser.id);
       },
       user: function(currentUser) {
         return currentUser;
@@ -32,8 +32,8 @@ module.exports = function ($stateProvider) {
   .state('home.following', {
     url: '/h/following',
     resolve: /*@ngInject*/{
-      firstSeedQuery: function(UserCache, currentUser) {
-        return UserCache.followedSeeds.fetch(currentUser);
+      firstPostQuery: function(UserCache, currentUser) {
+        return UserCache.followedPosts.fetch(currentUser);
       }
     },
     views: {
@@ -46,8 +46,8 @@ module.exports = function ($stateProvider) {
   .state('home.allSeeds', {
     url: '/h/all-seeds',
     resolve: /*@ngInject*/{
-      firstSeedQuery: function(UserCache, currentUser) {
-        return UserCache.allSeeds.fetch(currentUser);
+      firstPostQuery: function(UserCache, currentUser) {
+        return UserCache.allPosts.fetch(currentUser);
       }
     },
     views: {

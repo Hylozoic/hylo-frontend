@@ -31,14 +31,14 @@
       <div class="seeds">
         <h3>Seeds</h3>
 
-        <div ng-repeat="seed in results.seeds track by seed.id">
-          <hylo-post post="seed" remove-fn="removeSeed(postToRemove)"></hylo-post>
+        <div ng-repeat="post in results.posts track by post.id">
+          <hylo-post post="post"></hylo-post>
         </div>
-        <a ng-if="remaining('seeds') > 0" ng-click="loadMore('seeds')" class="load-more">
-          Show {{pageSize('seeds')}} more (out of {{remaining('seeds')}})
+        <a ng-if="remaining('posts') > 0" ng-click="loadMore('posts')" class="load-more">
+          Show {{pageSize('posts')}} more (out of {{remaining('posts')}})
         </a>
 
-        <div ng-if="!searching && results.seeds.length == 0" class="no-results">
+        <div ng-if="!searching && results.posts.length == 0" class="no-results">
           No seeds matched your search.
         </div>
 

@@ -14,11 +14,11 @@ dependencies.push(function($resource) {
       url: '/noo/user/:id/thanks',
       isArray: true
     },
-    followedSeeds: {
-      url: '/noo/user/:id/followed-seeds'
+    followedPosts: {
+      url: '/noo/user/:id/followed-posts'
     },
-    allSeeds: {
-      url: '/noo/user/:id/all-community-seeds'
+    allPosts: {
+      url: '/noo/user/:id/all-community-posts'
     },
     login: {
       url: '/noo/login',
@@ -48,14 +48,14 @@ dependencies.push(function($resource) {
     update: function(params, success, error) {
       return User.save(_.extend({id: this.id}, params), success, error);
     },
-    seeds: function(params, success, error) {
-      return User.seeds(_.extend({id: this.id}, params), success, error);
+    posts: function(params, success, error) {
+      return User.posts(_.extend({id: this.id}, params), success, error);
     },
-    followedSeeds: function(params, success, error) {
-      return User.followedSeeds(_.extend({id: this.id}, params), success, error);
+    followedPosts: function(params, success, error) {
+      return User.followedPosts(_.extend({id: this.id}, params), success, error);
     },
-    allSeeds: function(params, success, error) {
-      return User.allSeeds(_.extend({id: this.id}, params), success, error);
+    allPosts: function(params, success, error) {
+      return User.allPosts(_.extend({id: this.id}, params), success, error);
     },
     firstName: function() {
       return this.name.split(' ')[0];
