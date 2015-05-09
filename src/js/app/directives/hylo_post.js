@@ -190,6 +190,8 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
     var now = new Date();
     $scope.showUpdateTime = (now - new Date(post.last_updated)) < (now - new Date(post.creation_date)) * 0.8;
 
+    $scope.truncate = truncate;
+
   };
 
   return {
