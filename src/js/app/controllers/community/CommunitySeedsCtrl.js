@@ -16,8 +16,8 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
       type: $scope.selected.filter.value,
       sort: $scope.selected.sort.value
     }, function(resp) {
-      $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(seed) {
-        return seed.id;
+      $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(post) {
+        return post.id;
       });
 
       Cache.set('community.posts:' + community.id, {

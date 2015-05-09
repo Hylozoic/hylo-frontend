@@ -38,8 +38,7 @@ var factory = function($resource) {
     },
     queryForProject: {
       method: 'GET',
-      url: '/noo/project/:projectId/posts',
-      isArray: true
+      url: '/noo/project/:projectId/posts'
     },
     fulfill: {
       method: 'POST',

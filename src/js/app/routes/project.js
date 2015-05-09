@@ -69,16 +69,18 @@ module.exports = function ($stateProvider) {
   .state('project.requests', /*@ngInject*/ {
     url: '',
     resolve: {
-      requests: function(Seed, project) {
+      firstPostQuery: function(Seed, project) {
         return Seed.queryForProject({projectId: project.id, limit: 10}).$promise;
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/project/requests.tpl.html',
-        controller: function($scope, project, Seed, growl, Cache, UserCache, $analytics, requests, currentUser) {
+        controller: function($scope, project, Seed, growl, Cache, UserCache, $analytics, currentUser, firstPostQuery) {
 
-          $scope.posts = requests;
+          $scope.posts = firstPostQuery.posts;
+          $scope.loadMoreDisabled = $scope.posts.length >= firstPostQuery.posts_total;
+
           var newRequest = $scope.newRequest = {};
 
           $scope.addRequest = function() {
@@ -117,7 +119,21 @@ module.exports = function ($stateProvider) {
             $scope.posts.splice($scope.posts.indexOf(post), 1);
           };
 
-          $scope.loadMore = function() {};
+          $scope.loadMore = _.debounce(function() {
+            if ($scope.loadMoreDisabled) return;
+            $scope.loadMoreDisabled = true;
+
+            Seed.queryForProject({
+              projectId: project.id,
+              limit: 10,
+              offset: $scope.posts.length
+            }, function(resp) {
+              $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(post) { return post.id });
+
+              if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
+                $scope.loadMoreDisabled = false;
+            });
+          });
 
         }
       }
