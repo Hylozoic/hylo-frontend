@@ -32,7 +32,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
 
   $scope.remove = function(postToRemove) {
     growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
-    $analytics.eventTrack('Post: Remove a Seed', {post_name: postToRemove.name, post_id: postToRemove.id});
+    $analytics.eventTrack('Post: Remove', {post_name: postToRemove.name, post_id: postToRemove.id});
     $scope.seeds.splice($scope.seeds.indexOf(postToRemove), 1);
   };
 

@@ -5,7 +5,7 @@ var controller = function($scope, $analytics, $timeout, growl, currentUser, firs
 
   $scope.removePost = function(post) {
     growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});
-    $analytics.eventTrack('Post: Remove a Seed', {post_name: post.name, post_id: post.id});
+    $analytics.eventTrack('Post: Remove', {post_name: post.name, post_id: post.id});
     $scope.seeds.splice($scope.seeds.indexOf(post), 1);
   };
 

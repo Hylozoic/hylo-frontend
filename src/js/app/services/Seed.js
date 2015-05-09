@@ -36,6 +36,11 @@ var factory = function($resource) {
       method: 'GET',
       url: '/noo/user/:userId/seeds'
     },
+    queryForProject: {
+      method: 'GET',
+      url: '/noo/project/:projectId/posts',
+      isArray: true
+    },
     fulfill: {
       method: 'POST',
       url: '/noo/seed/:id/fulfill'
