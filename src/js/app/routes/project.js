@@ -1,4 +1,4 @@
-var truncate = require('html-truncate');
+var RichText = require('../services/RichText');
 
 module.exports = function ($stateProvider) {
 
@@ -47,10 +47,11 @@ module.exports = function ($stateProvider) {
           $scope.project = project;
           $scope.isCreator = currentUser && project.user_id === currentUser.id;
 
-          $scope.details = truncate(project.details || '', 420);
-          $scope.truncatedDetails = project.details && $scope.details !== project.details;
+          $scope.details = RichText.present(project.details, {maxlength: 420});
+          $scope.truncatedDetails = project.details && project.details.length > 420;
+
           $scope.showFullDetails = function() {
-            $scope.details = project.details;
+            $scope.details = RichText.present(project.details);
             $scope.truncatedDetails = false;
           };
 
