@@ -41,6 +41,9 @@
 
   .button {
     .rounded-button;
+    &.save {
+      .rounded-button-dark;
+    }
   }
 
   .header {
@@ -49,6 +52,7 @@
     }
     .save {
       float: right;
+      margin-left: @std-padding;
     }
   }
 
@@ -97,6 +101,35 @@ body.project {
 
   p {
     .seed-body-text;
+  }
+
+  .cta-wrapper {
+    .make-row;
+    background-color: @hylo-teal;
+    .seed-body-text;
+    color: white;
+
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    .button {
+      .rounded-button-clear;
+      float: right;
+      margin-left: @std-padding*2;
+    }
+  }
+
+  .cta {
+    .make-sm-column(8);
+    .make-sm-column-offset(2);
+    padding-top: @std-padding;
+    padding-bottom: @std-padding;
   }
 
   .summary-wrapper {
@@ -209,7 +242,7 @@ body.project {
       padding-bottom: 10px;
       display: inline-block;
       position: relative;
-      &.active {
+      &.selected {
         .has-bottom-triangle;
       }
 

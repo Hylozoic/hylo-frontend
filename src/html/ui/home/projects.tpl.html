@@ -6,7 +6,7 @@
 <div class="projects" masonry='{"itemSelector": ".project-wrapper", "percentPosition": true, "transitionDuration": 0}'>
   <div class="project-wrapper" ng-repeat="project in projects">
 
-    <div class="project-card" ng-click="$state.go('project', {slug: project.slug})">
+    <div class="project-card" ng-click="$state.go('project.requests', {id: project.slug})">
       <div class="image"
            ng-if="(project.image_url || project.thumbnail_url)"
            back-img="(project.image_url || project.thumbnail_url)"></div>
@@ -20,7 +20,7 @@
         <span class="contributors">
           {{project.contributor_count}}
           contributor{{project.contributor_count == 1 ? '' : 's'}}
-          <span class="draft-label" ng-show="!project.published_at">
+          <span class="draft-label" ng-show="!project.isPublished()">
             Draft
           </span>
         </span>
