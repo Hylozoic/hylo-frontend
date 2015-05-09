@@ -150,7 +150,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
 
     var setText = function(fullLength) {
       var text = post.description;
-      if (text == null) text = "";
+      if (!text) text = "";
 
       text = require('../services/RichText').present(text);
 
@@ -162,7 +162,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       }
 
       $scope.description = text;
-      $scope.hasDescription = text.length > 0;
+      $scope.hasDescription = angular.element(text).text().trim().length > 0;
     };
 
     $scope.$watchCollection("post.followers", function() {
@@ -186,6 +186,9 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
     $scope.canEdit = currentUser && (post.user.id == currentUser.id || currentUser.canModerate(post.community));
     $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
     setText($scope.startExpanded);
+
+    var now = new Date();
+    $scope.showUpdateTime = (now - new Date(post.last_updated)) < (now - new Date(post.creation_date)) * 0.8;
 
   };
 

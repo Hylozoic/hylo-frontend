@@ -1,6 +1,17 @@
+<div class="cta-wrapper" ng-if="isCreator && !project.isPublished()">
+  <div class="cta">
+    <a class="button" ng-click="publish()">Publish</a>
+    <strong>Draft Project</strong> &mdash; You can
+    <a ui-sref="editProject({id: project.slug})">edit project details</a>,
+    <a href='#requests'>add requests</a>, and
+    <a href='#contributors'>invite contributors</a>
+    until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
+  </div>
+</div>
+
 <div class="summary-wrapper">
   <div class="summary">
-    <a ng-show="isCreator" class="edit-button" ui-sref="editProject({slug: project.slug})">Edit project</a>
+    <a ng-show="isCreator" class="edit-button" ui-sref="editProject({id: project.slug})">Edit project</a>
     <h1>{{project.title}}</h1>
 
     <div class="columns">
@@ -49,12 +60,12 @@
 
 <div class="tabs-wrapper">
   <ul class="tabs">
-    <li ng-class="{active: selectedTab === 'requests'}" ng-click="selectedTab = 'requests'">
+    <li ng-class="{selected: $state.current.name === 'project.requests'}" ui-sref='.requests'>
       <h2>Requests</h2>
       <p ng-show="isCreator">Ask for what you need</p>
       <p ng-hide="isCreator">See how you can help</p>
     </li><!--
-    <--></--><li ng-class="{active: selectedTab === 'contributors'}" ng-click="selectedTab = 'contributors'">
+    <--></--><li ng-class="{selected: $state.current.name === 'project.contributors'}" ui-sref='.contributors'>
       <h2>Contributors</h2>
       <p ng-show="isCreator">Get people involved</p>
       <p ng-hide="isCreator">See who's involved</p>
@@ -62,6 +73,6 @@
   </ul>
 </div>
 
-<div class="tab-content">
+<div ui-view="tab" class="tab-content">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae iste nemo, vero eius architecto libero nobis recusandae neque, mollitia enim quibusdam! Optio quos asperiores magni quae veritatis eos sunt fuga.
 </div>
