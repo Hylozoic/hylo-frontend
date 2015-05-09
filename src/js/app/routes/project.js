@@ -102,8 +102,8 @@ module.exports = function ($stateProvider) {
               UserCache.posts.clear(currentUser.id);
               UserCache.allPosts.clear(currentUser.id);
 
-              // FIXME this is slow
-              $scope.posts = Seed.queryForProject({projectId: project.id});
+              $scope.posts = [];
+              $scope.loadMore();
               newRequest.name = null;
 
             }, function(err) {
