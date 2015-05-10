@@ -45,9 +45,16 @@ app.config(function ($locationProvider, growlProvider, $idleProvider) {
   $idleProvider.warningDuration(1); // in seconds
 });
 
-app.run(function($rootScope, $state, Community, growl, $bodyClass, clickthroughTracker) {
+app.run(function($anchorScroll) {
+  $anchorScroll.yOffset = 54; // = @nav-height in nav.less
+  $anchorScroll();
+});
 
+app.run(function(clickthroughTracker) {
   clickthroughTracker.track(location);
+});
+
+app.run(function($rootScope, $state, growl, $bodyClass) {
 
   $rootScope.$on('$stateChangeError',
     function(event, toState, toParams, fromState, fromParams, error) {

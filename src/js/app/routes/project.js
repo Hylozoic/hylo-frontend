@@ -43,7 +43,7 @@ module.exports = function ($stateProvider) {
     views: {
       main: {
         templateUrl: '/ui/project/show.tpl.html',
-        controller: function($scope, project, currentUser, growl) {
+        controller: function($scope, $state, $anchorScroll, project, currentUser, growl) {
           $scope.project = project;
           $scope.isCreator = currentUser && project.user_id === currentUser.id;
 
@@ -62,6 +62,13 @@ module.exports = function ($stateProvider) {
             });
           };
 
+          $scope.goToTab = function(name) {
+            if ($state.current.name === 'project.' + name) {
+              $anchorScroll('tabs');
+            } else {
+              $state.go('project.' + name, {id: project.slug, '#': 'tabs'});
+            }
+          }
         }
       }
     }
@@ -143,7 +150,7 @@ module.exports = function ($stateProvider) {
     url: '/contributors',
     views: {
       tab: {
-        template: 'contributors tab placeholder. {{foo}}',
+        templateUrl: '/ui/project/contributors.tpl.html',
         controller: function($scope) {
           $scope.foo = 'controller stub is working.';
         }

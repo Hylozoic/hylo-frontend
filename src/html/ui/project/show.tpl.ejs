@@ -3,8 +3,8 @@
     <a class="button" ng-click="publish()">Publish</a>
     <strong>Draft Project</strong> &mdash; You can
     <a ui-sref="editProject({id: project.slug})">edit project details</a>,
-    <a href='#requests'>add requests</a>, and
-    <a href='#contributors'>invite contributors</a>
+    <a ng-click="goToTab('requests')">add requests</a>, and
+    <a ng-click="goToTab('contributors')">invite contributors</a>
     until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
   </div>
 </div>
@@ -69,6 +69,7 @@
   </div>
 </div>
 
+<a name="tabs"></a>
 <div class="tabs-wrapper">
   <ul class="tabs">
     <li ng-class="{selected: $state.current.name === 'project.requests'}" ui-sref='.requests'>
