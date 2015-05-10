@@ -44,37 +44,35 @@
       <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.last_updated | fromNow}}</span>
     </div>
 
-    <div class="followers">
-      <span ng-if="post.followers.length > 0 && !onlyAuthorFollowing">
-        <!-- Add yourself as a follower -->
-        <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
-        <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
+    <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">
+      <!-- Add yourself as a follower -->
+      <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
+      <span ng-if="isFollowing && followersNotMe.length == 1"> and </span>
 
-        <!-- List Names -->
-        <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-          <a class="follower" ui-sref="profile.seeds({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
-          <span ng-if="!$last && followersNotMe.length == 2"> and </span>
-        </span>
-
-        <!-- Make a list of followers -->
-        <span ng-if="followersNotMe.length > 2">
-          and
-          <span class="dropdown" dropdown on-toggle="openFollowers(open)">
-            <a class="dropdown-toggle" dropdown-toggle>
-              {{followersNotMe.length - 2}} other<span ng-if="followersNotMe.length > 3">s</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li ng-repeat="user in followersNotMe.slice(2)">
-                <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})" ng-if="!user.hide">
-                  <div back-img="::user.avatar_url" class="avatar"></div>
-                  <div class="name">{{::user.name}}</div>
-                </a>
-              </li>
-            </ul>
-          </span>
-        </span>
-        <span ng-if="isFollowing || followersNotMe.length > 1">are</span><span ng-if="!isFollowing && followersNotMe.length == 1">is</span> following this seed.
+      <!-- List Names -->
+      <span ng-repeat="follower in followersNotMe.slice(0, 2)">
+        <a class="follower" ui-sref="profile.seeds({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
+        <span ng-if="!$last && followersNotMe.length == 2"> and </span>
       </span>
+
+      <!-- Make a list of followers -->
+      <span ng-if="followersNotMe.length > 2">
+        and
+        <span class="dropdown" dropdown on-toggle="openFollowers(open)">
+          <a class="dropdown-toggle" dropdown-toggle>
+            {{followersNotMe.length - 2}} other<span ng-if="followersNotMe.length > 3">s</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="user in followersNotMe.slice(2)">
+              <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})" ng-if="!user.hide">
+                <div back-img="::user.avatar_url" class="avatar"></div>
+                <div class="name">{{::user.name}}</div>
+              </a>
+            </li>
+          </ul>
+        </span>
+      </span>
+      <span ng-if="isFollowing || followersNotMe.length > 1">are</span><span ng-if="!isFollowing && followersNotMe.length == 1">is</span> following this seed.
     </div>
 
     <div class="fulfillment" ng-if="post.fulfilled">
@@ -104,30 +102,32 @@
       </span>
     </div>
 
-    <div class="post-controls">
-      <a ng-click="vote()" class="vote" tooltip-popup-delay="500" tooltip-html-unsafe="Show your support and bring this Seed to the attention of others">
-        <i ng-if="!post.myVote" class="icon-heart-new"></i>
-        <i ng-if="post.myVote" class="icon-heart-new-selected ng-class:{myVote: post.myVote}" ></i>
+    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled}">
+      <a class="vote" ng-click="vote()" tooltip-popup-delay="500" tooltip="Show your support and bring this to the attention of others">
+        <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
         <span class="num">{{post.votes}}</span>
-      </a>
-      <a ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Add members you would like to notify about this Seed" class="num-followers" ng-class="{'link-selected': editingFollowers}">
-        <i ng-if="!editingFollowers" class="icon-add-member"></i>
-        <i ng-if="editingFollowers" class="icon-add-member-selected"></i>
+      </a><!--
+
+      --><a class="num-followers" ng-click="onFollowerIconClick()" tooltip-popup-delay="500" tooltip="Notify members about this">
+        <i ng-class="editingFollowers ? 'icon-add-member-selected' : 'icon-add-member'"></i>
         <span class="num">{{post.followers.length}}</span>
-      </a>
-      <a ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment" class="comment" ng-class="{'link-selected': !isCommentsCollapsed}">
-        <i ng-if="isCommentsCollapsed" class="icon-comment"></i>
-        <i ng-if="!isCommentsCollapsed" class="icon-comment-selected"></i>
+      </a><!--
+
+      --><a class="comment" ng-click="onCommentIconClick()" tooltip-popup-delay="500" tooltip="Add Comment">
+        <i ng-class="isCommentsCollapsed ? 'icon-comment-selected' : 'icon-comment'"></i>
         <span class="num">{{post.numComments}}</span>
+      </a><!--
+
+      --><a class="follow" ng-click="toggleJoinPost()" tooltip-popup-delay="500"
+         tooltip="{{isFollowing ? 'Stop receiving notifications' : 'Receive notifications'}}">
+        <i ng-class="isFollowing ? 'icon-leave' : 'icon-join'"></i>
+        <span class="hidden-xs">{{isFollowing ? 'Unfollow' : 'Follow'}}</span>
+      </a><!--
+
+      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled">
+        <i class="icon-little-check"></i>
+        <span class="hidden-xs">Mark fulfilled</span>
       </a>
-      <a ng-click="toggleJoinPost()" tooltip-popup-delay="500" tooltip="{{joinPostTooltipText}}" class="join">
-        <i ng-if="!isFollowing" class="icon-join"></i>
-        <i ng-if="isFollowing" class="icon-leave"></i>
-        <span class="num follow-text">{{joinPostText | uppercase}}</span>
-      </a>
-      <div class="fulfill-link" ng-if="isPostOwner() && !post.fulfilled">
-        <span ng-click="markFulfilled()">Mark as Fulfilled</span>
-      </div>
     </div>
 
     <div ng-if="editingFollowers" class="add-followers">

@@ -69,16 +69,6 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       $scope.toggleEditFollowers();
     };
 
-    var toggleJoinPostText = function() {
-      if ($scope.isFollowing) {
-        $scope.joinPostTooltipText = "Stop receiving notifications";
-        $scope.joinPostText = "Unfollow";
-      } else {
-        $scope.joinPostTooltipText = "Receive notifications";
-        $scope.joinPostText = "Follow";
-      }
-    };
-
     $scope.toggleJoinPost = function() {
       var user = currentUser;
       if (!user) return;
@@ -179,8 +169,6 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       //If the only person following the post is the author we can hide the following status in the post
       var firstFollower = _.first(post.followers);
       $scope.onlyAuthorFollowing = (post.followers.length == 1 && firstFollower.name === post.user.name);
-
-      toggleJoinPostText();
     });
 
     $scope.canEdit = currentUser && (post.user.id == currentUser.id || currentUser.canModerate(post.community));
