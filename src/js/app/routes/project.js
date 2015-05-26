@@ -68,7 +68,7 @@ module.exports = function ($stateProvider) {
             } else {
               $state.go('project.' + name, {id: project.slug, '#': 'tabs'});
             }
-          }
+          };
         }
       }
     }

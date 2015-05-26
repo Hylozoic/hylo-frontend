@@ -14,7 +14,7 @@ require('angular-ui-bootstrap-bower/ui-bootstrap');
 require('angular-ui-bootstrap-bower/ui-bootstrap-tpls');
 require('angular-ui-router');
 require('angulartics');
-require('filepicker');
+require('filepicker.io/filepicker.min');
 require('gsap/src/uncompressed/TweenLite');
 require('gsap/src/uncompressed/plugins/CSSPlugin');
 // require('gsap/src/uncompressed/easing/EasePack');
