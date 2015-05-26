@@ -12,7 +12,7 @@ var controller = function($scope, $analytics, $timeout, growl, currentUser, firs
     if ($scope.loadMoreDisabled) return;
     $scope.loadMoreDisabled = true;
 
-    currentUser.followedSeeds({
+    currentUser.followedPosts({
       limit: 10,
       offset: $scope.posts.length
     }, function(resp) {
