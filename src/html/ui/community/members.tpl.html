@@ -1,19 +1,16 @@
 <div class="toolbar">
   <div>
-    <div class="row">
-      <div class="toolbar-left">
-        <a class="invite" ui-sref="community.invite({community: community.slug})" ng-if="canInvite">
-          <i class="icon-add-01"></i>
-          <span class="hidden-xs">Invite Members</span>
-        </a>
-      </div>
-      <a class="search toolbar-right" ui-sref="search({c: community.id})">
-        <i class="icon-search"></i>
-        Search
+    <div class="toolbar-left">
+      <a class="invite" ui-sref="community.invite({community: community.slug})" ng-if="canInvite">
+        <i class="icon-add-01"></i>
+        Invite Members
       </a>
     </div>
+    <a class="search toolbar-right" ui-sref="search({c: community.id})">
+      <i class="icon-search"></i>
+      Search
+    </a>
   </div>
-  <div class="clearfix"></div>
 </div>
 
 <div class="member-list"
@@ -22,42 +19,6 @@
      infinite-scroll-disabled="loadMoreDisabled"
      infinite-scroll-immediate-check="false">
 
-  <div ng-repeat="user in users | orderBy:'name'" class="member">
-    <a class="avatar" back-img="::user.avatar_url" ui-sref="profile.seeds({id: user.id})"></a>
-    <div class="member-info">
-      <span class="caret-menu dropdown" dropdown ng-if="::canModerate">
-        <a class="dropdown-toggle" dropdown-toggle><i class="icon-down"></i></a>
-        <ul class="dropdown-menu">
-          <li>
-            <a ng-click="remove(user, $index)">Remove from this community</a>
-          </li>
-        </ul>
-      </span>
-
-      <a class="name" ui-sref="profile.seeds({id: user.id})">{{::user.name}}</a>
-      <div class="member-links">
-        <social-media user="::user" page="'members'"></social-media>
-      </div>
-      <div class="bio" ng-if="::user.bio">
-        <div class="full-column">{{::user.bio}}</div>
-      </div>
-      <div class="skills" ng-if="::(!user.bio && user.skills.length > 0)">
-        <div class="title">Skills:</div>
-        <div class="clickable-links">
-          <span ng-repeat="skill in ::user.skills track by $index">
-            <a ng-click="search(skill)">{{::skill}}</a><span ng-if="$index < user.skills.length-1">,</span>
-          </span>
-        </div>
-      </div>
-      <div class="affiliations" ng-if="::(!user.bio && user.organizations.length > 0)">
-        <div class="title">Groups:</div>
-        <div class="clickable-links">
-          <span ng-repeat="affiliation in ::user.organizations track by $index">
-            <a ng-click="search(affiliation)">{{::affiliation}}</a><span ng-if="$index < user.organizations.length-1">,</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ng-include src="'/ui/shared/user-list-item.tpl.html'"></ng-include>
 
 </div>

@@ -253,10 +253,14 @@ body.project {
     }
   }
 
+  .tab-content-wrapper {
+    .make-row;
+  }
+
   .tab-content {
     .make-sm-column(8);
     .make-sm-column-offset(2);
-    padding: @std-padding*2 0;
+    padding-top: @std-padding*2;
   }
 }
 
@@ -308,6 +312,12 @@ body.project {
     overflow: hidden;
     margin-bottom: @std-padding*2;
 
+    @media (max-width: @screen-xs-max) {
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+
     h3 {
       margin-top: 0;
     }
@@ -323,6 +333,11 @@ body.project {
   }
 
   .tab-content {
+    @media (max-width: @screen-xs-max) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
     .post {
       .post-without-avatar;
 
@@ -336,5 +351,8 @@ body.project {
 }
 
 .project-contributors {
-
+  .tab-content {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+  }
 }

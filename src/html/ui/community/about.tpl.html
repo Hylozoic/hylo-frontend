@@ -1,22 +1,15 @@
 <div class="toolbar community-about-toolbar">
   <div class="col-sm-6 col-sm-offset-3">
-    <div class="row">
-      <div class="toolbar-left">
-        <a class="settings" ui-sref="community.settings({community: community.slug})" ng-if="community.canModerate">
-          <i class="icon-settings"></i>
-          <span class="hidden-xs">Settings</span>
-        </a>
-      </div>
-      <div class="toolbar-center">
-        <h3>Core Intention</h3>
-      </div>
+    <div class="toolbar-left">
+      <a class="settings" ui-sref="community.settings({community: community.slug})" ng-if="community.canModerate">
+        <i class="icon-settings"></i>
+        Settings
+      </a>
     </div>
   </div>
-  <div class="clearfix"></div>
 </div>
 
-<div class="row">
-  <div class="col-sm-offset-3 col-sm-6 core-intention">
-    {{community.description}}
-  </div>
+<div class="col-sm-offset-3 col-sm-6 core-intention">
+  <h3>Core Intention</h3>
+  {{community.description}}
 </div>
