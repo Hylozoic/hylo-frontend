@@ -303,20 +303,24 @@ body.project {
 
 }
 
+.highlight-box() {
+  padding: @std-padding;
+  background-color: @faint-gray;
+  border: 1px solid @border-light;
+  border-radius: @border-radius-base;
+  margin-bottom: @std-padding*2;
+
+  @media (max-width: @screen-xs-max) {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
 body.project.project-requests {
   .add-request-form {
-    padding: @std-padding;
-    background-color: @faint-gray;
-    border: 1px solid @border-light;
-    border-radius: @border-radius-base;
+    .highlight-box;
     overflow: hidden;
-    margin-bottom: @std-padding*2;
-
-    @media (max-width: @screen-xs-max) {
-      border-radius: 0;
-      border-left: 0;
-      border-right: 0;
-    }
 
     h3 {
       margin-top: 0;
@@ -354,5 +358,17 @@ body.project.project-contributors {
   .tab-content {
     .make-sm-column(6);
     .make-sm-column-offset(3);
+  }
+
+  .invite-cta {
+    .highlight-box;
+    .seed-body-text;
+    line-height: @default-button-height;
+
+    .button {
+      .rounded-button;
+      float: right;
+      margin-left: @std-padding;
+    }
   }
 }
