@@ -76,17 +76,17 @@ module.exports = function ($stateProvider) {
   .state('project.requests', /*@ngInject*/ {
     url: '',
     resolve: {
-      firstPostQuery: function(Seed, project) {
-        return Seed.queryForProject({projectId: project.id, limit: 10}).$promise;
+      postQuery: function(project) {
+        return project.posts({limit: 10}).$promise;
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/project/requests.tpl.html',
-        controller: function($scope, project, Seed, growl, Cache, UserCache, $analytics, currentUser, firstPostQuery) {
+        controller: function($scope, project, Seed, growl, Cache, UserCache, $analytics, currentUser, postQuery) {
 
-          $scope.posts = firstPostQuery.posts;
-          $scope.loadMoreDisabled = $scope.posts.length >= firstPostQuery.posts_total;
+          $scope.posts = postQuery.posts;
+          $scope.loadMoreDisabled = $scope.posts.length >= postQuery.posts_total;
 
           var newRequest = $scope.newRequest = {};
 
@@ -131,8 +131,7 @@ module.exports = function ($stateProvider) {
             if ($scope.loadMoreDisabled) return;
             $scope.loadMoreDisabled = true;
 
-            Seed.queryForProject({
-              projectId: project.id,
+            project.posts({
               limit: 10,
               offset: $scope.posts.length
             }, function(resp) {
@@ -149,11 +148,33 @@ module.exports = function ($stateProvider) {
   })
   .state('project.contributors', /*@ngInject*/ {
     url: '/contributors',
+    resolve: {
+      users: function(project) {
+        return project.users({limit: 20}).$promise;
+      }
+    },
     views: {
       tab: {
         templateUrl: '/ui/project/contributors.tpl.html',
-        controller: function($scope) {
-          $scope.foo = 'controller stub is working.';
+        controller: function($scope, project, users) {
+          $scope.users = users;
+
+          $scope.loadMore = _.debounce(function() {
+            if ($scope.loadMoreDisabled) return;
+            $scope.loadMoreDisabled = true;
+
+            project.users({
+              limit: 20,
+              offset: $scope.users.length
+            }, function(users) {
+              Array.prototype.push.apply($scope.users, users);
+
+              if (users.length > 0 && $scope.users.length < users[0].total)
+                $scope.loadMoreDisabled = false;
+            });
+
+          }, 200);
+
         }
       }
     }

@@ -36,10 +36,6 @@ var factory = function($resource) {
       method: 'GET',
       url: '/noo/user/:userId/posts'
     },
-    queryForProject: {
-      method: 'GET',
-      url: '/noo/project/:projectId/posts'
-    },
     fulfill: {
       method: 'POST',
       url: '/noo/post/:id/fulfill'
