@@ -110,6 +110,7 @@ module.exports = function ($stateProvider) {
               UserCache.allPosts.clear(currentUser.id);
 
               $scope.posts = [];
+              $scope.loadMoreDisabled = false;
               $scope.loadMore();
               newRequest.name = null;
 
