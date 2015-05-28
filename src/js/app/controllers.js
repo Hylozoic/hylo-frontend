@@ -36,5 +36,7 @@ require('./controllers/user/ForgotPasswordCtrl')(angularModule);
 
 require('./controllers/project/ProjectEditCtrl')(angularModule);
 
-angularModule.controller('ProjectRequestsCtrl', require('./controllers/project/ProjectRequestsCtrl'));
+angularModule.controller('ProjectCtrl', require('./controllers/project/ProjectCtrl'));
+angularModule.controller('ProjectPostsCtrl', require('./controllers/project/ProjectPostsCtrl'));
 angularModule.controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'));
+angularModule.controller('ProjectUsersCtrl', require('./controllers/project/ProjectUsersCtrl'));

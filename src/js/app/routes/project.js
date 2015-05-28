@@ -1,5 +1,3 @@
-var RichText = require('../services/RichText');
-
 module.exports = function ($stateProvider) {
 
   $stateProvider
@@ -51,46 +49,7 @@ module.exports = function ($stateProvider) {
     views: {
       project: {
         templateUrl: '/ui/project/show.tpl.html',
-        controller: function($scope, $state, $anchorScroll, project, currentUser, growl, $stateParams) {
-          "ngInject";
-
-          $scope.project = project;
-          $scope.isCreator = $scope.canModerate = currentUser && project.user_id === currentUser.id;
-          $scope.isContributor = project.is_contributor;
-
-          $scope.details = RichText.present(project.details, {maxlength: 420});
-          $scope.truncatedDetails = project.details && project.details.length > 420;
-
-          $scope.showFullDetails = function() {
-            $scope.details = RichText.present(project.details);
-            $scope.truncatedDetails = false;
-          };
-
-          $scope.publish = function() {
-            project.publish(function(resp) {
-              project.published_at = resp.published_at;
-              growl.addSuccessMessage('Published! You can unpublish from the Edit Project screen if you change your mind.');
-            });
-          };
-
-          $scope.goToTab = function(name) {
-            if ($state.current.name === 'project.' + name) {
-              $anchorScroll('tabs');
-            } else {
-              $state.go('project.' + name, {id: project.slug, '#': 'tabs'});
-            }
-          };
-
-          $scope.join = function() {
-            // TODO show login prompt if not logged in
-
-            project.join({token: $stateParams.token}, function() {
-              $scope.isContributor = true;
-              $scope.$broadcast('joinProject');
-            })
-          };
-
-        }
+        controller: 'ProjectCtrl'
       }
     }
   })
@@ -104,8 +63,8 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/project/requests.tpl.html',
-        controller: 'ProjectRequestsCtrl'
+        templateUrl: '/ui/project/posts.tpl.html',
+        controller: 'ProjectPostsCtrl'
       }
     }
   })
@@ -119,45 +78,8 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/project/contributors.tpl.html',
-        controller: function($scope, $stateParams, project, users, $dialog) {
-          "ngInject";
-          $scope.users = users;
-
-          $scope.$on('joinProject', function() {
-            $scope.users = [];
-            $scope.loadMoreDisabled = false;
-            $scope.loadMore();
-          })
-
-          $scope.loadMore = _.debounce(function() {
-            if ($scope.loadMoreDisabled) return;
-            $scope.loadMoreDisabled = true;
-
-            project.users({
-              limit: 20,
-              offset: $scope.users.length,
-              token: $stateParams.token
-            }, function(users) {
-              Array.prototype.push.apply($scope.users, users);
-
-              if (users.length > 0 && $scope.users.length < users[0].total)
-                $scope.loadMoreDisabled = false;
-            });
-
-          }, 200);
-
-          $scope.remove = function(user, index) {
-            $dialog.confirm({
-              message: 'Are you sure you want to remove ' + user.name + ' from this project?',
-            }).then(function() {
-              project.removeUser({userId: user.id}, function() {
-                $scope.users.splice(index, 1);
-              });
-            });
-          };
-
-        }
+        templateUrl: '/ui/project/users.tpl.html',
+        controller: 'ProjectUsersCtrl'
       }
     }
   })
