@@ -73,7 +73,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           });
         },
         context: function() { return 'normal' },
-
+        projectInvitation: function() { return null }
       },
       onEnter: function(loggedIn, $timeout, $state) {
         if (loggedIn) {
