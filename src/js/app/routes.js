@@ -26,21 +26,13 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       templateUrl: '/ui/shared/main.tpl.html',
       resolve: {
         currentUser: function(User) {
-          return User.current().$promise.then(function(user) {
-            return (user.id ? user : null);
-          });
+          return User.loadCurrent();
         },
         onboarding: function(currentUser, Onboarding) {
           var onboardingData = (currentUser && currentUser.onboarding);
           if (!_.any(onboardingData)) return null;
           return new Onboarding(currentUser);
         }
-      },
-      onEnter: function(currentUser) {
-        window.hyloEnv.provideUser(currentUser);
-      },
-      controller: function($scope, $rootScope, currentUser, onboarding) {
-        $rootScope.currentUser = currentUser;
       }
     })
     .state('appEntry', /*@ngInject*/ {

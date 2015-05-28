@@ -1,6 +1,6 @@
 var RichText = require('../../services/RichText');
 
-module.exports = function($scope, $state, $anchorScroll, project, currentUser, growl, $stateParams, $modal) {
+module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User) {
   "ngInject";
 
   var invitationToken = $stateParams.token;
@@ -25,10 +25,10 @@ module.exports = function($scope, $state, $anchorScroll, project, currentUser, g
   };
 
   $scope.goToTab = function(name) {
-    if ($state.current.name === 'project.' + name) {
+    if ($scope.$state.current.name === 'project.' + name) {
       $anchorScroll('tabs');
     } else {
-      $state.go('project.' + name, {id: project.slug, '#': 'tabs'});
+      $scope.$state.go('project.' + name, {id: project.slug, '#': 'tabs'});
     }
   };
 
@@ -41,7 +41,6 @@ module.exports = function($scope, $state, $anchorScroll, project, currentUser, g
         $scope.isContributor = true;
         $scope.$broadcast('joinProject');
         growl.addSuccessMessage('You joined the project.');
-
       });
     };
 
@@ -67,6 +66,7 @@ module.exports = function($scope, $state, $anchorScroll, project, currentUser, g
         open(result.state);
       } else if (result.action === 'finish') {
         join();
+        $scope.$state.reload();
       }
     };
 

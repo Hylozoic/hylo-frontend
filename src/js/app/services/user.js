@@ -1,5 +1,4 @@
-var dependencies = ['$resource'];
-dependencies.push(function($resource) {
+var factory = function($resource, $rootScope) {
   var User = $resource('/noo/user/:id', {
     id: '@id'
   }, {
@@ -44,6 +43,15 @@ dependencies.push(function($resource) {
     }
   });
 
+  User.loadCurrent = function() {
+    return User.current().$promise.then(function(user) {
+      var currentUser = (user.id ? user : null);
+      $rootScope.currentUser = currentUser;
+      window.hyloEnv.provideUser(currentUser);
+      return currentUser;
+    });
+  };
+
   // let's make things a bit more OO around here
   _.extend(User.prototype, {
     contributions: function(params, success, error) {
@@ -75,8 +83,8 @@ dependencies.push(function($resource) {
   });
 
   return User;
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.factory('User', dependencies);
+  angularModule.factory('User', factory);
 };
