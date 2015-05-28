@@ -22,7 +22,7 @@ window.popupDone = function(opts) {
 
   } else if (opts.context === 'oauth') {
     // controllers/user/{Login,Signup}Ctrl.js
-    var node = document.querySelector('.login-dialog');
+    var node = document.querySelector('.login-signup-dialog');
     angular.element(node).scope().finishThirdPartyAuth(opts.error);
   }
 
