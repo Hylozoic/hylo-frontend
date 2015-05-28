@@ -82,6 +82,11 @@ module.exports = function($scope, $state, $anchorScroll, project, currentUser, g
           templateUrl: '/ui/user/login.tpl.html',
           controller: 'LoginCtrl',
         }, defaults);
+      } else if (state === 'forgotPassword') {
+        _.merge(options, {
+          templateUrl: '/ui/user/forgot-password.tpl.html',
+          controller: 'ForgotPasswordCtrl',
+        }, defaults);
       }
       $modal.open(options).result.then(handle);
     };

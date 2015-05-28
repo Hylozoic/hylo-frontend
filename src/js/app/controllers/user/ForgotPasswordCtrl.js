@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, User) {
+var controller = function($scope, $analytics, User, context) {
   $analytics.eventTrack('Password reset start');
 
   $scope.submit = function(form) {
@@ -15,6 +15,14 @@ var controller = function($scope, $analytics, User) {
         $scope.error = 'The email address you entered was not recognized.';
       }
     });
+  };
+
+  $scope.go = function(state) {
+    if (context === 'modal') {
+      $scope.$close({action: 'go', state: state});
+    } else {
+      $scope.$state.go(state);
+    }
   };
 
 };
