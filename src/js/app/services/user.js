@@ -34,6 +34,13 @@ dependencies.push(function($resource) {
     requestPasswordChange: {
       url: '/noo/user/password',
       method: 'POST'
+    },
+    autocomplete: {
+      url: '/noo/autocomplete',
+      isArray: true,
+      params: {
+        type: 'people'
+      }
     }
   });
 

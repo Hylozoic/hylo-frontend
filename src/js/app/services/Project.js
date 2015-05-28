@@ -8,6 +8,10 @@ var factory = function($resource) {
     users: {
       url: '/noo/project/:id/users',
       isArray: true
+    },
+    invite: {
+      url: '/noo/project/:id/invite',
+      method: 'POST'
     }
   });
 
@@ -32,6 +36,9 @@ var factory = function($resource) {
     },
     users: function(params, success, error) {
       return Project.users(_.extend({id: this.id}, params), success, error);
+    },
+    invite: function(params, success, error) {
+      return Project.invite(_.extend({id: this.id}, params), success, error);
     }
   });
 

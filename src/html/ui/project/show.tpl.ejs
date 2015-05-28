@@ -72,12 +72,12 @@
 <a name="tabs"></a>
 <div class="tabs-wrapper">
   <ul class="tabs">
-    <li ng-class="{selected: $state.current.name === 'project.requests'}" ui-sref='.requests'>
+    <li ng-class="{selected: $state.current.name === 'project.requests'}" ng-click="goToTab('requests')">
       <h2>Requests</h2>
       <p ng-show="isCreator">Ask for what you need</p>
       <p ng-hide="isCreator">See how you can help</p>
     </li><!--
-    <--></--><li ng-class="{selected: $state.current.name === 'project.contributors'}" ui-sref='.contributors'>
+    <--></--><li ng-class="{selected: $state.current.name === 'project.contributors'}" ng-click="goToTab('contributors')">
       <h2>Contributors</h2>
       <p ng-show="isCreator">Get people involved</p>
       <p ng-hide="isCreator">See who's involved</p>

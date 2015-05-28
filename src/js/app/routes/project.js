@@ -31,19 +31,29 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('project', /*@ngInject*/ {
+  .state('project', {
     url: '/project/:id',
     parent: 'main',
     abstract: true,
     resolve: {
-      project: function(Project, $stateParams) {
+      project: /*@ngInject*/ function(Project, $stateParams) {
         return Project.get({id: $stateParams.id}).$promise;
       }
     },
     views: {
       main: {
+        template: '<div ui-view="project"></div>'
+      }
+    }
+  })
+  .state('project.page', {
+    abstract: true,
+    views: {
+      project: {
         templateUrl: '/ui/project/show.tpl.html',
         controller: function($scope, $state, $anchorScroll, project, currentUser, growl) {
+          "ngInject";
+
           $scope.project = project;
           $scope.isCreator = currentUser && project.user_id === currentUser.id;
 
@@ -73,10 +83,11 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('project.requests', /*@ngInject*/ {
+  .state('project.requests', {
     url: '',
+    parent: 'project.page',
     resolve: {
-      postQuery: function(project) {
+      postQuery: /*@ngInject*/ function(project) {
         return project.posts({limit: 10}).$promise;
       }
     },
@@ -89,6 +100,7 @@ module.exports = function ($stateProvider) {
   })
   .state('project.contributors', /*@ngInject*/ {
     url: '/contributors',
+    parent: 'project.page',
     resolve: {
       users: function(project) {
         return project.users({limit: 20}).$promise;
@@ -123,7 +135,10 @@ module.exports = function ($stateProvider) {
   .state('project.invite', {
     url: '/invite',
     views: {
-
+      project: {
+        templateUrl: '/ui/project/invite.tpl.html',
+        controller: 'ProjectInviteCtrl'
+      }
     }
   });
 

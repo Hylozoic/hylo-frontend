@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <i class="icon-hylo-script" ng-click="close()"></i>
+  </div>
+  <div class="navbar-center" href="#">Invite Contributors</div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
+
+<div class="main-content">
+  <div class="all-sections">
+    <div class="error" ng-show="errors">
+      <ul>
+        <li ng-repeat="error in errors">{{error}}</li>
+      </ul>
+    </div>
+
+    <label>Subject</label>
+    <input type="text" ng-model="subject" class="form-control">
+
+    <div>
+      <label>Message</label>
+      <textarea ng-model="message" class="form-control"></textarea>
+      <span class="help">The message will also contain a link to the project.</span>
+    </div>
+
+    <label>Search for Hylo members to invite</label>
+    <tags-input ng-model="users"
+                add-from-autocomplete-only="true"
+                display-property="name"
+                key-property="id"
+                replace-spaces-with-dashes="false"
+                placeholder="Start typing a name..."
+                template="/ui/shared/ngTagsInput/tag-user.tpl.html">
+      <auto-complete source="findMembers($query)"
+                     display-property="name"
+                     min-length="2"
+                     template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
+      </auto-complete>
+    </tags-input>
+
+    <label>Invite anyone else by email</label>
+    <input type="text" class="form-control" ng-model="emails" placeholder="Enter email addresses, separated by commas...">
+
+    <div class="footer">
+      <button class="button" ng-click="send()" ng-disabled="sending">
+        <span ng-hide="sending">Send invitations</span>
+        <span ng-show="sending">Sending...</span>
+      </button>
+    </div>
+
+  </div>
+</div>
