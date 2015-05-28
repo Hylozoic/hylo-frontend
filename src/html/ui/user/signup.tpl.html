@@ -1,5 +1,8 @@
 <div class="all-sections">
-  <h1 class="row">Sign up for Hylo {{invitation ? 'to join ' + invitation.community.name : ''}}</h1>
+  <h1 class="row">
+    Sign up for Hylo
+    {{invitation && invitation.community ? 'to join ' + invitation.community.name : ''}}
+  </h1>
 
   <form name="form" novalidate>
 
@@ -81,7 +84,7 @@
   </form>
 
   <div class="footer">
-    <a ui-sref="login">Already signed up? Log in!</a>
+    <a ng-click="go('login')">Already signed up? Log in!</a>
     <!-- &nbsp;•&nbsp;
     <a onclick="Intercom('showNewMessage', 'I need help logging in! The problem is:')">Need help?</a> -->
   </div>

@@ -30,13 +30,14 @@ require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);
 require('./controllers/SearchCtrl')(angularModule);
 require('./controllers/FulfillmentCtrl')(angularModule);
-require('./controllers/user/LoginCtrl')(angularModule);
-require('./controllers/user/SignupCtrl')(angularModule);
 require('./controllers/user/ForgotPasswordCtrl')(angularModule);
 
 require('./controllers/project/ProjectEditCtrl')(angularModule);
 
-angularModule.controller('ProjectCtrl', require('./controllers/project/ProjectCtrl'));
-angularModule.controller('ProjectPostsCtrl', require('./controllers/project/ProjectPostsCtrl'));
-angularModule.controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'));
-angularModule.controller('ProjectUsersCtrl', require('./controllers/project/ProjectUsersCtrl'));
+angularModule
+.controller('SignupCtrl',        require('./controllers/user/SignupCtrl'))
+.controller('LoginCtrl',         require('./controllers/user/LoginCtrl'))
+.controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
+.controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
+.controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
+.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'));

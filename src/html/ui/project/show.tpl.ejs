@@ -1,11 +1,15 @@
-<div class="cta-wrapper" ng-if="isCreator && !project.isPublished()">
+<div class="cta-wrapper" ng-if="!project.isPublished()">
   <div class="cta">
-    <a class="button" ng-click="publish()">Publish</a>
-    <strong>Draft Project</strong> &mdash; You can
-    <a ui-sref="editProject({id: project.slug})">edit project details</a>,
-    <a ng-click="goToTab('requests')">add requests</a>, and
-    <a ng-click="goToTab('contributors')">invite contributors</a>
-    until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
+    <a class="button" ng-click="publish()" ng-if="isCreator">Publish</a>
+    <strong>Draft Project</strong> &mdash;
+    <span ng-show="isCreator">
+      You can
+      <a ui-sref="editProject({id: project.slug})">edit project details</a>,
+      <a ng-click="goToTab('requests')">add requests</a>, and
+      <a ng-click="goToTab('contributors')">invite contributors</a>
+      until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
+    </span>
+    <span ng-hide="isCreator">This project is only visible to those who have been invited to contribute.</span>
   </div>
 </div>
 

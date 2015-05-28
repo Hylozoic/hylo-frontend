@@ -61,7 +61,7 @@ module.exports = function ($stateProvider) {
     url: '/h/my-projects',
     resolve: {
       projects: function(Project) {
-        return Project.query({context: 'mine'}).$promise;
+        return Project.query({context: 'creator-or-contributor'}).$promise;
       }
     },
     views: {

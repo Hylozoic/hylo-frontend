@@ -24,21 +24,27 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
-var controller = function($scope, $analytics, User, Community, ThirdPartyAuth, Invitation) {
+module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, Invitation, context, projectInvitation) {
+  "ngInject";
   $analytics.eventTrack('Signup start');
   $scope.user = {};
 
-  $scope.invitation = Invitation.storedData();
+  $scope.invitation = Invitation.storedData() || projectInvitation;
 
   $scope.submit = function(form) {
     form.submitted = true;
     $scope.signupError = null;
     if (form.$invalid) return;
 
-    User.signup(_.merge({}, $scope.user, {login: true}))
-    .$promise.then(function(user) {
+    var params = _.merge({}, $scope.user, {login: true}, projectInvitation);
+
+    User.signup(params).$promise.then(function(user) {
       $analytics.eventTrack('Signup success', {provider: 'password'});
-      $scope.$state.go('onboarding.start');
+      if (context === 'modal') {
+        $scope.$close({action: 'finish'});
+      } else {
+        $scope.$state.go('onboarding.start');
+      }
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
@@ -92,8 +98,13 @@ var controller = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     });
   };
 
+  $scope.go = function(state) {
+    if (context === 'modal') {
+      $scope.$close({action: 'go', state: state});
+    } else {
+      $scope.$state.go(state);
+    }
+  };
+
 };
 
-module.exports = function(angularModule) {
-  angularModule.controller('SignupCtrl', controller);
-};

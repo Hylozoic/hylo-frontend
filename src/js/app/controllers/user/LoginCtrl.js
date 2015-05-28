@@ -32,16 +32,19 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
-var finishLogin = function($scope, $analytics, $stateParams) {
+var finishLogin = function($scope, $analytics, $stateParams, context) {
   $analytics.eventTrack('Login success', {provider: $scope.serviceUsed || 'password'});
   if ($stateParams.next) {
     history.pushState(null, null, $stateParams.next);
+  } else if (context === 'modal') {
+    $scope.$close({action: 'finish'});
   } else {
     $scope.$state.go('appEntry');
   }
-}
+};
 
-var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth) {
+module.exports = function($scope, $stateParams, $analytics, User, ThirdPartyAuth, context) {
+  "ngInject";
   $analytics.eventTrack('Login start');
   $scope.user = {};
 
@@ -51,7 +54,7 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
     if (form.$invalid) return;
 
     User.login($scope.user).$promise.then(function() {
-      finishLogin($scope, $analytics, $stateParams);
+      finishLogin($scope, $analytics, $stateParams, context);
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
@@ -68,12 +71,16 @@ var controller = function($scope, $stateParams, $analytics, User, ThirdPartyAuth
       if (error) {
         handleError({data: error}, $scope, $analytics);
       } else {
-        finishLogin($scope, $analytics, $stateParams);
+        finishLogin($scope, $analytics, $stateParams, context);
       }
     });
   };
-};
 
-module.exports = function(angularModule) {
-  angularModule.controller('LoginCtrl', controller);
+  $scope.go = function(state) {
+    if (context === 'modal') {
+      $scope.$close({action: 'go', state: state});
+    } else {
+      $scope.$state.go(state);
+    }
+  };
 };

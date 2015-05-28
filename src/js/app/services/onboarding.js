@@ -30,7 +30,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
   var Onboarding = function(user) {
     // this is used in templates
-    this.community = user.memberships[0].community;
+    this.community = user.memberships[0] && user.memberships[0].community;
 
     // for internal use only
     this._user = user;

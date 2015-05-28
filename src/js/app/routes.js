@@ -71,7 +71,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           return User.status().$promise.then(function(res) {
             return res.signedIn;
           });
-        }
+        },
+        context: function() { return 'normal' },
+
       },
       onEnter: function(loggedIn, $timeout, $state) {
         if (loggedIn) {
