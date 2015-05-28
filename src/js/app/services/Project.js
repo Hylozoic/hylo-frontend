@@ -12,6 +12,14 @@ var factory = function($resource) {
     invite: {
       url: '/noo/project/:id/invite',
       method: 'POST'
+    },
+    join: {
+      url: '/noo/project/:id/join',
+      method: 'POST'
+    },
+    removeUser: {
+      url: '/noo/project/:id/user/:userId',
+      method: 'DELETE'
     }
   });
 
@@ -39,6 +47,12 @@ var factory = function($resource) {
     },
     invite: function(params, success, error) {
       return Project.invite(_.extend({id: this.id}, params), success, error);
+    },
+    join: function(params, success, error) {
+      return Project.join(_.extend({id: this.id}, params), success, error);
+    },
+    removeUser: function(params, success, error) {
+      return Project.removeUser(_.extend({id: this.id}, params), success, error);
     }
   });
 

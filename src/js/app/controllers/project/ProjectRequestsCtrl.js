@@ -1,10 +1,11 @@
-module.exports = function($scope, project, Seed, growl, Cache, UserCache, $analytics, currentUser, postQuery) {
+module.exports = function($scope, project, Seed, growl, Cache, UserCache, $analytics, currentUser, postQuery, $stateParams) {
   "ngInject";
 
   $scope.posts = postQuery.posts;
   $scope.loadMoreDisabled = $scope.posts.length >= postQuery.posts_total;
 
-  var newRequest = $scope.newRequest = {};
+  var placeholder = "I'm looking for ",
+    newRequest = $scope.newRequest = {name: placeholder};
 
   $scope.addRequest = function() {
     new Seed({
@@ -28,7 +29,7 @@ module.exports = function($scope, project, Seed, growl, Cache, UserCache, $analy
       $scope.posts = [];
       $scope.loadMoreDisabled = false;
       $scope.loadMore();
-      newRequest.name = null;
+      newRequest.name = placeholder;
 
     }, function(err) {
       growl.addErrorMessage(err.data);
@@ -49,7 +50,8 @@ module.exports = function($scope, project, Seed, growl, Cache, UserCache, $analy
 
     project.posts({
       limit: 10,
-      offset: $scope.posts.length
+      offset: $scope.posts.length,
+      token: $stateParams.token
     }, function(resp) {
       $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(post) { return post.id });
 

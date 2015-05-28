@@ -24,14 +24,21 @@
 
       </div>
       <div class="side-column">
-        <div ng-show="isCreator">
+        <div class="top-cta" ng-show="isCreator">
           <h2>Hi {{project.user.name | firstName}}!</h2>
           <p>Get started on your project by adding requests and contributors below.</p>
         </div>
-        <div ng-hide="isCreator">
-          <h2>6 Open Requests</h2>
-          <p>See how you can contribute by checking out the requests below.</p>
-          <a class="engage-button">See Requests</a>
+        <div class="top-cta" ng-hide="isCreator">
+          <p>
+            See how you can contribute by checking out the
+            {{project.open_request_count}} request{{project.open_request_count === 1 ? '' : 's'}}
+            below.
+          </p>
+          <a class="button" ng-click="goToTab('requests')">See Requests</a>
+        </div>
+        <div class="top-cta" ng-hide="isCreator || isContributor">
+          <p>Join the project to stay updated on its progress.</p>
+          <a class="engage-button" ng-click="join()">Join Project</a>
         </div>
 
         <ul>

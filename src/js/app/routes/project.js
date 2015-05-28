@@ -32,12 +32,12 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('project', {
-    url: '/project/:id',
+    url: '/project/:id?token',
     parent: 'main',
     abstract: true,
-    resolve: {
-      project: /*@ngInject*/ function(Project, $stateParams) {
-        return Project.get({id: $stateParams.id}).$promise;
+    resolve: /*@ngInject*/ {
+      project: function(Project, $stateParams) {
+        return Project.get({id: $stateParams.id, token: $stateParams.token}).$promise;
       }
     },
     views: {
@@ -51,11 +51,12 @@ module.exports = function ($stateProvider) {
     views: {
       project: {
         templateUrl: '/ui/project/show.tpl.html',
-        controller: function($scope, $state, $anchorScroll, project, currentUser, growl) {
+        controller: function($scope, $state, $anchorScroll, project, currentUser, growl, $stateParams) {
           "ngInject";
 
           $scope.project = project;
-          $scope.isCreator = currentUser && project.user_id === currentUser.id;
+          $scope.isCreator = $scope.canModerate = currentUser && project.user_id === currentUser.id;
+          $scope.isContributor = project.is_contributor;
 
           $scope.details = RichText.present(project.details, {maxlength: 420});
           $scope.truncatedDetails = project.details && project.details.length > 420;
@@ -79,6 +80,16 @@ module.exports = function ($stateProvider) {
               $state.go('project.' + name, {id: project.slug, '#': 'tabs'});
             }
           };
+
+          $scope.join = function() {
+            // TODO show login prompt if not logged in
+
+            project.join({token: $stateParams.token}, function() {
+              $scope.isContributor = true;
+              $scope.$broadcast('joinProject');
+            })
+          };
+
         }
       }
     }
@@ -87,8 +98,8 @@ module.exports = function ($stateProvider) {
     url: '',
     parent: 'project.page',
     resolve: {
-      postQuery: /*@ngInject*/ function(project) {
-        return project.posts({limit: 10}).$promise;
+      postQuery: /*@ngInject*/ function(project, $stateParams) {
+        return project.posts({token: $stateParams.token, limit: 10}).$promise;
       }
     },
     views: {
@@ -98,19 +109,26 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('project.contributors', /*@ngInject*/ {
+  .state('project.contributors', {
     url: '/contributors',
     parent: 'project.page',
     resolve: {
-      users: function(project) {
-        return project.users({limit: 20}).$promise;
+      users: /*@ngInject*/ function(project, $stateParams) {
+        return project.users({token: $stateParams.token, limit: 20}).$promise;
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/project/contributors.tpl.html',
-        controller: function($scope, project, users) {
+        controller: function($scope, $stateParams, project, users, $dialog) {
+          "ngInject";
           $scope.users = users;
+
+          $scope.$on('joinProject', function() {
+            $scope.users = [];
+            $scope.loadMoreDisabled = false;
+            $scope.loadMore();
+          })
 
           $scope.loadMore = _.debounce(function() {
             if ($scope.loadMoreDisabled) return;
@@ -118,7 +136,8 @@ module.exports = function ($stateProvider) {
 
             project.users({
               limit: 20,
-              offset: $scope.users.length
+              offset: $scope.users.length,
+              token: $stateParams.token
             }, function(users) {
               Array.prototype.push.apply($scope.users, users);
 
@@ -127,6 +146,16 @@ module.exports = function ($stateProvider) {
             });
 
           }, 200);
+
+          $scope.remove = function(user, index) {
+            $dialog.confirm({
+              message: 'Are you sure you want to remove ' + user.name + ' from this project?',
+            }).then(function() {
+              project.removeUser({userId: user.id}, function() {
+                $scope.users.splice(index, 1);
+              });
+            });
+          };
 
         }
       }
