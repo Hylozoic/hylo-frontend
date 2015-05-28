@@ -1,11 +1,11 @@
 var addrs = require('email-addresses');
 
-module.exports = function($scope, growl, project, User) {
+module.exports = function($scope, $history, growl, project, User) {
   "ngInject";
 
   $scope.close = function() {
     if ($history.isEmpty()) {
-      $scope.$state.go('project', {slug: project.slug});
+      $scope.$state.go('project.contributors', {slug: project.slug});
     } else {
       $history.go(-1);
     }
