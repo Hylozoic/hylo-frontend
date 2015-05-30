@@ -97,6 +97,25 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+  .state('community.projects', {
+    url: '/projects',
+    parent: 'community.home',
+    resolve: {
+      projects: /*@ngInject*/ function(community) {
+        return community.projects().$promise;
+      }
+    },
+    views: {
+      tab: {
+        templateUrl: '/ui/community/projects.tpl.html',
+        controller: function($scope, projects) {
+          'ngInject';
+
+          $scope.projects = projects;
+        }
+      }
+    }
+  })
   .state('createCommunity', {
     url: '/h/new-community',
     parent: 'main',

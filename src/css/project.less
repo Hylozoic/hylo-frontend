@@ -1,33 +1,3 @@
-.has-project-cards() {
-  // all the margin weirdness below
-  // is so we play nice with Masonry
-
-  margin-left: -@std-padding*1.5;
-  margin-right: -@std-padding*1.5;
-
-  // hide until Masonry is done
-  opacity: 0;
-  &.layout-complete {
-    opacity: 1;
-  }
-
-  @media (max-width: @screen-xs-max) {
-    margin-left: -@std-padding/2;
-    margin-right: -@std-padding/2;
-  }
-
-  .project-wrapper {
-    .make-sm-column(6);
-    padding-left: @std-padding/2;
-    padding-right: @std-padding/2;
-    margin-bottom: @std-padding;
-
-    @media (max-width: @screen-xs-max) {
-      position: static !important;
-    }
-  }
-}
-
 .newProject, .editProject {
   margin-bottom: @std-padding*4;
 
@@ -280,45 +250,6 @@ body.project {
       margin-top: 0;
     }
   }
-}
-
-.project-card {
-  border-radius: @border-radius-base;
-  border: 1px solid @border-light;
-  cursor: pointer;
-
-  .image {
-    border-top-left-radius: @border-radius-base;
-    border-top-right-radius: @border-radius-base;
-    width: 100%;
-    .fluid-height(61.8%);
-    background-size: cover;
-    background-position: center;
-  }
-
-  .content {
-    padding: @std-padding;
-  }
-
-  h3 {
-    margin-top: 0;
-  }
-
-  .avatar {
-    .user-avatar-sm;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-
-  .contributors {
-    float: right;
-  }
-
-  .draft-label {
-    margin-left: @std-padding*2;
-  }
-
 }
 
 .highlight-box() {
