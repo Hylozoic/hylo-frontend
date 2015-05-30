@@ -62,18 +62,15 @@ body.home {
     padding-top: @std-padding * 2;
   }
 
-  .post {
-    .make-row;
-  }
-
   .add-new {
     position: relative;
     top: -@std-padding;
   }
 
-  .add-new, .empty-content {
-    @media (min-width: @screen-sm) {
+  .post {
+    @media (max-width: @screen-xs-max) {
       margin-left: -@std-padding;
+      margin-right: -@std-padding;
     }
   }
 }
@@ -84,8 +81,4 @@ body.home {
       .post-without-avatar;
     }
   }
-}
-
-.home-projects .projects {
-  .has-project-cards;
 }

@@ -3,33 +3,4 @@
   <span class="new-seed-label">New Project</span>
 </a>
 
-<div class="projects" masonry='{"itemSelector": ".project-wrapper", "percentPosition": true, "transitionDuration": 0}'>
-  <div class="project-wrapper" ng-repeat="project in projects">
-
-    <div class="project-card" ng-click="$state.go('project.requests', {id: project.slug})">
-      <div class="image"
-           ng-if="(project.image_url || project.thumbnail_url)"
-           back-img="(project.image_url || project.thumbnail_url)"></div>
-      <div class="content">
-        <h3>{{project.title}}</h3>
-        <p>{{project.intention}}</p>
-        <p>
-          <span class="avatar" back-img="project.user.avatar_url"></span>
-          {{project.user.name}}
-        </p>
-        <span class="contributors">
-          {{project.contributor_count}}
-          contributor{{project.contributor_count == 1 ? '' : 's'}}
-          <span class="draft-label" ng-show="!project.isPublished()">
-            Draft
-          </span>
-        </span>
-        <span class="open-requests">
-          {{project.open_request_count}}
-          request{{project.open_request_count == 1 ? '' : 's'}}
-        </span>
-      </div>
-    </div>
-
-  </div>
-</div>
+<ng-include src="'/ui/shared/project-cards.tpl.html'"></ng-include>

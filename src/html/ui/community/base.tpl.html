@@ -1,32 +1,33 @@
-<div class="row community">
-
-  <div id="banner">
-    <div id="banner-image">
-      <div id="innerImage" back-img="community.banner_url"> </div>
-    </div>
-    <div id="banner-text">
-      <div class="banner-communityName">
-        <div class="logo" back-img="::community.avatar_url"></div>
-        <span>{{::community.name}}</span>
-      </div>
-
-      <div class="banner-menu">
-        <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds' || $state.current.name === 'community.seeds.onboarding'}">
-          SEEDS
-          <div class="triangle"></div>
-        </a>
-        <a ui-sref="community.members" ng-class="{selected: $state.current.name === 'community.members'}">
-          MEMBERS
-          <div class="triangle"></div>
-        </a>
-        <a ui-sref="community.about" ng-class="{selected: $state.current.name === 'community.about'}">
-          ABOUT
-          <div class="triangle"></div>
-        </a>
-      </div>
-
-    </div>
+<div id="banner" class="row">
+  <div id="banner-image">
+    <div id="innerImage" back-img="community.banner_url"> </div>
   </div>
-  <div class="tab-content" ui-view="tab"></div>
+  <div id="banner-text">
+    <div class="banner-communityName">
+      <div class="logo" back-img="::community.avatar_url"></div>
+      <span>{{::community.name}}</span>
+    </div>
 
+    <div class="banner-menu" ng-class="{'hide-projects': hideProjectsTab}">
+      <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds' || $state.current.name === 'community.seeds.onboarding'}">
+        SEEDS
+        <div class="triangle"></div>
+      </a><!--
+      --><a ui-sref="community.projects" ng-class="{selected: $state.current.name === 'community.projects'}">
+        PROJECTS
+        <div class="triangle"></div>
+      </a><!--
+      --><a ui-sref="community.members" ng-class="{selected: $state.current.name === 'community.members'}">
+        MEMBERS
+        <div class="triangle"></div>
+      </a><!--
+      --><a ui-sref="community.about" ng-class="{selected: $state.current.name === 'community.about'}">
+        ABOUT
+        <div class="triangle"></div>
+      </a>
+    </div>
+
+  </div>
 </div>
+<div class="tab-content row" ui-view="tab"></div>
+

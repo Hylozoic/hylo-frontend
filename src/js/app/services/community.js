@@ -1,5 +1,4 @@
-var dependencies = ['$resource'];
-dependencies.push(function($resource) {
+var service = function($resource) {
   var Community = $resource('/noo/community/:id', {
     id: '@id'
   }, {
@@ -37,6 +36,10 @@ dependencies.push(function($resource) {
     validate: {
       url: '/noo/community/validate',
       method: 'POST'
+    },
+    projects: {
+      url: '/noo/community/:id/projects',
+      isArray: true
     }
   });
 
@@ -62,12 +65,15 @@ dependencies.push(function($resource) {
     },
     removeMember: function(params, success, error) {
       return Community.removeMember(_.extend({id: this.id}, params), success, error);
+    },
+    projects: function(params, success, error) {
+      return Community.projects(_.extend({id: this.id}, params), success, error);
     }
   });
 
   return Community;
-});
+};
 
 module.exports = function(angularModule) {
-  angularModule.factory('Community', dependencies);
+  angularModule.factory('Community', service);
 };

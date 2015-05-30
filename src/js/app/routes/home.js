@@ -60,8 +60,8 @@ module.exports = function ($stateProvider) {
   .state('home.projects', /*@ngInject*/ {
     url: '/h/my-projects',
     resolve: {
-      projects: function(Project) {
-        return Project.query({context: 'creator-or-contributor'}).$promise;
+      projects: function(currentUser) {
+        return currentUser.projects().$promise;
       }
     },
     views: {
