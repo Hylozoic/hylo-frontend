@@ -121,7 +121,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   };
 
   $scope.getPeopleTextRaw = function(user) {
-    $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name} );
+    $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name});
     $scope.hasMention = true;
     return UserMentions.userTextRaw(user);
   };
