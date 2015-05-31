@@ -55,7 +55,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       });
     };
 
-    $scope.onCommentIconClick = function() {
+    $scope.toggleComments = function() {
       if ($scope.isCommentsCollapsed) {
         $analytics.eventTrack('Post: Comments: Show', {post_id: post.id});
         $scope.editingFollowers = false;
@@ -63,7 +63,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
     };
 
-    $scope.onFollowerIconClick = function() {
+    $scope.toggleFollowers = function() {
       $analytics.eventTrack('Post: Followers: Show', {post_id: post.id});
       $scope.isCommentsCollapsed = true;
       $scope.toggleEditFollowers();
