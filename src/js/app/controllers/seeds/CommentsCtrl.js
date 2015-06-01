@@ -9,6 +9,10 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
     Seed.findComments({id: post.id}, function(comments) {
       post.comments = comments;
       $scope.loading = false;
+    }, function(resp) {
+      if (_.contains([401, 403], resp.status)) {
+        $scope.$emit('unauthorized', {context: 'comment'});
+      }
     });
   }
 

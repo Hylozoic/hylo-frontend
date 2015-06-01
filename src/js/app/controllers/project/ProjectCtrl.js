@@ -1,6 +1,6 @@
 var RichText = require('../../services/RichText');
 
-module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User) {
+module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User, $dialog) {
   "ngInject";
 
   var invitationToken = $stateParams.token;
@@ -33,7 +33,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
   };
 
   $scope.join = function() {
-    var join = function() {
+    var join = function(callback) {
       project.join({token: invitationToken}, function() {
         // remove the token from the url
         window.history.replaceState({}, 'Hylo', location.pathname);
@@ -41,6 +41,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
         $scope.isContributor = true;
         $scope.$broadcast('joinProject');
         growl.addSuccessMessage('You joined the project.');
+        if (callback) callback();
       });
     };
 
@@ -65,8 +66,9 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
       if (result.action === 'go') {
         open(result.state);
       } else if (result.action === 'finish') {
-        join();
-        $scope.$state.reload();
+        join(function() {
+          $scope.$state.reload();
+        });
       }
     };
 
@@ -94,5 +96,14 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
     open('login');
 
   };
+
+  $scope.$on('unauthorized', function(event, data) {
+    if (_.contains(['comment', 'like', 'follow', 'add-members'], data.context)) {
+      $dialog.confirm({message: "You must join this project to do that."})
+      .then(function() {
+        $scope.join();
+      });
+    }
+  })
 
 }

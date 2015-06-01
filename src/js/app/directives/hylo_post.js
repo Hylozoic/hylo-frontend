@@ -52,6 +52,10 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
           post_id: post.id,
           state: (post.myVote ? 'on' : 'off')
         });
+      }, function(resp) {
+        if (_.contains([401, 403], resp.status)) {
+          $scope.$emit('unauthorized', {context: 'like'});
+        }
       });
     };
 
@@ -69,7 +73,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       $scope.toggleEditFollowers();
     };
 
-    $scope.toggleJoinPost = function() {
+    $scope.toggleFollow = function() {
       var user = currentUser;
       if (!user) return;
 
@@ -116,7 +120,12 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
     };
 
     $scope.findMembers = function(search) {
-      return Community.findMembers({id: post.community.id, autocomplete: search, limit: 5}).$promise;
+      return Community.findMembers({id: post.community.id, autocomplete: search, limit: 5}).$promise
+      .catch(function(resp) {
+        if (_.contains([401, 403], resp.status)) {
+          $scope.$emit('unauthorized', {context: 'add-members'});
+        }
+      });
     };
 
     $scope['delete'] = function() {
