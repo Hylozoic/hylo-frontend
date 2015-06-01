@@ -14,8 +14,13 @@
 
     <div ng-show="error == 'used link'">
       <p>That invitation link has already been used.</p>
-      <p>Would you like to <a href="/h/login">log in</a>?</p>
+      <p>Would you like to <a ui-sref="login">log in</a>?</p>
       <p>Please contact us at <a href="mailto:support@hylo.com">support@hylo.com</a> if you need assistance.</p>
+    </div>
+
+    <div ng-show="error === 'already a member'">
+      <p>You're already a member of that community.</p>
+      <p><a ui-sref="appEntry">Continue</a></p>
     </div>
 
     <div ng-show="error" class="hylo-definition">
