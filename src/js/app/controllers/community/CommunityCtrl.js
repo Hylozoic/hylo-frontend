@@ -8,7 +8,8 @@ var controller = function($scope, $analytics, community) {
     community_slug: community.slug
   });
 
-  $scope.hideProjectsTab = community.id != 842; // Dalai Lama Fellows
+  // Dalai Lama Fellows & Permaculture Action
+  $scope.hideProjectsTab = !_.contains([842, 910], community.id);
 
 };
 
