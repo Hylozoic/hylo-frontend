@@ -1,0 +1,21 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <i class="icon-hylo-script" ng-click="close()"></i>
+  </div>
+  <div class="navbar-center" href="#">Project Settings</div>
+  <a class="navbar-right close" ng-click="close()">&times;</a>
+</nav>
+
+<div class="main-content">
+  <div class="all-sections">
+
+    <div class="setting-item">
+      <div class="main-column">
+        <label>Receive notifications about new requests</label>
+      </div>
+      <div class="side-column">
+        <input type="checkbox" ng-model="membership.notify_on_new_posts" ng-click="save()">
+      </div>
+    </div>
+  </div>
+</div>

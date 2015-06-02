@@ -7,7 +7,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
 
   $scope.project = project;
   $scope.isCreator = $scope.canModerate = currentUser && project.user_id === currentUser.id;
-  $scope.isContributor = project.is_contributor;
+  $scope.isContributor = !!project.membership;
 
   $scope.details = RichText.present(project.details, {maxlength: 420});
   $scope.truncatedDetails = project.details && project.details.length > 420;

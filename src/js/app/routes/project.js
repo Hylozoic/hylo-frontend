@@ -91,6 +91,34 @@ module.exports = function ($stateProvider) {
         controller: 'ProjectInviteCtrl'
       }
     }
+  })
+  .state('project.settings', {
+    url: '/settings',
+    views: {
+      project: {
+        templateUrl: '/ui/project/settings.tpl.html',
+        controller: /*@ngInject*/ function($scope, $history, project, currentUser, growl) {
+
+          $scope.close = function() {
+            if ($history.isEmpty()) {
+              $scope.$state.go('project.requests', {slug: project.slug});
+            } else {
+              $history.go(-1);
+            }
+          };
+
+          $scope.membership = project.membership;
+
+          $scope.save = function() {
+            var attrs = _.merge({userId: currentUser.id}, _.pick($scope.membership, 'notify_on_new_posts'));
+            project.updateMembership(attrs, function() {
+              growl.addSuccessMessage('Changes were saved.');
+            });
+          };
+
+        }
+      }
+    }
   });
 
 };

@@ -1,6 +1,7 @@
 var factory = function($resource) {
   var Project = $resource('/noo/project/:id', {
-    id: '@id'
+    id: '@id',
+    userId: '@userId'
   }, {
     posts: {
       url: '/noo/project/:id/posts'
@@ -20,6 +21,10 @@ var factory = function($resource) {
     removeUser: {
       url: '/noo/project/:id/user/:userId',
       method: 'DELETE'
+    },
+    updateMembership: {
+      url: '/noo/project/:id/user/:userId',
+      method: 'POST'
     }
   });
 
@@ -53,6 +58,9 @@ var factory = function($resource) {
     },
     removeUser: function(params, success, error) {
       return Project.removeUser(_.extend({id: this.id}, params), success, error);
+    },
+    updateMembership: function(params, success, error) {
+      return Project.updateMembership(_.extend({id: this.id}, params), success, error);
     }
   });
 

@@ -16,6 +16,10 @@
 <div class="summary-wrapper">
   <div class="summary">
     <a ng-show="isCreator" class="edit-button" ui-sref="editProject({id: project.slug})">Edit project</a>
+    <a ng-show="isContributor" class="edit-button" ui-sref="project.settings({id: project.slug})">
+      <i class="icon-settings"></i>
+      Settings
+    </a>
     <h1>{{project.title}}</h1>
 
     <div class="columns">
