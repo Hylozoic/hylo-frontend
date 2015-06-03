@@ -93,7 +93,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
       $modal.open(options).result.then(handle);
     };
 
-    open('login');
+    open('signup');
 
   };
 
