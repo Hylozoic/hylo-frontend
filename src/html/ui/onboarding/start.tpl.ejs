@@ -12,9 +12,12 @@
     </div>
 
     <div class="leader-message">
-      <p>Thank you for accepting {{onboarding.community.leader.name}}'s invitation to join {{onboarding.community.name}} on Hylo.</p>
-      <img ng-src="{{onboarding.community.leader.avatar_url}}"/>
-      <p class="message">“{{onboarding.community.welcome_message}}”</p>
+      <p>Thank you for joining {{onboarding.community.name}} on Hylo.</p>
+      <div class="leader">
+        <img ng-src="{{onboarding.community.leader.avatar_url}}"/>
+        <div>{{onboarding.community.leader.name}}</div>
+      </div>
+      <p>“{{onboarding.community.welcome_message}}”</p>
     </div>
 
     <div class="center">

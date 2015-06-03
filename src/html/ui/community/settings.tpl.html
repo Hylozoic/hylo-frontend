@@ -78,7 +78,10 @@
           <p class="help">This is shown on the first screen that a new member sees.</p>
         </div>
         <div class="full-column value" ng-hide="editing.welcome_message">
-          <div class="avatar" back-img="community.leader.avatar_url"></div>
+          <div class="leader">
+            <img ng-src="{{community.leader.avatar_url}}"></img>
+            <div>{{community.leader.name}}</div>
+          </div>
           <p>{{community.welcome_message}}</p>
           <button type="button" ng-click="edit('welcome_message', 'leader')">Change</button>
         </div>

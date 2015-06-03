@@ -61,6 +61,28 @@
   }
 }
 
+.community-leader-message() {
+  overflow: hidden;
+
+  .leader {
+    float: left;
+    margin: 0 @std-padding @std-padding 0;
+    text-align: center;
+    width: 70px;
+    img {
+      .user-avatar;
+    }
+    div {
+      .seed-meta-text;
+      margin-top: 5px;
+    }
+  }
+
+  p.message {
+    overflow: hidden;
+  }
+}
+
 .onboarding-start {
 
   .logo {
@@ -77,20 +99,11 @@
   }
 
   .leader-message {
+    .community-leader-message;
     border: 1px solid @border-light;
     margin: @std-padding 0;
     padding: @std-padding @std-padding 0;
     background: white;
-
-    img {
-      .user-avatar;
-      float: left;
-      margin: 0 @std-padding @std-padding 0;
-    }
-
-    p.message {
-      overflow: hidden;
-    }
   }
 }
 
