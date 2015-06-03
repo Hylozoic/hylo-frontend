@@ -25,6 +25,10 @@ var factory = function($resource) {
     updateMembership: {
       url: '/noo/project/:id/user/:userId',
       method: 'POST'
+    },
+    queryForCommunity: {
+      url: '/noo/community/:id/projects',
+      isArray: true
     }
   });
 

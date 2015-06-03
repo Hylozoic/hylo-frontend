@@ -1,4 +1,4 @@
-var service = function($resource) {
+var service = function($resource, Project) {
   var Community = $resource('/noo/community/:id', {
     id: '@id'
   }, {
@@ -36,10 +36,6 @@ var service = function($resource) {
     validate: {
       url: '/noo/community/validate',
       method: 'POST'
-    },
-    projects: {
-      url: '/noo/community/:id/projects',
-      isArray: true
     }
   });
 
@@ -67,7 +63,7 @@ var service = function($resource) {
       return Community.removeMember(_.extend({id: this.id}, params), success, error);
     },
     projects: function(params, success, error) {
-      return Community.projects(_.extend({id: this.id}, params), success, error);
+      return Project.queryForCommunity(_.extend({id: this.id}, params), success, error);
     }
   });
 
