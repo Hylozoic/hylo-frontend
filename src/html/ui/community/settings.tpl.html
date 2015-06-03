@@ -101,9 +101,13 @@
         </div>
       </div>
 
-      <div class="setting-item">
+    </div>
 
-      </div>
+    <div class="section-label" ng-click="expand2 = !expand2">
+      Access
+      <i ng-class="{'icon-down': expand2, 'icon-right': !expand2}"></i>
+    </div>
+    <div class="section access" collapse="!expand2">
 
       <div class="setting-item invitation-permissions">
         <div class="main-column">
@@ -114,6 +118,23 @@
           <input type="checkbox" ng-model="community.settings.all_can_invite" ng-click="saveSetting('all_can_invite')"/>
         </div>
       </div>
+
+      <div class="setting-item">
+        <div class="half-column">
+          <label>Invitation code</label>
+          <p>{{community.beta_access_code}}</p>
+          <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
+        </div>
+        <div class="half-column value" ng-hide="editing.beta_access_code">
+          <button type="button" ng-click="edit('beta_access_code')">Change</button>
+        </div>
+        <div class="half-column edit" ng-show="editing.beta_access_code">
+          <input type="text" class="form-control" ng-model="edited.beta_access_code"/>
+          <button type="button" ng-click="cancelEdit('beta_access_code')">Cancel</button>
+          <button type="button" ng-click="saveEdit('beta_access_code')">Save</button>
+        </div>
+      </div>
+
     </div>
 
     <div class="section-label" ng-click="toggleModerators()">
