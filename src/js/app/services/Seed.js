@@ -29,12 +29,13 @@ var factory = function($resource) {
       }
     },
     queryForCommunity: {
-      method: 'GET',
       url: '/noo/community/:communityId/posts'
     },
     queryForUser: {
-      method: 'GET',
       url: '/noo/user/:userId/posts'
+    },
+    queryForNetwork: {
+      url: '/noo/network/:id/posts'
     },
     fulfill: {
       method: 'POST',

@@ -17,16 +17,33 @@ module.exports = function($stateProvider) {
       }
     }
   })
-  .state('network.seeds', {
+  .state('network.posts', {
     url: '',
     resolve: {
-
+      firstPostQuery: /*@ngInject*/ function(network, Seed) {
+        return Seed.queryForNetwork({id: network.id, limit: 10}).$promise;
+      }
     },
     views: {
       tab: {
-        template: '',
-        controller: function($scope) {
+        templateUrl: '/ui/network/posts.tpl.html',
+        controller: function($scope, network, firstPostQuery, PostManager, Seed) {
           'ngInject';
+
+          var postManager = new PostManager({
+            firstPage: firstPostQuery,
+            scope: $scope,
+            attr: 'posts',
+            query: function() {
+              return Seed.queryForNetwork({
+                id: network.id,
+                limit: 10,
+                offset: $scope.posts.length
+              }).$promise;
+            }
+          });
+
+          postManager.setup();
         }
       }
     }
