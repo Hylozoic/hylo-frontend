@@ -1,34 +1,26 @@
-var controller = function($scope, $analytics, $timeout, growl, currentUser, firstPostQuery, UserCache) {
+var controller = function($scope, currentUser, firstPostQuery, UserCache, PostManager) {
   $scope.posts = firstPostQuery.posts;
   $scope.hasSeeds = $scope.posts.length > 0;
 
-  $scope.removePost = function(post) {
-    growl.addSuccessMessage("Seed has been removed: " + post.name, {ttl: 5000});
-    $analytics.eventTrack('Post: Remove', {post_name: post.name, post_id: post.id});
-    $scope.posts.splice($scope.posts.indexOf(post), 1);
-  };
-
-  $scope.loadMore = _.debounce(function() {
-    if ($scope.loadMoreDisabled) return;
-    $scope.loadMoreDisabled = true;
-
-    currentUser.followedPosts({
-      limit: 10,
-      offset: $scope.posts.length
-    }, function(resp) {
-      Array.prototype.push.apply($scope.posts, resp.posts);
-
+  var postManager = new PostManager({
+    firstPage: firstPostQuery,
+    scope: $scope,
+    attr: 'posts',
+    query: function() {
+      return currentUser.followedPosts({
+        limit: 10,
+        offset: $scope.posts.length
+      }).$promise;
+    },
+    cache: function(posts, total) {
       UserCache.followedPosts.set(currentUser.id, {
-        posts: $scope.posts,
-        posts_total: resp.posts_total
+        posts: posts,
+        posts_total: total
       });
+    }
+  });
 
-      $timeout(function() {
-        if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
-          $scope.loadMoreDisabled = false;
-      });
-    });
-  }, 200);
+  postManager.setup();
 
 };
 

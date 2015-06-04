@@ -1,9 +1,8 @@
-var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstPostQuery, PostManager) {
-
+var controller = function($scope, Cache, Seed, community, onboarding, firstPostQuery, PostManager) {
   $scope.onboarding = onboarding;
   $scope.community = community;
 
-  var pager = new PostManager({
+  var postManager = new PostManager({
     firstPage: firstPostQuery,
     scope: $scope,
     attr: 'posts',
@@ -24,7 +23,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
     }
   });
 
-  pager.setup();
+  postManager.setup();
 
   $scope.selectOptions = {
     sort: [
@@ -50,7 +49,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
       function(x) { return x.value === value }
     );
 
-    pager.reload();
+    postManager.reload();
   };
 
 };

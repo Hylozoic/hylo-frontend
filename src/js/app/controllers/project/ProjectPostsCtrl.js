@@ -1,9 +1,21 @@
-module.exports = function($scope, project, Seed, growl, Cache, UserCache,
-  $analytics, currentUser, postQuery, $stateParams, UserMentions) {
+module.exports = function($scope, project, Seed, Cache, UserCache,
+  $analytics, currentUser, postQuery, $stateParams, UserMentions, PostManager) {
   "ngInject";
 
-  $scope.posts = postQuery.posts;
-  $scope.loadMoreDisabled = $scope.posts.length >= postQuery.posts_total;
+  var postManager = new PostManager({
+    firstPage: postQuery,
+    scope: $scope,
+    attr: 'posts',
+    query: function() {
+      return project.posts({
+        limit: 10,
+        offset: $scope.posts.length,
+        token: $stateParams.token
+      }).$promise;
+    }
+  });
+
+  postManager.setup();
 
   var placeholder = "I'm looking for ",
     newRequest = $scope.newRequest = {name: placeholder};
@@ -41,9 +53,7 @@ module.exports = function($scope, project, Seed, growl, Cache, UserCache,
       UserCache.posts.clear(currentUser.id);
       UserCache.allPosts.clear(currentUser.id);
 
-      $scope.posts = [];
-      $scope.loadMoreDisabled = false;
-      $scope.loadMore();
+      postManager.reload();
       newRequest.name = placeholder;
       newRequest.description = null;
       $scope.showDescription = false;
@@ -54,27 +64,5 @@ module.exports = function($scope, project, Seed, growl, Cache, UserCache,
     });
 
   };
-
-  $scope.removePost = function(post) {
-    growl.addSuccessMessage("Post has been removed: " + post.name, {ttl: 5000});
-    $analytics.eventTrack('Post: Remove', {post_name: post.name, post_id: post.id});
-    $scope.posts.splice($scope.posts.indexOf(post), 1);
-  };
-
-  $scope.loadMore = _.debounce(function() {
-    if ($scope.loadMoreDisabled) return;
-    $scope.loadMoreDisabled = true;
-
-    project.posts({
-      limit: 10,
-      offset: $scope.posts.length,
-      token: $stateParams.token
-    }, function(resp) {
-      $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(post) { return post.id });
-
-      if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
-        $scope.loadMoreDisabled = false;
-    });
-  });
 
 };
