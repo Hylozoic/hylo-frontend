@@ -1,7 +1,25 @@
-<div class="nav-title">{{network.name}}</div>
-
-<div class="main-content">
-  <div class="all-sections">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="banner">
+  <div class="background">
+    <div back-img="::network.banner_url"></div>
+  </div>
+  <div class="titles">
+    <div class="logo" back-img="::network.avatar_url"></div>
+    <div class="name">{{::network.name}}</div>
+  </div>
+  <div class="tabs">
+    <a ui-sref="network.seeds" ng-class="{selected: $state.current.name === 'network.seeds'}">
+      SEEDS
+      <div class="triangle"></div>
+    </a><!--
+    --><a ui-sref="network.communities" ng-class="{selected: $state.current.name === 'network.communities'}">
+      COMMUNITIES
+      <div class="triangle"></div>
+    </a><!--
+    --><a ui-sref="network.about" ng-class="{selected: $state.current.name === 'network.about'}">
+      ABOUT
+      <div class="triangle"></div>
+    </a>
   </div>
 </div>
+
+<div class="tab-content" ui-view="tab"></div>

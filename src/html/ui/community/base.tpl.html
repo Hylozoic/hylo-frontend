@@ -1,18 +1,18 @@
-<div id="banner" class="row">
-  <div id="banner-image">
-    <div id="innerImage" back-img="community.banner_url"> </div>
+<div class="banner">
+  <div class="background">
+    <div back-img="::community.banner_url"></div>
   </div>
-  <div id="banner-text">
-    <div class="banner-communityName">
-      <div class="logo" back-img="::community.avatar_url"></div>
-      <div class="name">{{::community.name}}</div>
-      <div class="network" ng-if="::community.network">
-        Part of
-        <a ui-sref="network({slug: community.network.slug})">{{::community.network.name}}</a>
-      </div>
-    </div>
 
-    <div class="banner-menu" ng-class="{'hide-projects': hideProjectsTab}">
+  <div class="titles">
+    <div class="logo" back-img="::community.avatar_url"></div>
+    <div class="name">{{::community.name}}</div>
+    <div class="network" ng-if="::community.network">
+      Part of
+      <a ui-sref="network({slug: community.network.slug})">{{::community.network.name}}</a>
+    </div>
+  </div>
+
+    <div class="tabs" ng-class="{'hide-projects': hideProjectsTab}">
       <a ui-sref="community.seeds" ng-class="{selected: $state.current.name === 'community.seeds' || $state.current.name === 'community.seeds.onboarding'}">
         SEEDS
         <div class="triangle"></div>

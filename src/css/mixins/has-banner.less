@@ -1,0 +1,125 @@
+.has-banner() {
+  .banner {
+    position: relative;
+    z-index: 1;
+    .make-row;
+  }
+
+  .background {
+    .dark-background-gradient;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    > div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: .9;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .titles {
+    position: relative;
+    color: white;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    padding: 8vh @std-padding 2vh;
+
+    .name {
+      .huge-header;
+      @media (max-width: @screen-xs-max) {
+        font-size: 32px;
+        line-height: 1;
+      }
+    }
+
+    .network {
+      .seed-title-text;
+      .proxima-nova-light;
+      &, a { color: white; }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      margin: 0 auto;
+
+      @media (max-width: @screen-xs-max) {
+        margin-bottom: 7px;
+      }
+    }
+  }
+
+  .tabs {
+    text-align: center;
+    margin-left: auto;
+    margin-top: auto;
+    width: 100%;
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+
+    @media (max-width: @screen-xs-max) {
+      padding: 0;
+    }
+
+    a {
+      .medium-title-text;
+      .remove-link-display(@lighter-gray);
+      display: inline-block;
+      position: relative;
+      padding: 10px 0;
+      height: 60px;
+      width: 25%;
+      font-weight: 300;
+      font-size: 14px;
+
+      .triangle {
+        display: none;
+      }
+
+      &.selected {
+        color: white;
+        font-weight: 500;
+        .triangle {
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-left: 12px solid transparent;
+          border-right: 12px solid transparent;
+          border-bottom: 14px solid white;
+          margin-left: -13px;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        height: 40px;
+        .small-title-text;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        &.selected {
+          .triangle {
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid white;
+            margin-left: -9px;
+          }
+        }
+      }
+    }
+
+  }
+
+  .tab-content {
+    position: relative;
+    z-index: 2;
+    .make-row;
+  }
+}
