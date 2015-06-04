@@ -1,5 +1,5 @@
 var controller = function($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Seed, $sce, $filter, UserMentions, Comment, $dialog) {
+  $q, Seed, $sce, UserMentions, Comment, $dialog) {
 
   var post = $scope.post;
 

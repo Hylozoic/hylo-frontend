@@ -1,5 +1,4 @@
-var filepickerUpload = require('../../services/filepickerUpload'),
-  format = require('util').format;
+var filepickerUpload = require('../../services/filepickerUpload');
 
 var controller = function($scope, currentUser, Project, project) {
 

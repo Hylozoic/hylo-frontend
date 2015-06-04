@@ -1,6 +1,6 @@
 var Medium = require('medium.js/medium');
 
-var directive = function($sce, $filter, $timeout) {
+var directive = function($sce, $timeout) {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
