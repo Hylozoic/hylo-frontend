@@ -5,7 +5,11 @@
   <div id="banner-text">
     <div class="banner-communityName">
       <div class="logo" back-img="::community.avatar_url"></div>
-      <span>{{::community.name}}</span>
+      <div class="name">{{::community.name}}</div>
+      <div class="network" ng-if="::community.network">
+        Part of
+        <a ui-sref="network({slug: community.network.slug})">{{::community.network.name}}</a>
+      </div>
     </div>
 
     <div class="banner-menu" ng-class="{'hide-projects': hideProjectsTab}">

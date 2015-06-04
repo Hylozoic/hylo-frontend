@@ -135,8 +135,13 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('network', {
-      url: "/n/:network",
+      url: "/n/:slug",
       parent: 'main',
+      resolve: {
+        network: /*@ngInject*/ function(Network, $stateParams) {
+          return Network.get({id: $stateParams.slug}).$promise;
+        }
+      },
       views: {
         main: {
           templateUrl: '/ui/app/network.tpl.html',

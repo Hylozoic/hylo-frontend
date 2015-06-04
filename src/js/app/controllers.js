@@ -1,7 +1,5 @@
 var angularModule = angular.module('hyloControllers', []);
 
-require('./controllers/network');
-
 require('./controllers/profile')(angularModule);
 require('./controllers/profile/edit')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
@@ -40,4 +38,5 @@ angularModule
 .controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
 .controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
-.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'));
+.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'))
+.controller('NetworkCtrl',       require('./controllers/network/NetworkCtrl'));

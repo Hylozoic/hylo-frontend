@@ -24,16 +24,24 @@
 
   .banner-communityName {
     position: relative;
-    .huge-header;
     color: white;
     text-align: center;
     margin: 0;
     width: 100%;
     padding: 8vh @std-padding 2vh;
 
-    @media (max-width: @screen-xs-max) {
-      font-size: 32px;
-      line-height: 1;
+    .name {
+      .huge-header;
+      @media (max-width: @screen-xs-max) {
+        font-size: 32px;
+        line-height: 1;
+      }
+    }
+
+    .network {
+      .seed-title-text;
+      .proxima-nova-light;
+      &, a { color: white; }
     }
 
     .logo {
