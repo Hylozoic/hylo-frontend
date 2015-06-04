@@ -1,40 +1,30 @@
-var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstPostQuery) {
+var controller = function($scope, Cache, Seed, growl, $analytics, community, onboarding, firstPostQuery, PostManager) {
 
   $scope.onboarding = onboarding;
   $scope.community = community;
-  $scope.posts = firstPostQuery.posts;
-  $scope.loadMoreDisabled = $scope.posts.length >= firstPostQuery.posts_total;
 
-  $scope.loadMore = _.debounce(function() {
-    if ($scope.loadMoreDisabled) return;
-    $scope.loadMoreDisabled = true;
-
-    Seed.queryForCommunity({
-      communityId: community.id,
-      limit: 10,
-      offset: $scope.posts.length,
-      type: $scope.selected.filter.value,
-      sort: $scope.selected.sort.value
-    }, function(resp) {
-      $scope.posts = _.uniq($scope.posts.concat(resp.posts), function(post) {
-        return post.id;
-      });
-
+  var pager = new PostManager({
+    firstPage: firstPostQuery,
+    scope: $scope,
+    attr: 'posts',
+    cache: function(posts, total) {
       Cache.set('community.posts:' + community.id, {
-        posts: $scope.posts,
-        posts_total: resp.posts_total
+        posts: posts,
+        posts_total: total
       }, {maxAge: 10 * 60});
+    },
+    query: function() {
+      return Seed.queryForCommunity({
+        communityId: community.id,
+        limit: 10,
+        offset: $scope.posts.length,
+        type: $scope.selected.filter.value,
+        sort: $scope.selected.sort.value
+      }).$promise;
+    }
+  });
 
-      if (resp.posts.length > 0 && $scope.posts.length < resp.posts_total)
-        $scope.loadMoreDisabled = false;
-    });
-  }, 200);
-
-  $scope.remove = function(postToRemove) {
-    growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
-    $analytics.eventTrack('Post: Remove', {post_name: postToRemove.name, post_id: postToRemove.id});
-    $scope.posts.splice($scope.posts.indexOf(postToRemove), 1);
-  };
+  pager.setup();
 
   $scope.selectOptions = {
     sort: [
@@ -60,9 +50,7 @@ var controller = function($scope, Cache, Seed, growl, $analytics, community, onb
       function(x) { return x.value === value }
     );
 
-    $scope.posts = [];
-    $scope.loadMoreDisabled = false;
-    $scope.loadMore();
+    pager.reload();
   };
 
 };

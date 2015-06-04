@@ -41,4 +41,5 @@ require('./services/dialog')(angularModule);
 require('./services/Cache')(angularModule);
 require('./services/UserCache')(angularModule);
 require('./services/ThirdPartyAuth')(angularModule);
+require('./services/PostManager')(angularModule);
 require('./services/popupDone');
