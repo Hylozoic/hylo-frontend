@@ -12,7 +12,10 @@
       padding: 0 @std-padding * 2;
     }
 
-    > p, > div, > form > p, > form > div {
+    // FIXME these pages are done wrong; it should be
+    // .main-content > .all-sections and then there will be
+    // no need for extra rows and padding adjustment on mobile
+    > p, > div, > form > p, > form > div, > h1 {
       .make-row;
     }
   }

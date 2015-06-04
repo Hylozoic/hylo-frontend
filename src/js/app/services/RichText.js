@@ -1,6 +1,12 @@
 var linkify = require('html-linkify'),
-  format = require('util').format,
+  marked = require('marked'),
   truncate = require('html-truncate');
+
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+  sanitize: true
+});
 
 module.exports = {
   present: function(text, opts) {
@@ -22,5 +28,7 @@ module.exports = {
       text = truncate(text, opts.maxlength);
 
     return text;
-  }
+  },
+
+  markdown: marked
 };

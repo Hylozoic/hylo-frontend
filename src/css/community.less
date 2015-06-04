@@ -171,18 +171,21 @@
 }
 
 .community-about-toolbar {
+  > div {
+    .make-sm-column(6);
+    .make-sm-column-offset(3);
+  }
   .settings {
     .rounded-button;
   }
 }
 
 .core-intention {
-  .large-body-text;
-  text-align: center;
-  color: @readable-text;
-  h3 {
-    .section-title;
-  }
+  padding-top: @std-padding;
+  padding-bottom: @std-padding;
+  .make-sm-column(6);
+  .make-sm-column-offset(3);
+  .seed-body-text;
 }
 
 .user-list-item {

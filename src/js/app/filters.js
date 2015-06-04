@@ -3,6 +3,11 @@ var RichText = require('./services/RichText'),
 
 module.exports = function(angularModule) {
   angularModule
+  .filter('markdown', function($filter) {
+    return function(text) {
+      return $filter('unsafe')(RichText.markdown(text));
+    }
+  })
   .filter('richText', function() {
     return function(text) {
       return RichText.present(text, {skipWrap: true});
