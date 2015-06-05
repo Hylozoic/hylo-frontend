@@ -33,7 +33,7 @@ var handleError = function(err, $scope, $analytics) {
 };
 
 var finishLogin = function($scope, $analytics, $stateParams, context) {
-  $analytics.eventTrack('Login success', {provider: $scope.serviceUsed || 'password'});
+  $analytics.eventTrack('Login success', {provider: $scope.serviceUsed || 'password', email: $scope.user.email});
   if ($stateParams.next) {
     history.pushState(null, null, $stateParams.next);
   } else if (context === 'modal') {
