@@ -11,7 +11,8 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dist/bundle.css': ['src/css/index.less'],
-          'dist/dev/admin.css': ['src/css/admin/index.less']
+          'dist/dev/admin/bundle.css': ['src/css/admin/index.less'],
+          'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less']
         },
         options: {
           rootpath: "/dev/"
@@ -20,12 +21,8 @@ module.exports = function(grunt) {
       deploy: {
         files: {
           'dist/deploy/bundle.css': ['src/css/index.less'],
-          'dist/deploy/pages/admin.css': ['src/css/admin/index.less']
-        }
-      },
-      styleguide: {
-        files: {
-          'dist/styleguide.css': ['src/css/styleguide.less']
+          'dist/deploy/pages/admin/bundle.css': ['src/css/admin/index.less'],
+          'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less']
         }
       }
     },
@@ -46,13 +43,13 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dist/bundle.js': ['src/js/index.js'],
-          'dist/dev/admin.js': ['src/js/admin/index.js']
+          'dist/dev/admin/bundle.js': ['src/js/admin/index.js']
         }
       },
       deploy: {
         files: {
           'dist/deploy/bundle.js': ['src/js/index.js'],
-          'dist/deploy/pages/admin.js': ['src/js/admin/index.js']
+          'dist/deploy/pages/admin/bundle.js': ['src/js/admin/index.js']
         }
       }
     },
@@ -108,14 +105,7 @@ module.exports = function(grunt) {
           {cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/ui/'}
         ],
         verbose: true
-      },
-      styleguide: {
-        files: [
-          {cwd: 'src/html/styleguide', src: ['**'], dest: 'dist/styleguide'}
-        ],
-        updateAndDelete: true,
-        verbose: true
-      },
+      }
     },
     copy: {
       deploy: {
@@ -147,7 +137,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*'],
-        tasks: ['less:dev', 'less:styleguide', 'notify:css']
+        tasks: ['less:dev', 'notify:css']
       },
       img: {
         files: ['src/img/**/*'],
@@ -164,10 +154,6 @@ module.exports = function(grunt) {
       uiEjs: {
         files: ['src/html/ui/**/*.ejs'],
         tasks: ['ejs:ui']
-      },
-      styleguide: {
-        files: ['src/html/styleguide/**/*'],
-        tasks: ['sync:styleguide']
       },
       options: {
         livereload: true,
@@ -196,12 +182,10 @@ module.exports = function(grunt) {
   grunt.registerTask('dev-start', [
     'browserify:dev',
     'less:dev',
-    'less:styleguide',
     'sync:img',
     'sync:ui',
     'ejs:pages',
-    'ejs:ui',
-    'sync:styleguide'
+    'ejs:ui'
   ]);
 
   grunt.registerTask('dev', [

@@ -42,7 +42,8 @@ var staticPages = [
   '/about/team',
   '/about/careers',
   '/about/contact',
-  '/admin'
+  '/admin',
+  '/styleguide'
 ];
 
 module.exports = function(opts) {
