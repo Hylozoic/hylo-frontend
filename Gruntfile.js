@@ -10,7 +10,8 @@ module.exports = function(grunt) {
     less: {
       dev: {
         files: {
-          'dist/bundle.css': ['src/css/index.less']
+          'dist/bundle.css': ['src/css/index.less'],
+          'dist/dev/admin.css': ['src/css/admin/index.less']
         },
         options: {
           rootpath: "/dev/"
@@ -18,7 +19,8 @@ module.exports = function(grunt) {
       },
       deploy: {
         files: {
-          'dist/deploy/bundle.css': ['src/css/index.less']
+          'dist/deploy/bundle.css': ['src/css/index.less'],
+          'dist/deploy/pages/admin.css': ['src/css/admin/index.less']
         }
       },
       styleguide: {
@@ -42,10 +44,16 @@ module.exports = function(grunt) {
         transform: ['browserify-ngannotate', 'debowerify']
       },
       dev: {
-        files: {'dist/bundle.js': ['src/js/index.js']}
+        files: {
+          'dist/bundle.js': ['src/js/index.js'],
+          'dist/dev/admin.js': ['src/js/admin/index.js']
+        }
       },
       deploy: {
-        files: {'dist/deploy/bundle.js': ['src/js/index.js']}
+        files: {
+          'dist/deploy/bundle.js': ['src/js/index.js'],
+          'dist/deploy/pages/admin.js': ['src/js/admin/index.js']
+        }
       }
     },
     ejs: {

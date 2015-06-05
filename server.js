@@ -42,6 +42,7 @@ var staticPages = [
   '/about/team',
   '/about/careers',
   '/about/contact',
+  '/admin'
 ];
 
 module.exports = function(opts) {
@@ -66,7 +67,7 @@ module.exports = function(opts) {
     u.pathname = u.pathname.replace(/\/$/, '');
 
     // Node API
-    if (_.any(['/noo', '/admin'], function(p) { return _.startsWith(u.pathname, p); })) {
+    if (_.startsWith(u.pathname, '/noo')) {
       proxy(req, res, upstreamHost, upstreamPort);
       log('→ Node');
       return;

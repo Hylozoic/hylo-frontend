@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<base href="/">
+
+<%- include('../_favicon') %>
+
+<script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="<%= assetUrl('admin.css') %>" rel="stylesheet">
+<title>Hylo Admin</title>
+</head>
+
+<body ng-controller="BaseCtrl">
+<div class="container-fluid">
+  <h1>Hylo Admin UI</h1>
+
+  <p>
+    {{currentUser.email}}&nbsp;&nbsp;☺&nbsp;
+    <a href="/admin/kue">Kue</a>&nbsp;&nbsp;☺&nbsp;
+    <a href="/noo/admin/logout">Log out</a>
+  </p>
+
+  <table class="communities">
+    <thead>
+      <tr>
+        <th>community</th>
+        <th>code</th>
+        <th>slug</th>
+        <th>id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="community in communities" ng-class="{even: $index % 2 == 0}">
+        <td>
+          <img ng-src="{{community.avatar_url}}">
+          <a ng-href="/c/{{community.slug}}">{{community.name}}</a>
+        </td>
+        <td>{{community.beta_access_code}}</td>
+        <td>{{community.slug}}</td>
+        <td>{{community.id}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script type="text/javascript" src="<%= assetUrl('admin.js') %>"></script>
+</body>
+</html>

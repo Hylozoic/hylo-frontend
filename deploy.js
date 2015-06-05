@@ -93,6 +93,8 @@ Deployer.prototype.upload = function(done) {
       upload(path, contents, 'text/css', done);
     }.bind(this),
 
+    // TODO just copy all the assets into the versioned directory,
+    // instead of treating the JS and CSS differently
     function pages(done) {
       dir.files('dist/deploy/pages', function(err, files) {
         if (err) throw err;
@@ -167,8 +169,6 @@ Deployer.prototype.updateEnv = function(callback) {
   this.log.subhead(util.format('updating ENV on %s and %s', this.app, nodeApp));
 
   newVars = {
-    JS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.js,
-    CSS_BUNDLE_URL: this.awsContentUrlPrefix + this.bundlePaths.css,
     BUNDLE_VERSION: this.version
   };
 

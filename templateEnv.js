@@ -10,6 +10,9 @@ module.exports = function(env) {
       imageUrl: function(path) {
         return format('/dev/img/%s', path);
       },
+      assetUrl: function(path) {
+        return format('/dev/%s', path);
+      },
       rootPath: '/dev/'
     };
   }
@@ -23,6 +26,9 @@ module.exports = function(env) {
     jsBundleUrl: format('%s/assets/bundle-%s.min.js', host, version),
     imageUrl: function(path) {
       return format('%s/assets/%s/img/%s', host, version, path);
+    },
+    assetUrl: function(path) {
+      return format('%s/assets/%s/%s', host, version, path);
     },
     rootPath: format('%s/assets/%s/', host, version)
   };
