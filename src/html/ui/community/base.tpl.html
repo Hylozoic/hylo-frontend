@@ -8,7 +8,7 @@
     <div class="name">{{::community.name}}</div>
     <div class="network" ng-if="::community.network">
       Part of
-      <a ui-sref="network({slug: community.network.slug})">{{::community.network.name}}</a>
+      <a ui-sref="network.communities({slug: community.network.slug})">{{::community.network.name}}</a>
     </div>
   </div>
 

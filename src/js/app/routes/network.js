@@ -13,7 +13,10 @@ module.exports = function($stateProvider) {
     views: {
       main: {
         templateUrl: '/ui/app/network.tpl.html',
-        controller: 'NetworkCtrl'
+        controller: function($scope, network) {
+          'ngInject';
+          $scope.network = network;
+        }
       }
     }
   })
@@ -51,13 +54,16 @@ module.exports = function($stateProvider) {
   .state('network.communities', {
     url: '/communities',
     resolve: {
-
+      communities: function(network) {
+        return network.communities().$promise;
+      }
     },
     views: {
       tab: {
-        template: '',
-        controller: function($scope) {
+        templateUrl: '/ui/network/communities.tpl.html',
+        controller: function($scope, communities) {
           'ngInject';
+          $scope.communities = communities;
         }
       }
     }

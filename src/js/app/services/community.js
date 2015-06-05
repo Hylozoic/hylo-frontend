@@ -33,6 +33,10 @@ var service = function($resource, Project) {
     validate: {
       url: '/noo/community/validate',
       method: 'POST'
+    },
+    queryForNetwork: {
+      url: '/noo/network/:id/communities',
+      isArray: true
     }
   });
 

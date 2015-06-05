@@ -1,0 +1,21 @@
+<div class="communities">
+  <div>
+    <div class="community-card-wrapper" ng-repeat="community in communities">
+
+      <div class="community-card" ng-click="$state.go('community.seeds', {community: community.slug})">
+        <div class="background">
+          <div>
+            <div back-img="::community.banner_url"></div>
+          </div>
+        </div>
+
+        <div class="middle-content">
+          <img class="logo" ng-src="{{community.avatar_url}}">
+          <div class="name">{{community.name}}</div>
+          {{community.memberCount}} members
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -38,5 +38,4 @@ angularModule
 .controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
 .controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
-.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'))
-.controller('NetworkCtrl',       require('./controllers/network/NetworkCtrl'));
+.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'));
