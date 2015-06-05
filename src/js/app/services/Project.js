@@ -29,6 +29,10 @@ var factory = function($resource) {
     queryForCommunity: {
       url: '/noo/community/:id/projects',
       isArray: true
+    },
+    queryForUser: {
+      url: '/noo/user/:id/projects',
+      isArray: true
     }
   });
 

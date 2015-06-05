@@ -1,4 +1,4 @@
-var factory = function($resource, $rootScope) {
+var factory = function($resource, $rootScope, Project) {
   var User = $resource('/noo/user/:id', {
     id: '@id'
   }, {
@@ -40,10 +40,6 @@ var factory = function($resource, $rootScope) {
       params: {
         type: 'people'
       }
-    },
-    projects: {
-      url: '/noo/user/:id/projects',
-      isArray: true
     }
   });
 
@@ -77,7 +73,7 @@ var factory = function($resource, $rootScope) {
       return User.allPosts(_.extend({id: this.id}, params), success, error);
     },
     projects: function(params, success, error) {
-      return User.projects(_.extend({id: this.id}, params), success, error);
+      return Project.queryForUser(_.extend({id: this.id}, params), success, error);
     },
     firstName: function() {
       return this.name.split(' ')[0];
