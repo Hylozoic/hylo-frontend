@@ -22,8 +22,8 @@ factory('Overlay', function($rootScope) {
 });
 
 // resources
-require('./services/user')(angularModule);
-require('./services/community')(angularModule);
+require('./services/User')(angularModule);
+require('./services/Community')(angularModule);
 require('./services/Activity')(angularModule);
 require('./services/Comment')(angularModule);
 require('./services/Search')(angularModule);
