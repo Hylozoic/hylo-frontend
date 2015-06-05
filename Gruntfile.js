@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     less: {
       dev: {
         files: {
-          'dist/bundle.css': ['src/css/index.less'],
+          'dist/dev/bundle.css': ['src/css/index.less'],
           'dist/dev/admin/bundle.css': ['src/css/admin/index.less'],
           'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less']
         },
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       },
       deploy: {
         files: {
-          'dist/deploy/bundle.css': ['src/css/index.less'],
+          'dist/deploy/pages/bundle.css': ['src/css/index.less'],
           'dist/deploy/pages/admin/bundle.css': ['src/css/admin/index.less'],
           'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less']
         }
@@ -29,7 +29,9 @@ module.exports = function(grunt) {
     cssmin: {
       deploy: {
         files: {
-          'dist/deploy/bundle.min.css': ['dist/deploy/bundle.css']
+          'dist/deploy/pages/bundle.min.css': ['dist/deploy/pages/bundle.css'],
+          'dist/deploy/pages/admin/bundle.min.css': ['dist/deploy/pages/admin/bundle.css'],
+          'dist/deploy/pages/styleguide/bundle.min.css': ['dist/deploy/pages/styleguide/bundle.css']
         }
       }
     },
@@ -42,13 +44,13 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'dist/bundle.js': ['src/js/index.js'],
+          'dist/dev/bundle.js': ['src/js/index.js'],
           'dist/dev/admin/bundle.js': ['src/js/admin/index.js']
         }
       },
       deploy: {
         files: {
-          'dist/deploy/bundle.js': ['src/js/index.js'],
+          'dist/deploy/pages/bundle.js': ['src/js/index.js'],
           'dist/deploy/pages/admin/bundle.js': ['src/js/admin/index.js']
         }
       }
@@ -76,7 +78,8 @@ module.exports = function(grunt) {
     extract_sourcemap: {
       deploy: {
         files: {
-          'dist/deploy': ['dist/deploy/bundle.js']
+          'dist/deploy/pages': ['dist/deploy/pages/bundle.js'],
+          'dist/deploy/pages/admin': ['dist/deploy/pages/admin/bundle.js']
         }
       }
     },
@@ -84,11 +87,12 @@ module.exports = function(grunt) {
       deploy: {
         options: {
           sourceMap: true,
-          sourceMapIn: 'dist/deploy/bundle.js.map',
+          sourceMapIn: 'dist/deploy/pages/bundle.js.map',
           sourceMapIncludeSources: true
         },
         files: {
-          'dist/deploy/bundle.min.js': ['dist/deploy/bundle.js']
+          'dist/deploy/pages/bundle.min.js': ['dist/deploy/pages/bundle.js'],
+          'dist/deploy/pages/admin/bundle.min.js': ['dist/deploy/pages/admin/bundle.js']
         }
       }
     },
@@ -119,7 +123,7 @@ module.exports = function(grunt) {
       deploy: {
         cwd: 'dist/deploy/ui',
         src: '**/*.html',
-        dest: 'dist/deploy/bundle.js',
+        dest: 'dist/deploy/pages/bundle.js',
         options: {
           append: true,
           module: 'hyloApp',

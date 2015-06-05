@@ -58,61 +58,21 @@ Deployer.prototype.upload = function(done) {
 
   var version = this.version;
 
-  async.series([
-    function js(done) {
-      var contents = cat('dist/deploy/bundle.min.js'),
-        path = 'assets/bundle-' + version + '.min.js';
-      this.bundlePaths.js = path;
+  dir.files('dist/deploy/pages', function(err, files) {
+    if (err) throw err;
+    async.each(files, function(filename, next) {
+      var contents = fs.readFileSync(filename),
+        path = filename.replace(/^dist\/deploy\/pages/, 'assets/' + version);
 
-      contents = contents.replace(
-        'sourceMappingURL=bundle.min.js.map',
-        'sourceMappingURL=bundle-' + version + '.min.js.map'
-      );
-
-      upload(path, contents, 'application/x-javascript', done);
-    }.bind(this),
-
-    function jsMap(done) {
-      var contents = cat('dist/deploy/bundle.min.js.map'),
-        path = this.bundlePaths.js + '.map';
-
-      upload(path, contents, 'application/json', done);
-    }.bind(this),
-
-    function css(done) {
-      var contents = cat('dist/deploy/bundle.min.css'),
-        path = 'assets/bundle-' + version + '.min.css';
-      this.bundlePaths.css = path;
-
-      // fix image paths
-      contents = contents.replace(
-        /url\((['"])*\//g,
-        'url($1' + process.env.CONTENT_URL + '/'
-      );
-
-      upload(path, contents, 'text/css', done);
-    }.bind(this),
-
-    // TODO just copy all the assets into the versioned directory,
-    // instead of treating the JS and CSS differently
-    function pages(done) {
-      dir.files('dist/deploy/pages', function(err, files) {
-        if (err) throw err;
-        async.each(files, function(filename, next) {
-          var contents = fs.readFileSync(filename),
-            path = filename.replace(/^dist\/deploy\/pages/, 'assets/' + version);
-
-          upload(path, contents, mime.lookup(filename), next);
-        }, done);
-      });
-    }.bind(this)
-
-  ], done);
-
+      upload(path, contents, mime.lookup(filename), next);
+    }, done);
+  });
 };
 
 Deployer.prototype.uploadSourceMap = function(callback) {
   this.log.subhead('uploading source map to Rollbar');
+
+  var sourceMapFile = 'dist/deploy/pages/bundle.min.js.map';
 
   var formData = {
     // Pass a simple key-value pair
@@ -123,9 +83,9 @@ Deployer.prototype.uploadSourceMap = function(callback) {
     // Pass optional meta-data with an 'options' object with style: {value: DATA, options: OPTIONS}
     // See the `form-data` README for more information about options: https://github.com/felixge/node-form-data
     source_map: {
-      value:  fs.createReadStream('dist/deploy/bundle.min.js.map'),
+      value:  fs.createReadStream(sourceMapFile),
       options: {
-        filename: 'dist/deploy/bundle.min.js.map',
+        filename: sourceMapFile,
         contentType: 'application/octet-stream'
       }
     }
