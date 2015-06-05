@@ -54,7 +54,7 @@ module.exports = function($stateProvider) {
   .state('network.communities', {
     url: '/communities',
     resolve: {
-      communities: function(network) {
+      communities: /*@ngInject*/ function(network) {
         return network.communities().$promise;
       }
     },
