@@ -1,35 +1,28 @@
 var format = require('util').format;
 
 module.exports = function(env) {
+  var rootPath;
 
-  if (env == 'development') {
-    return {
-      environment: 'development',
-      imageUrl: function(path) {
-        return format('/dev/img/%s', path);
-      },
-      assetUrl: function(path) {
-        return format('/dev/%s', path);
-      },
-      rootPath: '/dev/'
-    };
+  if (env === 'development') {
+    rootPath = '/dev/';
+  } else {
+    rootPath = format('%s/assets/%s',
+      process.env.AWS_S3_CONTENT_URL,
+      process.env.BUNDLE_VERSION);
   }
-
-  var host = process.env.AWS_S3_CONTENT_URL,
-    version = process.env.BUNDLE_VERSION;
 
   return {
     environment: env,
+    rootPath: rootPath,
     imageUrl: function(path) {
-      return format('%s/assets/%s/img/%s', host, version, path);
+      return format('%s/img/%s', rootPath, path);
     },
     assetUrl: function(path) {
       if (path.match(/bundle\.(js|css)/)) {
         path = path.replace(/\.(js|css)$/, '.min.$1');
       }
-      return format('%s/assets/%s/%s', host, version, path);
-    },
-    rootPath: format('%s/assets/%s/', host, version)
+      return format('%s/%s', rootPath, path);
+    }
   };
 
 };
