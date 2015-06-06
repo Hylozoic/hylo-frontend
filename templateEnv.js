@@ -4,7 +4,7 @@ module.exports = function(env) {
   var rootPath;
 
   if (env === 'development') {
-    rootPath = '/dev/';
+    rootPath = '/dev';
   } else {
     rootPath = format('%s/assets/%s',
       process.env.AWS_S3_CONTENT_URL,
@@ -18,7 +18,7 @@ module.exports = function(env) {
       return format('%s/img/%s', rootPath, path);
     },
     assetUrl: function(path) {
-      if (path.match(/bundle\.(js|css)/)) {
+      if (env !== 'development' && path.match(/bundle\.(js|css)/)) {
         path = path.replace(/\.(js|css)$/, '.min.$1');
       }
       return format('%s/%s', rootPath, path);
