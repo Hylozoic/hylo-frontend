@@ -4,6 +4,18 @@ module.exports = function ($stateProvider) {
   .state('home', {
     abstract: true,
     parent: 'main',
+    resolve: {
+      requireLogin: /*@ngInject*/ function(currentUser, $timeout, $state, $q) {
+        if (!currentUser) {
+          $timeout(function() {
+            $state.go('login');
+          });
+          var deferred = $q.defer();
+          deferred.reject('login required');
+          return deferred.promise;
+        }
+      }
+    },
     views: {
       main: {
         templateUrl: '/ui/home/show.tpl.html',
@@ -14,7 +26,7 @@ module.exports = function ($stateProvider) {
   .state('home.mySeeds', {
     url: '/h/my-seeds',
     resolve: /*@ngInject*/{
-      firstPostQuery: function(UserCache, currentUser) {
+      firstPostQuery: function(UserCache, currentUser, requireLogin) {
         return UserCache.posts.fetch(currentUser.id);
       },
       user: function(currentUser) {
@@ -32,7 +44,7 @@ module.exports = function ($stateProvider) {
   .state('home.following', {
     url: '/h/following',
     resolve: /*@ngInject*/{
-      firstPostQuery: function(UserCache, currentUser) {
+      firstPostQuery: function(UserCache, currentUser, requireLogin) {
         return UserCache.followedPosts.fetch(currentUser);
       }
     },
@@ -46,7 +58,7 @@ module.exports = function ($stateProvider) {
   .state('home.allSeeds', {
     url: '/h/all-seeds',
     resolve: /*@ngInject*/{
-      firstPostQuery: function(UserCache, currentUser) {
+      firstPostQuery: function(UserCache, currentUser, requireLogin) {
         return UserCache.allPosts.fetch(currentUser);
       }
     },
@@ -60,7 +72,7 @@ module.exports = function ($stateProvider) {
   .state('home.projects', /*@ngInject*/ {
     url: '/h/my-projects',
     resolve: {
-      projects: function(currentUser) {
+      projects: function(currentUser, requireLogin) {
         return currentUser.projects().$promise;
       }
     },

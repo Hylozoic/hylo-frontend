@@ -69,6 +69,11 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
         return;
       }
 
+      if (error === 'login required') {
+        // see e.g. routes/home.js
+        return;
+      }
+
       if (!hyloEnv.isProd) {
         console.error('$stateChangeError en route to ' + toState.name);
         console.error(error);
