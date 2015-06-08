@@ -56,7 +56,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('loginSignup', {
+    .state('entrance', {
       abstract: true,
       resolve: {
         loggedIn: function(User, $timeout, $state) {
@@ -76,34 +76,34 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           window.hyloEnv.provideUser(null);
         }
       },
-      templateUrl: '/ui/user/loginSignup.tpl.html'
+      templateUrl: '/ui/entrance/base.tpl.html'
     })
     .state('login', {
       url: '/h/login?next',
-      parent: 'loginSignup',
+      parent: 'entrance',
       views: {
-        loginSignup: {
-          templateUrl: '/ui/user/login.tpl.html',
+        entrance: {
+          templateUrl: '/ui/entrance/login.tpl.html',
           controller: 'LoginCtrl'
         }
       }
     })
     .state('signup', {
       url: '/h/signup',
-      parent: 'loginSignup',
+      parent: 'entrance',
       views: {
-        loginSignup: {
-          templateUrl: '/ui/user/signup.tpl.html',
+        entrance: {
+          templateUrl: '/ui/entrance/signup.tpl.html',
           controller: 'SignupCtrl'
         }
       }
     })
     .state('forgotPassword', {
       url: '/h/forgot-password',
-      parent: 'loginSignup',
+      parent: 'entrance',
       views: {
-        loginSignup: {
-          templateUrl: '/ui/user/forgot-password.tpl.html',
+        entrance: {
+          templateUrl: '/ui/entrance/forgot-password.tpl.html',
           controller: 'ForgotPasswordCtrl'
         }
       }
