@@ -76,8 +76,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
     if (form.code) {
-      if (!_.isEmpty(form.code.$error)) return;
-      if (!$scope.isCodeValid) {
+      if (!_.isEmpty(form.code.$error) || !$scope.isCodeValid) {
         handleError({data: 'bad code'}, $scope, $analytics);
         return;
       }
