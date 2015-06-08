@@ -35,95 +35,6 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('appEntry', /*@ngInject*/ {
-      parent: 'main',
-      url: '/app',
-      onEnter: function(currentUser, $state, $timeout, onboarding) {
-        var membership = (currentUser && currentUser.memberships[0]);
-        if (membership) {
-          $timeout(function() {
-            $state.go('community.seeds', {community: membership.community.slug});
-          });
-        } else if (currentUser) {
-          $timeout(function() {
-            $state.go('home.allSeeds');
-            Rollbar.error('User without community', {user_id: currentUser.id});
-          });
-        } else {
-          $timeout(function() {
-            $state.go('login');
-          })
-        }
-      }
-    })
-    .state('entrance', {
-      abstract: true,
-      resolve: {
-        loggedIn: function(User, $timeout, $state) {
-          return User.status().$promise.then(function(res) {
-            return res.signedIn;
-          });
-        },
-        context: function() { return 'normal' },
-        projectInvitation: function() { return null }
-      },
-      onEnter: function(loggedIn, $timeout, $state) {
-        if (loggedIn) {
-          $timeout(function() {
-            $state.go('appEntry');
-          });
-        } else {
-          window.hyloEnv.provideUser(null);
-        }
-      },
-      templateUrl: '/ui/entrance/base.tpl.html'
-    })
-    .state('login', {
-      url: '/h/login?next',
-      parent: 'entrance',
-      views: {
-        entrance: {
-          templateUrl: '/ui/entrance/login.tpl.html',
-          controller: 'LoginCtrl'
-        }
-      }
-    })
-    .state('signup', {
-      url: '/h/signup',
-      parent: 'entrance',
-      views: {
-        entrance: {
-          templateUrl: '/ui/entrance/signup.tpl.html',
-          controller: 'SignupCtrl'
-        }
-      }
-    })
-    .state('forgotPassword', {
-      url: '/h/forgot-password',
-      parent: 'entrance',
-      views: {
-        entrance: {
-          templateUrl: '/ui/entrance/forgot-password.tpl.html',
-          controller: 'ForgotPasswordCtrl'
-        }
-      }
-    })
-    .state('useInvitation', /*@ngInject*/{
-      url: '/h/use-invitation?token',
-      templateUrl: '/ui/user/use-invitation.tpl.html',
-      controller: function($scope, Invitation, $stateParams, $state) {
-        Invitation.use({token: $stateParams.token}, function(resp) {
-          if (resp.error) {
-            $scope.error = resp.error;
-          } else if (resp.signup) {
-            Invitation.store(resp);
-            $state.go('signup');
-          } else {
-            $state.go('appEntry');
-          }
-        });
-      }
-    })
     .state('userSettings', {
       url: '/settings?expand',
       parent: 'main',
@@ -201,6 +112,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     require('./routes/home')($stateProvider);
     require('./routes/project')($stateProvider);
     require('./routes/network')($stateProvider);
+    require('./routes/entrance')($stateProvider);
 
 };
 

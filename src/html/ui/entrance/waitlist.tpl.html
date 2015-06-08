@@ -1,0 +1,38 @@
+<div class="all-sections">
+  <h1>Contact us</h1>
+
+  <div class="success" ng-show="success">{{success}}</div>
+
+  <p>Thanks for your interest in Hylo!</p>
+
+  <p>If you are a leader, manager, or member of a community that could benefit from using Hylo, please leave your information in the form below and we'll get back to you soon.</p>
+
+  <form name="form" novalidate>
+    <div class="row">
+      <div class="form-group left-col">
+        <input type="text" name="name" ng-model="request.name" placeholder="Your name" required>
+        <p class="help error" ng-if="form.submitted && form.name.$error.required">Please fill in this field.</p>
+      </div>
+
+      <div class="form-group right-col">
+        <input type="email" name="email" ng-model="request.email" placeholder="Your email address" required>
+        <p class="help error" ng-if="form.submitted && form.email.$error.required">Please fill in this field.</p>
+        <p class="help error" ng-if="form.submitted && form.email.$error.email">Please enter a valid email address.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <textarea name="details" ng-model="request.details" placeholder="Tell us a little about why you're interested in Hylo." required></textarea>
+      <p class="help error" ng-if="form.submitted && form.details.$error.required">Please fill in this field.</p>
+    </div>
+
+    <div class="right">
+      <a class="button" ng-click="submit(form)">Submit</a>
+    </div>
+  </form>
+
+  <div class="footer">
+    <a ui-sref="login">Already signed up? Log in!</a>
+  </div>
+</div>
+

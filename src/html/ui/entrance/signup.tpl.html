@@ -11,7 +11,7 @@
 
     <div ng-if="!invitation">
       <p>We are currently in private beta with a number of pilot communities.</p>
-      <p>If you are a member of one of these communities, you should have received an invitation code from your community manager. Please enter it below:</p>
+      <p>As a member of one of these communities, you should have received an <strong>invitation code</strong> from your community manager. Please enter it below:</p>
 
       <div class="form-group has-feedback"
            ng-class="{'has-success': isCodeValid, 'has-error': !isCodeValid && validationDone}">
@@ -27,7 +27,8 @@
       </div>
     </div>
 
-    <p ng-hide="invitation">Next, connect one of these services with Hylo to finish signing up.</p>
+    <p ng-hide="invitation">(<a ui-sref="waitlist">Don't have a code?</a>)</p>
+    <p ng-hide="invitation"><strong>Next</strong>, connect one of these services with Hylo to finish signing up.</p>
     <p ng-show="invitation">Connect one of these services with Hylo.</p>
 
     <div class="service-buttons">

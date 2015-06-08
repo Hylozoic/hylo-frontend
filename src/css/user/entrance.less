@@ -88,11 +88,11 @@
   }
 }
 
-.login, .signup, .forgotPassword, .useInvitation, .presignup {
+.login, .signup, .forgotPassword, .useInvitation, .presignup, .waitlist {
   .entrance-page;
 }
 
-.signup, .login-signup-modal {
+.signup, .login-signup-modal, .waitlist {
   .left-col, .right-col {
     .make-sm-column(6);
   }
@@ -108,5 +108,28 @@
 
   .icon-big-check {
     margin-top: 10px;
+  }
+}
+
+.presignup {
+  .button {
+    .rounded-button;
+  }
+
+  .answers {
+    text-align: center;
+    a:first-child {
+      margin-right: 5px;
+    }
+  }
+}
+
+.waitlist {
+  input, textarea {
+    .form-control;
+  }
+
+  textarea {
+    min-height: 6em;
   }
 }
