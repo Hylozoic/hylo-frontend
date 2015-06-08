@@ -76,7 +76,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
           window.hyloEnv.provideUser(null);
         }
       },
-      template: '<div ui-view="loginSignup"></div>'
+      templateUrl: '/ui/user/loginSignup.tpl.html'
     })
     .state('login', {
       url: '/h/login?next',
@@ -89,7 +89,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('signup', {
-      url: '/h/signup?mode',
+      url: '/h/signup',
       parent: 'loginSignup',
       views: {
         loginSignup: {

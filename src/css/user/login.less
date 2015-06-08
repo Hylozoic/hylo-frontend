@@ -7,17 +7,6 @@
 
   .all-sections {
     margin-top: @std-padding * 2;
-
-    @media (max-width: @screen-xs-max) {
-      padding: 0 @std-padding * 2;
-    }
-
-    // FIXME these pages are done wrong; it should be
-    // .main-content > .all-sections and then there will be
-    // no need for extra rows and padding adjustment on mobile
-    > p, > div, > form > p, > form > div, > h1 {
-      .make-row;
-    }
   }
 
   .button {
@@ -43,6 +32,7 @@
 
   .service-buttons {
     margin-bottom: @std-padding;
+    overflow: hidden;
   }
 
   .service-buttons a {
@@ -98,16 +88,20 @@
   }
 }
 
-.login, .signup, .forgotPassword, .useInvitation {
+.login, .signup, .forgotPassword, .useInvitation, .presignup {
   .login-signup-page;
 }
 
 .signup, .login-signup-modal {
+  .left-col, .right-col {
+    .make-sm-column(6);
+  }
+
   @media (min-width: @screen-sm) {
-    .form-group.email {
+    .left-col {
       padding-right: @std-padding/2;
     }
-    .form-group.password {
+    .right-col {
       padding-left: @std-padding/2;
     }
   }
