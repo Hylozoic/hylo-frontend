@@ -13,7 +13,7 @@
   </div>
 
   <div class="item home">
-    <a class="button" ui-sref="home.allSeeds" tooltip="Home" tooltip-placement="bottom">
+    <a class="button" ui-sref="home.allPosts" tooltip="Home" tooltip-placement="bottom">
       <i class="icon-home"></i>
     </a>
   </div>
@@ -24,7 +24,7 @@
     </a>
     <ul class="dropdown-menu" role="menu">
       <li ng-repeat="membership in currentUser.memberships|orderBy:'community.name'">
-        <a ui-sref="community.seeds({community: membership.community.slug})">
+        <a ui-sref="community.posts({community: membership.community.slug})">
           <div class="avatar" back-img="membership.community.avatar_url"></div>
           {{membership.community.name}}
         </a>
@@ -56,7 +56,7 @@
       <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom">
       </a>
       <ul class="dropdown-menu" role="menu">
-        <li><a ui-sref="profile.seeds({id: currentUser.id})">Profile</a></li>
+        <li><a ui-sref="profile.posts({id: currentUser.id})">Profile</a></li>
         <li><a ui-sref="userSettings">Settings</a></li>
         <li><a href="/noo/logout" target="_self" class="logout">Log out</a></li>
         <li role="presentation" class="divider"></li>

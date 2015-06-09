@@ -1,6 +1,6 @@
 var truncate = require('html-truncate');
 
-var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
+var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
 
   var controller = function($scope, $element) {
     $scope.isCommentsCollapsed = !($state.current.data && $state.current.data.singlePost);
@@ -47,7 +47,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       post.votes += (post.myVote ? 1 : -1);
       $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
 
-      Seed.vote({id: post.id}, function() {
+      Post.vote({id: post.id}, function() {
         $analytics.eventTrack('Post: Like', {
           post_id: post.id,
           state: (post.myVote ? 'on' : 'off')
@@ -84,12 +84,12 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
           name: user.name,
           avatar_url: user.avatar
         });
-        Seed.follow({id: post.id});
+        Post.follow({id: post.id});
         UserCache.followedPosts.clear(user.id);
       } else {
         $analytics.eventTrack('Post: Leave', {post_id: post.id});
         post.followers = _.without(post.followers, _.findWhere(post.followers, {id: '' + user.id}));
-        Seed.follow({id: post.id});
+        Post.follow({id: post.id});
         UserCache.followedPosts.remove(user.id, post.id);
       }
     };
@@ -99,7 +99,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
       if ($scope.editingFollowers) return;
 
       // save new followers
-      Seed.addFollowers({
+      Post.addFollowers({
         id: post.id,
         userIds: _.difference(
           _.pluck($scope.followersToAdd, 'id'),
@@ -133,7 +133,7 @@ var directive = function(Seed, $state, $rootScope, $log, $modal, $timeout, $anal
         message: 'Are you sure you want to remove "' + post.name + '"? This cannot be undone.'
       }).then(function() {
         $scope.removeFn({postToRemove: post});
-        new Seed(post).$remove({});
+        new Post(post).$remove({});
       });
     };
 

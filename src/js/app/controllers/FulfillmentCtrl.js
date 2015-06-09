@@ -1,10 +1,10 @@
-var controller = function($scope, $modalInstance, Seed, Community) {
+var controller = function($scope, $modalInstance, Post, Community) {
 
   var post = $scope.post,
     contributors = $scope.contributors = [];
 
   $scope.save = function () {
-    Seed.fulfill({id: post.id, contributors: _.pluck(contributors, 'id')}, function() {
+    Post.fulfill({id: post.id, contributors: _.pluck(contributors, 'id')}, function() {
       post.contributors = contributors;
       post.fulfilled = true;
     });

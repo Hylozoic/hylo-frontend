@@ -47,7 +47,7 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
     }
   };
 
-  $scope.removeSeed = function(seed) {
+  $scope.removePost = function(seed) {
     growl.addSuccessMessage("That seed has been removed.", {ttl: 5000});
     $scope.posts.splice($scope.posts.indexOf(seed), 1);
   };

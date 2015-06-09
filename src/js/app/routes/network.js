@@ -23,14 +23,14 @@ module.exports = function($stateProvider) {
   .state('network.posts', {
     url: '',
     resolve: {
-      firstPostQuery: /*@ngInject*/ function(network, Seed) {
-        return Seed.queryForNetwork({id: network.id, limit: 10}).$promise;
+      firstPostQuery: /*@ngInject*/ function(network, Post) {
+        return Post.queryForNetwork({id: network.id, limit: 10}).$promise;
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/network/posts.tpl.html',
-        controller: function($scope, network, firstPostQuery, PostManager, Seed) {
+        controller: function($scope, network, firstPostQuery, PostManager, Post) {
           'ngInject';
 
           var postManager = new PostManager({
@@ -38,7 +38,7 @@ module.exports = function($stateProvider) {
             scope: $scope,
             attr: 'posts',
             query: function() {
-              return Seed.queryForNetwork({
+              return Post.queryForNetwork({
                 id: network.id,
                 limit: 10,
                 offset: $scope.posts.length

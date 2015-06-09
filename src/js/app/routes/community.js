@@ -25,24 +25,24 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('community.seeds', {
+  .state('community.posts', {
     url: '',
     parent: 'community.home',
     views: {
       tab: {
-        templateUrl: '/ui/community/seeds.tpl.html',
-        controller: 'CommunitySeedsCtrl'
+        templateUrl: '/ui/community/posts.tpl.html',
+        controller: 'CommunityPostsCtrl'
       }
     },
     resolve: /*@ngInject*/ {
-      firstPostQuery: function(community, Seed, Cache) {
+      firstPostQuery: function(community, Post, Cache) {
         var key = 'community.posts:' + community.id,
           cached = Cache.get(key);
 
         if (cached) {
           return cached;
         } else {
-          return Seed.queryForCommunity({
+          return Post.queryForCommunity({
             communityId: community.id,
             limit: 10
           }).$promise.then(function(resp) {
@@ -144,44 +144,44 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('community.newSeed', {
+  .state('community.newPost', {
     url: '/new-seed',
     views: {
       community: {
-        templateUrl: '/ui/seeds/edit.tpl.html',
-        controller: 'SeedEditCtrl'
+        templateUrl: '/ui/post/edit.tpl.html',
+        controller: 'PostEditCtrl'
       }
     },
     resolve: {
       seed: function() { return null; }
     }
   })
-  .state('community.editSeed', {
-    url: '/s/:seedId/edit',
+  .state('community.editPost', {
+    url: '/s/:postId/edit',
     views: {
       community: {
-        templateUrl: '/ui/seeds/edit.tpl.html',
-        controller: 'SeedEditCtrl'
+        templateUrl: '/ui/post/edit.tpl.html',
+        controller: 'PostEditCtrl'
       }
     },
     resolve: {
-      seed: ['Seed', '$stateParams', function(Seed, $stateParams) {
-        return Seed.get({id: $stateParams.seedId}).$promise;
+      seed: ['Post', '$stateParams', function(Post, $stateParams) {
+        return Post.get({id: $stateParams.postId}).$promise;
       }]
     }
   })
-  .state('seed', {
-    url: '/s/:seedId?action',
+  .state('post', {
+    url: '/s/:postId?action',
     parent: 'community',
     views: {
       community: {
-        templateUrl: '/ui/seeds/show.tpl.html',
-        controller: 'SeedCtrl'
+        templateUrl: '/ui/post/show.tpl.html',
+        controller: 'PostCtrl'
       }
     },
     resolve: {
-      seed: ['Seed', '$stateParams', function(Seed, $stateParams) {
-        return Seed.get({id: $stateParams.seedId}).$promise;
+      post: ['Post', '$stateParams', function(Post, $stateParams) {
+        return Post.get({id: $stateParams.postId}).$promise;
       }]
     },
     data: {

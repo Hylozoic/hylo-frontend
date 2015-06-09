@@ -1,5 +1,5 @@
 <div ng-repeat="user in users | orderBy:'name'" class="user-list-item">
-  <a class="avatar" back-img="::user.avatar_url" ui-sref="profile.seeds({id: user.id})"></a>
+  <a class="avatar" back-img="::user.avatar_url" ui-sref="profile.posts({id: user.id})"></a>
   <div class="user-info">
     <span class="caret-menu dropdown" dropdown ng-if="::canModerate">
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down"></i></a>
@@ -10,7 +10,7 @@
       </ul>
     </span>
 
-    <a class="name" ui-sref="profile.seeds({id: user.id})">{{::user.name}}</a>
+    <a class="name" ui-sref="profile.posts({id: user.id})">{{::user.name}}</a>
     <div class="user-links">
       <social-media user="::user" page="'members'"></social-media>
     </div>

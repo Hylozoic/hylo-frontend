@@ -1,6 +1,6 @@
 <div class="post" analytics-id="{{::post.id}}">
 
-  <a class="user" ui-sref="profile.seeds({id: post.user.id})">
+  <a class="user" ui-sref="profile.posts({id: post.user.id})">
     <div back-img="post.user.avatar" class="avatar"></div>
     <div class="name">{{::post.user.name}}</div>
   </a>
@@ -10,7 +10,7 @@
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
         <li>
-          <a class="post-option" ui-sref="community.editSeed({community: post.community.slug, seedId: post.id})">Edit</a>
+          <a class="post-option" ui-sref="community.editPost({community: post.community.slug, postId: post.id})">Edit</a>
         </li>
         <li>
           <a class="post-option" ng-click="delete()">Delete</a>
@@ -21,7 +21,7 @@
     <div class="post-header">
       <div class="title" ng-bind-html="post.name | richText | unsafe"></div>
       <img ng-if="post.hasMedia" class="full-media" ng-src="{{::post.media[0].url}}"/>
-      <a ui-sref="seed({community: post.community.slug, seedId: post.id})"
+      <a ui-sref="post({community: post.community.slug, postId: post.id})"
         ng-if="post.hasMedia" class="media" back-img="::post.media[0].url">
       </a>
       <div ng-if="hasDescription" class="post-description">
@@ -32,11 +32,11 @@
     <div class="post-context">
       <span class="post-type" ng-class="::post.type">{{::post.type | uppercase}}</span>
       <span class="after-post-type-dot">&nbsp;•&nbsp;</span>
-      <a class="timestamp" ui-sref="seed({community: post.community.slug, seedId: post.id})">
+      <a class="timestamp" ui-sref="post({community: post.community.slug, postId: post.id})">
         {{::post.creation_date | fromNow}}<!--
       --></a>
       <span class="community" ng-hide="post.projects[0]">
-        in <a ui-sref="community.seeds({community: post.community.slug})">{{::post.community.name}}</a>
+        in <a ui-sref="community.posts({community: post.community.slug})">{{::post.community.name}}</a>
       </span>
       <span class="project" ng-if="post.projects[0]">
         in <a ui-sref="project.requests({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
@@ -51,7 +51,7 @@
 
       <!-- List Names -->
       <span ng-repeat="follower in followersNotMe.slice(0, 2)">
-        <a class="follower" ui-sref="profile.seeds({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
+        <a class="follower" ui-sref="profile.posts({id: follower.id})" ng-bind="::follower.name"></a><span ng-if="!$last && followersNotMe.length > 2">, </span>
         <span ng-if="!$last && followersNotMe.length == 2"> and </span>
       </span>
 
@@ -64,7 +64,7 @@
           </a>
           <ul class="dropdown-menu">
             <li ng-repeat="user in followersNotMe.slice(2)">
-              <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})" ng-if="!user.hide">
+              <a class="dropdown-list-user" ui-sref="profile.posts({id: user.id})" ng-if="!user.hide">
                 <div back-img="::user.avatar_url" class="avatar"></div>
                 <div class="name">{{::user.name}}</div>
               </a>
@@ -79,7 +79,7 @@
       Fulfilled
       <span ng-if="::post.contributors.length > 0">
         with contributions from
-        <a class="contributor" ui-sref="profile.seeds({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
+        <a class="contributor" ui-sref="profile.posts({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
           <span>{{::user.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span>
         </a>
         <span ng-if="::post.contributors.length > 2">
@@ -91,7 +91,7 @@
 
             <ul class="dropdown-menu">
               <li ng-repeat="user in post.contributors.slice(2)">
-                <a class="dropdown-list-user" ui-sref="profile.seeds({id: user.id})">
+                <a class="dropdown-list-user" ui-sref="profile.posts({id: user.id})">
                   <div back-img="::user.avatar_url" class="avatar"></div>
                   <div class="name">{{::user.name}}</div>
                 </a>

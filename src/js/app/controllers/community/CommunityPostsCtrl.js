@@ -1,4 +1,4 @@
-var controller = function($scope, Cache, Seed, community, onboarding, firstPostQuery, PostManager) {
+var controller = function($scope, Cache, Post, community, onboarding, firstPostQuery, PostManager) {
   $scope.onboarding = onboarding;
   $scope.community = community;
 
@@ -13,7 +13,7 @@ var controller = function($scope, Cache, Seed, community, onboarding, firstPostQ
       }, {maxAge: 10 * 60});
     },
     query: function() {
-      return Seed.queryForCommunity({
+      return Post.queryForCommunity({
         communityId: community.id,
         limit: 10,
         offset: $scope.posts.length,
@@ -31,7 +31,7 @@ var controller = function($scope, Cache, Seed, community, onboarding, firstPostQ
       {label: 'Top', value: 'top'}
     ],
     filter: [
-      {label: 'All Seeds', value: 'all'},
+      {label: 'All Posts', value: 'all'},
       {label: 'Intentions', value: 'intention'},
       {label: 'Offers', value: 'offer'},
       {label: 'Requests', value: 'request'}
@@ -55,5 +55,5 @@ var controller = function($scope, Cache, Seed, community, onboarding, firstPostQ
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('CommunitySeedsCtrl', controller);
+  angularModule.controller('CommunityPostsCtrl', controller);
 };

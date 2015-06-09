@@ -1,6 +1,6 @@
 // FIXME: this cries out for DRYing
 
-var factory = function(Seed, User, Cache) {
+var factory = function(Post, User, Cache) {
 
   var api = {
     posts: {
@@ -13,7 +13,7 @@ var factory = function(Seed, User, Cache) {
         if (cached) {
           return cached;
         } else {
-          return Seed.queryForUser({
+          return Post.queryForUser({
             userId: userId,
             limit: 10
           }).$promise.then(function(resp) {
@@ -51,12 +51,12 @@ var factory = function(Seed, User, Cache) {
       set: function(userId, data) {
         Cache.set(api.followedPosts.key(userId), data, {maxAge: 10 * 60});
       },
-      remove: function(userId, seedId) {
+      remove: function(userId, postId) {
         var data = Cache.get(api.followedPosts.key(userId));
         if (!data) return;
 
-        var post = _.find(data.posts, function(seed) {
-          return seed.id == seedId;
+        var post = _.find(data.posts, function(p) {
+          return p.id == postId;
         });
         if (!post) return;
 

@@ -13,7 +13,7 @@ var controller = function($scope, growl, $stateParams, $analytics, currentUser, 
 
   $scope.close = function() {
     if ($history.isEmpty()) {
-      $scope.$state.go('profile.seeds', {id: user.id});
+      $scope.$state.go('profile.posts', {id: user.id});
     } else {
       $history.go(-1);
     }

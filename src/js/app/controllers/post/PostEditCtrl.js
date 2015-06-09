@@ -1,6 +1,6 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var directive = function($scope, currentUser, community, Seed, growl, $analytics, $history,
+var directive = function($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, seed, $state, $rootScope, Cache, UserCache) {
 
   var prefixes = {
@@ -16,7 +16,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?'
   };
 
-  $scope.switchSeedType = function(seedType) {
+  $scope.switchPostType = function(seedType) {
   	$scope.seedType = seedType;
     $scope.title = prefixes[seedType] + ' ';
     $scope.descriptionPlaceholder = placeholders[seedType];
@@ -25,7 +25,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   $scope.close = function() {
     $rootScope.seedEditProgress = null;
     if ($history.isEmpty()) {
-      $state.go('community.seeds', {community: community.slug});
+      $state.go('community.posts', {community: community.slug});
     } else {
       $history.go(-1);
     }
@@ -76,7 +76,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
     seed.update(data, function() {
       $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
-      $state.go('seed', {community: community.slug, seedId: seed.id});
+      $state.go('seed', {community: community.slug, postId: seed.id});
       growl.addSuccessMessage('Seed updated.');
     }, function(err) {
       $scope.saving = false;
@@ -86,7 +86,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
   };
 
   var create = function(data) {
-    new Seed(data).$save(function() {
+    new Post(data).$save(function() {
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
       $scope.close();
@@ -135,7 +135,7 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 
   if (seed) {
     $scope.editing = true;
-    $scope.switchSeedType(seed.type);
+    $scope.switchPostType(seed.type);
     $scope.title = seed.name;
     if (seed.media[0]) {
       $scope.imageUrl = seed.media[0].url;
@@ -147,12 +147,12 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
       $scope.description = format('<p>%s</p>', seed.description);
     }
   } else if ($rootScope.seedEditProgress) {
-    $scope.switchSeedType($rootScope.seedEditProgress.type);
+    $scope.switchPostType($rootScope.seedEditProgress.type);
     $scope.title = $rootScope.seedEditProgress.title;
     $scope.description = $rootScope.seedEditProgress.description;
 
   } else {
-    $scope.switchSeedType('intention');
+    $scope.switchPostType('intention');
   }
 
   if (!community) {
@@ -173,5 +173,5 @@ var directive = function($scope, currentUser, community, Seed, growl, $analytics
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('SeedEditCtrl', directive);
+  angularModule.controller('PostEditCtrl', directive);
 }

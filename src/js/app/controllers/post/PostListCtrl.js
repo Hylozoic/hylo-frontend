@@ -1,11 +1,11 @@
-var controller = function($scope, Seed, firstPostQuery, user, isSelf, UserCache, PostManager) {
+var controller = function($scope, Post, firstPostQuery, user, isSelf, UserCache, PostManager) {
 
   var postManager = new PostManager({
     firstPage: firstPostQuery,
     scope: $scope,
     attr: 'posts',
     query: function() {
-      return Seed.queryForUser({
+      return Post.queryForUser({
         userId: user.id,
         limit: 10,
         offset: $scope.posts.length
@@ -21,10 +21,10 @@ var controller = function($scope, Seed, firstPostQuery, user, isSelf, UserCache,
 
   postManager.setup();
 
-	$scope.hasSeeds = $scope.posts.length > 0;
+	$scope.hasPosts = $scope.posts.length > 0;
   $scope.isSelf = isSelf;
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('SeedListCtrl', controller);
+  angularModule.controller('PostListCtrl', controller);
 };

@@ -6,10 +6,10 @@ var steps = {
     state: 'onboarding.seeds',
   },
   community: {
-    state: 'community.seeds'
+    state: 'community.posts'
   },
   profile: {
-    state: 'profile.seeds'
+    state: 'profile.posts'
   }
 };
 
@@ -144,7 +144,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
       var params;
       // FIXME code smell
-      if (_.include(['newSeed', 'community'], name)) {
+      if (_.include(['newPost', 'community'], name)) {
         params = {community: this.community.slug};
       } else if (_.include(['profile'], name)) {
         params = {id: this._user.id};

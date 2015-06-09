@@ -7,21 +7,21 @@ require('./controllers/profile/thanks')(angularModule);
 require('./controllers/user/settings')(angularModule);
 require('./controllers/user/NotificationsCtrl')(angularModule);
 
-require('./controllers/seeds/SeedEditCtrl')(angularModule);
-require('./controllers/seeds/SeedCtrl')(angularModule);
-require('./controllers/seeds/SeedListCtrl')(angularModule);
-require('./controllers/seeds/CommentsCtrl')(angularModule);
+require('./controllers/post/PostEditCtrl')(angularModule);
+require('./controllers/post/PostCtrl')(angularModule);
+require('./controllers/post/PostListCtrl')(angularModule);
+require('./controllers/post/CommentsCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);
 require('./controllers/community/CommunitySettingsCtrl')(angularModule);
-require('./controllers/community/CommunitySeedsCtrl')(angularModule);
+require('./controllers/community/CommunityPostsCtrl')(angularModule);
 require('./controllers/community/CommunityMembersCtrl')(angularModule);
 require('./controllers/community/CommunityInviteCtrl')(angularModule);
 require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/home/HomeCtrl')(angularModule);
-require('./controllers/home/FollowedSeedsCtrl')(angularModule);
-require('./controllers/home/AllSeedsCtrl')(angularModule);
+require('./controllers/home/FollowedPostsCtrl')(angularModule);
+require('./controllers/home/AllPostsCtrl')(angularModule);
 
 require('./controllers/AnnouncerCtrl')(angularModule);
 require('./controllers/OverlayCtrl')(angularModule);

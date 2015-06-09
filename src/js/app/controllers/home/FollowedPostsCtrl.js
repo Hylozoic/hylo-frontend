@@ -1,17 +1,19 @@
 var controller = function($scope, currentUser, firstPostQuery, UserCache, PostManager) {
+  $scope.posts = firstPostQuery.posts;
+  $scope.hasPosts = $scope.posts.length > 0;
 
   var postManager = new PostManager({
     firstPage: firstPostQuery,
     scope: $scope,
     attr: 'posts',
     query: function() {
-      return currentUser.allPosts({
+      return currentUser.followedPosts({
         limit: 10,
         offset: $scope.posts.length
       }).$promise;
     },
     cache: function(posts, total) {
-      UserCache.allPosts.set({
+      UserCache.followedPosts.set(currentUser.id, {
         posts: posts,
         posts_total: total
       });
@@ -20,11 +22,8 @@ var controller = function($scope, currentUser, firstPostQuery, UserCache, PostMa
 
   postManager.setup();
 
-  $scope.hasSeeds = $scope.posts.length > 0;
-  $scope.defaultCommunity = currentUser.memberships[0].community;
-
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('AllSeedsCtrl', controller);
+  angularModule.controller('FollowedPostsCtrl', controller);
 };

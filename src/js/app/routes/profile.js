@@ -38,17 +38,17 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('profile.seeds', {
+  .state('profile.posts', {
     url: '',
     resolve: /*@ngInject*/ {
-      firstPostQuery: function(Seed, UserCache, user) {
+      firstPostQuery: function(Post, UserCache, user) {
         return UserCache.posts.fetch(user.id);
       }
     },
     views: {
       tab: {
-        templateUrl: '/ui/seeds/list.tpl.html',
-        controller: 'SeedListCtrl'
+        templateUrl: '/ui/post/list.tpl.html',
+        controller: 'PostListCtrl'
       }
     }
   })

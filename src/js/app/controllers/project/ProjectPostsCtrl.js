@@ -1,4 +1,4 @@
-module.exports = function($scope, project, Seed, Cache, UserCache,
+module.exports = function($scope, project, Post, Cache, UserCache,
   $analytics, currentUser, postQuery, $stateParams, UserMentions, PostManager) {
   "ngInject";
 
@@ -34,7 +34,7 @@ module.exports = function($scope, project, Seed, Cache, UserCache,
   };
 
   $scope.addRequest = function() {
-    new Seed({
+    new Post({
       name: newRequest.name,
       description: newRequest.description,
       projectId: project.id,
@@ -48,7 +48,7 @@ module.exports = function($scope, project, Seed, Cache, UserCache,
         project_id: project.id
       });
 
-      // FIXME this is copied from SeedEditCtrl
+      // FIXME this is copied from PostEditCtrl
       Cache.drop('community.posts:' + project.community.id);
       UserCache.posts.clear(currentUser.id);
       UserCache.allPosts.clear(currentUser.id);

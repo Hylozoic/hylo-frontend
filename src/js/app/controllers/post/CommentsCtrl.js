@@ -1,12 +1,12 @@
 var controller = function($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Seed, $sce, UserMentions, Comment, $dialog) {
+  $q, Post, $sce, UserMentions, Comment, $dialog) {
 
   var post = $scope.post;
 
   if (!post.comments) {
     $scope.loading = true;
 
-    Seed.findComments({id: post.id}, function(comments) {
+    Post.findComments({id: post.id}, function(comments) {
       post.comments = comments;
       $scope.loading = false;
     }, function(resp) {
@@ -28,7 +28,7 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   $scope.create = function() {
     if ($scope.commentLength() > 0) {
       $scope.createDisabled = true;
-      Seed.comment({id: post.id, text: $scope.commentInput.trim()}, function(comment) {
+      Post.comment({id: post.id, text: $scope.commentInput.trim()}, function(comment) {
         post.comments.push(comment);
         post.numComments++;
 

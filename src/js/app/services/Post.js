@@ -1,6 +1,6 @@
 var factory = function($resource) {
 
-  var Seed = $resource("/noo/post/:id/:action", {
+  var Post = $resource("/noo/post/:id/:action", {
     id: '@id'
   }, {
     comment: {
@@ -52,27 +52,27 @@ var factory = function($resource) {
   });
 
   // let's make things a bit more OO around here
-  _.extend(Seed.prototype, {
+  _.extend(Post.prototype, {
     update: function(params, success, error) {
-      return Seed.save(_.extend({id: this.id}, params), success, error);
+      return Post.save(_.extend({id: this.id}, params), success, error);
     },
     fulfill: function(params, success, error) {
-      return Seed.fulfill(_.extend({id: this.id}, params), success, error);
+      return Post.fulfill(_.extend({id: this.id}, params), success, error);
     },
     vote: function(params, success, error) {
-      return Seed.vote(_.extend({id: this.id}, params), success, error);
+      return Post.vote(_.extend({id: this.id}, params), success, error);
     },
     findComments: function(params, success, error) {
-      return Seed.findComments(_.extend({id: this.id}, params), success, error);
+      return Post.findComments(_.extend({id: this.id}, params), success, error);
     },
     unfollow: function(params, success, error) {
-      return Seed.unfollow(_.extend({id: this.id}, params), success, error);
+      return Post.unfollow(_.extend({id: this.id}, params), success, error);
     }
   });
 
-  return Seed;
+  return Post;
 };
 
 module.exports = function(angularModule) {
-  angularModule.factory('Seed', factory);
+  angularModule.factory('Post', factory);
 };

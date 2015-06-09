@@ -8,11 +8,11 @@ module.exports = function($stateProvider) {
       var membership = (currentUser && currentUser.memberships[0]);
       if (membership) {
         $timeout(function() {
-          $state.go('community.seeds', {community: membership.community.slug});
+          $state.go('community.posts', {community: membership.community.slug});
         });
       } else if (currentUser) {
         $timeout(function() {
-          $state.go('home.allSeeds');
+          $state.go('home.allPosts');
           Rollbar.error('User without community', {user_id: currentUser.id});
         });
       } else {

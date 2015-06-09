@@ -27,7 +27,7 @@ require('./services/Community')(angularModule);
 require('./services/Activity')(angularModule);
 require('./services/Comment')(angularModule);
 require('./services/Search')(angularModule);
-require('./services/Seed')(angularModule);
+require('./services/Post')(angularModule);
 require('./services/Invitation')(angularModule);
 require('./services/Project')(angularModule);
 require('./services/Network')(angularModule);

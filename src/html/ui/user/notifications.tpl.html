@@ -11,7 +11,7 @@
 
     <div class="notification" ng-repeat="event in activity" ng-class="{unread: event.unread}">
 
-      <a ui-sref="profile.seeds({id: event.actor.id})" back-img="::event.actor.avatar_url" class="avatar"></a>
+      <a ui-sref="profile.posts({id: event.actor.id})" back-img="::event.actor.avatar_url" class="avatar"></a>
 
       <div class="content">
         <div class="title">

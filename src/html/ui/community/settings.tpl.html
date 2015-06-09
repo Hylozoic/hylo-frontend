@@ -152,8 +152,8 @@
           </p>
 
           <div class="moderator" ng-repeat="user in moderators">
-            <a class="avatar" back-img="user.avatar_url" ui-sref="profile.seeds({id: user.id})"></a>
-            <a class="name" ui-sref="profile.seeds({id: user.id})" ng-bind="::user.name"></a>
+            <a class="avatar" back-img="user.avatar_url" ui-sref="profile.posts({id: user.id})"></a>
+            <a class="name" ui-sref="profile.posts({id: user.id})" ng-bind="::user.name"></a>
             <a class="close" ng-click="removeModerator(user.id)">&times;</a>
           </div>
 

@@ -23,7 +23,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('home.mySeeds', {
+  .state('home.myPosts', {
     url: '/h/my-seeds',
     resolve: /*@ngInject*/{
       firstPostQuery: function(UserCache, currentUser, requireLogin) {
@@ -36,8 +36,8 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/home/my-seeds.tpl.html',
-        controller: 'SeedListCtrl'
+        templateUrl: '/ui/home/my-posts.tpl.html',
+        controller: 'PostListCtrl'
       }
     }
   })
@@ -50,12 +50,12 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/home/following-seeds.tpl.html',
-        controller: 'FollowedSeedsCtrl'
+        templateUrl: '/ui/home/following-posts.tpl.html',
+        controller: 'FollowedPostsCtrl'
       }
     }
   })
-  .state('home.allSeeds', {
+  .state('home.allPosts', {
     url: '/h/all-seeds',
     resolve: /*@ngInject*/{
       firstPostQuery: function(UserCache, currentUser, requireLogin) {
@@ -64,8 +64,8 @@ module.exports = function ($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/home/all-seeds.tpl.html',
-        controller: 'AllSeedsCtrl'
+        templateUrl: '/ui/home/all-posts.tpl.html',
+        controller: 'AllPostsCtrl'
       }
     }
   })

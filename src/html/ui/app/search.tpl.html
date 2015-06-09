@@ -12,9 +12,9 @@
         <h3>People</h3>
 
         <div class="person" ng-repeat="person in results.people track by person.id">
-          <a class="avatar" back-img="::person.avatar_url" ui-sref="profile.seeds({id: person.id})"></a>
+          <a class="avatar" back-img="::person.avatar_url" ui-sref="profile.posts({id: person.id})"></a>
           <div class="info">
-            <a class="name" bind-html-unsafe="::name(person)" ui-sref="profile.seeds({id: person.id})"></a>
+            <a class="name" bind-html-unsafe="::name(person)" ui-sref="profile.posts({id: person.id})"></a>
             <p class="blurb" bind-html-unsafe="::blurb(person)"></p>
           </div>
         </div>

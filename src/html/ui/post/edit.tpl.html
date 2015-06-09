@@ -11,19 +11,19 @@
     <div class="select-type">
       <div class="option intention" ng-class="{active: seedType==='intention'}">
         <label>
-          <input type="radio" ng-checked="seedType==='intention'" ng-click="switchSeedType('intention')">
+          <input type="radio" ng-checked="seedType==='intention'" ng-click="switchPostType('intention')">
             Intention
         </label>
       </div>
       <div class="option offer" ng-class="{active: seedType==='offer'}">
         <label>
-          <input type="radio" ng-checked="seedType==='offer'" ng-click="switchSeedType('offer')">
+          <input type="radio" ng-checked="seedType==='offer'" ng-click="switchPostType('offer')">
             Offer
         </label>
       </div>
       <div class="option request" ng-class="{active: seedType==='request'}">
         <label>
-          <input type="radio" ng-checked="seedType==='request'" ng-click="switchSeedType('request')">
+          <input type="radio" ng-checked="seedType==='request'" ng-click="switchPostType('request')">
             Request
         </label>
       </div>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="edit-content">
-      <div class="title">Seed Title</div>
+      <div class="title">Title</div>
       <input type="text" class="form-control" ng-model="title"/>
 
       <div class="title">Description</div>

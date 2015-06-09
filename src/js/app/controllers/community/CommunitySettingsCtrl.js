@@ -7,7 +7,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
 
   $scope.close = function() {
     if ($history.isEmpty()) {
-      $scope.$state.go('community.seeds', {community: community.slug});
+      $scope.$state.go('community.posts', {community: community.slug});
     } else {
       $history.back();
     }

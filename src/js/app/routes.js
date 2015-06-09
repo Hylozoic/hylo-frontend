@@ -9,7 +9,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   });
 
   // handle old links
-  $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
+  $urlRouterProvider.when('/c/:community/s/:postId/comments', '/c/:community/s/:postId');
   $urlRouterProvider.when('/community/invite/:token', '/use-invitation?token');
   $urlRouterProvider.when('/h/login', '/login');
   $urlRouterProvider.when('/h/signup', '/signup');
@@ -91,13 +91,13 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('newSeed', {
+    .state('newPost', {
       url: '/h/new-seed',
       parent: 'main',
       views: {
         main: {
-          templateUrl: '/ui/seeds/edit.tpl.html',
-          controller: 'SeedEditCtrl'
+          templateUrl: '/ui/post/edit.tpl.html',
+          controller: 'PostEditCtrl'
         }
       },
       resolve: {
