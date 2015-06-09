@@ -65,7 +65,9 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/community/about.tpl.html',
-        controller: 'CommunityAboutCtrl'
+        controller: function($scope, community) {
+          $scope.community = community;
+        }
       }
     }
   })
@@ -109,8 +111,6 @@ module.exports = function ($stateProvider) {
       tab: {
         templateUrl: '/ui/community/projects.tpl.html',
         controller: function($scope, projects) {
-          'ngInject';
-
           $scope.projects = projects;
         }
       }

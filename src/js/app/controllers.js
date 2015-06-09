@@ -14,7 +14,6 @@ require('./controllers/seeds/CommentsCtrl')(angularModule);
 
 require('./controllers/community/CommunityCtrl')(angularModule);
 require('./controllers/community/CommunitySettingsCtrl')(angularModule);
-require('./controllers/community/CommunityAboutCtrl')(angularModule);
 require('./controllers/community/CommunitySeedsCtrl')(angularModule);
 require('./controllers/community/CommunityMembersCtrl')(angularModule);
 require('./controllers/community/CommunityInviteCtrl')(angularModule);
