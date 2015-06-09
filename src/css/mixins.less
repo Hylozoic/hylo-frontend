@@ -159,7 +159,7 @@
   font-size: 18px;
 }
 
-.seed-meta-text() {
+.meta-text() {
   .proxima-nova-light;
   font-size: 13px;
 
@@ -171,38 +171,28 @@
   }
 }
 
-.seed-type-text(@color) {
+.post-type-text(@color) {
   .proxima-nova-semibold;
   font-size: 14px;
   letter-spacing: 1.5px;
   color: @color;
 }
 
-.seed-title-text {
+.title-text {
   .proxima-nova-regular;
   font-size: 18px;
   line-height: 20px;
   color: @default-text;
 }
 
-.seed-body-text() {
+.body-text() {
   .proxima-nova-light;
   font-size: 15px;
   color: @readable-text;
   line-height: 1.25em;
 }
 
-.seed-username-text() {
-  .seed-meta-text;
-  margin-top: 6px;
-  text-align: center;
-  line-height: 1.4;
-  overflow: hidden;
-  word-wrap: break-word;
-  max-height: 78px;
-}
-
-.medium-title-text() {
+.strong-title-text() {
   .proxima-nova-regular;
   text-transform: uppercase;
   font-size: 16px;
@@ -347,7 +337,7 @@
 
 .corner-dropdown-menu() {
   float: right;
-  .seed-meta-text();
+  .meta-text();
 
   a, a:hover {
     cursor: pointer;

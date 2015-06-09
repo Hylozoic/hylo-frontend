@@ -58,7 +58,14 @@
     }
 
     .name {
-      .seed-username-text;
+      .meta-text;
+      margin-top: 6px;
+      text-align: center;
+      line-height: 1.4;
+      overflow: hidden;
+      word-wrap: break-word;
+      max-height: 78px;
+
       @media (max-width: @screen-xs-max) {
         line-height: @avatar-size-xs;
         display: inline-block;
@@ -82,12 +89,12 @@
 
   .post-header {
     .title {
-      .seed-title-text;
+      .title-text;
       margin: 0 10px 10px 0;
     }
 
     .post-description {
-      .seed-body-text;
+      .body-text;
     }
   }
 
@@ -120,17 +127,17 @@
 
   .post-context {
     margin-bottom: 9px;
-    .seed-meta-text;
+    .meta-text;
 
     .post-type {
       &.intention {
-        .seed-type-text(@intention-color);
+        .post-type-text(@intention-color);
       }
       &.request {
-        .seed-type-text(@request-color);
+        .post-type-text(@request-color);
       }
       &.offer {
-        .seed-type-text(@offer-color);
+        .post-type-text(@offer-color);
       }
     }
 
@@ -140,7 +147,7 @@
   }
 
   .fulfillment {
-    .seed-meta-text;
+    .meta-text;
     margin-bottom: 10px;
 
     a {
@@ -155,7 +162,7 @@
     border-bottom: 1px solid @border-lightest;
 
     > a {
-      .seed-meta-text;
+      .meta-text;
       cursor: pointer;
       display: inline-block;
       text-decoration: none;
