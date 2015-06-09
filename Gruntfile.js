@@ -46,6 +46,9 @@ module.exports = function(grunt) {
         files: {
           'dist/dev/bundle.js': ['src/js/index.js'],
           'dist/dev/admin/bundle.js': ['src/js/admin/index.js']
+        },
+        options: {
+          watch: true
         }
       },
       deploy: {
@@ -133,11 +136,7 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['src/js/**/*'],
-        tasks: ['browserify:dev', 'notify:js'],
-        options: {
-          spawn: true
-        }
+        files: ['dist/dev/**/*.js']
       },
       css: {
         files: ['src/css/**/*'],
