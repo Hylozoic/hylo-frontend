@@ -8,11 +8,11 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     return $location.path();
   });
 
-  // handle old single-post links
+  // handle old links
   $urlRouterProvider.when('/c/:community/s/:seedId/comments', '/c/:community/s/:seedId');
-
-  // handle old invitation links
-  $urlRouterProvider.when('/community/invite/:token', '/h/use-invitation?token');
+  $urlRouterProvider.when('/community/invite/:token', '/use-invitation?token');
+  $urlRouterProvider.when('/h/login', '/login');
+  $urlRouterProvider.when('/h/signup', '/signup');
 
   // handle alternate name of starting route
   $urlRouterProvider.when('/', '/app');

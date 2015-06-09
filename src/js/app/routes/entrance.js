@@ -45,7 +45,7 @@ module.exports = function($stateProvider) {
     templateUrl: '/ui/entrance/base.tpl.html'
   })
   .state('login', {
-    url: '/h/login?next',
+    url: '/login?next',
     parent: 'entrance',
     views: {
       entrance: {
@@ -55,7 +55,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('presignup', {
-    url: '/h/start-signup',
+    url: '/start-signup',
     parent: 'entrance',
     views: {
       entrance: {
@@ -67,7 +67,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('signup', {
-    url: '/h/signup',
+    url: '/signup',
     parent: 'entrance',
     views: {
       entrance: {
@@ -77,7 +77,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('waitlist', {
-    url: '/h/waitlist',
+    url: '/waitlist',
     parent: 'entrance',
     views: {
       entrance: {
@@ -105,7 +105,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('forgotPassword', {
-    url: '/h/forgot-password',
+    url: '/forgot-password',
     parent: 'entrance',
     views: {
       entrance: {
