@@ -16,8 +16,8 @@
   </div>
 
   <div dropdown class="item communities">
-    <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom">
-      <i class="icon-communities-new"></i>
+    <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom" back-img="">
+      <%- include('../../img/projects/community.svg') %>
     </a>
     <ul class="dropdown-menu" role="menu">
       <li ng-repeat="membership in currentUser.memberships|orderBy:'community.name'">
