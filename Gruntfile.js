@@ -155,7 +155,7 @@ module.exports = function(grunt) {
         tasks: ['sync:ui']
       },
       uiEjs: {
-        files: ['src/html/ui/**/*.ejs'],
+        files: ['src/html/ui/**/*.ejs', 'src/html/ui-partials/**/*.ejs'],
         tasks: ['ejs:ui']
       },
       options: {
