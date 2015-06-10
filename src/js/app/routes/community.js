@@ -112,6 +112,7 @@ module.exports = function ($stateProvider) {
       tab: {
         templateUrl: '/ui/community/projects.tpl.html',
         controller: function($scope, projects) {
+          'ngInject';
           $scope.projects = projects;
         }
       }
