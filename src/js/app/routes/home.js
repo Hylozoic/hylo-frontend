@@ -19,7 +19,7 @@ module.exports = function ($stateProvider) {
     views: {
       main: {
         templateUrl: '/ui/home/show.tpl.html',
-        controller: 'HomeCtrl'
+        controller: function() {}
       }
     }
   })

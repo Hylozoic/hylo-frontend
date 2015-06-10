@@ -19,7 +19,6 @@ require('./controllers/community/CommunityMembersCtrl')(angularModule);
 require('./controllers/community/CommunityInviteCtrl')(angularModule);
 require('./controllers/community/NewCommunityCtrl')(angularModule);
 
-require('./controllers/home/HomeCtrl')(angularModule);
 require('./controllers/home/FollowedPostsCtrl')(angularModule);
 require('./controllers/home/AllPostsCtrl')(angularModule);
 
