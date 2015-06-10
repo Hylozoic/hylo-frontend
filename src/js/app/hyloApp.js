@@ -59,7 +59,11 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
   $rootScope.$on('$stateChangeError',
     function(event, toState, toParams, fromState, fromParams, error) {
       if (error && _.include([401, 403], error.status)) {
-        $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});
+        if ($rootScope.currentUser) {
+          growl.addErrorMessage("You don't have permission to view that.");
+        } else {
+          $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});
+        }
         return;
       }
 
