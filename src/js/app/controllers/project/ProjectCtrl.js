@@ -76,17 +76,17 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
       var options = {};
       if (state === 'signup') {
         _.merge(options, {
-          templateUrl: '/ui/user/signup.tpl.html',
+          templateUrl: '/ui/entrance/signup.tpl.html',
           controller: 'SignupCtrl',
         }, defaults);
       } else if (state === 'login') {
         _.merge(options, {
-          templateUrl: '/ui/user/login.tpl.html',
+          templateUrl: '/ui/entrance/login.tpl.html',
           controller: 'LoginCtrl',
         }, defaults);
       } else if (state === 'forgotPassword') {
         _.merge(options, {
-          templateUrl: '/ui/user/forgot-password.tpl.html',
+          templateUrl: '/ui/entrance/forgot-password.tpl.html',
           controller: 'ForgotPasswordCtrl',
         }, defaults);
       }
