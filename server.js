@@ -5,54 +5,9 @@ var http = require('http'),
   url = require('url'),
   util = require('util');
 
-var proxy = function(req, res, upstream, port) {
-  req.headers.host = upstream;
-  var preq = http.request({
-    host: upstream,
-    port: port,
-    path: req.url,
-    headers: req.headers,
-    method: req.method
-  });
-
-  preq.addListener('response', function (pres) {
-    pres.addListener('data', function(chunk) {
-      res.write(chunk, 'binary');
-    });
-    pres.addListener('end', function() {
-      res.end();
-    });
-    res.writeHead(pres.statusCode, pres.headers);
-  });
-
-  req.addListener('data', function(chunk) {
-    preq.write(chunk, 'binary');
-  });
-
-  req.addListener('end', function() {
-    preq.end();
-  });
-};
-
-var staticPages = [
-  '',
-  '/app',
-  '/faq',
-  '/about',
-  '/about/team',
-  '/about/careers',
-  '/about/contact',
-  '/admin',
-  '/styleguide'
-];
-
 module.exports = function(opts) {
 
-  var upstream = opts.upstream.split(':'),
-    upstreamHost = upstream[0],
-    upstreamPort = parseInt(upstream[1] || '80');
-
-  var server = http.createServer(function(req, res) {
+  http.createServer(function(req, res) {
 
     var u = url.parse(req.url),
       originalUrl = req.url,
@@ -64,28 +19,22 @@ module.exports = function(opts) {
         opts.log.writeln('%s %s %s %s', req.connection.remoteAddress, req.method, originalUrl, resolution);
       };
 
-    // remove leading slash
+    // remove trailing slash
     u.pathname = u.pathname.replace(/\/$/, '');
 
-    // Node API
-    if (_.startsWith(u.pathname, '/noo')) {
-      proxy(req, res, upstreamHost, upstreamPort);
-      log('→ Node');
-      return;
-    }
+    if (_.startsWith(u.pathname, '/assets/dev/ui')) {
+      // Angular templates
+      changePathname(u.pathname.replace(/^\/assets\/dev\/ui/, '/ui'));
 
-    // static pages
-    if (_.contains(staticPages, u.pathname)) {
-      changePathname(util.format('/dev%s/index.html', u.pathname));
+    } else if (_.startsWith(u.pathname, '/assets')) {
+      // other static assets
+      changePathname(u.pathname.replace(/^\/assets/, '/'));
     }
 
     // all local assets
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
-        // assume it's an Angular route
-        changePathname('/dev/app/index.html');
-        fileServer.serve(req, res);
-        log('→ ' + u.pathname);
+        log('→ Not Found');
       } else {
         log('');
       }
@@ -93,5 +42,5 @@ module.exports = function(opts) {
 
   }).listen(opts.port);
 
-  opts.log.writeln(util.format('listening on port %s, proxying %s:%s', opts.port, upstreamHost, upstreamPort));
+  opts.log.writeln('listening on port ' + opts.port);
 };

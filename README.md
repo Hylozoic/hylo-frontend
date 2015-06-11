@@ -12,7 +12,7 @@ Create a file named `.env` in the root of the repo, with contents like this:
 
 ```
 AWS_S3_BUCKET=hylo-dev
-AWS_S3_CONTENT_URL=http://hylo-dev.s3.amazonaws.com
+AWS_S3_CONTENT_URL=http://localhost:3001
 FB_CLIENTID=foo
 FILEPICKER_API_KEY=foo
 ROLLBAR_CLIENT_TOKEN=foo
@@ -20,25 +20,15 @@ SEGMENT_IO_KEY=foo
 NEW_RELIC_LICENSE_KEY=foo
 ```
 
-### Development server
+### Asset server
 
-Start it with `npm run start`, then visit `localhost:3001`. It watches changes to the Javascript and CSS files under `src`, and creates/updates the "bundle" files named `bundle.js` and `bundle.css` in the `dist/` directory.
-
-It serves files in `dist/` and proxies all other requests to the "upstream" server. (see `Proxy behavior`)
+Start it with `npm run start`. It watches changes to the Javascript, CSS, and HTML files under `src`, and creates output files in `dist`, which it serves at `localhost:3001` by default. You don't access it directly; the [hylo-node](https://github.com/Hylozoic/hylo-node) app will proxy requests to this server as necessary.
 
 #### Live Reload
 
-Install [Live Reload browser extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) and turn it on for the
-localhost:3001 page by pressing the livereload button that was added to the toolbar next to the URL.
+Install [Live Reload browser extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) and turn it on for the browser tab in which you're doing development work by pressing the button that was added by the extension.
 
-Once installed and turned on for the page, it will automatically reload your page after you make any changes
-to the code.
-
-### Proxy behavior
-
-Requests that start with `/noo` are proxied to the Node API. Set its location with `--upstream`.
-
-e.g.: `grunt dev --upstream localhost:1337`, aliased as `npm run dev`
+Once installed and turned on for the page, it will automatically reload your page after you make any changes to the code.
 
 ### Deploying
 

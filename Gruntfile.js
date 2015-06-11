@@ -200,8 +200,7 @@ module.exports = function(grunt) {
   grunt.registerTask('serve', function() {
     require('./server')({
       log: grunt.log,
-      port: parseInt(grunt.option('port') || 3001),
-      upstream: grunt.option('upstream')
+      port: parseInt(grunt.option('port') || 3001)
     });
   });
 

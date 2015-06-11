@@ -59,7 +59,7 @@
     "prune": "bower prune",
     "start": "grunt dev",
     "start-local": "npm run dev",
-    "dev": "grunt dev --upstream=localhost:1337",
+    "dev": "grunt dev",
     "test": "karma start karma.config.js"
   },
   "repository": {

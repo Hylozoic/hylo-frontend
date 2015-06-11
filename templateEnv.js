@@ -1,15 +1,14 @@
 var format = require('util').format;
 
 module.exports = function(env) {
-  var rootPath;
 
   if (env === 'development') {
-    rootPath = '/dev';
-  } else {
-    rootPath = format('%s/assets/%s',
-      process.env.AWS_S3_CONTENT_URL,
-      process.env.BUNDLE_VERSION);
+    process.env.BUNDLE_VERSION = 'dev';
   }
+
+  var rootPath = format('%s/assets/%s',
+    process.env.AWS_S3_CONTENT_URL,
+    process.env.BUNDLE_VERSION);
 
   return {
     environment: env,
