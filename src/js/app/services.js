@@ -43,3 +43,5 @@ require('./services/UserCache')(angularModule);
 require('./services/ThirdPartyAuth')(angularModule);
 require('./services/PostManager')(angularModule);
 require('./services/popupDone');
+
+angularModule.factory('Meta', require('./services/Meta'));

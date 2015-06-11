@@ -1,7 +1,16 @@
 var RichText = require('../../services/RichText');
 
-module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User, $dialog) {
+module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User, $dialog, Meta) {
   "ngInject";
+
+  Meta.set({
+    og: {
+      url: window.location.href,
+      title: project.title,
+      image: (project.image_url || project.thumbnail_url),
+      description: project.intention
+    }
+  });
 
   var invitationToken = $stateParams.token;
 

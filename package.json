@@ -52,7 +52,8 @@
     "node-uuid": "^1.4.3",
     "pretty-date": "^0.2.0",
     "request": "latest",
-    "shelljs": "latest"
+    "shelljs": "latest",
+    "striptags": "^2.0.2"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",

@@ -1,5 +1,17 @@
-var controller = function($scope, Post, growl, post, currentUser, $stateParams) {
+var striptags = require('striptags'),
+  truncate = require('html-truncate');
+
+var controller = function($scope, Post, growl, post, currentUser, $stateParams, Meta) {
   $scope.post = post;
+
+  Meta.set({
+    og: {
+      url: window.location.href,
+      title: post.name,
+      image: post.image_url,
+      description: truncate(striptags(post.description), 140)
+    }
+  });
 
   $scope.postdeleted = function(deletedPost) {
     growl.addSuccessMessage("Seed has been removed: " + deletedPost.name, {ttl: 5000});
