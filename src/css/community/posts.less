@@ -41,7 +41,7 @@
   }
 }
 
-.community.posts {
+.community-posts {
   .reminder {
     width: 100%;
     overflow: hidden;
@@ -49,23 +49,18 @@
     background-color: @hylo-teal;
     .title-text;
     &, a { color: white; }
-    line-height: 32px;
 
     > div {
       .make-sm-column(6);
       .make-sm-column-offset(3);
     }
 
-    .button {
-      .rounded-button-clear;
-    }
-
-    .right {
-      float: right;
-    }
-
-    @media (max-width: @screen-xs-max) {
-      padding: @std-padding;
+    .help {
+      .meta-text;
+      color: white !important;
+      a {
+        text-decoration: underline;
+      }
     }
   }
 }

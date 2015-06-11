@@ -39,12 +39,12 @@
 
 <div ng-if="currentUser.post_count == 0" class="reminder">
   <div>
-    <div class="row">
-      <div class="right">
-        <a href="/h/support#post" class="button">Learn more</a>
-      </div>
-      <a ui-sref="community.newPost">Plant your first seed!</a>
-    </div>
+    <a ui-sref="community.newPost">Plant your first seed!</a>
+    <br/>
+    <span class="help">
+      Just tap the <i class="icon-add-01"></i> button above.
+      <a class="help" href="/h/support#post">Learn more</a>
+    </span>
   </div>
 </div>
 

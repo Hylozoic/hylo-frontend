@@ -69,8 +69,7 @@
   }
 }
 
-.rounded-button-clear {
-  .rounded-button;
+.clear-button {
   &, &:hover {
     color: white;
   }
@@ -79,6 +78,11 @@
   &:active {
     background-color: rgba(255, 255, 255, 0.3);
   }
+}
+
+.rounded-button-clear {
+  .rounded-button;
+  .clear-button;
 }
 
 .circular-button(@size: @default-button-height) {
