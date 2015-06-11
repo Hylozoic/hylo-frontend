@@ -9,28 +9,28 @@
 <div class="main-content">
   <div class="all-sections">
     <div class="select-type">
-      <div class="option intention" ng-class="{active: seedType==='intention'}">
+      <div class="option intention" ng-class="{active: postType==='intention'}">
         <label>
-          <input type="radio" ng-checked="seedType==='intention'" ng-click="switchPostType('intention')">
+          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')">
             Intention
         </label>
       </div>
-      <div class="option offer" ng-class="{active: seedType==='offer'}">
+      <div class="option offer" ng-class="{active: postType==='offer'}">
         <label>
-          <input type="radio" ng-checked="seedType==='offer'" ng-click="switchPostType('offer')">
+          <input type="radio" ng-checked="postType==='offer'" ng-click="switchPostType('offer')">
             Offer
         </label>
       </div>
-      <div class="option request" ng-class="{active: seedType==='request'}">
+      <div class="option request" ng-class="{active: postType==='request'}">
         <label>
-          <input type="radio" ng-checked="seedType==='request'" ng-click="switchPostType('request')">
+          <input type="radio" ng-checked="postType==='request'" ng-click="switchPostType('request')">
             Request
         </label>
       </div>
       <p class="help">
-        <span ng-if="seedType==='intention'">Intention: Something you’d like to create, with the support of your community.</span>
-        <span ng-if="seedType==='offer'">Offer: Any skill, item, information, or opportunity that you’d like to share.</span>
-        <span ng-if="seedType==='request'">Request: Some skill, item, information, or opportunity that you're looking for.</span>
+        <span ng-if="postType==='intention'">Intention: Something you’d like to create, with the support of your community.</span>
+        <span ng-if="postType==='offer'">Offer: Any skill, item, information, or opportunity that you’d like to share.</span>
+        <span ng-if="postType==='request'">Request: Some skill, item, information, or opportunity that you're looking for.</span>
       </p>
     </div>
 

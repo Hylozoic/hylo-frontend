@@ -1,7 +1,7 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
 var directive = function($scope, currentUser, community, Post, growl, $analytics, $history,
-  UserMentions, seed, $state, $rootScope, Cache, UserCache) {
+  UserMentions, post, $state, $rootScope, Cache, UserCache) {
 
   var prefixes = {
     intention: "I'd like to create",
@@ -16,14 +16,14 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
     request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?'
   };
 
-  $scope.switchPostType = function(seedType) {
-  	$scope.seedType = seedType;
-    $scope.title = prefixes[seedType] + ' ';
-    $scope.descriptionPlaceholder = placeholders[seedType];
+  $scope.switchPostType = function(postType) {
+  	$scope.postType = postType;
+    $scope.title = prefixes[postType] + ' ';
+    $scope.descriptionPlaceholder = placeholders[postType];
   };
 
   $scope.close = function() {
-    $rootScope.seedEditProgress = null;
+    $rootScope.postEditProgress = null;
     if ($history.isEmpty()) {
       $state.go('community.posts', {community: community.slug});
     } else {
@@ -73,10 +73,10 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
   };
 
   var update = function(data) {
-    seed.update(data, function() {
+    post.update(data, function() {
       $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
-      $state.go('seed', {community: community.slug, postId: seed.id});
+      $state.go('post', {community: community.slug, postId: post.id});
       growl.addSuccessMessage('Seed updated.');
     }, function(err) {
       $scope.saving = false;
@@ -105,7 +105,7 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
     var data = {
       name: $scope.title,
       description: $scope.description,
-      type: $scope.seedType,
+      type: $scope.postType,
       communityId: community.id,
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved
@@ -126,30 +126,30 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
   };
 
   $scope.storeProgress = function() {
-    $rootScope.seedEditProgress = {
+    $rootScope.postEditProgress = {
       title: $scope.title,
       description: $scope.description,
-      type: $scope.seedType
+      type: $scope.postType
     };
   };
 
-  if (seed) {
+  if (post) {
     $scope.editing = true;
-    $scope.switchPostType(seed.type);
-    $scope.title = seed.name;
-    if (seed.media[0]) {
-      $scope.imageUrl = seed.media[0].url;
+    $scope.switchPostType(post.type);
+    $scope.title = post.name;
+    if (post.media[0]) {
+      $scope.imageUrl = post.media[0].url;
     }
 
-    if (seed.description.substring(0, 3) === '<p>') {
-      $scope.description = seed.description;
+    if (post.description.substring(0, 3) === '<p>') {
+      $scope.description = post.description;
     } else {
-      $scope.description = format('<p>%s</p>', seed.description);
+      $scope.description = format('<p>%s</p>', post.description);
     }
-  } else if ($rootScope.seedEditProgress) {
-    $scope.switchPostType($rootScope.seedEditProgress.type);
-    $scope.title = $rootScope.seedEditProgress.title;
-    $scope.description = $rootScope.seedEditProgress.description;
+  } else if ($rootScope.postEditProgress) {
+    $scope.switchPostType($rootScope.postEditProgress.type);
+    $scope.title = $rootScope.postEditProgress.title;
+    $scope.description = $rootScope.postEditProgress.description;
 
   } else {
     $scope.switchPostType('intention');

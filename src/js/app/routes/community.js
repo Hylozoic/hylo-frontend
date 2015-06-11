@@ -155,7 +155,7 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      seed: function() { return null; }
+      post: function() { return null; }
     }
   })
   .state('community.editPost', {
@@ -167,7 +167,7 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      seed: ['Post', '$stateParams', function(Post, $stateParams) {
+      post: ['Post', '$stateParams', function(Post, $stateParams) {
         return Post.get({id: $stateParams.postId}).$promise;
       }]
     }
