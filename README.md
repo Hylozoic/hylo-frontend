@@ -12,7 +12,7 @@ Create a file named `.env` in the root of the repo, with contents like this:
 
 ```
 AWS_S3_BUCKET=hylo-dev
-AWS_S3_CONTENT_URL=http://localhost:3001
+AWS_S3_CONTENT_URL=http://localhost:1337
 FB_CLIENTID=foo
 FILEPICKER_API_KEY=foo
 ROLLBAR_CLIENT_TOKEN=foo
@@ -22,7 +22,7 @@ NEW_RELIC_LICENSE_KEY=foo
 
 ### Asset server
 
-Start it with `npm run start`. It watches changes to the Javascript, CSS, and HTML files under `src`, and creates output files in `dist`, which it serves at `localhost:3001` by default. You don't access it directly; the [hylo-node](https://github.com/Hylozoic/hylo-node) app will proxy requests to this server as necessary.
+Start it with `npm run start`. It watches changes to the Javascript, CSS, and HTML files under `src`, and creates output files in `dist`, which it serves at `localhost:1337` by default.
 
 #### Live Reload
 

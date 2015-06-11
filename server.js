@@ -16,7 +16,7 @@ module.exports = function(opts) {
         req.url = url.format(u);
       },
       log = function(resolution) {
-        opts.log.writeln('%s %s %s %s', req.connection.remoteAddress, req.method, originalUrl, resolution);
+        opts.log.writeln('%s %s %s', req.method, originalUrl, resolution);
       };
 
     // remove trailing slash
@@ -28,15 +28,17 @@ module.exports = function(opts) {
 
     } else if (_.startsWith(u.pathname, '/assets')) {
       // other static assets
-      changePathname(u.pathname.replace(/^\/assets/, '/'));
+      changePathname(u.pathname.replace(/^\/assets/, ''));
     }
 
     // all local assets
     fileServer.serve(req, res, function(err, result) {
       if (err && err.status === 404) {
+        res.statusCode = 404;
+        res.end('404 Not Found');
         log('→ Not Found');
       } else {
-        log('');
+        log('→ OK');
       }
     });
 

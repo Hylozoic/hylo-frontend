@@ -13,9 +13,6 @@ module.exports = function(grunt) {
           'dist/dev/bundle.css': ['src/css/index.less'],
           'dist/dev/admin/bundle.css': ['src/css/admin/index.less'],
           'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less']
-        },
-        options: {
-          rootpath: "/dev/"
         }
       },
       deploy: {
@@ -200,7 +197,7 @@ module.exports = function(grunt) {
   grunt.registerTask('serve', function() {
     require('./server')({
       log: grunt.log,
-      port: parseInt(grunt.option('port') || 3001)
+      port: parseInt(grunt.option('port') || 1337)
     });
   });
 
