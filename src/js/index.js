@@ -35,6 +35,6 @@ filepicker.setKey(hyloEnv.filepicker.key);
 
 if (hyloEnv.environment != 'test') {
   angular.element(document).ready(function() {
-    angular.bootstrap(document.body, ['hyloApp'], {strictDi: true});
+    angular.bootstrap(document.getElementsByTagName('html')[0], ['hyloApp'], {strictDi: true});
   });
 }
