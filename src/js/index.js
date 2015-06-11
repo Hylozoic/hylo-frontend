@@ -29,7 +29,7 @@ require('ngInfiniteScroll');
 /* Manually installed components */
 require('./angular/angulartics-segmentio');
 
-require('./app/hyloApp');
+require('./app/index');
 
 filepicker.setKey(hyloEnv.filepicker.key);
 
