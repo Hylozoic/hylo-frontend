@@ -1,4 +1,33 @@
-var path = require('path');
+var path = require('path'),
+  qs = require('querystring');
+
+// order matters, except for CONVERT, which toggles the crop UI
+var services = [
+  // 'CONVERT',
+  'COMPUTER',
+  'URL',
+  'WEBCAM',
+  'FACEBOOK',
+  'INSTAGRAM',
+  'DROPBOX',
+  'GOOGLE_DRIVE'
+];
+
+var makeFilename = function(blob) {
+  var extension = '',
+    timestamp = new Date().getTime().toString();
+
+  if (blob.filename) {
+    return timestamp + '_' + blob.filename.replace(/[ %+]/g, '');
+  }
+
+  switch (blob.mimetype) {
+    case 'image/png':  extension = '.png'; break;
+    case 'image/jpeg': extension = '.jpg'; break;
+    case 'image/gif':  extension = '.gif'; break;
+  }
+  return timestamp + extension;
+};
 
 /*
  * options:
@@ -9,32 +38,38 @@ var path = require('path');
  *
  */
 module.exports = function(opts) {
-  var pickOptions = {
-    mimetype: 'image/*',
-    multiple: false,
-    services: ['COMPUTER', 'FACEBOOK', 'WEBCAM', 'GOOGLE_DRIVE', 'DROPBOX', 'INSTAGRAM', 'FLICKR', 'URL'],
-    folders: false
-  };
 
-  var storeOptions = {
-    location: 'S3',
-    container: hyloEnv.s3.bucket,
-    path: 'orig/',
-    access: 'public'
-  };
+  filepicker.pick(
+    {
+      mimetype: 'image/*',
+      multple: false,
+      services: services
+    },
 
-  var convert = function(blobs) {
-    var blob = blobs[0],
-      // trim the old path "orig/" and replace spaces
-      filename = blob.key.substring(5).replace(/ /g, '_'),
-      convertStoreOptions = _.extend(storeOptions, {
-        path: path.join(opts.path, filename)
-      });
+    function(blob) {
+      // apply additional context-specific conversion settings
+      var conversion = _.extend({compress: true, quality: 85}, opts.convert);
 
-    filepicker.convert(blob, opts.convert, convertStoreOptions, function(newBlob) {
-      opts.success(hyloEnv.s3.cloudfrontHost + '/' + newBlob.key);
-    }, opts.failure)
-  };
+      // blob.url will end with "/convert?crop=..."
+      // if "CONVERT" is in the list of services
+      var url = blob.url + '/convert?' + qs.stringify(conversion);
 
-  filepicker.pickAndStore(pickOptions, storeOptions, convert, opts.failure);
+      filepicker.storeUrl(
+        url,
+        {
+          access: 'public',
+          container: hyloEnv.s3.bucket,
+          location: 'S3',
+          path: path.join(opts.path, makeFilename(blob))
+        },
+        function(stored) {
+          opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key);
+        },
+        opts.failure
+      );
+    },
+
+    opts.failure
+  );
+
 };

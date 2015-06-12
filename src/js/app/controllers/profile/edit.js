@@ -86,7 +86,7 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
     fieldName: 'avatar_url',
     humanName: 'Icon',
     path: format('user/%s/avatar', user.id),
-    convert: {width: 200, height: 200, fit: 'clip', rotate: "exif"}
+    convert: {width: 200, height: 200, fit: 'crop', rotate: "exif"}
   });
 
   $scope.changeBanner = imageChangeFn({
