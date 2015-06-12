@@ -39,6 +39,8 @@ var makeFilename = function(blob) {
  */
 module.exports = function(opts) {
 
+  filepicker.setKey(hyloEnv.filepicker.key);
+
   filepicker.pick(
     {
       mimetype: 'image/*',
