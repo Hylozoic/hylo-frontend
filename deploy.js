@@ -39,10 +39,7 @@ Deployer.prototype.fail = function(err) {
 Deployer.prototype.upload = function(done) {
   this.log.subhead('uploading to S3');
 
-  var s3 = new (require('aws-sdk')).S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY
-  });
+  var s3 = new (require('aws-sdk')).S3();
 
   var upload = function(path, contents, type, done) {
     this.log.writeln(path);
@@ -148,7 +145,7 @@ var api = {
     var appName = api.appName(target),
       keys = [
         'NODE_ENV',
-        'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET', 'AWS_S3_CONTENT_URL',
+        'AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_S3_BUCKET', 'AWS_S3_CONTENT_URL',
         'FACEBOOK_APP_ID',
         'FILEPICKER_API_KEY',
         'ROLLBAR_CLIENT_TOKEN', 'ROLLBAR_SERVER_TOKEN',
