@@ -108,7 +108,7 @@ Deployer.prototype.notifyRollbar = function(callback) {
   var formData = {
     access_token: process.env.ROLLBAR_SERVER_TOKEN,
     revision: require('./deploy/version')(),
-    environment: process.env.APPLICATION_ENV,
+    environment: process.env.NODE_ENV,
     local_username: username()
   };
   request.post({
@@ -123,24 +123,15 @@ Deployer.prototype.notifyRollbar = function(callback) {
 };
 
 Deployer.prototype.updateEnv = function(callback) {
-  var nodeApp = this.app.replace('hylo', 'hylo-node'),
-    version = this.version;
+  this.log.subhead(util.format('updating ENV on %s', this.app));
 
-  this.log.subhead(util.format('updating ENV on %s and %s', this.app, nodeApp));
-
-  newVars = {
+  _.forIn(newVars = {
     BUNDLE_VERSION: this.version
-  };
-
-  _.forIn(newVars, function(val, key) {
+  }, function(val, key) {
     this.log.writeln(key + ': ' + val);
   }.bind(this));
 
-  heroku.config(this.app).update(newVars, function(err) {
-    if (err) throw err;
-    var nodeConfig = heroku.config(nodeApp);
-    nodeConfig.update({BUNDLE_VERSION: version}, callback);
-  });
+  heroku.config(this.app).update(newVars, callback);
 };
 
 var api = {
@@ -148,9 +139,9 @@ var api = {
   appName: function(target) {
     var name;
     if (target == 'staging') {
-      name = 'hylo-staging';
+      name = 'hylo-node-staging';
     } else if (target == 'production') {
-      name = 'hylo';
+      name = 'hylo-node';
     }
     return name;
   },
@@ -163,14 +154,12 @@ var api = {
 
     var appName = api.appName(target),
       keys = [
-        'APPLICATION_ENV',
+        'NODE_ENV',
         'AWS_ACCESS_KEY', 'AWS_SECRET_KEY', 'AWS_S3_BUCKET', 'AWS_S3_CONTENT_URL',
-        'CONTENT_URL',
-        'DOMAIN',
-        'FB_CLIENTID',
+        'FACEBOOK_APP_ID',
         'FILEPICKER_API_KEY',
         'ROLLBAR_CLIENT_TOKEN', 'ROLLBAR_SERVER_TOKEN',
-        'SEGMENT_IO_KEY'
+        'SEGMENT_KEY'
       ];
 
     log.writeln(util.format('fetching from %s: %s', appName, keys.join(', ')));

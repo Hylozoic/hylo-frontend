@@ -13,10 +13,10 @@ Create a file named `.env` in the root of the repo, with contents like this:
 ```
 AWS_S3_BUCKET=hylo-dev
 AWS_S3_CONTENT_URL=http://localhost:1337
-FB_CLIENTID=foo
+FACEBOOK_APP_ID=foo
 FILEPICKER_API_KEY=foo
 ROLLBAR_CLIENT_TOKEN=foo
-SEGMENT_IO_KEY=foo
+SEGMENT_KEY=foo
 NEW_RELIC_LICENSE_KEY=foo
 ```
 
