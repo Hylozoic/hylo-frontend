@@ -123,15 +123,8 @@ Deployer.prototype.notifyRollbar = function(callback) {
 };
 
 Deployer.prototype.updateEnv = function(callback) {
-  this.log.subhead(util.format('updating ENV on %s', this.app));
-
-  _.forIn(newVars = {
-    BUNDLE_VERSION: this.version
-  }, function(val, key) {
-    this.log.writeln(key + ': ' + val);
-  }.bind(this));
-
-  heroku.config(this.app).update(newVars, callback);
+  this.log.subhead(util.format('updating BUNDLE_VERSION on %s: %s', this.app, this.version));
+  heroku.config(this.app).update({BUNDLE_VERSION: this.version}, callback);
 };
 
 var api = {
