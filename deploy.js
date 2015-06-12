@@ -145,6 +145,7 @@ var api = {
     var appName = api.appName(target),
       keys = [
         'NODE_ENV',
+        'ASSET_HOST_URL',
         'AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_S3_BUCKET', 'AWS_S3_CONTENT_URL',
         'FACEBOOK_APP_ID',
         'FILEPICKER_API_KEY',

@@ -7,7 +7,7 @@ module.exports = function(env) {
   }
 
   var rootPath = format('%s/assets/%s',
-    process.env.AWS_S3_CONTENT_URL,
+    process.env.ASSET_HOST_URL,
     process.env.BUNDLE_VERSION);
 
   return {
