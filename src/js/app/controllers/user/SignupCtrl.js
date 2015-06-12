@@ -3,24 +3,24 @@ var handleError = function(err, $scope, $analytics) {
   if (!msg) {
     $scope.signupError = "Couldn't sign up. Please try again.";
     Rollbar.error("Signup failure", {email: $scope.user.email});
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'unknown'});
+    $analytics.eventTrack('Signup failure', {email: email, cause: 'unknown', code: $scope.user.code});
     return;
   }
 
   if (msg === 'bad code') {
     $scope.signupError = 'The invitation code you entered is not valid.';
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'bad invitation code'});
+    $analytics.eventTrack('Signup failure', {email: email, cause: 'bad invitation code', code: $scope.user.code});
 
   } else if (msg.match(/Key.*already exists/)) {
     var match = msg.match(/Key \((.*)\)=\((.*)\) already exists/),
       key = match[1], value = match[2];
 
     $scope.signupError = format('The %s "%s" is already in use. Try logging in instead?', key, value);
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'duplicate ' + key});
+    $analytics.eventTrack('Signup failure', {email: email, cause: 'duplicate ' + key, code: $scope.user.code});
 
   } else {
     $scope.signupError = msg;
-    $analytics.eventTrack('Signup failure', {email: email, cause: msg});
+    $analytics.eventTrack('Signup failure', {email: email, cause: msg, code: $scope.user.code});
   }
 };
 
@@ -39,7 +39,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     var params = _.merge({}, $scope.user, {login: true}, projectInvitation);
 
     User.signup(params).$promise.then(function(user) {
-      $analytics.eventTrack('Signup success', {provider: 'password'});
+      $analytics.eventTrack('Signup success', {provider: 'password', code: $scope.user.code});
       if (context === 'modal') {
         $scope.$close({action: 'finish'});
       } else {
@@ -91,7 +91,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
       if (error) {
         handleError({data: error}, $scope, $analytics);
       } else {
-        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed});
+        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed, code: $scope.user.code});
         $scope.$state.go('onboarding.start');
       }
     });
