@@ -93,14 +93,14 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   $scope.changeIcon = imageChangeFn({
     fieldName: 'avatar_url',
     humanName: 'Icon',
-    path: 'communityIcon',
+    path: format('community/%s/avatar', community.id),
     convert: {width: 160, fit: 'clip', rotate: "exif"}
   });
 
   $scope.changeBanner = imageChangeFn({
     fieldName: 'banner_url',
     humanName: 'Banner',
-    path: 'communityBanner',
+    path: format('community/%s/banner', community.id),
     convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
   });
 
