@@ -1,6 +1,6 @@
-var controller = function($scope, $timeout, $analytics, $modal, community, users, $dialog, Cache) {
+var controller = function($scope, community, users, $dialog, Cache, currentUser) {
   $scope.community = community;
-  $scope.canInvite = community.canModerate || community.settings.all_can_invite;
+  $scope.canInvite = community.canModerate || community.settings.all_can_invite || currentUser.is_admin;
   $scope.canModerate = community.canModerate;
   $scope.users = users;
 

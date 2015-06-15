@@ -65,9 +65,10 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/community/about.tpl.html',
-        controller: function($scope, community) {
+        controller: function($scope, community, currentUser) {
           'ngInject';
           $scope.community = community;
+          $scope.canModerate = community.canModerate || currentUser.is_admin;
         }
       }
     }
