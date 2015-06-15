@@ -8,8 +8,8 @@ var controller = function($scope, $analytics, community) {
     community_slug: community.slug
   });
 
-  // Dalai Lama Fellows & Permaculture Action
-  $scope.hideProjectsTab = !_.contains([842, 910], community.id);
+  // Dalai Lama Fellows, Permaculture Action, Unlikely Allies
+  $scope.hideProjectsTab = !_.contains([842, 910, 985], community.id);
 
 };
 
