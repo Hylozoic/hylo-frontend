@@ -41,15 +41,20 @@
       }
     }
     .results {
+      tr {
+        background-color: @state-success-bg;
+
+        &.error {
+          background-color: @state-danger-bg;
+        }
+
+        td {
+          padding: 5px 10px;
+          .body-text;
+        }
+      }
       h3 {
         .title-text;
-      }
-      td {
-        padding-right: @std-padding * 2;
-        .body-text;
-        &.error {
-          color: @error-color;
-        }
       }
     }
   }

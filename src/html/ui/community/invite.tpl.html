@@ -38,9 +38,9 @@
         <div ng-show="inviteResults" class="results full-column">
           <h3>Results</h3>
           <table>
-            <tr ng-repeat="result in inviteResults">
+            <tr ng-repeat="result in inviteResults" ng-class="{error: result.error}">
               <td>{{result.email}}</td>
-              <td class="status" ng-class="{error: result.error}">
+              <td class="status">
                 {{result.error ? result.error : "invitation sent!"}}
               </td>
             </tr>
