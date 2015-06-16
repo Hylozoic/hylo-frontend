@@ -42,7 +42,6 @@
             {{project.open_request_count}} request{{project.open_request_count === 1 ? '' : 's'}}
             below.
           </p>
-          <a class="button" ng-click="goToTab('requests')">See Requests</a>
         </div>
         <div class="top-cta" ng-hide="isCreator || isContributor">
           <p>Join the project to stay updated on its progress.</p>
@@ -63,8 +62,8 @@
             <div>
               <strong>Public Project</strong>
               <br/>
-              <span ng-show="project.isPublished()">This project is visible to anyone with the link, and any Hylo member may join as a contributor.</span>
-              <span ng-hide="project.isPublished()">When published, this project will be visible to anyone with the link, and any Hylo member will be able to join as a contributor.</span>
+              <span ng-show="project.isPublished()">This project is visible to anyone with the link, and anyone may join as a contributor by signing up with Hylo.</span>
+              <span ng-hide="project.isPublished()">When published, this project will be visible to anyone with the link, and anyone will be able to join as a contributor by signing up with Hylo.</span>
             </div>
           </li>
           <li ng-if="!project.isPublic()">
