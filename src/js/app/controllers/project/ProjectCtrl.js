@@ -113,6 +113,13 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
         $scope.join();
       });
     }
-  })
+  });
+
+  $scope.share = function() {
+    FB.ui({
+      method: 'share',
+      href: window.location.href,
+    }, function(response){});
+  };
 
 }

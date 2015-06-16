@@ -75,6 +75,9 @@
               <span ng-hide="project.isPublished()">All members of {{project.community.name}} may view and join this project when it is published.</span>
             </div>
           </li>
+          <li ng-if="project.isPublic()">
+            <a class="button" ng-click="share()">Share on Facebook</a>
+          </li>
 
         </ul>
       </div>
