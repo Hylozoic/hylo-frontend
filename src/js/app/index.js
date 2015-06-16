@@ -3,6 +3,7 @@ require('./controllers');
 require('./services');
 
 var dependencies = [
+  'afkl.lazyImage',
   'angular-growl',
   'angulartics',
   'angulartics.segment.io',

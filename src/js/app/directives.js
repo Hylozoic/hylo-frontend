@@ -63,7 +63,7 @@ directive('autofocus', function ($timeout) {
   };
 }).
 
-directive('backImg', [function() {
+directive('backImg', function() {
   function link(scope, element, attrs) {
     scope.$watch(attrs.backImg, function(value) {
       if (!value) return;
@@ -80,7 +80,7 @@ directive('backImg', [function() {
   return {
     link: link
   };
-}]).
+}).
 
 directive('hyloUnique', ['$http', function ($http) {
   return {

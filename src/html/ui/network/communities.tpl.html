@@ -4,10 +4,20 @@
 
       <div class="community-card" ng-click="$state.go('community.posts', {community: community.slug})">
         <div class="background-wrapper">
-          <div class="background"><div><div back-img="::community.banner_url"></div></div></div>
+          <div class="background">
+            <div>
+              <div afkl-lazy-image="{{::community.banner_url}}"
+                   afkl-lazy-image-options="{background: true}"
+                   class="afkl-lazy-wrapper">
+              </div>
+            </div>
+          </div>
         </div>
         <div class="middle-content">
-          <img class="logo" ng-src="{{community.avatar_url}}">
+          <div class="logo afkl-lazy-wrapper"
+               afkl-lazy-image="{{::community.avatar_url}}"
+               afkl-lazy-image-options="{background: true}">
+          </div>
           <div class="name">{{community.name}}</div>
           {{community.memberCount}} members
         </div>

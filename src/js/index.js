@@ -5,6 +5,7 @@ window.format = require('util').format;
 require('./onload');
 
 /* Bower Components */
+require('afkl-lazy-image');
 require('angular-animate');
 require('angular-growl');
 require('angular-resource');
