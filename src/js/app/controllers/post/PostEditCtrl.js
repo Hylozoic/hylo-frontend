@@ -41,6 +41,7 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
 
     filepickerUpload({
       path: format('user/%s/seeds', currentUser.id),
+      convert: {width: 800, format: 'jpg', fit: 'max', rotate: "exif"},
       success: function(url) {
         $scope.imageUrl = url;
         $scope.imageRemoved = false;
