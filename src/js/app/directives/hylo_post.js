@@ -3,7 +3,8 @@ var truncate = require('html-truncate');
 var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
 
   var controller = function($scope, $element) {
-    $scope.isCommentsCollapsed = !($state.current.data && $state.current.data.singlePost);
+    $scope.singlePost = $state.current.data && $state.current.data.singlePost;
+    $scope.isCommentsCollapsed = !$scope.singlePost;
     $scope.voteTooltipText = "";
     $scope.followersNotMe = [];
     $scope.followersToAdd = []; // builds an array of followers to add after hitting the "complete" button
