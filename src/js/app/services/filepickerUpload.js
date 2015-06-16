@@ -50,7 +50,7 @@ module.exports = function(opts) {
 
     function(blob) {
       // apply additional context-specific conversion settings
-      var conversion = _.extend({compress: true, quality: 85}, opts.convert);
+      var conversion = _.extend({compress: true, quality: 90}, opts.convert);
 
       // blob.url will end with "/convert?crop=..."
       // if "CONVERT" is in the list of services
