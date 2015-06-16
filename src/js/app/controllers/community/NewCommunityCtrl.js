@@ -54,19 +54,8 @@ var controller = function ($scope, $timeout, $analytics, $history, Community, gr
     };
   };
 
-  $scope.changeIcon = imageChangeFn({
-    fieldName: 'avatar_url',
-    humanName: 'Icon',
-    path: 'communityIcon',
-    convert: {width: 160, fit: 'clip', rotate: "exif"}
-  });
-
-  $scope.changeBanner = imageChangeFn({
-    fieldName: 'banner_url',
-    humanName: 'Banner',
-    path: 'communityBanner',
-    convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
-  });
+  $scope.changeIcon = imageChangeFn(community.avatarUploadSettings());
+  $scope.changeBanner = imageChangeFn(community.bannerUploadSettings());
 
   $scope.close = function () {
     if ($history.isEmpty()) {

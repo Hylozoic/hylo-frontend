@@ -65,6 +65,22 @@ var service = function($resource, Project) {
     },
     projects: function(params, success, error) {
       return Project.queryForCommunity(_.extend({id: this.id}, params), success, error);
+    },
+    avatarUploadSettings: function() {
+      return {
+        fieldName: 'avatar_url',
+        humanName: 'Icon',
+        path: format('community/%s/avatar', this.id || 'new'),
+        convert: {width: 160, height: 160, fit: 'crop', rotate: "exif"}
+      }
+    },
+    bannerUploadSettings: function() {
+      return {
+        fieldName: 'banner_url',
+        humanName: 'Banner',
+        path: format('community/%s/banner', this.id || 'new'),
+        convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
+      };
     }
   });
 

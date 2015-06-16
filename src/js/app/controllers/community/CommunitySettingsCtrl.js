@@ -90,19 +90,8 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
     };
   };
 
-  $scope.changeIcon = imageChangeFn({
-    fieldName: 'avatar_url',
-    humanName: 'Icon',
-    path: format('community/%s/avatar', community.id),
-    convert: {width: 160, height: 160, fit: 'crop', rotate: "exif"}
-  });
-
-  $scope.changeBanner = imageChangeFn({
-    fieldName: 'banner_url',
-    humanName: 'Banner',
-    path: format('community/%s/banner', community.id),
-    convert: {width: 1600, format: 'jpg', fit: 'max', rotate: "exif"}
-  });
+  $scope.changeIcon = imageChangeFn(community.avatarUploadSettings());
+  $scope.changeBanner = imageChangeFn(community.bannerUploadSettings());
 
   $scope.toggleModerators = function() {
     $scope.expand3 = !$scope.expand3;
