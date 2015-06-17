@@ -1,4 +1,4 @@
-<div class="tabs">
+<div class="tabs" ng-show="$state.current.data.showTabs">
   <a ui-sref="home.allPosts" ng-class="{active: $state.current.name === 'home.allPosts'}">
     All seeds
   </a>
@@ -18,3 +18,4 @@
     <div class="all-sections tab-content" ui-view="tab"></div>
   </div>
 </div>
+

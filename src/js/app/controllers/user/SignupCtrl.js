@@ -43,35 +43,12 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
       if (context === 'modal') {
         $scope.$close({action: 'finish'});
       } else {
-        $scope.$state.go('onboarding.start');
+        $scope.$state.go('appEntry');
       }
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
   };
-
-  $scope.validateCode = _.debounce(function(form) {
-    if ($scope.invitation) return;
-
-    $scope.authStarted = true;
-    $scope.validationDone = false;
-    if (!_.isEmpty(form.code.$error)) return;
-
-    Community.validate({
-      column: 'beta_access_code',
-      constraint: 'exists',
-      value: form.code.$viewValue,
-      store_value: true
-    }, function(resp) {
-      if (resp.exists) {
-        $scope.isCodeValid = true;
-        $scope.signupError = null;
-      } else {
-        $scope.isCodeValid = false;
-      }
-      $scope.validationDone = true;
-    });
-  }, 250);
 
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
@@ -92,7 +69,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
         handleError({data: error}, $scope, $analytics);
       } else {
         $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed, code: $scope.user.code});
-        $scope.$state.go('onboarding.start');
+        $scope.$state.go('appEntry');
       }
     });
   };

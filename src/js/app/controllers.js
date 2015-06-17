@@ -31,6 +31,7 @@ require('./controllers/user/ForgotPasswordCtrl')(angularModule);
 require('./controllers/project/ProjectEditCtrl')(angularModule);
 
 angularModule
+.controller('JoinCommunityCtrl', require('./controllers/community/JoinCommunityCtrl'))
 .controller('SignupCtrl',        require('./controllers/user/SignupCtrl'))
 .controller('LoginCtrl',         require('./controllers/user/LoginCtrl'))
 .controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))

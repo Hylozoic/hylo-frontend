@@ -16,10 +16,40 @@ module.exports = function ($stateProvider) {
         }
       }
     },
+    data: {
+      showTabs: true
+    },
     views: {
       main: {
         templateUrl: '/ui/home/show.tpl.html',
         controller: function() {}
+      }
+    }
+  })
+  .state('home.simple', /*@ngInject*/ {
+    url: '/h/starting-out',
+    resolve: {
+      projects: function(currentUser, requireLogin) {
+        return currentUser.projects().$promise;
+      },
+      requireNoCommunity: function(currentUser, $timeout, $state) {
+        if (!_.isEmpty(currentUser.memberships)) {
+          $timeout(function() {
+            $state.go('community.posts', {community: currentUser.memberships[0].community.slug});
+          });
+        }
+      }
+    },
+    data: {
+      showTabs: false
+    },
+    views: {
+      tab: {
+        templateUrl: '/ui/home/simple.tpl.html',
+        controller: function($scope, projects, requireNoCommunity) {
+          'ngInject';
+          $scope.projects = projects;
+        }
       }
     }
   })
