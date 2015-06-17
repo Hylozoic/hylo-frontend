@@ -9,27 +9,7 @@
 
     <div class="error" ng-show="signupError">{{signupError}}</div>
 
-    <div ng-if="!invitation">
-      <p>We are currently in private beta with a number of pilot communities.</p>
-      <p>As a member of one of these communities, you should have received an <strong>invitation code</strong> from your community manager. Please enter it below:</p>
-
-      <div class="form-group has-feedback"
-           ng-class="{'has-success': isCodeValid, 'has-error': !isCodeValid && validationDone}">
-        <input type="text"
-               name="code"
-               ng-model="user.code"
-               class="form-control"
-               placeholder="Invitation code"
-               ng-keyup="validateCode(form)"
-               required/>
-        <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
-        <p class="help error" ng-if="form.submitted && form.code.$error.required">Please fill in this field.</p>
-      </div>
-    </div>
-
-    <p ng-hide="invitation">(<a ui-sref="waitlist">Don't have a code?</a>)</p>
-    <p ng-hide="invitation"><strong>Next</strong>, connect one of these services with Hylo to finish signing up.</p>
-    <p ng-show="invitation">Connect one of these services with Hylo.</p>
+    <p>Connect one of these services with Hylo.</p>
 
     <div class="service-buttons">
       <a ng-click="useThirdPartyAuth('google', form)" class="google">Google</a>
@@ -75,6 +55,8 @@
         <p class="help error" ng-if="form.submitted && form.password.$error.required">Please fill in this field.</p>
       </div>
     </div>
+
+    <p ng-hide="invitation">We are currently in private beta with a number of pilot communities. As a member of one of these communities, you should have been given an <strong>invitation code</strong> by your community manager. You will be asked to enter it after signing up.</p>
 
     <div class="right">
       <a class="button" ng-click="submit(form)">Sign up</a>

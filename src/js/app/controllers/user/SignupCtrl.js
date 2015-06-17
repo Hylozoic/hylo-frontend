@@ -50,29 +50,6 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     });
   };
 
-  $scope.validateCode = _.debounce(function(form) {
-    if ($scope.invitation) return;
-
-    $scope.authStarted = true;
-    $scope.validationDone = false;
-    if (!_.isEmpty(form.code.$error)) return;
-
-    Community.validate({
-      column: 'beta_access_code',
-      constraint: 'exists',
-      value: form.code.$viewValue,
-      store_value: true
-    }, function(resp) {
-      if (resp.exists) {
-        $scope.isCodeValid = true;
-        $scope.signupError = null;
-      } else {
-        $scope.isCodeValid = false;
-      }
-      $scope.validationDone = true;
-    });
-  }, 250);
-
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
     if (form.code) {
