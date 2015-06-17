@@ -20,8 +20,8 @@ hyloEnv.onUser(function(user) {
     email: user.email,
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
-    createdAt: user.date_created,
-    created: user.date_created,
+    createdAt: user.created_at,
+    created: user.created_at,
     community_name: (membership ? membership.community.name : undefined),
     community_id: (membership ? membership.community.id : undefined),
   });

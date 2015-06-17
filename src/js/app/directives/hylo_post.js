@@ -186,7 +186,7 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
     setText($scope.startExpanded);
 
     var now = new Date();
-    $scope.showUpdateTime = (now - new Date(post.last_updated)) < (now - new Date(post.creation_date)) * 0.8;
+    $scope.showUpdateTime = (now - new Date(post.updated_at)) < (now - new Date(post.created_at)) * 0.8;
 
     $scope.truncate = truncate;
 

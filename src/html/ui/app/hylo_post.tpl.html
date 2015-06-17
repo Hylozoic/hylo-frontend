@@ -36,7 +36,7 @@
       <span class="post-type" ng-class="::post.type">{{::post.type | uppercase}}</span>
       <span class="after-post-type-dot">&nbsp;•&nbsp;</span>
       <a class="timestamp" ui-sref="post({community: post.community.slug, postId: post.id})">
-        {{::post.creation_date | fromNow}}<!--
+        {{::post.created_at | fromNow}}<!--
       --></a>
       <span class="community" ng-hide="post.projects[0]">
         in <a ui-sref="community.posts({community: post.community.slug})">{{::post.community.name}}</a>
@@ -44,7 +44,7 @@
       <span class="project" ng-if="post.projects[0]">
         in <a ui-sref="project.requests({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
       </span>
-      <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.last_updated | fromNow}}</span>
+      <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.updated_at | fromNow}}</span>
     </div>
 
     <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">
