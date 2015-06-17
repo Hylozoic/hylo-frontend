@@ -1,4 +1,4 @@
-module.exports = function($scope, Community) {
+module.exports = function($scope, Community, $analytics) {
   'ngInject';
 
   $scope.validateCode = _.debounce(function() {
@@ -24,6 +24,8 @@ module.exports = function($scope, Community) {
     if (!$scope.isCodeValid) return;
 
     Community.join({code: $scope.code}, function(resp) {
+      $analytics.eventTrack('Joined community', {id: resp.id, slug: resp.slug});
+
       $scope.$state.reload();
       if ($scope.$close) {
         $scope.$close(resp);

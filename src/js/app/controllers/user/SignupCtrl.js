@@ -3,24 +3,20 @@ var handleError = function(err, $scope, $analytics) {
   if (!msg) {
     $scope.signupError = "Couldn't sign up. Please try again.";
     Rollbar.error("Signup failure", {email: $scope.user.email});
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'unknown', code: $scope.user.code});
+    $analytics.eventTrack('Signup failure', {email: email, cause: 'unknown'});
     return;
   }
 
-  if (msg === 'bad code') {
-    $scope.signupError = 'The invitation code you entered is not valid.';
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'bad invitation code', code: $scope.user.code});
-
-  } else if (msg.match(/Key.*already exists/)) {
+  if (msg.match(/Key.*already exists/)) {
     var match = msg.match(/Key \((.*)\)=\((.*)\) already exists/),
       key = match[1], value = match[2];
 
     $scope.signupError = format('The %s "%s" is already in use. Try logging in instead?', key, value);
-    $analytics.eventTrack('Signup failure', {email: email, cause: 'duplicate ' + key, code: $scope.user.code});
+    $analytics.eventTrack('Signup failure', {email: email, cause: 'duplicate ' + key});
 
   } else {
     $scope.signupError = msg;
-    $analytics.eventTrack('Signup failure', {email: email, cause: msg, code: $scope.user.code});
+    $analytics.eventTrack('Signup failure', {email: email, cause: msg});
   }
 };
 
@@ -39,7 +35,8 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     var params = _.merge({}, $scope.user, {login: true}, projectInvitation);
 
     User.signup(params).$promise.then(function(user) {
-      $analytics.eventTrack('Signup success', {provider: 'password', code: $scope.user.code});
+      trackSignup('password');
+      $analytics.eventTrack('Signup success', {provider: 'password'});
       if (context === 'modal') {
         $scope.$close({action: 'finish'});
       } else {
@@ -52,12 +49,6 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
 
   $scope.useThirdPartyAuth = function(service, form) {
     $scope.authStarted = true;
-    if (form.code) {
-      if (!_.isEmpty(form.code.$error) || !$scope.isCodeValid) {
-        handleError({data: 'bad code'}, $scope, $analytics);
-        return;
-      }
-    }
     $scope.serviceUsed = service;
     $scope.authDialog = ThirdPartyAuth.openPopup(service);
   };
@@ -68,7 +59,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
       if (error) {
         handleError({data: error}, $scope, $analytics);
       } else {
-        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed, code: $scope.user.code});
+        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed});
         $scope.$state.go('appEntry');
       }
     });

@@ -1,6 +1,7 @@
 var RichText = require('../../services/RichText');
 
-module.exports = function($scope, $anchorScroll, project, currentUser, growl, $stateParams, $modal, User, $dialog, Meta) {
+module.exports = function($scope, $anchorScroll, project, currentUser, growl,
+  $stateParams, $modal, User, $dialog, Meta, $analytics) {
   "ngInject";
 
   Meta.set({
@@ -50,6 +51,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl, $s
         $scope.isContributor = true;
         $scope.$broadcast('joinProject');
         growl.addSuccessMessage('You joined the project.');
+        $analytics.eventTrack('Joined project', {project_id: project.id});
         if (callback) callback();
       });
     };
