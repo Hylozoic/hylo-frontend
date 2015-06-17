@@ -43,7 +43,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
       if (context === 'modal') {
         $scope.$close({action: 'finish'});
       } else {
-        $scope.$state.go('onboarding.start');
+        $scope.$state.go('appEntry');
       }
     }, function(err) {
       handleError(err, $scope, $analytics);
@@ -92,7 +92,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
         handleError({data: error}, $scope, $analytics);
       } else {
         $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed, code: $scope.user.code});
-        $scope.$state.go('onboarding.start');
+        $scope.$state.go('appEntry');
       }
     });
   };
