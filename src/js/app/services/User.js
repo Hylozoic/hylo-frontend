@@ -82,6 +82,9 @@ var factory = function($resource, $rootScope, Project) {
       return !!_.find(this.memberships, function(membership) {
         return membership.community.id == community.id && membership.role == 1;
       });
+    },
+    inCommunity: function() {
+      return !_.isEmpty(this.memberships);
     }
   });
 

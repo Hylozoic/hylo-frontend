@@ -1,0 +1,10 @@
+<div ng-controller="JoinCommunityCtrl">
+  <p>Enter the code that was given to you by your community manager.</p>
+
+  <div class="form-group has-feedback" ng-class="{'has-success': isCodeValid}">
+    <input type="text" class="form-control" ng-model="code" placeholder="" ng-keyup="validateCode()">
+    <i class="icon-big-check form-control-feedback" ng-show="isCodeValid"></i>
+  </div>
+
+  <button class="button" ng-click="submit()" ng-disabled="!isCodeValid">Submit</button>
+</div>

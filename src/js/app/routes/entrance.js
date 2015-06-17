@@ -6,20 +6,19 @@ module.exports = function($stateProvider) {
     url: '/app',
     onEnter: function(currentUser, $state, $timeout, onboarding) {
       var membership = (currentUser && currentUser.memberships[0]);
-      if (membership) {
-        $timeout(function() {
-          $state.go('community.posts', {community: membership.community.slug});
-        });
-      } else if (currentUser) {
-        $timeout(function() {
-          $state.go('home.allPosts');
-          Rollbar.error('User without community', {user_id: currentUser.id});
-        });
-      } else {
-        $timeout(function() {
+      $timeout(function() {
+        if (membership) {
+          if (onboarding && onboarding.currentStep() == 'start') {
+            $state.go('onboarding.start');
+          } else {
+            $state.go('community.posts', {community: membership.community.slug});
+          }
+        } else if (currentUser) {
+          $state.go('home.simple');
+        } else {
           $state.go('login');
-        })
-      }
+        }
+      });
     }
   })
   .state('entrance', /*@ngInject*/ {
@@ -51,18 +50,6 @@ module.exports = function($stateProvider) {
       entrance: {
         templateUrl: '/ui/entrance/login.tpl.html',
         controller: 'LoginCtrl'
-      }
-    }
-  })
-  .state('presignup', {
-    url: '/start-signup',
-    parent: 'entrance',
-    views: {
-      entrance: {
-        templateUrl: '/ui/entrance/presignup.tpl.html',
-        controller: function($scope) {
-          'ngInject';
-        }
       }
     }
   })

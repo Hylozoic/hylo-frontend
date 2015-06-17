@@ -10,7 +10,10 @@
   </div>
 
   <div class="item home">
-    <a class="button" ui-sref="home.allPosts" tooltip="Home" tooltip-placement="bottom">
+    <a class="button" ui-sref="home.allPosts" tooltip="Home" tooltip-placement="bottom" ng-show="currentUser.inCommunity()">
+      <i class="icon-home"></i>
+    </a>
+    <a class="button" ui-sref="home.simple" tooltip="Home" tooltip-placement="bottom" ng-hide="currentUser.inCommunity()">
       <i class="icon-home"></i>
     </a>
   </div>
