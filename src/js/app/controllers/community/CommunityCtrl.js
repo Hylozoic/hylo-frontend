@@ -1,6 +1,7 @@
-var controller = function($scope, $analytics, community) {
+var controller = function($scope, $analytics, community, currentUser) {
 
   $scope.community = community;
+  $scope.canModerate = currentUser && currentUser.canModerate(community);
 
   $analytics.eventTrack('Community: Load Community', {
     community_id: community.id,
