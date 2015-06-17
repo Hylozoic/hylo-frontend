@@ -35,7 +35,6 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     var params = _.merge({}, $scope.user, {login: true}, projectInvitation);
 
     User.signup(params).$promise.then(function(user) {
-      trackSignup('password');
       $analytics.eventTrack('Signup success', {provider: 'password'});
       if (context === 'modal') {
         $scope.$close({action: 'finish'});
