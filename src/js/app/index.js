@@ -57,43 +57,27 @@ app.run(function(clickthroughTracker) {
 
 app.run(function($rootScope, $state, growl, $bodyClass) {
 
-  $rootScope.$on('$stateChangeError',
-    function(event, toState, toParams, fromState, fromParams, error) {
-      if (error && _.include([401, 403], error.status)) {
-        if ($rootScope.currentUser) {
-          growl.addErrorMessage("You don't have permission to view that.");
-        } else {
-          $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});
-        }
-        return;
-      }
-
-      // the part of the code that caused this should be prepared to
-      // handle it (e.g. login attempt with invalid password)
-      if (error && error.status == 422) {
-        return;
-      }
-
-      if (error === 'login required') {
-        // see e.g. routes/home.js
-        return;
-      }
-
-      if (!hyloEnv.isProd) {
-        console.error('$stateChangeError en route to ' + toState.name);
-        console.error(error);
+  $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    if (error && _.include([401, 403], error.status)) {
+      if ($rootScope.currentUser) {
+        growl.addErrorMessage("You don't have permission to view that.");
       } else {
-        Rollbar.error("$stateChangeError", {
-          toState: toState,
-          toParams: toParams,
-          fromState: fromState,
-          fromParams: fromParams,
-          error: error
-        });
-        growl.addErrorMessage("Oops! An error occurred. The Hylo team has been notified. (SCE)", {ttl: 5000});
+        $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});
       }
+      return;
     }
-  );
+
+    // the part of the code that caused this should be prepared to
+    // handle it (e.g. login attempt with invalid password)
+    if (error && error.status == 422) {
+      return;
+    }
+
+    if (error === 'login required') {
+      // see e.g. routes/home.js
+      return;
+    }
+  });
 
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
