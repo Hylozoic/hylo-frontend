@@ -122,6 +122,11 @@ module.exports = function ($stateProvider) {
   .state('createCommunity', {
     url: '/h/new-community',
     parent: 'main',
+    resolve: {
+      requireLogin: function(User, currentUser) {
+        return User.requireLogin(currentUser);
+      }
+    },
     views: {
       "main": {
         templateUrl: '/ui/community/create.tpl.html',

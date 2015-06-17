@@ -5,15 +5,8 @@ module.exports = function ($stateProvider) {
     abstract: true,
     parent: 'main',
     resolve: {
-      requireLogin: /*@ngInject*/ function(currentUser, $timeout, $state, $q) {
-        if (!currentUser) {
-          $timeout(function() {
-            $state.go('login');
-          });
-          var deferred = $q.defer();
-          deferred.reject('login required');
-          return deferred.promise;
-        }
+      requireLogin: /*@ngInject*/ function(User, currentUser) {
+        return User.requireLogin(currentUser);
       }
     },
     data: {
