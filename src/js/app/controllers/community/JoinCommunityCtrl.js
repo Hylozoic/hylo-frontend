@@ -25,6 +25,9 @@ module.exports = function($scope, Community) {
 
     Community.join({code: $scope.code}, function(resp) {
       $scope.$state.reload();
+      if ($scope.$close) {
+        $scope.$close(resp);
+      }
     });
   };
 

@@ -1,5 +1,5 @@
 <div id="nav-pad"></div>
-<div id="nav" ng-class="{public: !currentUser}">
+<div id="nav" ng-class="{public: !currentUser}" ng-controller="NavCtrl">
 
   <div class="item public-only hylo-icon">
     <a href="/" target="_self"><i class="icon-hylo-script"></i></a>
@@ -30,8 +30,10 @@
         </a>
       </li>
       <li role="presentation" class="divider"></li>
-      <li>
+      <li class="bottom">
+        <a ng-click="joinCommunity()">Join a community</a>
         <a class="disabled">Create a new community<br/>(coming soon)</a>
+      </li>
       </li>
     </ul>
   </div>

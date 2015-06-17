@@ -42,9 +42,14 @@
     max-height: 70vh;
     overflow-y: scroll;
 
-    .disabled {
-      color: @inactive-text;
+    .bottom a {
       line-height: 1.4em;
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      &.disabled {
+        color: @inactive-text;
+      }
     }
 
     a {
