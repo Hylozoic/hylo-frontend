@@ -5,7 +5,7 @@
     <span ng-show="isCreator">
       You can
       <a ui-sref="editProject({id: project.slug})">edit project details</a>,
-      <a ng-click="goToTab('requests')">add requests</a>, and
+      <a ng-click="goToTab('posts')">add requests</a>, and
       <a ng-click="goToTab('contributors')">invite contributors</a>
       until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
     </span>
@@ -26,15 +26,14 @@
       <div class="main-column">
         <div ng-if="project.image_url" class="media" back-img="project.image_url"></div>
         <anguvideo ng-if="project.video_url" class="media" ng-model="project.video_url"></anguvideo>
-        <h3 class="intention">{{project.intention}}</h3>
+        <h3 class="intention">Core Intention: {{project.intention}}</h3>
         <see-more class="details" contents="details" truncated="truncatedDetails" expand="showFullDetails()">
         </see-more>
 
       </div>
       <div class="side-column">
         <div class="top-cta" ng-show="isCreator">
-          <h2>Hi {{project.user.name | firstName}}!</h2>
-          <p>Get started on your project by adding requests and contributors below.</p>
+          <p>Move your project forward by adding requests and contributors below.</p>
         </div>
         <div class="top-cta" ng-hide="isCreator">
           <p>
@@ -89,12 +88,12 @@
 <a name="tabs"></a>
 <div class="tabs-wrapper">
   <ul class="tabs">
-    <li ng-class="{selected: $state.current.name === 'project.requests'}" ng-click="goToTab('requests')">
-      <h2>Requests</h2>
+    <li ng-class="{selected: $state.current.name === 'project.posts'}" ng-click="goToTab('posts')">
+      <h2>Requests &amp; Offers</h2>
       <p ng-show="isCreator">Ask for what you need</p>
       <p ng-hide="isCreator">See how you can help</p>
     </li><!--
-    <--></--><li ng-class="{selected: $state.current.name === 'project.contributors'}" ng-click="goToTab('contributors')">
+    --><li ng-class="{selected: $state.current.name === 'project.contributors'}" ng-click="goToTab('contributors')">
       <h2>Contributors</h2>
       <p ng-show="isCreator">Get people involved</p>
       <p ng-hide="isCreator">See who's involved</p>

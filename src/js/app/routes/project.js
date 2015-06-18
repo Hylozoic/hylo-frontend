@@ -53,7 +53,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('project.requests', {
+  .state('project.posts', {
     url: '',
     parent: 'project.page',
     resolve: {
@@ -101,7 +101,7 @@ module.exports = function ($stateProvider) {
 
           $scope.close = function() {
             if ($history.isEmpty()) {
-              $scope.$state.go('project.requests', {slug: project.slug});
+              $scope.$state.go('project.posts', {slug: project.slug});
             } else {
               $history.go(-1);
             }

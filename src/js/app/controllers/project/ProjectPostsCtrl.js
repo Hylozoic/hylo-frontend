@@ -1,4 +1,4 @@
-module.exports = function($scope, project, Post, Cache, UserCache,
+module.exports = function($scope, project, Post, Cache, UserCache, growl,
   $analytics, currentUser, postQuery, $stateParams, UserMentions, PostManager) {
   "ngInject";
 
@@ -17,8 +17,17 @@ module.exports = function($scope, project, Post, Cache, UserCache,
 
   postManager.setup();
 
-  var placeholder = "I'm looking for ",
-    newRequest = $scope.newRequest = {name: placeholder};
+  var postType, placeholder;
+
+  if ($scope.isCreator) {
+    placeholder = "I'm looking for ";
+    postType = 'request';
+  } else {
+    placeholder = "I'd like to offer ";
+    postType = 'offer';
+  }
+
+  var newPost = $scope.newPost = {name: placeholder};
 
   $scope.searchPeople = function(query) {
     var community = project.visibility == 0 ? project.community : null;
@@ -33,13 +42,13 @@ module.exports = function($scope, project, Post, Cache, UserCache,
     return UserMentions.userTextRaw(user);
   };
 
-  $scope.addRequest = function() {
+  $scope.addPost = function() {
     new Post({
-      name: newRequest.name,
-      description: newRequest.description,
+      name: newPost.name,
+      description: newPost.description,
       projectId: project.id,
       communityId: project.community.id,
-      type: 'request'
+      type: postType
     }).$save(function() {
       $analytics.eventTrack('Add Post', {
         has_mention: $scope.hasMention,
@@ -54,8 +63,8 @@ module.exports = function($scope, project, Post, Cache, UserCache,
       UserCache.allPosts.clear(currentUser.id);
 
       postManager.reload();
-      newRequest.name = placeholder;
-      newRequest.description = null;
+      newPost.name = placeholder;
+      newPost.description = null;
       $scope.showDescription = false;
 
     }, function(err) {

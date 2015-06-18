@@ -1,11 +1,12 @@
-<div class="add-request-form" ng-show="isCreator">
-  <h3>What do you need to make this project happen?</h3>
+<div class="add-request-form" ng-show="isCreator || isContributor">
+  <h3 ng-if="isCreator">What do you need to make this project succeed?</h3>
+  <h3 ng-if="isContributor">What can you offer to help make this project succeed?</h3>
   <input type="text"
          class="form-control"
-         ng-model="newRequest.name"
-         ng-keyup="$event.which == 13 && addRequest()"/>
+         ng-model="newPost.name"
+         ng-keyup="$event.which == 13 && addPost()"/>
 
-  <div ng-model="newRequest.description" autocomplete="off" contenteditable="true" ng-show="showDescription"
+  <div ng-model="newPost.description" autocomplete="off" contenteditable="true" ng-show="showDescription"
     class="mentio-editor form-control elastic"
     placeholder="Add more detail here."
     mentio=""
@@ -17,7 +18,7 @@
     mentio-typed-term="typedTerm">
   </div>
 
-  <a class="button" ng-click="addRequest()">
+  <a class="button" ng-click="addPost()">
     <i class="icon-add-01"></i>
     Add Request
   </a>

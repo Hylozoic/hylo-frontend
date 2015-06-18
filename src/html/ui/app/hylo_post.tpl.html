@@ -42,7 +42,7 @@
         in <a ui-sref="community.posts({community: post.community.slug})">{{::post.community.name}}</a>
       </span>
       <span class="project" ng-if="post.projects[0]">
-        in <a ui-sref="project.requests({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
+        in <a ui-sref="project.posts({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
       </span>
       <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.updated_at | fromNow}}</span>
     </div>
