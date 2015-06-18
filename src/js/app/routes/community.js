@@ -134,7 +134,7 @@ module.exports = function ($stateProvider) {
     url: '/settings',
     resolve: {
       extraProperties: function(community) {
-        return community.settings().$promise;
+        return community.getSettings().$promise;
       }
     },
     views: {
