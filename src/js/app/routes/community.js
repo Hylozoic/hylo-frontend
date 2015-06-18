@@ -119,7 +119,7 @@ module.exports = function ($stateProvider) {
     url: '/h/new-community',
     parent: 'main',
     resolve: {
-      requireLogin: function(User, currentUser) {
+      requireLogin: /*@ngInject*/ function(User, currentUser) {
         return User.requireLogin(currentUser);
       }
     },
@@ -133,7 +133,7 @@ module.exports = function ($stateProvider) {
   .state('community.settings', {
     url: '/settings',
     resolve: {
-      extraProperties: function(community) {
+      extraProperties: /*@ngInject*/ function(community) {
         return community.getSettings().$promise;
       }
     },
