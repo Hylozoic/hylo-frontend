@@ -29,9 +29,6 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
   var OnboardingResource = $resource('/noo/user/:userId/onboarding', {userId: '@userId'});
 
   var Onboarding = function(user) {
-    // this is used in templates
-    this.community = user.memberships[0] && user.memberships[0].community;
-
     // for internal use only
     this._user = user;
     this._status = user.onboarding.status;
@@ -50,7 +47,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
         if (this._announcerDelay) {
           $timeout.cancel(this._announcerDelay);
         }
-        this._setStep('profile', true);
+        this.setStep('profile', true);
       }
 
     }.bind(this));
@@ -58,6 +55,12 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
   };
 
   _.extend(Onboarding.prototype, {
+    init: function() {
+      var get = OnboardingResource.get({userId: this._user.id});
+      // this is used in templates
+      this.community = get;
+      return get.$promise;
+    },
     trackStep: function(name) {
       return this._track('Step: ' + name);
     },
@@ -118,11 +121,11 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
             });
           }, 3000);
 
-          this._setStep('profile', true);
+          this.setStep('profile', true);
           break;
 
         case 'profile':
-          this._setStep('done', true);
+          this.setStep('done', true);
           break;
       }
     },
@@ -140,7 +143,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       this._go(next, delta != 0);
     },
     _go: function(name, update) {
-      this._setStep(name, update);
+      this.setStep(name, update);
 
       var params;
       // FIXME code smell
@@ -153,7 +156,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
       }
       return $state.go(steps[name].state, params);
     },
-    _setStep: function(name, update) {
+    setStep: function(name, update) {
       this.trackStep(name);
       this._status.step = name;
 

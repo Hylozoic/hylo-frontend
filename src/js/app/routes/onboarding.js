@@ -11,12 +11,17 @@ module.exports = function ($stateProvider) {
   })
   .state('onboarding.start', {
     url: '/h/onboarding/start',
+    resolve: {
+      onboardingInit: function(onboarding) {
+        return onboarding.init();
+      }
+    },
     views: {
       onboarding: {
         templateUrl: '/ui/onboarding/start.tpl.html',
         controller: /*@ngInject*/ function(onboarding, $scope) {
           $scope.onboarding = onboarding;
-          onboarding.trackStep('start');
+          onboarding.setStep('start');
         }
       }
     }
