@@ -17,14 +17,14 @@ module.exports = function($scope, project, Post, Cache, UserCache, growl,
 
   postManager.setup();
 
-  var postType, placeholder;
+  var placeholder;
 
   if ($scope.isCreator) {
     placeholder = "I'm looking for ";
-    postType = 'request';
+    $scope.postType = 'request';
   } else {
     placeholder = "I'd like to offer ";
-    postType = 'offer';
+    $scope.postType = 'offer';
   }
 
   var newPost = $scope.newPost = {name: placeholder};
@@ -43,13 +43,13 @@ module.exports = function($scope, project, Post, Cache, UserCache, growl,
   };
 
   $scope.addPost = function() {
-    new Post({
+    Post.saveInProject({
+      communityId: project.community.id,
+      projectId: project.id,
       name: newPost.name,
       description: newPost.description,
-      projectId: project.id,
-      communityId: project.community.id,
-      type: postType
-    }).$save(function() {
+      type: $scope.postType
+    }, function() {
       $analytics.eventTrack('Add Post', {
         has_mention: $scope.hasMention,
         community_name: project.community.name,

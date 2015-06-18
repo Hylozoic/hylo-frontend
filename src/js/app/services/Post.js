@@ -1,7 +1,8 @@
 var factory = function($resource) {
 
   var Post = $resource("/noo/post/:id/:action", {
-    id: '@id'
+    id: '@id',
+    projectId: '@projectId'
   }, {
     comment: {
       method: "POST",
@@ -48,6 +49,10 @@ var factory = function($resource) {
     findComments: {
       url: '/noo/post/:id/comments',
       isArray: true
+    },
+    saveInProject: {
+      url: '/noo/project/:projectId/posts',
+      method: 'POST'
     }
   });
 
