@@ -1,4 +1,4 @@
-<div class="post" analytics-id="{{::post.id}}">
+<div class="post" analytics-id="{{::post.id}}" ng-class="{fulfilled: post.fulfilled_at}">
 
   <a class="user" ui-sref="profile.posts({id: post.user.id})">
     <div back-img="post.user.avatar" class="avatar"></div>
@@ -78,7 +78,7 @@
       <span ng-if="isFollowing || followersNotMe.length > 1">are</span><span ng-if="!isFollowing && followersNotMe.length == 1">is</span> following this seed.
     </div>
 
-    <div class="fulfillment" ng-if="post.fulfilled">
+    <div class="fulfillment" ng-if="post.fulfilled_at">
       Fulfilled
       <span ng-if="::post.contributors.length > 0">
         with contributions from
@@ -105,7 +105,7 @@
       </span>
     </div>
 
-    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled}">
+    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled_at}">
       <a class="vote" ng-click="vote()" tooltip-popup-delay="500" tooltip="Show your support and bring this to the attention of others">
         <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
         <span class="num">{{post.votes}}</span>
@@ -127,7 +127,7 @@
         <span class="hidden-xs">{{isFollowing ? 'Unfollow' : 'Follow'}}</span>
       </a><!--
 
-      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled">
+      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark fulfilled</span>
       </a>

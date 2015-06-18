@@ -6,7 +6,7 @@ var controller = function($scope, $modalInstance, Post, Community) {
   $scope.save = function () {
     Post.fulfill({id: post.id, contributors: _.pluck(contributors, 'id')}, function() {
       post.contributors = contributors;
-      post.fulfilled = true;
+      post.fulfilled_at = new Date();
     });
     $modalInstance.close();
   };
