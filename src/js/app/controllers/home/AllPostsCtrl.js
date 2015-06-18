@@ -21,8 +21,6 @@ var controller = function($scope, currentUser, firstPostQuery, UserCache, PostMa
   postManager.setup();
 
   $scope.hasPosts = $scope.posts.length > 0;
-  $scope.defaultCommunity = currentUser.memberships[0].community;
-
 };
 
 module.exports = function(angularModule) {

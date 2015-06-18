@@ -159,7 +159,7 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
   if (!community) {
     $scope.shouldPickCommunity = true;
     $scope.communityOptions = _.map(currentUser.memberships, function(membership) {
-      return _.pick(membership.community, 'id', 'name', 'slug');
+      return membership.community;
     });
     community = $scope.community = $scope.communityOptions[0];
 
