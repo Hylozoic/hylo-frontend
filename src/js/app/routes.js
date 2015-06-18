@@ -13,6 +13,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.when('/community/invite/:token', '/use-invitation?token');
   $urlRouterProvider.when('/h/login', '/login');
   $urlRouterProvider.when('/h/signup', '/signup');
+  $urlRouterProvider.when('/h/search', '/search');
 
   // handle alternate name of starting route
   $urlRouterProvider.when('/', '/app');
@@ -73,7 +74,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('search', {
-      url: "/h/search?q&c",
+      url: "/search?q&c",
       parent: 'main',
       resolve: /*@ngInject*/ {
         initialQuery: function($stateParams) {
