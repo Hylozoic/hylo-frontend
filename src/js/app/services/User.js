@@ -95,6 +95,8 @@ var factory = function($resource, $rootScope, Project, $timeout, $q) {
       return this.name.split(' ')[0];
     },
     canModerate: function(community) {
+      if (this.is_admin) return true;
+
       return !!_.find(this.memberships, function(membership) {
         return membership.community.id == community.id && membership.role == 1;
       });

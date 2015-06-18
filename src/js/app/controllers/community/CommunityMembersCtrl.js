@@ -1,5 +1,5 @@
 var controller = function($scope, community, users, $dialog, Cache, currentUser) {
-  $scope.canInvite = $scope.canModerate || community.settings.all_can_invite || currentUser.is_admin;
+  $scope.canInvite = $scope.canModerate || community.settings.all_can_invite;
   $scope.users = users;
 
   $scope.loadMore = _.debounce(function() {
