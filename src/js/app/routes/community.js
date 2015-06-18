@@ -132,6 +132,11 @@ module.exports = function ($stateProvider) {
   })
   .state('community.settings', {
     url: '/settings',
+    resolve: {
+      extraProperties: function(community) {
+        return community.settings().$promise;
+      }
+    },
     views: {
       community: {
         templateUrl: '/ui/community/settings.tpl.html',

@@ -1,7 +1,8 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var controller = function ($scope, $history, $analytics, community, currentUser, growl) {
+var controller = function ($scope, $history, $analytics, community, currentUser, growl, extraProperties) {
 
+  _.merge(community, extraProperties);
   $scope.community = community;
   $scope.settings = community.settings;
 

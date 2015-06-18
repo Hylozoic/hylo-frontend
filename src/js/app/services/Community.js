@@ -41,6 +41,9 @@ var service = function($resource, Project) {
     join: {
       url: '/noo/community/code',
       method: 'POST'
+    },
+    settings: {
+      url: '/noo/community/:id/settings',
     }
   });
 
@@ -48,6 +51,9 @@ var service = function($resource, Project) {
   _.extend(Community.prototype, {
     members: function(params, success, error) {
       return Community.findMembers(_.extend({id: this.id}, params), success, error);
+    },
+    settings: function(success, error) {
+      return Community.settings({id: this.id}, success, error);
     },
     moderators: function(success, error) {
       return Community.findModerators({id: this.id}, success, error);
