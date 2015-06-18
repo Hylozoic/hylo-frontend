@@ -305,8 +305,14 @@ body.project.project-posts {
       .post-without-avatar;
 
       .post-context {
-        .post-type, .after-post-type-dot, .community {
+        .community {
           display: none;
+        }
+      }
+
+      &.fulfilled {
+        .title, .post-type {
+          color: @text-light-gray;
         }
       }
     }

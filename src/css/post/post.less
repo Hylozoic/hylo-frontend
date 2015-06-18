@@ -125,21 +125,21 @@ div.post {
     color: @link-color;
   }
 
+  .post-type {
+    &.intention {
+      .post-type-text(@intention-color);
+    }
+    &.request {
+      .post-type-text(@request-color);
+    }
+    &.offer {
+      .post-type-text(@offer-color);
+    }
+  }
+
   .post-context {
     margin-bottom: 9px;
     .meta-text;
-
-    .post-type {
-      &.intention {
-        .post-type-text(@intention-color);
-      }
-      &.request {
-        .post-type-text(@request-color);
-      }
-      &.offer {
-        .post-type-text(@offer-color);
-      }
-    }
 
     .timestamp {
       line-height: 20px;

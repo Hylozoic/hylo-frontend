@@ -201,7 +201,11 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
     },
     controller: controller,
     templateUrl: "/ui/app/hylo_post.tpl.html",
-    replace: true
+    replace: true,
+    link: function(scope, element, attrs) {
+      element.addClass(scope.post.type);
+      if (scope.post.fulfilled_at) element.addClass('fulfilled');
+    }
   };
 
 };
