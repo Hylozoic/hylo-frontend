@@ -68,7 +68,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
       event.unread = false;
       currentUser.notification_count -= 1;
     }
-    $scope.$state.go('seed', {community: event.post.communities[0].slug, postId: event.post.id});
+    $scope.$state.go('post', {community: event.post.communities[0].slug, postId: event.post.id});
   };
 
   $scope.truncate = truncate;
