@@ -10,7 +10,7 @@ var controller = function($scope, $analytics, community, currentUser) {
   });
 
   // Dalai Lama Fellows, Permaculture Action, Unlikely Allies
-  $scope.hideProjectsTab = !_.contains([842, 910, 985], community.id);
+  $scope.hideProjectsTab = !_.contains(["842", "910", "985"], community.id);
 
 };
 
