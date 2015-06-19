@@ -14,7 +14,7 @@
       <div class="controls">
         <a ui-sref="profile.posts({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>
         •
-        <span class="timestamp">{{::comment.date_commented | fromNow}}</span>
+        <span class="timestamp">{{::comment.created_at | fromNow}}</span>
         <span ng-show="::(!commentOwner(comment))">
           <span ng-if="!comment.isThanked">•
             <a class="thank-link" tooltip='click to give thanks for this comment' tooltip-popup-delay="500" ng-click="thank(comment)">Say thanks</a>
