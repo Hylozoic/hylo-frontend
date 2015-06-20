@@ -81,7 +81,7 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
       if (!$scope.isFollowing) {
         $analytics.eventTrack('Post: Join', {post_id: post.id});
         post.followers.push({
-          id: '' + user.id,
+          id: user.id,
           name: user.name,
           avatar_url: user.avatar
         });
@@ -89,7 +89,7 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
         UserCache.followedPosts.clear(user.id);
       } else {
         $analytics.eventTrack('Post: Leave', {post_id: post.id});
-        post.followers = _.without(post.followers, _.findWhere(post.followers, {id: '' + user.id}));
+        post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}));
         Post.follow({id: post.id});
         UserCache.followedPosts.remove(user.id, post.id);
       }
@@ -104,11 +104,11 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
         id: post.id,
         userIds: _.difference(
           _.pluck($scope.followersToAdd, 'id'),
-          _.map(post.followers, function(u) { return parseInt(u.id) })
+          _.map(post.followers, function(u) { return u.id })
         )
       }, function() {
         _.each($scope.followersToAdd, function(follower) {
-          if (!_.findWhere(post.followers, {id: follower.id + ''})) {
+          if (!_.findWhere(post.followers, {id: follower.id})) {
             post.followers.push(follower);
           }
         });

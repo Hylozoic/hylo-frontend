@@ -6,7 +6,7 @@ module.exports = function ($stateProvider) {
     abstract: true,
     resolve: /*@ngInject*/ {
       isSelf: function(currentUser, $stateParams) {
-        return currentUser && parseInt(currentUser.id) === parseInt($stateParams.id);
+        return currentUser && currentUser.id === $stateParams.id;
       },
       user: function(User, isSelf, $stateParams, currentUser) {
         if (isSelf) {

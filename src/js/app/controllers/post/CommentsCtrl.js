@@ -39,7 +39,7 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
 
         $analytics.eventTrack('Post: Comment: Add', {post_id: post.id, has_mention: $scope.hasMention});
 
-        if (!_.findWhere(post.followers, {id: comment.user.id + ''})) {
+        if (!_.findWhere(post.followers, {id: comment.user.id})) {
           post.followers.push(comment.user);
         }
 
