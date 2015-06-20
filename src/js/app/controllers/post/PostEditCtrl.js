@@ -1,6 +1,6 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var directive = function($scope, currentUser, community, Post, growl, $analytics, $history,
+var controller = function($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
 
   var prefixes = {
@@ -174,5 +174,5 @@ var directive = function($scope, currentUser, community, Post, growl, $analytics
 };
 
 module.exports = function(angularModule) {
-  angularModule.controller('PostEditCtrl', directive);
+  angularModule.controller('PostEditCtrl', controller);
 }

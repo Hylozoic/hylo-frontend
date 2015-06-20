@@ -102,7 +102,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
         }
       },
       resolve: {
-        seed: function() { return null; },
+        post: function() { return null; },
         community: function() { return null; }
       }
     });

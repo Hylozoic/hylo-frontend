@@ -174,9 +174,9 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      post: ['Post', '$stateParams', function(Post, $stateParams) {
+      post: /*@ngInject*/ function(Post, $stateParams) {
         return Post.get({id: $stateParams.postId}).$promise;
-      }]
+      }
     }
   })
   .state('post', {
@@ -189,9 +189,9 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      post: ['Post', '$stateParams', function(Post, $stateParams) {
+      post: /*@ngInject*/ function(Post, $stateParams) {
         return Post.get({id: $stateParams.postId}).$promise;
-      }]
+      }
     },
     data: {
       singlePost: true
