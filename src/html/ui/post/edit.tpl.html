@@ -73,15 +73,15 @@
 
     <div class="bottom-bar">
       <div class="add-meta image">
-        <a ng-click="addImage()">
+        <a class="add-image" ng-click="addImage()">
           <i class="icon-add-photo"></i>
           <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} Image</span>
           <span ng-show="addingImage">Please wait...</span>
         </a>
 
-        <div ng-if="imageUrl">
+        <div ng-if="imageUrl" class="image-preview">
           <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
-          <a class="remove-image" ng-click="removeImage()">&times;</a>
+          <a class="remove" ng-click="removeImage()">&times;</a>
         </div>
       </div>
 

@@ -412,3 +412,30 @@
     -ms-transform: rotate(45deg);
   }
 }
+
+.image-preview {
+  position: relative;
+  display: inline-block;
+  img {
+    width: 100px;
+  }
+  .thumbnail {
+  }
+  .remove {
+    .large-header;
+    @size: 25px;
+    text-decoration: none;
+    vertical-align: top;
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    height: @size;
+    line-height: @size !important;
+    width: @size;
+    border-radius: @size;
+    border: 1px solid @border-light;
+    text-align: center;
+    background-color: white;
+    color: @readable-text;
+  }
+}

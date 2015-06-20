@@ -56,6 +56,10 @@ var controller = function($scope, currentUser, Project, project) {
     });
   };
 
+  $scope.removeImage = function() {
+    project.image_url = null;
+  };
+
   $scope.unpublish = function() {
     project.unpublish(function() {
       project.published_at = null;

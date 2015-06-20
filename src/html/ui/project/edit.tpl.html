@@ -34,16 +34,17 @@
       <label>Photo or Video</label>
       <p class="help">A picture is worth a thousand words, and a video can help you communicate the impact of your project even more effectively.</p>
 
-      <div ng-show="project.image_url" class="image-thumbnail">
-        <img ng-src="{{project.image_url}}"/>
-      </div>
-
       <input type="text" ng-model="project.video_url" class="form-control" placeholder="Add a link to YouTube or Vimeo"/>
       &nbsp;or&nbsp;
       <a class="button" ng-class="{disabled: addingImage}" ng-click="addImage()">
         <span ng-hide="addingImage">Add a photo</span>
         <span ng-show="addingImage">Please wait...</span>
       </a>
+      <br/>
+      <div ng-if="project.image_url" class="image-preview">
+        <a class="thumbnail" ng-href="{{project.image_url}}" target="_blank"><img ng-src="{{project.image_url}}"/></a>
+        <a class="remove" ng-click="removeImage()">&times;</a>
+      </div>
 
     </div>
 

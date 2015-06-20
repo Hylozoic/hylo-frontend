@@ -138,6 +138,17 @@
 			&.image {
 				@media (min-width: @screen-sm) {
 					padding-left: 0;
+
+					.image-preview {
+						margin-left: @std-padding;
+						vertical-align: top;
+					}
+				}
+
+				@media (max-width: @screen-xs-max) {
+					.add-image {
+						display: block;
+					}
 				}
   		}
 
@@ -159,20 +170,6 @@
 				}
 			}
 		}
-
-		.thumbnail {
-			display: inline-block;
-			margin-bottom: 0;
-			img {
-				width: 60px;
-			}
-		}
-		.remove-image {
-			font-size: 24px;
-			vertical-align: top;
-			position: relative;
-			top: -9px;
-		}
 	}
 
 	.notifications {
@@ -189,7 +186,11 @@
 
   .edit-content {
     .mentio-editor {
-      height: 120px;
+      height: 10em;
+
+      @media (max-width: @screen-xs-max) {
+      	height: 50vh;
+      }
     }
 
     .Medium-placeholder {
