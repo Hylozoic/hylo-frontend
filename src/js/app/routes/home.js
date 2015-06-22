@@ -39,9 +39,27 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/home/simple.tpl.html',
-        controller: function($scope, projects, requireNoCommunity) {
+        controller: function($scope, projects, requireNoCommunity, currentUser, $http) {
           'ngInject';
           $scope.projects = projects;
+
+          $scope.submit = function(form) {
+            form.submitted = true;
+            if (form.$invalid) return;
+
+            $http({
+              method: 'POST',
+              url: '/noo/waitlist',
+              data: {
+                name: currentUser.name,
+                email: currentUser.email,
+                details: $scope.details
+              }
+            }).success(function() {
+              $scope.success = "Thank you for contacting us! We'll get back to you soon.";
+            });
+          };
+
         }
       }
     }
