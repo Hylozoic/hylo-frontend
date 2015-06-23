@@ -28,7 +28,9 @@ var controller = function($scope, growl, $stateParams, $analytics, currentUser, 
     editing[field] = false;
   };
 
-  $scope.saveEdit = function(field) {
+  $scope.saveEdit = function(field, form) {
+    if (form && form.$invalid) return;
+
     editing[field] = false;
     var data = {};
     data[field] = edited[field];
