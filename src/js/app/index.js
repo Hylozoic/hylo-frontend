@@ -1,6 +1,5 @@
 require('./directives');
 require('./controllers');
-require('./services');
 
 var dependencies = [
   'afkl.lazyImage',
@@ -9,7 +8,6 @@ var dependencies = [
   'angulartics.segment.io',
   'hyloControllers',
   'hyloDirectives',
-  'hyloServices',
   'infinite-scroll',
   'mentio',
   'newrelic-timing',
@@ -34,9 +32,7 @@ var app = angular.module('hyloApp', dependencies);
 require('./routes')(app);
 require('./animations')(app);
 require('./filters')(app);
-require('./features/mentions/userMentions')(app);
-require('./services/removeTrailingSlash')(app);
-require('./services/myHttpInterceptor')(app);
+require('./services')(app);
 
 app.config(function ($locationProvider, growlProvider, $idleProvider) {
   $locationProvider.html5Mode(true);
