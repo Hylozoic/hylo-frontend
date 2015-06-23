@@ -9,9 +9,6 @@ var controller = function($scope, $analytics, community, currentUser) {
     community_slug: community.slug
   });
 
-  // Dalai Lama Fellows, Permaculture Action, Unlikely Allies
-  $scope.hideProjectsTab = !_.contains(["842", "910", "985"], community.id);
-
 };
 
 module.exports = function(angularModule) {
