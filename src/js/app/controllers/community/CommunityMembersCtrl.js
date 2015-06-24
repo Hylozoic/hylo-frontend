@@ -1,22 +1,24 @@
-var controller = function($scope, community, users, $dialog, Cache, currentUser) {
+var controller = function($scope, community, usersQuery, $dialog, Cache, currentUser, $timeout) {
   $scope.canInvite = $scope.canModerate || community.settings.all_can_invite;
-  $scope.users = users;
+  $scope.users = usersQuery.people;
 
   $scope.loadMore = _.debounce(function() {
     if ($scope.loadMoreDisabled) return;
     $scope.loadMoreDisabled = true;
 
-    community.members({
-      with: ['skills', 'organizations'],
-      limit: 20,
-      offset: $scope.users.length
-    }, function(users) {
-      Array.prototype.push.apply($scope.users, users);
+    community.members({offset: $scope.users.length}, function(resp) {
+      $scope.users = _.uniq(
+        $scope.users.concat(resp.people),
+        function(user) { return user.id }
+      );
 
-      Cache.set('community.members:' + community.id, $scope.users, {maxAge: 10 * 60});
+      Cache.set('community.members:' + community.id, {
+        people: $scope.users,
+        people_total: resp.people_total
+      }, {maxAge: 10 * 60});
 
-      if (users.length > 0 && $scope.users.length < users[0].total)
-        $scope.loadMoreDisabled = false;
+      if (resp.people.length > 0 && $scope.users.length < resp.people_total)
+        $timeout(function() { $scope.loadMoreDisabled = false; });
     });
 
   }, 200);

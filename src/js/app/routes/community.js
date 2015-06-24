@@ -79,17 +79,14 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: /*@ngInject*/ {
-      users: function(community, Cache) {
+      usersQuery: function(community, Cache) {
         var key = 'community.members:' + community.id,
           cached = Cache.get(key);
 
         if (cached) {
           return cached;
         } else {
-          return community.members({
-            with: ['skills', 'organizations'],
-            limit: 20
-          }).$promise.then(function(resp) {
+          return community.members().$promise.then(function(resp) {
             Cache.set(key, resp, {maxAge: 10 * 60});
             return resp;
           });

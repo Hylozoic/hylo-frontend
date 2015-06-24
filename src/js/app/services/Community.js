@@ -7,8 +7,7 @@ var service = function($resource, Project) {
       url: '/noo/community/:id/invite'
     },
     findMembers: {
-      url: '/noo/community/:id/members',
-      isArray: true
+      url: '/noo/community/:id/members'
     },
     findModerators: {
       url: '/noo/community/:id/moderators',
