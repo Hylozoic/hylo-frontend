@@ -32,7 +32,7 @@ module.exports = {
 
   markdown: function(text, opts) {
     var text = marked(text);
-    if (opts.maxlength) {
+    if (opts && opts.maxlength) {
       text = truncate(text, opts.maxlength);
     }
     return text;
