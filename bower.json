@@ -20,7 +20,8 @@
     "gsap": "~1.15.1",
     "ng-tags-input": "~2.3.0",
     "angular-ui-bootstrap-bower": "0.13.0",
-    "afkl-lazy-image": "~0.1.4"
+    "afkl-lazy-image": "~0.1.4",
+    "stellar": "~0.6.2"
   },
   "private": true,
   "resolutions": {
