@@ -1,4 +1,4 @@
-var controller = function($scope, $modalInstance, Post, Community) {
+var controller = function($scope, $modalInstance, Post, User) {
 
   var post = $scope.post,
     contributors = $scope.contributors = [];
@@ -12,7 +12,7 @@ var controller = function($scope, $modalInstance, Post, Community) {
   };
 
   $scope.findMembers = function(search) {
-    return Community.findMembers({id: post.community.id, autocomplete: search, limit: 5}).$promise;
+    return User.autocomplete({q: search, communityId: post.community.id}).$promise;
   };
 
 };

@@ -1,6 +1,7 @@
 var truncate = require('html-truncate');
 
-var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $analytics, growl, $dialog, UserCache, Community) {
+var directive = function(Post, $state, $rootScope, $log, $modal, $timeout,
+  $analytics, growl, $dialog, UserCache, User) {
 
   var controller = function($scope, $element) {
     $scope.singlePost = $state.current.data && $state.current.data.singlePost;
@@ -121,7 +122,7 @@ var directive = function(Post, $state, $rootScope, $log, $modal, $timeout, $anal
     };
 
     $scope.findMembers = function(search) {
-      return Community.findMembers({id: post.community.id, autocomplete: search, limit: 5}).$promise
+      return User.autocomplete({communityId: post.community.id, q: search}).$promise
       .catch(function(resp) {
         if (_.contains([401, 403], resp.status)) {
           $scope.$emit('unauthorized', {context: 'add-members'});

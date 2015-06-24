@@ -1,6 +1,6 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var controller = function ($scope, $history, $analytics, community, currentUser, growl, extraProperties) {
+var controller = function ($scope, $history, $analytics, community, currentUser, growl, extraProperties, User) {
 
   _.merge(community, extraProperties);
   $scope.community = community;
@@ -126,7 +126,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   };
 
   $scope.findMembers = function(search) {
-    return community.members({autocomplete: search, limit: 5}).$promise;
+    return User.autocomplete({q: search, communityId: community.id}).$promise;
   };
 
   $scope.addModerator = function(item, model, label) {
