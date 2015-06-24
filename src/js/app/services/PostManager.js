@@ -8,7 +8,7 @@
   which couples it to our particular server implementation.
  */
 
-var factory = function(growl, $analytics) {
+var factory = function(growl, $analytics, $timeout) {
 
   var PostManager = function(opts) {
     var firstPage = opts.firstPage;
@@ -52,8 +52,9 @@ var factory = function(growl, $analytics) {
       if (this.opts.cache)
         this.opts.cache(this.scope[this.attr], resp.posts_total);
 
+      var self = this;
       if (resp.posts.length > 0 && this.scope[this.attr].length < resp.posts_total)
-        this.scope.loadMoreDisabled = false;
+        $timeout(function() { self.scope.loadMoreDisabled = false; });
     }
 
   });
