@@ -22,12 +22,8 @@
 
     <div>
       <label>Project details</label>
-      <div ng-model="project.details"
-        autocomplete="off"
-        contenteditable="true"
-        class="form-control details"
-        placeholder="Provide more detail about the project, and why it is important to you.">
-      </div>
+      <textarea class="form-control details" ng-model="project.details" placeholder="Provide more detail about the project, and why it is important to you."></textarea>
+      <span class="help"><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> is supported.</span>
     </div>
 
     <div class="add-media">
