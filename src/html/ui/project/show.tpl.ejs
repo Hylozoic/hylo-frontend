@@ -50,11 +50,11 @@
         <ul>
           <li>
             <a class="avatar icon" back-img="project.user.avatar_url"></a>
-            <div>Created by <strong>{{project.user.name}}</strong></div>
+            <div>Created by <strong><a ui-sref="profile.posts({id: project.user.id})">{{project.user.name}}</a></strong></div>
           </li>
           <li>
             <div class="community icon" back-img="project.community.avatar_url"></div>
-            <div>Based out of <strong>{{project.community.name}}</strong></div>
+            <div>Based out of <strong><a ui-sref="community.posts({community: project.community.slug})">{{project.community.name}}</a></strong></div>
           </li>
           <li ng-if="project.isPublic()">
             <div class="icon" back-img="'<%= imageUrl('projects/public.svg') %>'"></div>
