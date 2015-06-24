@@ -28,7 +28,7 @@ module.exports = function ($stateProvider) {
       requireNoCommunity: function(currentUser, $timeout, $state) {
         if (!_.isEmpty(currentUser.memberships)) {
           $timeout(function() {
-            $state.go('community.posts', {community: currentUser.memberships[0].community.slug});
+            $state.go('appEntry');
           });
         }
       }
