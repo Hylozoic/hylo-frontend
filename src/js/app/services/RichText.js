@@ -30,5 +30,11 @@ module.exports = {
     return text;
   },
 
-  markdown: marked
+  markdown: function(text, opts) {
+    var text = marked(text);
+    if (opts.maxlength) {
+      text = truncate(text, opts.maxlength);
+    }
+    return text;
+  }
 };

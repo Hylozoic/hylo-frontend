@@ -19,7 +19,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
   $scope.isCreator = $scope.canModerate = currentUser && project.user_id === currentUser.id;
   $scope.isContributor = !!project.membership;
 
-  $scope.details = RichText.present(RichText.markdown(project.details), {skipWrap: true, maxlength: 420});
+  $scope.details = RichText.markdown(project.details, {maxlength: 420});
   $scope.truncatedDetails = project.details && project.details.length > 420;
 
   // this is a hack to get user mention autocompletion working correctly
@@ -34,7 +34,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
   });
 
   $scope.showFullDetails = function() {
-    $scope.details = RichText.present(RichText.markdown(project.details), {skipWrap: true});
+    $scope.details = RichText.markdown(project.details);
     $scope.truncatedDetails = false;
   };
 
