@@ -31,7 +31,7 @@ module.exports = function($scope, project, Post, Cache, UserCache, growl,
 
   $scope.searchPeople = function(query) {
     var community = project.visibility == 0 ? project.community : null;
-    UserMentions.searchPeople(query, community).$promise.then(function(items) {
+    UserMentions.searchPeople(query, 'project', project).$promise.then(function(items) {
       $scope.people = items;
     });
   };

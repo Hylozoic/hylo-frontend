@@ -7,9 +7,11 @@ module.exports = function(Community, User, $rootScope) {
         user.id, user.id, user.name);
     },
 
-    searchPeople: function(query, community) {
-      if (community) {
-        return Community.findMembers({id: community.id, autocomplete: query, limit: 5});
+    searchPeople: function(query, context, id) {
+      if (context === 'community') {
+        return Community.findMembers({id: id, autocomplete: query, limit: 5});
+      } else if (context === 'project') {
+        return User.autocomplete({projectId: id, q: query});
       } else {
         return User.autocomplete({q: query});
       }

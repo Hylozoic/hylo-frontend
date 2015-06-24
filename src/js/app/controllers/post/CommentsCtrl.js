@@ -80,8 +80,16 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
     });
   };
 
-  $scope.searchPeople = function(query, community) {
-    UserMentions.searchPeople(query, community).$promise.then(function(items) {
+  $scope.searchPeople = function(query) {
+    var context, id;
+    if ($rootScope.userMentionContext) {
+      context = $rootScope.userMentionContext.context;
+      id = $rootScope.userMentionContext.id;
+    } else {
+      context = 'community';
+      id = post.community.id;
+    }
+    UserMentions.searchPeople(query, context, id).$promise.then(function(items) {
       $scope.people = items;
     });
   };

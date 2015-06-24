@@ -1,7 +1,7 @@
 var RichText = require('../../services/RichText');
 
 module.exports = function($scope, $anchorScroll, project, currentUser, growl,
-  $stateParams, $modal, User, $dialog, Meta, $analytics) {
+  $stateParams, $modal, User, $dialog, Meta, $analytics, $rootScope) {
   "ngInject";
 
   Meta.set({
@@ -21,6 +21,17 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
 
   $scope.details = RichText.present(project.details, {maxlength: 420});
   $scope.truncatedDetails = project.details && project.details.length > 420;
+
+  // this is a hack to get user mention autocompletion working correctly
+  // for comments in projects
+  $rootScope.userMentionContext = {
+    context: 'project',
+    id: project.id
+  };
+
+  $rootScope.$on('$stateChangeStart', function() {
+    $rootScope.userMentionContext = null;
+  });
 
   $scope.showFullDetails = function() {
     $scope.details = RichText.present(project.details);
