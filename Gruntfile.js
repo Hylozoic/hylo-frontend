@@ -12,14 +12,16 @@ module.exports = function(grunt) {
         files: {
           'dist/dev/bundle.css': ['src/css/index.less'],
           'dist/dev/admin/bundle.css': ['src/css/admin/index.less'],
-          'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less']
+          'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less'],
+          'dist/dev/subscribe/bundle.css': ['src/css/subscribe.less']
         }
       },
       deploy: {
         files: {
           'dist/deploy/pages/bundle.css': ['src/css/index.less'],
           'dist/deploy/pages/admin/bundle.css': ['src/css/admin/index.less'],
-          'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less']
+          'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less'],
+          'dist/deploy/pages/subscribe/bundle.css': ['src/css/subscribe.less']
         }
       }
     },
@@ -28,7 +30,8 @@ module.exports = function(grunt) {
         files: {
           'dist/deploy/pages/bundle.min.css': ['dist/deploy/pages/bundle.css'],
           'dist/deploy/pages/admin/bundle.min.css': ['dist/deploy/pages/admin/bundle.css'],
-          'dist/deploy/pages/styleguide/bundle.min.css': ['dist/deploy/pages/styleguide/bundle.css']
+          'dist/deploy/pages/styleguide/bundle.min.css': ['dist/deploy/pages/styleguide/bundle.css'],
+          'dist/deploy/pages/subscribe/bundle.min.css': ['dist/deploy/pages/subscribe/bundle.css']
         }
       }
     },
@@ -42,7 +45,8 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dist/dev/bundle.js': ['src/js/index.js'],
-          'dist/dev/admin/bundle.js': ['src/js/admin/index.js']
+          'dist/dev/admin/bundle.js': ['src/js/admin/index.js'],
+          'dist/dev/subscribe/bundle.js': ['src/js/subscribe/index.js']
         },
         options: {
           watch: true
@@ -51,7 +55,8 @@ module.exports = function(grunt) {
       deploy: {
         files: {
           'dist/deploy/pages/bundle.js': ['src/js/index.js'],
-          'dist/deploy/pages/admin/bundle.js': ['src/js/admin/index.js']
+          'dist/deploy/pages/admin/bundle.js': ['src/js/admin/index.js'],
+          'dist/deploy/pages/subscribe/bundle.js': ['src/js/subscribe/index.js']
         }
       }
     },

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="subscribeApp" ng-strict-di>
+<head>
+<script src="//cdn.optimizely.com/js/2520710496.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<%- include('../_clientEnv') %>
+<%- include('../_segment') %>
+<%- include('../_favicon') %>
+<script type="text/javascript" src="//use.typekit.net/npw4ouq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="<%= assetUrl('subscribe/bundle.css') %>" rel="stylesheet">
+<style>
+
+</style>
+<title>Hylo</title>
+</head>
+<body class="container-fluid" ng-controller="BaseCtrl">
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h2>Subscribe to Hylo</h2>
+    <p>Click the button below to enter your billing details.</p>
+
+    <button class="btn btn-large btn-primary" ng-click="startStripe()">Subscribe to the Basic Plan</button>
+
+    <div class="success" ng-if="success">
+      Your subscription was successfully created! If you have any questions, please email <a href="mailto:hello@hylo.com">hello@hylo.com</a>.
+    </div>
+  </div>
+</div>
+
+<script>
+  window.stripePublishableKey = '<%= process.env.STRIPE_PUBLISHABLE_KEY %>';
+</script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script type="text/javascript" src="<%= assetUrl('subscribe/bundle.js') %>"></script>
+</body>
+</html>

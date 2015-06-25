@@ -1,0 +1,24 @@
+@import 'bower_components/bootstrap/less/bootstrap';
+@import 'shared/colors';
+@import 'mixins';
+
+@std-padding: floor(@grid-gutter-width / 2);
+
+body {
+  background: url(../img/homepage/coworkingBg-faint.jpg);
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+
+  padding-top: 10vh;
+  .body-text;
+}
+
+div.success {
+  border-radius: @border-radius-base;
+  padding: @std-padding;
+  margin-top: @std-padding;
+  margin-bottom: @std-padding;
+  background-color: @state-success-bg;
+  color: @alert-success-text;
+}
