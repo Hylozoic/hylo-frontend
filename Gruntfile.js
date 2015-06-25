@@ -14,6 +14,9 @@ module.exports = function(grunt) {
           'dist/dev/admin/bundle.css': ['src/css/admin/index.less'],
           'dist/dev/styleguide/bundle.css': ['src/css/styleguide.less'],
           'dist/dev/subscribe/bundle.css': ['src/css/subscribe.less']
+        },
+        options: {
+          rootpath: '/assets/dev'
         }
       },
       deploy: {
@@ -23,7 +26,7 @@ module.exports = function(grunt) {
           'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less'],
           'dist/deploy/pages/subscribe/bundle.css': ['src/css/subscribe.less']
         }
-      }
+      },
     },
     cssmin: {
       deploy: {

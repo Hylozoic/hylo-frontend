@@ -150,7 +150,7 @@ var api = {
         'FACEBOOK_APP_ID',
         'FILEPICKER_API_KEY',
         'ROLLBAR_CLIENT_TOKEN', 'ROLLBAR_SERVER_TOKEN',
-        'SEGMENT_KEY'
+        'SEGMENT_KEY', 'STRIPE_PUBLISHABLE_KEY'
       ];
 
     log.writeln(util.format('fetching from %s: %s', appName, keys.join(', ')));
