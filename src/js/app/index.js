@@ -97,8 +97,6 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
 
       connectWebViewJavascriptBridge(function(bridge) {
         
-        /* Init your app here */
-
         bridge.init(function(message, responseCallback) {
 
           // currently does not do anything with messages from app
