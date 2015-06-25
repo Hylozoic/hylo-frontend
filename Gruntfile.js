@@ -97,7 +97,8 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/deploy/pages/bundle.min.js': ['dist/deploy/pages/bundle.js'],
-          'dist/deploy/pages/admin/bundle.min.js': ['dist/deploy/pages/admin/bundle.js']
+          'dist/deploy/pages/admin/bundle.min.js': ['dist/deploy/pages/admin/bundle.js'],
+          'dist/deploy/pages/subscribe/bundle.min.js': ['dist/deploy/pages/subscribe/bundle.js']
         }
       }
     },
