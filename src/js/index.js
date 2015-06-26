@@ -1,6 +1,7 @@
 // because i use this so damn often, let's just make it a global.
 // at least until we get ES6 template strings up in here
 window.format = require('util').format;
+window.io = require('./sails.io')(require('socket.io-client/socket.io'));
 
 require('./onload');
 
