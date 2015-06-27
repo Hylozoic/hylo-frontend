@@ -103,5 +103,10 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
         
       });
     };
+    
+    connectWebViewJavascriptBridge(function(bridge) {
+      bridge.send("stateChanged");
+    });
+    
   });
 });
