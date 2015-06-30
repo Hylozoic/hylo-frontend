@@ -78,34 +78,7 @@
       <span ng-if="isFollowing || followersNotMe.length > 1">are</span><span ng-if="!isFollowing && followersNotMe.length == 1">is</span> following this seed.
     </div>
 
-    <div class="fulfillment" ng-if="post.fulfilled_at">
-      Fulfilled
-      <span ng-if="::post.contributors.length > 0">
-        with contributions from
-        <a class="contributor" ui-sref="profile.posts({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
-          <span>{{::user.name}}</span><span ng-show="::!$last && post.contributors.length>1">,</span>
-        </a>
-        <span ng-if="::post.contributors.length > 2">
-          and
-          <span class="dropdown" dropdown>
-            <a class="dropdown-toggle" dropdown-toggle>
-              {{::post.contributors.length - 2}} other<span ng-if="::post.contributors.length > 3">s</span>
-            </a>
-
-            <ul class="dropdown-menu">
-              <li ng-repeat="user in post.contributors.slice(2)">
-                <a class="dropdown-list-user" ui-sref="profile.posts({id: user.id})">
-                  <div back-img="::user.avatar_url" class="avatar"></div>
-                  <div class="name">{{::user.name}}</div>
-                </a>
-              </li>
-            </ul>
-          </span>
-        </span>
-      </span>
-    </div>
-
-    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled_at}">
+    <div class="post-controls">
       <a class="vote" ng-click="vote()" tooltip-popup-delay="500" tooltip="Show your support and bring this to the attention of others">
         <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
         <span class="num">{{post.votes}}</span>
@@ -125,11 +98,6 @@
          tooltip="{{isFollowing ? 'Stop receiving notifications' : 'Receive notifications'}}">
         <i ng-class="isFollowing ? 'icon-leave' : 'icon-join'"></i>
         <span class="hidden-xs">{{isFollowing ? 'Unfollow' : 'Follow'}}</span>
-      </a><!--
-
-      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at">
-        <i class="icon-little-check"></i>
-        <span class="hidden-xs">Mark fulfilled</span>
       </a>
     </div>
 
