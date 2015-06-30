@@ -41,11 +41,6 @@
         <h3>SEEDS PLANTED</h3>
         <div class="count">{{user.post_count}}</div>
       </a>
-      <a class="tab" ui-sref=".contributions" ng-class="{selected: $state.current.name === 'profile.contributions'}">
-        <h3 class="hidden-xs">CONTRIBUTIONS</h3>
-        <h3 class="visible-xs">CONTRI-<br/>BUTIONS</h3>
-        <div class="count">{{user.contribution_count}}</div>
-      </a>
       <a class="tab" ui-sref=".thanks" ng-class="{selected: $state.current.name === 'profile.thanks'}">
         <h3>THANK YOU'S</h3>
         <div class="count">{{user.thank_count}}</div>
