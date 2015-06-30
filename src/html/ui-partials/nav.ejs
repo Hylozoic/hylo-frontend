@@ -10,16 +10,16 @@
   </div>
 
   <div class="item home">
-    <a class="button" ui-sref="home.allPosts" tooltip="Home" tooltip-placement="bottom" ng-show="currentUser.inCommunity()">
+    <a class="button" ui-sref="home.allPosts" tooltip="Home" tooltip-placement="bottom" ng-show="currentUser.inCommunity()" touch-class="active">
       <i class="icon-home"></i>
     </a>
-    <a class="button" ui-sref="home.simple" tooltip="Home" tooltip-placement="bottom" ng-hide="currentUser.inCommunity()">
+    <a class="button" ui-sref="home.simple" tooltip="Home" tooltip-placement="bottom" ng-hide="currentUser.inCommunity()" touch-class="active">
       <i class="icon-home"></i>
     </a>
   </div>
 
   <div dropdown class="item communities">
-    <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom" back-img="">
+    <a class="button" dropdown-toggle tooltip="Communities" tooltip-placement="bottom" back-img="" touch-class="active">
       <%- include('../../img/projects/community.svg') %>
     </a>
     <ul class="dropdown-menu" role="menu">
@@ -39,7 +39,7 @@
   </div>
 
   <div class="item search">
-    <a class="button" ui-sref="search" tooltip="Search" tooltip-placement="bottom">
+    <a class="button" ui-sref="search" tooltip="Search" tooltip-placement="bottom" touch-class="active">
       <i class="icon-search"></i>
     </a>
   </div>
@@ -48,14 +48,14 @@
     <!-- inline-block space fix
 
     --><div class="item notifications">
-      <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom">
+      <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom" touch-class="active">
         <div class="badge" ng-if="currentUser.new_notification_count > 0">{{currentUser.new_notification_count}}</div>
         <i class="icon-notifications"></i>
       </a>
     </div><!-- inline-block space fix
 
     --><div dropdown class="item profile">
-      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom">
+      <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom" touch-class="active">
       </a>
       <ul class="dropdown-menu" role="menu">
         <li><a ui-sref="profile.posts({id: currentUser.id})">Profile</a></li>
