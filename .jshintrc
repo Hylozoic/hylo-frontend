@@ -1,8 +1,10 @@
 {
   "undef": true,
+  "browser": true,
   "globals": {
     "_": false,
-    "format": false
+    "format": false,
+    "module": false,
+    "require": false
   }
 }
-
