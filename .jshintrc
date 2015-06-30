@@ -4,6 +4,7 @@
   "globals": {
     "_": false,
     "alert": false,
+    "angular": false,
     "format": false,
     "module": false,
     "require": false

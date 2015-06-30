@@ -37,7 +37,7 @@ directive('scrollClass', function($window) {
         scope.$apply();
       }
     });
-  }
+  };
 }).
 
 directive('animateIf', function($animate) {
@@ -48,8 +48,8 @@ directive('animateIf', function($animate) {
       } else {
         $animate.removeClass(element, attrs.animation);
       }
-    })
-  }
+    });
+  };
 }).
 
 // https://gist.github.com/kirkstrobeck/599664399dbc23968741
@@ -91,7 +91,7 @@ directive('hyloUnique', ['$http', function ($http) {
         scope.$apply(function () {
           var extraData = _.isEmpty(attrs.hyloUniqueExtra) ? null : attrs.hyloUniqueExtra;
 
-          if (elem.val() == '') return;
+          if (elem.val() === '') return;
 
           // FIXME don't use $http directly
           $http({
@@ -109,7 +109,7 @@ directive('hyloUnique', ['$http', function ($http) {
         });
       });
     }
-  }
+  };
 }
 ]).
 
@@ -118,14 +118,14 @@ directive('forceLowercase', function() {
     require: 'ngModel',
     link: function(scope, element, attrs, modelCtrl) {
       var lowercase = function(inputValue) {
-        if(inputValue == undefined) inputValue = '';
+        if(inputValue === undefined) inputValue = '';
         var lowercased = inputValue.toLowerCase();
         if(lowercased !== inputValue) {
           modelCtrl.$setViewValue(lowercased);
           modelCtrl.$render();
         }
         return lowercased;
-      }
+      };
       modelCtrl.$parsers.push(lowercase);
       lowercase(scope[attrs.ngModel]);  // capitalize initial value
     }
