@@ -75,7 +75,12 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
 
   var update = function(data) {
     post.update(data, function() {
-      $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
+      $analytics.eventTrack('Edit Post', {
+        has_mention: $scope.hasMention,
+        community_name: community.name,
+        community_id: community.id,
+        type: $scope.postType
+      });
       clearCache();
       $state.go('post', {community: community.slug, postId: post.id});
       growl.addSuccessMessage('Post updated.');
@@ -111,7 +116,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved
     };
-    $scope.editing ? update(data) : create(data);
+    ($scope.editing ? update : create)(data);
   };
 
   $scope.searchPeople = function(query) {
@@ -175,4 +180,4 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
 
 module.exports = function(angularModule) {
   angularModule.controller('PostEditCtrl', controller);
-}
+};

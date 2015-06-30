@@ -3,6 +3,7 @@
   "browser": true,
   "globals": {
     "_": false,
+    "alert": false,
     "format": false,
     "module": false,
     "require": false
