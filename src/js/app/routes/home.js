@@ -65,7 +65,7 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('home.myPosts', {
-    url: '/h/my-seeds',
+    url: '/h/my-posts',
     resolve: /*@ngInject*/{
       firstPostQuery: function(UserCache, currentUser, requireLogin) {
         return UserCache.posts.fetch(currentUser.id);
@@ -97,7 +97,7 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('home.allPosts', {
-    url: '/h/all-seeds',
+    url: '/h/all-posts',
     resolve: /*@ngInject*/{
       firstPostQuery: function(UserCache, currentUser, requireLogin) {
         return UserCache.allPosts.fetch(currentUser);

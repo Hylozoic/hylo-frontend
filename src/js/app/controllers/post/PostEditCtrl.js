@@ -50,7 +50,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       failure: function(err) {
         finish();
       }
-    })
+    });
   };
 
   $scope.removeImage = function() {
@@ -78,7 +78,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       $analytics.eventTrack('Edit Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
       $state.go('post', {community: community.slug, postId: post.id});
-      growl.addSuccessMessage('Seed updated.');
+      growl.addSuccessMessage('Post updated.');
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);
@@ -91,7 +91,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
       clearCache();
       $scope.close();
-      growl.addSuccessMessage('Seed created!');
+      growl.addSuccessMessage('Post created!');
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);

@@ -151,7 +151,7 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('community.newPost', {
-    url: '/new-seed',
+    url: '/new-post',
     views: {
       community: {
         templateUrl: '/ui/post/edit.tpl.html',

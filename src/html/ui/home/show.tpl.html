@@ -1,9 +1,9 @@
 <div class="tabs" ng-show="$state.current.data.showTabs">
   <a ui-sref="home.allPosts" ng-class="{active: $state.current.name === 'home.allPosts'}">
-    All seeds
+    All posts
   </a>
   <a ui-sref="home.myPosts" ng-class="{active: $state.current.name === 'home.myPosts'}">
-    My seeds
+    My posts
   </a>
   <a ui-sref="home.following" ng-class="{active: $state.current.name === 'home.following'}">
     Follow&shy;ing
@@ -18,4 +18,3 @@
     <div class="all-sections tab-content" ui-view="tab"></div>
   </div>
 </div>
-

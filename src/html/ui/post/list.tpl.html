@@ -1,9 +1,9 @@
 <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
 <div ng-if="!hasPosts" class="empty-content">
   <p ng-if="isSelf">
-    You haven't planted any seeds yet -- go to your community to do so!
+    You haven't made any posts yet -- go to your community to do so!
   </p>
   <p ng-hide="isSelf">
-    {{user.firstName()}} has not planted any seeds in your communities yet.
+    {{user.firstName()}} has not posted in any of your communities yet.
   </p>
 </div>

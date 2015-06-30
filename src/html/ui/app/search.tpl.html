@@ -28,8 +28,8 @@
 
       </div>
 
-      <div class="seeds">
-        <h3>Seeds</h3>
+      <div class="posts">
+        <h3>Posts</h3>
 
         <div ng-repeat="post in results.posts track by post.id">
           <hylo-post post="post"></hylo-post>
@@ -39,7 +39,7 @@
         </a>
 
         <div ng-if="!searching && results.posts.length == 0" class="no-results">
-          No seeds matched your search.
+          No posts matched your search.
         </div>
 
       </div>

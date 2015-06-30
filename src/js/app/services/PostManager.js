@@ -30,7 +30,7 @@ var factory = function(growl, $analytics, $timeout) {
       }.bind(this), 200);
 
       this.scope.removePost = function(postToRemove) {
-        growl.addSuccessMessage("Seed has been removed: " + postToRemove.name, {ttl: 5000});
+        growl.addSuccessMessage("Post has been removed: " + postToRemove.name, {ttl: 5000});
         $analytics.eventTrack('Post: Remove', {post_name: postToRemove.name, post_id: postToRemove.id});
         var index = this.scope[this.attr].indexOf(postToRemove);
         this.scope[this.attr].splice(index, 1);

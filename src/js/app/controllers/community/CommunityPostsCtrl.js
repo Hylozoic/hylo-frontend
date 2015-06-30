@@ -30,7 +30,7 @@ var controller = function($scope, Cache, Post, community, onboarding, firstPostQ
       {label: 'Top', value: 'top'}
     ],
     filter: [
-      {label: 'All Seeds', value: 'all'},
+      {label: 'All Posts', value: 'all'},
       {label: 'Intentions', value: 'intention'},
       {label: 'Offers', value: 'offer'},
       {label: 'Requests', value: 'request'}
@@ -45,7 +45,7 @@ var controller = function($scope, Cache, Post, community, onboarding, firstPostQ
   $scope.select = function(type, value) {
     $scope.selected[type] = _.find(
       $scope.selectOptions[type],
-      function(x) { return x.value === value }
+      function(x) { return x.value === value; }
     );
 
     postManager.reload();

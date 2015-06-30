@@ -2,7 +2,7 @@
   <div>
     <a class="toolbar-left add-new" ui-sref="community.newPost" ng-show="currentUser">
       <i class="icon-add-01"></i>
-      <span class="hidden-xs new-seed-label">New Seed</span>
+      <span class="hidden-xs new-post-label">New Post</span>
     </a>
 
     <div class="toolbar-right">
@@ -39,7 +39,7 @@
 
 <div ng-if="currentUser.post_count == 0" class="reminder">
   <div>
-    <a ui-sref="community.newPost">Plant your first seed!</a>
+    <a ui-sref="community.newPost">Make your first post!</a>
     <br/>
     <span class="help">
       Just tap the <i class="icon-add-01"></i> button above.
@@ -57,4 +57,3 @@
     <h3 style="text-align: center;">There are no posts to display.</h3>
   </div>
 </div>
-

@@ -94,7 +94,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('newPost', {
-      url: '/h/new-seed',
+      url: '/h/new-post',
       parent: 'main',
       views: {
         main: {

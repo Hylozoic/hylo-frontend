@@ -1,5 +1,4 @@
-var format = require('util').format,
-  highlight = require('em-highlight'),
+var highlight = require('em-highlight'),
   pageSize = 5;
 
 var controller = function($scope, $history, $analytics, growl, Search, searchCommunity, initialQuery) {
@@ -34,7 +33,7 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
       // var newUrl = format('%s?q=%s&c=%s',
       //   location.pathname, $scope.query, (communityId ? communityId : ''));
       // window.history.replaceState({}, 'Hylo', newUrl);
-    })
+    });
   }, 500);
 
   $scope.$watch('query', fetch);
@@ -47,9 +46,9 @@ var controller = function($scope, $history, $analytics, growl, Search, searchCom
     }
   };
 
-  $scope.removePost = function(seed) {
-    growl.addSuccessMessage("That seed has been removed.", {ttl: 5000});
-    $scope.posts.splice($scope.posts.indexOf(seed), 1);
+  $scope.removePost = function(post) {
+    growl.addSuccessMessage("That post has been removed.", {ttl: 5000});
+    $scope.posts.splice($scope.posts.indexOf(post), 1);
   };
 
   $scope.name = function(person) {
