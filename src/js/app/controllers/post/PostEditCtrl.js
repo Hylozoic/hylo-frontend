@@ -160,7 +160,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
     $scope.description = $rootScope.postEditProgress.description;
 
   } else {
-    $scope.switchPostType('offer');
+    $scope.switchPostType('chat');
   }
 
   if (!community) {
