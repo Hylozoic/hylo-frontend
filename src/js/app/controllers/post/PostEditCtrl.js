@@ -4,21 +4,23 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
 
   var prefixes = {
-    intention: "I'd like to create",
-    offer: "I'd like to share",
-    request: "I'm looking for"
+    intention: "I'd like to create ",
+    offer: "I'd like to share ",
+    request: "I'm looking for ",
+    chat: ''
   };
 
   // TODO get multiple placeholders to work
   var placeholders = {
     intention: "Add more detail about this intention. What help do you need to make it happen?",
     offer: 'Add more detail about this offer. Is it in limited supply? Do you wish to be compensated?',
-    request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?'
+    request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?',
+    chat: ''
   };
 
   $scope.switchPostType = function(postType) {
   	$scope.postType = postType;
-    $scope.title = prefixes[postType] + ' ';
+    $scope.title = prefixes[postType];
     $scope.descriptionPlaceholder = placeholders[postType];
   };
 
@@ -158,7 +160,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
     $scope.description = $rootScope.postEditProgress.description;
 
   } else {
-    $scope.switchPostType('intention');
+    $scope.switchPostType('offer');
   }
 
   if (!community) {

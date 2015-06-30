@@ -16,7 +16,8 @@
 		padding-bottom: @std-padding/2;
 
 		.option {
-			.make-sm-column(4);
+			.make-sm-column(3);
+			text-align: center;
 
 			.make-radio-color(@color) {
 				input[type=radio]:checked {
@@ -25,19 +26,28 @@
 				}
 			}
 
+      &:first-of-type {
+        text-align: left;
+				@media (min-width: @screen-sm) { padding-left: 0;}
+      }
+
+      &:last-of-type {
+        text-align: right;
+				@media (min-width: @screen-sm) { padding-right: 0;}
+      }
+
 			&.intention {
 				.make-radio-color(@intention-color);
-				@media (min-width: @screen-sm) { padding-left: 0;}
 			}
 			&.offer {
 				.make-radio-color(@offer-color);
-				text-align: center;
 			}
 			&.request {
 				.make-radio-color(@request-color);
-				text-align: right;
-				@media (min-width: @screen-sm) { padding-right: 0;}
 			}
+      &.chat {
+        .make-radio-color(@light-gray);
+      }
 
 			@media (max-width: @screen-xs-max) {
 				&.intention, &.offer, &.request {
@@ -52,12 +62,12 @@
 			}
 
 			label {
-				.large-header;
+				.medium-header;
 				color: @inactive-text;
 			}
 
 			input[type=radio] {
-			    .round-radio;
+		    .round-radio;
 			}
 		}
 

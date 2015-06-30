@@ -33,7 +33,8 @@ var controller = function($scope, Cache, Post, community, onboarding, firstPostQ
       {label: 'All Posts', value: 'all'},
       {label: 'Intentions', value: 'intention'},
       {label: 'Offers', value: 'offer'},
-      {label: 'Requests', value: 'request'}
+      {label: 'Requests', value: 'request'},
+      {label: 'Chats', value: 'chat'}
     ]
   };
 

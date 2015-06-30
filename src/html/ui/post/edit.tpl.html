@@ -9,10 +9,10 @@
 <div class="main-content">
   <div class="all-sections">
     <div class="select-type">
-      <div class="option intention" ng-class="{active: postType==='intention'}">
+      <div class="option chat" ng-class="{active: postType==='chat'}">
         <label>
-          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')">
-            Intention
+          <input type="radio" ng-checked="postType==='chat'" ng-click="switchPostType('chat')">
+            Chat
         </label>
       </div>
       <div class="option offer" ng-class="{active: postType==='offer'}">
@@ -27,10 +27,17 @@
             Request
         </label>
       </div>
+      <div class="option intention" ng-class="{active: postType==='intention'}">
+        <label>
+          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')">
+            Intention
+        </label>
+      </div>
       <p class="help">
-        <span ng-if="postType==='intention'">Intention: Something you’d like to create, with the support of your community.</span>
+        <span ng-if="postType==='chat'">Chat: Anything you'd like to talk about.</span>
         <span ng-if="postType==='offer'">Offer: Any skill, item, information, or opportunity that you’d like to share.</span>
         <span ng-if="postType==='request'">Request: Some skill, item, information, or opportunity that you're looking for.</span>
+        <span ng-if="postType==='intention'">Intention: Something you’d like to create, with the support of your community.</span>
       </p>
     </div>
 
