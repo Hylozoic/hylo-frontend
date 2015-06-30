@@ -80,7 +80,7 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, error) {
     if (fromState.name == "") {
-      
+
       function connectWebViewJavascriptBridge(callback) {
         if (window.WebViewJavascriptBridge) {
           callback(WebViewJavascriptBridge)
@@ -92,7 +92,7 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
       };
 
       connectWebViewJavascriptBridge(function(bridge) {
-        
+
         bridge.init(function(message, responseCallback) {
 
           // currently does not do anything with messages from app
@@ -100,13 +100,13 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
         });
 
         bridge.send("loaded");
-        
+
       });
     };
-    
+
     connectWebViewJavascriptBridge(function(bridge) {
       bridge.send("stateChanged");
     });
-    
+
   });
 });

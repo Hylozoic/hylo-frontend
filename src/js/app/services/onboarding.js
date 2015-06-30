@@ -18,11 +18,11 @@ var sanitize = function(string) {
 
   return _.chain(string.split(','))
     .map(function(x) { return x.trim(); })
-    .reject(function(x) { return x == '' })
+    .reject(function(x) { return x === ''; })
     .uniq().value();
 };
 
-var stepOrder = ['start', 'seeds', 'community', 'profile', 'done'];
+var stepOrder = ['start', 'community', 'profile', 'done'];
 
 var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
 
@@ -42,6 +42,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       $rootScope.$emit('announcer:hide');
+      $rootScope.$emit('overlay:hide');
 
       if (this.currentStep() === 'community' && toState.name === 'profile' && toParams.id === this._user.id) {
         if (this._announcerDelay) {
@@ -140,7 +141,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
     },
     _goDelta: function(delta) {
       var next = stepOrder[_.indexOf(stepOrder, this.currentStep()) + delta];
-      this._go(next, delta != 0);
+      this._go(next, delta !== 0);
     },
     _go: function(name, update) {
       this.setStep(name, update);

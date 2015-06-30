@@ -36,6 +36,10 @@ var controller = function($scope, $rootScope, $timeout, Overlay) {
     $scope.showOverlay = false;
   };
 
+  $rootScope.$on('overlay:hide', function() {
+    $scope.hide();
+  });
+
 };
 
 module.exports = function(angularModule) {
