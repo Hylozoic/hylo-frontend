@@ -99,13 +99,15 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
 
         });
 
-        bridge.send("loaded");
+        var payload = {"message":"loaded"};      
+        bridge.send(JSON.stringify(payload));
 
       });
     };
-
+    
     connectWebViewJavascriptBridge(function(bridge) {
-      bridge.send("stateChanged");
+      var payload = {"message":"stateChanged", "toState":toState.name};      
+      bridge.send(JSON.stringify(payload));
     });
 
   });
