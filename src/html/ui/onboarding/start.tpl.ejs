@@ -11,7 +11,7 @@
       <h4>Discover the people, skills, and resources all around you with Hylo. Together, we can create anything we can imagine.</h4>
     </div>
 
-    <div class="leader-message">
+    <div class="leader-message" ng-if="onboarding.community.welcome_message">
       <p>Thank you for joining {{onboarding.community.name}} on Hylo.</p>
       <div class="leader">
         <div class="avatar" back-img="::onboarding.community.leader.avatar_url"></div>

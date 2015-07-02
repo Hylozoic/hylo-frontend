@@ -76,20 +76,21 @@
       <div class="setting-item welcome-message">
         <div class="full-column">
           <label>Welcome message</label>
-          <p class="help">This is shown on the first screen that a new member sees.</p>
+          <p class="help">This text is shown on the first screen that a new member sees.</p>
         </div>
         <div class="full-column value" ng-hide="editing.welcome_message">
-          <div class="leader">
+          <div class="leader" ng-show="community.welcome_message">
             <div class="avatar" back-img="community.leader.avatar_url"></div>
             <div class="name">{{community.leader.name}}</div>
           </div>
-          <p>{{community.welcome_message}}</p>
+          <p>{{community.welcome_message || "[Not set yet]"}}</p>
           <button type="button" ng-click="edit('welcome_message', 'leader')">Change</button>
         </div>
         <div class="full-column edit" ng-show="editing.welcome_message">
-          <textarea class="form-control" ng-model="edited.welcome_message" rows="4"></textarea>
+          <textarea class="form-control" ng-model="edited.welcome_message" rows="4" placeholder="Enter a welcome message."></textarea>
 
-          <p class="help">{{edited.leader.name}}'s image will be shown. Search for someone else:</p>
+          <p class="help" ng-show="edited.leader">{{edited.leader.name}}'s image will be shown. Search for someone else:</p>
+          <p class="help" ng-hide="edited.leader">Search by name for a community leader, whose image will be shown:</p>
           <input type="text" class="form-control" ng-model="selectedLeader"
             typeahead="user.name for user in findMembers($viewValue)"
             typeahead-min-length="2"
