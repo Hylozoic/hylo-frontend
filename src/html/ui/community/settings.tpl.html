@@ -80,8 +80,8 @@
         </div>
         <div class="full-column value" ng-hide="editing.welcome_message">
           <div class="leader">
-            <img ng-src="{{community.leader.avatar_url}}"></img>
-            <div>{{community.leader.name}}</div>
+            <div class="avatar" back-img="community.leader.avatar_url"></div>
+            <div class="name">{{community.leader.name}}</div>
           </div>
           <p>{{community.welcome_message}}</p>
           <button type="button" ng-click="edit('welcome_message', 'leader')">Change</button>
