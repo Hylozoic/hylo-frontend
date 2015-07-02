@@ -19,23 +19,14 @@
   }
 
   nav {
-    @nav-height: 64px;
-    @nav-height-mobile: 50px;
-
     border: none;
     border-bottom: 2px solid #DCDCDC;
     background-color: transparent;
     border-radius: 0;
-    padding: 0 20px;
+    padding: 0 @std-padding;
     margin: 0 -@std-padding @std-padding !important;
     height: @nav-height;
     line-height: @nav-height;
-
-    @media (max-width: @screen-xs-max) {
-      height: @nav-height-mobile;
-      line-height: @nav-height-mobile;
-      padding: 0 @std-padding;
-    }
 
     .close {
       .big-close;
@@ -52,9 +43,9 @@
     }
 
     .icon-hylo-script {
-      font-size: 50px;
+      font-size: 45px;
       display: block;
-      margin: 7px 0 5px;
+      margin: 5px 0 5px;
       @media (max-width: @screen-xs-max) {
         display: none;
       }
