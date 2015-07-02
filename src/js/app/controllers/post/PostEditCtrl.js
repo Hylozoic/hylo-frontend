@@ -3,6 +3,8 @@ var filepickerUpload = require('../../services/filepickerUpload');
 var controller = function($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
 
+  $scope.maxTitleLength = 140;
+
   var prefixes = {
     intention: "I'd like to create ",
     offer: "I'd like to share ",

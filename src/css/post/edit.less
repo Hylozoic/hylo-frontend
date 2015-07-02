@@ -11,9 +11,7 @@
   }
 
 	.select-type {
-		.make-row;
-		border-bottom: 2px solid @default-border;
-		padding-bottom: @std-padding/2;
+    .make-row;
 
 		.option {
 			.make-sm-column(3);
@@ -28,12 +26,10 @@
 
       &:first-of-type {
         text-align: left;
-				@media (min-width: @screen-sm) { padding-left: 0;}
       }
 
       &:last-of-type {
         text-align: right;
-				@media (min-width: @screen-sm) { padding-right: 0;}
       }
 
 			&.intention {
@@ -70,26 +66,24 @@
 		    .round-radio;
 			}
 		}
-
-		.help {
-		  @media (max-width: @screen-xs-max) {
-		  	padding: 0 @std-padding;
-		  }
-		}
 	}
 
-	.edit-content {
-		.make-row;
+  .type-help {
+    margin-bottom: @std-padding;
+    display: block;
+  }
 
-		@media (max-width: @screen-xs-max) {
-			padding-left: @std-padding;
-			padding-right: @std-padding;
-		}
+	.edit-content {
+		padding-top: @std-padding*2;
+    padding-bottom: @std-padding*2;
+    border-top: 2px solid @default-border;
+    border-bottom: 2px solid @default-border;
+
 		.title {
 			.strong-title-text;
-			margin-top: @std-padding*2;
 			margin-bottom: @std-padding/2;
 		}
+
 		input, textarea {
 			margin-bottom: @std-padding;
 			.proxima-nova-regular;
@@ -102,25 +96,39 @@
 			margin-top: 10px;
 			margin-bottom: 0;
 		}
+
+    .counter {
+      float: right;
+      .meta-text;
+      vertical-align: baseline;
+      line-height: 25px;
+    }
+
+    .mentio-editor {
+      height: 10em;
+
+      @media (max-width: @screen-xs-max) {
+        height: 50vh;
+      }
+    }
+
+    .Medium-placeholder {
+      border-radius: 4px;
+    }
 	}
 
 	.bottom-bar {
 		.make-row;
-		border-top: 2px solid @default-border;
-		border-bottom: 2px solid @default-border;
-		margin-top: @std-padding;
-		margin-bottom: @std-padding;
+
+    .add-image {
+      .rounded-button;
+    }
 
 		.add-meta {
 			.make-sm-column(6);
 			.body-text;
 			padding-top: @std-padding;
 			padding-bottom: @std-padding;
-			@media (max-width: @screen-xs-max) {
-				padding-top: @std-padding/2;
-				padding-bottom: @std-padding/2;
-				text-align: center;
-			}
 
 			a {
 				line-height: @default-button-height;
@@ -138,75 +146,36 @@
 				}
 			}
 
-			&.duration, &.members {
-				visibility: hidden;
-				@media (max-width: @screen-xs-max) {
-					display: none;
+			.image-preview {
+        @media (min-width: @screen-sm) {
+					margin-left: @std-padding;
+					vertical-align: top;
 				}
+        @media (max-width: @screen-xs-max) {
+          margin-left: 19.1%;
+          margin-right: 19.1%;
+          margin-top: @std-padding;
+          img {
+            width: 100%;
+          }
+        }
 			}
-
-			&.image {
-				@media (min-width: @screen-sm) {
-					padding-left: 0;
-
-					.image-preview {
-						margin-left: @std-padding;
-						vertical-align: top;
-					}
-				}
-
-				@media (max-width: @screen-xs-max) {
-					.add-image {
-						display: block;
-					}
-				}
-  		}
 
 			&.done {
+        text-align: right;
+
 				button {
 					.rounded-button-dark;
-					@media (min-width: @screen-sm) {
-						float: right;
-						.rounded-button;
-						margin-left: 5px;
-					}
-					&.skip {
-						.rounded-button;
-						margin-left: 5px;
-					}
-				}
-				@media (min-width: @screen-sm) {
-					padding-right: 0;
 				}
 			}
-		}
-	}
 
-	.notifications {
-		.make-row;
-
-		@media (max-width: @screen-xs-max) {
-			padding-left: @std-padding;
-			padding-right: @std-padding;
-		}
-		i {
-			color: @hylo-green;
-		}
-	}
-
-  .edit-content {
-    .mentio-editor {
-      height: 10em;
-
-      @media (max-width: @screen-xs-max) {
-      	height: 50vh;
+      &, &.done {
+        @media (max-width: @screen-xs-max) {
+          text-align: center;
+        }
       }
-    }
-
-    .Medium-placeholder {
-      border-radius: 4px;
-    }
-  }
+		}
+	}
 
   .community-picker {
   	.dropdown-menu li {

@@ -33,17 +33,19 @@
             Intention
         </label>
       </div>
-      <p class="help">
-        <span ng-if="postType==='chat'">Chat: Anything you'd like to talk about.</span>
-        <span ng-if="postType==='offer'">Offer: Any skill, item, information, or opportunity that you’d like to share.</span>
-        <span ng-if="postType==='request'">Request: Some skill, item, information, or opportunity that you're looking for.</span>
-        <span ng-if="postType==='intention'">Intention: Something you’d like to create, with the support of your community.</span>
-      </p>
     </div>
 
+    <p class="help type-help">
+      <span ng-if="postType==='chat'">Anything you'd like to talk about.</span>
+      <span ng-if="postType==='offer'">Anything you'd like to share. (e.g. a skill, some goods, information, an opportunity, etc.)</span>
+      <span ng-if="postType==='request'">Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)</span>
+      <span ng-if="postType==='intention'">Something you’d like to create, with the support of your community. A vision.</span>
+    </p>
+
     <div class="edit-content">
+      <div class="counter">{{title.length}} / {{maxTitleLength}}</div>
       <div class="title">Title</div>
-      <input type="text" class="form-control" ng-model="title"/>
+      <input type="text" class="form-control" ng-model="title" maxlength="{{maxTitleLength}}"/>
 
       <div class="title">Description</div>
       <div ng-model="description" autocomplete="off" contenteditable="true"
