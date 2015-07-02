@@ -104,7 +104,7 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
 
       });
     };
-    
+
     connectWebViewJavascriptBridge(function(bridge) {
       var payload = {"message":"stateChanged", "toState":toState.name};      
       bridge.send(JSON.stringify(payload));
