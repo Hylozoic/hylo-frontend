@@ -2,6 +2,7 @@ require('dotenv').load();
 
 var deploy = require('./deploy'),
   _ = require('lodash'),
+  es6ify = require('es6ify'),
   format = require('util').format;
 
 module.exports = function(grunt) {
@@ -43,7 +44,11 @@ module.exports = function(grunt) {
         browserifyOptions: {
           debug: true
         },
-        transform: ['browserify-ngannotate', 'debowerify']
+        transform: [
+          'browserify-ngannotate',
+          'debowerify',
+          es6ify.configure(/^(?!.*node_modules)+.+\.js$/)
+        ]
       },
       dev: {
         files: {

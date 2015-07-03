@@ -43,7 +43,7 @@ var factory = function($resource, $rootScope, Project, $timeout, $q) {
     }
   });
 
-  User.loadCurrent = function() {
+  User.loadCurrent = () => {
     return User.current().$promise.then(function(user) {
       var currentUser = (user.id ? user : null);
       $rootScope.currentUser = currentUser;

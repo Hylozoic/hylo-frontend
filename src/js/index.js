@@ -1,3 +1,5 @@
+require('traceur/bin/traceur-runtime');
+
 // because i use this so damn often, let's just make it a global.
 // at least until we get ES6 template strings up in here
 window.format = require('util').format;
@@ -6,7 +8,7 @@ io.sails.autoConnect = false;
 
 require('./onload');
 
-/* Bower Components */
+// Bower components
 require('afkl-lazy-image');
 require('angular-animate');
 require('angular-growl');
@@ -26,9 +28,8 @@ require('newrelic-timing/newrelic-timing-angular');
 require('ng-idle');
 require('ng-tags-input');
 require('ngInfiniteScroll');
-/* End Bower Components */
 
-/* Manually installed components */
+// Manually-installed components
 require('./angular/angulartics-segmentio');
 
 require('./app/index');

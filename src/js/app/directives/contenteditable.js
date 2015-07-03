@@ -1,5 +1,5 @@
-window.rangy = require('rangy-official/rangy-core');
-window.Undo = require('undo');
+window.rangy = require('rangy');
+window.Undo = require('medium.js/node_modules/undo.js/undo');
 var Medium = require('medium.js/medium');
 
 var directive = function($sce, $timeout) {

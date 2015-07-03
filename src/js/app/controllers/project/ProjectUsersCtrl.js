@@ -1,4 +1,4 @@
-module.exports = function($scope, $stateParams, project, users, $dialog) {
+module.exports = ($scope, $stateParams, project, users, $dialog) => {
   "ngInject";
   $scope.users = users;
 
@@ -6,7 +6,7 @@ module.exports = function($scope, $stateParams, project, users, $dialog) {
     $scope.users = [];
     $scope.loadMoreDisabled = false;
     $scope.loadMore();
-  })
+  });
 
   $scope.loadMore = _.debounce(function() {
     if ($scope.loadMoreDisabled) return;
@@ -35,4 +35,4 @@ module.exports = function($scope, $stateParams, project, users, $dialog) {
     });
   };
 
-}
+};
