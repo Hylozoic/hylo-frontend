@@ -8,82 +8,114 @@
 
 <%- include('../_linksBar'); %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-    </div>
-  </div>
-</div>
-
 <div class="container team-section">
-  <div class="row">
-    <div class="col-xs-12"><hr/></div>
 
-    <div class="col-md-12">
-      <h1>Our Team</h1>
-    </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/Edward.jpg") %>" alt="Edward West"/>
-      <p class="title"><strong class="name">Edward West</strong><br>Chief Executive Officer</p>
+  <hr/>
+  <h1>Our Team</h1>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="title">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/Edward.jpg") %>" alt="Edward West"/>
+        <p>Edward West<br>Chief Executive Officer</p>
+      </div>
       <p>Co-founder and President of Mission Motors, a high-performance electric motorcycle and electric powertrain company, and is a co-founder of Hub Oakland.</p>
       <p>BSME: Yale University; MBA: Presidio Graduate School.</p>
     </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/Ray.jpg") %>" alt="Ray Marceau"/>
-      <p class="title"><strong class="name">Ray Marceau</strong><br>Chief Technology Officer</p>
+    <div class="col-sm-3">
+      <div class="title">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/Lawrence.jpg") %>" alt="Lawrence Wang"/>
+        <p>Lawrence Wang<br>Lead Engineer</p>
+      </div>
       <p>
-        Full-stack web and mobile engineer with experiences ranging from hardened secure information systems to high-scale mobile web applications.  When not working, Ray spends time outdoors Highlining between the cliffs of Yosemite or jumping out of planes over sacramento.
-      </p>
-      <p>BSCS: Georgia Institute of Technology</p>
-    </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/Lawrence.jpg") %>" alt="Lawrence Wang"/>
-      <p class="title"><strong class="name">Lawrence Wang</strong><br>Dev Ops Guru</p>
-      <p>
-        Lawrence is a full-stack web & mobile software engineer with ten years of experience in mid- to early-stage startups. He has worked professionally with Ruby, Javascript, Python, Objective-C, & Java. He likes bikes, snowboarding, tai chi, dance, reading, free association, & being in the woods.
+        Lawrence is a full-stack web &amp; mobile software engineer with ten years of experience in mid- to early-stage startups. He has worked professionally with Ruby, Javascript, Python, Objective-C, &amp; Java. He likes bikes, snowboarding, tai chi, dance, reading, free association, & being in the woods.
       </p>
       <p>B.S. Computer Science, Columbia University</p>
     </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/Minda.jpg") %>" alt="Minda Myers"/>
-      <p class="title"><strong class="name">Minda Myers</strong><br>UX Sorceress</p>
+    <div class="col-sm-3">
+      <div class="title">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/Minda.jpg") %>" alt="Minda Myers"/>
+        <p>Minda Myers<br>UX Sorceress</p>
+      </div>
       <p>
         Front-end engineer and UX designer who has developed web applications for Stanford University and Castlight Health.
       </p>
       <p>B.Sc. Computer Science and Psychology, Dalhousie University</p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12"><hr/></div>
-    <div class="col-xs-12"><h1>Our Advisors</h1></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/ArtBrock.jpg") %>" alt="Art Brock"/>
-      <p class="title"><strong class="name">Arthur Brock</strong></p>
-      <p>Currency Systems Modeler, Founder of the Metacurrency Project</p>
+    <div class="col-sm-3">
+      <div class="title">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/Ray.jpg") %>" alt="Ray Marceau"/>
+        <p>Ray Marceau<br>Founding Engineer</p>
+      </div>
+      <p>
+        Full-stack web and mobile engineer with experiences ranging from hardened secure information systems to high-scale mobile web applications.  When not working, Ray spends time outdoors Highlining between the cliffs of Yosemite or jumping out of planes over sacramento.
+      </p>
+      <p>BSCS: Georgia Institute of Technology</p>
     </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/DanielGoldman.jpg") %>" alt="Daniel Goldman"/>
-      <p class="title"><strong class="name">Daniel Goldman</strong></p>
+  </div>
+
+  <hr/>
+  <h1>Our Advisors</h1>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/in/artbrock">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/ArtBrock.jpg") %>" alt="Art Brock"/>
+        <p>Arthur Brock</p>
+      </a>
+      <p>Currency Systems Modeler, Founder of the Metacurrency Project.</p>
+    </div>
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/in/danielgoldman">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/DanielGoldman.jpg") %>" alt="Daniel Goldman"/>
+        <p>Daniel Goldman</p>
+      </a>
       <p>Pioneer of games and online community including Inner Circle, SimCity, TEN/Pogo, Posit Science, EdgeDriven, and Xmobb.</p>
     </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/DavidHodgson.jpg") %>" alt="David Hodgson"/>
-      <p class="title"><strong class="name">David Hodgson</strong></p>
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/in/davidhodgson">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/DavidHodgson.jpg") %>" alt="David Hodgson"/>
+        <p>David Hodgson</p>
+      </a>
       <p>Founder and CEO of Hummingbird Labs, ecosystem builder, catalyst, connector, convener.</p>
     </div>
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/JohnKatovich.jpg") %>" alt="John Katovich"/>
-      <p class="title"><strong class="name">John Katovich</strong></p>
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/pub/john-katovich/0/410/74b">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/JohnKatovich.jpg") %>" alt="John Katovich"/>
+        <p>John Katovich</p>
+      </a>
       <p>Former EVP and Legal Affairs Officer for the Boston Stock Exchange, and Local Economy Expert.</p>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-sm-3 text-center">
-      <img class="head-shot" src="<%= imageUrl("about/headshots/DavidMartin.jpg") %>" alt="David Martin"/>
-      <p class="title"><strong class="name">David Martin</strong></p>
+    <div class="col-sm-3">
+      <a class="title" href="http://www.m-cam.com/david-e-martin">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/DavidMartin.jpg") %>" alt="David Martin"/>
+        <p>David Martin</p>
+      </a>
       <p>Founder of Mosaic Collateralized Asset Management, alternative currency and intangible assets expert.</p>
+    </div>
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/pub/eric-berlow/4/519/986">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/EricBerlow.jpg") %>" alt="Eric Berlow"/>
+        <p>Eric Berlow</p>
+      </a>
+      <p>Ecologist and network scientist, TED Senior Fellow, and co-founder of Mappr.</p>
+    </div>
+    <div class="col-sm-3">
+      <a class="title" href="https://mx.linkedin.com/in/ferananda">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/FeranandaIbarra.jpg") %>" alt="Ferananda Ibarra"/>
+        <p>Ferananda Ibarra</p>
+      </a>
+      <p>Collective Intelligence processes, tools and technologies that enable organizations and communities to augment their intelligence and capacities in an integral way.</p>
+    </div>
+    <div class="col-sm-3">
+      <a class="title" href="https://www.linkedin.com/in/mihaelaulieru">
+        <img class="head-shot" src="<%= imageUrl("about/headshots/MihaelaUlieru.jpg") %>" alt="Mihaela Ulieru"/>
+        <p>Mihaela Ulieru</p>
+      </a>
+      <p>Global Agenda Council at World Economic Forum, with a focus on the adoption of cutting edge information technologies to improve productivity and wealth creation in all areas of society and economic sectors.</p>
     </div>
   </div>
 </div>
