@@ -62,7 +62,7 @@
   },
   "scripts": {
     "postinstall": "node_modules/.bin/bower install",
-    "prune": "bower prune",
+    "prune": "node_modules/.bin/bower prune",
     "start": "grunt dev",
     "start-local": "npm run dev",
     "dev": "grunt dev",
