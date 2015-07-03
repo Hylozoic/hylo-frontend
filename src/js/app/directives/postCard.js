@@ -17,5 +17,5 @@ var directive = function() {
 };
 
 module.exports = function(angularModule) {
-  angularModule.directive('hyloPost', directive);
+  angularModule.directive('postCard', directive);
 };

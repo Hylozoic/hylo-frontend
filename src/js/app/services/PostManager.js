@@ -2,7 +2,7 @@
   encapsulate the pagination logic for posts.
 
   this hardcodes the names "loadMoreDisabled", "loadMore", and "removePost",
-  which couples it to the templates that use the infinite-scroll and hylo-post directives.
+  which couples it to the templates that use the infinite-scroll and post-card directives.
 
   it also assumes the server response will contain "posts" and "posts_total" keys,
   which couples it to our particular server implementation.

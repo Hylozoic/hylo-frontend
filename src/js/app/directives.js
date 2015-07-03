@@ -1,13 +1,13 @@
 var angularModule = angular.module('hyloDirectives', ['ngResource']);
 
 require('./directives/contenteditable')(angularModule);
-require('./directives/hylo_post')(angularModule);
 require('./directives/socialMedia')(angularModule);
 require('./directives/seeMore')(angularModule);
 require('./directives/embeddedComments')(angularModule);
 require('./directives/masonry')(angularModule);
 require('./directives/anguvideo')(angularModule);
 require('./directives/touchClass')(angularModule);
+require('./directives/postCard')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {

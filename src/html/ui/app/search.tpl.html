@@ -32,7 +32,7 @@
         <h3>Posts</h3>
 
         <div ng-repeat="post in results.posts track by post.id">
-          <hylo-post post="post"></hylo-post>
+          <post-card post="post"></post-card>
         </div>
         <a ng-if="remaining('posts') > 0" ng-click="loadMore('posts')" class="load-more">
           Show {{pageSize('posts')}} more (out of {{remaining('posts')}})
