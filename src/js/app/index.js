@@ -78,31 +78,26 @@ app.run(function($rootScope, $state, growl, $bodyClass) {
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
 
+  var connectWebViewJavascriptBridge = function(callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge);
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function() {
+        callback(window.WebViewJavascriptBridge);
+      }, false);
+    }
+  };
+
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, error) {
-    if (fromState.name == "") {
-
-      function connectWebViewJavascriptBridge(callback) {
-        if (window.WebViewJavascriptBridge) {
-          callback(WebViewJavascriptBridge)
-        } else {
-          document.addEventListener('WebViewJavascriptBridgeReady', function() {
-            callback(WebViewJavascriptBridge)
-          }, false)
-        }
-      };
-
+    if (fromState.name === "") {
       connectWebViewJavascriptBridge(function(bridge) {
-
         bridge.init(function(message, responseCallback) {
-
           // currently does not do anything with messages from app
-
         });
 
         bridge.send("loaded");
-
       });
-    };
+    }
 
     connectWebViewJavascriptBridge(function(bridge) {
       bridge.send("stateChanged");

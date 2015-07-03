@@ -33,7 +33,7 @@ require('./angular/angulartics-segmentio');
 
 require('./app/index');
 
-if (hyloEnv.environment != 'test') {
+if (hyloEnv.environment !== 'test') {
   angular.element(document).ready(function() {
     angular.bootstrap(document.getElementsByTagName('html')[0], ['hyloApp'], {strictDi: true});
   });

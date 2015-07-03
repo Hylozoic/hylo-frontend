@@ -1,11 +1,13 @@
 {
   "undef": true,
   "browser": true,
+  "esnext": true,
   "globals": {
-    "_": false,
+    "_": true,
     "alert": false,
     "angular": false,
-    "format": false,
+    "format": true,
+    "hyloEnv": true,
     "module": false,
     "require": false
   }

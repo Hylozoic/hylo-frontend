@@ -21,7 +21,6 @@ hyloEnv.onUser(function(user) {
     name: user.name,
     provider: user.linkedAccounts[0].provider_key,
     createdAt: user.created_at,
-    created: user.created_at,
     community_name: (membership ? membership.community.name : undefined),
     community_id: (membership ? membership.community.id : undefined),
   });
@@ -59,10 +58,10 @@ document.addEventListener('keydown', function (e) {
         break;
       case 'INPUT':
         preventKeyPress = d.readOnly || d.disabled ||
-        (d.attributes["type"] && _.contains(["radio", "checkbox", "submit", "button"], d.attributes["type"].value.toLowerCase()));
+        (d.attributes.type && _.contains(["radio", "checkbox", "submit", "button"], d.attributes.type.value.toLowerCase()));
         break;
       case 'DIV':
-        preventKeyPress = d.readOnly || d.disabled || !(d.attributes["contentEditable"] && d.attributes["contentEditable"].value == "true");
+        preventKeyPress = d.readOnly || d.disabled || !(d.attributes.contentEditable && d.attributes.contentEditable.value == "true");
         break;
       default:
         preventKeyPress = true;
