@@ -8,6 +8,7 @@ require('./directives/masonry')(angularModule);
 require('./directives/anguvideo')(angularModule);
 require('./directives/touchClass')(angularModule);
 require('./directives/postCard')(angularModule);
+require('./directives/welcomePost')(angularModule);
 
 angularModule.directive('ngEnter', function() {
   return function(scope, element, attrs) {

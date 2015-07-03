@@ -36,6 +36,7 @@ angularModule
 .controller('SignupCtrl',        require('./controllers/user/SignupCtrl'))
 .controller('LoginCtrl',         require('./controllers/user/LoginCtrl'))
 .controller('PostCardCtrl',      require('./controllers/post/PostCardCtrl'))
+.controller('WelcomePostCtrl',   require('./controllers/post/WelcomePostCtrl'))
 .controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
 .controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))

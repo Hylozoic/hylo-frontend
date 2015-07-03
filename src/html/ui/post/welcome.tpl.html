@@ -1,0 +1,9 @@
+<div class="welcome-post">
+  {{post.relatedUsers[0].name}} joined {{post.created_at | fromNow}}. Welcome them!
+  <div class="controls">
+    <a class="vote" ng-click="vote()">
+      <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
+      <span class="num">{{post.votes}}</span>
+    </a>
+  </div>
+</div>
