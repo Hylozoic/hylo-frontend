@@ -6,8 +6,11 @@
     "_": true,
     "alert": false,
     "angular": false,
+    "describe": false,
+    "expect": false,
     "format": true,
     "hyloEnv": true,
+    "it": false,
     "module": false,
     "require": false
   }
