@@ -12,7 +12,6 @@ var dependencies = [
   'mentio',
   'newrelic-timing',
   'ngAnimate',
-  'ngIdle',
   'ngResource',
   'ngSanitize',
   'ngTagsInput',
@@ -34,12 +33,9 @@ require('./animations')(app);
 require('./filters')(app);
 require('./services')(app);
 
-app.config(function ($locationProvider, growlProvider, $idleProvider) {
+app.config(function ($locationProvider, growlProvider) {
   $locationProvider.html5Mode(true);
   growlProvider.globalTimeToLive(5000);
-
-  $idleProvider.idleDuration(45); // in seconds
-  $idleProvider.warningDuration(1); // in seconds
 });
 
 app.run(function($anchorScroll) {
