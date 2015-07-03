@@ -10,22 +10,8 @@ require('./directives/touchClass')(angularModule);
 require('./directives/postCard')(angularModule);
 require('./directives/welcomePost')(angularModule);
 
-angularModule.directive('ngEnter', function() {
-  return function(scope, element, attrs) {
-    element.bind("keydown keypress", function(event) {
-      if (event.which === 13) {
-        scope.$apply(function() {
-          scope.$eval(attrs.ngEnter);
-        });
-
-        event.preventDefault();
-      }
-    });
-  };
-}).
-
-directive('scrollClass', function($window) {
-  return function(scope, element, attrs) {
+angularModule.directive('scrollClass', function($window) {
+  return (scope, element, attrs) => {
     var threshold = parseInt(attrs.scrollClassThreshold),
       className = attrs.scrollClass;
 
@@ -42,26 +28,17 @@ directive('scrollClass', function($window) {
 }).
 
 directive('animateIf', function($animate) {
-  return function(scope, element, attrs) {
-    scope.$watch(attrs.animateIf, function(val) {
-      if (val) {
-        $animate.addClass(element, attrs.animation);
-      } else {
-        $animate.removeClass(element, attrs.animation);
-      }
-    });
+  return (scope, element, attrs) => {
+    scope.$watch(attrs.animateIf, val =>
+      $animate[val ? 'addClass' : 'removeClass'](element, attrs.animation));
   };
 }).
 
 // https://gist.github.com/kirkstrobeck/599664399dbc23968741
-directive('autofocus', function ($timeout) {
+directive('autofocus', function($timeout) {
   return {
     restrict: 'A',
-    link: function ($scope, $element) {
-      $timeout(function () {
-        $element[0].focus();
-      });
-    }
+    link: ($scope, $element) => $timeout(() => $element[0].focus())
   };
 }).
 
@@ -84,7 +61,7 @@ directive('backImg', function() {
   };
 }).
 
-directive('hyloUnique', ['$http', function ($http) {
+directive('hyloUnique', function($http) {
   return {
     require: 'ngModel',
     link: function (scope, elem, attrs, ctrl) {
@@ -111,8 +88,7 @@ directive('hyloUnique', ['$http', function ($http) {
       });
     }
   };
-}
-]).
+}).
 
 directive('forceLowercase', function() {
   return {
@@ -133,8 +109,6 @@ directive('forceLowercase', function() {
   };
 }).
 
-directive("loadingIndicator", function() {
-  return {
-    template: '<div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>'
-  };
-});
+directive("loadingIndicator", () => ({
+  template: '<div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>'
+}));

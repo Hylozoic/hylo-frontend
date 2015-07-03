@@ -1,13 +1,8 @@
-var directive = () => {
+module.exports = app => app.directive('welcomePost', () => {
   return {
     restrict: 'E',
-    scope: {
-      post: '='
-    },
+    scope: {post: '='},
     controller: 'WelcomePostCtrl',
     templateUrl: '/ui/post/welcome.tpl.html'
   };
-};
-
-module.exports = angularModule =>
-  angularModule.directive('welcomePost', directive);
+});
