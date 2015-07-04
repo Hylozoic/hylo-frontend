@@ -13,11 +13,14 @@
       </div>
 
       <div class="text">
-        <strong><a ui-sref="profile.about({id: user.id})">{{user.name}}</a></strong>
+        <span ng-show="isSelf">You</span>
+        <strong ng-hide="isSelf">
+          <a ui-sref="profile.about({id: user.id})">{{user.name}}</a>
+        </strong>
         joined
-        {{post.community.name}}
+        <span class="community-name">{{post.community.name}}</span>
         {{post.created_at | fromNow}}.
-        Say hello!
+        <span ng-hide="isSelf">Say hello!</span>
       </div>
     </div>
   </div>

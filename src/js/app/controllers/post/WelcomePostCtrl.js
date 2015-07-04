@@ -4,6 +4,7 @@ module.exports = function($scope, Post, $analytics, CurrentUser) {
   var post = $scope.post;
   $scope.user = post.relatedUsers[0];
   $scope.isFollowing = () => _.any(post.followers, CurrentUser.is);
+  $scope.isSelf = CurrentUser.is($scope.user);
 
   $scope.unfollow = () => {
     Post.follow({id: post.id});
