@@ -29,29 +29,29 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   };
 
   $scope.create = function() {
-    if ($scope.commentLength() > 0) {
-      $scope.createDisabled = true;
-      Post.comment({id: post.id, text: $scope.commentInput.trim()}, function(comment) {
-        post.comments.push(comment);
-        post.numComments++;
+    if ($scope.commentLength() == 0) return;
 
-        $scope.commentInput = '';
-        $scope.createDisabled = false;
-        $scope.commenting = false;
-        $scope.hasMention = false;
+    $scope.createDisabled = true;
+    Post.comment({id: post.id, text: $scope.commentInput.trim()}, function(comment) {
+      post.comments.push(comment);
+      post.numComments++;
 
-        $analytics.eventTrack('Post: Comment: Add', {post_id: post.id, has_mention: $scope.hasMention});
+      $scope.commentInput = '';
+      $scope.createDisabled = false;
+      $scope.commenting = false;
+      $scope.hasMention = false;
 
-        if (!_.findWhere(post.followers, {id: comment.user.id})) {
-          post.followers.push(comment.user);
-        }
+      $analytics.eventTrack('Post: Comment: Add', {post_id: post.id, has_mention: $scope.hasMention});
 
-      }, function() {
-        $scope.createDisabled = false;
-        growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
-        $analytics.eventTrack('Post: Comment: Adding a Comment Failed.', {post_id: post.id});
-      });
-    }
+      if (!_.findWhere(post.followers, {id: comment.user.id})) {
+        post.followers.push(comment.user);
+      }
+
+    }, function() {
+      $scope.createDisabled = false;
+      growl.addErrorMessage("Error posting comment.  Please try again later", {ttl: 5000});
+      $analytics.eventTrack('Post: Comment: Adding a Comment Failed.', {post_id: post.id});
+    });
   };
 
   $scope.thank = function(comment) {
