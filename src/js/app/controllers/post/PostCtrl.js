@@ -9,7 +9,7 @@ var controller = function($scope, Post, growl, post, currentUser, $stateParams, 
       url: window.location.href,
       title: post.name,
       image: post.image_url,
-      description: truncate(striptags(post.description), 140)
+      description: truncate(striptags(post.description || ''), 140)
     }
   });
 

@@ -5,6 +5,7 @@
 
 <div class="row">
   <div class="single-post">
-    <post-card post="post" remove-fn="postdeleted(postToRemove)" start-expanded='true'></post-card>
+    <post-card ng-if="post.type !== 'welcome'" post="post" remove-fn="postdeleted(postToRemove)" start-expanded='true'></post-card>
+    <welcome-post ng-if="post.type === 'welcome'" post="post" show-comments="true"></welcome-post>
   </div>
 </div>
