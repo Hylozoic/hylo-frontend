@@ -3,7 +3,7 @@
      infinite-scroll-disabled="loadMoreDisabled"
      infinite-scroll-immediate-check="false">
   <div ng-repeat="post in posts">
-    <post-card ng-if="post.type !== 'join'" post="post" remove-fn="removePost(postToRemove)"></post-card>
-    <welcome-post ng-if="post.type === 'join'" post="post"></welcome-post>
+    <post-card ng-if="post.type !== 'welcome'" post="post" remove-fn="removePost(postToRemove)"></post-card>
+    <welcome-post ng-if="post.type === 'welcome'" post="post"></welcome-post>
   </div>
 </div>
