@@ -47,11 +47,11 @@ app.run(function(clickthroughTracker) {
   clickthroughTracker.track(location);
 });
 
-app.run(function($rootScope, $state, growl, $bodyClass) {
+app.run(function($rootScope, $state, growl, $bodyClass, CurrentUser) {
 
   $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
     if (error && _.include([401, 403], error.status)) {
-      if ($rootScope.currentUser) {
+      if (CurrentUser.isLoggedIn()) {
         growl.addErrorMessage("You don't have permission to view that.");
       } else {
         $state.go('login', {next: format('%s%s', window.location.pathname, window.location.search)});

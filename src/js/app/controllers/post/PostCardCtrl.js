@@ -1,7 +1,7 @@
 var RichText = require('../../services/RichText'),
   truncate = require('html-truncate');
 
-module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache) {
+module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache, CurrentUser) {
   'ngInject';
 
   $scope.singlePost = $state.current.data && $state.current.data.singlePost;
@@ -14,16 +14,13 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
   $scope.joinPostText = "";
   $scope.onlyAuthorFollowing = false;
 
-  var currentUser = $rootScope.currentUser,
+  var currentUser = CurrentUser.get(),
     voteText = "click to <i class='icon-following'></i> me.",
     unvoteText = "click to un-<i class='icon-following'></i> me.",
     post = $scope.post;
 
   $scope.isPostOwner = function() {
-    if (post.user) {
-      return currentUser && post.user.id == currentUser.id;
-    }
-    return false;
+    return CurrentUser.is(post.user && post.user.id);
   };
 
   $scope.markFulfilled = function() {

@@ -1,5 +1,7 @@
-module.exports = function($scope, $modal, $timeout) {
+module.exports = function($scope, $modal, $timeout, CurrentUser) {
   'ngInject';
+
+  $scope.currentUser = CurrentUser.get();
 
   $scope.joinCommunity = function() {
     $modal.open({

@@ -1,5 +1,5 @@
 var controller = function($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Post, $sce, UserMentions, Comment, $dialog) {
+  $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser) {
 
   var post = $scope.post;
 
@@ -17,12 +17,13 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   }
 
   $scope.canDelete = function(comment) {
-    var user = $rootScope.currentUser;
-    return user && (comment.user.id == user.id || user.canModerate(post.community));
+    if (!CurrentUser.isLoggedIn()) return false;
+    if (CurrentUser.is(comment.user.id)) return true;
+    return CurrentUser.get().canModerate(post.community);
   };
 
   $scope.commentOwner = function(comment) {
-    return $rootScope.currentUser && $rootScope.currentUser.id == comment.user.id;
+    return CurrentUser.is(comment.user.id);
   };
 
   $scope.create = function() {

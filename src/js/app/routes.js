@@ -27,8 +27,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       abstract: true,
       templateUrl: '/ui/shared/main.tpl.html',
       resolve: {
-        currentUser: function(User) {
-          return User.loadCurrent();
+        currentUser: function(CurrentUser) {
+          return CurrentUser.load();
         },
         onboarding: function(currentUser, Onboarding) {
           var onboardingData = (currentUser && currentUser.onboarding);

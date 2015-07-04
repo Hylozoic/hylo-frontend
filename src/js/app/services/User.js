@@ -1,4 +1,4 @@
-var factory = function($resource, $rootScope, Project, $timeout, $q) {
+var factory = function($resource, $state, Project, $timeout, $q) {
   var User = $resource('/noo/user/:id', {
     id: '@id'
   }, {
@@ -43,30 +43,19 @@ var factory = function($resource, $rootScope, Project, $timeout, $q) {
     }
   });
 
-  User.loadCurrent = () => {
-    return User.current().$promise.then(function(user) {
-      var currentUser = (user.id ? user : null);
-      $rootScope.currentUser = currentUser;
-      window.hyloEnv.provideUser(currentUser);
-      return currentUser;
-    });
-  };
-
   // load this as a "resolve" dependency for a route.
   // if the route has children with resolve dependencies
   // that call resources requiring login,
   // add it as a dependency of those.
   // (see e.g. routes/home.js)
-  User.requireLogin = function(currentUser) {
-    if (currentUser) return;
+  User.requireLogin = function(user) {
+    if (user) return;
 
-    $timeout(function() {
-      $rootScope.$state.go('login');
-    });
+    $timeout(() => $state.go('login'));
     var deferred = $q.defer();
     deferred.reject('login required'); // this string is expected in app/index.js
     return deferred.promise;
-  }
+  };
 
   // let's make things a bit more OO around here
   _.extend(User.prototype, {
