@@ -30,7 +30,7 @@ var controller = function($scope, Cache, Post, community, onboarding, firstPostQ
       {label: 'Top', value: 'top'}
     ],
     filter: [
-      {label: 'All Posts', value: 'all'},
+      {label: 'All Posts', value: 'all+welcome'},
       {label: 'Intentions', value: 'intention'},
       {label: 'Offers', value: 'offer'},
       {label: 'Requests', value: 'request'},

@@ -44,7 +44,8 @@ module.exports = function ($stateProvider) {
         } else {
           return Post.queryForCommunity({
             communityId: community.id,
-            limit: 10
+            limit: 10,
+            type: 'all+welcome'
           }).$promise.then(function(resp) {
             Cache.set(key, resp, {maxAge: 10 * 60});
             return resp;
