@@ -30,8 +30,8 @@
 
   <div ng-if="loading" class="loading">Loading comments...</div>
 
-  <div class="add-comment" ng-show="::$root.currentUser">
-    <a class="avatar" back-img="::$root.currentUser.avatar_url" ng-class="{'inactive-image': !commentInput}"></a>
+  <div class="add-comment" ng-show="currentUser">
+    <a class="avatar" back-img="::currentUser.avatar_url" ng-class="{'inactive-image': !commentInput}"></a>
 
     <div class="comment-input">
       <form class="comment-form">

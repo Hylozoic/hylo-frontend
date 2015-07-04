@@ -16,6 +16,8 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
     });
   }
 
+  $scope.currentUser = CurrentUser.get();
+
   $scope.canDelete = function(comment) {
     if (!CurrentUser.isLoggedIn()) return false;
     if (CurrentUser.is(comment.user.id)) return true;
