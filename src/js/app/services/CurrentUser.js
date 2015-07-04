@@ -6,8 +6,10 @@ module.exports = function(User) {
   var api = {
     set: u => user = u,
     get: () => user,
-    is: id => user && user.id === id,
     isLoggedIn: () => !!user,
+
+    is: userOrId =>
+      user && user.id === (typeof(userOrId) === 'number' ? userOrId : userOrId.id),
 
     load: () =>
       User.current().$promise.then(resp =>

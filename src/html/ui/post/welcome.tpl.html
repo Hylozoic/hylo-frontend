@@ -1,9 +1,25 @@
 <div class="welcome-post">
-  {{post.relatedUsers[0].name}} joined {{post.created_at | fromNow}}. Welcome them!
-  <div class="controls">
-    <a class="vote" ng-click="vote()">
-      <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
-      <span class="num">{{post.votes}}</span>
-    </a>
+  <div class="top">
+    <div class="avatar" back-img="post.relatedUsers[0].avatar_url"></div>
+    <div class="content">
+      <div class="controls">
+        <a class="comment" ng-click="showComments = !showComments" tooltip-popup-delay="500">
+          <i ng-class="showComments ? 'icon-comment-selected' : 'icon-comment'"></i>
+          <span class="num">{{post.numComments}}</span>
+        </a><!--
+        --><a ng-if="isFollowing()" class="follow" ng-click="unfollow()" tooltip="Stop receiving notifications">
+          <i class="icon-leave"></i>
+        </a>
+      </div>
+
+      <div class="text">
+        <strong><a ui-sref="profile.about({id: user.id})">{{user.name}}</a></strong>
+        joined
+        {{post.community.name}}
+        {{post.created_at | fromNow}}.
+        Say hello!
+      </div>
+    </div>
   </div>
+  <embedded-comments ng-if="showComments" class="for-welcome" post="post"></embedded-comments>
 </div>

@@ -26,6 +26,39 @@
 
 @post-avatar-margin: @avatar-size-default + @std-padding * 2;
 
+.post-buttons() {
+  > a {
+    .meta-text;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px @std-padding;
+    box-sizing: content-box;
+
+    &.vote, &.num-followers, &.comment {
+      width: @std-padding * 3;
+    }
+
+    &.fulfill i {
+      font-size: 13px;
+    }
+  }
+
+  i {
+    color: @link-color;
+    font-size: 16px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
+
+  .icon-heart-new-selected {
+    color: #f8f;
+  }
+
+}
+
 div.post {
   margin-bottom: @std-padding * 2;
   font-size: @font-size-base;
@@ -160,39 +193,10 @@ div.post {
     margin-top: 9px;
     padding-bottom: @std-padding;
     border-bottom: 1px solid @border-lightest;
+    .post-buttons;
 
-    > a {
-      .meta-text;
-      cursor: pointer;
-      display: inline-block;
-      text-decoration: none;
-      text-transform: uppercase;
-      padding: 5px @std-padding;
-      box-sizing: content-box;
-
-      &:first-child {
-        padding-left: 0;
-      }
-
-      &.vote, &.num-followers, &.comment {
-        width: @std-padding * 3;
-      }
-
-      &.fulfill i {
-        font-size: 13px;
-      }
-    }
-
-    i {
-      color: @link-color;
-      font-size: 16px;
-      vertical-align: middle;
-      position: relative;
-      top: -2px;
-    }
-
-    .icon-heart-new-selected {
-      color: pink;
+    > a:first-child {
+      padding-left: 0;
     }
 
     @media (max-width: @screen-xs-max) {
@@ -260,8 +264,38 @@ div.post {
 }
 
 .welcome-post {
-  padding: @std-padding;
-  background-color: @faint-gray;
-  margin-bottom: @std-padding;
-  border-radius: @border-radius-base;
+  .body-text;
+  margin-bottom: @std-padding*2;
+
+  > .top {
+    border: 1px solid @border-lightest;
+    padding: @std-padding;
+    background-color: @faint-gray;
+    min-height: @avatar-size-sm + 2*@std-padding;
+
+    .avatar {
+      .user-avatar-sm;
+      float: left;
+      margin-right: @std-padding;
+    }
+
+    .content {
+      overflow: hidden;
+      padding-top: 7px;
+    }
+
+    .controls {
+      .post-buttons;
+      float: right;
+      margin-top: -4px;
+      > a {
+        padding: 5px;
+        text-align: right;
+
+        &.follow {
+          margin-left: 13px;
+        }
+      }
+    }
+  }
 }
