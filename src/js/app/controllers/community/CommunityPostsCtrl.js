@@ -1,5 +1,6 @@
-var controller = function($scope, Cache, Post, community, onboarding, firstPostQuery, PostManager) {
+var controller = function($scope, Cache, Post, community, onboarding, firstPostQuery, PostManager, currentUser) {
   $scope.onboarding = onboarding;
+  $scope.currentUser = currentUser;
 
   var postManager = new PostManager({
     firstPage: firstPostQuery,
