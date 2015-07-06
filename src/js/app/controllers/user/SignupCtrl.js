@@ -27,6 +27,15 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
 
   $scope.invitation = Invitation.storedData() || projectInvitation;
 
+  var finishSignup = provider => {
+    $analytics.eventTrack('Signup success', {provider: provider});
+    if (context === 'modal') {
+      $scope.$close({action: 'finish'});
+    } else {
+      $scope.$state.go('appEntry');
+    }
+  };
+
   $scope.submit = function(form) {
     form.submitted = true;
     $scope.signupError = null;
@@ -35,12 +44,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     var params = _.merge({}, $scope.user, {login: true}, projectInvitation);
 
     User.signup(params).$promise.then(function(user) {
-      $analytics.eventTrack('Signup success', {provider: 'password'});
-      if (context === 'modal') {
-        $scope.$close({action: 'finish'});
-      } else {
-        $scope.$state.go('appEntry');
-      }
+      finishSignup('password');
     }, function(err) {
       handleError(err, $scope, $analytics);
     });
@@ -58,8 +62,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
       if (error) {
         handleError({data: error}, $scope, $analytics);
       } else {
-        $analytics.eventTrack('Signup success', {provider: $scope.serviceUsed});
-        $scope.$state.go('appEntry');
+        finishSignup($scope.serviceUsed);
       }
     });
   };
@@ -73,4 +76,3 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
   };
 
 };
-
