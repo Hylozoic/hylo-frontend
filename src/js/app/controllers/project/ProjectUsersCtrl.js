@@ -1,4 +1,4 @@
-module.exports = ($scope, $stateParams, project, users, $dialog) => {
+module.exports = function ($scope, $stateParams, project, users, $dialog) {
   "ngInject";
   $scope.users = users;
 
