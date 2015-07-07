@@ -11,8 +11,6 @@
   }
 
   .post {
-    .make-row;
-
     .full-media {
       display: block;
       margin-top: 10px;
@@ -21,6 +19,12 @@
 
     .media {
       display: none;
+    }
+
+  }
+  @media (max-width: @screen-xs-max) {
+    .post, .welcome-post {
+      .make-row;
     }
   }
 }
@@ -297,6 +301,11 @@ div.post {
           margin-left: 13px;
         }
       }
+    }
+
+    @media (max-width: @screen-xs-max) {
+      border-left: none;
+      border-right: none;
     }
   }
 }

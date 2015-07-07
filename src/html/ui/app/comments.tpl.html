@@ -1,15 +1,13 @@
 <div class="comments">
 
   <div class="comment" ng-repeat="comment in post.comments" ng-class="{last: $last}">
-    <div class="comment-delete">
-      <a ng-if="::canDelete(comment)" ng-click="delete(comment)">
-        <i class="comment-delete-icon icon-cancel-01 hidden-xs"></i>
-      </a>
-    </div>
+    <a ng-if="::canDelete(comment)" ng-click="delete(comment)" class="delete-comment">
+      <i class="icon-cancel-01"></i>
+    </a>
 
     <a class="avatar" back-img="::comment.user.avatar_url" ui-sref="profile.posts({id: comment.user.id})"></a>
 
-    <div class="comment-content" ng-class="::{deletable: canDelete(comment)}">
+    <div class="comment-content">
       <div class="comment-text unpad-last-p" ng-bind-html="::comment.comment_text | richText | unsafe"></div>
       <div class="controls">
         <a ui-sref="profile.posts({id: comment.user.id})"><span>{{::comment.user.name}}</span></a>

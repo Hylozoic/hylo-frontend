@@ -3,6 +3,7 @@
 
   &.for-welcome {
     margin-left: 0;
+    margin-right: 0;
   }
 
   .loading {
@@ -13,6 +14,7 @@
 
   .comment {
     padding-top: @std-padding;
+    padding-right: @std-padding;
     background-color: @faint-gray;
     border-right: 1px solid @border-lightest;
     border-left: 1px solid @border-lightest;
@@ -35,23 +37,14 @@
       word-wrap: break-word;
     }
 
-    .comment-delete {
-      a {
-        float: right;
+    .delete-comment {
+      float: right;
+      font-size: 12px;
+      color: @text-gray;
 
-        &:hover {
-          text-decoration: none;
-        }
-
-        .comment-delete-icon {
-          color: @border-dark;
-          font-size: 12px;
-          margin: 5px -25px;
-
-          &:hover {
-            color: @link-color;
-          }
-        }
+      &:hover {
+        text-decoration: none;
+        color: @link-color;
       }
     }
 
@@ -71,6 +64,15 @@
       }
     }
 
+    @media (max-width: @screen-xs-max) {
+      &.last {
+        padding-bottom: @std-padding;
+      }
+
+      .comment-content {
+        padding-right: 0;
+      }
+    }
   }
 
   @media (max-width: @screen-xs-max) {
@@ -82,6 +84,7 @@
   background-color: white;
   position: relative;
   padding: 6px 0;
+  min-height: @avatar-size-sm + 12px;
   border: 1px solid @border-lightest;
   border-top: none;
   .body-text;
@@ -91,81 +94,52 @@
     margin: 0 @std-padding;
     float: left;
   }
-
-  .comment-input {
-    overflow: hidden;
-    display: block;
-    margin-top: 5px;
-    min-height: 28px;
-
-    .add-comment-btn {
-      position: absolute;
-      right: 3px;
-      bottom: 1px;
-    }
-
-    textarea, .mentio-editor {
-      padding: 0 0 5px;
-      width: 81%;
-      position: relative;
-      top: 3px;
-      z-index: 10;
-    }
-
-    .placeholder {
-      font-style: italic;
-      color: @inactive-text;
-      top: 14px;
-      position: absolute;
-      z-index: 0;
-
-      @media (max-width: @screen-xs-max) {
-        top: 3px;
-      }
-    }
-  }
-
-  .empty-comment {
-    font-style: italic;
-  }
-
 }
 
-@media (max-width: @screen-xs-max) {
+.comment-input {
+  overflow: hidden;
+  display: block;
+  margin-top: 5px;
+  min-height: 28px;
 
-  .comments .comment {
-    padding: @std-padding @std-padding 0;
+  .add-comment-btn {
+    position: absolute;
+    right: 3px;
+    bottom: 1px;
+  }
 
-    &.last {
-      padding-bottom: @std-padding;
-    }
+  textarea, .mentio-editor {
+    padding: 0 0 5px;
+    width: 81%;
+    position: relative;
+    top: 3px;
+    z-index: 10;
+  }
 
-    .avatar {
-      .user-avatar-xs;
-      margin-left: 0;
-    }
-    .comment-content {
-      padding-right: 0;
+  .placeholder {
+    font-style: italic;
+    color: @inactive-text;
+    top: 14px;
+    position: absolute;
+    z-index: 0;
+
+    @media (max-width: @screen-xs-max) {
+      top: 5px;
     }
   }
 
-  .add-comment {
+  @media (max-width: @screen-xs-max) {
+    margin-top: 2px;
 
-    .avatar {
-      margin-left: @std-padding;
-      .user-avatar-xs;
-    }
-
-    .comment-input {
-      margin-left: @avatar-size-xs + @std-padding * 2;
-      margin-top: 2px;
-
-      button {
-        position: relative;
-        margin-top: 12px;
-      }
+    button {
+      position: relative;
+      margin-top: 12px;
     }
   }
+}
+
+.empty-comment {
+  font-style: italic;
 }
 
 .comment-btn {
