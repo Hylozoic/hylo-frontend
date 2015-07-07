@@ -65,6 +65,9 @@
     }
 
     @media (max-width: @screen-xs-max) {
+      border-left: none;
+      border-right: none;
+
       &.last {
         padding-bottom: @std-padding;
       }
@@ -93,6 +96,11 @@
     .user-avatar-sm;
     margin: 0 @std-padding;
     float: left;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    border-left: none;
+    border-right: none;
   }
 }
 
