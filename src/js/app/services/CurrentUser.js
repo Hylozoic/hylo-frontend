@@ -8,8 +8,7 @@ module.exports = function(User) {
     get: () => user,
     isLoggedIn: () => !!user,
 
-    is: userOrId =>
-      user && user.id === (typeof(userOrId) === 'number' ? userOrId : userOrId.id),
+    is: userOrId => user && (user.id === userOrId || user.id === userOrId.id),
 
     load: () =>
       User.current().$promise.then(resp =>
