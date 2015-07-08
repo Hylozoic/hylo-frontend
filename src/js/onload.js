@@ -23,6 +23,7 @@ hyloEnv.onUser(function(user) {
     createdAt: user.created_at,
     community_name: (membership ? membership.community.name : undefined),
     community_id: (membership ? membership.community.id : undefined),
+    post_count: user.post_count
   });
 
   // rollbar
