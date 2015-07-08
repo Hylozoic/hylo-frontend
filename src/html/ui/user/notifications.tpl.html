@@ -16,7 +16,10 @@
       <div class="content">
         <div class="title">
           {{::event.actor.name}} {{::actionText(event)}}
-          "<a ng-click="visit(event)">{{::truncate(event.post.name, 140)}}</a>"
+          <a ng-click="visit(event)">
+            <span ng-if="event.post.type !== 'welcome'">"{{::truncate(event.post.name, 140)}}"</span>
+            <span ng-if="event.post.type === 'welcome'">{{::event.post.relatedUsers[0].name}}'s welcoming post</span>
+          </a>
         </div>
 
         <div class="body-text" ng-if="::hasBodyText(event)">
