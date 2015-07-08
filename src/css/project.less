@@ -223,14 +223,19 @@ body.project {
       padding-bottom: 10px;
       display: inline-block;
       position: relative;
-      &.selected {
-        .has-bottom-triangle;
-      }
-
       h2 {
         .strong-title-text;
         margin-bottom: 5px;
       }
+
+      &.selected {
+        .has-bottom-triangle;
+
+        h2 {
+          .bold-title-text;
+        }
+      }
+
     }
   }
 
