@@ -12,6 +12,7 @@
 
   #main-container {
     background-color: white;
+    margin-top: @nav-height + @std-padding;
     @media (max-width: @screen-xs-max) {
       padding: 0;
       overflow-x: hidden;
@@ -21,24 +22,25 @@
   nav {
     border: none;
     border-bottom: 2px solid #DCDCDC;
-    background-color: transparent;
+    background-color: white;
     border-radius: 0;
     padding: 0 @std-padding;
-    margin: 0 -@std-padding @std-padding !important;
+    margin: 0 !important;
     height: @nav-height;
     line-height: @nav-height;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: @nav-z-index;
 
     .close {
       .big-close;
       position: relative;
       z-index: 2;
-      margin-right: -15px;
-      margin-top: (@nav-height - 50) / 2;
-      padding-right: @std-padding*2;
 
-      @media (max-width: @screen-xs-max) {
-        margin-top: 0;
-        top: -2px;
+      @media (min-width: @screen-sm) {
+        padding-right: @std-padding*2;
       }
     }
 
@@ -61,7 +63,7 @@
       margin: auto;
       @media (max-width: @screen-xs-max) {
         text-align: left;
-        padding-left: @std-padding*2;
+        padding-left: @std-padding;
         padding-top: 0;
       }
     }
