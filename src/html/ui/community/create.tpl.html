@@ -10,13 +10,13 @@
   <div class="all-sections">
 
     <form name="form" novalidate>
-      <p>Welcome! You're just minutes away from unlocking the creative potential of your community with Hylo. Just fill out the form below. All settings below can be changed later, except for the URL.</p>
+      <h4>Let's get started unlocking the creative potential of your community with Hylo.</h4>
 
       <div class="section-label">Information</div>
       <div class="section">
         <div class="setting-item">
           <div class="side-column">
-            <label>Name</label>
+            <label>Community name</label>
           </div>
           <div class="main-column">
             <input type="text" hylo-unique="name" name="name" ng-model="community.name" class="form-control" required />
@@ -105,6 +105,10 @@
           </div>
         </div>
       </div>
+
+      <p>All of the settings above can be changed later, except for the URL.</p>
+
+      <p>The product is currently free of charge for communities of 100 or fewer people. If your community exceeds 100 people, we'll contact you to discuss payment options. If you have any questions about this now, feel free to send us a message using the chat widget in the lower right of your screen.</p>
 
       <div class="section footer">
         <button type="button" ng-click="submit(form)" ng-disabled="saving">

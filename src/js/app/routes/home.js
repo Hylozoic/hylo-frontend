@@ -24,13 +24,6 @@ module.exports = function ($stateProvider) {
     resolve: {
       projects: function(currentUser, requireLogin) {
         return currentUser.projects().$promise;
-      },
-      requireNoCommunity: function(currentUser, $timeout, $state) {
-        if (!_.isEmpty(currentUser.memberships)) {
-          $timeout(function() {
-            $state.go('appEntry');
-          });
-        }
       }
     },
     data: {
@@ -39,7 +32,7 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/home/simple.tpl.html',
-        controller: function($scope, projects, requireNoCommunity, currentUser, $http) {
+        controller: function($scope, projects, currentUser, $http) {
           'ngInject';
           $scope.projects = projects;
 

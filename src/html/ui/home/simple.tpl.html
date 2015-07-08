@@ -9,12 +9,6 @@
   <ng-include src="'/ui/home/projects.tpl.html'"></ng-include>
 </div>
 
-<h2>Request to create a community</h2>
+<h2>Create your own community</h2>
 
-<div class="success" ng-if="success">{{success}}</div>
-
-<form name="form">
-  <textarea name="details" class="form-control" ng-model="details" placeholder="Tell us about what you want to use Hylo for." required></textarea>
-  <a class="button" ng-click="submit(form)">Submit</a>
-</form>
-
+<a class="button" ui-sref="createCommunity">Get started</a>
