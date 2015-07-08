@@ -223,6 +223,10 @@ body.project {
       padding-bottom: 10px;
       display: inline-block;
       position: relative;
+      &, p {
+        color: @text-light-gray;
+      }
+
       h2 {
         .strong-title-text;
         margin-bottom: 5px;
@@ -230,12 +234,10 @@ body.project {
 
       &.selected {
         .has-bottom-triangle;
-
-        h2 {
-          .bold-title-text;
+        &, p {
+          color: @default-text;
         }
       }
-
     }
   }
 
