@@ -79,7 +79,7 @@
     </div>
 
     <div class="fulfillment" ng-if="post.fulfilled_at">
-      Fulfilled
+      Completed
       <span ng-if="::post.contributors.length > 0">
         with contributions from
         <a class="contributor" ui-sref="profile.posts({id: user.id})" ng-repeat="user in post.contributors.slice(0, 2)">
@@ -129,7 +129,7 @@
 
       --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at">
         <i class="icon-little-check"></i>
-        <span class="hidden-xs">Mark fulfilled</span>
+        <span class="hidden-xs">Mark complete</span>
       </a>
     </div>
 
