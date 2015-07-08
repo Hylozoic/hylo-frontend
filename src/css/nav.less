@@ -39,7 +39,7 @@
     margin-top: @nav-vertical-padding + 1px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    max-height: 85vh;
+    max-height: 80vh;
     overflow-y: scroll;
 
     .bottom a {
@@ -56,7 +56,16 @@
       line-height: 42px;
       padding: 0 20px;
     }
+
+    @media (max-width: @screen-xs-max) {
+      position: fixed;
+      top: @nav-height - 1px;
+      left: 3vw;
+      width: 94vw;
+      margin-top: 0;
+    }
   }
+
 
   .item {
     float: left;
@@ -120,10 +129,13 @@
     margin-right: 0;
 
     .dropdown-menu {
-      left: initial;
-      right: 0;
-      a {
-        line-height: 2*@std-padding;
+      line-height: 42px;
+      @media (min-width: @screen-sm) {
+        left: initial;
+        right: 0;
+        a {
+          line-height: 2*@std-padding;
+        }
       }
     }
 
