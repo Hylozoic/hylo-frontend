@@ -5,7 +5,8 @@ module.exports = function($stateProvider) {
     parent: 'main',
     url: '/app',
     onEnter: function(currentUser, $state, $timeout, onboarding) {
-      var membership = (currentUser && currentUser.memberships[0]);
+      var reverseDate = m => -Date.parse(m.last_viewed_at || '2001-01-01'),
+        membership = (currentUser && _.sortBy(currentUser.memberships, reverseDate)[0]);
       $timeout(function() {
         if (membership) {
           if (onboarding && onboarding.currentStep() == 'start') {
