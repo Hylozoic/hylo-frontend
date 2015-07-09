@@ -1,0 +1,102 @@
+.borderless-text-input() {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  margin-left: 0;
+}
+
+@default-button-height: 32px;
+
+.rounded-button(@size: @default-button-height, @background-color: white) {
+  .proxima-nova-regular;
+  font-size: 14px;
+  &, &:hover {
+    text-decoration: none;
+    color: @text-dark;
+  }
+  background-color: @background-color;
+  cursor: pointer;
+  border: 1px solid @light-gray;
+  border-radius: @size;
+  display: inline-block;
+  height: @size;
+  line-height: @size - 2px;
+  padding: 0px 15px;
+  outline: none;
+  > i {
+    position: relative;
+    top: 1px;
+  }
+  :active, &.active {
+    background-color: darken(@background-color, 20%);
+  }
+
+  &.disabled, &[disabled] {
+    opacity: 0.4;
+  }
+}
+
+.rounded-button-dark(@size: @default-button-height, @background-color: @dark-gray) {
+  .rounded-button(@size, @background-color);
+  &, &:hover {
+    color: white;
+  }
+}
+
+.clear-button {
+  &, &:hover {
+    color: white;
+  }
+  background-color: transparent;
+  border: 1px solid white;
+  &:active {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.rounded-button-clear {
+  .rounded-button;
+  .clear-button;
+}
+
+.circular-button(@size: @default-button-height) {
+  .rounded-button(@size);
+  width: @size;
+  text-align: center !important;
+  padding: 0;
+}
+
+.round-input {
+  -webkit-appearance: none;
+  border: 1px solid @button-border;
+  border-radius: 25px;
+  outline: none;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+  .proxima-nova(100);
+}
+
+.round-radio() {
+  .round-input;
+  padding: 10px;
+}
+
+.round-checkbox() {
+  .round-input;
+  padding: 15px;
+
+  &:checked {
+
+    &:after {
+      font-family: @icon-font-family;
+      content: '\e62e';
+      font-size: 14px;
+      position: absolute;
+      top: 8px;
+      left: 7px;
+      color: @default-text;
+    }
+  }
+}

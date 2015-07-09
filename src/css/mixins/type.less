@@ -1,0 +1,126 @@
+.proxima-nova(@weight) {
+  font-family: "proxima-nova",sans-serif;
+  font-style: normal;
+  font-weight: @weight;
+}
+
+.proxima-nova-light() {
+  .proxima-nova(300);
+}
+
+.proxima-nova-regular() {
+  .proxima-nova(400);
+}
+
+.proxima-nova-semibold() {
+  .proxima-nova(600);
+}
+
+.proxima-nova-bold() {
+  .proxima-nova(700);
+}
+
+.huge-header() {
+  .proxima-nova-semibold;
+  font-size: 45px;
+}
+
+.large-header() {
+  .proxima-nova-semibold;
+  font-size: 32px;
+}
+
+.section-title() {
+  .proxima-nova-semibold;
+  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: 3.5px;
+  color: @dark-gray;
+}
+
+.medium-header() {
+  .proxima-nova-semibold;
+  font-size: 24px;
+}
+
+.small-header() {
+  .proxima-nova-semibold;
+  font-size: 18px;
+}
+
+.meta-text() {
+  .proxima-nova-light;
+  font-size: 13px;
+
+  &, a {
+    color: @text-light-gray;
+  }
+  a:hover {
+    color: @link-color;
+  }
+}
+
+.strong-meta-text() {
+  .meta-text;
+  .proxima-nova-regular;
+}
+
+.post-type-text(@color) {
+  .proxima-nova-semibold;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  color: @color;
+}
+
+.title-text() {
+  .proxima-nova-regular;
+  font-size: 18px;
+  line-height: 20px;
+  color: @default-text;
+}
+
+.body-text() {
+  .proxima-nova-light;
+  font-size: 15px;
+  color: @readable-text;
+  line-height: 1.25em;
+}
+
+.strong-title-text() {
+  .proxima-nova-regular;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 2.4px;
+}
+
+.bold-title-text() {
+  .strong-title-text;
+  .proxima-nova-bold;
+}
+
+.small-title-text() {
+  .proxima-nova-regular;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2.4px;
+}
+
+.small-bold-title-text() {
+  .small-title-text;
+  .proxima-nova-bold;
+  font-size: 14px;
+  color: @secondary-text;
+}
+
+.large-body-text() {
+  .proxima-nova-regular;
+  font-size: 20px;
+  line-height: 1.4em;
+}
+
+.remove-link-display(@color: @default-text) {
+  &, &:hover {
+    color: @color;
+    text-decoration: none;
+  }
+}
