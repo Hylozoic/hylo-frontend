@@ -51,8 +51,9 @@
 
     <section>
       <h2>Skills I can share</h2>
+      <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
-        placeholder="Add skills by typing here then pressing enter..."
+        placeholder="Type a word or short phrase, then press Return."
         ng-keypress="add($event, 'skills')"/>
       <ul>
         <li ng-repeat="skill in editData.skills">
@@ -64,8 +65,9 @@
 
     <section>
       <h2>Groups and organizations</h2>
+      <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
-        placeholder="Add groups you are affiliated with by typing here then pressing enter..."
+        placeholder="Type a name, then press Return."
         ng-keypress="add($event, 'organizations')"/>
       <ul>
         <li ng-repeat="org in editData.organizations">
@@ -78,7 +80,7 @@
     <section>
       <h2>Phone</h2>
       <input type="text" maxlength="200"
-      placeholder="Add a phone number by typing here then pressing enter..."
+      placeholder="Type a number, then press Return."
       ng-keypress="add($event, 'phones')"/>
       <ul>
         <li ng-repeat="phone in editData.phones">
@@ -90,7 +92,7 @@
     <section>
       <h2>Email</h2>
       <input type="text" maxlength="200"
-      placeholder="Add a email address by typing here then pressing enter..."
+      placeholder="Type an address, then press Return."
       ng-keypress="add($event, 'emails')"/>
       <ul>
         <li ng-repeat="email in editData.emails">
@@ -102,7 +104,7 @@
     <section>
       <h2>Website</h2>
       <input type="text" maxlength="200"
-      placeholder="Add a website URL by typing here then pressing enter..."
+      placeholder="Type a URL, then press Return."
       ng-keypress="add($event, 'websites')"/>
       <ul>
         <li ng-repeat="website in editData.websites">
