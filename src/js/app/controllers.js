@@ -23,7 +23,6 @@ require('./controllers/home/FollowedPostsCtrl')(angularModule);
 require('./controllers/home/AllPostsCtrl')(angularModule);
 
 require('./controllers/AnnouncerCtrl')(angularModule);
-require('./controllers/OverlayCtrl')(angularModule);
 require('./controllers/SearchCtrl')(angularModule);
 require('./controllers/FulfillmentCtrl')(angularModule);
 require('./controllers/user/ForgotPasswordCtrl')(angularModule);

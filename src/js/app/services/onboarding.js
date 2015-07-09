@@ -9,14 +9,14 @@ var steps = {
     state: 'community.posts'
   },
   profile: {
-    state: 'profile.posts'
+    state: 'profile.about'
   }
 };
 
 var sanitize = function(string) {
   if (!string) return;
 
-  return _.chain(string.split(','))
+  return _.chain(string.split(/,|\n/))
     .map(function(x) { return x.trim(); })
     .reject(function(x) { return x === ''; })
     .uniq().value();
@@ -24,7 +24,7 @@ var sanitize = function(string) {
 
 var stepOrder = ['start', 'community', 'profile', 'done'];
 
-var factory = function($timeout, $resource, $rootScope, $state, $analytics, Overlay) {
+var factory = function($timeout, $resource, $rootScope, $state, $analytics, $modal) {
 
   var OnboardingResource = $resource('/noo/user/:userId/onboarding', {userId: '@userId'});
 
@@ -42,7 +42,6 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       $rootScope.$emit('announcer:hide');
-      $rootScope.$emit('overlay:hide');
 
       if (this.currentStep() === 'community' && toState.name === 'profile' && toParams.id === this._user.id) {
         if (this._announcerDelay) {
@@ -71,64 +70,33 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
 
       return this._status.step;
     },
-    showOverlay: function(name) {
-      var scope = {
-        overlay: 'onboarding.' + name,
-        onboarding: this
-      };
-      if (name === 'community') {
-        scope.conversationStep = 1;
-      }
-      Overlay.show(scope);
+    showCommunityModal: function() {
+      $modal.open({
+        templateUrl: '/ui/onboarding/community-modal.tpl.html',
+        keyboard: false,
+        backdrop: 'static',
+        windowClass: 'onboarding-modal',
+        controller: function($scope) {
+          'ngInject';
+          $scope.conversationStep = 1;
+        }
+      }).result.then(input => {
+        this._saveCommunityModalInput(input);
+
+        this._announcerDelay = $timeout(() => $rootScope.$emit('announcer:show', {
+          text: "Next, click here to visit your profile.",
+          onclick: () => this._goDelta(0),
+          className: 'point-to-profile'
+        }), 3000);
+
+        this.setStep('profile', true);
+      });
     },
-    continue: function(data) {
-      var self = this;
-
-      switch (this.currentStep()) {
-        case 'community':
-          // process responses to prompts
-          var input = {
-            skills: sanitize(data.skills),
-            organizations: sanitize(data.organizations)
-          };
-
-          // add skills to front-end
-          if (_.isEmpty(input.skills)) {
-            delete input.skills;
-          } else {
-            this._track('Add Skills');
-            this._user.skills = input.skills;
-          }
-
-          // add organizations to front-end
-          if (_.isEmpty(input.organizations)) {
-            delete input.organizations;
-          } else {
-            this._track('Add Affiliations');
-            this._user.organizations = input.organizations;
-          }
-
-          // save data to back-end
-          if (!_.isEmpty(input))
-            this._user.update(input);
-
-          this._announcerDelay = $timeout(function() {
-            $rootScope.$emit('announcer:show', {
-              text: "When you're ready, click here to visit your profile.",
-              onclick: function() {
-                self._goDelta(0);
-              },
-              className: 'point-to-profile'
-            });
-          }, 3000);
-
-          this.setStep('profile', true);
-          break;
-
-        case 'profile':
-          this.setStep('done', true);
-          break;
-      }
+    showProfileModal: function() {
+      $modal.open({
+        templateUrl: '/ui/onboarding/profile-modal.tpl.html',
+        windowClass: 'onboarding-modal',
+      }).result.then(() => this.setStep('done', true));
     },
     goNext: function() {
       this._goDelta(1);
@@ -170,6 +138,33 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, Over
         user_id: this._user.id,
         new_user: this._status.new_user
       }, params));
+    },
+    _saveCommunityModalInput: function(input) {
+      // process responses to prompts
+      input = {
+        skills: sanitize(input.skills),
+        organizations: sanitize(input.organizations)
+      };
+
+      // add skills to front-end
+      if (_.isEmpty(input.skills)) {
+        delete input.skills;
+      } else {
+        this._track('Add Skills');
+        this._user.skills = input.skills;
+      }
+
+      // add organizations to front-end
+      if (_.isEmpty(input.organizations)) {
+        delete input.organizations;
+      } else {
+        this._track('Add Affiliations');
+        this._user.organizations = input.organizations;
+      }
+
+      // save data to back-end
+      if (!_.isEmpty(input))
+        this._user.update(input);
     }
   });
 

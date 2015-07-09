@@ -15,11 +15,10 @@ module.exports = function ($stateProvider) {
           return User.get({id: $stateParams.id}).$promise;
         }
       },
-      showOverlay: function(isSelf, onboarding) {
+      showModal: function(isSelf, onboarding) {
         // hack -- this is only here so it shows before the controller's other content appears
-        if (isSelf && onboarding && onboarding.currentStep() === 'profile') {
-          onboarding.showOverlay('profile');
-        }
+        if (isSelf && onboarding && onboarding.currentStep() === 'profile')
+          onboarding.showProfileModal();
       }
     },
     views: {
@@ -91,4 +90,3 @@ module.exports = function ($stateProvider) {
     }
   });
 };
-

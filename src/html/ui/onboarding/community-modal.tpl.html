@@ -1,0 +1,25 @@
+<h2 class="center">Welcome!</h2>
+
+<div ng-show="conversationStep == 1">
+  <div class="wrapper">
+    <p>Let's get started! Tell us a little about yourself.</p>
+    <p>What groups or organizations are you a part of?</p>
+    <textarea class="form-control" ng-model="organizations"></textarea>
+    <p class="help">Type names, separated by commas or line breaks. This information will be searchable and also shown on your profile, helping other members discover opportunities to collaborate with you.</p>
+  </div>
+  <div class="right">
+    <a class="button" ng-click="conversationStep = 2">Next</a>
+  </div>
+</div>
+
+<div ng-show="conversationStep == 2">
+  <div class="wrapper">
+    <p>Thanks! Are there any skills, passions, or hobbies you'd like to be known for in your community?</p>
+    <textarea class="form-control" ng-model="skills"></textarea>
+    <p class="help">Type words or short phrases, separated by commas or line breaks. This information will be searchable and also shown on your profile, helping other members discover opportunities to collaborate with you.</p>
+  </div>
+  <div class="right">
+    <a class="button" ng-click="conversationStep = 1">Back</a>
+    <a class="button" ng-click="$close({skills: skills, organizations: organizations})">Next</a>
+  </div>
+</div>

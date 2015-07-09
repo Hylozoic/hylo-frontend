@@ -27,7 +27,6 @@ module.exports = function(angularModule) {
 
   angularModule.factory('CurrentUser',  require('./services/CurrentUser'));
   angularModule.factory('Meta',         require('./services/Meta'));
-  angularModule.factory('Overlay',      require('./services/Overlay'));
   angularModule.factory('UserMentions', require('./services/UserMentions'));
 
 };

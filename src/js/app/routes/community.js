@@ -52,11 +52,11 @@ module.exports = function ($stateProvider) {
           });
         }
       },
-      showOverlay: function(onboarding) {
+      showModal: function(onboarding) {
         // hack -- this is only here so it shows before the controller's other content appears
-        if (onboarding && onboarding.currentStep() === 'community') {
-          onboarding.showOverlay('community');
-        }
+        if (onboarding && onboarding.currentStep() === 'community')
+          onboarding.showCommunityModal();
+
       }
     }
   })
