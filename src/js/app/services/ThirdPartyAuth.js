@@ -7,7 +7,6 @@ var factory = function() {
       if (service === 'google') {
         width = 420;
         height = 480;
-        size = {width: 420, height: 480};
       } else if (service === 'facebook') {
         width = 560;
         height = 520;
