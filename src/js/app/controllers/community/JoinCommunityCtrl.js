@@ -29,6 +29,8 @@ module.exports = function($scope, Community, $analytics) {
       $scope.$state.reload();
       if ($scope.$close) {
         $scope.$close(resp);
+      } else {
+        $scope.$state.go('community.posts', {community: resp.slug});
       }
     });
   };
