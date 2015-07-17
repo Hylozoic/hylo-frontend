@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, user, isSelf, growl) {
+var controller = function($scope, $analytics, user, isSelf, growl, $anchorScroll) {
   $scope.user = user;
   $scope.isSelf = isSelf;
 
@@ -16,6 +16,7 @@ var controller = function($scope, $analytics, user, isSelf, growl) {
     return 'http://' + url;
   };
 
+  $anchorScroll();
 };
 
 module.exports = function(angularModule) {
