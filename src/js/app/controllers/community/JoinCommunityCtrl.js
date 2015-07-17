@@ -1,4 +1,4 @@
-module.exports = function($scope, Community, $analytics) {
+module.exports = function($scope, Community, CurrentUser, $timeout, $analytics) {
   'ngInject';
 
   $scope.validateCode = _.debounce(function() {
@@ -23,15 +23,17 @@ module.exports = function($scope, Community, $analytics) {
   $scope.submit = function() {
     if (!$scope.isCodeValid) return;
 
-    Community.join({code: $scope.code}, function(resp) {
-      $analytics.eventTrack('Joined community', {id: resp.id, slug: resp.slug});
+    Community.join({code: $scope.code}, function(membership) {
+      var community = membership.community;
+      $analytics.eventTrack('Joined community', {id: community.id, slug: community.slug});
 
-      $scope.$state.reload();
-      if ($scope.$close) {
-        $scope.$close(resp);
-      } else {
-        $scope.$state.go('community.posts', {community: resp.slug});
-      }
+      if ($scope.$close) $scope.$close();
+
+      var user = CurrentUser.get();
+      if (!_.find(user.memberships, m => m.community_id === community.id))
+        user.memberships.push(membership);
+
+      $scope.$state.go('appEntry');
     });
   };
 

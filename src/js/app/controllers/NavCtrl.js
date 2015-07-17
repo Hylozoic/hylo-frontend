@@ -1,4 +1,4 @@
-module.exports = function($scope, $modal, $timeout, CurrentUser) {
+module.exports = function($scope, $modal, CurrentUser) {
   'ngInject';
 
   $scope.currentUser = CurrentUser.get();
@@ -7,10 +7,6 @@ module.exports = function($scope, $modal, $timeout, CurrentUser) {
     $modal.open({
       templateUrl: '/ui/shared/join-community.tpl.html',
       controller: 'JoinCommunityCtrl'
-    }).result.then(function(community) {
-      $timeout(function() {
-        $scope.$state.go('community.posts', {community: community.slug});
-      });
     });
   };
 
