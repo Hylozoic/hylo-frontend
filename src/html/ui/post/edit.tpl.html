@@ -8,6 +8,7 @@
 
 <div class="main-content">
   <div class="all-sections">
+    <div class="title">Choose a post type</div>
     <div class="select-type">
       <div class="option chat" ng-class="{active: postType==='chat'}">
         <label>
@@ -35,9 +36,9 @@
       </div>
     </div>
 
-    <p class="help type-help">
+    <p class="help">
       <span ng-if="postType==='chat'">Anything you'd like to talk about.</span>
-      <span ng-if="postType==='offer'">Anything you'd like to share. (e.g. a skill, some goods, information, an opportunity, etc.)</span>
+      <span ng-if="postType==='offer'">Anything you'd like to share. (e.g. a skill, some goods, information, an opportunity, etc.) If you would like to be compensated, say so in the description.</span>
       <span ng-if="postType==='request'">Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)</span>
       <span ng-if="postType==='intention'">Something you’d like to create, with the support of your community. A vision.</span>
     </p>
@@ -60,10 +61,10 @@
         mentio-typed-term="typedTerm">
       </div>
 
-      <div ng-if="shouldPickCommunity">
+      <div ng-if="shouldPickCommunity" class="community-picker">
         <div class="title">Community</div>
 
-        <div class="btn-group community-picker" dropdown>
+        <div class="btn-group" dropdown>
           <a class="button" dropdown-toggle>
             {{community.name}}
             <span class="caret"></span>
@@ -78,6 +79,7 @@
       </div>
 
       <p class="help">This post will be visible only to other members of your community. You can edit or remove it at any time.</p>
+      <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
     </div>
 
     <div class="bottom-bar">

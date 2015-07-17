@@ -10,6 +10,11 @@
     }
   }
 
+	.title {
+		.strong-title-text;
+		margin-bottom: @std-padding/2;
+	}
+
 	.select-type {
     .make-row;
 
@@ -58,31 +63,27 @@
 			}
 
 			label {
-				.medium-header;
+				.small-header;
 				color: @inactive-text;
+        margin-bottom: 0;
 			}
 
 			input[type=radio] {
 		    .round-radio;
+        vertical-align: top;
 			}
 		}
 	}
 
-  .type-help {
-    margin-bottom: @std-padding;
-    display: block;
-  }
+	p.help {
+		margin-top: 10px;
+		margin-bottom: 0;
+	}
 
 	.edit-content {
-		padding-top: @std-padding*2;
+		padding-top: @std-padding;
     padding-bottom: @std-padding*2;
-    border-top: 2px solid @default-border;
     border-bottom: 2px solid @default-border;
-
-		.title {
-			.strong-title-text;
-			margin-bottom: @std-padding/2;
-		}
 
 		input, textarea {
 			margin-bottom: @std-padding;
@@ -92,10 +93,6 @@
 			border: 1px solid @default-border;
 		}
 
-		p.help {
-			margin-top: 10px;
-			margin-bottom: 0;
-		}
 
     .counter {
       float: right;
@@ -178,6 +175,7 @@
 	}
 
   .community-picker {
+    margin-top: @std-padding;
   	.dropdown-menu li {
   		white-space: nowrap;
   	}
