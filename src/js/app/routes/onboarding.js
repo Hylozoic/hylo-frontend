@@ -13,6 +13,7 @@ module.exports = function ($stateProvider) {
     url: '/h/onboarding/start',
     resolve: {
       onboardingInit: function(onboarding) {
+        'ngInject';
         return onboarding.init();
       }
     },
