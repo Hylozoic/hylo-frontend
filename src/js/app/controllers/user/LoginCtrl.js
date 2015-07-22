@@ -27,7 +27,7 @@ var handleError = function(err, $scope, $analytics) {
     $analytics.eventTrack('Login failure', {email: $scope.user.email, cause: 'no community'});
 
   } else {
-    $scope.signupError = msg;
+    $scope.loginError = msg;
     $analytics.eventTrack('Login failure', {email: $scope.user.email, cause: msg});
   }
 };
