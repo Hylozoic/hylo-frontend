@@ -12,7 +12,7 @@ describe('RichText', function() {
 
   it('links hashtags', function() {
     var input = '<p>and #foo</p>',
-      expected = '<p>and <a href="/h/search?q=%23foo">#foo</a></p>',
+      expected = '<p>and <a href="/search?q=%23foo">#foo</a></p>',
       output = RichText.present(input);
 
     expect(output).to.equal(expected);
