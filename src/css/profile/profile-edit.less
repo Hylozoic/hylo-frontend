@@ -16,16 +16,6 @@
     .main-content .buttons {
       text-align: center;
     }
-    .banner .buttons {
-      padding: 5px 0 @std-padding * 2;
-      text-align: center;
-      position: static;
-    }
-    .buttons a {
-      float: none !important;
-      display: inline-block !important;
-      margin: 0 !important;
-    }
   }
 
   .icon-edit-profile-photo {
@@ -46,7 +36,22 @@
     }
 
     @media (max-width: @screen-xs-max) {
-      height: auto;
+      height: auto !important;
+
+      .buttons {
+        padding: 5px 0 @std-padding !important;
+        text-align: center;
+        position: static !important;
+        a {
+          float: none !important;
+          display: inline-block !important;
+          margin: 0 !important;
+        }
+      }
+
+      .banner-content {
+        position: static;
+      }
     }
   }
 
@@ -83,7 +88,7 @@
     }
 
     .banner-content {
-      position: static;
+      position: static !important;
     }
 
     .social-media {
