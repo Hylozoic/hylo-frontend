@@ -29,8 +29,9 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
     id: project.id
   };
 
-  $rootScope.$on('$stateChangeStart', function() {
-    $rootScope.userMentionContext = null;
+  $rootScope.$on('$stateChangeStart', function(event, toState) {
+    if (!toState.name.startsWith('project'))
+      $rootScope.userMentionContext = null;
   });
 
   $scope.showFullDetails = function() {
