@@ -111,11 +111,6 @@
         <span class="num">{{post.votes}}</span>
       </a><!--
 
-      --><a class="num-followers" ng-click="toggleFollowers()" tooltip-popup-delay="500" tooltip="Notify members about this">
-        <i ng-class="editingFollowers ? 'icon-add-member-selected' : 'icon-add-member'"></i>
-        <span class="num">{{post.followers.length}}</span>
-      </a><!--
-
       --><a class="comment" ng-click="toggleComments()" tooltip-popup-delay="500" tooltip="Comments">
         <i ng-class="isCommentsCollapsed ? 'icon-comment' : 'icon-comment-selected'"></i>
         <span class="num">{{post.numComments}}</span>
