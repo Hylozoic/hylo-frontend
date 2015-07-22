@@ -22,7 +22,7 @@ module.exports = {
 
     // link hashtags
     // this is not ideal because it hardcodes the search path
-    text = text.replace(/( |^)#(\w+)/g, '$1<a href="/search?q=%23$2">#$2</a>');
+    text = text.replace(/( |^|>)#(\w+)/g, '$1<a href="/search?q=%23$2">#$2</a>');
 
     if (opts.maxlength)
       text = truncate(text, opts.maxlength);
