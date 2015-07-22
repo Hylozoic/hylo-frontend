@@ -7,7 +7,7 @@ var directive = function() {
       startExpanded: '='
     },
     controller: 'PostCardCtrl',
-    templateUrl: "/ui/app/hylo_post.tpl.html",
+    templateUrl: "/ui/post/card.tpl.html",
     replace: true,
     link: function(scope, element, attrs) {
       element.addClass(scope.post.type);
