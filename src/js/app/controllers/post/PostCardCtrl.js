@@ -147,7 +147,7 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
 
     text = RichText.present(text);
 
-    if (!fullLength && text.length > 140) {
+    if (!fullLength && angular.element(text).text().trim().length > 140) {
       text = truncate(text, 140);
       $scope.truncated = true;
     } else {
