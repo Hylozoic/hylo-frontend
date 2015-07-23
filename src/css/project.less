@@ -171,6 +171,10 @@ body.project {
           margin-bottom: @std-padding;
           .meta-text;
 
+          a.button {
+            .rounded-button;
+          }
+
           .icon {
             display: block;
             float: left;
@@ -199,9 +203,10 @@ body.project {
     margin-bottom: 5px;
   }
 
-  .edit-button {
+  .edit-button, .share-button {
     .rounded-button;
     float: right;
+    margin-left: 5px;
   }
 
   .tabs-wrapper {
@@ -278,7 +283,7 @@ body.project {
 }
 
 body.project.project-posts {
-  .add-request-form {
+  .add-post-form {
     .highlight-box;
     overflow: hidden;
 

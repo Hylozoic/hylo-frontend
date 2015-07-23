@@ -1,25 +1,23 @@
 <div class="cta-wrapper" ng-if="!project.isPublished()">
   <div class="cta">
-    <a class="button" ng-click="publish()" ng-if="isCreator">Publish</a>
+    <a class="button" ng-click="publish()" ng-if="canModerate">Publish</a>
     <strong>Draft Project</strong> &mdash;
-    <span ng-show="isCreator">
+    <span ng-show="canModerate">
       You can
       <a ui-sref="editProject({id: project.slug})">edit project details</a>,
       <a ng-click="goToTab('posts')">add requests</a>, and
       <a ng-click="goToTab('contributors')">invite contributors</a>
       until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
     </span>
-    <span ng-hide="isCreator">This project is only visible to those who have been invited to contribute.</span>
+    <span ng-hide="canModerate">This project is only visible to those who have been invited to contribute.</span>
   </div>
 </div>
 
 <div class="summary-wrapper">
   <div class="summary">
-    <a ng-show="isCreator" class="edit-button" ui-sref="editProject({id: project.slug})">Edit project</a>
-    <a ng-show="isContributor" class="edit-button" ui-sref="project.settings({id: project.slug})">
-      <i class="icon-settings"></i>
-      Settings
-    </a>
+    <a ng-show="canModerate" class="edit-button" ui-sref="editProject({id: project.slug})">Edit project</a>
+    <a ng-if="project.isPublic()" class="share-button" ng-click="share()">Share on Facebook</a>
+
     <h1>{{project.title}}</h1>
 
     <div class="columns">
@@ -74,8 +72,11 @@
               <span ng-hide="project.isPublished()">All members of {{project.community.name}} may view and join this project when it is published.</span>
             </div>
           </li>
-          <li ng-if="project.isPublic()">
-            <a class="button" ng-click="share()">Share on Facebook</a>
+          <li ng-show="isContributor">
+            <a class="button" ui-sref="project.settings({id: project.slug})">
+              <i class="icon-settings"></i>
+              Settings
+            </a>
           </li>
 
         </ul>
@@ -90,13 +91,13 @@
   <ul class="tabs">
     <li ng-class="{selected: $state.current.name === 'project.posts'}" ng-click="goToTab('posts')">
       <h2>Requests &amp; Offers</h2>
-      <p ng-show="isCreator">Ask for what you need</p>
-      <p ng-hide="isCreator">See how you can help</p>
+      <p ng-show="canModerate">Ask for what you need</p>
+      <p ng-hide="canModerate">See how you can help</p>
     </li><!--
     --><li ng-class="{selected: $state.current.name === 'project.contributors'}" ng-click="goToTab('contributors')">
       <h2>Contributors</h2>
-      <p ng-show="isCreator">Get people involved</p>
-      <p ng-hide="isCreator">See who's involved</p>
+      <p ng-show="canModerate">Get people involved</p>
+      <p ng-hide="canModerate">See who's involved</p>
     </li>
   </ul>
 </div>

@@ -19,7 +19,7 @@ module.exports = function($scope, project, Post, Cache, UserCache, growl,
 
   var placeholder;
 
-  if ($scope.isCreator) {
+  if ($scope.canModerate) {
     placeholder = "I'm looking for ";
     $scope.postType = 'request';
   } else {

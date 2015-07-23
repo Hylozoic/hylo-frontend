@@ -16,7 +16,8 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
   var invitationToken = $stateParams.token;
 
   $scope.project = project;
-  $scope.isCreator = $scope.canModerate = currentUser && project.user_id === currentUser.id;
+  $scope.isCreator = currentUser && project.user_id === currentUser.id;
+  $scope.canModerate = $scope.isCreator || (project.membership && project.membership.role === 1);
   $scope.isContributor = !!project.membership;
 
   $scope.details = RichText.markdown(project.details || '', {maxlength: 420});

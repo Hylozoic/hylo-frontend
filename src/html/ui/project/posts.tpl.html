@@ -1,6 +1,6 @@
-<div class="add-request-form" ng-show="isCreator || isContributor">
-  <h3 ng-if="isCreator">What do you need to make this project succeed?</h3>
-  <h3 ng-if="isContributor">What can you offer to help make this project succeed?</h3>
+<div class="add-post-form" ng-show="isCreator || isContributor">
+  <h3 ng-show="canModerate">What do you need to make this project succeed?</h3>
+  <h3 ng-hide="canModerate">What can you offer to help make this project succeed?</h3>
   <input type="text"
          class="form-control"
          ng-model="newPost.name"
@@ -32,4 +32,4 @@
   <post-card ng-repeat="post in posts" post="post" remove-fn="removePost(postToRemove)"></post-card>
 </div>
 
-<div ng-if="posts.length == 0 && !isCreator">No requests yet.</div>
+<div ng-if="posts.length == 0 && !canModerate">No requests or offers yet.</div>
