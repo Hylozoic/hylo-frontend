@@ -26,6 +26,10 @@ var factory = function($resource) {
       url: '/noo/project/:id/user/:userId',
       method: 'POST'
     },
+    toggleModeratorRole: {
+      url: '/noo/project/:id/moderator/:userId',
+      method: 'POST'
+    },
     queryForCommunity: {
       url: '/noo/community/:id/projects',
       isArray: true
@@ -69,6 +73,9 @@ var factory = function($resource) {
     },
     updateMembership: function(params, success, error) {
       return Project.updateMembership(_.extend({id: this.id}, params), success, error);
+    },
+    toggleModeratorRole: function(params, success, error) {
+      return Project.toggleModeratorRole(_.extend({id: this.id}, params), success, error);
     }
   });
 

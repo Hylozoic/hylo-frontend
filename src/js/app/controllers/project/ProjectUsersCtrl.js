@@ -35,4 +35,14 @@ module.exports = function ($scope, $stateParams, project, users, $dialog) {
     });
   };
 
+  $scope.toggleModerator = function(user, index) {
+    var newRole = user.membership.role === 1 ? 0 : 1;
+    user.membership.role = newRole;
+    project.toggleModeratorRole({userId: user.id, role: newRole});
+  };
+
+  $scope.isModerator = function(user) {
+    return user.membership.role === 1;
+  }
+
 };
