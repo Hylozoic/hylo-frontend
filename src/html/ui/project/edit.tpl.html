@@ -4,7 +4,8 @@
   <div class="all-sections">
     <div class="header">
       <a class="button save" ng-click="save()">Save {{project.isPublished() ? '' : 'Draft'}}</a>
-      <p>Everything amazing in the world begins with a story of what might be. Tell us the story of what you want to create, and how it could become real. It doesn't have to be perfect; you can always edit it later.</p>
+      <p>Everything amazing in the world begins with a story of what might be. Tell us the story of what you want to create, and how it could become real.</p>
+      <p>It doesn't have to be perfect; you can always edit it later.</p>
       <p ng-hide="project.isPublished()">In the next steps, you'll be able to make requests and invite people to contribute.</p>
     </div>
 
@@ -61,10 +62,9 @@
 
     </div>
 
-    <div>
+    <div class="visibility">
       <label>Project visibility</label>
       <p class="help">Control who can see and contribute to this project.</p>
-      <p class="help">Only the community" means that only community members or people you invite may see and comment on it, once it is published. "Anyone" means that the project will be visible to anyone who has the link, once published, and anyone will be able to join the project after signing up for Hylo.</p>
       <div class="btn-group" dropdown>
         <a class="button" dropdown-toggle>
           {{pickedVisibility().label}}
@@ -76,6 +76,9 @@
           </li>
         </ul>
       </div>
+      <p class="help">
+        <strong>Only the community:</strong> only community members or people you invite may see and comment on it, once it is published. <strong>Anyone:</strong> the project will be visible to anyone who has the link, once published, and anyone will be able to join the project after signing up for Hylo.
+      </p>
     </div>
 
     <div class="footer">
