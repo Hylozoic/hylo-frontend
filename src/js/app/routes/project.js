@@ -30,9 +30,12 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('project', {
-    url: '/project/:id?token',
+    url: '/project/:id/:slug?token',
     parent: 'main',
     abstract: true,
+    params: {
+      slug: {value: null, squash: true}
+    },
     resolve: /*@ngInject*/ {
       project: function(Project, $stateParams) {
         return Project.get({id: $stateParams.id, token: $stateParams.token}).$promise;

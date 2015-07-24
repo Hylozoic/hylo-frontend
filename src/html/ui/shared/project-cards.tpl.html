@@ -1,7 +1,7 @@
 <div class="project-cards" masonry='{"itemSelector": ".project-wrapper", "percentPosition": true, "transitionDuration": 0}'>
   <div class="project-wrapper" ng-repeat="project in projects">
 
-    <div class="project-card" ng-click="$state.go('project.posts', {id: project.slug})">
+    <div class="project-card" ng-click="$state.go('project.posts', {id: project.id, slug: project.slug})">
       <div class="image"
            ng-if="(project.image_url || project.thumbnail_url)"
            back-img="(project.image_url || project.thumbnail_url)"></div>

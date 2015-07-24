@@ -33,7 +33,7 @@ var controller = function($scope, currentUser, Project, project) {
       community_id: project.community.id
     });
     Project.save(attrs, function(project) {
-      $scope.$state.go('project.posts', {id: project.slug});
+      $scope.$state.go('project.posts', {id: project.id, slug: project.slug});
     });
   };
 

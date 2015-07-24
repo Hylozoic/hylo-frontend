@@ -4,7 +4,7 @@
     <strong>Draft Project</strong> &mdash;
     <span ng-show="canModerate">
       You can
-      <a ui-sref="editProject({id: project.slug})">edit project details</a>,
+      <a ui-sref="editProject({id: project.id})">edit project details</a>,
       <a ng-click="goToTab('posts')">add requests</a>, and
       <a ng-click="goToTab('contributors')">invite contributors</a>
       until you are happy with how your project looks. Only you and the people you invite will be able to see this project until you publish it.
@@ -15,7 +15,7 @@
 
 <div class="summary-wrapper">
   <div class="summary">
-    <a ng-show="canModerate" class="edit-button" ui-sref="editProject({id: project.slug})">Edit project</a>
+    <a ng-show="canModerate" class="edit-button" ui-sref="editProject({id: project.id})">Edit project</a>
     <a ng-if="project.isPublic()" class="share-button" ng-click="share()">Share on Facebook</a>
 
     <h1>{{project.title}}</h1>
