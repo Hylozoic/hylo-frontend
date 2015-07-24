@@ -1,6 +1,7 @@
 var path = require('path'),
-  qs = require('querystring');
-
+  qs = require('querystring'),
+  isiOSApp = require('./isiosapp'),
+  connectWebViewJavascriptBridge = require('./webviewjavascriptbridge');
 // order matters, except for CONVERT, which toggles the crop UI
 var services = [
   // 'CONVERT',
@@ -12,6 +13,7 @@ var services = [
   'DROPBOX',
   'GOOGLE_DRIVE'
 ];
+
 
 var makeFilename = function(blob) {
   var extension = '',
@@ -39,39 +41,63 @@ var makeFilename = function(blob) {
  */
 module.exports = function(opts) {
 
+  var convertAndStoreImage = function(blob) {
+
+    // this function captures 'opts'
+    
+    // apply additional context-specific conversion settings
+    var conversion = _.extend({compress: true, quality: 90}, opts.convert);
+    
+    // blob.url will end with "/convert?crop=..."
+    // if "CONVERT" is in the list of services
+    var url = blob.url + '/convert?' + qs.stringify(conversion);
+    
+    filepicker.storeUrl(
+      url,
+      {
+        access: 'public',
+        container: hyloEnv.s3.bucket,
+        location: 'S3',
+        path: path.join(opts.path, makeFilename(blob))
+      },
+      function(stored) {
+        opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key);
+      },
+      opts.failure
+    );
+  };    
+
   filepicker.setKey(hyloEnv.filepicker.key);
+  
+  if (isiOSApp()) {
 
-  filepicker.pick(
-    {
-      mimetype: 'image/*',
-      multple: false,
-      services: services
-    },
+    console.log("JS Reloaded");
+    
+    connectWebViewJavascriptBridge(function(bridge) {
+      var payload = {message: "filepickerUpload", options: opts};
+      bridge.send(JSON.stringify(payload), function (responseData) {
 
-    function(blob) {
-      // apply additional context-specific conversion settings
-      var conversion = _.extend({compress: true, quality: 90}, opts.convert);
+        if (responseData == "")
+          return opts.failure("Cancelled");
 
-      // blob.url will end with "/convert?crop=..."
-      // if "CONVERT" is in the list of services
-      var url = blob.url + '/convert?' + qs.stringify(conversion);
+        convertAndStoreImage(JSON.parse(responseData));
+      });      
+    });
+    
+  } else {
+    
+    filepicker.pick(
+      {
+        mimetype: 'image/*',
+        multple: false,
+        services: services
+      },
 
-      filepicker.storeUrl(
-        url,
-        {
-          access: 'public',
-          container: hyloEnv.s3.bucket,
-          location: 'S3',
-          path: path.join(opts.path, makeFilename(blob))
-        },
-        function(stored) {
-          opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key);
-        },
-        opts.failure
-      );
-    },
-
-    opts.failure
-  );
+      convertAndStoreImage,
+      
+      opts.failure
+    );
+    
+  }  
 
 };
