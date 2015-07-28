@@ -74,32 +74,28 @@ app.run(function($rootScope, $state, growl, $bodyClass, CurrentUser) {
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
 
-  var connectWebViewJavascriptBridge = function(callback) {
-    if (window.WebViewJavascriptBridge) {
-      callback(window.WebViewJavascriptBridge);
-    } else {
-      document.addEventListener('WebViewJavascriptBridgeReady', function() {
-        callback(window.WebViewJavascriptBridge);
-      }, false);
-    }
-  };
-
+  var connectWebViewJavascriptBridge = require('./services/webviewjavascriptbridge'),
+    isiOSApp = require('./services/isiosapp');
+  
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, error) {
-    if (fromState.name === "") {
-      connectWebViewJavascriptBridge(function(bridge) {
-        bridge.init(function(message, responseCallback) {
-          // currently does not do anything with messages from app
-        });
 
-        var payload = {message: "loaded"};
+    if(isiOSApp()) {    
+      if (fromState.name === "") {
+        connectWebViewJavascriptBridge(function(bridge) {
+          bridge.init(function(message, responseCallback) {
+            // currently does not do anything with messages from app
+          });
+
+          var payload = {message: "loaded"};
+          bridge.send(JSON.stringify(payload));
+        });
+      }
+
+      connectWebViewJavascriptBridge(function(bridge) {
+        var payload = {message: "stateChanged", toState: toState.name};
         bridge.send(JSON.stringify(payload));
       });
-    }
-
-    connectWebViewJavascriptBridge(function(bridge) {
-      var payload = {message: "stateChanged", toState: toState.name};
-      bridge.send(JSON.stringify(payload));
-    });
-
+    };
   });
+  
 });
