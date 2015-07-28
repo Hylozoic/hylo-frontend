@@ -18,9 +18,18 @@ var directive = function($sce, $timeout) {
         ngModel.$setViewValue(html);
       }
 
-      //update mediumEditor when ngModel updates
+      // update mediumEditor when ngModel updates
+      // so that we can start out the contenteditable element
+      // with pre-filled content, e.g. when editing an existing post.
+      // this is the same as calling mediumEditor.value(ngModel.$viewValue),
+      // except that it skips a call to makeUndoable(), which would trigger
+      // a change event and cause a "digest in progress" error.
       ngModel.$render = function() {
-        if (mediumEditor) mediumEditor.value(ngModel.$viewValue);
+        if (mediumEditor && typeof(ngModel.$viewValue) !== 'undefined') {
+          mediumEditor.element.innerHTML = ngModel.$viewValue;
+          mediumEditor.clean();
+          mediumEditor.placeholders();
+        }
       };
 
       var mediumEditor = new Medium({
