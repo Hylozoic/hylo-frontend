@@ -39,7 +39,7 @@ var directive = function($sce, $timeout) {
         autoHR: false,
         pasteAsText: true,
         tags: {
-          innerLevel: ['br']
+          innerLevel: ['a', 'br']
         }
       });
 
