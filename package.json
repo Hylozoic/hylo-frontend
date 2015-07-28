@@ -2,6 +2,7 @@
   "name": "hylo",
   "description": "A new kind of social network that helps real communities create, together.",
   "version": "1.0.0",
+  "private": true,
   "devDependencies": {
     "chai": "^2.1.2",
     "grunt-contrib-watch": "latest",
@@ -48,7 +49,7 @@
     "lodash": "^3.8.0",
     "marked": "^0.3.3",
     "masonry-layout": "^3.3.0",
-    "medium.js": "jakiestfu/Medium.js#master",
+    "medium.js": "levity/Medium.js#master",
     "mime": "^1.3.4",
     "node-dir": "^0.1.6",
     "node-uuid": "^1.4.3",
