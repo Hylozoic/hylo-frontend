@@ -29,10 +29,8 @@ var directive = function($sce, $timeout) {
         // placeholder: attrs.placeholder,
         autoHR: false,
         pasteAsText: true,
-        pasteEventHandler: function(e) {
-          e.preventDefault();
-          var text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('Paste something..');
-          document.execCommand('insertText', false, text);
+        tags: {
+          innerLevel: ['br']
         }
       });
 
