@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+td {
+  vertical-align: top;
+  padding-right: 30px;
+}
+</style>
+</head>
+<body>
+<table>
+<tr><td>
+<pre id='markdown-src'>
+What is markdown?
+=================
+
+
+Markdown is a way of writing plain text (left),
+so that it can be converted to rich text (right).
+
+This page is written in markdown to show how it works.
+
+
+Headings: just underline with equals
+====================================
+
+Or underline with dash
+----------------------
+
+
+Paragraphs
+--------
+
+
+You need
+to put a
+blank line
+in between lines.
+
+Or it will end up as one big paragraph!
+
+
+Emphasis
+--------
+
+
+You can italicize a word with _underscore_ or *star*.
+
+__Bold__ a word by doubling the **emphasis**.
+
+
+Lists
+-----
+
+
+Here&#39;s how to make a list:
+
+* leave a blank line before your list
+* use stars (*)
+* leave a space after the star
+
+
+Links and Images
+----------------
+
+
+Repeat out loud:
+
+Square brackets for name then round brackets for URL.
+
+[Hylo Homepage](https://www.hylo.com/)
+
+Images are the same, but prefixed with an exclamation mark.
+
+![Hylo logo](https://hylo-app.s3.amazonaws.com/misc/hylo-logo-teal-on-transparent.png)
+
+Thanks to our friends at [Loomio](https://www.loomio.org/)!
+
+</pre>
+</td>
+<td id='content'>
+</td></tr></table>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+<script>
+  document.getElementById('content').innerHTML = marked(document.getElementById('markdown-src').innerHTML, {breaks: true})
+</script>
+</body>
+</html>
