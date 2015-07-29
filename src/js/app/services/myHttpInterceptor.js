@@ -10,7 +10,7 @@ var config = function ($httpProvider) {
 
         if (rejection.status === 0) {
           Rollbar.error('Timeout', {url: rejection.config.url});
-          growl.addErrorMessage("Oops! Your request timed out. Please try again.", {ttl: 5000});
+          growl.addErrorMessage("Oops! Your request timed out. Please check your network connection and try again.", {ttl: 5000});
         }
 
         return $q.reject(rejection);
