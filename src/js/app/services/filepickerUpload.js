@@ -1,7 +1,8 @@
 var path = require('path'),
   qs = require('querystring'),
-  isiOSApp = require('./isiosapp'),
-  connectWebViewJavascriptBridge = require('./webviewjavascriptbridge');
+  isiOSApp = require('./isIOSApp'),
+  connectToBridge = require('./webViewJavascriptBridge');
+
 // order matters, except for CONVERT, which toggles the crop UI
 var services = [
   // 'CONVERT',
@@ -13,7 +14,6 @@ var services = [
   'DROPBOX',
   'GOOGLE_DRIVE'
 ];
-
 
 var makeFilename = function(blob) {
   var extension = '',
@@ -41,17 +41,14 @@ var makeFilename = function(blob) {
  */
 module.exports = function(opts) {
 
-  var convertAndStoreImage = function(blob) {
-
-    // this function captures 'opts'
-    
+  var convertAndStore = function(blob) {
     // apply additional context-specific conversion settings
     var conversion = _.extend({compress: true, quality: 90}, opts.convert);
-    
+
     // blob.url will end with "/convert?crop=..."
     // if "CONVERT" is in the list of services
     var url = blob.url + '/convert?' + qs.stringify(conversion);
-    
+
     filepicker.storeUrl(
       url,
       {
@@ -60,44 +57,29 @@ module.exports = function(opts) {
         location: 'S3',
         path: path.join(opts.path, makeFilename(blob))
       },
-      function(stored) {
-        opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key);
-      },
+      stored => opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key),
       opts.failure
     );
-  };    
+  };
 
   filepicker.setKey(hyloEnv.filepicker.key);
-  
+
   if (isiOSApp()) {
+    var payload = JSON.stringify({message: "filepickerUpload", options: opts});
 
-    console.log("JS Reloaded");
-    
-    connectWebViewJavascriptBridge(function(bridge) {
-      var payload = {message: "filepickerUpload", options: opts};
-      bridge.send(JSON.stringify(payload), function (responseData) {
+    connectToBridge(bridge => bridge.send(payload, resp =>
+      (resp === "" ? opts.failure("Cancelled") : convertAndStore(JSON.parse(resp)))));
 
-        if (responseData == "")
-          return opts.failure("Cancelled");
-
-        convertAndStoreImage(JSON.parse(responseData));
-      });      
-    });
-    
   } else {
-    
     filepicker.pick(
       {
         mimetype: 'image/*',
         multple: false,
         services: services
       },
-
-      convertAndStoreImage,
-      
+      convertAndStore,
       opts.failure
     );
-    
-  }  
+  }
 
 };

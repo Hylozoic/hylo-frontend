@@ -8,6 +8,7 @@
     "angular": false,
     "describe": false,
     "expect": false,
+    "filepicker": true,
     "format": true,
     "hyloEnv": true,
     "it": false,

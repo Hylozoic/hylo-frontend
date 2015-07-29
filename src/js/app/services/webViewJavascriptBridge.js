@@ -1,5 +1,5 @@
-/* usage: 
- * var connectWebViewJavascriptBridge = require('webviewjavascriptbridge');
+/* usage:
+ * var connectWebViewJavascriptBridge = require('webViewJavascriptBridge');
  * connectWebViewJavascriptBridge(function(bridge) {
  *   bridge.send(...)
  * }

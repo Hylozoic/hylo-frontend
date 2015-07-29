@@ -1,3 +1,6 @@
+var connectWebViewJavascriptBridge = require('./services/webViewJavascriptBridge'),
+  isiOSApp = require('./services/isIOSApp');
+
 require('./directives');
 require('./controllers');
 
@@ -74,12 +77,8 @@ app.run(function($rootScope, $state, growl, $bodyClass, CurrentUser) {
   $rootScope.$state = $state;
   $rootScope.$bodyClass = $bodyClass;
 
-  var connectWebViewJavascriptBridge = require('./services/webviewjavascriptbridge'),
-    isiOSApp = require('./services/isiosapp');
-  
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, error) {
-
-    if(isiOSApp()) {    
+    if (isiOSApp()) {
       if (fromState.name === "") {
         connectWebViewJavascriptBridge(function(bridge) {
           bridge.init(function(message, responseCallback) {
@@ -95,7 +94,7 @@ app.run(function($rootScope, $state, growl, $bodyClass, CurrentUser) {
         var payload = {message: "stateChanged", toState: toState.name};
         bridge.send(JSON.stringify(payload));
       });
-    };
+    }
   });
-  
+
 });
