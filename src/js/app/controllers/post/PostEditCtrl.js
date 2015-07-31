@@ -1,7 +1,20 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
+var hasLocalStorage = function() {
+  try {
+    return 'localStorage' in window && window.localStorage !== null;
+  } catch (e) {
+    return false;
+  }
+};
+
 var controller = function($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
+
+  $scope.updatePostDraftStorage = _.debounce(function() {
+    if (!hasLocalStorage()) return;
+    localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'));
+  }, 200);
 
   $scope.maxTitleLength = 140;
 
@@ -24,6 +37,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
   	$scope.postType = postType;
     $scope.title = prefixes[postType];
     $scope.descriptionPlaceholder = placeholders[postType];
+    $scope.updatePostDraftStorage();
   };
 
   $scope.close = function() {
@@ -101,6 +115,7 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       clearCache();
       $scope.close();
       growl.addSuccessMessage('Post created!');
+      if (hasLocalStorage()) delete localStorage.postDraft;
     }, function(err) {
       $scope.saving = false;
       growl.addErrorMessage(err.data);
@@ -135,14 +150,6 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
     return UserMentions.userTextRaw(user);
   };
 
-  $scope.storeProgress = function() {
-    $rootScope.postEditProgress = {
-      title: $scope.title,
-      description: $scope.description,
-      type: $scope.postType
-    };
-  };
-
   if (post) {
     $scope.editing = true;
     $scope.switchPostType(post.type);
@@ -156,11 +163,10 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
     } else {
       $scope.description = format('<p>%s</p>', post.description);
     }
-  } else if ($rootScope.postEditProgress) {
-    $scope.switchPostType($rootScope.postEditProgress.type);
-    $scope.title = $rootScope.postEditProgress.title;
-    $scope.description = $rootScope.postEditProgress.description;
-
+  } else if (hasLocalStorage() && localStorage.postDraft) {
+    try {
+      _.merge($scope, JSON.parse(localStorage.postDraft));
+    } catch(e) {}
   } else {
     $scope.switchPostType('chat');
   }

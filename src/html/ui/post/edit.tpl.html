@@ -46,7 +46,8 @@
     <div class="edit-content">
       <div class="counter">{{title.length}} / {{maxTitleLength}}</div>
       <div class="title">Title</div>
-      <input type="text" class="form-control" ng-model="title" maxlength="{{maxTitleLength}}"/>
+      <input type="text" class="form-control" ng-model="title" maxlength="{{maxTitleLength}}"
+             ng-keypress="updatePostDraftStorage()">
 
       <div class="title">Description</div>
       <div ng-model="description" autocomplete="off" contenteditable="true"
@@ -58,7 +59,8 @@
         mentio-template-url="/ui/shared/people-mentions.tpl.html"
         mentio-search="searchPeople(term)"
         mentio-select="getPeopleTextRaw(item)"
-        mentio-typed-term="typedTerm">
+        mentio-typed-term="typedTerm"
+        ng-keypress="updatePostDraftStorage()">
       </div>
 
       <div ng-if="shouldPickCommunity" class="community-picker">
