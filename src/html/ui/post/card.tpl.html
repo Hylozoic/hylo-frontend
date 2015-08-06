@@ -122,7 +122,7 @@
         <span class="hidden-xs">{{isFollowing ? 'Unfollow' : 'Follow'}}</span>
       </a><!--
 
-      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type != 'chat'">
+      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type !== 'chat'">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
       </a>
