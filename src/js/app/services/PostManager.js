@@ -25,6 +25,7 @@ var factory = function(growl, $analytics, $timeout) {
       this.scope.loadMore = _.debounce(function() {
         if (this.scope.loadMoreDisabled) return;
         this.scope.loadMoreDisabled = true;
+        this.scope.loadingPosts = true;
 
         this.opts.query().then(this._append.bind(this));
       }.bind(this), 200);
@@ -38,12 +39,15 @@ var factory = function(growl, $analytics, $timeout) {
     },
 
     reload: function() {
+      this.scope.loadingPosts = true;
       this.scope[this.attr] = [];
       this.scope.loadMoreDisabled = false;
       this.scope.loadMore();
     },
 
     _append: function(resp) {
+      this.scope.loadingPosts = false;
+
       this.scope[this.attr] = _.uniq(
         this.scope[this.attr].concat(resp.posts),
         function(post) { return post.id }

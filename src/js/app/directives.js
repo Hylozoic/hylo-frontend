@@ -8,6 +8,7 @@ require('./directives/masonry')(angularModule);
 require('./directives/anguvideo')(angularModule);
 require('./directives/touchClass')(angularModule);
 require('./directives/postCard')(angularModule);
+require('./directives/postsToolbar')(angularModule);
 require('./directives/welcomePost')(angularModule);
 
 angularModule.directive('scrollClass', function($window) {

@@ -1,41 +1,4 @@
-<div class="toolbar community-posts-toolbar">
-  <div>
-    <a class="toolbar-left add-new" ui-sref="community.newPost" ng-show="currentUser">
-      <i class="icon-add-01"></i>
-      <span class="hidden-xs new-post-label">New Post</span>
-    </a>
-
-    <div class="toolbar-right">
-      <div class="btn-group" dropdown>
-        <a class="button" dropdown-toggle>
-          {{selected.sort.label}}
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-repeat="option in selectOptions.sort" ng-click="select('sort', option.value)">
-            {{option.label}}
-          </li>
-        </ul>
-      </div>
-
-      <div class="btn-group" dropdown>
-        <a class="button" dropdown-toggle>
-          {{selected.filter.label}}
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-repeat="option in selectOptions.filter" ng-click="select('filter', option.value)">
-            {{option.label}}
-          </li>
-        </ul>
-      </div>
-
-      <a class="search" ui-sref="search({c: community.id})">
-        <i class="icon-search"></i>
-      </a>
-    </div>
-  </div>
-</div>
+<posts-toolbar community="community" update="updateView(data)"></posts-toolbar>
 
 <div ng-if="currentUser.post_count == 0" class="reminder">
   <div>
@@ -51,9 +14,8 @@
 <div class="posts">
   <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
 
-  <div loading-indicator ng-if="searching"></div>
-
-  <div ng-if="posts.length == 0">
-    <h3 style="text-align: center;">There are no posts to display.</h3>
-  </div>
+  <h3 ng-if="posts.length == 0">
+    <span ng-show="loadingPosts">Loading...</span>
+    <span ng-hide="loadingPosts">There are no posts to display.</span>
+  </h3>
 </div>
