@@ -41,9 +41,6 @@ module.exports = function(grunt) {
     },
     browserify: {
       options: {
-        browserifyOptions: {
-          debug: true
-        },
         transform: [
           'browserify-ngannotate',
           'debowerify',
@@ -57,7 +54,10 @@ module.exports = function(grunt) {
           'dist/dev/subscribe/bundle.js': ['src/js/subscribe/index.js']
         },
         options: {
-          watch: true
+          watch: true,
+          browserifyOptions: {
+            debug: true
+          }
         }
       },
       deploy: {
@@ -65,6 +65,11 @@ module.exports = function(grunt) {
           'dist/deploy/pages/bundle.js': ['src/js/index.js'],
           'dist/deploy/pages/admin/bundle.js': ['src/js/admin/index.js'],
           'dist/deploy/pages/subscribe/bundle.js': ['src/js/subscribe/index.js']
+        },
+        options: {
+          browserifyOptions: {
+            debug: true
+          }
         }
       }
     },
