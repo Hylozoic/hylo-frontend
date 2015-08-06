@@ -13,7 +13,7 @@ hyloEnv.onUser(function(user) {
     return;
   }
 
-  var membership = user.memberships[0];
+  var membership = user.lastUsedMembership();
 
   // segment
   analytics.identify(user.id, {

@@ -92,6 +92,10 @@ var factory = function($resource, $state, Project, $timeout, $q) {
     },
     inCommunity: function() {
       return !_.isEmpty(this.memberships);
+    },
+    lastUsedMembership: function() {
+      var reverseDate = m => -Date.parse(m.last_viewed_at || '2001-01-01');
+      return _.sortBy(this.memberships, reverseDate)[0];
     }
   });
 
