@@ -6,6 +6,7 @@ var app = angular.module('hyloAdmin', ['ngResource', 'ui.router']),
 
 require('../app/services/Community')(app);
 require('../app/services/Project')(app);
+require('../app/directives/masonry')(app);
 
 app.factory('Admin', require('./services/Admin'));
 

@@ -1,22 +1,11 @@
-<table class="communities">
-  <thead>
-    <tr>
-      <th>community</th>
-      <th>code</th>
-      <th>slug</th>
-      <th>id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="community in communities" ng-class="{even: $index % 2 == 0}">
-      <td>
-        <img ng-src="{{community.avatar_url}}">
-        <a ng-href="/c/{{community.slug}}">{{community.name}}</a>
-      </td>
-      <td>{{community.beta_access_code}}</td>
-      <td>{{community.slug}}</td>
-      <td>{{community.id}}</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<div masonry='{"itemSelector": ".community-card", "percentPosition": true, "transitionDuration": 0}'>
+  <div ng-repeat="community in communities" class="community-card">
+    <img ng-src="{{community.avatar_url}}">
+    <div class="text">
+      <strong>{{community.name}}</strong><br>
+      {{community.beta_access_code}}<br>
+      <a href="/c/{{community.slug}}">{{community.slug}}</a><br>
+      ID: {{community.id}}
+    </div>
+  </div>
+</div>

@@ -14,17 +14,25 @@ ul.horizontal-menu {
   }
 }
 
-table.communities {
-  tr.even {
-    background-color: @faint-gray;
-  }
-  td, th {
-    padding: 5px 10px;
-  }
+.community-card {
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  border: 1px solid @border-light;
+  background-color: @faint-gray;
+  padding: 10px;
   img {
+    float: left;
     width: 40px;
     height: 40px;
+    margin-right: 5px;
+    margin-bottom: 5px;
   }
+  .text {
+    overflow: hidden;
+  }
+  width: 16vw;
 }
 
 .chart.new-users {
