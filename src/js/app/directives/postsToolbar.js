@@ -11,7 +11,8 @@ var directive = function() {
       $scope.selectOptions = {
         sort: [
           {label: 'Recent', value: 'recent'},
-          {label: 'Top', value: 'top'}
+          {label: 'Top', value: 'top'},
+          {label: 'Suggested', value: 'suggested'}
         ],
         filter: [
           {label: 'All Posts', value: 'all+welcome'},
