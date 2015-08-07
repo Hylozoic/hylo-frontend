@@ -75,6 +75,23 @@ body.home {
   }
 }
 
+body.home-allPosts {
+  .tab-content-wrapper {
+    padding-top: 0;
+  }
+
+  .add-new {
+    top: 0;
+  }
+
+  .posts-toolbar {
+    margin-bottom: @std-padding * 2;
+    @media (max-width: @screen-xs-max) {
+      margin-bottom: @std-padding;
+    }
+  }
+}
+
 .home-myPosts {
   .tab-content {
     .post {

@@ -1,9 +1,8 @@
-<a class="add-new" ui-sref="newPost">
-  <i class="icon-add-01"></i>
-  <span class="new-post-label">New Post</span>
-</a>
+<posts-toolbar update="updateView(data)"></posts-toolbar>
 
-<ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
-<div ng-if="!hasPosts" class="empty-content">
-  <p>Your communities are completely devoid of posts! You could be the first to unite people around a common vision. Just click the button above to start.</p>
+<div class="all-sections">
+  <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
+  <div ng-if="!hasPosts" class="empty-content">
+    <p>Your communities are completely devoid of posts! You could be the first to unite people around a common vision. Just click the button above to start.</p>
+  </div>
 </div>

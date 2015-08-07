@@ -1,7 +1,9 @@
-<ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
-<div ng-if="!hasPosts" class="empty-content">
-  <p>
-    You aren't following any posts yet.
-    Click <i class="icon-join"></i> FOLLOW on any post to receive notifications when it is updated.
-  </p>
+<div class="all-sections">
+  <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
+  <div ng-if="!hasPosts" class="empty-content">
+    <p>
+      You aren't following any posts yet.
+      Click <i class="icon-join"></i> FOLLOW on any post to receive notifications when it is updated.
+    </p>
+  </div>
 </div>

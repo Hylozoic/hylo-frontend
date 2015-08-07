@@ -7,7 +7,9 @@ var controller = function($scope, currentUser, firstPostQuery, UserCache, PostMa
     query: function() {
       return currentUser.allPosts({
         limit: 10,
-        offset: $scope.posts.length
+        offset: $scope.posts.length,
+        type: $scope.selected.filter.value,
+        sort: $scope.selected.sort.value
       }).$promise;
     },
     cache: function(posts, total) {
@@ -21,6 +23,11 @@ var controller = function($scope, currentUser, firstPostQuery, UserCache, PostMa
   postManager.setup();
 
   $scope.hasPosts = $scope.posts.length > 0;
+
+  $scope.updateView = function(data) {
+    $scope.selected = data;
+    postManager.reload();
+  };
 };
 
 module.exports = function(angularModule) {

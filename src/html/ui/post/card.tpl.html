@@ -105,7 +105,7 @@
       </span>
     </div>
 
-    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled_at}">
+    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled_at && post.type !== 'chat'}">
       <a class="vote" ng-click="vote()" tooltip-popup-delay="500" tooltip="Show your support and bring this to the attention of others">
         <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
         <span class="num">{{post.votes}}</span>
