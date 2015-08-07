@@ -1,0 +1,22 @@
+<table class="communities">
+  <thead>
+    <tr>
+      <th>community</th>
+      <th>code</th>
+      <th>slug</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="community in communities" ng-class="{even: $index % 2 == 0}">
+      <td>
+        <img ng-src="{{community.avatar_url}}">
+        <a ng-href="/c/{{community.slug}}">{{community.name}}</a>
+      </td>
+      <td>{{community.beta_access_code}}</td>
+      <td>{{community.slug}}</td>
+      <td>{{community.id}}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
