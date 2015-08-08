@@ -69,7 +69,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       main: {
         templateUrl: '/ui/admin/metrics.tpl.html',
         controller: function($scope, metrics) {
-          $scope.newUsers = metrics.newUsers;
+          $scope.metrics = metrics;
         }
       }
     }
