@@ -22,12 +22,7 @@ module.exports = function(opts) {
     // remove trailing slash
     u.pathname = u.pathname.replace(/\/$/, '');
 
-    if (_.startsWith(u.pathname, '/assets/dev/ui')) {
-      // Angular templates
-      changePathname(u.pathname.replace(/^\/assets\/dev\/ui/, '/ui'));
-
-    } else if (_.startsWith(u.pathname, '/assets')) {
-      // other static assets
+    if (_.startsWith(u.pathname, '/assets')) {
       changePathname(u.pathname.replace(/^\/assets/, ''));
     }
 

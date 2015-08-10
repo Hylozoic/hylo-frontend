@@ -83,7 +83,7 @@ module.exports = function(grunt) {
       ui: {
         options: require('./templateEnv')('development'),
         files: [
-          {expand: true, cwd: 'src/html/ui', src: ['**/!(_)*.ejs'], dest: 'dist/ui', ext: '.tpl.html'}
+          {expand: true, cwd: 'src/html/ui', src: ['**/!(_)*.ejs'], dest: 'dist/dev/ui', ext: '.tpl.html'}
         ]
       },
       deploy: {
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
       },
       ui: {
         files: [
-          {cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/ui/'}
+          {cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/dev/ui/'},
         ],
         verbose: true
       }
