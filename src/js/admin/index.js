@@ -50,7 +50,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/communities',
     views: {
       main: {
-        templateUrl: '/ui/admin/communities.tpl.html',
+        templateUrl: '/admin/communities.tpl.html',
         controller: function($scope, Community) {
           Community.query().$promise.then(cs => $scope.communities = _.sortBy(cs, c => c.slug));
         }
@@ -67,7 +67,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     },
     views: {
       main: {
-        templateUrl: '/ui/admin/metrics.tpl.html',
+        templateUrl: '/admin/metrics.tpl.html',
         controller: function($scope, metrics) {
           $scope.metrics = metrics;
         }

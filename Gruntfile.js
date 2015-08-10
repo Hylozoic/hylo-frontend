@@ -126,6 +126,7 @@ module.exports = function(grunt) {
       ui: {
         files: [
           {cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/dev/ui/'},
+          {cwd: 'src/html/admin', src: ['**/*.html'], dest: 'dist/dev/admin/'}
         ],
         verbose: true
       }
@@ -134,12 +135,13 @@ module.exports = function(grunt) {
       deploy: {
         files: [
           {expand: true, cwd: 'src/img', src: ['**'], dest: 'dist/deploy/pages/img/'},
-          {expand: true, cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/deploy/ui/'}
+          {expand: true, cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/deploy/ui/'},
+          {expand: true, cwd: 'src/html/admin', src: ['**/*.html'], dest: 'dist/deploy/admin/'}
         ],
       }
     },
     ngtemplates: {
-      deploy: {
+      app: {
         cwd: 'dist/deploy/ui',
         src: '**/*.html',
         dest: 'dist/deploy/pages/bundle.js',
@@ -147,6 +149,16 @@ module.exports = function(grunt) {
           append: true,
           module: 'hyloApp',
           prefix: '/ui'
+        }
+      },
+      admin: {
+        cwd: 'dist/deploy',
+        src: 'admin/**/*.html',
+        dest: 'dist/deploy/pages/admin/bundle.js',
+        options: {
+          append: true,
+          module: 'hyloAdmin',
+          prefix: '/'
         }
       }
     },
