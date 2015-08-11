@@ -43,6 +43,10 @@ var directive = function($timeout) {
         masonry.layout();
       });
 
+      scope.$on('masonry.update', function() {
+        scope.update();
+      });
+
       masonry.on('layoutComplete', function() {
         elem.addClass('layout-complete');
         return true;

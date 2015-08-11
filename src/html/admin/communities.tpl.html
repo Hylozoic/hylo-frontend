@@ -1,11 +1,26 @@
-<div ng-if="communities" masonry='{"itemSelector": ".community-card", "percentPosition": true, "transitionDuration": 0}'>
+<div class="sort-controls">
+  Sort by
+  <label><input type="radio" ng-click="resort()" ng-model="sortKey" name="sortKey" value="name"> name</label>
+  <label><input type="radio" ng-click="resort()" ng-model="sortKey" name="sortKey" value="slug"> slug</label>
+  <label><input type="radio" ng-click="resort()" ng-model="sortKey" name="sortKey" value="id"> ID</label>
+  <label><input type="radio" ng-click="resort()" ng-model="sortKey" name="sortKey" value="created_at"> date created</label>
+  <label><input type="radio" ng-click="resort()" ng-model="sortKey" name="sortKey" value="memberships"> members</label>
+  <br>
+  Sort
+  <label><input type="radio" ng-click="resort()" ng-model="sortOrder" name="sortOrder" value="asc"> ascending</label>
+  <label><input type="radio" ng-click="resort()" ng-model="sortOrder" name="sortOrder" value="desc"> descending</label>
+</div>
+
+<div ng-if="communities.length" masonry='{"itemSelector": ".community-card", "percentPosition": true, "transitionDuration": 0}'>
   <div ng-repeat="community in communities" class="community-card">
     <img ng-src="{{community.avatar_url}}">
     <div class="text">
       <strong>{{community.name}}</strong><br>
       {{community.beta_access_code}}<br>
       <a href="/c/{{community.slug}}" target="_blank">{{community.slug}}</a><br>
-      ID: {{community.id}}
+      ID: {{community.id}}<br>
+      {{community.memberships}} <i class="icon-members-new"></i><br>
+      <span title="{{community.created_at}}">{{community.created_at | shortFromNow}} old</span>
     </div>
   </div>
 </div>

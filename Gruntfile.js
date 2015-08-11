@@ -179,7 +179,7 @@ module.exports = function(grunt) {
         tasks: ['ejs:pages']
       },
       ui: {
-        files: ['src/html/ui/**/*.html'],
+        files: ['src/html/ui/**/*.html', 'src/html/admin/**/*.html'],
         tasks: ['sync:ui']
       },
       uiEjs: {

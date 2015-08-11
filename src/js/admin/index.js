@@ -7,6 +7,7 @@ var app = angular.module('hyloAdmin', ['ngResource', 'ui.router']),
 require('../app/services/Community')(app);
 require('../app/services/Project')(app);
 require('../app/directives/masonry')(app);
+require('../app/filters')(app);
 
 app.factory('Admin', require('./services/Admin'));
 
@@ -52,7 +53,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
       main: {
         templateUrl: '/admin/communities.tpl.html',
         controller: function($scope, Community) {
-          Community.query().$promise.then(cs => $scope.communities = _.sortBy(cs, c => c.slug));
+          $scope.communities;
+          $scope.sortKey = 'name';
+          $scope.sortOrder = 'asc';
+
+          Community.query().$promise.then(cs => {
+            $scope.communities = cs;
+            $scope.resort();
+          });
+
+          $scope.resort = function() {
+            $scope.communities = _.sortByOrder($scope.communities, [$scope.sortKey], [$scope.sortOrder]);
+            $scope.$broadcast('masonry.update');
+          };
         }
       }
     }

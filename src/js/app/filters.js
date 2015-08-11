@@ -22,5 +22,10 @@ module.exports = function(angularModule) {
     return function(dateStr) {
       return prettydate.format(new Date(dateStr));
     }
+  })
+  .filter('shortFromNow', function() {
+    return function(dateStr) {
+      return prettydate.format(new Date(dateStr)).replace(' ago', '');
+    }
   });
 };
