@@ -15,12 +15,12 @@
       <div class="text">
         <span ng-show="isSelf">You</span>
         <strong ng-hide="isSelf">
-          <a ui-sref="profile.about({id: user.id})">{{user.name}}</a>
+          <a class="name" ui-sref="profile.about({id: user.id})">{{user.name}}</a>
         </strong>
         joined
         <span class="community-name">{{post.community.name}}</span>
         {{post.created_at | fromNow}}.
-        <span ng-hide="isSelf">Say hello!</span>
+        <span ng-hide="isSelf"><a ng-click="showComments = !showComments">Say hello!</a></span>
       </div>
     </div>
   </div>
