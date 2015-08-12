@@ -141,6 +141,12 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
     }
   };
 
+  $scope.complain = function() {
+    Post.complain({id: post.id}, function() {
+      growl.addSuccessMessage('Thank you for reporting this. Moderators will address it within 24 hours.');
+    });
+  };
+
   var setText = function(fullLength) {
     var text = post.description;
     if (!text) text = "";

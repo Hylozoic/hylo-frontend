@@ -53,6 +53,10 @@ var factory = function($resource) {
     saveInProject: {
       url: '/noo/project/:projectId/posts',
       method: 'POST'
+    },
+    complain: {
+      method: 'POST',
+      url: '/noo/post/:id/complain'
     }
   });
 
@@ -72,6 +76,9 @@ var factory = function($resource) {
     },
     unfollow: function(params, success, error) {
       return Post.unfollow(_.extend({id: this.id}, params), success, error);
+    },
+    complain: function(params, success, error) {
+      return Post.complain(_.extend({id: this.id}, params), success, error);
     }
   });
 

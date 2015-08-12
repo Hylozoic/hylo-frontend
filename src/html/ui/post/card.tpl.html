@@ -6,14 +6,17 @@
   </a>
 
   <div class="post-container">
-    <span class="post-options dropdown" dropdown ng-show="canEdit">
+    <span class="post-options dropdown" dropdown>
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
-        <li>
-          <a class="post-option" ui-sref="community.editPost({community: post.community.slug, postId: post.id})">Edit</a>
+        <li ng-show="canEdit">
+          <a ui-sref="community.editPost({community: post.community.slug, postId: post.id})">Edit</a>
+        </li>
+        <li ng-show="canEdit">
+          <a ng-click="delete()">Delete</a>
         </li>
         <li>
-          <a class="post-option" ng-click="delete()">Delete</a>
+          <a ng-click="complain()">Report objectionable content</a>
         </li>
       </ul>
     </span>
