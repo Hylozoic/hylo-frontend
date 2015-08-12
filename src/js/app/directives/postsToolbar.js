@@ -37,6 +37,8 @@ var directive = function() {
         $scope.update({data: $scope.selected});
       };
 
+      $scope.update({data: $scope.selected});
+
     },
     templateUrl: '/ui/post/toolbar.tpl.html',
     replace: true
