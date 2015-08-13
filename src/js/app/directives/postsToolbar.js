@@ -2,8 +2,11 @@ var directive = function() {
   return {
     restrict: 'E',
     scope: {
-      community: '=',
-      update: '&'
+      update: '&',
+      hidePostButton: '@'
+    },
+    link: function(scope, element, attrs) {
+      scope.hidePostButton = attrs.hidePostButton;
     },
     controller: function($scope, CurrentUser) {
       $scope.currentUser = CurrentUser.get();

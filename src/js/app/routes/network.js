@@ -41,12 +41,20 @@ module.exports = function($stateProvider) {
               return Post.queryForNetwork({
                 id: network.id,
                 limit: 10,
-                offset: $scope.posts.length
+                offset: $scope.posts.length,
+                type: $scope.selected.filter.value,
+                sort: $scope.selected.sort.value
               }).$promise;
             }
           });
 
           postManager.setup();
+
+          $scope.updateView = function(data) {
+            $scope.selected = data;
+            postManager.reload();
+          };
+
         }
       }
     }
