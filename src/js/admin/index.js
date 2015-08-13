@@ -15,15 +15,19 @@ app.directive('chart', function() {
   return {
     restrict: 'E',
     scope: {
-      data: '='
+      data: '=',
+      setup: '='
     },
     replace: true,
     template: '<div><svg></svg></div>',
     link: function(scope, element, attrs) {
       element.addClass('chart');
+
       Chart.render({
         data: scope.data,
-        to: element.find('svg')[0]
+        to: element.find('svg')[0],
+        type: attrs.type || 'bar',
+        setup: scope.setup
       });
     }
   };
@@ -53,7 +57,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       main: {
         templateUrl: '/admin/communities.tpl.html',
         controller: function($scope, Community) {
-          $scope.communities;
           $scope.sortKey = 'name';
           $scope.sortOrder = 'asc';
 
@@ -83,6 +86,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: '/admin/metrics.tpl.html',
         controller: function($scope, metrics) {
           $scope.metrics = metrics;
+
+          $scope.setupNewUserActivity = function(chart) {
+            chart.yDomain([0, 1]);
+          };
         }
       }
     }
