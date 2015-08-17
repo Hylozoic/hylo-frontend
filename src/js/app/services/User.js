@@ -40,6 +40,9 @@ var factory = function($resource, $state, Project, $timeout, $q) {
       params: {
         type: 'people'
       }
+    },
+    queryForNetwork: {
+      url: '/noo/network/:id/members'
     }
   });
 

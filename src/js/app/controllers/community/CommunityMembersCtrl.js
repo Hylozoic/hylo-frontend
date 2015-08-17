@@ -7,10 +7,7 @@ var controller = function($scope, community, usersQuery, $dialog, Cache, current
     $scope.loadMoreDisabled = true;
 
     community.members({offset: $scope.users.length}, function(resp) {
-      $scope.users = _.uniq(
-        $scope.users.concat(resp.people),
-        function(user) { return user.id }
-      );
+      $scope.users = _.uniq($scope.users.concat(resp.people), u => u.id);
 
       Cache.set('community.members:' + community.id, {
         people: $scope.users,
@@ -41,4 +38,4 @@ var controller = function($scope, community, usersQuery, $dialog, Cache, current
 
 module.exports = function(angularModule) {
   angularModule.controller('CommunityMembersCtrl', controller);
-}
+};

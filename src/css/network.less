@@ -1,29 +1,38 @@
-.centered-column() {
-  .make-sm-column(8);
-  .make-sm-column-offset(2);
-  .make-md-column(6);
-  .make-md-column-offset(3);
+.centered-column(@size) {
+  .make-sm-column(@size + 2);
+  .make-md-column-offset((10-@size)/2);
+  .make-md-column(@size);
+  .make-md-column-offset((12-@size)/2);
+
+  @media (max-width: @screen-xs-max) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 body.network {
   .has-banner;
+
+  .tabs a[ui-sref="network.members"] {
+    text-align: right;
+  }
 }
 
 body.network-posts {
   .posts {
-    .centered-column;
+    .centered-column(6);
   }
 }
 
 body.network-communities {
 
   .tab-content .communities {
-    .centered-column;
+    .centered-column(10);
     padding-top: @std-padding*2;
   }
 
   .community-card-wrapper {
-    .make-sm-column(6);
+    .make-sm-column(4);
   }
 
   .community-card {
@@ -61,6 +70,17 @@ body.network-communities {
 
     .name {
       .small-header;
+    }
+  }
+}
+
+body.network-members {
+  .tab-content {
+    .centered-column(6);
+    padding-top: @std-padding*2;
+    @media (max-width: @screen-xs-max) {
+      padding-left: @std-padding;
+      padding-right: @std-padding;
     }
   }
 }
