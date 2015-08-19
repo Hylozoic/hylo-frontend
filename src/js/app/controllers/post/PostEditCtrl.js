@@ -10,10 +10,15 @@ var hasLocalStorage = function () {
 
 var controller = function ($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
+
   $scope.updatePostDraftStorage = _.debounce(function () {
     if (!hasLocalStorage()) return
     window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
   }, 200)
+
+  var clearPostDraftStorage = function () {
+    if (hasLocalStorage()) delete window.localStorage.postDraft
+  }
 
   $scope.maxTitleLength = 140
 
@@ -41,6 +46,7 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
 
   $scope.close = function () {
     $rootScope.postEditProgress = null
+    clearPostDraftStorage()
     if ($history.isEmpty()) {
       $state.go('community.posts', {community: community.slug})
     } else {
@@ -97,6 +103,7 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
         type: $scope.postType
       })
       clearCache()
+      clearPostDraftStorage()
       $state.go('post', {community: community.slug, postId: post.id})
       growl.addSuccessMessage('Post updated.')
     }, function (err) {
@@ -112,7 +119,7 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
       clearCache()
       $scope.close()
       growl.addSuccessMessage('Post created!')
-      if (hasLocalStorage()) delete window.localStorage.postDraft
+      clearPostDraftStorage()
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
@@ -131,7 +138,8 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
       communityId: community.id,
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved
-    }($scope.editing ? update : create)(data)
+    }
+    return ($scope.editing ? update : create)(data)
   }
 
   $scope.searchPeople = function (query) {
