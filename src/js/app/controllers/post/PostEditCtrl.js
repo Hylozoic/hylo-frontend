@@ -1,131 +1,128 @@
-var filepickerUpload = require('../../services/filepickerUpload');
+var filepickerUpload = require('../../services/filepickerUpload')
 
-var hasLocalStorage = function() {
+var hasLocalStorage = function () {
   try {
-    return 'localStorage' in window && window.localStorage !== null;
+    return 'localStorage' in window && window.localStorage !== null
   } catch (e) {
-    return false;
+    return false
   }
-};
+}
 
-var controller = function($scope, currentUser, community, Post, growl, $analytics, $history,
+var controller = function ($scope, currentUser, community, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
+  $scope.updatePostDraftStorage = _.debounce(function () {
+    if (!hasLocalStorage()) return
+    window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
+  }, 200)
 
-  $scope.updatePostDraftStorage = _.debounce(function() {
-    if (!hasLocalStorage()) return;
-    localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'));
-  }, 200);
-
-  $scope.maxTitleLength = 140;
+  $scope.maxTitleLength = 140
 
   var prefixes = {
     intention: "I'd like to create ",
     offer: "I'd like to share ",
     request: "I'm looking for ",
     chat: ''
-  };
+  }
 
   // TODO get multiple placeholders to work
   var placeholders = {
-    intention: "Add more detail about this intention. What help do you need to make it happen?",
+    intention: 'Add more detail about this intention. What help do you need to make it happen?',
     offer: 'Add more detail about this offer. Is it in limited supply? Do you wish to be compensated?',
     request: 'Add more detail about what you need. Is it urgent? What can you offer in exchange?',
     chat: ''
-  };
+  }
 
-  $scope.switchPostType = function(postType) {
-  	$scope.postType = postType;
-    $scope.title = prefixes[postType];
-    $scope.descriptionPlaceholder = placeholders[postType];
-    $scope.updatePostDraftStorage();
-  };
+  $scope.switchPostType = function (postType) {
+    $scope.postType = postType
+    $scope.title = prefixes[postType]
+    $scope.descriptionPlaceholder = placeholders[postType]
+    $scope.updatePostDraftStorage()
+  }
 
-  $scope.close = function() {
-    $rootScope.postEditProgress = null;
+  $scope.close = function () {
+    $rootScope.postEditProgress = null
     if ($history.isEmpty()) {
-      $state.go('community.posts', {community: community.slug});
+      $state.go('community.posts', {community: community.slug})
     } else {
-      $history.go(-1);
+      $history.go(-1)
     }
-  };
+  }
 
-  $scope.addImage = function() {
-    $scope.addingImage = true;
+  $scope.addImage = function () {
+    $scope.addingImage = true
 
-    function finish() {
-      $scope.addingImage = false;
-      $scope.$apply();
+    function finish () {
+      $scope.addingImage = false
+      $scope.$apply()
     }
 
     filepickerUpload({
       path: format('user/%s/seeds', currentUser.id),
-      convert: {width: 800, format: 'jpg', fit: 'max', rotate: "exif"},
-      success: function(url) {
-        $scope.imageUrl = url;
-        $scope.imageRemoved = false;
-        finish();
+      convert: {width: 800, format: 'jpg', fit: 'max', rotate: 'exif'},
+      success: function (url) {
+        $scope.imageUrl = url
+        $scope.imageRemoved = false
+        finish()
       },
-      failure: function(err) {
-        finish();
-      }
-    });
-  };
+      failure: () => finish()
+    })
+  }
 
-  $scope.removeImage = function() {
-    delete $scope.imageUrl;
-    $scope.imageRemoved = true;
-  };
+  $scope.removeImage = function () {
+    delete $scope.imageUrl
+    $scope.imageRemoved = true
+  }
 
-  var validate = function() {
-    var invalidTitle = _.contains(_.values(prefixes), $scope.title.trim());
+  var validate = function () {
+    var invalidTitle = _.contains(_.values(prefixes), $scope.title.trim())
 
     // TODO show errors in UI
-    if (invalidTitle) alert('Please fill in a title');
+    if (invalidTitle) window.alert('Please fill in a title')
 
-    return !invalidTitle;
-  };
+    return !invalidTitle
+  }
 
-  var clearCache = function() {
-    Cache.drop('community.posts:' + community.id);
-    UserCache.posts.clear(currentUser.id);
-    UserCache.allPosts.clear(currentUser.id);
-  };
+  var clearCache = function () {
+    Cache.drop('community.posts:' + community.id)
+    UserCache.posts.clear(currentUser.id)
+    UserCache.allPosts.clear(currentUser.id)
+  }
 
-  var update = function(data) {
-    post.update(data, function() {
+  var update = function (data) {
+    post.update(data, function () {
       $analytics.eventTrack('Edit Post', {
         has_mention: $scope.hasMention,
         community_name: community.name,
         community_id: community.id,
         type: $scope.postType
-      });
-      clearCache();
-      $state.go('post', {community: community.slug, postId: post.id});
-      growl.addSuccessMessage('Post updated.');
-    }, function(err) {
-      $scope.saving = false;
-      growl.addErrorMessage(err.data);
-      $analytics.eventTrack('Edit Post Failed');
-    });
-  };
+      })
+      clearCache()
+      $state.go('post', {community: community.slug, postId: post.id})
+      growl.addSuccessMessage('Post updated.')
+    }, function (err) {
+      $scope.saving = false
+      growl.addErrorMessage(err.data)
+      $analytics.eventTrack('Edit Post Failed')
+    })
+  }
 
-  var create = function(data) {
-    new Post(data).$save(function() {
-      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id});
-      clearCache();
-      $scope.close();
-      growl.addSuccessMessage('Post created!');
-      if (hasLocalStorage()) delete localStorage.postDraft;
-    }, function(err) {
-      $scope.saving = false;
-      growl.addErrorMessage(err.data);
-      $analytics.eventTrack('Add Post Failed');
-    });
-  };
+  var create = function (data) {
+    new Post(data).$save(function () {
+      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id})
+      clearCache()
+      $scope.close()
+      growl.addSuccessMessage('Post created!')
+      if (hasLocalStorage()) delete window.localStorage.postDraft
+    }, function (err) {
+      $scope.saving = false
+      growl.addErrorMessage(err.data)
+      $analytics.eventTrack('Add Post Failed')
+    })
+  }
 
-  $scope.save = function() {
-    if (!validate()) return;
-    $scope.saving = true;
+  $scope.save = function () {
+    if (!validate()) return
+    $scope.saving = true
 
     var data = {
       name: $scope.title,
@@ -134,60 +131,56 @@ var controller = function($scope, currentUser, community, Post, growl, $analytic
       communityId: community.id,
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved
-    };
-    ($scope.editing ? update : create)(data);
-  };
+    }($scope.editing ? update : create)(data)
+  }
 
-  $scope.searchPeople = function(query) {
-    UserMentions.searchPeople(query, 'community', community.id).$promise.then(function(items) {
-      $scope.people = items;
-    });
-  };
+  $scope.searchPeople = function (query) {
+    UserMentions.searchPeople(query, 'community', community.id).$promise.then(function (items) {
+      $scope.people = items
+    })
+  }
 
-  $scope.getPeopleTextRaw = function(user) {
-    $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name});
-    $scope.hasMention = true;
-    return UserMentions.userTextRaw(user);
-  };
+  $scope.getPeopleTextRaw = function (user) {
+    $analytics.eventTrack('Post: Add New: @-mention: Lookup', {query: user.name})
+    $scope.hasMention = true
+    return UserMentions.userTextRaw(user)
+  }
 
   if (post) {
-    $scope.editing = true;
-    $scope.switchPostType(post.type);
-    $scope.title = post.name;
+    $scope.editing = true
+    $scope.switchPostType(post.type)
+    $scope.title = post.name
     if (post.media[0]) {
-      $scope.imageUrl = post.media[0].url;
+      $scope.imageUrl = post.media[0].url
     }
 
     if (post.description.substring(0, 3) === '<p>') {
-      $scope.description = post.description;
+      $scope.description = post.description
     } else {
-      $scope.description = format('<p>%s</p>', post.description);
+      $scope.description = format('<p>%s</p>', post.description)
     }
-  } else if (hasLocalStorage() && localStorage.postDraft) {
+  } else if (hasLocalStorage() && window.localStorage.postDraft) {
     try {
-      _.merge($scope, JSON.parse(localStorage.postDraft));
+      _.merge($scope, JSON.parse(window.localStorage.postDraft))
     } catch(e) {}
   } else {
-    $scope.switchPostType('chat');
+    $scope.switchPostType('chat')
   }
 
   if (!community) {
-    $scope.shouldPickCommunity = true;
-    $scope.communityOptions = _.map(currentUser.memberships, function(membership) {
-      return membership.community;
-    });
-    community = $scope.community = $scope.communityOptions[0];
+    $scope.shouldPickCommunity = true
+    $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
+      return membership.community
+    })
+    community = $scope.community = $scope.communityOptions[0]
 
-    $scope.pickCommunity = function(id) {
-      community = $scope.community = _.find($scope.communityOptions, function(x) {
-        return x.id == id;
-      });
-    };
+    $scope.pickCommunity = function (id) {
+      community = $scope.community = _.find($scope.communityOptions, x => x.id === id)
+    }
   }
 
+}
 
-};
-
-module.exports = function(angularModule) {
-  angularModule.controller('PostEditCtrl', controller);
-};
+module.exports = function (angularModule) {
+  angularModule.controller('PostEditCtrl', controller)
+}
