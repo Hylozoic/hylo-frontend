@@ -2,6 +2,7 @@ var directive = function() {
   return {
     restrict: 'E',
     scope: {
+      community: '=',
       update: '&',
       hidePostButton: '@'
     },
