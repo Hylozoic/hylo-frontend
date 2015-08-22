@@ -1,151 +1,150 @@
-var RichText = require('../../services/RichText'),
-  truncate = require('html-truncate');
+var RichText = require('../../services/RichText')
+var truncate = require('html-truncate')
 
-module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache, CurrentUser) {
-  'ngInject';
+module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache, CurrentUser) {
+  'ngInject'
 
-  $scope.singlePost = $state.current.data && $state.current.data.singlePost;
-  $scope.isCommentsCollapsed = !$scope.singlePost;
-  $scope.voteTooltipText = "";
-  $scope.followersNotMe = [];
-  $scope.followersToAdd = []; // builds an array of followers to add after hitting the "complete" button
-  $scope.isFollowing = false;
-  $scope.joinPostText = "";
-  $scope.onlyAuthorFollowing = false;
+  $scope.singlePost = $state.current.data && $state.current.data.singlePost
+  $scope.isCommentsCollapsed = !$scope.singlePost
+  $scope.voteTooltipText = ''
+  $scope.followersNotMe = []
+  $scope.isFollowing = false
+  $scope.joinPostText = ''
+  $scope.onlyAuthorFollowing = false
 
-  var currentUser = CurrentUser.get(),
-    voteText = "click to <i class='icon-following'></i> me.",
-    unvoteText = "click to un-<i class='icon-following'></i> me.",
-    post = $scope.post;
+  var currentUser = CurrentUser.get()
+  var voteText = "click to <i class='icon-following'></i> me."
+  var unvoteText = "click to un-<i class='icon-following'></i> me."
+  var post = $scope.post
 
-  $scope.community = Post.relevantCommunity(post, currentUser);
+  $scope.community = Post.relevantCommunity(post, currentUser)
 
-  $scope.isPostOwner = function() {
-    return CurrentUser.is(post.user && post.user.id);
-  };
+  $scope.isPostOwner = function () {
+    return CurrentUser.is(post.user && post.user.id)
+  }
 
-  $scope.markFulfilled = function() {
+  $scope.markFulfilled = function () {
     var modalInstance = $modal.open({
       templateUrl: '/ui/app/fulfillModal.tpl.html',
-      controller: "FulfillmentCtrl",
+      controller: 'FulfillmentCtrl',
       keyboard: false,
       backdrop: 'static',
       scope: $scope
-    });
+    })
 
-    modalInstance.result.then(() => $analytics.eventTrack('Post: Fulfill', {post_id: post.id}));
-  };
+    modalInstance.result.then(() => $analytics.eventTrack('Post: Fulfill', {post_id: post.id}))
+  }
 
-  //Voting is the same thing as "liking"
-  $scope.vote = function() {
-    post.myVote = !post.myVote;
-    post.votes += (post.myVote ? 1 : -1);
-    $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
+  // Voting is the same thing as "liking"
+  $scope.vote = function () {
+    post.myVote = !post.myVote
+    post.votes += (post.myVote ? 1 : -1)
+    $scope.voteTooltipText = post.myVote ? unvoteText : voteText
 
-    Post.vote({id: post.id}, function() {
+    Post.vote({id: post.id}, function () {
       $analytics.eventTrack('Post: Like', {
         post_id: post.id,
         state: (post.myVote ? 'on' : 'off')
-      });
-    }, function(resp) {
+      })
+    }, function (resp) {
       if (_.contains([401, 403], resp.status)) {
-        $scope.$emit('unauthorized', {context: 'like'});
+        $scope.$emit('unauthorized', {context: 'like'})
       }
-    });
-  };
+    })
+  }
 
-  $scope.toggleComments = function() {
+  $scope.toggleComments = function () {
     if ($scope.isCommentsCollapsed) {
-      $analytics.eventTrack('Post: Comments: Show', {post_id: post.id});
+      $analytics.eventTrack('Post: Comments: Show', {post_id: post.id})
     }
-    $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-  };
+    $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed
+  }
 
-  $scope.toggleFollow = function() {
-    var user = currentUser;
-    if (!user) return;
+  $scope.toggleFollow = function () {
+    var user = currentUser
+    if (!user) return
 
     if (!$scope.isFollowing) {
-      $analytics.eventTrack('Post: Join', {post_id: post.id});
+      $analytics.eventTrack('Post: Join', {post_id: post.id})
       post.followers.push({
         id: user.id,
         name: user.name,
         avatar_url: user.avatar
-      });
-      Post.follow({id: post.id});
-      UserCache.followedPosts.clear(user.id);
+      })
+      Post.follow({id: post.id})
+      UserCache.followedPosts.clear(user.id)
     } else {
-      $analytics.eventTrack('Post: Leave', {post_id: post.id});
-      post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}));
-      Post.follow({id: post.id});
-      UserCache.followedPosts.remove(user.id, post.id);
+      $analytics.eventTrack('Post: Leave', {post_id: post.id})
+      post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}))
+      Post.follow({id: post.id})
+      UserCache.followedPosts.remove(user.id, post.id)
     }
-  };
+  }
 
-  $scope['delete'] = function() {
+  $scope['delete'] = function () {
     $dialog.confirm({
       message: 'Are you sure you want to remove "' + post.name + '"? This cannot be undone.'
-    }).then(function() {
-      $scope.removeFn({postToRemove: post});
-      new Post(post).$remove({});
-    });
-  };
+    }).then(function () {
+      $scope.removeFn({postToRemove: post})
+      new Post(post).$remove({})
+    })
+  }
 
-  $scope.showMore = function() {
-    setText(true);
-  };
+  $scope.showMore = function () {
+    setText(true)
+  }
 
-  $scope.openFollowers = function(isOpen) {
+  $scope.openFollowers = function (isOpen) {
     if (isOpen) {
-      $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length});
+      $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length})
     }
-  };
+  }
 
-  $scope.complain = function() {
-    Post.complain({id: post.id}, function() {
-      growl.addSuccessMessage('Thank you for reporting this. Moderators will address it within 24 hours.');
-    });
-  };
+  $scope.complain = function () {
+    Post.complain({id: post.id}, function () {
+      growl.addSuccessMessage('Thank you for reporting this. Moderators will address it within 24 hours.')
+    })
+  }
 
-  var setText = function(fullLength) {
-    var text = post.description;
-    if (!text) text = "";
+  var setText = function (fullLength) {
+    var text = post.description
+    if (!text) text = ''
 
-    text = RichText.present(text);
+    text = RichText.present(text)
 
     if (!fullLength && angular.element(text).text().trim().length > 140) {
-      text = truncate(text, 140);
-      $scope.truncated = true;
+      text = truncate(text, 140)
+      $scope.truncated = true
     } else {
-      $scope.truncated = false;
+      $scope.truncated = false
     }
 
-    $scope.description = text;
-    $scope.hasDescription = angular.element(text).text().trim().length > 0;
-  };
+    $scope.description = text
+    $scope.hasDescription = angular.element(text).text().trim().length > 0
+  }
 
-  $scope.$watchCollection("post.followers", function() {
-    var meInFollowers = (currentUser && _.findWhere(post.followers, {id: currentUser.id}));
+  $scope.$watchCollection('post.followers', function () {
+    var meInFollowers = (currentUser && _.findWhere(post.followers, {id: currentUser.id}))
 
     if (meInFollowers) {
-      $scope.followersNotMe = _.without(post.followers, meInFollowers);
-      $scope.isFollowing = true;
+      $scope.followersNotMe = _.without(post.followers, meInFollowers)
+      $scope.isFollowing = true
     } else {
-      $scope.followersNotMe = post.followers;
-      $scope.isFollowing = false;
+      $scope.followersNotMe = post.followers
+      $scope.isFollowing = false
     }
 
-    //If the only person following the post is the author we can hide the following status in the post
-    var firstFollower = _.first(post.followers);
-    $scope.onlyAuthorFollowing = (post.followers.length == 1 && firstFollower.name === post.user.name);
-  });
+    // If the only person following the post is the author we can hide the following status in the post
+    var firstFollower = _.first(post.followers)
+    $scope.onlyAuthorFollowing = (post.followers.length === 1 && firstFollower.name === post.user.name)
+  })
 
-  $scope.canEdit = currentUser && (post.user.id == currentUser.id || currentUser.canModerate(post.communities[0]));
-  $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
-  setText($scope.startExpanded);
+  $scope.canEdit = currentUser && (post.user.id === currentUser.id || currentUser.canModerate(post.communities[0]))
+  $scope.voteTooltipText = post.myVote ? unvoteText : voteText
+  setText($scope.startExpanded)
 
-  var now = new Date();
-  $scope.showUpdateTime = (now - new Date(post.updated_at)) < (now - new Date(post.created_at)) * 0.8;
+  var now = new Date()
+  $scope.showUpdateTime = (now - new Date(post.updated_at)) < (now - new Date(post.created_at)) * 0.8
 
-  $scope.truncate = truncate;
-};
+  $scope.truncate = truncate
+}
