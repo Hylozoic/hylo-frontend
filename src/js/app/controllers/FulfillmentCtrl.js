@@ -12,7 +12,7 @@ var controller = function($scope, $modalInstance, Post, User) {
   };
 
   $scope.findMembers = function(search) {
-    return User.autocomplete({q: search, communityId: post.community.id}).$promise;
+    return User.autocomplete({q: search}).$promise;
   };
 
 };
