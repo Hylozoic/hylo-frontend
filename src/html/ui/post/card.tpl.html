@@ -10,7 +10,7 @@
       <a class="dropdown-toggle" dropdown-toggle><i class="icon-down" title="icon-down-new"></i></a>
       <ul class="dropdown-menu">
         <li ng-show="canEdit">
-          <a ui-sref="community.editPost({community: post.community.slug, postId: post.id})">Edit</a>
+          <a ui-sref="editPost({postId: post.id})">Edit</a>
         </li>
         <li ng-show="canEdit">
           <a ng-click="delete()">Delete</a>

@@ -164,37 +164,6 @@ module.exports = function ($stateProvider) {
       communities: community => [community]
     }
   })
-  .state('community.editPost', {
-    url: '/s/:postId/edit',
-    views: {
-      community: {
-        templateUrl: '/ui/post/edit.tpl.html',
-        controller: 'PostEditCtrl'
-      }
-    },
-    resolve: /* @ngInject*/ {
-      post: function (Post, $stateParams) {
-        return Post.get({id: $stateParams.postId}).$promise
-      },
-      communities: post => post.communities
-    }
-  })
-  .state('post', {
-    url: '/s/:postId?action',
-    parent: 'community',
-    views: {
-      community: {
-        templateUrl: '/ui/post/show.tpl.html',
-        controller: 'PostCtrl'
-      }
-    },
-    resolve: {
-      post: /* @ngInject*/ function (Post, $stateParams) {
-        return Post.get({id: $stateParams.postId}).$promise
-      }
-    },
-    data: {
-      singlePost: true
-    }
-  })
+  
+
 }

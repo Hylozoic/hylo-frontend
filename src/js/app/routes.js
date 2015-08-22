@@ -7,7 +7,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   })
 
   // handle old links
-  $urlRouterProvider.when('/c/:community/s/:postId/comments', '/c/:community/s/:postId')
+  $urlRouterProvider.when('/c/:community/s/:postId', '/p/:postId')
   $urlRouterProvider.when('/community/invite/:token', '/use-invitation?token')
   $urlRouterProvider.when('/h/login', '/login')
   $urlRouterProvider.when('/h/signup', '/signup')
@@ -104,6 +104,40 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     resolve: {
       post: () => null,
       communities: () => []
+    }
+  })
+  .state('post', {
+    url: '/p/:postId?action',
+    parent: 'main',
+    views: {
+      main: {
+        templateUrl: '/ui/post/show.tpl.html',
+        controller: 'PostCtrl'
+      }
+    },
+    resolve: {
+      post: /* @ngInject*/ function (Post, $stateParams) {
+        return Post.get({id: $stateParams.postId}).$promise
+      }
+    },
+    data: {
+      singlePost: true
+    }
+  })
+  .state('editPost', {
+    url: '/p/:postId/edit',
+    parent: 'main',
+    views: {
+      main: {
+        templateUrl: '/ui/post/edit.tpl.html',
+        controller: 'PostEditCtrl'
+      }
+    },
+    resolve: /* @ngInject*/ {
+      post: function (Post, $stateParams) {
+        return Post.get({id: $stateParams.postId}).$promise
+      },
+      communities: post => post.communities
     }
   })
 
