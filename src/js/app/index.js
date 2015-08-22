@@ -18,7 +18,7 @@ var dependencies = [
   'ngResource',
   'ngSanitize',
   'ngTagsInput',
-  'ngTouch',
+  // 'ngTouch',
   'ui.bootstrap',
   'ui.router'
 ]
