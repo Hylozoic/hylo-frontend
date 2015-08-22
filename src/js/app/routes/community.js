@@ -7,11 +7,11 @@ module.exports = function ($stateProvider) {
     views: {
       main: {
         template: "<div ui-view='community'></div>"
-      },
+      }
     },
-    resolve: /*@ngInject*/ {
-      community: function(Community, $stateParams, $rootScope) {
-        return Community.get({id: $stateParams.community}).$promise;
+    resolve: /* @ngInject*/ {
+      community: function (Community, $stateParams, $rootScope) {
+        return Community.get({id: $stateParams.community}).$promise
       }
     }
   })
@@ -34,29 +34,29 @@ module.exports = function ($stateProvider) {
         controller: 'CommunityPostsCtrl'
       }
     },
-    resolve: /*@ngInject*/ {
-      firstPostQuery: function(community, Post, Cache) {
-        var key = 'community.posts:' + community.id,
-          cached = Cache.get(key);
+    resolve: /* @ngInject*/ {
+      firstPostQuery: function (community, Post, Cache) {
+        var key = 'community.posts:' + community.id
+        var cached = Cache.get(key)
 
         if (cached) {
-          return cached;
+          return cached
         } else {
           return Post.queryForCommunity({
             communityId: community.id,
             limit: 10,
             type: 'all+welcome'
-          }).$promise.then(function(resp) {
-            Cache.set(key, resp, {maxAge: 10 * 60});
-            return resp;
-          });
+          }).$promise.then(function (resp) {
+            Cache.set(key, resp, {maxAge: 10 * 60})
+            return resp
+          })
         }
       },
-      showModal: function(onboarding) {
+      showModal: function (onboarding) {
         // hack -- this is only here so it shows before the controller's other content appears
-        if (onboarding && onboarding.currentStep() === 'community')
-          onboarding.showCommunityModal();
-
+        if (onboarding && onboarding.currentStep() === 'community') {
+          onboarding.showCommunityModal()
+        }
       }
     }
   })
@@ -66,7 +66,7 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/community/about.tpl.html',
-        controller: function() {}
+        controller: function () {}
       }
     }
   })
@@ -79,18 +79,18 @@ module.exports = function ($stateProvider) {
         controller: 'CommunityMembersCtrl'
       }
     },
-    resolve: /*@ngInject*/ {
-      usersQuery: function(community, Cache) {
-        var key = 'community.members:' + community.id,
-          cached = Cache.get(key);
+    resolve: /* @ngInject*/ {
+      usersQuery: function (community, Cache) {
+        var key = 'community.members:' + community.id
+        var cached = Cache.get(key)
 
         if (cached) {
-          return cached;
+          return cached
         } else {
-          return community.members().$promise.then(function(resp) {
-            Cache.set(key, resp, {maxAge: 10 * 60});
-            return resp;
-          });
+          return community.members().$promise.then(function (resp) {
+            Cache.set(key, resp, {maxAge: 10 * 60})
+            return resp
+          })
         }
       }
     }
@@ -99,16 +99,16 @@ module.exports = function ($stateProvider) {
     url: '/projects',
     parent: 'community.home',
     resolve: {
-      projects: /*@ngInject*/ function(community) {
-        return community.projects().$promise;
+      projects: /* @ngInject*/ function (community) {
+        return community.projects().$promise
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/community/projects.tpl.html',
-        controller: function($scope, projects) {
-          'ngInject';
-          $scope.projects = projects;
+        controller: function ($scope, projects) {
+          'ngInject'
+          $scope.projects = projects
         }
       }
     }
@@ -117,12 +117,12 @@ module.exports = function ($stateProvider) {
     url: '/h/new-community',
     parent: 'main',
     resolve: {
-      requireLogin: /*@ngInject*/ function(User, currentUser) {
-        return User.requireLogin(currentUser);
+      requireLogin: /* @ngInject*/ function (User, currentUser) {
+        return User.requireLogin(currentUser)
       }
     },
     views: {
-      "main": {
+      'main': {
         templateUrl: '/ui/community/create.tpl.html',
         controller: 'NewCommunityCtrl'
       }
@@ -131,8 +131,8 @@ module.exports = function ($stateProvider) {
   .state('community.settings', {
     url: '/settings',
     resolve: {
-      extraProperties: /*@ngInject*/ function(community) {
-        return community.getSettings().$promise;
+      extraProperties: /* @ngInject*/ function (community) {
+        return community.getSettings().$promise
       }
     },
     views: {
@@ -160,7 +160,7 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      post: function() { return null; },
+      post: () => null,
       communities: community => [community]
     }
   })
@@ -172,9 +172,9 @@ module.exports = function ($stateProvider) {
         controller: 'PostEditCtrl'
       }
     },
-    resolve: /*@ngInject*/ {
+    resolve: /* @ngInject*/ {
       post: function (Post, $stateParams) {
-        return Post.get({id: $stateParams.postId}).$promise;
+        return Post.get({id: $stateParams.postId}).$promise
       },
       communities: post => post.communities
     }
@@ -189,12 +189,12 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      post: /*@ngInject*/ function(Post, $stateParams) {
-        return Post.get({id: $stateParams.postId}).$promise;
+      post: /* @ngInject*/ function (Post, $stateParams) {
+        return Post.get({id: $stateParams.postId}).$promise
       }
     },
     data: {
       singlePost: true
     }
-  });
-};
+  })
+}
