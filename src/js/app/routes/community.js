@@ -161,9 +161,11 @@ module.exports = function ($stateProvider) {
     },
     resolve: {
       post: () => null,
-      communities: community => [community]
+      communities: function (community) {
+        'ngInject'
+        return [community]
+      }
     }
   })
-  
 
 }
