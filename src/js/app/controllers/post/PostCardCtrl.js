@@ -9,7 +9,6 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
   $scope.voteTooltipText = "";
   $scope.followersNotMe = [];
   $scope.followersToAdd = []; // builds an array of followers to add after hitting the "complete" button
-  $scope.editingFollowers = false;
   $scope.isFollowing = false;
   $scope.joinPostText = "";
   $scope.onlyAuthorFollowing = false;
@@ -58,15 +57,8 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
   $scope.toggleComments = function() {
     if ($scope.isCommentsCollapsed) {
       $analytics.eventTrack('Post: Comments: Show', {post_id: post.id});
-      $scope.editingFollowers = false;
     }
     $scope.isCommentsCollapsed = !$scope.isCommentsCollapsed;
-  };
-
-  $scope.toggleFollowers = function() {
-    $analytics.eventTrack('Post: Followers: Show', {post_id: post.id});
-    $scope.isCommentsCollapsed = true;
-    $scope.toggleEditFollowers();
   };
 
   $scope.toggleFollow = function() {
@@ -88,40 +80,6 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
       Post.follow({id: post.id});
       UserCache.followedPosts.remove(user.id, post.id);
     }
-  };
-
-  $scope.toggleEditFollowers = function() {
-    $scope.editingFollowers = !$scope.editingFollowers;
-    if ($scope.editingFollowers) return;
-
-    // save new followers
-    Post.addFollowers({
-      id: post.id,
-      userIds: _.difference(
-        _.pluck($scope.followersToAdd, 'id'),
-        _.map(post.followers, u => u.id)
-      )
-    }, function() {
-      _.each($scope.followersToAdd, function(follower) {
-        if (!_.findWhere(post.followers, {id: follower.id})) {
-          post.followers.push(follower);
-        }
-      });
-      $analytics.eventTrack('Followers: Add Followers', {num_followers: $scope.followersToAdd.length});
-      $scope.followersToAdd = [];
-    }, function(err) {
-      growl.addErrorMessage(err.data);
-      $analytics.eventTrack('Followers: Failed to Add Followers');
-    });
-  };
-
-  $scope.findMembers = function(search) {
-    return User.autocomplete({communityId: post.community.id, q: search}).$promise
-    .catch(function(resp) {
-      if (_.contains([401, 403], resp.status)) {
-        $scope.$emit('unauthorized', {context: 'add-members'});
-      }
-    });
   };
 
   $scope['delete'] = function() {
