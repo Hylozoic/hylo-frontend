@@ -160,7 +160,8 @@ module.exports = function ($stateProvider) {
       }
     },
     resolve: {
-      post: function() { return null; }
+      post: function() { return null; },
+      communities: community => [community]
     }
   })
   .state('community.editPost', {
@@ -171,10 +172,11 @@ module.exports = function ($stateProvider) {
         controller: 'PostEditCtrl'
       }
     },
-    resolve: {
-      post: /*@ngInject*/ function(Post, $stateParams) {
+    resolve: /*@ngInject*/ {
+      post: function (Post, $stateParams) {
         return Post.get({id: $stateParams.postId}).$promise;
-      }
+      },
+      communities: post => post.communities
     }
   })
   .state('post', {

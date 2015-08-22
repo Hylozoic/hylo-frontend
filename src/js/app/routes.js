@@ -104,7 +104,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       },
       resolve: {
         post: function() { return null; },
-        community: function() { return null; }
+        communities: () => []
       }
     });
 

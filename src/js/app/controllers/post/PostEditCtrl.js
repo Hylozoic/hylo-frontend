@@ -8,7 +8,7 @@ var hasLocalStorage = function () {
   }
 }
 
-var controller = function ($scope, currentUser, community, Post, growl, $analytics, $history,
+var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache) {
 
   $scope.updatePostDraftStorage = _.debounce(function () {
@@ -48,7 +48,11 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
     $rootScope.postEditProgress = null
     clearPostDraftStorage()
     if ($history.isEmpty()) {
-      $state.go('community.posts', {community: community.slug})
+      if (_.isEmpty(communities)) {
+        $state.go('home.allPosts')
+      } else {
+        $state.go('community.posts', {community: communities[0].slug})
+      }
     } else {
       $history.go(-1)
     }
@@ -89,7 +93,7 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
   }
 
   var clearCache = function () {
-    Cache.drop('community.posts:' + community.id)
+    communities.forEach(c => Cache.drop('community.posts:' + c.id))
     UserCache.posts.clear(currentUser.id)
     UserCache.allPosts.clear(currentUser.id)
   }
@@ -98,13 +102,13 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
     post.update(data, function () {
       $analytics.eventTrack('Edit Post', {
         has_mention: $scope.hasMention,
-        community_name: community.name,
-        community_id: community.id,
+        community_name: communities[0].name,
+        community_id: communities[0].id,
         type: $scope.postType
       })
       clearCache()
       clearPostDraftStorage()
-      $state.go('post', {community: community.slug, postId: post.id})
+      $state.go('post', {postId: post.id})
       growl.addSuccessMessage('Post updated.')
     }, function (err) {
       $scope.saving = false
@@ -115,7 +119,11 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
 
   var create = function (data) {
     new Post(data).$save(function () {
-      $analytics.eventTrack('Add Post', {has_mention: $scope.hasMention, community_name: community.name, community_id: community.id})
+      $analytics.eventTrack('Add Post', {
+        has_mention: $scope.hasMention,
+        community_name: communities[0].name,
+        community_id: communities[0].id
+      })
       clearCache()
       $scope.close()
       growl.addSuccessMessage('Post created!')
@@ -135,7 +143,7 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
       name: $scope.title,
       description: $scope.description,
       type: $scope.postType,
-      communityId: community.id,
+      communities: communities.map(c => c.id),
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved
     }
@@ -175,17 +183,17 @@ var controller = function ($scope, currentUser, community, Post, growl, $analyti
     $scope.switchPostType('chat')
   }
 
-  if (!community) {
-    $scope.shouldPickCommunity = true
-    $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
-      return membership.community
-    })
-    community = $scope.community = $scope.communityOptions[0]
+  $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
+    return membership.community
+  })
 
-    $scope.pickCommunity = function (id) {
-      community = $scope.community = _.find($scope.communityOptions, x => x.id === id)
-    }
+  $scope.findCommunities = function (query) {
+    return _.filter($scope.communityOptions, c =>
+      _.any(c.name.split(' '), w =>
+        w.toLowerCase().startsWith(query.toLowerCase())))
   }
+
+  $scope.communities = communities
 
 }
 

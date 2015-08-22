@@ -62,23 +62,23 @@
         mentio-typed-term="typedTerm"
         ng-keypress="updatePostDraftStorage()">
       </div>
+    </div>
 
-      <div ng-if="shouldPickCommunity" class="community-picker">
-        <div class="title">Community</div>
-
-        <div class="btn-group" dropdown>
-          <a class="button" dropdown-toggle>
-            {{community.name}}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="option in communityOptions" ng-click="pickCommunity(option.id)">
-              {{option.name}}
-            </li>
-          </ul>
-        </div>
-
-      </div>
+    <div class="community-picker">
+      <div class="title">Communities</div>
+      <tags-input ng-model="communities"
+                  add-from-autocomplete-only="true"
+                  display-property="name"
+                  key-property="id"
+                  replace-spaces-with-dashes="false"
+                  placeholder="Search for communities by name"
+                  template="/ui/shared/ngTagsInput/tag-user.tpl.html">
+        <auto-complete source="findCommunities($query)"
+                       display-property="name"
+                       min-length="1"
+                       template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
+        </auto-complete>
+      </tags-input>
 
       <p class="help">This post will be visible only to other members of your community. You can edit or remove it at any time.</p>
       <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
