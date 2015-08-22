@@ -1,7 +1,7 @@
 require('angular-ui-router')
 require('angular-resource')
 
-var app = angular.module('hyloAdmin', ['ngResource', 'ui.router', 'ngTagsInput'])
+var app = angular.module('hyloAdmin', ['ngResource', 'ui.router'])
 var Chart = require('./services/Chart')
 
 require('../app/services/Community')(app)
