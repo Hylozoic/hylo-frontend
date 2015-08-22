@@ -1,7 +1,7 @@
 var striptags = require('striptags')
 var truncate = require('html-truncate')
 
-var controller = function ($scope, Post, growl, post, currentUser, $stateParams, Meta) {
+var controller = function ($scope, Post, growl, post, currentUser, $stateParams, Meta, $history) {
   $scope.post = post
 
   Meta.set({
@@ -15,7 +15,11 @@ var controller = function ($scope, Post, growl, post, currentUser, $stateParams,
 
   $scope.postdeleted = function (deletedPost) {
     growl.addSuccessMessage('Post has been removed: ' + deletedPost.name, {ttl: 5000})
-    $scope.$state.go('community.posts', {community: deletedPost.community.slug})
+    if ($history.isEmpty()) {
+      $scope.$state.go('community.posts', {community: deletedPost.communities[0].slug})
+    } else {
+      $history.go(-1);
+    }
   }
 
   if ($stateParams.action === 'unfollow') {

@@ -19,6 +19,8 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
     unvoteText = "click to un-<i class='icon-following'></i> me.",
     post = $scope.post;
 
+  $scope.community = Post.relevantCommunity(post, currentUser);
+
   $scope.isPostOwner = function() {
     return CurrentUser.is(post.user && post.user.id);
   };
@@ -180,7 +182,7 @@ module.exports = function($scope, $state, $rootScope, $modal, $dialog, $analytic
     $scope.onlyAuthorFollowing = (post.followers.length == 1 && firstFollower.name === post.user.name);
   });
 
-  $scope.canEdit = currentUser && (post.user.id == currentUser.id || currentUser.canModerate(post.community));
+  $scope.canEdit = currentUser && (post.user.id == currentUser.id || currentUser.canModerate(post.communities[0]));
   $scope.voteTooltipText = post.myVote ? unvoteText : voteText;
   setText($scope.startExpanded);
 

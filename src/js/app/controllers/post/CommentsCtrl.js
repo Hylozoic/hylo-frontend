@@ -21,7 +21,7 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   $scope.canDelete = function(comment) {
     if (!CurrentUser.isLoggedIn()) return false;
     if (CurrentUser.is(comment.user.id)) return true;
-    return CurrentUser.get().canModerate(post.community);
+    return CurrentUser.get().canModerate(post.communities[0]);
   };
 
   $scope.commentOwner = function(comment) {
@@ -90,7 +90,7 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
       id = $rootScope.userMentionContext.id;
     } else {
       context = 'community';
-      id = post.community.id;
+      id = post.communities[0].id;
     }
     UserMentions.searchPeople(query, context, id).$promise.then(function(items) {
       $scope.people = items;

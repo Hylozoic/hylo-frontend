@@ -1,13 +1,12 @@
-var factory = function($resource) {
-
-  var Post = $resource("/noo/post/:id/:action", {
+var factory = function ($resource) {
+  var Post = $resource('/noo/post/:id/:action', {
     id: '@id',
     projectId: '@projectId'
   }, {
     comment: {
-      method: "POST",
+      method: 'POST',
       params: {
-        action: "comment"
+        action: 'comment'
       }
     },
     addFollowers: {
@@ -58,30 +57,35 @@ var factory = function($resource) {
       method: 'POST',
       url: '/noo/post/:id/complain'
     }
-  });
+  })
+
+  Post.relevantCommunity = function (post, user) {
+    var ids = _.pluck(user.memberships, 'community_id')
+    return _.find(post.communities, c => c.id in ids)
+  }
 
   // let's make things a bit more OO around here
   _.extend(Post.prototype, {
-    update: function(params, success, error) {
-      return Post.save(_.extend({id: this.id}, params), success, error);
+    update: function (params, success, error) {
+      return Post.save(_.extend({id: this.id}, params), success, error)
     },
-    fulfill: function(params, success, error) {
-      return Post.fulfill(_.extend({id: this.id}, params), success, error);
+    fulfill: function (params, success, error) {
+      return Post.fulfill(_.extend({id: this.id}, params), success, error)
     },
-    vote: function(params, success, error) {
-      return Post.vote(_.extend({id: this.id}, params), success, error);
+    vote: function (params, success, error) {
+      return Post.vote(_.extend({id: this.id}, params), success, error)
     },
-    findComments: function(params, success, error) {
-      return Post.findComments(_.extend({id: this.id}, params), success, error);
+    findComments: function (params, success, error) {
+      return Post.findComments(_.extend({id: this.id}, params), success, error)
     },
-    unfollow: function(params, success, error) {
-      return Post.unfollow(_.extend({id: this.id}, params), success, error);
+    unfollow: function (params, success, error) {
+      return Post.unfollow(_.extend({id: this.id}, params), success, error)
     }
-  });
+  })
 
-  return Post;
-};
+  return Post
+}
 
-module.exports = function(angularModule) {
-  angularModule.factory('Post', factory);
-};
+module.exports = function (angularModule) {
+  angularModule.factory('Post', factory)
+}

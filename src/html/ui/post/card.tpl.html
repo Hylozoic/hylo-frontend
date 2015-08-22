@@ -24,7 +24,7 @@
     <div class="post-header">
       <div class="title" ng-bind-html="post.name | richText | unsafe"></div>
       <img ng-if="post.hasMedia && singlePost" class="full-media" ng-src="{{::post.media[0].url}}"/>
-      <a ui-sref="post({community: post.community.slug, postId: post.id})"
+      <a ui-sref="post({postId: post.id})"
          ng-if="post.hasMedia"
          afkl-lazy-image="{{::post.media[0].url}}"
          afkl-lazy-image-options="{background: true}"
@@ -38,11 +38,12 @@
     <div class="post-context">
       <span class="post-type" ng-class="::post.type">{{::post.type | uppercase}}</span>
       <span class="after-post-type-dot">&nbsp;•&nbsp;</span>
-      <a class="timestamp" ui-sref="post({community: post.community.slug, postId: post.id})">
+      <a class="timestamp" ui-sref="post({postId: post.id})">
         {{::post.created_at | fromNow}}<!--
       --></a>
       <span class="community" ng-hide="post.projects[0]">
-        in <a ui-sref="community.posts({community: post.community.slug})">{{::post.community.name}}</a>
+        in <a ui-sref="community.posts({community: community.slug})">{{::community.name}}</a>
+        <span ng-if="post.communities.length > 1">et al.</span>
       </span>
       <span class="project" ng-if="post.projects[0]">
         in <a ui-sref="project.posts({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
@@ -131,28 +132,6 @@
       </a>
     </div>
 
-    <div ng-if="editingFollowers" class="add-followers">
-      <div class="add-label">Add Members</div>
-      <div class="add-tags">
-        <tags-input ng-model="followersToAdd"
-                    add-from-autocomplete-only="true"
-                    display-property="name"
-                    key-property="id"
-                    replace-spaces-with-dashes="false"
-                    placeholder="Search for people by name"
-                    template="/ui/shared/ngTagsInput/tag-user.tpl.html">
-          <auto-complete source="findMembers($query)"
-                         display-property="name"
-                         min-length="2"
-                         template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
-          </auto-complete>
-        </tags-input>
-      </div>
-    </div>
-
-    <div class="add-followers-complete" ng-show="followersToAdd.length > 0">
-      <button type="button" class="add-followers-btn" ng-click="toggleEditFollowers()" > Done </button>
-    </div>
   </div>
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>

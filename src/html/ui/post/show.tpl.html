@@ -1,8 +1,3 @@
-<a class="nav-title" ui-sref="community.posts({community: post.community.slug})">
-  <i class="logo" back-img="::post.community.avatar_url"></i><!--
-  --><span>{{::post.community.name}}</span>
-</a>
-
 <div class="row">
   <div class="single-post">
     <post-card ng-if="post.type !== 'welcome'" post="post" remove-fn="postdeleted(postToRemove)" start-expanded='true'></post-card>
