@@ -137,7 +137,9 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       post: function (Post, $stateParams) {
         return Post.get({id: $stateParams.postId}).$promise
       },
-      communities: post => post.communities
+      communities: function (post) {
+        return post.communities
+      }
     }
   })
 
