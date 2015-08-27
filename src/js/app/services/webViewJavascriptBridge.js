@@ -5,6 +5,8 @@
  * }
  */
 
+
+
 module.exports = function(callback) {
   if (window.WebViewJavascriptBridge) {
     callback(window.WebViewJavascriptBridge);

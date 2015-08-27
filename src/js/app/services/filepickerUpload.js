@@ -64,7 +64,10 @@ module.exports = function(opts) {
 
   filepicker.setKey(hyloEnv.filepicker.key);
 
-  if (isiOSApp()) {
+  if (typeof AndroidBridge !== 'undefined') {
+    var resp = AndroidBridge.filepickerUpload(opts);
+    resp === "" ? opts.failure("Cancelled") : convertAndStore(JSON.parse(resp));
+  } else if (isiOSApp()) {
     var payload = JSON.stringify({message: "filepickerUpload", options: opts});
 
     connectToBridge(bridge => bridge.send(payload, resp =>

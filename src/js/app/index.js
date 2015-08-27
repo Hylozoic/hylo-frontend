@@ -1,5 +1,6 @@
 var connectWebViewJavascriptBridge = require('./services/webViewJavascriptBridge')
 var isiOSApp = require('./services/isIOSApp')
+var isAndroidApp = require('./services/isAndroidApp')
 
 require('./directives')
 require('./controllers')
@@ -77,7 +78,14 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
   $rootScope.$bodyClass = $bodyClass
 
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, error) {
-    if (isiOSApp()) {
+
+
+    if (typeof AndroidBridge !== 'undefined') {
+      
+      var payload = {message: 'stateChanged', toState: toState.name}
+      AndroidBridge.send(JSON.stringify(payload))
+
+    } else if (isiOSApp()) {
       if (fromState.name === '') {
         connectWebViewJavascriptBridge(function (bridge) {
           bridge.init(function (message, responseCallback) {
