@@ -78,10 +78,7 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
   $rootScope.$bodyClass = $bodyClass
 
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, error) {
-
-
     if (typeof AndroidBridge !== 'undefined') {
-      
       var payload = {message: 'stateChanged', toState: toState.name}
       AndroidBridge.send(JSON.stringify(payload))
 
