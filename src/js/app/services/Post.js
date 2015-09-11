@@ -60,6 +60,7 @@ var factory = function ($resource) {
   })
 
   Post.relevantCommunity = function (post, user) {
+    if (!user) return null
     var ids = _.pluck(user.memberships, 'community_id')
     return _.find(post.communities, c => _.contains(ids, c.id))
   }
