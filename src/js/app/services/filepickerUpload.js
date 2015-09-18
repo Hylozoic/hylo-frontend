@@ -1,7 +1,7 @@
 var path = require('path'),
   qs = require('querystring'),
   isiOSApp = require('./isIOSApp'),
-  connectToBridge = require('./webViewJavascriptBridge');
+  connectToBridge = require('./webViewJavascriptBridge')
 
 // order matters, except for CONVERT, which toggles the crop UI
 var services = [
@@ -13,23 +13,26 @@ var services = [
   'INSTAGRAM',
   'DROPBOX',
   'GOOGLE_DRIVE'
-];
+]
 
-var makeFilename = function(blob) {
+var makeFilename = function (blob) {
   var extension = '',
-    timestamp = new Date().getTime().toString();
+    timestamp = new Date().getTime().toString()
 
   if (blob.filename) {
-    return timestamp + '_' + blob.filename.replace(/[ %+]/g, '');
+    return timestamp + '_' + blob.filename.replace(/[ %+]/g, '')
   }
 
   switch (blob.mimetype) {
-    case 'image/png':  extension = '.png'; break;
-    case 'image/jpeg': extension = '.jpg'; break;
-    case 'image/gif':  extension = '.gif'; break;
+    case 'image/png':  extension = '.png'
+      break
+    case 'image/jpeg': extension = '.jpg'
+      break
+    case 'image/gif':  extension = '.gif'
+      break
   }
-  return timestamp + extension;
-};
+  return timestamp + extension
+}
 
 /*
  * options:
@@ -39,15 +42,14 @@ var makeFilename = function(blob) {
  *   failure:  a failure callback, which receives the error as an argument
  *
  */
-module.exports = function(opts) {
-
-  var convertAndStore = function(blob) {
+module.exports = function (opts) {
+  var convertAndStore = function (blob) {
     // apply additional context-specific conversion settings
-    var conversion = _.extend({compress: true, quality: 90}, opts.convert);
+    var conversion = _.extend({compress: true, quality: 90}, opts.convert)
 
     // blob.url will end with "/convert?crop=..."
     // if "CONVERT" is in the list of services
-    var url = blob.url + '/convert?' + qs.stringify(conversion);
+    var url = blob.url + '/convert?' + qs.stringify(conversion)
 
     filepicker.storeUrl(
       url,
@@ -59,16 +61,18 @@ module.exports = function(opts) {
       },
       stored => opts.success(hyloEnv.s3.cloudfrontHost + '/' + stored.key),
       opts.failure
-    );
-  };
+    )
+  }
 
-  filepicker.setKey(hyloEnv.filepicker.key);
+  filepicker.setKey(hyloEnv.filepicker.key)
 
-  if (isiOSApp()) {
-    var payload = JSON.stringify({message: "filepickerUpload", options: opts});
+  if (typeof AndroidBridge !== 'undefined') {
+    var resp = AndroidBridge.filepickerUpload(opts)
+    resp === '' ? opts.failure('Cancelled') : convertAndStore(JSON.parse(resp))
+  } else if (isiOSApp()) {
+    var payload = JSON.stringify({message: 'filepickerUpload', options: opts})
 
-    connectToBridge(bridge => bridge.send(payload, resp =>
-      (resp === "" ? opts.failure("Cancelled") : convertAndStore(JSON.parse(resp)))));
+    connectToBridge(bridge => bridge.send(payload, resp => (resp === '' ? opts.failure('Cancelled') : convertAndStore(JSON.parse(resp)))))
 
   } else {
     filepicker.pick(
@@ -79,7 +83,7 @@ module.exports = function(opts) {
       },
       convertAndStore,
       opts.failure
-    );
+    )
   }
 
-};
+}

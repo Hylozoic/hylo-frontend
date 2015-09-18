@@ -76,7 +76,8 @@
     "global": [
       "_",
       "angular",
-      "format"
+      "format",
+      "AndroidBridge"
     ]
   }
 }
