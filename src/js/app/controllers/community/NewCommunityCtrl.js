@@ -42,7 +42,7 @@ var controller = function ($scope, $timeout, $analytics, $history, Community, gr
         failure: function(error) {
           $scope.uploading[opts.fieldName] = false;
           $scope.$apply();
-          if (FPError.code == 101) return;
+          if (error.code == 101) return;
 
           growl.addErrorMessage('An error occurred while uploading the image. Please try again.');
           $analytics.eventTrack('Create Community: Failed to Upload ' + opts.humanName, {
