@@ -151,7 +151,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   }
 
   $scope.searchPeople = function (query) {
-    UserMentions.searchPeople(query, 'community', community.id).$promise.then(function (items) {
+    UserMentions.searchPeople(query).$promise.then(function (items) {
       $scope.people = items
     })
   }
