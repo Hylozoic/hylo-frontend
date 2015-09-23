@@ -9,8 +9,7 @@ var hasLocalStorage = function () {
 }
 
 var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache) {
-
+  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker) {
   $scope.updatePostDraftStorage = _.debounce(function () {
     if (!hasLocalStorage()) return
     window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
@@ -196,6 +195,21 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   $scope.communities = communities
 
+  $scope.addDriveFile = function () {
+    GooglePicker.init({
+      onPick: function (data) {
+        if (data.action == google.picker.Action.PICKED) {
+          var fileId = data.docs[0].id
+          console.log('Selected: ' + fileId)
+        } else {
+          console.log('Non-select action: ' + data.action)
+        }
+      }
+    }).then(picker => {
+      console.log('initialized picker, yay!')
+      picker.setVisible(true)
+    })
+  }
 }
 
 module.exports = function (angularModule) {
