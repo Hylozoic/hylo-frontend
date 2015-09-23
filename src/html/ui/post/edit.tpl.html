@@ -86,7 +86,7 @@
 
     <div class="bottom-bar">
       <div class="add-meta image">
-        <a class="add-image" ng-click="addImage()">
+        <a class="button" ng-click="addImage()">
           <i class="icon-add-photo"></i>
           <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} Image</span>
           <span ng-show="addingImage">Please wait...</span>
@@ -96,6 +96,8 @@
           <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
           <a class="remove" ng-click="removeImage()">&times;</a>
         </div>
+
+        <a class="button" ng-click="addDriveFile()">Attach File</a>
       </div>
 
       <div class="add-meta done">
