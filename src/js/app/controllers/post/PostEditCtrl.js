@@ -85,11 +85,12 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   var validate = function () {
     var invalidTitle = _.contains(_.values(prefixes), $scope.title.trim())
-
+    var noCommunities = _.isEmpty(communities)
     // TODO show errors in UI
     if (invalidTitle) window.alert('Please fill in a title')
+    if (noCommunities) window.alert('Please pick at least one community')
 
-    return !invalidTitle
+    return !invalidTitle && !noCommunities
   }
 
   var clearCache = function () {
