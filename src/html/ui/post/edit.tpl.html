@@ -92,12 +92,20 @@
           <span ng-show="addingImage">Please wait...</span>
         </a>
 
-        <div ng-if="imageUrl" class="image-preview">
-          <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
-          <a class="remove" ng-click="removeImage()">&times;</a>
-        </div>
+        <a class="button" ng-click="addDoc()">Attach File</a>
 
-        <a class="button" ng-click="addDriveFile()">Attach File</a>
+        <div class="previews">
+          <div ng-if="imageUrl" class="image-preview">
+            <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
+            <a class="remove" ng-click="removeImage()">&times;</a>
+          </div>
+          <div class="doc-previews">
+            <div ng-repeat="doc in docs" class="doc-preview">
+              <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
+              <a class="remove" ng-click="removeDoc($index)">&times;</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="add-meta done">

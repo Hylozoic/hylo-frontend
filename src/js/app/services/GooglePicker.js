@@ -6,10 +6,11 @@ const createPicker = function (resolve, onPick) {
   if (!pickerApiLoaded || !oauthToken) return
 
   var view = new google.picker.View(google.picker.ViewId.DOCS)
+  // https://developers.google.com/drive/web/mime-types
   view.setMimeTypes('image/png,image/jpeg,image/jpg,' +
     'text/html,text/plain,application/pdf,application/rtf,' +
     'application/vnd.google-apps.spreadsheet,' +
-    'application/vnd.google-apps.document', +
+    'application/vnd.google-apps.document,' +
     'application/vnd.google-apps.file')
 
   var picker = new google.picker.PickerBuilder()
@@ -20,7 +21,13 @@ const createPicker = function (resolve, onPick) {
     .addView(view)
     .addView(new google.picker.DocsUploadView())
     .setDeveloperKey(window.hyloEnv.google.key)
-    .setCallback(onPick)
+    .setCallback(function (data) {
+      if (data.action === window.google.picker.Action.PICKED) {
+        onPick(data.docs[0])
+      } else {
+        console.log('Non-select action: ' + data.action)
+      }
+    })
     .build()
 
   resolve(picker)
@@ -56,7 +63,7 @@ const initMethodName = 'initGooglePicker'
 
 const init = function ($q) {
   // options.onPick gets called with one argument, a result object,
-  // after the picker selects a file or is cancelled.
+  // when the picker takes an action.
   // https://developers.google.com/picker/docs/results
   return function (options) {
     appId = window.hyloEnv.google.clientId.split('-')[0]

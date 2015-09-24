@@ -145,8 +145,8 @@
 
 			.image-preview {
         @media (min-width: @screen-sm) {
-					margin-left: @std-padding;
 					vertical-align: top;
+          float: left;
 				}
         @media (max-width: @screen-xs-max) {
           margin-left: 19.1%;
@@ -157,6 +157,17 @@
           }
         }
 			}
+
+      .doc-previews {
+        overflow: hidden;
+      }
+
+      .previews {
+        margin-top: @std-padding;
+        div {
+          margin-right: @std-padding;
+        }
+      }
 
 			&.done {
         .make-sm-column(3);

@@ -34,13 +34,11 @@
   position: relative;
   display: inline-block;
   img {
-    width: 100px;
-  }
-  .thumbnail {
+    width: 60px;
   }
   .remove {
-    .large-header;
-    @size: 25px;
+    .medium-header;
+    @size: 20px;
     text-decoration: none;
     vertical-align: top;
     position: absolute;
@@ -54,6 +52,22 @@
     text-align: center;
     background-color: @white;
     color: @readable-text;
+  }
+}
+
+.doc-preview {
+  line-height: 32px;
+  border-radius: @border-radius-base;
+  border: 1px solid #ddd;
+  padding: 0 @std-padding;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  .remove {
+    display: inline-block;
+    margin-left: 10px;
+    .medium-header;
+    vertical-align: middle;
   }
 }
 

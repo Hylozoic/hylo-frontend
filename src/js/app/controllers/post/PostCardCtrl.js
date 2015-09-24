@@ -106,6 +106,14 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     })
   }
 
+  $scope.postImage = function () {
+    return _.find(post.media || [], m => m.type === 'image')
+  }
+
+  $scope.docs = function () {
+    return _.filter(post.media || [], m => m.type === 'gdoc')
+  }
+
   var setText = function (fullLength) {
     var text = post.description
     if (!text) text = ''
