@@ -143,15 +143,18 @@
 				}
 			}
 
+      .previews {
+        margin-top: @std-padding;
+      }
+
 			.image-preview {
         @media (min-width: @screen-sm) {
 					vertical-align: top;
           float: left;
+          margin-right: @std-padding;
 				}
         @media (max-width: @screen-xs-max) {
-          margin-left: 19.1%;
-          margin-right: 19.1%;
-          margin-top: @std-padding;
+          margin: @std-padding @std-padding 0;
           img {
             width: 100%;
           }
@@ -160,12 +163,11 @@
 
       .doc-previews {
         overflow: hidden;
-      }
-
-      .previews {
-        margin-top: @std-padding;
-        div {
-          margin-right: @std-padding;
+        @media (max-width: @screen-xs-max) {
+          div {
+            margin: @std-padding @std-padding 0;
+            display: block;
+          }
         }
       }
 
