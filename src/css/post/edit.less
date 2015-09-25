@@ -117,12 +117,12 @@
 	.bottom-bar {
 		.make-row;
 
-    .add-image {
+    .button {
       .rounded-button;
     }
 
 		.add-meta {
-			.make-sm-column(6);
+			.make-sm-column(9);
 			.body-text;
 			padding-top: @std-padding;
 			padding-bottom: @std-padding;
@@ -143,22 +143,36 @@
 				}
 			}
 
+      .previews {
+        margin-top: @std-padding;
+      }
+
 			.image-preview {
         @media (min-width: @screen-sm) {
-					margin-left: @std-padding;
 					vertical-align: top;
+          float: left;
+          margin-right: @std-padding;
 				}
         @media (max-width: @screen-xs-max) {
-          margin-left: 19.1%;
-          margin-right: 19.1%;
-          margin-top: @std-padding;
+          margin: @std-padding @std-padding 0;
           img {
             width: 100%;
           }
         }
 			}
 
+      .doc-previews {
+        overflow: hidden;
+        @media (max-width: @screen-xs-max) {
+          div {
+            margin: @std-padding @std-padding 0;
+            display: block;
+          }
+        }
+      }
+
 			&.done {
+        .make-sm-column(3);
         text-align: right;
 
 				button {

@@ -9,8 +9,7 @@ var hasLocalStorage = function () {
 }
 
 var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache) {
-
+  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker) {
   $scope.updatePostDraftStorage = _.debounce(function () {
     if (!hasLocalStorage()) return
     window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
@@ -146,7 +145,9 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       type: $scope.postType,
       communities: communities.map(c => c.id),
       imageUrl: $scope.imageUrl,
-      imageRemoved: $scope.imageRemoved
+      imageRemoved: $scope.imageRemoved,
+      docs: $scope.docs,
+      removedDocs: $scope.removedDocs
     }
     return ($scope.editing ? update : create)(data)
   }
@@ -167,9 +168,11 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     $scope.editing = true
     $scope.switchPostType(post.type)
     $scope.title = post.name
-    if (post.media[0]) {
-      $scope.imageUrl = post.media[0].url
-    }
+
+    var image = _.find(post.media || [], m => m.type === 'image')
+    if (image) $scope.imageUrl = image.url
+
+    $scope.docs = _.filter(post.media || [], m => m.type === 'gdoc')
 
     if (post.description.substring(0, 3) === '<p>') {
       $scope.description = post.description
@@ -182,6 +185,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     } catch(e) {}
   } else {
     $scope.switchPostType('chat')
+    $scope.docs = []
   }
 
   $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
@@ -195,7 +199,23 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   }
 
   $scope.communities = communities
+  $scope.removedDocs = []
 
+  $scope.addDoc = function () {
+    GooglePicker.init({
+      onPick: function (doc) {
+        console.log('Selected!')
+        $scope.docs.push(_.pick(doc, 'iconUrl', 'name', 'mimeType', 'url'))
+        $scope.$apply()
+      }
+    }).then(picker => {
+      picker.setVisible(true)
+    })
+  }
+
+  $scope.removeDoc = function (index) {
+    $scope.removedDocs.push($scope.docs.splice(index, 1)[0])
+  }
 }
 
 module.exports = function (angularModule) {
