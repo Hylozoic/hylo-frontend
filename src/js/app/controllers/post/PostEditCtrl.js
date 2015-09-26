@@ -164,6 +164,8 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     return UserMentions.userTextRaw(user)
   }
 
+  $scope.docs = []
+
   if (post) {
     $scope.editing = true
     $scope.switchPostType(post.type)
@@ -185,7 +187,6 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     } catch(e) {}
   } else {
     $scope.switchPostType('chat')
-    $scope.docs = []
   }
 
   $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
