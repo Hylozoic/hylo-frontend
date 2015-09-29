@@ -101,6 +101,7 @@
           </div>
           <div class="doc-previews">
             <div ng-repeat="doc in docs" class="doc-preview">
+              <img ng-src='{{doc.thumbnail_url}}'>
               <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
               <a class="remove" ng-click="removeDoc($index)">&times;</a>
             </div>

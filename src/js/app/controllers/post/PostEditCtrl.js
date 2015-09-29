@@ -205,8 +205,11 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   $scope.addDoc = function () {
     GooglePicker.init({
       onPick: function (doc) {
-        console.log('Selected!')
-        $scope.docs.push(_.pick(doc, 'iconUrl', 'name', 'mimeType', 'url'))
+        $scope.docs.push({
+          url: doc.url,
+          name: doc.name,
+          thumbnail_url: doc.iconUrl
+        })
         $scope.$apply()
       }
     }).then(picker => {

@@ -24,8 +24,6 @@ const createPicker = function (resolve, onPick) {
     .setCallback(function (data) {
       if (data.action === window.google.picker.Action.PICKED) {
         onPick(data.docs[0])
-      } else {
-        console.log('Non-select action: ' + data.action)
       }
     })
     .build()

@@ -35,6 +35,7 @@
       </div>
       <div class="docs">
         <div ng-repeat="doc in docs()" class="doc-preview">
+          <img ng-src='{{doc.thumbnail_url}}'>
           <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
         </div>
       </div>
