@@ -55,6 +55,7 @@
         in <a ui-sref="project.posts({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
       </span>
       <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.updated_at | fromNow}}</span>
+      <span ng-if="post.public">&nbsp;•&nbsp; Public</span>
     </div>
 
     <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">

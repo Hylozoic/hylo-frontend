@@ -147,7 +147,8 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       imageUrl: $scope.imageUrl,
       imageRemoved: $scope.imageRemoved,
       docs: $scope.docs,
-      removedDocs: $scope.removedDocs
+      removedDocs: $scope.removedDocs,
+      public: $scope.public
     }
     return ($scope.editing ? update : create)(data)
   }
@@ -170,6 +171,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     $scope.editing = true
     $scope.switchPostType(post.type)
     $scope.title = post.name
+    $scope.public = post.public
 
     var image = _.find(post.media || [], m => m.type === 'image')
     if (image) $scope.imageUrl = image.url
