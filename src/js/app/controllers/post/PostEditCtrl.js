@@ -128,6 +128,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       $scope.close()
       growl.addSuccessMessage('Post created!')
       clearPostDraftStorage()
+      currentUser.post_count += 1
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
