@@ -45,16 +45,14 @@
   </div>
 
   <div class="right">
-    <!-- inline-block space fix
 
-    --><div class="item notifications">
+    <div class="item notifications">
       <a class="button" ui-sref="notifications" tooltip="Activity" tooltip-placement="bottom" touch-class="active">
         <div class="badge" ng-if="currentUser.new_notification_count > 0">{{currentUser.new_notification_count}}</div>
         <i class="icon-notifications"></i>
       </a>
-    </div><!-- inline-block space fix
-
-    --><div dropdown class="item profile">
+    </div>
+    <div dropdown class="item profile">
       <a class="button avatar" dropdown-toggle back-img="currentUser.avatar_url" tooltip="Your Account" tooltip-placement="bottom" touch-class="active">
       </a>
       <ul class="dropdown-menu" role="menu">
