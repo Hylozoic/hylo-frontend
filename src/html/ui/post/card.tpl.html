@@ -26,7 +26,7 @@
       <img ng-if="postImage() && singlePost" class="full-media" ng-src="{{::postImage().url}}"/>
       <a ui-sref="post({postId: post.id})"
          ng-if="!!postImage()"
-         afkl-lazy-image="{{::post.media[0].url}}"
+         afkl-lazy-image="{{::postImage().url}}"
          afkl-lazy-image-options="{background: true}"
          class="afkl-lazy-wrapper media">
       </a>
