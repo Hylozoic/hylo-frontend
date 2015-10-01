@@ -1,4 +1,4 @@
-var controller = function($scope, growl, $stateParams, $analytics, currentUser, Community, $history, $dialog, UserCache) {
+var controller = function($scope, growl, $stateParams, $analytics, currentUser, Community, $history, $dialog, UserCache, joinCommunity) {
 
   var user = $scope.user = currentUser,
     editing = $scope.editing = {},
@@ -64,6 +64,8 @@ var controller = function($scope, growl, $stateParams, $analytics, currentUser, 
       });
     })
   };
+
+  $scope.joinCommunity = joinCommunity;
 
 };
 

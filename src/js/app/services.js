@@ -23,6 +23,7 @@ module.exports = function (angularModule) {
   require('./services/removeTrailingSlash')(angularModule)
   require('./services/myHttpInterceptor')(angularModule)
   require('./services/GooglePicker')(angularModule)
+  require('./services/joinCommunity')(angularModule)
   require('./services/popupDone')
 
   angularModule.factory('CurrentUser', require('./services/CurrentUser'))
