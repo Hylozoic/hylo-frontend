@@ -20,6 +20,12 @@ body {
   }
 }
 
+body.branch-banner-is-active #nav-pad { top: 76px; }
+body.branch-banner-is-active #nav { top: 76px; }
+body.branch-banner-is-active .navbar-default { top: 76px; }
+body.about-page.branch-banner-is-active .navbar-default { top: 0px !important; }
+body.faqs-page.branch-banner-is-active .navbar-default { top: 0px !important; }
+
 @media (max-width: @screen-xs-max) {
   body, html {
     width: 100%;
