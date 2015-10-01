@@ -103,7 +103,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     },
     resolve: {
       post: () => null,
-      communities: () => []
+      communities: () => [],
+      startingType: () => null
     }
   })
   .state('post', {
@@ -139,7 +140,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       },
       communities: function (post) {
         return post.communities
-      }
+      },
+      startingType: () => null
     }
   })
 
@@ -150,7 +152,6 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   require('./routes/project')($stateProvider)
   require('./routes/network')($stateProvider)
   require('./routes/entrance')($stateProvider)
-
 }
 
 module.exports = function (angularModule) {

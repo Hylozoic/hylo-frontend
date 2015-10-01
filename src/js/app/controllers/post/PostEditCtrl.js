@@ -9,7 +9,7 @@ var hasLocalStorage = function () {
 }
 
 var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker) {
+  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker, startingType) {
   $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
     var fields = [
@@ -197,7 +197,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       _.merge($scope, JSON.parse(window.localStorage.postDraft))
     } catch(e) {}
   } else {
-    $scope.switchPostType('chat')
+    $scope.switchPostType(startingType || 'chat')
   }
 
   $scope.communityOptions = _.map(currentUser.memberships, function (membership) {

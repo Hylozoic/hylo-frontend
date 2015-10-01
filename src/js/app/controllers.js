@@ -31,6 +31,7 @@ require('./controllers/project/ProjectEditCtrl')(angularModule);
 
 angularModule
 .controller('NavCtrl',           require('./controllers/NavCtrl'))
+.controller('CommunityEventsCtrl', require('./controllers/community/CommunityEventsCtrl'))
 .controller('JoinCommunityCtrl', require('./controllers/community/JoinCommunityCtrl'))
 .controller('SignupCtrl',        require('./controllers/user/SignupCtrl'))
 .controller('LoginCtrl',         require('./controllers/user/LoginCtrl'))

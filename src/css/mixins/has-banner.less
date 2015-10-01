@@ -14,7 +14,7 @@
   }
 }
 
-.has-banner() {
+.has-banner(@tab-count) {
   .banner {
     position: relative;
     z-index: 1;
@@ -58,8 +58,10 @@
     margin-left: auto;
     margin-top: auto;
     width: 100%;
-    .make-sm-column(6);
-    .make-sm-column-offset(3);
+    .make-sm-column(8);
+    .make-sm-column-offset(2);
+    .make-md-column(6);
+    .make-md-column-offset(3);
 
     @media (max-width: @screen-xs-max) {
       padding: 0;
@@ -72,7 +74,7 @@
       position: relative;
       padding: 10px 0;
       height: 60px;
-      width: 25%;
+      width: unit(100/@tab-count, %);
       font-weight: 300;
       font-size: 14px;
 
@@ -100,8 +102,8 @@
       @media (max-width: @screen-xs-max) {
         height: 40px;
         .small-title-text;
-        font-size: 12px;
-        letter-spacing: 0.08em;
+        font-size: 11px;
+        letter-spacing: normal;
         &.selected {
           .triangle {
             border-left: 8px solid transparent;

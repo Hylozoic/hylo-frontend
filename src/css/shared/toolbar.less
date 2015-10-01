@@ -4,6 +4,7 @@
 // navbar's extra functionality
 //
 .toolbar {
+  .button-text;
   text-align: center;
   padding: @std-padding 0;
   border-bottom: 1px solid @border-light;
@@ -23,5 +24,14 @@
   .toolbar-right {
     float: right;
     text-align: left;
+  }
+  p {
+    line-height: @default-button-height;
+  }
+  label {
+    font-weight: normal;
+    input {
+      margin-right: 2px;
+    }
   }
 }

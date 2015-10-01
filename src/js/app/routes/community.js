@@ -60,6 +60,27 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+  .state('community.events', {
+    url: '/events',
+    parent: 'community.home',
+    resolve: /* @ngInject*/ {
+      firstPostQuery: function (community, Post) {
+        return Post.queryForCommunity({
+          communityId: community.id,
+          limit: 10,
+          type: 'event',
+          sort: 'start_time',
+          filter: 'future'
+        }).$promise
+      }
+    },
+    views: {
+      tab: {
+        templateUrl: '/ui/community/events.tpl.html',
+        controller: 'CommunityEventsCtrl'
+      }
+    }
+  })
   .state('community.about', {
     url: '/about',
     parent: 'community.home',
@@ -152,20 +173,21 @@ module.exports = function ($stateProvider) {
     }
   })
   .state('community.newPost', {
-    url: '/new-post',
+    url: '/new-post?type',
     views: {
       community: {
         templateUrl: '/ui/post/edit.tpl.html',
         controller: 'PostEditCtrl'
       }
     },
-    resolve: {
+    resolve: /* @ngInject*/ {
       post: () => null,
       communities: function (community) {
-        'ngInject'
         return [community]
+      },
+      startingType: function ($stateParams) {
+        return $stateParams.type
       }
     }
   })
-
 }
