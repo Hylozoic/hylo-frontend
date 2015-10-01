@@ -10,9 +10,13 @@ var hasLocalStorage = function () {
 
 var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
   UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker) {
-  $scope.updatePostDraftStorage = _.debounce(function () {
+  $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
-    window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
+    var fields = [
+      'title', 'description', 'postType', 'communities',
+      'start_time', 'end_time'
+    ]
+    window.localStorage.postDraft = JSON.stringify(_.pick($scope, fields))
   }, 200)
 
   var clearPostDraftStorage = function () {
@@ -140,17 +144,16 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     if (!validate()) return
     $scope.saving = true
 
-    var data = {
+    var data = _.merge({
       name: $scope.title,
       description: $scope.description,
       type: $scope.postType,
-      communities: communities.map(c => c.id),
-      imageUrl: $scope.imageUrl,
-      imageRemoved: $scope.imageRemoved,
-      docs: $scope.docs,
-      removedDocs: $scope.removedDocs,
-      public: $scope.public
-    }
+      communities: communities.map(c => c.id)
+    }, _.pick($scope, [
+      'description',
+      'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
+      'public', 'start_time', 'end_time'
+    ]))
     return ($scope.editing ? update : create)(data)
   }
 
@@ -168,11 +171,16 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   $scope.docs = []
 
+  // round up to next quarter hour
+  var now = new Date()
+  $scope.startTime = new Date(Math.ceil(now.getTime() / 900000) * 900000)
+  $scope.endTime = $scope.startTime
+
   if (post) {
     $scope.editing = true
     $scope.switchPostType(post.type)
     $scope.title = post.name
-    $scope.public = post.public
+    ;['public', 'start_time', 'end_time'].forEach(attr => $scope[attr] = post[attr])
 
     var image = _.find(post.media || [], m => m.type === 'image')
     if (image) $scope.imageUrl = image.url
@@ -223,6 +231,18 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   $scope.removeDoc = function (index) {
     $scope.removedDocs.push($scope.docs.splice(index, 1)[0])
   }
+
+  $scope.datePickerStatus = {}
+  $scope.toggleDatePicker = function ($event, num) {
+    $event.preventDefault()
+    $event.stopPropagation()
+    var attr = 'opened' + num
+    var status = $scope.datePickerStatus
+    status[attr] = !status[attr]
+  }
+
+  $scope.$watch('startTime', $scope.updatePostDraftStorage)
+  $scope.$watch('endTime', $scope.updatePostDraftStorage)
 }
 
 module.exports = function (angularModule) {

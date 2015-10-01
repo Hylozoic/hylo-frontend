@@ -19,7 +19,8 @@
     "ng-tags-input": "igorprado/ngTagsInput#68a6c42a",
     "angular-ui-bootstrap-bower": "0.13.0",
     "afkl-lazy-image": "~0.1.4",
-    "stellar": "~0.6.2"
+    "stellar": "~0.6.2",
+    "bootstrap-ui-datetime-picker": "~1.2.5"
   },
   "private": true,
   "resolutions": {

@@ -1,41 +1,29 @@
 .community-newPost, .editPost, .newPost {
   .full-screen-modal;
 	.has-rounded-dropdowns;
+}
 
-  .onboarding-text {
-  	.body-text;
-  	margin-bottom: @std-padding;
-  	@media (min-width: @screen-sm) {
-      margin: 0 -@std-padding @std-padding;
-    }
-  }
-
+.edit-post {
 	.title {
 		.strong-title-text;
 		margin-bottom: @std-padding/2;
 	}
 
+  @radio-left-margin: 32px;
+
 	.select-type {
-    .make-row;
+    border-top: 1px solid @border-lightest;
+    padding-top: @std-padding;
+    margin-bottom: @std-padding;
 
 		.option {
-			.make-sm-column(3);
-			text-align: center;
-
+      margin-bottom: 10px;
 			.make-radio-color(@color) {
 				input[type=radio]:checked {
 					background-color: @color;
 					border-color: @color;
 				}
 			}
-
-      &:first-of-type {
-        text-align: left;
-      }
-
-      &:last-of-type {
-        text-align: right;
-      }
 
 			&.intention {
 				.make-radio-color(@intention-color);
@@ -49,12 +37,30 @@
       &.chat {
         .make-radio-color(@light-gray);
       }
+      &.event {
+        .make-radio-color(@light-gray);
+      }
 
-			@media (max-width: @screen-xs-max) {
-				&.intention, &.offer, &.request {
-					text-align: left;
-				}
+      input[type=radio] {
+		    .round-radio;
+        float: left;
+        margin-right: 10px;
 			}
+
+			label {
+        font-weight: normal;
+        display: block;
+				color: @inactive-text;
+        > div {
+          padding-top: 2px;
+          margin-left: @radio-left-margin;
+        }
+        h4 {
+  				.small-header;
+          margin-top: 0;
+          margin-bottom: 0;
+  			}
+      }
 
 			&.active {
 				label {
@@ -62,18 +68,44 @@
 				}
 			}
 
-			label {
-				.small-header;
-				color: @inactive-text;
-        margin-bottom: 0;
-			}
-
-			input[type=radio] {
-		    .round-radio;
-        vertical-align: top;
-			}
 		}
 	}
+
+  .event {
+    .form {
+      .make-row;
+      margin-top: 10px;
+      padding-left: @radio-left-margin;
+      > div {
+        .make-sm-column(6);
+      }
+      label {
+        font-weight: bold;
+      }
+    }
+    .input-group-btn {
+      button {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        svg {
+          height: 47%;
+          vertical-align: middle;
+        }
+      }
+    }
+    [datepicker] > table {
+      outline: 0 !important;
+    }
+    .date-picker-menu {
+      &:hover {
+        background-color: transparent;
+      }
+      div > table .btn-default {
+        border: 0;
+      }
+    }
+  }
 
 	p.help {
 		margin-top: 10px;
@@ -81,9 +113,7 @@
 	}
 
 	.edit-content {
-		padding-top: @std-padding;
-    padding-bottom: @std-padding*2;
-    border-bottom: 2px solid @default-border;
+		padding: @std-padding 0;
 
 		input, textarea {
 			margin-bottom: @std-padding;
@@ -92,7 +122,6 @@
 			width: 100%;
 			border: 1px solid @default-border;
 		}
-
 
     .counter {
       float: right;
@@ -190,7 +219,9 @@
 	}
 
   .visibility {
-    margin-top: @std-padding;
+    border-top: 1px solid @border-lightest;
+    padding-top: @std-padding;
+
   	.dropdown-menu li {
   		white-space: nowrap;
   	}
