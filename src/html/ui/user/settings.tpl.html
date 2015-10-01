@@ -75,6 +75,13 @@
         <div class="side-column"><a ng-click="leaveCommunity(membership.community_id, $index)">Leave</a></div>
       </div>
     </div>
+    <div class="section" collapse="!expand2" ng-class="{public: !currentUser}" ng-controller="NavCtrl">
+      <div class="setting-item">
+        <div class="full-column">
+          <p>You do not belong to any communities yet. <a ng-click="joinCommunity()">Join a community</a></p>
+        </div>
+      </div>
+    </div>
 
     <div class="section-label" ng-click="expand3 = !expand3">
         Payment Details
