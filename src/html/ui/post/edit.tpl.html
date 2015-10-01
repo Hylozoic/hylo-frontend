@@ -6,43 +6,8 @@
   <a class="navbar-right close" ng-click="close()">&times;</a>
 </nav>
 
-<div class="main-content">
+<div class="main-content edit-post">
   <div class="all-sections">
-    <div class="title">Choose a post type</div>
-    <div class="select-type">
-      <div class="option chat" ng-class="{active: postType==='chat'}">
-        <label>
-          <input type="radio" ng-checked="postType==='chat'" ng-click="switchPostType('chat')">
-            Chat
-        </label>
-      </div>
-      <div class="option offer" ng-class="{active: postType==='offer'}">
-        <label>
-          <input type="radio" ng-checked="postType==='offer'" ng-click="switchPostType('offer')">
-            Offer
-        </label>
-      </div>
-      <div class="option request" ng-class="{active: postType==='request'}">
-        <label>
-          <input type="radio" ng-checked="postType==='request'" ng-click="switchPostType('request')">
-            Request
-        </label>
-      </div>
-      <div class="option intention" ng-class="{active: postType==='intention'}">
-        <label>
-          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')">
-            Intention
-        </label>
-      </div>
-    </div>
-
-    <p class="help">
-      <span ng-if="postType==='chat'">Anything you'd like to talk about.</span>
-      <span ng-if="postType==='offer'">Anything you'd like to share. (e.g. a skill, some goods, information, an opportunity, etc.) If you would like to be compensated, say so in the description.</span>
-      <span ng-if="postType==='request'">Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)</span>
-      <span ng-if="postType==='intention'">Something you’d like to create, with the support of your community. A vision.</span>
-    </p>
-
     <div class="edit-content">
       <div class="counter">{{title.length}} / {{maxTitleLength}}</div>
       <div class="title">Title</div>
@@ -61,6 +26,91 @@
         mentio-select="getPeopleTextRaw(item)"
         mentio-typed-term="typedTerm"
         ng-keypress="updatePostDraftStorage()">
+      </div>
+      <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
+    </div>
+
+    <div class="select-type">
+      <div class="title">Type</div>
+      <div class="option chat" ng-class="{active: postType==='chat'}">
+        <label>
+          <input type="radio" ng-checked="postType==='chat'" ng-click="switchPostType('chat')"/>
+          <div>
+            <h4>Chat</h4>
+            Anything you'd like to talk about.
+          </div>
+        </label>
+      </div>
+      <div class="option offer" ng-class="{active: postType==='offer'}">
+        <label>
+          <input type="radio" ng-checked="postType==='offer'" ng-click="switchPostType('offer')"/>
+          <div>
+            <h4>Offer</h4>
+            Anything you'd like to share, with or without compensation. (e.g. a skill, some goods, information, an opportunity, etc.)
+          </div>
+        </label>
+      </div>
+      <div class="option request" ng-class="{active: postType==='request'}">
+        <label>
+          <input type="radio" ng-checked="postType==='request'" ng-click="switchPostType('request')"/>
+          <div>
+            <h4>Request</h4>
+            Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)
+          </div>
+        </label>
+      </div>
+      <div class="option intention" ng-class="{active: postType==='intention'}">
+        <label>
+          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')"/>
+          <div>
+            <h4>Intention</h4>
+            Something you’d like to create, with the support of your community. A vision.
+          </div>
+        </label>
+      </div>
+      <div class="option event" ng-class="{active: postType==='event'}">
+        <label>
+          <input type="radio" ng-checked="postType==='event'" ng-click="switchPostType('event')"/>
+          <div>
+            <h4>Event</h4>
+            A calendar event with a specific date and time.
+          </div>
+        </label>
+
+        <div ng-show='postType === "event"' class="form">
+          <div>
+            <label>Start time</label>
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="start_time"
+                datetime-picker="MM/dd/yyyy HH:mm"
+                datepicker-options='{showWeeks: false}'
+                timepicker-options='{minuteStep: 15}'
+                is-open="datePickerStatus.opened1"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 1)">
+                  <i class='glyphicon glyphicon-calendar'></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div>
+            <label>End time</label>
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="end_time"
+                datetime-picker="MM/dd/yyyy HH:mm"
+                datepicker-options='{showWeeks: false}'
+                timepicker-options='{minuteStep: 15}'
+                min-date='start_time'
+                is-open="datePickerStatus.opened2"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 2)">
+                  <i class='glyphicon glyphicon-calendar'></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -87,9 +137,9 @@
 
       <p class="help">
         You can edit or remove this post at any time.
-        <span ng-hide="public">It will be visible only to other members the communities you tag.</span>
+        <span ng-hide="public">It will be visible only to other members of the communities you tag.</span>
       </p>
-      <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
+
     </div>
 
     <div class="bottom-bar">

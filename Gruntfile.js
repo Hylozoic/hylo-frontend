@@ -168,7 +168,13 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*'],
-        tasks: ['less:dev', 'notify:css']
+        tasks: ['less:dev', 'notify:css'],
+        options: {
+          livereload: false
+        }
+      },
+      builtCss: {
+        files: ['dist/dev/**/bundle.css']
       },
       img: {
         files: ['src/img/**/*'],

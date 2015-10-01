@@ -1,4 +1,5 @@
 var RichText = require('../../services/RichText')
+var TimeText = require('../../services/TimeText')
 var truncate = require('html-truncate')
 
 module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache, CurrentUser) {
@@ -155,4 +156,16 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.showUpdateTime = (now - new Date(post.updated_at)) < (now - new Date(post.created_at)) * 0.8
 
   $scope.truncate = truncate
+
+  $scope.showTime = function () {
+    var start = new Date(post.start_time)
+    var end = post.end_time && new Date(post.end_time)
+    return TimeText.range(start, end)
+  }
+
+  $scope.showFullTime = function () {
+    var start = new Date(post.start_time)
+    var end = post.end_time && new Date(post.end_time)
+    return TimeText.rangeFullText(start, end)
+  }
 }

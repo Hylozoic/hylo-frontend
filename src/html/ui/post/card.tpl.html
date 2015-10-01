@@ -33,6 +33,10 @@
       <div ng-if="hasDescription" class="post-description">
         <see-more contents="description" truncated="truncated" expand="showMore()"></see-more>
       </div>
+      <p ng-if='post.type === "event"'>
+        <i class="glyphicon glyphicon-time"></i>&nbsp;
+        <span title="{{showFullTime()}}">{{showTime()}}</span>
+      </p>
       <div class="docs">
         <div ng-repeat="doc in docs()" class="doc-preview">
           <img ng-src='{{doc.thumbnail_url}}'>

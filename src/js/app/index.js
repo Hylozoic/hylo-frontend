@@ -21,6 +21,7 @@ var dependencies = [
   'ngTagsInput',
   // 'ngTouch',
   'ui.bootstrap',
+  'ui.bootstrap.datetimepicker',
   'ui.router'
 ]
 

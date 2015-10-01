@@ -19,6 +19,7 @@ require('angular-ui-bootstrap-bower/ui-bootstrap');
 require('angular-ui-bootstrap-bower/ui-bootstrap-tpls');
 require('angular-ui-router');
 require('angulartics');
+require('bootstrap-ui-datetime-picker/dist/datetime-picker');
 require('gsap/src/uncompressed/TweenLite');
 require('gsap/src/uncompressed/plugins/CSSPlugin');
 // require('gsap/src/uncompressed/easing/EasePack');
