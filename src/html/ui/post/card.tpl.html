@@ -23,15 +23,21 @@
 
     <div class="post-header">
       <div class="title" ng-bind-html="post.name | richText | unsafe"></div>
-      <img ng-if="post.hasMedia && singlePost" class="full-media" ng-src="{{::post.media[0].url}}"/>
+      <img ng-if="postImage() && singlePost" class="full-media" ng-src="{{::postImage().url}}"/>
       <a ui-sref="post({postId: post.id})"
-         ng-if="post.hasMedia"
-         afkl-lazy-image="{{::post.media[0].url}}"
+         ng-if="!!postImage()"
+         afkl-lazy-image="{{::postImage().url}}"
          afkl-lazy-image-options="{background: true}"
          class="afkl-lazy-wrapper media">
       </a>
       <div ng-if="hasDescription" class="post-description">
         <see-more contents="description" truncated="truncated" expand="showMore()"></see-more>
+      </div>
+      <div class="docs">
+        <div ng-repeat="doc in docs()" class="doc-preview">
+          <img ng-src='{{doc.thumbnail_url}}'>
+          <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
+        </div>
       </div>
     </div>
 
@@ -49,6 +55,7 @@
         in <a ui-sref="project.posts({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
       </span>
       <span ng-if="showUpdateTime">&nbsp;•&nbsp; active {{::post.updated_at | fromNow}}</span>
+      <span ng-if="post.public">&nbsp;•&nbsp; Public</span>
     </div>
 
     <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">

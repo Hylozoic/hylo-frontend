@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="community-picker">
+    <div class="visibility">
       <div class="title">Communities</div>
       <tags-input ng-model="communities"
                   add-from-autocomplete-only="true"
@@ -80,21 +80,40 @@
         </auto-complete>
       </tags-input>
 
-      <p class="help">This post will be visible only to other members of your community. You can edit or remove it at any time.</p>
+      <label class='publicity'>
+        <input type="checkbox" ng-model="public"/>
+        Make this post publicly visible
+      </label>
+
+      <p class="help">
+        You can edit or remove this post at any time.
+        <span ng-hide="public">It will be visible only to other members the communities you tag.</span>
+      </p>
       <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
     </div>
 
     <div class="bottom-bar">
       <div class="add-meta image">
-        <a class="add-image" ng-click="addImage()">
+        <a class="button" ng-click="addImage()">
           <i class="icon-add-photo"></i>
-          <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} Image</span>
+          <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} image</span>
           <span ng-show="addingImage">Please wait...</span>
         </a>
 
-        <div ng-if="imageUrl" class="image-preview">
-          <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
-          <a class="remove" ng-click="removeImage()">&times;</a>
+        <a class="button" ng-click="addDoc()">Attach file with Google Drive</a>
+
+        <div class="previews">
+          <div ng-if="imageUrl" class="image-preview">
+            <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
+            <a class="remove" ng-click="removeImage()">&times;</a>
+          </div>
+          <div class="doc-previews">
+            <div ng-repeat="doc in docs" class="doc-preview">
+              <img ng-src='{{doc.thumbnail_url}}'>
+              <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
+              <a class="remove" ng-click="removeDoc($index)">&times;</a>
+            </div>
+          </div>
         </div>
       </div>
 

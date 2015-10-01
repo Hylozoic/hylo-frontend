@@ -9,8 +9,7 @@ var hasLocalStorage = function () {
 }
 
 var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache) {
-
+  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker) {
   $scope.updatePostDraftStorage = _.debounce(function () {
     if (!hasLocalStorage()) return
     window.localStorage.postDraft = JSON.stringify(_.pick($scope, 'postType', 'title', 'description'))
@@ -85,11 +84,12 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   var validate = function () {
     var invalidTitle = _.contains(_.values(prefixes), $scope.title.trim())
-
+    var noCommunities = _.isEmpty(communities)
     // TODO show errors in UI
     if (invalidTitle) window.alert('Please fill in a title')
+    if (noCommunities) window.alert('Please pick at least one community')
 
-    return !invalidTitle
+    return !invalidTitle && !noCommunities
   }
 
   var clearCache = function () {
@@ -128,6 +128,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       $scope.close()
       growl.addSuccessMessage('Post created!')
       clearPostDraftStorage()
+      currentUser.post_count += 1
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
@@ -145,13 +146,16 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       type: $scope.postType,
       communities: communities.map(c => c.id),
       imageUrl: $scope.imageUrl,
-      imageRemoved: $scope.imageRemoved
+      imageRemoved: $scope.imageRemoved,
+      docs: $scope.docs,
+      removedDocs: $scope.removedDocs,
+      public: $scope.public
     }
     return ($scope.editing ? update : create)(data)
   }
 
   $scope.searchPeople = function (query) {
-    UserMentions.searchPeople(query, 'community', community.id).$promise.then(function (items) {
+    UserMentions.searchPeople(query).$promise.then(function (items) {
       $scope.people = items
     })
   }
@@ -162,13 +166,18 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     return UserMentions.userTextRaw(user)
   }
 
+  $scope.docs = []
+
   if (post) {
     $scope.editing = true
     $scope.switchPostType(post.type)
     $scope.title = post.name
-    if (post.media[0]) {
-      $scope.imageUrl = post.media[0].url
-    }
+    $scope.public = post.public
+
+    var image = _.find(post.media || [], m => m.type === 'image')
+    if (image) $scope.imageUrl = image.url
+
+    $scope.docs = _.filter(post.media || [], m => m.type === 'gdoc')
 
     if (post.description.substring(0, 3) === '<p>') {
       $scope.description = post.description
@@ -194,7 +203,26 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   }
 
   $scope.communities = communities
+  $scope.removedDocs = []
 
+  $scope.addDoc = function () {
+    GooglePicker.init({
+      onPick: function (doc) {
+        $scope.docs.push({
+          url: doc.url,
+          name: doc.name,
+          thumbnail_url: doc.iconUrl
+        })
+        $scope.$apply()
+      }
+    }).then(picker => {
+      picker.setVisible(true)
+    })
+  }
+
+  $scope.removeDoc = function (index) {
+    $scope.removedDocs.push($scope.docs.splice(index, 1)[0])
+  }
 }
 
 module.exports = function (angularModule) {

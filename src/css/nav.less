@@ -195,14 +195,26 @@
 
   @media (max-width: @screen-xs-max) {
     padding: 10px 0;
+    @item-width: unit(100/@nav-item-count, vw);
 
     .item {
-      width: unit(100/@nav-item-count, vw);
+      width: @item-width;
       margin: 0 !important;
       text-align: center;
 
       &.hylo-icon, &.text-link {
         margin: 0 @std-padding !important;
+      }
+    }
+
+    .right {
+      width: @item-width * 2;
+      .item {
+        display: block;
+        &.profile {
+          float: none;
+          margin-left: @item-width !important;
+        }
       }
     }
 

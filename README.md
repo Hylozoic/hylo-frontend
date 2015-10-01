@@ -16,12 +16,13 @@ AWS_S3_BUCKET=hylo-dev
 AWS_S3_CONTENT_URL=http://hylo-dev.s3.amazonaws.com
 FACEBOOK_APP_ID=foo
 FILEPICKER_API_KEY=foo
+HEROKU_API_TOKEN=foo
 ROLLBAR_CLIENT_TOKEN=foo
 SEGMENT_KEY=foo
 NEW_RELIC_LICENSE_KEY=foo
 ```
 
-`ASSET_HOST_URL` and `AWS_S3_CONTENT_URL` are identical on staging and production, but not in development. In development we want the asset server to serve assets locally, but uploaded files are always be saved to S3.
+`ASSET_HOST_URL` and `AWS_S3_CONTENT_URL` are identical on staging and production, but not in development. In development we want the asset server to serve assets locally, but uploaded files are always saved to S3.
 
 ### Asset server
 
