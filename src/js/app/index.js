@@ -103,13 +103,13 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
 
   $rootScope.$on('$viewContentLoaded', function () {
     if (!isiOSApp() && !isAndroidApp()) {
-      branch.init('key_live_mhdVu4UFbZnZ86jxdBGyjbajqubGzCLQ')
+      branch.init(window.hyloEnv.branch.key)
       branch.banner(
         {
           icon: '/img/appicon.png',
           title: 'Hylo App',
           description: 'The Hylo App!',
-          forgetHide: true,
+          forgetHide: 10,
           mobileSticky: true,
           showDesktop: false
         },

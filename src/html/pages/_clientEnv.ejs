@@ -17,6 +17,7 @@
       clientId: '<%= process.env.GOOGLE_CLIENT_ID %>',
       key: '<%= process.env.GOOGLE_BROWSER_KEY %>'
     },
+    branch: {key: '<%= process.env.BRANCH_API_KEY %>'},
     onUser: function(fn) {
       hyloEnv.onUserCallbacks.push(fn);
     },
