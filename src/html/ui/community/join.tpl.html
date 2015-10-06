@@ -1,6 +1,6 @@
 <div class="banner">
   <div class="background">
-    <div back-img="::community.banner_url"></div>
+    <div back-img="community.banner_url"></div>
   </div>
 
   <div class="titles">
@@ -11,9 +11,9 @@
       <a ui-sref="network.communities({slug: community.network.slug})">{{::community.network.name}}</a>
     </div>
   </div>
-
-
 </div>
+
 <div>
-  <button class="btn btn-large btn-primary" ng-click="joinCommunity()">Join This Community!</button>
+  <button ng-if="isCodeValid" class="btn btn-large btn-primary" ng-click="submit()">Join This Community!</button>
+  <span ng-show="!isCodeValid && (isCodeValid !== undefined)">Invalid code. Try again.</span>
 </div>

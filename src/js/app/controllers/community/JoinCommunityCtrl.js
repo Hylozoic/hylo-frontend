@@ -1,5 +1,8 @@
-module.exports = function($scope, Community, CurrentUser, $timeout, $analytics) {
+module.exports = function($scope, Community, CurrentUser, $timeout, $analytics, community, code) {
   'ngInject';
+
+  $scope.community = community;
+  $scope.code = code;
 
   $scope.validateCode = _.debounce(function() {
     if (_.isEmpty($scope.code)) {
@@ -19,6 +22,8 @@ module.exports = function($scope, Community, CurrentUser, $timeout, $analytics) 
       }
     });
   }, 250);
+
+  $scope.validateCode();
 
   $scope.submit = function() {
     if (!$scope.isCodeValid) return;

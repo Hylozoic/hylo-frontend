@@ -28,12 +28,20 @@ module.exports = function ($stateProvider) {
   })
 
   .state('community.join', {
-    url: '/join/:invite_code',
+    url: '/join/:code',
     parent: 'community',
     views: {
       community: {
         templateUrl: '/ui/community/join.tpl.html',
-        controller: 'JoinCommunityByUrlCtrl'
+        controller: 'JoinCommunityCtrl'
+      }
+    },
+    resolve: /* @ngInject*/ {
+      community: function (Community, $stateParams, $rootScope) {
+        return Community.get({id: $stateParams.community}).$promise
+      },
+      code: function($stateParams) {
+        return $stateParams.code
       }
     }
   })
