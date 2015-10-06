@@ -1,0 +1,19 @@
+<div class="banner">
+  <div class="background">
+    <div back-img="community.banner_url"></div>
+  </div>
+
+  <div class="titles">
+    <div class="logo" back-img="::community.avatar_url"></div>
+    <div class="name">{{::community.name}}</div>
+    <div class="network" ng-if="::community.network">
+      Part of
+      <a ui-sref="network.communities({slug: community.network.slug})">{{::community.network.name}}</a>
+    </div>
+  </div>
+</div>
+
+<div class="text-center" style="padding:15px">
+  <button ng-if="isCodeValid" class="btn btn-lg btn-primary" ng-click="submit()">Join This Community</button>
+  <span ng-show="!isCodeValid && (isCodeValid !== undefined)" style="font-size: 15px; color: #a94428;">{{ code }} is not the right code. Try again.</span>
+</div>
