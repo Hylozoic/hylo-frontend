@@ -1,6 +1,6 @@
 var filepickerUpload = require('../../services/filepickerUpload')
 
-module.exports = function ($scope, $analytics, currentUser, growl, onboarding) {
+module.exports = function ($scope, $analytics, currentUser, growl, onboarding, $rootScope) {
   'ngInject'
   var user = $scope.user = currentUser
   var editData = $scope.editData = _.pick(user, [
@@ -11,7 +11,25 @@ module.exports = function ($scope, $analytics, currentUser, growl, onboarding) {
   var edited = {}
   var bio = editData.bio
 
+  $scope.multiInput = {}
+
+  var checkUnsavedChanges = function () {
+    var unsavedChanges = _.filter(_.pairs($scope.multiInput), p => p[1] !== '')
+    if (_.any(unsavedChanges)) {
+      var unsavedChangeFields = _.map(unsavedChanges, p => format('"%s"', p[0])).join(' and ')
+      window.alert(format('You have entered text for %s. Make sure to press Return if you want to save it.', unsavedChangeFields))
+      return false
+    }
+    return true
+  }
+
+  $rootScope.$on('$stateChangeStart', function (event) {
+    if (!checkUnsavedChanges()) event.preventDefault()
+  })
+
   $scope.save = function () {
+    if (!checkUnsavedChanges()) return
+
     if (editData.banner_url === require('../../services/defaultUserBanner')) {
       editData.banner_url = null
     }
