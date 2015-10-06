@@ -1,6 +1,7 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var controller = function($scope, $analytics, currentUser, growl, onboarding) {
+module.exports = function($scope, $analytics, currentUser, growl, onboarding) {
+  'ngInject'
   var user = $scope.user = currentUser,
     editData = $scope.editData = _.pick(user, [
       'bio', 'work', 'intention', 'extra_info', 'avatar_url', 'banner_url',
@@ -149,8 +150,4 @@ var controller = function($scope, $analytics, currentUser, growl, onboarding) {
       $analytics.eventTrack('My Profile: Edit: Add Social Media Link to Profile', {provider: 'LinkedIn'});
     });
   };
-};
-
-module.exports = function(angularModule) {
-  angularModule.controller('ProfileEditCtrl', controller);
 };

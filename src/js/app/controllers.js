@@ -1,7 +1,6 @@
 var angularModule = angular.module('hyloControllers', []);
 
 require('./controllers/profile')(angularModule);
-require('./controllers/profile/edit')(angularModule);
 require('./controllers/profile/contributions')(angularModule);
 require('./controllers/profile/thanks')(angularModule);
 require('./controllers/user/settings')(angularModule);
@@ -40,4 +39,5 @@ angularModule
 .controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
 .controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
-.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'));
+.controller('ProjectUsersCtrl',  require('./controllers/project/ProjectUsersCtrl'))
+.controller('ProfileEditCtrl', require('./controllers/profile/ProfileEditCtrl'));
