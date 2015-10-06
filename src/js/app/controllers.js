@@ -17,7 +17,6 @@ require('./controllers/community/CommunitySettingsCtrl')(angularModule);
 require('./controllers/community/CommunityPostsCtrl')(angularModule);
 require('./controllers/community/CommunityMembersCtrl')(angularModule);
 require('./controllers/community/CommunityInviteCtrl')(angularModule);
-require('./controllers/community/JoinCommunityByUrlCtrl')(angularModule);
 require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/home/FollowedPostsCtrl')(angularModule);
@@ -34,6 +33,7 @@ angularModule
 .controller('NavCtrl',           require('./controllers/NavCtrl'))
 .controller('CommunityEventsCtrl', require('./controllers/community/CommunityEventsCtrl'))
 .controller('JoinCommunityCtrl', require('./controllers/community/JoinCommunityCtrl'))
+.controller('JoinCommunityByUrlCtrl', require('./controllers/community/JoinCommunityByUrlCtrl'))
 .controller('SignupCtrl',        require('./controllers/user/SignupCtrl'))
 .controller('LoginCtrl',         require('./controllers/user/LoginCtrl'))
 .controller('PostCardCtrl',      require('./controllers/post/PostCardCtrl'))
