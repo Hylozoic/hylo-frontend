@@ -1,4 +1,4 @@
-module.exports = function($scope, Community, CurrentUser, $timeout, $analytics) {
+module.exports = function($scope, Community, CurrentUser, $timeout, $analytics, $log) {
   'ngInject';
 
   $scope.validateCode = _.debounce(function() {
