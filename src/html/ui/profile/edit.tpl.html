@@ -16,7 +16,7 @@
     </div>
 
     <div class="info-column">
-      <span class="name">{{user.name}}</span>
+      <input class="name" type="text" ng-model='editData.name'/>
       <span class="social-media">
         <i class="icon-twitter" ng-click="changeTwitter()">
           <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
@@ -54,7 +54,8 @@
       <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
         placeholder="Type a word or short phrase, then press Return."
-        ng-keypress="add($event, 'skills')"/>
+        ng-keypress="add($event, 'skills')"
+        ng-model='multiInput["Skills"]' />
       <ul>
         <li ng-repeat="skill in editData.skills">
           {{skill}}
@@ -68,7 +69,8 @@
       <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
         placeholder="Type a name, then press Return."
-        ng-keypress="add($event, 'organizations')"/>
+        ng-keypress="add($event, 'organizations')"
+        ng-model='multiInput["Groups and organizations"]' />
       <ul>
         <li ng-repeat="org in editData.organizations">
           {{org}}
@@ -78,10 +80,11 @@
     </section>
 
     <section>
-      <h2>Phone</h2>
+      <h2>Phone numbers</h2>
       <input type="text" maxlength="200"
       placeholder="Type a number, then press Return."
-      ng-keypress="add($event, 'phones')"/>
+      ng-keypress="add($event, 'phones')"
+      ng-model='multiInput["Phone numbers"]' />
       <ul>
         <li ng-repeat="phone in editData.phones">
           {{phone}} <a class="close" ng-click="remove(phone, 'phones')">&times;</a>
@@ -90,10 +93,11 @@
     </section>
 
     <section>
-      <h2>Email</h2>
+      <h2>Email addresses</h2>
       <input type="text" maxlength="200"
       placeholder="Type an address, then press Return."
-      ng-keypress="add($event, 'emails')"/>
+      ng-keypress="add($event, 'emails')"
+      ng-model='multiInput["Email addresses"]' />
       <ul>
         <li ng-repeat="email in editData.emails">
           {{email}} <a class="close" ng-click="remove(email, 'emails')">&times;</a>
@@ -102,10 +106,11 @@
     </section>
 
     <section>
-      <h2>Website</h2>
+      <h2>Web addresses</h2>
       <input type="text" maxlength="200"
       placeholder="Type a URL, then press Return."
-      ng-keypress="add($event, 'websites')"/>
+      ng-keypress="add($event, 'websites')"
+      ng-model='multiInput["Web addresses"]' />
       <ul>
         <li ng-repeat="website in editData.websites">
           {{website}} <a class="close" ng-click="remove(website, 'websites')">&times;</a>

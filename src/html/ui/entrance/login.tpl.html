@@ -2,7 +2,7 @@
 <div class="all-sections login-signup-dialog">
   <h1>Log in to Hylo</h1>
 
-  <div class="error" ng-show="loginError">{{loginError}}</div>
+  <div class="error" ng-show="loginError" bind-html-unsafe='loginError'></div>
 
   <p class="section-label">Log in with one of these services:</p>
 

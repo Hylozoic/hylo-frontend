@@ -9,12 +9,6 @@ var factory = function ($resource) {
         action: 'comment'
       }
     },
-    addFollowers: {
-      method: 'POST',
-      params: {
-        action: 'followers'
-      }
-    },
     follow: {
       method: 'POST',
       params: {
