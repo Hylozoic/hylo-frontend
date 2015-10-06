@@ -12,15 +12,16 @@ window.hyloEnv.onUser(function (user) {
   }
 
   var membership = user.lastUsedMembership()
+  var account = user.linkedAccounts[0]
 
   // segment
   window.analytics.identify(user.id, {
     email: user.email,
     name: user.name,
-    provider: user.linkedAccounts[0].provider_key,
+    provider: account && account.provider_key,
     createdAt: user.created_at,
-    community_name: (membership ? membership.community.name : undefined),
-    community_id: (membership ? membership.community.id : undefined),
+    community_name: membership && membership.community.name,
+    community_id: membership && membership.community.id,
     post_count: user.post_count
   })
 
