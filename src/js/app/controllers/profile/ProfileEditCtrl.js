@@ -4,7 +4,7 @@ module.exports = function ($scope, $analytics, currentUser, growl, onboarding, $
   'ngInject'
   var user = $scope.user = currentUser
   var editData = $scope.editData = _.pick(user, [
-    'bio', 'work', 'intention', 'extra_info', 'avatar_url', 'banner_url',
+    'name', 'bio', 'work', 'intention', 'extra_info', 'avatar_url', 'banner_url',
     'skills', 'organizations', 'phones', 'emails', 'websites',
     'twitter_name', 'linkedin_url', 'facebook_url'
   ])

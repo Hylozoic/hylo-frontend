@@ -16,7 +16,7 @@
     </div>
 
     <div class="info-column">
-      <span class="name">{{user.name}}</span>
+      <input class="name" type="text" ng-model='editData.name'/>
       <span class="social-media">
         <i class="icon-twitter" ng-click="changeTwitter()">
           <i class="status" ng-class="editData.twitter_name ? 'icon-big-check' : 'icon-add-01'"></i>
