@@ -15,7 +15,6 @@ require('./controllers/community/CommunitySettingsCtrl')(angularModule);
 require('./controllers/community/CommunityPostsCtrl')(angularModule);
 require('./controllers/community/CommunityMembersCtrl')(angularModule);
 require('./controllers/community/CommunityInviteCtrl')(angularModule);
-require('./controllers/community/JoinCommunityByUrlCtrl')(angularModule);
 require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/home/FollowedPostsCtrl')(angularModule)
@@ -32,11 +31,11 @@ angularModule
 .controller('NavCtrl', require('./controllers/NavCtrl'))
 .controller('CommunityEventsCtrl', require('./controllers/community/CommunityEventsCtrl'))
 .controller('JoinCommunityCtrl', require('./controllers/community/JoinCommunityCtrl'))
-.controller('PostCardCtrl', require('./controllers/post/PostCardCtrl'))
-.controller('WelcomePostCtrl', require('./controllers/post/WelcomePostCtrl'))
-.controller('ProfileEditCtrl', require('./controllers/profile/ProfileEditCtrl'))
-.controller('ProjectCtrl', require('./controllers/project/ProjectCtrl'))
-.controller('ProjectPostsCtrl', require('./controllers/project/ProjectPostsCtrl'))
+.controller('JoinCommunityByUrlCtrl', require('./controllers/community/JoinCommunityByUrlCtrl'))
+.controller('PostCardCtrl',      require('./controllers/post/PostCardCtrl'))
+.controller('WelcomePostCtrl',   require('./controllers/post/WelcomePostCtrl'))
+.controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
+.controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
 .controller('ProjectUsersCtrl', require('./controllers/project/ProjectUsersCtrl'))
 .controller('LoginCtrl', require('./controllers/user/LoginCtrl'))

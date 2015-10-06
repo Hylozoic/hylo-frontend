@@ -33,7 +33,7 @@ module.exports = function ($stateProvider) {
     views: {
       community: {
         templateUrl: '/ui/community/join.tpl.html',
-        controller: 'JoinCommunityCtrl'
+        controller: 'JoinCommunityByUrlCtrl'
       }
     },
     resolve: /* @ngInject*/ {
