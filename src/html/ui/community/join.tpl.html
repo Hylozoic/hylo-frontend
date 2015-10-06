@@ -1,0 +1,19 @@
+<div class="banner">
+  <div class="background">
+    <div back-img="::community.banner_url"></div>
+  </div>
+
+  <div class="titles">
+    <div class="logo" back-img="::community.avatar_url"></div>
+    <div class="name">{{::community.name}}</div>
+    <div class="network" ng-if="::community.network">
+      Part of
+      <a ui-sref="network.communities({slug: community.network.slug})">{{::community.network.name}}</a>
+    </div>
+  </div>
+
+
+</div>
+<div>
+  <button class="btn btn-large btn-primary" ng-click="joinCommunity()">Join This Community!</button>
+</div>

@@ -15,6 +15,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+
   .state('community.home', {
     abstract: true,
     parent: 'community',
@@ -25,6 +26,18 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+
+  .state('community.join', {
+    url: '/join/:invite_code',
+    parent: 'community',
+    views: {
+      community: {
+        templateUrl: '/ui/community/join.tpl.html',
+        controller: 'JoinCommunityByUrlCtrl'
+      }
+    }
+  })
+
   .state('community.posts', {
     url: '',
     parent: 'community.home',

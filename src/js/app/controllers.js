@@ -10,12 +10,13 @@ require('./controllers/post/PostCtrl')(angularModule)
 require('./controllers/post/PostListCtrl')(angularModule)
 require('./controllers/post/CommentsCtrl')(angularModule)
 
-require('./controllers/community/CommunityCtrl')(angularModule)
-require('./controllers/community/CommunitySettingsCtrl')(angularModule)
-require('./controllers/community/CommunityPostsCtrl')(angularModule)
-require('./controllers/community/CommunityMembersCtrl')(angularModule)
-require('./controllers/community/CommunityInviteCtrl')(angularModule)
-require('./controllers/community/NewCommunityCtrl')(angularModule)
+require('./controllers/community/CommunityCtrl')(angularModule);
+require('./controllers/community/CommunitySettingsCtrl')(angularModule);
+require('./controllers/community/CommunityPostsCtrl')(angularModule);
+require('./controllers/community/CommunityMembersCtrl')(angularModule);
+require('./controllers/community/CommunityInviteCtrl')(angularModule);
+require('./controllers/community/JoinCommunityByUrlCtrl')(angularModule);
+require('./controllers/community/NewCommunityCtrl')(angularModule);
 
 require('./controllers/home/FollowedPostsCtrl')(angularModule)
 require('./controllers/home/AllPostsCtrl')(angularModule)
