@@ -4,6 +4,10 @@ module.exports = function ($scope, growl, $stateParams, $analytics, currentUser,
   var editing = $scope.editing = {}
   var edited = $scope.edited = {}
 
+  if (!user.settings.digest_frequency) {
+    user.settings.digest_frequency = 'daily'
+  }
+
   $analytics.eventTrack('User Settings: Viewed')
 
   if ($stateParams.expand === 'password') {
@@ -44,9 +48,14 @@ module.exports = function ($scope, growl, $stateParams, $analytics, currentUser,
     })
   }
 
-  $scope.toggle = function (field) {
+  $scope.toggle = function (field, isInSettings) {
     var data = {}
-    data[field] = user[field]
+    if (isInSettings) {
+      data.settings = {}
+      data.settings[field] = user.settings[field]
+    } else {
+      data[field] = user[field]
+    }
     user.update(data, function () {
       growl.addSuccessMessage('Saved change.')
     }, function (err) {
