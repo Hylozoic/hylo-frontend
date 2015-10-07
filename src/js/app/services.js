@@ -27,6 +27,5 @@ module.exports = function (angularModule) {
   require('./services/popupDone')
 
   angularModule.factory('CurrentUser', require('./services/CurrentUser'))
-  angularModule.factory('Meta', require('./services/Meta'))
   angularModule.factory('UserMentions', require('./services/UserMentions'))
 }
