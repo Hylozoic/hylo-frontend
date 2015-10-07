@@ -1,6 +1,7 @@
 var connectWebViewJavascriptBridge = require('./services/webViewJavascriptBridge')
 var isiOSApp = require('./services/isIOSApp')
 var isAndroidApp = require('./services/isAndroidApp')
+var branch = require('../../../node_modules/branch-sdk')
 
 require('./directives')
 require('./controllers')
@@ -82,7 +83,6 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
     if (typeof AndroidBridge !== 'undefined') {
       var payload = {message: 'stateChanged', toState: toState.name}
       AndroidBridge.send(JSON.stringify(payload))
-
     } else if (isiOSApp()) {
       if (fromState.name === '') {
         connectWebViewJavascriptBridge(function (bridge) {
@@ -102,4 +102,20 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
     }
   })
 
+  $rootScope.$on('$viewContentLoaded', function () {
+    if (!isiOSApp() && !isAndroidApp()) {
+      branch.init(window.hyloEnv.branch.key)
+      branch.banner(
+        {
+          icon: '/img/appicon.png',
+          title: 'Hylo App',
+          description: 'The Hylo App!',
+          forgetHide: 10,
+          mobileSticky: true,
+          showDesktop: false
+        },
+        {}
+      )
+    }
+  })
 })
