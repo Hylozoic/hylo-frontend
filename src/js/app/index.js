@@ -103,7 +103,7 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
   })
 
   $rootScope.$on('$viewContentLoaded', function () {
-    if (!isiOSApp() && !isAndroidApp()) {
+    if (!isiOSApp() && !isAndroidApp() && window.hyloEnv.branch.key) {
       branch.init(window.hyloEnv.branch.key)
       branch.banner(
         {
