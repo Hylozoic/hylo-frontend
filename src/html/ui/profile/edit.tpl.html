@@ -54,7 +54,7 @@
       <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
         placeholder="Type a word or short phrase, then press Return."
-        ng-keypress="add($event, 'skills')"
+        ng-keypress="add($event, 'skills', 'Skills')"
         ng-model='multiInput["Skills"]' />
       <ul>
         <li ng-repeat="skill in editData.skills">
@@ -69,7 +69,7 @@
       <p class="help">Other members can find you in searches for these terms, creating opportunities to collaborate.</p>
       <input type="text" maxlength="200"
         placeholder="Type a name, then press Return."
-        ng-keypress="add($event, 'organizations')"
+        ng-keypress="add($event, 'organizations', 'Groups and organizations')"
         ng-model='multiInput["Groups and organizations"]' />
       <ul>
         <li ng-repeat="org in editData.organizations">
@@ -83,7 +83,7 @@
       <h2>Phone numbers</h2>
       <input type="text" maxlength="200"
       placeholder="Type a number, then press Return."
-      ng-keypress="add($event, 'phones')"
+      ng-keypress="add($event, 'phones', 'Phone numbers')"
       ng-model='multiInput["Phone numbers"]' />
       <ul>
         <li ng-repeat="phone in editData.phones">
@@ -96,7 +96,7 @@
       <h2>Email addresses</h2>
       <input type="text" maxlength="200"
       placeholder="Type an address, then press Return."
-      ng-keypress="add($event, 'emails')"
+      ng-keypress="add($event, 'emails', 'Email addresses')"
       ng-model='multiInput["Email addresses"]' />
       <ul>
         <li ng-repeat="email in editData.emails">
@@ -109,7 +109,7 @@
       <h2>Web addresses</h2>
       <input type="text" maxlength="200"
       placeholder="Type a URL, then press Return."
-      ng-keypress="add($event, 'websites')"
+      ng-keypress="add($event, 'websites', 'Web addresses')"
       ng-model='multiInput["Web addresses"]' />
       <ul>
         <li ng-repeat="website in editData.websites">

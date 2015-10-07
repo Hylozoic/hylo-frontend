@@ -14,7 +14,7 @@ module.exports = function ($scope, $analytics, currentUser, growl, onboarding, $
   $scope.multiInput = {}
 
   var checkUnsavedChanges = function () {
-    var unsavedChanges = _.filter(_.pairs($scope.multiInput), p => p[1] !== '')
+    var unsavedChanges = _.filter(_.pairs($scope.multiInput), p => p[1])
     if (_.any(unsavedChanges)) {
       var unsavedChangeFields = _.map(unsavedChanges, p => format('"%s"', p[0])).join(' and ')
       window.alert(format('You have entered text for %s. Make sure to press Return if you want to save it.', unsavedChangeFields))
@@ -60,13 +60,13 @@ module.exports = function ($scope, $analytics, currentUser, growl, onboarding, $
     $scope.$state.go('profile.about', {id: user.id})
   }
 
-  $scope.add = function (event, type) {
+  $scope.add = function (event, type, name) {
     if (event.which === 13) {
       if (!_.contains(editData[type], event.target.value)) {
         editData[type].unshift(event.target.value)
       }
 
-      event.target.value = ''
+      $scope.multiInput[name] = null
       edited[type] = true
       $analytics.eventTrack('My Profile: Edit: Add to Profile', {item_type: type})
     }
