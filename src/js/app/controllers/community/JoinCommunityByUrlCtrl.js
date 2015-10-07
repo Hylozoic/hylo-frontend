@@ -3,6 +3,7 @@ module.exports = function($scope, $controller, community, code, currentUser, $mo
 
   $scope.community = community;
   $scope.code = code;
+  $scope.alreadyJoined = !!_.find(currentUser.memberships, m => m.community_id === community.id);
 
   if (!currentUser) {
 
