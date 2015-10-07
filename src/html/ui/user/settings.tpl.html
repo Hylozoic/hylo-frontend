@@ -64,6 +64,24 @@
           </select>
         </div>
       </div>
+      <div class="setting-item">
+        <div class="main-column">
+          <label>Get mobile notifications on post you are following?</label>
+          <div class="summary">Check the circle to get mobile notifications on any posts you are following.</div>
+        </div>
+        <div class="side-column">
+          <input type="checkbox" ng-model="user.push_follow_preference" ng-click="toggle('push_follow_preference')"/>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="main-column">
+          <label>Get mobile notifications on new posts?</label>
+          <div class="summary">Check the circle to get mobile notifications on any new posts in your communities.</div>
+        </div>
+        <div class="side-column">
+          <input type="checkbox" ng-model="user.push_new_post_preference" ng-click="toggle('push_new_post_preference')"/>
+        </div>
+      </div>
     </div>
 
     <div class="section-label" ng-click="expand2 = !expand2">
