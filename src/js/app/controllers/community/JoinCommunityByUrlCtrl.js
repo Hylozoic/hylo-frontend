@@ -3,7 +3,6 @@ module.exports = function($scope, $controller, community, code, currentUser, $mo
 
   $scope.community = community;
   $scope.code = code;
-  $scope.alreadyJoined = !!_.find(currentUser.memberships, m => m.community_id === community.id);
 
   // TODO: Refactor the common code here with ProjectCtrl.js
   if (!currentUser) {
@@ -48,11 +47,13 @@ module.exports = function($scope, $controller, community, code, currentUser, $mo
 
     open('signup');
 
+  } else {
+    $scope.alreadyJoined = !!_.find(currentUser.memberships, m => m.community_id === community.id);
+
+    // Put functions from JoinCommunityCtrl onto $scope.
+    $controller('JoinCommunityCtrl', {$scope: $scope})
+
+    // Validate the community join code from last part of the URL.
+    $scope.validateCode();
   }
-
-  // Put functions from JoinCommunityCtrl onto $scope.
-  $controller('JoinCommunityCtrl', {$scope: $scope})
-
-  // Validate the community join code from last part of the URL.
-  $scope.validateCode();
 };
