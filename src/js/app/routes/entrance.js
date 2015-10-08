@@ -54,7 +54,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('signup', {
-    url: '/signup',
+    url: '/signup?next',
     parent: 'entrance',
     views: {
       entrance: {
