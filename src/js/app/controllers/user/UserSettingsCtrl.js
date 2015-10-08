@@ -15,6 +15,10 @@ module.exports = function ($scope, growl, $stateParams, $analytics, currentUser,
     editing.password = true
   }
 
+  if ($stateParams.expand === 'solicitation') {
+    $scope.expand1 = true
+  }
+
   $scope.close = function () {
     if ($history.isEmpty()) {
       $scope.$state.go('profile.posts', {id: user.id})
