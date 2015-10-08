@@ -127,6 +127,12 @@
           <p>{{community.beta_access_code}}</p>
           <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
         </div>
+        <div class="half-column">
+          <label>Invitation code link</label>
+          <p><a href="{{join_url}}">{{join_url}}</a></p>
+          <p class="help">You can copy this link for pasting in emails or embedding on your webpage
+to pre-populate the invite code for new members to easily join.</p>
+        </div>
         <div class="half-column value" ng-hide="editing.beta_access_code">
           <button type="button" ng-click="edit('beta_access_code')">Change</button>
         </div>

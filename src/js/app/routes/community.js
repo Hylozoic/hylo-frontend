@@ -15,6 +15,7 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+
   .state('community.home', {
     abstract: true,
     parent: 'community',
@@ -25,6 +26,29 @@ module.exports = function ($stateProvider) {
       }
     }
   })
+
+  .state('community.join', {
+    url: '/join/:code',
+    parent: 'community',
+    views: {
+      community: {
+        templateUrl: '/ui/community/join.tpl.html',
+        controller: 'JoinCommunityByUrlCtrl'
+      }
+    },
+    resolve: /* @ngInject*/ {
+      community: function (Community, $stateParams, $rootScope) {
+        return Community.get({id: $stateParams.community}).$promise
+      },
+      code: function($stateParams) {
+        return $stateParams.code
+      },
+      requireLogin: /* @ngInject*/ function (User, currentUser) {
+        return User.requireLogin(currentUser)
+      }
+    }
+  })
+
   .state('community.posts', {
     url: '',
     parent: 'community.home',
