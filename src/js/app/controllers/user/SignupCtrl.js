@@ -20,7 +20,7 @@ var handleError = function(err, $scope, $analytics) {
   }
 };
 
-module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, Invitation, context, projectInvitation) {
+module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, Invitation, context, projectInvitation, $stateParams) {
   "ngInject";
   $analytics.eventTrack('Signup start');
   $scope.user = {};
@@ -29,7 +29,9 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
 
   var finishSignup = provider => {
     $analytics.eventTrack('Signup success', {provider: provider});
-    if (context === 'modal') {
+    if ($stateParams.next) {
+      window.history.pushState(null, null, $stateParams.next)
+    } else if (context === 'modal') {
       $scope.$close({action: 'finish'});
     } else {
       $scope.$state.go('appEntry');
@@ -71,7 +73,7 @@ module.exports = function($scope, $analytics, User, Community, ThirdPartyAuth, I
     if (context === 'modal') {
       $scope.$close({action: 'go', state: state});
     } else {
-      $scope.$state.go(state);
+      $scope.$state.go(state, {next: $stateParams.next});
     }
   };
 

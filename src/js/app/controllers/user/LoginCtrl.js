@@ -84,7 +84,7 @@ module.exports = function ($scope, $stateParams, $analytics, User, ThirdPartyAut
     if (context === 'modal') {
       $scope.$close({action: 'go', state: state})
     } else {
-      $scope.$state.go(state)
+      $scope.$state.go(state, {next: $stateParams.next})
     }
   }
 }
