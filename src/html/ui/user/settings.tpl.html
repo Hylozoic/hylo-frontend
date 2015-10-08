@@ -66,6 +66,15 @@
       </div>
       <div class="setting-item">
         <div class="main-column">
+          <label>Receive email invitations to post?</label>
+          <div class="summary">Check the circle to get a weekly email that lets you create posts without leaving your inbox.</div>
+        </div>
+        <div class="side-column">
+          <input type="checkbox" ng-model="user.settings.email_solicitation_preference" ng-click="toggle('email_solicitation_preference', true)"/>
+        </div>
+      </div>
+      <div class="setting-item">
+        <div class="main-column">
           <label>Get mobile notifications on post you are following?</label>
           <div class="summary">Check the circle to get mobile notifications on any posts you are following.</div>
         </div>
