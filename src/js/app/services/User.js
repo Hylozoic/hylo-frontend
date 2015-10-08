@@ -54,7 +54,9 @@ var factory = function($resource, $state, Project, $timeout, $q) {
   User.requireLogin = function(user) {
     if (user) return;
 
-    $timeout(() => $state.go('login'));
+    var nextParams = {next: format('%s%s', window.location.pathname, window.location.search)}
+
+    $timeout(() => $state.go('login', nextParams));
     var deferred = $q.defer();
     deferred.reject('login required'); // this string is expected in app/index.js
     return deferred.promise;
