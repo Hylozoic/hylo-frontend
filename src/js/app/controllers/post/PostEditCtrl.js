@@ -8,8 +8,15 @@ var hasLocalStorage = function () {
   }
 }
 
-var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker, startingType) {
+module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $history,
+  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker) {
+  'ngInject'
+
+  var currentUser = CurrentUser.get()
+  var communities = $scope.communities
+  var post = $scope.post
+  var startingType = $scope.startingType
+
   $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
     var fields = [
@@ -42,7 +49,9 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   $scope.switchPostType = function (postType) {
     $scope.postType = postType
-    $scope.title = prefixes[postType]
+    if (_.contains(_.values(prefixes), $scope.title)) {
+      $scope.title = prefixes[postType]
+    }
     $scope.descriptionPlaceholder = placeholders[postType]
     $scope.updatePostDraftStorage()
   }
@@ -50,16 +59,9 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   $scope.close = function () {
     $rootScope.postEditProgress = null
     clearPostDraftStorage()
-    if ($history.isEmpty()) {
-      if (_.isEmpty(communities)) {
-        $state.go('home.allPosts')
-      } else {
-        $state.go('community.posts', {community: communities[0].slug})
-      }
-    } else {
-      $history.go(-1)
-    }
   }
+
+  $scope.$on('post-editor-closing', $scope.close)
 
   $scope.addImage = function () {
     $scope.addingImage = true
@@ -114,6 +116,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       clearPostDraftStorage()
       $state.go('post', {postId: post.id})
       growl.addSuccessMessage('Post updated.')
+      $scope.$emit('post-editor-done')
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
@@ -131,6 +134,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
       clearCache()
       $scope.close()
       growl.addSuccessMessage('Post created!')
+      $scope.$emit('post-editor-done')
       clearPostDraftStorage()
       currentUser.post_count += 1
     }, function (err) {
@@ -243,8 +247,4 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   $scope.$watch('startTime', $scope.updatePostDraftStorage)
   $scope.$watch('endTime', $scope.updatePostDraftStorage)
-}
-
-module.exports = function (angularModule) {
-  angularModule.controller('PostEditCtrl', controller)
 }

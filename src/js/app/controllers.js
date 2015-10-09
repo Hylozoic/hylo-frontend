@@ -5,7 +5,6 @@ require('./controllers/profile/contributions')(angularModule)
 require('./controllers/profile/thanks')(angularModule)
 require('./controllers/user/NotificationsCtrl')(angularModule)
 
-require('./controllers/post/PostEditCtrl')(angularModule)
 require('./controllers/post/PostCtrl')(angularModule)
 require('./controllers/post/PostListCtrl')(angularModule)
 require('./controllers/post/CommentsCtrl')(angularModule)
@@ -29,16 +28,23 @@ require('./controllers/project/ProjectEditCtrl')(angularModule)
 
 angularModule
 .controller('NavCtrl', require('./controllers/NavCtrl'))
+
 .controller('CommunityEventsCtrl', require('./controllers/community/CommunityEventsCtrl'))
 .controller('JoinCommunityCtrl', require('./controllers/community/JoinCommunityCtrl'))
 .controller('JoinCommunityByUrlCtrl', require('./controllers/community/JoinCommunityByUrlCtrl'))
-.controller('PostCardCtrl',      require('./controllers/post/PostCardCtrl'))
+
+.controller('PostCardCtrl', require('./controllers/post/PostCardCtrl'))
+.controller('PostEditCtrl', require('./controllers/post/PostEditCtrl'))
+.controller('PostEditPageCtrl', require('./controllers/post/PostEditPageCtrl'))
+.controller('WelcomePostCtrl', require('./controllers/post/WelcomePostCtrl'))
+
 .controller('ProfileEditCtrl', require('./controllers/profile/ProfileEditCtrl'))
-.controller('WelcomePostCtrl',   require('./controllers/post/WelcomePostCtrl'))
-.controller('ProjectCtrl',       require('./controllers/project/ProjectCtrl'))
-.controller('ProjectPostsCtrl',  require('./controllers/project/ProjectPostsCtrl'))
+
+.controller('ProjectCtrl', require('./controllers/project/ProjectCtrl'))
+.controller('ProjectPostsCtrl', require('./controllers/project/ProjectPostsCtrl'))
 .controller('ProjectInviteCtrl', require('./controllers/project/ProjectInviteCtrl'))
 .controller('ProjectUsersCtrl', require('./controllers/project/ProjectUsersCtrl'))
+
 .controller('LoginCtrl', require('./controllers/user/LoginCtrl'))
 .controller('SignupCtrl', require('./controllers/user/SignupCtrl'))
 .controller('UserSettingsCtrl', require('./controllers/user/UserSettingsCtrl'))
