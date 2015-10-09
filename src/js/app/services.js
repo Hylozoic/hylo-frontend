@@ -1,6 +1,7 @@
 module.exports = function (angularModule) {
-  // resources
-  require('./services/User')(angularModule)
+  // FIXME don't do modules like this anymore;
+  // instead just export the factory function
+  // as in the second section below
   require('./services/Community')(angularModule)
   require('./services/Activity')(angularModule)
   require('./services/Comment')(angularModule)
@@ -9,8 +10,6 @@ module.exports = function (angularModule) {
   require('./services/Invitation')(angularModule)
   require('./services/Project')(angularModule)
   require('./services/Network')(angularModule)
-
-  // other services
   require('./services/bodyClass')(angularModule)
   require('./services/onboarding')(angularModule)
   require('./services/clickthroughTracker')(angularModule)
@@ -26,6 +25,8 @@ module.exports = function (angularModule) {
   require('./services/joinCommunity')(angularModule)
   require('./services/popupDone')
 
-  angularModule.factory('CurrentUser', require('./services/CurrentUser'))
-  angularModule.factory('UserMentions', require('./services/UserMentions'))
+  angularModule
+  .factory('CurrentUser', require('./services/CurrentUser'))
+  .factory('User', require('./services/User'))
+  .factory('UserMentions', require('./services/UserMentions'))
 }
