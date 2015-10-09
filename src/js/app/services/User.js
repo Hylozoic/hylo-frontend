@@ -51,12 +51,13 @@ var factory = function($resource, $state, Project, $timeout, $q) {
   // that call resources requiring login,
   // add it as a dependency of those.
   // (see e.g. routes/home.js)
-  User.requireLogin = function(user) {
+  User.requireLogin = function(user, redirectState) {
     if (user) return;
 
     var nextParams = {next: format('%s%s', window.location.pathname, window.location.search)}
+    if (!redirectState) redirectState = 'login'
 
-    $timeout(() => $state.go('login', nextParams));
+    $timeout(() => $state.go(redirectState, nextParams));
     var deferred = $q.defer();
     deferred.reject('login required'); // this string is expected in app/index.js
     return deferred.promise;
