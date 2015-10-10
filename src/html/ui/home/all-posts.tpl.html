@@ -1,6 +1,7 @@
 <posts-toolbar update="updateView(data)"></posts-toolbar>
 
 <div class="all-sections">
+  <inline-post-input></inline-post-input>
   <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
   <div ng-if="!hasPosts" class="empty-content">
     <p>Your communities are completely devoid of posts! You could be the first to unite people around a common vision. Just click the button above to start.</p>

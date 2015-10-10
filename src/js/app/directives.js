@@ -13,6 +13,7 @@ require('./directives/welcomePost')(angularModule)
 
 angularModule
 .directive('postEditor', require('./directives/postEditor'))
+.directive('inlinePostInput', require('./directives/inlinePostInput'))
 
 .directive('scrollClass', function ($window) {
   return (scope, element, attrs) => {

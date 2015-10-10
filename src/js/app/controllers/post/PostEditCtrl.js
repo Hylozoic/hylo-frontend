@@ -63,6 +63,11 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
   $scope.$on('post-editor-closing', $scope.close)
 
+  $scope.cancel = function () {
+    $scope.close()
+    $scope.$emit('post-editor-done')
+  }
+
   $scope.addImage = function () {
     $scope.addingImage = true
 

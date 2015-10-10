@@ -80,3 +80,57 @@
     }
   }
 }
+
+.inline-post-input {
+  min-height: 34px;
+  margin-bottom: @std-padding * 2;
+  position: relative;
+  z-index: 1;
+  background-color: @white;
+
+  > input[type="text"] {
+    .form-control;
+    .small-header;
+    position: absolute;
+  }
+
+  .edit-post {
+    display: none;
+
+    border: 1px solid @border-lightest;
+    border-radius: @border-radius-base;
+    padding: @std-padding @std-padding 0;
+    background-color: @faint-gray;
+
+    .edit-content {
+      padding-top: 0;
+    }
+  }
+
+  &.expanded {
+    > input[type="text"] {
+      display: none;
+    }
+
+    .edit-post {
+      display: block;
+    }
+  }
+
+  &.animating {
+    .edit-post, > input[type="text"] {
+      display: none;
+    }
+  }
+
+  &.pre-animating {
+    .edit-post {
+      display: block;
+    }
+
+    > input[type="text"] {
+      display: block;
+      color: white;
+    }
+  }
+}

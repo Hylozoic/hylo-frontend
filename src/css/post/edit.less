@@ -150,16 +150,20 @@
 
 	.bottom-bar {
 		.make-row;
+    min-height: @default-button-height + @std-padding*2;
 
-    .button {
+    .button, button {
       .rounded-button;
+      &.save {
+        .rounded-button-dark;
+      }
     }
 
 		.add-meta {
-			.make-sm-column(9);
 			.body-text;
-			padding-top: @std-padding;
-			padding-bottom: @std-padding;
+      float: left;
+      display: inline-block;
+      padding: @std-padding;
 
 			a {
 				line-height: @default-button-height;
@@ -206,18 +210,22 @@
         }
       }
 
-			&.done {
-        .make-sm-column(3);
-        text-align: right;
+      &.image {
+        padding-right: 0;
+      }
 
-				button {
-					.rounded-button-dark;
-				}
+			&.done {
+        padding-left: 0;
+        text-align: right;
+        float: right;
 			}
 
       &, &.done {
         @media (max-width: @screen-xs-max) {
+          float: none;
+          display: block;
           text-align: center;
+          padding: @std-padding @std-padding 0;
         }
       }
 		}
