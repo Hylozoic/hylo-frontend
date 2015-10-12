@@ -49,7 +49,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
   $scope.switchPostType = function (postType) {
     $scope.postType = postType
-    if (_.contains(_.values(prefixes), $scope.title)) {
+    if (_.contains(_.values(prefixes), $scope.title) || !$scope.title) {
       $scope.title = prefixes[postType]
     }
     $scope.descriptionPlaceholder = placeholders[postType]
