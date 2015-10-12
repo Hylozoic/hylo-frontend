@@ -78,7 +78,7 @@ module.exports = function($stateProvider) {
   })
   .state('network.members', {
     url: '/members',
-    resolve: {
+    resolve: /* @ngInject*/ {
       usersQuery: function(network) {
         return network.members().$promise;
       }
