@@ -76,10 +76,16 @@
 
         <div class="setting-item">
           <div class="side-column">
-            <label>Public</label>
+            <label>Visibility</label>
           </div>
           <div class="main-column">
-            <input type="checkbox" name="public" ng-model="community.is_public">
+            <select name="visibility" ng-model="community.visibility" ng-options="id as value for (id, value) in visibilities" class="form-control" required>
+              <option value="">Pick one:</option>
+            </select>
+            <p class="help error" ng-if="form.submitted && form.visibility.$error.required">Please choose one.</p>
+            <p class="help">Public means all content is public by default and participation is not gated.</p>
+            <p class="help">Private means you have to be approved to participate.</p>
+            <p class="help">Secret means private, plus the group doesn't turn up in searches.</p>
           </div>
         </div>
       </div>

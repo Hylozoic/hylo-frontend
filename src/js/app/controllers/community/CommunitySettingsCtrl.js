@@ -1,11 +1,18 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
+var visibilities = {
+  'public': "Public",
+  'private': "Private",
+  'secret': "Secret"
+};
+
 var controller = function ($scope, $history, $analytics, community, currentUser, growl, extraProperties, User, $location) {
 
   _.merge(community, extraProperties);
   var origin = $location.absUrl().replace($location.path(), '');
   $scope.join_url = origin + '/c/' + community.slug + '/join/' + community.beta_access_code;
   $scope.community = community;
+  $scope.visibilities = visibilities;
   $scope.settings = community.settings;
 
   $scope.close = function() {
@@ -101,6 +108,19 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
     if (!$scope.moderators) {
       $scope.moderators = community.moderators();
     }
+  };
+
+  $scope.saveField = function(field) {
+    var data = {};
+    data[field] = community[field];
+    community.update(data, function() {
+      $analytics.eventTrack('Community: Changed Field', {
+        name: field,
+        community_id: community.slug,
+        moderator_id: currentUser.id
+      });
+      growl.addSuccessMessage('Change was saved.');
+    });
   };
 
   $scope.saveSetting = function(name) {

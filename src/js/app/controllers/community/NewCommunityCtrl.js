@@ -14,9 +14,16 @@ var categories = {
   'other': 'Other'
 };
 
+var visibilities = {
+  'public': "Public",
+  'private': "Private",
+  'secret': "Secret"
+};
+
 var controller = function ($scope, $timeout, $analytics, $history, Community, growl, currentUser) {
 
   $scope.categories = categories;
+  $scope.visibilities = visibilities;
   $scope.uploading = {};
 
   var community = $scope.community = new Community({

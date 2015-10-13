@@ -143,6 +143,19 @@ to pre-populate the invite code for new members to easily join.</p>
         </div>
       </div>
 
+      <div class="setting-item">
+        <div class="half-column">
+          <label>Visibility</label>
+          <p>{{community.visibility}}</p>
+          <p class="help">Public means all content is public by default and participation is not gated.</p>
+          <p class="help">Private means you have to be approved to participate.</p>
+          <p class="help">Secret means private, plus the group doesn't turn up in searches.</p>
+        </div>
+        <div class="half-column value">
+          <select name="visibility" ng-model="community.visibility" ng-options="id as value for (id, value) in visibilities" ng-change="saveField('visibility')" class="form-control">
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="section-label" ng-click="toggleModerators()">
