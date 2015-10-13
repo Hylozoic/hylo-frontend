@@ -16,6 +16,7 @@ body.community {
 
 .banner {
   .buttons {
+    z-index: 1;
     position: absolute;
     right: 0;
     padding: @std-padding;
@@ -27,13 +28,26 @@ body.community {
       margin-right: 0;
     }
   }
-  
+
   .buttons a {
     display: block;
     float: left;
     margin-right: 5px;
     .rounded-button;
   }
+
+  @media (max-width: @screen-xs-max) {
+    .buttons {
+      padding: 5px 0 @std-padding !important;
+      text-align: center;
+      width: 100%;
+      a {
+        float: none !important;
+        display: inline-block !important;
+      }
+    }
+  }
+
 }
 
 .community-posts {
