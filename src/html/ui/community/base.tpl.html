@@ -2,7 +2,16 @@
   <div class="background">
     <div back-img="::community.banner_url"></div>
   </div>
-
+  <div class="buttons">
+    <a class="invite" ui-sref="community.invite({community: community.slug})" ng-if="canInvite">
+      <i class="icon-add-01"></i>
+      Invite Members
+    </a>
+    <a class="settings" ui-sref="community.settings({community: community.slug})" ng-if="canModerate">
+      <i class="icon-settings"></i>
+      Settings
+    </a>
+  </div>
   <div class="titles">
     <div class="logo" back-img="::community.avatar_url"></div>
     <div class="name">{{::community.name}}</div>

@@ -21,7 +21,7 @@ describe('CommunityCtrl', function() {
       $scope: scope,
       $analytics: {eventTrack: function() {}},
       community: community,
-      currentUser: null
+      currentUser: {canModerate: function() { return true; }}
     });
     expect(scope.community).to.equal(community);
   });
