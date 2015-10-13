@@ -2,10 +2,12 @@ module.exports = function () {
   return {
     restrict: 'E',
     scope: {
-      communities: '='
+      community: '='
     },
     controller: function ($scope) {
       'ngInject'
+
+      $scope.communities = $scope.community ? [$scope.community] : []
 
       $scope.expand = function () {
         $scope.expanded = true

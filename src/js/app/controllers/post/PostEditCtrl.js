@@ -30,6 +30,10 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     if (hasLocalStorage()) delete window.localStorage.postDraft
   }
 
+  $rootScope.$on('$stateChangeSuccess', function () {
+    clearPostDraftStorage()
+  })
+
   $scope.maxTitleLength = 140
 
   var prefixes = {
@@ -120,6 +124,17 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     UserCache.allPosts.clear(currentUser.id)
   }
 
+  var cleanup = function () {
+    clearCache()
+    clearPostDraftStorage()
+    ;[
+      'title', 'description',
+      'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
+      'public', 'start_time', 'end_time'
+    ].forEach(attr => $scope[attr] = null)
+    $scope.switchPostType($scope.postType)
+  }
+
   var update = function (data) {
     post.update(data, function () {
       $analytics.eventTrack('Edit Post', {
@@ -128,8 +143,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
         community_id: communities[0].id,
         type: $scope.postType
       })
-      clearCache()
-      clearPostDraftStorage()
+      cleanup()
       $state.go('post', {postId: post.id})
       growl.addSuccessMessage('Post updated.')
       $scope.$emit('post-editor-done', {action: 'update'})
@@ -147,11 +161,10 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
         community_name: communities[0].name,
         community_id: communities[0].id
       })
-      clearCache()
+      cleanup()
       $scope.close()
       growl.addSuccessMessage('Post created!')
       $scope.$emit('post-editor-done', {action: 'create'})
-      clearPostDraftStorage()
       currentUser.post_count += 1
     }, function (err) {
       $scope.saving = false
