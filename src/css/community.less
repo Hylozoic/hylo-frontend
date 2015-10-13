@@ -14,6 +14,28 @@ body.community {
   }
 }
 
+.banner {
+  .buttons {
+    position: absolute;
+    right: 0;
+    padding: @std-padding;
+    @media (max-width: @screen-xs-max) {
+      padding-top: 5px;
+    }
+    a {
+      margin-left: 5px;
+      margin-right: 0;
+    }
+  }
+  
+  .buttons a {
+    display: block;
+    float: left;
+    margin-right: 5px;
+    .rounded-button;
+  }
+}
+
 .community-posts {
   .post-context .community {
     display: none;

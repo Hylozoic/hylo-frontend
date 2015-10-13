@@ -1,5 +1,4 @@
 var controller = function($scope, community, usersQuery, $dialog, Cache, currentUser, $timeout) {
-  $scope.canInvite = $scope.canModerate || community.settings.all_can_invite;
   $scope.users = usersQuery.people;
 
   $scope.loadMore = _.debounce(function() {
