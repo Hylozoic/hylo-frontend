@@ -21,7 +21,8 @@ body.community {
     right: 0;
     padding: @std-padding;
     @media (max-width: @screen-xs-max) {
-      padding-top: 5px;
+      padding: 5px 0 @std-padding !important;
+      right: 5px;
     }
     a {
       margin-left: 5px;
@@ -32,8 +33,12 @@ body.community {
   .buttons a {
     display: block;
     float: left;
-    margin-right: 5px;
     .rounded-button;
+    @media (max-width: @screen-xs-max) {
+      float: none !important;
+      display: inline-block !important;
+      margin: 0 !important;
+    }
   }
 
 }
