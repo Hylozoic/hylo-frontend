@@ -8,12 +8,12 @@ require('./directives/masonry')(angularModule)
 require('./directives/anguvideo')(angularModule)
 require('./directives/touchClass')(angularModule)
 require('./directives/postCard')(angularModule)
-require('./directives/postsToolbar')(angularModule)
 require('./directives/welcomePost')(angularModule)
 
 angularModule
 .directive('postEditor', require('./directives/postEditor'))
 .directive('inlinePostInput', require('./directives/inlinePostInput'))
+.directive('postsToolbar', require('./directives/postsToolbar'))
 
 .directive('scrollClass', function ($window) {
   return (scope, element, attrs) => {
@@ -109,4 +109,16 @@ angularModule
 
 .directive('loadingIndicator', () => ({
   template: '<div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>'
+}))
+
+.directive('ngPlaceholder', () => ({
+  restrict: 'A',
+  scope: {
+    placeholder: '=ngPlaceholder'
+  },
+  link: function (scope, elem, attr) {
+    scope.$watch('placeholder', function () {
+      elem[0].placeholder = scope.placeholder
+    })
+  }
 }))

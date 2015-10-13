@@ -9,85 +9,68 @@
 		margin-bottom: @std-padding/2;
 	}
 
-  @radio-left-margin: 32px;
+  .counter {
+    float: right;
+  }
 
 	.select-type {
-    border-top: 1px solid @border-lightest;
-    padding-top: @std-padding;
-    margin-bottom: @std-padding;
+    margin-bottom: 6px;
 
-		.option {
-      margin-bottom: 10px;
-			.make-radio-color(@color) {
-				input[type=radio]:checked {
-					background-color: @color;
-					border-color: @color;
-				}
-			}
+    .labels {
+      font-size: 0;
+      a {
+        display: inline-block;
+        margin-right: 2px;
+        .small-title-text;
+        color: @white;
+        border-radius: @border-radius-base;
+        border: 2px solid @faint-gray;
+        line-height: 28px;
+        height: 30px;
+        vertical-align: middle;
+        padding: 0 8px;
 
-			&.intention {
-				.make-radio-color(@intention-color);
-			}
-			&.offer {
-				.make-radio-color(@offer-color);
-			}
-			&.request {
-				.make-radio-color(@request-color);
-			}
-      &.chat {
-        .make-radio-color(@light-gray);
-      }
-      &.event {
-        .make-radio-color(@light-gray);
-      }
-
-      input[type=radio] {
-		    .round-radio;
-        float: left;
-        margin-right: 10px;
-			}
-
-			label {
-        font-weight: normal;
-        display: block;
-				color: @inactive-text;
-        > div {
-          padding-top: 2px;
-          margin-left: @radio-left-margin;
+        &:hover {
+          border: 2px solid @white;
+          text-decoration: none;
         }
-        h4 {
-  				.small-header;
-          margin-top: 0;
-          margin-bottom: 0;
-  			}
-      }
 
-			&.active {
-				label {
-					color: @default-text;
-				}
-			}
-
-		}
-	}
-
-  .event {
-    .form {
-      .make-row;
-      margin-top: 10px;
-      padding-left: @radio-left-margin;
-      > div {
-        .make-sm-column(6);
-        @media (max-width: @screen-xs-max) {
-          &:last-child {
-            margin-top: 10px;
-          }
+        &.active {
+          border: 2px solid @border-dark;
+          color: white;
         }
-      }
-      label {
-        font-weight: bold;
+
+        &.chat { background-color: @light-gray; }
+        &.offer { background-color: @offer-color; }
+        &.request { background-color: @request-color; }
+        &.intention { background-color: @intention-color; }
+        &.event { background-color: @light-gray; }
       }
     }
+	}
+
+  .type-descriptions {
+    margin-top: 5px;
+    border-bottom: 1px solid @border-lightest;
+    padding-bottom: @std-padding;
+    margin-bottom: @std-padding;
+  }
+
+  .event-form {
+    .make-row;
+    margin-top: 10px;
+    > div {
+      .make-sm-column(6);
+      @media (max-width: @screen-xs-max) {
+        &:last-child {
+          margin-top: 10px;
+        }
+      }
+    }
+    label {
+      font-weight: bold;
+    }
+
     .input-group-btn {
       button {
         width: 34px;
@@ -99,9 +82,11 @@
         }
       }
     }
+
     [datepicker] > table {
       outline: 0 !important;
     }
+
     .date-picker-menu {
       &:hover {
         background-color: transparent;
@@ -118,37 +103,53 @@
 	}
 
 	.edit-content {
-		padding: @std-padding 0;
+		padding: 0;
 
-		input, textarea {
-			margin-bottom: @std-padding;
-			.proxima-nova-regular;
-			font-size: 18px;
+		input[type=text] {
+      .title-text;
 			width: 100%;
 			border: 1px solid @default-border;
 		}
+  }
 
-    .counter {
-      float: right;
-      .meta-text;
-      vertical-align: baseline;
-      line-height: 25px;
+  .mentio-editor {
+    height: 8em;
+
+    @media (max-width: @screen-xs-max) {
+      height: 40vh;
     }
+  }
 
-    .mentio-editor {
-      height: 10em;
+  .Medium-placeholder {
+    border-radius: 4px;
+  }
 
-      @media (max-width: @screen-xs-max) {
-        height: 50vh;
+  .visibility {
+    border-top: 1px solid @border-lightest;
+    padding-top: @std-padding;
+    margin-top: @std-padding;
+
+  	.dropdown-menu li {
+  		white-space: nowrap;
+  	}
+
+    tags-input {
+      margin-bottom: 15px;
+      .avatar {
+        border-radius: 0 !important;
+      }
+
+      input.input {
+        min-width: 50%;
       }
     }
 
-    .Medium-placeholder {
-      border-radius: 4px;
+    .publicity {
+      .body-text;
     }
-	}
+  }
 
-	.bottom-bar {
+  .bottom-bar {
 		.make-row;
     min-height: @default-button-height + @std-padding*2;
 
@@ -187,6 +188,10 @@
       }
 
 			.image-preview {
+        .thumbnail {
+          margin-bottom: 0;
+        }
+
         @media (min-width: @screen-sm) {
 					vertical-align: top;
           float: left;
@@ -228,27 +233,13 @@
           padding: @std-padding @std-padding 0;
         }
       }
+
+      &.done {
+        @media (max-width: @screen-xs-max) {
+          padding-bottom: @std-padding;
+        }
+      }
 		}
 	}
-
-  .visibility {
-    border-top: 1px solid @border-lightest;
-    padding-top: @std-padding;
-
-  	.dropdown-menu li {
-  		white-space: nowrap;
-  	}
-
-    tags-input {
-      margin-bottom: 15px;
-      .avatar {
-        border-radius: 0 !important;
-      }
-    }
-
-    .publicity {
-      .body-text;
-    }
-  }
 
 }

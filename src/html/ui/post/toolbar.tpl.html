@@ -1,15 +1,5 @@
 <div class="toolbar posts-toolbar">
   <div>
-    <a ng-if="community && currentUser && !hidePostButton" class="toolbar-left add-new" ui-sref="community.newPost">
-      <i class="icon-add-01"></i>
-      <span class="hidden-xs new-post-label">New Post</span>
-    </a>
-
-    <a ng-if="!community && currentUser && !hidePostButton" class="toolbar-left add-new" ui-sref="newPost">
-      <i class="icon-add-01"></i>
-      <span class="hidden-xs new-post-label">New Post</span>
-    </a>
-
     <div class="toolbar-right">
       <div class="btn-group" dropdown>
         <a class="button" dropdown-toggle>

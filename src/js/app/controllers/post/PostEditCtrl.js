@@ -47,12 +47,21 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     chat: ''
   }
 
+  var titlePlaceholders = {
+    intention: 'What would you like to create?',
+    offer: 'What would you like to share?',
+    request: 'What are you looking for?',
+    chat: 'What do you want to say?',
+    event: "What is your event's name?"
+  }
+
   $scope.switchPostType = function (postType) {
     $scope.postType = postType
     if (_.contains(_.values(prefixes), $scope.title) || !$scope.title) {
       $scope.title = prefixes[postType]
     }
     $scope.descriptionPlaceholder = placeholders[postType]
+    $scope.titlePlaceholder = titlePlaceholders[postType]
     $scope.updatePostDraftStorage()
   }
 
@@ -63,9 +72,11 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
   $scope.$on('post-editor-closing', $scope.close)
 
-  $scope.cancel = function () {
+  $scope.cancel = event => {
     $scope.close()
-    $scope.$emit('post-editor-done')
+    $scope.$emit('post-editor-done', {action: 'cancel'})
+    event.preventDefault()
+    event.stopPropagation()
   }
 
   $scope.addImage = function () {
@@ -121,7 +132,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       clearPostDraftStorage()
       $state.go('post', {postId: post.id})
       growl.addSuccessMessage('Post updated.')
-      $scope.$emit('post-editor-done')
+      $scope.$emit('post-editor-done', {action: 'update'})
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
@@ -139,7 +150,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       clearCache()
       $scope.close()
       growl.addSuccessMessage('Post created!')
-      $scope.$emit('post-editor-done')
+      $scope.$emit('post-editor-done', {action: 'create'})
       clearPostDraftStorage()
       currentUser.post_count += 1
     }, function (err) {
@@ -204,6 +215,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   } else if (hasLocalStorage() && window.localStorage.postDraft) {
     try {
       _.merge($scope, JSON.parse(window.localStorage.postDraft))
+      $scope.switchPostType($scope.postType)
     } catch(e) {}
   } else {
     $scope.switchPostType(startingType || 'chat')

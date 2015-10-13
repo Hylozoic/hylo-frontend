@@ -1,4 +1,4 @@
-var directive = function() {
+module.exports = function () {
   return {
     restrict: 'E',
     scope: {
@@ -6,11 +6,10 @@ var directive = function() {
       update: '&',
       hidePostButton: '@'
     },
-    link: function(scope, element, attrs) {
-      scope.hidePostButton = attrs.hidePostButton;
-    },
-    controller: function($scope, CurrentUser) {
-      $scope.currentUser = CurrentUser.get();
+    controller: function ($scope, CurrentUser) {
+      'ngInject'
+
+      $scope.currentUser = CurrentUser.get()
 
       $scope.selectOptions = {
         sort: [
@@ -25,30 +24,25 @@ var directive = function() {
           {label: 'Requests', value: 'request'},
           {label: 'Chats', value: 'chat'}
         ]
-      };
+      }
 
       $scope.selected = {
         sort: $scope.selectOptions.sort[0],
         filter: $scope.selectOptions.filter[0]
-      };
+      }
 
-      $scope.select = function(type, value) {
+      $scope.select = function (type, value) {
         $scope.selected[type] = _.find(
           $scope.selectOptions[type],
-          function(x) { return x.value === value; }
-        );
+          x => x.value === value
+        )
 
-        $scope.update({data: $scope.selected});
-      };
+        $scope.update({data: $scope.selected})
+      }
 
-      $scope.update({data: $scope.selected});
-
+      $scope.update({data: $scope.selected})
     },
     templateUrl: '/ui/post/toolbar.tpl.html',
     replace: true
-  };
-};
-
-module.exports = function(angularModule) {
-  angularModule.directive('postsToolbar', directive);
-};
+  }
+}

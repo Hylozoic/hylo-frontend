@@ -2,6 +2,7 @@ module.exports = function ($scope, $history, $state, post, communities, starting
   'ngInject'
 
   $scope.post = post
+  $scope.editing = !!post
   $scope.communities = communities
   $scope.startingType = startingType
 
