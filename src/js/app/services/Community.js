@@ -37,6 +37,10 @@ var service = function($resource, Project) {
       url: '/noo/network/:id/communities',
       isArray: true
     },
+    search: {
+      url: '/noo/community/search',
+      isArray: true
+    },
     join: {
       url: '/noo/community/code',
       method: 'POST'

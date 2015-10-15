@@ -63,8 +63,8 @@ module.exports = function($stateProvider) {
   .state('network.discover', {
     url: '/discover',
     resolve: {
-      communities: /*@ngInject*/ function(network) {
-        return network.communities().$promise;
+      communities: /*@ngInject*/ function(Community) {
+        return Community.search().$promise;
       }
     },
     views: {
