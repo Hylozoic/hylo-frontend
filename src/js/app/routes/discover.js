@@ -18,7 +18,7 @@ module.exports = function($stateProvider) {
     },
     views: {
       main: {
-        templateUrl: '/ui/network/communities.tpl.html',
+        templateUrl: '/ui/discover/communities.tpl.html',
         controller: function($scope, network, communities) {
           'ngInject';
           $scope.communities = communities;

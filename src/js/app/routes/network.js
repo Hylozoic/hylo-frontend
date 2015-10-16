@@ -70,7 +70,7 @@ module.exports = function($stateProvider) {
     },
     views: {
       tab: {
-        templateUrl: '/ui/network/communities.tpl.html',
+        templateUrl: '/ui/community/communities.tpl.html',
         controller: function($scope, communities) {
           'ngInject';
           $scope.communities = communities;
