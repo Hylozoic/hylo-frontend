@@ -3,18 +3,11 @@ module.exports = function($stateProvider) {
   .state('discover', {
     url: "/discover",
     parent: 'main',
-    abstract: true,
-    views: {
-      main: {
-        templateUrl: '/ui/app/discover.tpl.html',
-        controller: function($scope) {
-          'ngInject';
-        }
-      }
-    }
+    abstract: true
   })
   .state('discover.communities', {
-    url: '/communities',
+    url: '/discover/communities',
+    parent: 'main',
     resolve: {
       network: /*@ngInject*/ function(Network) {
         return Network.get({id: 'testing'}).$promise;
@@ -24,7 +17,7 @@ module.exports = function($stateProvider) {
       }
     },
     views: {
-      tab: {
+      main: {
         templateUrl: '/ui/network/communities.tpl.html',
         controller: function($scope, network, communities) {
           'ngInject';
