@@ -1,14 +1,4 @@
-.centered-column(@size) {
-  .make-sm-column(@size + 2);
-  .make-md-column-offset((10-@size)/2);
-  .make-md-column(@size);
-  .make-md-column-offset((12-@size)/2);
-
-  @media (max-width: @screen-xs-max) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
+@import 'mixins/communities';
 
 body.network {
   .has-banner(4);
@@ -21,53 +11,7 @@ body.network-posts {
 }
 
 body.network-communities {
-
-  .tab-content .communities {
-    .centered-column(10);
-    padding-top: @std-padding*2;
-  }
-
-  .community-card-wrapper {
-    .make-sm-column(4);
-  }
-
-  .community-card {
-    width: 100%;
-    position: relative;
-    border: 1px solid @border-light;
-    border-radius: @border-radius-base;
-    overflow: hidden;
-    margin-bottom: @std-padding*2;
-
-    .background-wrapper {
-      font-size: 0; // inline-block spacing fix
-    }
-
-    .background {
-      .fluid-height(38.2%);
-      > div {
-        .banner-background;
-      }
-    }
-
-    .middle-content {
-      position: relative;
-      padding: @std-padding;
-      background: @faint-gray;
-    }
-
-    .logo {
-      width: @avatar-size-default;
-      height: @avatar-size-default;
-      margin-top: -@avatar-size-default/2 - @std-padding;
-      margin-bottom: 10px;
-      background-size: cover;
-    }
-
-    .name {
-      .small-header;
-    }
-  }
+  .communities-mixin();
 }
 
 body.network-members {
