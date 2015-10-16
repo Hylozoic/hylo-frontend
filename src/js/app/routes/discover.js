@@ -24,10 +24,6 @@ module.exports = function($stateProvider) {
           $scope.communities = communities;
           $scope.network = network;
 
-          // temporary workaround
-          var body = angular.element(document.querySelector('body'));
-          body.addClass('network');
-          body.addClass('network-communities');
         }
       }
     }
