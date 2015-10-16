@@ -150,6 +150,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
   require('./routes/onboarding')($stateProvider)
   require('./routes/home')($stateProvider)
   require('./routes/project')($stateProvider)
+  require('./routes/discover')($stateProvider)
   require('./routes/network')($stateProvider)
   require('./routes/entrance')($stateProvider)
 }

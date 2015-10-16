@@ -60,24 +60,6 @@ module.exports = function($stateProvider) {
     }
   })
 
-  .state('network.discover', {
-    url: '/discover',
-    resolve: {
-      communities: /*@ngInject*/ function(Community) {
-        return Community.search().$promise;
-      }
-    },
-    views: {
-      tab: {
-        templateUrl: '/ui/network/communities.tpl.html',
-        controller: function($scope, communities) {
-          'ngInject';
-          $scope.communities = communities;
-          console.log($scope.communities.length + ' communities');
-        }
-      }
-    }
-  })
 
   .state('network.communities', {
     url: '/communities',
