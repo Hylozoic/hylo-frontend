@@ -21,7 +21,7 @@
           <div class="name">{{community.name}}</div>
           {{community.memberCount}} member{{community.memberCount == 1 ? '' : 's'}}
           <div class="visibility">{{community.visibility}}</div>
-          <div ng-if="community.visibility != 'public'" class="join-button">
+          <div ng-if="canJoin && community.visibility != 'public'" class="join-button">
             <a ng-click="askToJoin(community.id, currentUser.id); $event.stopPropagation();">&oplus;</a>
           </div>
         </div>

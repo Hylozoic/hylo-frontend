@@ -9,9 +9,6 @@ module.exports = function($stateProvider) {
     url: '/discover/communities',
     parent: 'main',
     resolve: {
-      network: /*@ngInject*/ function(Network) {
-        return Network.get({id: 'testing'}).$promise;
-      },
       communities: /*@ngInject*/ function(Community) {
         return Community.search().$promise;
       }
@@ -19,11 +16,11 @@ module.exports = function($stateProvider) {
     views: {
       main: {
         templateUrl: '/ui/discover/communities.tpl.html',
-        controller: function($scope, network, communities, currentUser) {
+        controller: function($scope, communities, currentUser) {
           'ngInject';
           $scope.communities = communities;
-          $scope.network = network;
           $scope.currentUser = currentUser;
+          $scope.canJoin = true;
 
           $scope.askToJoin = function(communityId, userId) {
             console.log('User ' + userId + ' asks to join ' + communityId);

@@ -74,6 +74,7 @@ module.exports = function($stateProvider) {
         controller: function($scope, communities) {
           'ngInject';
           $scope.communities = communities;
+          $scope.canJoin = false;
         }
       }
     }
