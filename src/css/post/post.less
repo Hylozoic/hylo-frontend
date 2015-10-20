@@ -6,10 +6,6 @@
   margin-top: @std-padding * 2;
   margin-bottom: 70px;
 
-  @media (max-width: @screen-xs-max) {
-    margin-top: @std-padding;
-  }
-
   .post {
     .full-media {
       display: block;
@@ -19,9 +15,10 @@
     .media {
       display: none;
     }
-
   }
+
   @media (max-width: @screen-xs-max) {
+    margin-top: @std-padding;
     .post, .welcome-post {
       .make-row;
     }
