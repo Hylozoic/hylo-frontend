@@ -37,4 +37,8 @@ module.exports = function ($scope, Cache, Post, community, onboarding, firstPost
       postManager.reload()
     }
   })
+
+  $scope.startPosting = function () {
+    $scope.$broadcast('open-post-editor')
+  }
 }

@@ -26,6 +26,11 @@ module.exports = function () {
         }
       })
 
+      scope.$on('open-post-editor', () => {
+        scope.expand()
+        element.find('input')[0].focus()
+      })
+
       scope.$watch('expanded', val => {
         if (val) {
           element.addClass('expanded')

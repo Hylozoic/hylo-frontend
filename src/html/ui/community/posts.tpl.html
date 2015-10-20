@@ -1,8 +1,8 @@
 <posts-toolbar update="updateView(data)" community="community"></posts-toolbar>
 
-<div ng-if="currentUser.post_count == 0" class="reminder">
+<div ng-show="currentUser && currentUser.post_count == 0" class="reminder">
   <div>
-    <a ui-sref="community.newPost">Make your first post!</a>
+    <a ng-click="startPosting()">Make your first post!</a>
     <br/>
     <span class="help">
       <a class="help" href="/h/support#post">Learn more</a>
