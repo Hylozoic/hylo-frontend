@@ -14,6 +14,33 @@ body.community {
   }
 }
 
+.banner {
+  .buttons {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    padding: @std-padding;
+    @media (max-width: @screen-xs-max) {
+      padding: 5px 0 @std-padding !important;
+      right: 5px;
+    }
+  }
+
+  .buttons a {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    margin-right: 0;
+    .rounded-button;
+    @media (max-width: @screen-xs-max) {
+      float: none !important;
+      display: inline-block !important;
+      margin: 0 !important;
+    }
+  }
+
+}
+
 .community-posts {
   .post-context .community {
     display: none;

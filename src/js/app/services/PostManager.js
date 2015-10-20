@@ -17,6 +17,7 @@ var factory = function(growl, $analytics, $timeout) {
     this.scope = opts.scope;
     this.scope[this.attr] = firstPage.posts;
     this.scope.loadMoreDisabled = this.scope.posts.length >= firstPage.posts_total;
+    if (opts.hideWelcomePosts) this.scope.hideWelcomePosts = true
   };
 
   _.extend(PostManager.prototype, {

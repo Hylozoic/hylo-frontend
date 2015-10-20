@@ -24,7 +24,7 @@ module.exports = function($stateProvider) {
     url: '',
     resolve: {
       firstPostQuery: /*@ngInject*/ function(network, Post) {
-        return Post.queryForNetwork({id: network.id, limit: 10}).$promise;
+        return Post.queryForNetwork({id: network.id, limit: 10, type: 'all'}).$promise;
       }
     },
     views: {
@@ -37,6 +37,7 @@ module.exports = function($stateProvider) {
             firstPage: firstPostQuery,
             scope: $scope,
             attr: 'posts',
+            hideWelcomePosts: true,
             query: function() {
               return Post.queryForNetwork({
                 id: network.id,

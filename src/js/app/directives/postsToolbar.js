@@ -4,7 +4,8 @@ module.exports = function () {
     scope: {
       community: '=',
       update: '&',
-      hidePostButton: '@'
+      hidePostButton: '@',
+      hideWelcomePosts: '='
     },
     controller: function ($scope, CurrentUser) {
       'ngInject'
@@ -18,7 +19,7 @@ module.exports = function () {
           {label: 'Suggested', value: 'suggested'}
         ],
         filter: [
-          {label: 'All Posts', value: 'all+welcome'},
+          {label: 'All Posts', value: ($scope.hideWelcomePosts ? 'all' : 'all+welcome')},
           {label: 'Intentions', value: 'intention'},
           {label: 'Offers', value: 'offer'},
           {label: 'Requests', value: 'request'},
