@@ -4,7 +4,8 @@ var directive = function() {
     scope: {
       community: '=',
       update: '&',
-      hidePostButton: '@'
+      hidePostButton: '@',
+      hideWelcomePosts: '='
     },
     link: function(scope, element, attrs) {
       scope.hidePostButton = attrs.hidePostButton;
@@ -19,7 +20,7 @@ var directive = function() {
           {label: 'Suggested', value: 'suggested'}
         ],
         filter: [
-          {label: 'All Posts', value: 'all+welcome'},
+          {label: 'All Posts', value: ($scope.hideWelcomePosts ? 'all' : 'all+welcome')},
           {label: 'Intentions', value: 'intention'},
           {label: 'Offers', value: 'offer'},
           {label: 'Requests', value: 'request'},
