@@ -40,7 +40,7 @@ module.exports = function ($stateProvider) {
       community: function (Community, $stateParams, $rootScope) {
         return Community.get({id: $stateParams.community}).$promise
       },
-      code: function($stateParams) {
+      code: function ($stateParams) {
         return $stateParams.code
       },
       requireLogin: /* @ngInject*/ function (User, currentUser) {
@@ -200,8 +200,8 @@ module.exports = function ($stateProvider) {
     url: '/new-post?type',
     views: {
       community: {
-        templateUrl: '/ui/post/edit.tpl.html',
-        controller: 'PostEditCtrl'
+        templateUrl: '/ui/post/edit-page.tpl.html',
+        controller: 'PostEditPageCtrl'
       }
     },
     resolve: /* @ngInject*/ {

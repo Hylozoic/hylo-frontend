@@ -1,180 +1,138 @@
-<nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <i class="icon-hylo-script" ng-click="close()"></i>
-  </div>
-  <div class="navbar-center" href="#">{{editing ? 'Edit' : 'New'}} Post</div>
-  <a class="navbar-right close" ng-click="close()">&times;</a>
-</nav>
-
-<div class="main-content edit-post">
-  <div class="all-sections">
-    <div class="edit-content">
-      <div class="counter">{{title.length}} / {{maxTitleLength}}</div>
-      <div class="title">Title</div>
-      <input type="text" class="form-control" ng-model="title" maxlength="{{maxTitleLength}}"
-             ng-keypress="updatePostDraftStorage()">
-
-      <div class="title">Description</div>
-      <div ng-model="description" autocomplete="off" contenteditable="true"
-        class="mentio-editor form-control elastic"
-        placeholder="Add more detail here."
-        mentio=""
-        mentio-trigger-char="'@'"
-        mentio-items="people"
-        mentio-template-url="/ui/shared/people-mentions.tpl.html"
-        mentio-search="searchPeople(term)"
-        mentio-select="getPeopleTextRaw(item)"
-        mentio-typed-term="typedTerm"
-        ng-keypress="updatePostDraftStorage()">
-      </div>
-      <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
-    </div>
-
+<div class='edit-post'>
+  <div class="edit-content">
     <div class="select-type">
-      <div class="title">Type</div>
-      <div class="option chat" ng-class="{active: postType==='chat'}">
-        <label>
-          <input type="radio" ng-checked="postType==='chat'" ng-click="switchPostType('chat')"/>
-          <div>
-            <h4>Chat</h4>
-            Anything you'd like to talk about.
-          </div>
-        </label>
-      </div>
-      <div class="option offer" ng-class="{active: postType==='offer'}">
-        <label>
-          <input type="radio" ng-checked="postType==='offer'" ng-click="switchPostType('offer')"/>
-          <div>
-            <h4>Offer</h4>
-            Anything you'd like to share, with or without compensation. (e.g. a skill, some goods, information, an opportunity, etc.)
-          </div>
-        </label>
-      </div>
-      <div class="option request" ng-class="{active: postType==='request'}">
-        <label>
-          <input type="radio" ng-checked="postType==='request'" ng-click="switchPostType('request')"/>
-          <div>
-            <h4>Request</h4>
-            Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)
-          </div>
-        </label>
-      </div>
-      <div class="option intention" ng-class="{active: postType==='intention'}">
-        <label>
-          <input type="radio" ng-checked="postType==='intention'" ng-click="switchPostType('intention')"/>
-          <div>
-            <h4>Intention</h4>
-            Something you’d like to create, with the support of your community. A vision.
-          </div>
-        </label>
-      </div>
-      <div class="option event" ng-class="{active: postType==='event'}">
-        <label>
-          <input type="radio" ng-checked="postType==='event'" ng-click="switchPostType('event')"/>
-          <div>
-            <h4>Event</h4>
-            A calendar event with a specific date and time.
-          </div>
-        </label>
-
-        <div ng-show='postType === "event"' class="form">
-          <div>
-            <label>Start time</label>
-            <div class="input-group">
-              <input type="text" class="form-control" ng-model="start_time"
-                datetime-picker="MM/dd/yyyy HH:mm"
-                datepicker-options='{showWeeks: false}'
-                timepicker-options='{minuteStep: 15}'
-                is-open="datePickerStatus.opened1"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 1)">
-                  <i class='glyphicon glyphicon-calendar'></i>
-                </button>
-              </span>
-            </div>
-          </div>
-          <div>
-            <label>End time (optional)</label>
-            <div class="input-group">
-              <input type="text" class="form-control" ng-model="end_time"
-                datetime-picker="MM/dd/yyyy HH:mm"
-                datepicker-options='{showWeeks: false}'
-                timepicker-options='{minuteStep: 15}'
-                min-date='start_time'
-                is-open="datePickerStatus.opened2"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 2)">
-                  <i class='glyphicon glyphicon-calendar'></i>
-                </button>
-              </span>
-            </div>
-          </div>
-        </div>
-
+      <div class="labels">
+        <a ng-click="switchPostType('chat')" class="chat" ng-class="{active: postType==='chat'}">Chat</a>
+        <a ng-click="switchPostType('offer')" class="offer" ng-class="{active: postType==='offer'}">Offer</a>
+        <a ng-click="switchPostType('request')" class="request" ng-class="{active: postType==='request'}">Request</a>
+        <a ng-click="switchPostType('intention')" class="intention" ng-class="{active: postType==='intention'}">Intention</a>
+        <a ng-click="switchPostType('event')" class="event" ng-class="{active: postType==='event'}">Event</a>
       </div>
     </div>
 
-    <div class="visibility">
-      <div class="title">Communities</div>
-      <tags-input ng-model="communities"
-                  add-from-autocomplete-only="true"
-                  display-property="name"
-                  key-property="id"
-                  replace-spaces-with-dashes="false"
-                  placeholder="Search for communities by name"
-                  template="/ui/shared/ngTagsInput/tag-user.tpl.html">
-        <auto-complete source="findCommunities($query)"
-                       display-property="name"
-                       min-length="1"
-                       template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
-        </auto-complete>
-      </tags-input>
+    <input type="text" class="form-control post-title" ng-model="title" maxlength="{{maxTitleLength}}"
+           ng-keypress="updatePostDraftStorage()" ng-placeholder='titlePlaceholder'>
 
-      <label class='publicity'>
-        <input type="checkbox" ng-model="public"/>
-        Make this post publicly visible
-      </label>
-
-      <p class="help">
-        You can edit or remove this post at any time.
-        <span ng-hide="public">It will be visible only to other members of the communities you tag.</span>
-      </p>
-
+    <div class="type-descriptions">
+      <span ng-show="postType==='chat'">Anything you'd like to talk about.</span>
+      <span ng-show="postType==='offer'">Anything you'd like to share, with or without compensation. (e.g. a skill, some goods, information, an opportunity, etc.)</span>
+      <span ng-show="postType==='request'">Something you're looking for. (e.g. advice, something to borrow, an introduction, etc.)</span>
+      <span ng-show="postType==='intention'">Something you’d like to create, with the support of your community. A vision.</span>
+      <span ng-show="postType==='event'">A calendar event with a specific date and time.</span>
+      <span class="counter">{{title.length || 0}} / {{maxTitleLength}}</span>
     </div>
 
-    <div class="bottom-bar">
-      <div class="add-meta image">
-        <a class="button" ng-click="addImage()">
-          <i class="icon-add-photo"></i>
-          <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} image</span>
-          <span ng-show="addingImage">Please wait...</span>
-        </a>
+    <div class="title">Details</div>
+    <div ng-model="description" autocomplete="off" contenteditable="true"
+      class="mentio-editor form-control elastic"
+      placeholder="Add more detail here."
+      mentio=""
+      mentio-trigger-char="'@'"
+      mentio-items="people"
+      mentio-template-url="/ui/shared/people-mentions.tpl.html"
+      mentio-search="searchPeople(term)"
+      mentio-select="getPeopleTextRaw(item)"
+      mentio-typed-term="typedTerm"
+      ng-keypress="updatePostDraftStorage()">
+    </div>
+    <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
+  </div>
 
-        <a class="button" ng-click="addDoc()">Attach file with Google Drive</a>
-
-        <div class="previews">
-          <div ng-if="imageUrl" class="image-preview">
-            <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
-            <a class="remove" ng-click="removeImage()">&times;</a>
-          </div>
-          <div class="doc-previews">
-            <div ng-repeat="doc in docs" class="doc-preview">
-              <img ng-src='{{doc.thumbnail_url}}'>
-              <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
-              <a class="remove" ng-click="removeDoc($index)">&times;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="add-meta done">
-        <button type="button" class="save" ng-click="save()" ng-disabled="saving">
-          <i class="icon-little-check"></i>
-          <span ng-if="saving">Saving...</span>
-          <span ng-hide="saving">{{editing ? 'Save Changes' : 'Create Post'}}</span>
-        </button>
+  <div ng-show='postType === "event"' class="event-form">
+    <div>
+      <label>Start time</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="start_time"
+          datetime-picker="MM/dd/yyyy HH:mm"
+          datepicker-options='{showWeeks: false}'
+          timepicker-options='{minuteStep: 15}'
+          is-open="datePickerStatus.opened1"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 1)">
+            <i class='glyphicon glyphicon-calendar'></i>
+          </button>
+        </span>
       </div>
     </div>
+    <div>
+      <label>End time (optional)</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="end_time"
+          datetime-picker="MM/dd/yyyy HH:mm"
+          datepicker-options='{showWeeks: false}'
+          timepicker-options='{minuteStep: 15}'
+          min-date='start_time'
+          is-open="datePickerStatus.opened2"/>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="toggleDatePicker($event, 2)">
+            <i class='glyphicon glyphicon-calendar'></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="visibility">
+    <div class="title">Communities</div>
+    <tags-input ng-model="communities"
+                add-from-autocomplete-only="true"
+                display-property="name"
+                key-property="id"
+                replace-spaces-with-dashes="false"
+                placeholder="Search for communities by name"
+                template="/ui/shared/ngTagsInput/tag-user.tpl.html">
+      <auto-complete source="findCommunities($query)"
+                     display-property="name"
+                     min-length="1"
+                     template="/ui/shared/ngTagsInput/autocomplete-user.tpl.html"
+      </auto-complete>
+    </tags-input>
+
+    <label class='publicity'>
+      <input type="checkbox" ng-model="public"/>
+      Make this post publicly visible
+    </label>
+
+    <p class="help">
+      You can edit or remove this post at any time.
+      <span ng-hide="public">It will be visible only to other members of the communities you tag.</span>
+    </p>
 
   </div>
+
+  <div class="bottom-bar">
+    <div class="add-meta image">
+      <a class="button" ng-click="addImage()">
+        <i class="icon-add-photo"></i>
+        <span ng-hide="addingImage">{{imageUrl ? 'Change' : 'Attach'}} image</span>
+        <span ng-show="addingImage">Please wait...</span>
+      </a>
+
+      <a class="button" ng-click="addDoc()">Attach file with Google Drive</a>
+
+      <div class="previews" ng-if="imageUrl || docs.length > 0">
+        <div ng-if="imageUrl" class="image-preview">
+          <a class="thumbnail" ng-href="{{imageUrl}}" target="_blank"><img ng-src="{{imageUrl}}"/></a>
+          <a class="remove" ng-click="removeImage()">&times;</a>
+        </div>
+        <div class="doc-previews">
+          <div ng-repeat="doc in docs" class="doc-preview">
+            <img ng-src='{{doc.thumbnail_url}}'>
+            <a ng-href="{{doc.url}}" target="_blank">{{doc.name}}</a>
+            <a class="remove" ng-click="removeDoc($index)">&times;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-meta done">
+      <button ng-click="cancel($event)" class="cancel">Cancel</button>
+      <button type="button" class="save" ng-click="save()" ng-disabled="saving">
+        <i class="icon-little-check"></i>
+        <span ng-if="saving">Saving...</span>
+        <span ng-hide="saving">{{editing ? 'Save Changes' : 'Post'}}</span>
+      </button>
+    </div>
+  </div>
+
 </div>

@@ -97,8 +97,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     parent: 'main',
     views: {
       main: {
-        templateUrl: '/ui/post/edit.tpl.html',
-        controller: 'PostEditCtrl'
+        templateUrl: '/ui/post/edit-page.tpl.html',
+        controller: 'PostEditPageCtrl'
       }
     },
     resolve: {
@@ -130,8 +130,8 @@ var routes = function ($stateProvider, $urlRouterProvider) {
     parent: 'main',
     views: {
       main: {
-        templateUrl: '/ui/post/edit.tpl.html',
-        controller: 'PostEditCtrl'
+        templateUrl: '/ui/post/edit-page.tpl.html',
+        controller: 'PostEditPageCtrl'
       }
     },
     resolve: /* @ngInject*/ {

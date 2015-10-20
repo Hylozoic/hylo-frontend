@@ -5,13 +5,13 @@
     <a ui-sref="community.newPost">Make your first post!</a>
     <br/>
     <span class="help">
-      Just tap the <i class="icon-add-01"></i> button above.
       <a class="help" href="/h/support#post">Learn more</a>
     </span>
   </div>
 </div>
 
 <div class="posts">
+  <inline-post-input community="community" ng-if="currentUser"></inline-post-input>
   <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
 
   <h3 ng-if="posts.length == 0">

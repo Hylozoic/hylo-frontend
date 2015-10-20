@@ -8,8 +8,15 @@ var hasLocalStorage = function () {
   }
 }
 
-var controller = function ($scope, currentUser, communities, Post, growl, $analytics, $history,
-  UserMentions, post, $state, $rootScope, Cache, UserCache, GooglePicker, startingType) {
+module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $history,
+  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker) {
+  'ngInject'
+
+  var currentUser = CurrentUser.get()
+  var communities = $scope.communities
+  var post = $scope.post
+  var startingType = $scope.startingType
+
   $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
     var fields = [
@@ -22,6 +29,10 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   var clearPostDraftStorage = function () {
     if (hasLocalStorage()) delete window.localStorage.postDraft
   }
+
+  $rootScope.$on('$stateChangeSuccess', function () {
+    clearPostDraftStorage()
+  })
 
   $scope.maxTitleLength = 140
 
@@ -40,25 +51,36 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     chat: ''
   }
 
+  var titlePlaceholders = {
+    intention: 'What would you like to create?',
+    offer: 'What would you like to share?',
+    request: 'What are you looking for?',
+    chat: 'What do you want to say?',
+    event: "What is your event's name?"
+  }
+
   $scope.switchPostType = function (postType) {
     $scope.postType = postType
-    $scope.title = prefixes[postType]
+    if (_.contains(_.values(prefixes), $scope.title) || !$scope.title) {
+      $scope.title = prefixes[postType]
+    }
     $scope.descriptionPlaceholder = placeholders[postType]
+    $scope.titlePlaceholder = titlePlaceholders[postType]
     $scope.updatePostDraftStorage()
   }
 
   $scope.close = function () {
     $rootScope.postEditProgress = null
     clearPostDraftStorage()
-    if ($history.isEmpty()) {
-      if (_.isEmpty(communities)) {
-        $state.go('home.allPosts')
-      } else {
-        $state.go('community.posts', {community: communities[0].slug})
-      }
-    } else {
-      $history.go(-1)
-    }
+  }
+
+  $scope.$on('post-editor-closing', $scope.close)
+
+  $scope.cancel = event => {
+    $scope.close()
+    $scope.$emit('post-editor-done', {action: 'cancel'})
+    event.preventDefault()
+    event.stopPropagation()
   }
 
   $scope.addImage = function () {
@@ -102,6 +124,18 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
     UserCache.allPosts.clear(currentUser.id)
   }
 
+  var cleanup = function () {
+    clearCache()
+    clearPostDraftStorage()
+    ;[
+      'title', 'description',
+      'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
+      'public', 'start_time', 'end_time'
+    ].forEach(attr => $scope[attr] = null)
+    $scope.switchPostType($scope.postType)
+    $scope.saving = false
+  }
+
   var update = function (data) {
     post.update(data, function () {
       $analytics.eventTrack('Edit Post', {
@@ -110,10 +144,10 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
         community_id: communities[0].id,
         type: $scope.postType
       })
-      clearCache()
-      clearPostDraftStorage()
+      cleanup()
       $state.go('post', {postId: post.id})
       growl.addSuccessMessage('Post updated.')
+      $scope.$emit('post-editor-done', {action: 'update'})
     }, function (err) {
       $scope.saving = false
       growl.addErrorMessage(err.data)
@@ -128,10 +162,10 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
         community_name: communities[0].name,
         community_id: communities[0].id
       })
-      clearCache()
+      cleanup()
       $scope.close()
       growl.addSuccessMessage('Post created!')
-      clearPostDraftStorage()
+      $scope.$emit('post-editor-done', {action: 'create'})
       currentUser.post_count += 1
     }, function (err) {
       $scope.saving = false
@@ -195,6 +229,7 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
   } else if (hasLocalStorage() && window.localStorage.postDraft) {
     try {
       _.merge($scope, JSON.parse(window.localStorage.postDraft))
+      $scope.switchPostType($scope.postType)
     } catch(e) {}
   } else {
     $scope.switchPostType(startingType || 'chat')
@@ -243,8 +278,4 @@ var controller = function ($scope, currentUser, communities, Post, growl, $analy
 
   $scope.$watch('startTime', $scope.updatePostDraftStorage)
   $scope.$watch('endTime', $scope.updatePostDraftStorage)
-}
-
-module.exports = function (angularModule) {
-  angularModule.controller('PostEditCtrl', controller)
 }
