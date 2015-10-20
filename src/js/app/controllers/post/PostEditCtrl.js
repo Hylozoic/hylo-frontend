@@ -133,6 +133,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       'public', 'start_time', 'end_time'
     ].forEach(attr => $scope[attr] = null)
     $scope.switchPostType($scope.postType)
+    $scope.saving = false
   }
 
   var update = function (data) {
