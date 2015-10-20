@@ -1,11 +1,5 @@
 <div class="toolbar posts-toolbar">
   <div>
-    <div>
-      <a ng-if="community && currentUser" class="toolbar-left add-new" ui-sref="community.newPost({type: 'event'})">
-        <i class="icon-add-01"></i>
-        <span class="hidden-xs new-post-label">New Event</span>
-      </a>
-    </div>
     <div class="toolbar-right">
       <p>
         <label>
@@ -20,6 +14,6 @@
 <div class="posts">
   <ng-include src="'/ui/post/infinite-scroll.tpl.html'"></ng-include>
   <div ng-if='posts.length === 0 && !loadingPosts' class='no-posts'>
-    No events yet. You can create one by clicking the button above.
+    No events yet. You can create one by going to the Posts tab.
   </div>
 </div>

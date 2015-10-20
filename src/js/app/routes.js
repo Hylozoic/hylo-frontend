@@ -92,21 +92,6 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('newPost', {
-    url: '/h/new-post',
-    parent: 'main',
-    views: {
-      main: {
-        templateUrl: '/ui/post/edit-page.tpl.html',
-        controller: 'PostEditPageCtrl'
-      }
-    },
-    resolve: {
-      post: () => null,
-      communities: () => [],
-      startingType: () => null
-    }
-  })
   .state('post', {
     url: '/p/:postId?action',
     parent: 'main',

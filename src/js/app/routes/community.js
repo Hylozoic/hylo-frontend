@@ -196,22 +196,4 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('community.newPost', {
-    url: '/new-post?type',
-    views: {
-      community: {
-        templateUrl: '/ui/post/edit-page.tpl.html',
-        controller: 'PostEditPageCtrl'
-      }
-    },
-    resolve: /* @ngInject*/ {
-      post: () => null,
-      communities: function (community) {
-        return [community]
-      },
-      startingType: function ($stateParams) {
-        return $stateParams.type
-      }
-    }
-  })
 }

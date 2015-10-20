@@ -115,8 +115,7 @@ var factory = function($timeout, $resource, $rootScope, $state, $analytics, $mod
       this.setStep(name, update);
 
       var params;
-      // FIXME code smell
-      if (_.include(['newPost', 'community'], name)) {
+      if (_.include(['community'], name)) {
         params = {community: this.community.slug};
       } else if (_.include(['profile'], name)) {
         params = {id: this._user.id};
