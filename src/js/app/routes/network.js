@@ -1,21 +1,20 @@
-module.exports = function($stateProvider) {
-
+module.exports = function ($stateProvider) {
   $stateProvider
   .state('network', {
-    url: "/n/:slug",
+    url: '/n/:slug',
     parent: 'main',
     abstract: true,
     resolve: {
-      network: /*@ngInject*/ function(Network, $stateParams) {
-        return Network.get({id: $stateParams.slug}).$promise;
+      network: /* @ngInject*/ function (Network, $stateParams) {
+        return Network.get({id: $stateParams.slug}).$promise
       }
     },
     views: {
       main: {
         templateUrl: '/ui/app/network.tpl.html',
-        controller: function($scope, network) {
-          'ngInject';
-          $scope.network = network;
+        controller: function ($scope, network) {
+          'ngInject'
+          $scope.network = network
         }
       }
     }
@@ -23,39 +22,38 @@ module.exports = function($stateProvider) {
   .state('network.posts', {
     url: '',
     resolve: {
-      firstPostQuery: /*@ngInject*/ function(network, Post) {
-        return Post.queryForNetwork({id: network.id, limit: 10, type: 'all'}).$promise;
+      firstPostQuery: /* @ngInject*/ function (network, Post) {
+        return Post.queryForNetwork({id: network.id, limit: 10, type: 'all'}).$promise
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/network/posts.tpl.html',
-        controller: function($scope, network, firstPostQuery, PostManager, Post) {
-          'ngInject';
+        controller: function ($scope, network, firstPostQuery, PostManager, Post) {
+          'ngInject'
 
           var postManager = new PostManager({
             firstPage: firstPostQuery,
             scope: $scope,
             attr: 'posts',
             hideWelcomePosts: true,
-            query: function() {
+            query: function () {
               return Post.queryForNetwork({
                 id: network.id,
                 limit: 10,
                 offset: $scope.posts.length,
                 type: $scope.selected.filter.value,
                 sort: $scope.selected.sort.value
-              }).$promise;
+              }).$promise
             }
-          });
+          })
 
-          postManager.setup();
+          postManager.setup()
 
-          $scope.updateView = function(data) {
-            $scope.selected = data;
-            postManager.reload();
-          };
-
+          $scope.updateView = function (data) {
+            $scope.selected = data
+            postManager.reload()
+          }
         }
       }
     }
@@ -63,16 +61,16 @@ module.exports = function($stateProvider) {
   .state('network.communities', {
     url: '/communities',
     resolve: {
-      communities: /*@ngInject*/ function(network) {
-        return network.communities().$promise;
+      communities: /* @ngInject*/ function (network) {
+        return network.communities().$promise
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/network/communities.tpl.html',
-        controller: function($scope, communities) {
-          'ngInject';
-          $scope.communities = communities;
+        controller: function ($scope, communities) {
+          'ngInject'
+          $scope.communities = communities
         }
       }
     }
@@ -80,30 +78,29 @@ module.exports = function($stateProvider) {
   .state('network.members', {
     url: '/members',
     resolve: /* @ngInject*/ {
-      usersQuery: function(network) {
-        return network.members().$promise;
+      usersQuery: function (network) {
+        return network.members().$promise
       }
     },
     views: {
       tab: {
         templateUrl: '/ui/network/members.tpl.html',
-        controller: function($scope, $timeout, usersQuery, network) {
-          'ngInject';
-          $scope.users = usersQuery.people;
+        controller: function ($scope, $timeout, usersQuery, network) {
+          'ngInject'
+          $scope.users = usersQuery.people
 
-          $scope.loadMore = _.debounce(function() {
-            if ($scope.loadMoreDisabled) return;
-            $scope.loadMoreDisabled = true;
+          $scope.loadMore = _.debounce(function () {
+            if ($scope.loadMoreDisabled) return
+            $scope.loadMoreDisabled = true
 
-            network.members({offset: $scope.users.length}, function(resp) {
-              $scope.users = _.uniq($scope.users.concat(resp.people), u => u.id);
+            network.members({offset: $scope.users.length}, function (resp) {
+              $scope.users = _.uniq($scope.users.concat(resp.people), u => u.id)
 
-              if (resp.people.length > 0 && $scope.users.length < resp.people_total)
-                $timeout(() => $scope.loadMoreDisabled = false);
-            });
-
-          }, 200);
-
+              if (resp.people.length > 0 && $scope.users.length < resp.people_total) {
+                $timeout(() => $scope.loadMoreDisabled = false)
+              }
+            })
+          }, 200)
         }
       }
     }
@@ -116,12 +113,11 @@ module.exports = function($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/network/about.tpl.html',
-        controller: function($scope, network) {
-          'ngInject';
-          $scope.network = network;
+        controller: function ($scope, network) {
+          'ngInject'
+          $scope.network = network
         }
       }
     }
-  });
-
-};
+  })
+}

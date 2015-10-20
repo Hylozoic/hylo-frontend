@@ -18,7 +18,6 @@ module.exports = function (angularModule) {
   require('./services/Cache')(angularModule)
   require('./services/UserCache')(angularModule)
   require('./services/ThirdPartyAuth')(angularModule)
-  require('./services/PostManager')(angularModule)
   require('./services/removeTrailingSlash')(angularModule)
   require('./services/myHttpInterceptor')(angularModule)
   require('./services/GooglePicker')(angularModule)
@@ -29,4 +28,5 @@ module.exports = function (angularModule) {
   .factory('CurrentUser', require('./services/CurrentUser'))
   .factory('User', require('./services/User'))
   .factory('UserMentions', require('./services/UserMentions'))
+  .factory('PostManager', require('./services/PostManager'))
 }
