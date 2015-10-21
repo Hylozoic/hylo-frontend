@@ -125,8 +125,7 @@ var routes = function ($stateProvider, $urlRouterProvider) {
       },
       communities: function (post) {
         return post.communities
-      },
-      startingType: () => null
+      }
     }
   })
 

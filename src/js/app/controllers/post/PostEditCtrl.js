@@ -15,7 +15,8 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   var currentUser = CurrentUser.get()
   var communities = $scope.communities
   var post = $scope.post
-  var startingType = $scope.startingType
+  var project = $scope.project
+  if (project) communities = $scope.communities = [project.community]
 
   $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
@@ -110,7 +111,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
   var validate = function () {
     var invalidTitle = _.contains(_.values(prefixes), $scope.title.trim())
-    var noCommunities = _.isEmpty(communities)
+    var noCommunities = _.isEmpty(communities) && !project
     // TODO show errors in UI
     if (invalidTitle) window.alert('Please fill in a title')
     if (noCommunities) window.alert('Please pick at least one community')
@@ -182,6 +183,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       name: $scope.title,
       description: $scope.description,
       type: $scope.postType,
+      projectId: project && project.id,
       communities: communities.map(c => c.id)
     }, _.pick($scope, [
       'description',
@@ -232,7 +234,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       $scope.switchPostType($scope.postType)
     } catch(e) {}
   } else {
-    $scope.switchPostType(startingType || 'chat')
+    $scope.switchPostType('chat')
   }
 
   $scope.communityOptions = _.map(currentUser.memberships, function (membership) {
@@ -245,7 +247,6 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
         w.toLowerCase().startsWith(query.toLowerCase())))
   }
 
-  $scope.communities = communities
   $scope.removedDocs = []
 
   $scope.addDoc = function () {

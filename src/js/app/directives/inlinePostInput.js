@@ -2,7 +2,8 @@ module.exports = function () {
   return {
     restrict: 'E',
     scope: {
-      community: '='
+      community: '=',
+      project: '='
     },
     controller: function ($scope) {
       'ngInject'

@@ -43,10 +43,6 @@ var factory = function ($resource) {
       url: '/noo/post/:id/comments',
       isArray: true
     },
-    saveInProject: {
-      url: '/noo/project/:projectId/posts',
-      method: 'POST'
-    },
     complain: {
       method: 'POST',
       url: '/noo/post/:id/complain'

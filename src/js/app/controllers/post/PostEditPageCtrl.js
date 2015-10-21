@@ -1,10 +1,9 @@
-module.exports = function ($scope, $history, $state, post, communities, startingType) {
+module.exports = function ($scope, $history, $state, post, communities) {
   'ngInject'
 
   $scope.post = post
   $scope.editing = !!post
   $scope.communities = communities
-  $scope.startingType = startingType
 
   $scope.close = function () {
     $scope.$broadcast('post-editor-closing')
