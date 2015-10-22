@@ -15,7 +15,7 @@ module.exports = function ($scope, growl, $stateParams, $analytics, currentUser,
     editing.password = true
   }
 
-  if ($stateParams.expand === 'solicitation') {
+  if ($stateParams.expand === 'prompts') {
     $scope.expand1 = true
   }
 
