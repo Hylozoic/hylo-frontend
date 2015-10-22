@@ -78,7 +78,7 @@ module.exports = function ($stateProvider) {
   .state('home.following', {
     url: '/h/following',
     resolve: /*@ngInject*/{
-      firstPostQuery: function(UserCache, currentUser, requireLogin) {
+      firstPostQuery: function (UserCache, currentUser, requireLogin) {
         return UserCache.followedPosts.fetch(currentUser);
       }
     },
@@ -89,11 +89,19 @@ module.exports = function ($stateProvider) {
       }
     }
   })
-  .state('home.allPosts', {
+  .state('home.allPosts', /*@ngInject*/ {
     url: '/h/all-posts',
-    resolve: /*@ngInject*/{
-      firstPostQuery: function(UserCache, currentUser, requireLogin) {
-        return UserCache.allPosts.fetch(currentUser);
+    onEnter: function (currentUser, $state, $timeout) {
+      var memberships = currentUser && currentUser.memberships
+      $timeout(function () {
+        if (!memberships || memberships.length === 0) {
+          $state.go('home.simple')
+        }
+      })
+    },
+    resolve: {
+      firstPostQuery: function (UserCache, currentUser, requireLogin) {
+        return UserCache.allPosts.fetch(currentUser)
       }
     },
     views: {
