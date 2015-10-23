@@ -1,0 +1,15 @@
+<div infinite-scroll="loadMore()"
+     infinite-scroll-distance="1"
+     infinite-scroll-disabled="loadMoreDisabled"
+     infinite-scroll-immediate-check="false">
+
+  <div ng-repeat="post in posts" ng-init="header = eventHeader(posts[$index-1], post);">
+    <div ng-if="header" class="event-group-header">
+      {{header}}
+    </div>
+    <div>
+      <post-card ng-if="post.type !== 'welcome'" post="post" remove-fn="removePost(postToRemove)"></post-card>
+      <welcome-post ng-if="post.type === 'welcome'" post="post"></welcome-post>
+    </div>
+  </div>
+</div>
