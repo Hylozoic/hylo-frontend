@@ -10,6 +10,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.voteTooltipText = ''
   $scope.followersNotMe = []
   $scope.isFollowing = false
+  $scope.eventResponse = ''
   $scope.joinPostText = ''
   $scope.onlyAuthorFollowing = false
 
@@ -167,5 +168,37 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     var start = new Date(post.start_time)
     var end = post.end_time && new Date(post.end_time)
     return TimeText.rangeFullText(start, end)
+  }
+
+  $scope.changeEventResponse = function (response) {
+    var user = currentUser
+    if (!user) return
+    if ($scope.eventResponse === response) {
+      $scope.eventResponse = ''
+      $analytics.eventTrack('Event: Unrespond', {post_id: post.id})
+      Post.respond({id: post.id, response: response})
+    } else {
+      $scope.eventResponse = response
+      $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
+      Post.respond({id: post.id, response: response})
+    }
+
+    /*
+    if (!$scope.isFollowing) {
+      $analytics.eventTrack('Post: Join', {post_id: post.id})
+      post.followers.push({
+        id: user.id,
+        name: user.name,
+        avatar_url: user.avatar
+      })
+      Post.follow({id: post.id})
+      UserCache.followedPosts.clear(user.id)
+    } else {
+      $analytics.eventTrack('Post: Leave', {post_id: post.id})
+      post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}))
+      Post.follow({id: post.id})
+      UserCache.followedPosts.remove(user.id, post.id)
+    }
+    */
   }
 }

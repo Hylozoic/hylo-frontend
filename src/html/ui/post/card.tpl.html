@@ -140,7 +140,20 @@
       --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type !== 'chat'">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
-      </a>
+      </a><!--
+
+      --><div class="post-controls no-border" ng-if='post.type === "event"'><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('yes')">
+        <span class="hidden-xs">Going</span>
+      </a><!--
+
+      --><a class="rsvp-maybe" ng-class="eventResponse === 'maybe' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('maybe')">
+        <span class="hidden-xs">Maybe</span>
+      </a><!--
+
+      --><a class="rsvp-no" ng-class="eventResponse === 'no' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('no')">
+        <span class="hidden-xs">Can't go</span>
+      </a></div>
+
     </div>
 
   </div>

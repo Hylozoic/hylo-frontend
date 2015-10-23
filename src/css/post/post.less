@@ -228,6 +228,10 @@ div.post {
       }
     }
 
+    .rsvp-selected {
+      border: 1px solid @border-lightest;
+    }
+
     &.has-fulfill {
       @media (max-width: @screen-xs-max) {
         > a {
@@ -235,6 +239,11 @@ div.post {
         }
       }
     }
+
+    .post-controls.no-border {
+      border: none !important;
+    }
+
   }
 
   &.ng-leave {

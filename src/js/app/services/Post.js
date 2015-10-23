@@ -22,6 +22,12 @@ var factory = function ($resource) {
         force: 'unfollow'
       }
     },
+    respond: {
+      method: 'POST',
+      params: {
+        action: 'respond'
+      }
+    },
     queryForCommunity: {
       url: '/noo/community/:communityId/posts'
     },
