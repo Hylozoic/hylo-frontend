@@ -182,23 +182,5 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
       Post.respond({id: post.id, response: response})
     }
-
-    /*
-    if (!$scope.isFollowing) {
-      $analytics.eventTrack('Post: Join', {post_id: post.id})
-      post.followers.push({
-        id: user.id,
-        name: user.name,
-        avatar_url: user.avatar
-      })
-      Post.follow({id: post.id})
-      UserCache.followedPosts.clear(user.id)
-    } else {
-      $analytics.eventTrack('Post: Leave', {post_id: post.id})
-      post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}))
-      Post.follow({id: post.id})
-      UserCache.followedPosts.remove(user.id, post.id)
-    }
-    */
   }
 }
