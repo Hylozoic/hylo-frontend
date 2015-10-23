@@ -28,55 +28,34 @@ module.exports = function ($scope, community, currentUser, firstPostQuery, Post,
   }
 
   $scope.eventHeader = function (previous, current) {
-    var timeCategory = function (event) {
+    var group = function (event) {
       var now = moment()
       var eventTime = moment(event.start_time)
       var difference = eventTime.diff(now, 'days')
       if (difference < 0) {
-        return 'past'
+        return 'Past'
       } else if (difference === 0) {
-        return 'today'
+        return 'Today'
       } else if (difference === 1) {
-        return 'tomorrow'
+        return 'Tomorrow'
       } else if (difference < 8 && eventTime.isoWeek() === now.isoWeek()) {
-        return 'this_week'
+        return 'This Week'
       } else if (difference < 15 && eventTime.isoWeek() === now.isoWeek() + 1) {
-        return 'next_week'
+        return 'Next Week'
       } else if (difference < 31 && eventTime.month() === now.month()) {
-        return 'month'
+        return 'Month'
       } else {
-        return 'future'
+        return 'Future'
       }
     }
 
-    var headerFromCategory = function (category) {
-      switch (category) {
-        case 'past':
-          return 'Past'
-        case 'today':
-          return 'Today'
-        case 'tomorrow':
-          return 'Tomorrow'
-        case 'this_week':
-          return 'This Week'
-        case 'next_week':
-          return 'Next Week'
-        case 'month':
-          return 'This Month'
-        case 'future':
-          return 'Beyond'
-        default:
-          return null
-      }
-    }
-
-    var currentCategory = timeCategory(current)
+    var currentGroup = group(current)
 
     if (previous) {
-      var previousCategory = timeCategory(previous)
-      if (previousCategory === currentCategory) return
+      var previousGroup = group(previous)
+      if (previousGroup === currentGroup) return
     }
 
-    return headerFromCategory(currentCategory)
+    return currentGroup
   }
 }
