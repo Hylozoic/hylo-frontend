@@ -38,8 +38,10 @@ module.exports = function ($scope, community, currentUser, firstPostQuery, Post,
         return 'today'
       } else if (difference === 1) {
         return 'tomorrow'
-      } else if (difference < 8 && eventTime.week() === now.week()) {
-        return 'week'
+      } else if (difference < 8 && eventTime.isoWeek() === now.isoWeek()) {
+        return 'this_week'
+      } else if (difference < 15 && eventTime.isoWeek() === now.isoWeek() + 1) {
+        return 'next_week'
       } else if (difference < 31 && eventTime.month() === now.month()) {
         return 'month'
       } else {
@@ -50,17 +52,19 @@ module.exports = function ($scope, community, currentUser, firstPostQuery, Post,
     var headerFromCategory = function (category) {
       switch (category) {
         case 'past':
-          return 'Past Events'
+          return 'Past'
         case 'today':
-          return 'Todays Events'
+          return 'Today'
         case 'tomorrow':
-          return 'Tomorrows Events'
-        case 'week':
-          return 'This Weeks Events'
+          return 'Tomorrow'
+        case 'this_week':
+          return 'This Week'
+        case 'next_week':
+          return 'Next Week'
         case 'month':
-          return 'This Months Events'
+          return 'This Month'
         case 'future':
-          return 'Future Events'
+          return 'Beyond'
         default:
           return null
       }
