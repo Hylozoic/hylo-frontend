@@ -1,5 +1,5 @@
 var controller = function($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser) {
+  $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser, User) {
 
   var post = $scope.post;
 
@@ -84,17 +84,7 @@ var controller = function($scope, $log, $rootScope, $modal, growl, $window, $tim
   };
 
   $scope.searchPeople = function(query) {
-    var context, id;
-    if ($rootScope.userMentionContext) {
-      context = $rootScope.userMentionContext.context;
-      id = $rootScope.userMentionContext.id;
-    } else {
-      context = 'community';
-      id = post.communities[0].id;
-    }
-    UserMentions.searchPeople(query, context, id).$promise.then(function(items) {
-      $scope.people = items;
-    });
+    User.autocomplete({q: query}).$promise.then(items => $scope.people = items)
   };
 
   $scope.getPeopleTextRaw = function(user) {

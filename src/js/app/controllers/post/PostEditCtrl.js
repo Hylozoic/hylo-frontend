@@ -9,7 +9,7 @@ var hasLocalStorage = function () {
 }
 
 module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $history,
-  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker) {
+  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker, User) {
   'ngInject'
 
   var currentUser = CurrentUser.get()
@@ -194,7 +194,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   }
 
   $scope.searchPeople = function (query) {
-    UserMentions.searchPeople(query).$promise.then(function (items) {
+    User.autocomplete({q: query}).$promise.then(function (items) {
       $scope.people = items
     })
   }

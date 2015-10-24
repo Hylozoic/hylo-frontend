@@ -5,17 +5,6 @@ module.exports = function(Community, User, $rootScope) {
       return format(
         '<a contenteditable="false" tabindex="-1" target="_blank" href="/u/%s" data-user-id="%s">@%s</a>',
         user.id, user.id, user.name);
-    },
-
-    searchPeople: function(query, context, id) {
-      if (context === 'community') {
-        return User.autocomplete({q: query, communityId: id});
-      } else if (context === 'project') {
-        return User.autocomplete({projectId: id, q: query});
-      } else {
-        return User.autocomplete({q: query});
-      }
     }
-
   };
 };
