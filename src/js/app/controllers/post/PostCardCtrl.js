@@ -10,7 +10,6 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.voteTooltipText = ''
   $scope.followersNotMe = []
   $scope.isFollowing = false
-  $scope.eventResponse = ''
   $scope.joinPostText = ''
   $scope.onlyAuthorFollowing = false
 
@@ -20,6 +19,17 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var post = $scope.post
 
   $scope.community = Post.relevantCommunity(post, currentUser)
+
+  var initialEventResponse = function () {
+    var responder = _.filter(post.responders, responder => responder.id === currentUser.id)[0]
+    if (responder) {
+      return responder.response
+    } else {
+      return ''
+    }
+  }
+
+  $scope.eventResponse = initialEventResponse()
 
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)

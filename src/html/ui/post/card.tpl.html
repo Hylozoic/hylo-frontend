@@ -1,5 +1,7 @@
 <div class="post" analytics-id="{{::post.id}}">
 
+
+
   <a class="user" ui-sref="profile.posts({id: post.user.id})">
     <div back-img="post.user.avatar_url" class="avatar"></div>
     <div class="name">{{::post.user.name}}</div>
@@ -142,7 +144,7 @@
         <span class="hidden-xs">Mark complete</span>
       </a><!--
 
-      --><div class="post-controls no-border" ng-if='post.type === "event"'><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('yes')">
+      --><div class="post-controls no-border" ng-if="post.type === 'event'"><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('yes')">
         <span class="hidden-xs">Going</span>
       </a><!--
 
