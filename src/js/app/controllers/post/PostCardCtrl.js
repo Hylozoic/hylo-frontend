@@ -20,7 +20,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
 
   $scope.community = Post.relevantCommunity(post, currentUser)
 
-  var initialEventResponse = function () {
+  var userEventResponse = function () {
     var responder = _.filter(post.responders, responder => responder.id === currentUser.id)[0]
     if (responder) {
       return responder.response
@@ -29,7 +29,10 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     }
   }
 
-  $scope.eventResponse = initialEventResponse()
+  $scope.eventResponse = userEventResponse()
+  $scope.eventYeses = () => _.filter(post.responders, er => er.response === 'yes')
+  $scope.eventMaybes = () => _.filter(post.responders, er => er.response === 'maybe')
+  $scope.eventNos = () => _.filter(post.responders, er => er.response === 'no')
 
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)
@@ -183,14 +186,19 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.changeEventResponse = function (response) {
     var user = currentUser
     if (!user) return
+
+    Post.respond({id: post.id, response: response})
+
+    var meInResponders = _.findWhere(post.responders, {id: user.id})
+    post.responders = _.without(post.responders, meInResponders)
+
     if ($scope.eventResponse === response) {
       $scope.eventResponse = ''
       $analytics.eventTrack('Event: Unrespond', {post_id: post.id})
-      Post.respond({id: post.id, response: response})
     } else {
       $scope.eventResponse = response
+      post.responders.push({id: user.id, name: user.name, avatar_url: user.avatar_url, response: response})
       $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
-      Post.respond({id: post.id, response: response})
     }
   }
 }

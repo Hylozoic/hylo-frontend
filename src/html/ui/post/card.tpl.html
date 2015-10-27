@@ -142,23 +142,20 @@
       --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type !== 'chat'">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
-      </a><!--
-
-      --><div class="post-controls no-border" ng-if="post.type === 'event'"><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('yes')">
-        <span class="hidden-xs">Going</span>
-      </a><!--
-
-      --><a class="rsvp-maybe" ng-class="eventResponse === 'maybe' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('maybe')">
-        <span class="hidden-xs">Maybe</span>
-      </a><!--
-
-      --><a class="rsvp-no" ng-class="eventResponse === 'no' ? 'rsvp-selected' : ''" ng-click="changeEventResponse('no')">
-        <span class="hidden-xs">Can't go</span>
-      </a></div>
-
+      </a>
     </div>
+    <div class="rsvp-buttons no-border" ng-if="post.type === 'event'"><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
+        <span class="hidden-xs">Going</span><span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
+      </a><!--
 
-  </div>
+      --><a class="rsvp-maybe" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
+        <span class="hidden-xs">Maybe</span><span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
+      </a><!--
+
+      --><a class="rsvp-no" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
+        <span class="hidden-xs">Can't go</span><span ng-if="eventNos().length > 0"> ({{eventYeses().length}})</span>
+      </a></div>
+    </div>
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
 </div>
