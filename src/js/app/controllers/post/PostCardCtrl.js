@@ -35,9 +35,6 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.eventNos = () => _.filter(post.responders, er => er.response === 'no')
 
   var rlResult = []
-  var rlYeses = []
-  var rlMaybes = []
-  var rlNos = []
 
   var yesHeader = {header: 'Going', name: -1}
   var maybeHeader = {header: 'Maybe', name: -2}
@@ -46,28 +43,25 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.responderList = () => {
     console.log('responderList')
     rlResult.length = 0
-    rlYeses.length = 0
-    rlMaybes.length = 0
-    rlNos.length = 0
 
-    rlYeses = rlYeses.concat($scope.eventYeses())
-    rlMaybes = rlMaybes.concat($scope.eventMaybes())
-    rlNos = rlNos.concat($scope.eventNos())
+    var yeses = $scope.eventYeses()
+    var maybes = $scope.eventMaybes()
+    var nos = $scope.eventNos()
 
-    if (rlYeses.length > 0) {
+    if (yeses.length > 0) {
       console.log('yeses > 0')
       rlResult.push(yesHeader)
-      rlResult = rlResult.concat(rlYeses)
+      rlResult = rlResult.concat(yeses)
     }
-    if (rlMaybes.length > 0) {
+    if (maybes.length > 0) {
       console.log('maybes > 0')
       rlResult.push(maybeHeader)
-      rlResult = rlResult.concat(rlMaybes)
+      rlResult = rlResult.concat(maybes)
     }
-    if (rlNos.length > 0) {
+    if (nos.length > 0) {
       console.log('nos > 0')
       rlResult.push(noHeader)
-      rlResult = rlResult.concat(rlNos)
+      rlResult = rlResult.concat(nos)
     }
     console.log('list: ', JSON.stringify(rlResult))
     return rlResult
