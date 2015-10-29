@@ -193,7 +193,7 @@ module.exports = function(grunt) {
         tasks: ['ejs:ui']
       },
       options: {
-        livereload: true,
+        livereload: !process.env.DISABLE_LIVERELOAD,
         livereloadOnError: false
       }
     },
