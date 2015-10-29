@@ -34,6 +34,45 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.eventMaybes = () => _.filter(post.responders, er => er.response === 'maybe')
   $scope.eventNos = () => _.filter(post.responders, er => er.response === 'no')
 
+  var rlResult = []
+  var rlYeses = []
+  var rlMaybes = []
+  var rlNos = []
+
+  var yesHeader = {header: 'Going', name: -1}
+  var maybeHeader = {header: 'Maybe', name: -2}
+  var noHeader = {header: 'Can\'t Go', name: -3}
+
+  $scope.responderList = () => {
+    console.log('responderList')
+    rlResult.length = 0
+    rlYeses.length = 0
+    rlMaybes.length = 0
+    rlNos.length = 0
+
+    rlYeses = rlYeses.concat($scope.eventYeses())
+    rlMaybes = rlMaybes.concat($scope.eventMaybes())
+    rlNos = rlNos.concat($scope.eventNos())
+
+    if (rlYeses.length > 0) {
+      console.log('yeses > 0')
+      rlResult.push(yesHeader)
+      rlResult = rlResult.concat(rlYeses)
+    }
+    if (rlMaybes.length > 0) {
+      console.log('maybes > 0')
+      rlResult.push(maybeHeader)
+      rlResult = rlResult.concat(rlMaybes)
+    }
+    if (rlNos.length > 0) {
+      console.log('nos > 0')
+      rlResult.push(noHeader)
+      rlResult = rlResult.concat(rlNos)
+    }
+    console.log('list: ', JSON.stringify(rlResult))
+    return rlResult
+  }
+
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)
   }
@@ -112,6 +151,12 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.openFollowers = function (isOpen) {
     if (isOpen) {
       $analytics.eventTrack('Followers: Viewed List of Followers', {num_followers: $scope.followersNotMe.length})
+    }
+  }
+
+  $scope.openResponders = function (isOpen) {
+    if (isOpen) {
+      $analytics.eventTrack('Responders: Viewed List of Responders', {num_responders: post.responders.length})
     }
   }
 

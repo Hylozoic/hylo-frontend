@@ -238,21 +238,93 @@ div.post {
 
   }
 
-  .rsvp-buttons {
-    .post-controls;
+  .rsvp-controls {
 
-    //border: none !important;
+    border: 1px solid @border-lightest;
+    padding: @std-padding;
+    padding-bottom: 10px;
+    background-color: @visible-gray-bg;
+    border-radius: @border-radius-base;
+    margin-bottom: 10px;
 
-    a {
-      border: 1px solid @white;
-    }
+    .buttons {
+      margin-bottom: 10px;
 
-    > a:first-child {
-      padding-left: 15px;
+      a {
+        font-family: proxima-nova-semibold;
+        font-size: 16px;
+        font-weight: bold;
+        color: #666666;
+        text-decoration: none;
+        background-color: @faint-gray;
+        display: inline-block;
+        margin-right: 2px;
+        .body-text;
+        border-radius: @border-radius-base;
+        border: 1px solid @faint-gray;
+        line-height: 28px;
+        height: 30px;
+        vertical-align: middle;
+        padding: 0 8px;
+        text-align: center;
+
+        &.rsvp-yes {
+          width: 96px;
+        }
+        &.rsvp-maybe {
+          width: 99px;
+        }
+        &.rsvp-no {
+          width: 109px;
+        }
+      }
+
+      i {
+        color: #388ecb;
+      }
+
+      .icon-little-x {
+        font-weight: bold;
+      }
+
+      .icon-question-mark {
+        font-weight: bold;
+      }
+
+      .icon-little-check {
+        font-size: 12px;
+      }
+
+
     }
 
     .selected {
-      border: 1px solid @border-lightest !important;
+      border: 1px solid #000000 !important;
+    }
+
+    .responses {
+      .meta-text();
+
+      a, a:hover {
+        color: @link-color;
+      }
+
+      .dropdown-menu {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+      }
+
+      .header {
+        .body-text;
+        font-size: 18px;
+        text-align: center;
+        padding: 5px @std-padding;
+        border-top: 1px solid @default-border;
+        border-bottom: 1px solid @default-border;
+        margin-bottom: 6px;
+        display: block;
+        width: 100%;
+      }
     }
   }
 

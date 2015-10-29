@@ -64,6 +64,43 @@
       <span ng-if="post.public">&nbsp;•&nbsp; Public</span>
     </div>
 
+    <div class="rsvp-controls" ng-if="post.type === 'event'">
+      <div class="buttons">
+        <a class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
+          <i class="icon-little-check"></i> Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
+        </a><!--
+
+        --><a class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
+          <i class="icon-question-mark"></i> Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
+        </a><!--
+
+        --><a class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
+          <i class="icon-little-x"></i> Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
+        </a>
+      </div>
+
+      <div class="responses" ng-if="post.responders.length > 0">
+        <span class="dropdown" dropdown on-toggle="openResponders(open)">
+          <a class="dropdown-toggle" dropdown-toggle>
+              See Responses
+          </a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="listItem in responderList() track by listItem.name">
+              <span class="header" ng-if="listItem.header">{{listItem.header}}</span>
+              <a class="dropdown-list-user" ui-sref="profile.posts({id: listItem.id})" ng-if="!listItem.header">
+                <div back-img="::listItem.avatar_url" class="avatar"></div>
+                <div class="name">{{::listItem.name}}</div>
+              </a>
+            </li>
+          </ul>
+        </span>
+      </div>
+      <div class="responses" ng-if="post.responders.length === 0">
+        No responses yet!
+      </div>
+
+    </div>
+
     <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">
       <!-- Add yourself as a follower -->
       <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
@@ -143,18 +180,6 @@
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
       </a>
-    </div>
-    <div class="rsvp-buttons no-border" ng-if="post.type === 'event'"><a class="rsvp-yes" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
-        <span class="hidden-xs">Going</span><span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
-      </a><!--
-
-      --><a class="rsvp-maybe" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
-        <span class="hidden-xs">Maybe</span><span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
-      </a><!--
-
-      --><a class="rsvp-no" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
-        <span class="hidden-xs">Can't go</span><span ng-if="eventNos().length > 0"> ({{eventYeses().length}})</span>
-      </a></div>
     </div>
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
