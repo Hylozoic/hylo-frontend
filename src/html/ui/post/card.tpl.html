@@ -1,7 +1,5 @@
 <div class="post" analytics-id="{{::post.id}}">
 
-
-
   <a class="user" ui-sref="profile.posts({id: post.user.id})">
     <div back-img="post.user.avatar_url" class="avatar"></div>
     <div class="name">{{::post.user.name}}</div>
@@ -67,15 +65,15 @@
     <div class="rsvp-controls" ng-if="post.type === 'event'">
       <div class="buttons">
         <a class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
-          <i class="icon-little-check"></i> Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
+          <i class="glyphicon glyphicon-ok-sign"></i> Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
         </a><!--
 
         --><a class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
-          <i class="icon-question-mark"></i> Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
+          <i class="glyphicon glyphicon-question-sign"></i> Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
         </a><!--
 
         --><a class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
-          <i class="icon-little-x"></i> Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
+          <i class="glyphicon glyphicon-remove-sign"></i> Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
         </a>
       </div>
 
