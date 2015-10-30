@@ -9,6 +9,11 @@
   </div>
 </div>
 
+<div class="location" ng-if="community.location">
+  <i class="glyphicon glyphicon-map-marker"></i>&nbsp;
+  <span title="location">{{community.location}}</span>
+</div>
+
 <div class="core-intention">
   <div ng-bind-html="community.description | markdown"></div>
 </div>

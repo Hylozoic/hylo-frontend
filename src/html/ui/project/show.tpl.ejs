@@ -72,6 +72,10 @@
               <span ng-hide="project.isPublished()">All members of {{project.community.name}} may view and join this project when it is published.</span>
             </div>
           </li>
+          <li ng-if='project.location'>
+            <div class="icon"><i class="location glyphicon glyphicon-map-marker"></i></div>
+            <span title="location">{{project.location}}</span>
+          </li>
           <li ng-show="isContributor">
             <a class="button" ui-sref="project.settings({id: project.slug})">
               <i class="icon-settings"></i>
