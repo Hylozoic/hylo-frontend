@@ -17,8 +17,11 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var voteText = "click to <i class='icon-following'></i> me."
   var unvoteText = "click to un-<i class='icon-following'></i> me."
   var post = $scope.post
+  post.location = "Hull, Yorkshire"
 
   $scope.community = Post.relevantCommunity(post, currentUser)
+
+
 
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)
