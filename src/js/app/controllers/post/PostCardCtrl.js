@@ -20,8 +20,6 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
 
   $scope.community = Post.relevantCommunity(post, currentUser)
 
-
-
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)
   }
