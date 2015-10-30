@@ -248,34 +248,34 @@ div.post {
     margin-bottom: 10px;
 
     .buttons {
-      margin-bottom: 10px;
+      margin-bottom: 4px;
 
       a {
-        font-family: proxima-nova-semibold;
-        font-size: 16px;
-        font-weight: bold;
-        color: #666666;
         text-decoration: none;
-        background-color: @faint-gray;
+        background-color: @white;
         display: inline-block;
-        margin-right: 2px;
+        margin-right: 6px;
         .body-text;
+        .proxima-nova-regular;
+        font-size: 13px;
         border-radius: @border-radius-base;
-        border: 1px solid @faint-gray;
+        border: 1px solid @white;
         line-height: 28px;
         height: 30px;
         vertical-align: middle;
         padding: 0 8px;
         text-align: center;
 
+        margin-bottom: 6px;
+
         &.rsvp-yes {
-          width: 96px;
+          width: 105px;
         }
         &.rsvp-maybe {
-          width: 99px;
+          width: 100px;
         }
         &.rsvp-no {
-          width: 109px;
+          width: 111px;
         }
       }
 
@@ -304,15 +304,12 @@ div.post {
           padding: 0;
           width: 33vw !important;
           text-align: center;
-          margin-top: 6px;
         }
       }
-
-
     }
 
     .selected {
-      border: 1px solid #000000 !important;
+      border: 1px solid @default-text !important;
     }
 
     .responses {
