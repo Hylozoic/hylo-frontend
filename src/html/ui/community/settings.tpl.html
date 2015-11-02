@@ -103,6 +103,22 @@
         </div>
       </div>
 
+      <div class="setting-item">
+        <div class="half-column">
+          <label>Location</label>
+          <p ng-if="community.location">{{community.location}}</p>
+          <p ng-if="!community.location">You haven't specified a location yet.</p>
+        </div>
+        <div class="half-column value" ng-hide="editing.location">
+          <button type="button" ng-click="edit('location')">Change</button>
+        </div>
+        <div class="half-column edit" ng-show="editing.location">
+          <input type="text" class="form-control" ng-model="edited.location"/>
+          <button type="button" ng-click="cancelEdit('location')">Cancel</button>
+          <button type="button" ng-click="saveEdit('location')">Save</button>
+        </div>
+      </div>
+
     </div>
 
     <div class="section-label" ng-click="expand2 = !expand2">

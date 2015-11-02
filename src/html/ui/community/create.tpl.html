@@ -73,6 +73,15 @@
             <p class="help error" ng-if="form.submitted && form.category.$error.required">Please choose one.</p>
           </div>
         </div>
+
+        <div class="setting-item">
+          <div class="side-column">
+            <label>Location</label>
+          </div>
+          <div class="main-column">
+            <input type="text" name="location" ng-model="community.location" class="form-control" placeholder="Optionally, choose a location for your community" />
+          </div>
+        </div>
       </div>
 
       <div class="section-label">Appearance</div>

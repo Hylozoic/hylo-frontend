@@ -2,7 +2,7 @@ module.exports = function ($stateProvider) {
 
   $stateProvider
   .state('newProject', {
-    url: '/new-project',
+    url: '/new-project?community',
     parent: 'main',
     resolve: {
       project: function() { return null }

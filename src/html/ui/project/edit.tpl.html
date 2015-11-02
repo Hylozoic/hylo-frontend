@@ -27,6 +27,12 @@
       <span class="help"><a href="/help/markdown" target="_blank">Markdown</a> is supported.</span>
     </div>
 
+    <div>
+      <div class="counter">{{60 - project.location.length}}/60</div>
+      <label>Project location</label>
+      <input type="text" class="form-control" ng-model="project.location" placeholder="Where is this project located?" maxlength="60"/>
+    </div>
+
     <div class="add-media">
       <label>Photo or Video</label>
       <p class="help">A picture is worth a thousand words, and a video can help you communicate the impact of your project even more effectively.</p>

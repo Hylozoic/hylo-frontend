@@ -1,14 +1,19 @@
 var filepickerUpload = require('../../services/filepickerUpload');
 
-var controller = function($scope, currentUser, Project, project) {
+var controller = function($scope, currentUser, Project, project, $stateParams) {
 
   $scope.communities = _.map(currentUser.memberships, function(membership) {
     return membership.community;
   });
 
   if (!project) {
+    var community = $scope.communities[0]
+    var community_slug = $stateParams.community
+    if (community_slug) {
+        community = _.find($scope.communities, c => c.slug === community_slug)
+    }
     project = {
-      community: $scope.communities[0],
+      community: community,
       visibility: 0
     };
   } else {
