@@ -63,18 +63,18 @@
     </div>
 
     <div class="rsvp-controls" ng-if="post.type === 'event'">
-      <div class="buttons">
-        <a class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
+      <div class="btn-group buttons">
+        <button type="button" class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
           Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
-        </a><!--
+        </button><!--
 
-        --><a class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
+        --><button type="button" class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
           Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
-        </a><!--
+        </button><!--
 
-        --><a class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
+        --><button type="button" class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
           Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
-        </a>
+        </button>
       </div>
 
       <div class="responses" ng-if="post.responders.length > 0">
