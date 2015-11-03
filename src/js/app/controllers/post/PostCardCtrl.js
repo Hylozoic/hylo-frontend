@@ -16,6 +16,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var currentUser = CurrentUser.get()
   var voteText = "click to <i class='icon-following'></i> me."
   var unvoteText = "click to un-<i class='icon-following'></i> me."
+
   var post = $scope.post
 
   $scope.community = Post.relevantCommunity(post, currentUser)
@@ -36,12 +37,11 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
 
   var rlResult = []
 
-  var yesHeader = {header: 'Going', name: -1}
-  var maybeHeader = {header: 'Maybe', name: -2}
-  var noHeader = {header: 'Can\'t Go', name: -3}
+  var yesHeader = {header: 'Going', id: -1}
+  var maybeHeader = {header: 'Maybe', id: -2}
+  var noHeader = {header: 'Can\'t Go', id: -3}
 
   $scope.responderList = () => {
-    console.log('responderList')
     rlResult.length = 0
 
     var yeses = $scope.eventYeses()
@@ -49,21 +49,17 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     var nos = $scope.eventNos()
 
     if (yeses.length > 0) {
-      console.log('yeses > 0')
       rlResult.push(yesHeader)
       rlResult = rlResult.concat(yeses)
     }
     if (maybes.length > 0) {
-      console.log('maybes > 0')
       rlResult.push(maybeHeader)
       rlResult = rlResult.concat(maybes)
     }
     if (nos.length > 0) {
-      console.log('nos > 0')
       rlResult.push(noHeader)
       rlResult = rlResult.concat(nos)
     }
-    console.log('list: ', JSON.stringify(rlResult))
     return rlResult
   }
 

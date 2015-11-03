@@ -83,7 +83,7 @@
               See Responses
           </a>
           <ul class="dropdown-menu">
-            <li ng-repeat="listItem in responderList() track by listItem.name">
+            <li ng-repeat="listItem in responderList() track by listItem.id">
               <span class="header" ng-if="listItem.header">{{listItem.header}}</span>
               <a class="dropdown-list-user" ui-sref="profile.posts({id: listItem.id})" ng-if="!listItem.header">
                 <div back-img="::listItem.avatar_url" class="avatar"></div>
