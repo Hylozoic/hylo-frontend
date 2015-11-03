@@ -65,15 +65,15 @@
     <div class="rsvp-controls" ng-if="post.type === 'event'">
       <div class="buttons">
         <a class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
-          <i class="glyphicon glyphicon-ok-sign"></i> Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
+          Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
         </a><!--
 
         --><a class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
-          <i class="glyphicon glyphicon-question-sign"></i> Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
+          Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
         </a><!--
 
         --><a class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
-          <i class="glyphicon glyphicon-remove-sign"></i> Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
+          Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
         </a>
       </div>
 
