@@ -249,21 +249,20 @@ div.post {
     .buttons {
       margin-bottom: 4px;
 
-      a {
-        text-decoration: none;
+      .btn-default.active {
+        background-color: #e6e6e6 !important;
+      }
+
+      .btn-default:focus {
         background-color: @white;
-        display: inline-block;
-        margin-right: 6px;
-        .body-text;
-        .proxima-nova-regular;
-        font-size: 13px;
-        border-radius: @border-radius-base;
-        border: 1px solid @border-lightest;
-        line-height: 28px;
-        height: 30px;
-        vertical-align: middle;
-        padding: 0 8px;
-        text-align: center;
+      }
+
+      .btn-default:hover {
+        background-color: @white;
+      }
+
+
+      button {
 
         margin-bottom: 6px;
 
@@ -278,37 +277,13 @@ div.post {
         }
       }
 
-      i {
-        color: @light-gray;
-      }
-
-      .icon-little-x {
-        font-weight: bold;
-      }
-
-      .icon-question-mark {
-        font-weight: bold;
-      }
-
-      .icon-little-check {
-        font-size: 12px;
-      }
-
-
       @media (max-width: @screen-xs-max) {
-        > a {
-          display: block !important;
-          line-height: 37px;
-          height: 37px;
-          padding: 0;
+        .btn-group-vertical;
+        .btn {
+          border-radius: 4px !important;
           width: 33vw !important;
-          text-align: center;
         }
       }
-    }
-
-    .selected {
-      border: 1px solid @default-text !important;
     }
 
     .responses {

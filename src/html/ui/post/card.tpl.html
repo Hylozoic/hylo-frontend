@@ -64,15 +64,15 @@
 
     <div class="rsvp-controls" ng-if="post.type === 'event'">
       <div class="btn-group buttons">
-        <button type="button" class="rsvp-yes button" ng-class="eventResponse === 'yes' ? 'selected' : ''" ng-click="changeEventResponse('yes')">
+        <button type="button" class="rsvp-yes btn btn-default" ng-class="eventResponse === 'yes' ? 'active' : ''" ng-click="changeEventResponse('yes')">
           Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
         </button><!--
 
-        --><button type="button" class="rsvp-maybe button" ng-class="eventResponse === 'maybe' ? 'selected' : ''" ng-click="changeEventResponse('maybe')">
+        --><button type="button" class="rsvp-maybe btn btn-default" ng-class="eventResponse === 'maybe' ? 'active' : ''" ng-click="changeEventResponse('maybe')">
           Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
         </button><!--
 
-        --><button type="button" class="rsvp-no button" ng-class="eventResponse === 'no' ? 'selected' : ''" ng-click="changeEventResponse('no')">
+        --><button type="button" class="rsvp-no btn btn-default" ng-class="eventResponse === 'no' ? 'active' : ''" ng-click="changeEventResponse('no')">
           Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
         </button>
       </div>
