@@ -9,7 +9,7 @@ var hasLocalStorage = function () {
 }
 
 module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $history,
-  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker) {
+  UserMentions, $state, $rootScope, Cache, UserCache, GooglePicker, User) {
   'ngInject'
 
   var currentUser = CurrentUser.get()
@@ -22,7 +22,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     if (!hasLocalStorage()) return
     var fields = [
       'title', 'description', 'postType', 'communities',
-      'start_time', 'end_time'
+      'start_time', 'end_time', 'location'
     ]
     window.localStorage.postDraft = JSON.stringify(_.pick($scope, fields))
   }, 200)
@@ -131,7 +131,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     ;[
       'title', 'description',
       'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
-      'public', 'start_time', 'end_time'
+      'public', 'start_time', 'end_time', 'location'
     ].forEach(attr => $scope[attr] = null)
     $scope.switchPostType($scope.postType)
     $scope.saving = false
@@ -188,13 +188,13 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     }, _.pick($scope, [
       'description',
       'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
-      'public', 'start_time', 'end_time'
+      'public', 'start_time', 'end_time', 'location'
     ]))
     return ($scope.editing ? update : create)(data)
   }
 
   $scope.searchPeople = function (query) {
-    UserMentions.searchPeople(query).$promise.then(function (items) {
+    User.autocomplete({q: query}).$promise.then(function (items) {
       $scope.people = items
     })
   }
@@ -216,7 +216,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     $scope.editing = true
     $scope.switchPostType(post.type)
     $scope.title = post.name
-    ;['public', 'start_time', 'end_time'].forEach(attr => $scope[attr] = post[attr])
+    ;['public', 'start_time', 'end_time', 'location'].forEach(attr => $scope[attr] = post[attr])
 
     var image = _.find(post.media || [], m => m.type === 'image')
     if (image) $scope.imageUrl = image.url
@@ -279,4 +279,5 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
   $scope.$watch('startTime', $scope.updatePostDraftStorage)
   $scope.$watch('endTime', $scope.updatePostDraftStorage)
+  $scope.$watch('location', $scope.updatePostDraftStorage)
 }

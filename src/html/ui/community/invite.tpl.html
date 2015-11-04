@@ -18,7 +18,7 @@
           <textarea class="form-control" ng-model="invitationText"></textarea>
 
           <label>Recipients</label>
-          <input type="text" class="form-control" placeholder="Enter email addresses, separated by commas" ng-class="{placeholding: !emails}" ng-model="emails"/>
+          <textarea class="form-control" placeholder="Enter email addresses, separated by commas or line breaks" ng-class="{placeholding: !emails}" ng-model="emails"></textarea>
         </div>
         <div class="main-column">
           <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>

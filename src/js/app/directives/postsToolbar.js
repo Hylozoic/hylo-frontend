@@ -32,16 +32,20 @@ module.exports = function () {
         filter: $scope.selectOptions.filter[0]
       }
 
+      $scope.reload = function () {
+        $scope.update({data: $scope.selected})
+      }
+
       $scope.select = function (type, value) {
         $scope.selected[type] = _.find(
           $scope.selectOptions[type],
           x => x.value === value
         )
 
-        $scope.update({data: $scope.selected})
+        $scope.reload()
       }
 
-      $scope.update({data: $scope.selected})
+      $scope.reload()
     },
     templateUrl: '/ui/post/toolbar.tpl.html',
     replace: true

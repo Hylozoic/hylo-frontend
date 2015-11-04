@@ -29,6 +29,7 @@
 
   .search {
     .rounded-button;
+    margin-right: 5px;
     padding: 0;
     width: 32px;
     text-align: center;
@@ -37,6 +38,14 @@
     i {
       font-weight: 600;
       top: 1px;
+    }
+  }
+
+  .reload {
+    .circular-button;
+    i {
+      position: relative;
+      top: 3px;
     }
   }
 }
@@ -66,8 +75,10 @@
 }
 
 .posts {
-  .make-sm-column(6);
-  .make-sm-column-offset(3);
+  .make-sm-column(8);
+  .make-sm-column-offset(2);
+  .make-md-column(6);
+  .make-md-column-offset(3);
 
   padding-top: @std-padding;
   @media (max-width: @screen-xs-max) {
@@ -101,8 +112,7 @@
     border-radius: @border-radius-base;
 
     @media (max-width: @screen-xs-max) {
-      margin-left: -@std-padding;
-      margin-right: -@std-padding;
+      margin-top: -@std-padding;
       border-top: none;
       border-left: none;
       border-right: none;
@@ -146,6 +156,16 @@
       > *, .descriptions {
         display: block;
       }
+    }
+  }
+}
+
+.all-sections {
+  .inline-post-input {
+    .edit-post {
+      margin-top: 0;
+      margin-left: -@std-padding;
+      margin-right: -@std-padding;
     }
   }
 }
