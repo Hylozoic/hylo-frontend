@@ -189,6 +189,11 @@ module.exports = function ($stateProvider) {
   })
   .state('community.invite', {
     url: '/invite',
+    resolve: {
+      extraProperties: /* @ngInject*/ function (community) {
+        return community.getSettings().$promise
+      }
+    },
     views: {
       community: {
         templateUrl: '/ui/community/invite.tpl.html',
