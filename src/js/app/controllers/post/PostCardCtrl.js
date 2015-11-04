@@ -16,9 +16,52 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var currentUser = CurrentUser.get()
   var voteText = "click to <i class='icon-following'></i> me."
   var unvoteText = "click to un-<i class='icon-following'></i> me."
+
   var post = $scope.post
 
   $scope.community = Post.relevantCommunity(post, currentUser)
+
+  var userEventResponse = function () {
+    var responder = _.filter(post.responders, responder => responder.id === currentUser.id)[0]
+    if (responder) {
+      return responder.response
+    } else {
+      return ''
+    }
+  }
+
+  $scope.eventResponse = userEventResponse()
+  $scope.eventYeses = () => _.filter(post.responders, er => er.response === 'yes')
+  $scope.eventMaybes = () => _.filter(post.responders, er => er.response === 'maybe')
+  $scope.eventNos = () => _.filter(post.responders, er => er.response === 'no')
+
+  var rlResult = []
+
+  var yesHeader = {header: 'Going', id: -1}
+  var maybeHeader = {header: 'Maybe', id: -2}
+  var noHeader = {header: 'Can\'t Go', id: -3}
+
+  $scope.responderList = () => {
+    rlResult.length = 0
+
+    var yeses = $scope.eventYeses()
+    var maybes = $scope.eventMaybes()
+    var nos = $scope.eventNos()
+
+    if (yeses.length > 0) {
+      rlResult.push(yesHeader)
+      rlResult = rlResult.concat(yeses)
+    }
+    if (maybes.length > 0) {
+      rlResult.push(maybeHeader)
+      rlResult = rlResult.concat(maybes)
+    }
+    if (nos.length > 0) {
+      rlResult.push(noHeader)
+      rlResult = rlResult.concat(nos)
+    }
+    return rlResult
+  }
 
   $scope.isPostOwner = function () {
     return CurrentUser.is(post.user && post.user.id)
@@ -101,6 +144,12 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     }
   }
 
+  $scope.openResponders = function (isOpen) {
+    if (isOpen) {
+      $analytics.eventTrack('Responders: Viewed List of Responders', {num_responders: post.responders.length})
+    }
+  }
+
   $scope.complain = function () {
     Post.complain({id: post.id}, function () {
       growl.addSuccessMessage('Thank you for reporting this. Moderators will address it within 24 hours.')
@@ -167,5 +216,24 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     var start = new Date(post.start_time)
     var end = post.end_time && new Date(post.end_time)
     return TimeText.rangeFullText(start, end)
+  }
+
+  $scope.changeEventResponse = function (response) {
+    var user = currentUser
+    if (!user) return
+
+    Post.respond({id: post.id, response: response})
+
+    var meInResponders = _.findWhere(post.responders, {id: user.id})
+    post.responders = _.without(post.responders, meInResponders)
+
+    if ($scope.eventResponse === response) {
+      $scope.eventResponse = ''
+      $analytics.eventTrack('Event: Unrespond', {post_id: post.id})
+    } else {
+      $scope.eventResponse = response
+      post.responders.push({id: user.id, name: user.name, avatar_url: user.avatar_url, response: response})
+      $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
+    }
   }
 }

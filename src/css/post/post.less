@@ -235,6 +235,81 @@ div.post {
         }
       }
     }
+
+  }
+
+  .rsvp-controls {
+
+    border-top: 1px solid @border-lightest;
+    border-bottom: 1px solid @border-lightest;
+    padding-top: @std-padding;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+
+    .buttons {
+      margin-bottom: 4px;
+
+      .btn-default.active {
+        background-color: #e6e6e6 !important;
+      }
+
+      .btn-default:focus {
+        background-color: @white;
+      }
+
+      .btn-default:hover {
+        background-color: @white;
+      }
+
+
+      button {
+
+        margin-bottom: 6px;
+
+        &.rsvp-yes {
+          width: 105px;
+        }
+        &.rsvp-maybe {
+          width: 100px;
+        }
+        &.rsvp-no {
+          width: 111px;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+        .btn-group-vertical;
+        .btn {
+          border-radius: 4px !important;
+          width: 33vw !important;
+        }
+      }
+    }
+
+    .responses {
+      .meta-text();
+
+      a, a:hover {
+        color: @link-color;
+      }
+
+      .dropdown-menu {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+      }
+
+      .header {
+        .body-text;
+        font-size: 18px;
+        text-align: center;
+        padding: 5px @std-padding;
+        border-top: 1px solid @default-border;
+        border-bottom: 1px solid @default-border;
+        margin-bottom: 6px;
+        display: block;
+        width: 100%;
+      }
+    }
   }
 
   &.ng-leave {

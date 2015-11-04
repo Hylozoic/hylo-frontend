@@ -66,6 +66,43 @@
       <span ng-if="post.public">&nbsp;•&nbsp; Public</span>
     </div>
 
+    <div class="rsvp-controls" ng-if="post.type === 'event'">
+      <div class="btn-group buttons">
+        <button type="button" class="rsvp-yes btn btn-default" ng-class="eventResponse === 'yes' ? 'active' : ''" ng-click="changeEventResponse('yes')">
+          Going<span ng-if="eventYeses().length > 0"> ({{eventYeses().length}})</span>
+        </button><!--
+
+        --><button type="button" class="rsvp-maybe btn btn-default" ng-class="eventResponse === 'maybe' ? 'active' : ''" ng-click="changeEventResponse('maybe')">
+          Maybe<span ng-if="eventMaybes().length > 0"> ({{eventMaybes().length}})</span>
+        </button><!--
+
+        --><button type="button" class="rsvp-no btn btn-default" ng-class="eventResponse === 'no' ? 'active' : ''" ng-click="changeEventResponse('no')">
+          Can't go<span ng-if="eventNos().length > 0"> ({{eventNos().length}})</span>
+        </button>
+      </div>
+
+      <div class="responses" ng-if="post.responders.length > 0">
+        <span class="dropdown" dropdown on-toggle="openResponders(open)">
+          <a class="dropdown-toggle" dropdown-toggle>
+              See Responses
+          </a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="listItem in responderList() track by listItem.id">
+              <span class="header" ng-if="listItem.header">{{listItem.header}}</span>
+              <a class="dropdown-list-user" ui-sref="profile.posts({id: listItem.id})" ng-if="!listItem.header">
+                <div back-img="::listItem.avatar_url" class="avatar"></div>
+                <div class="name">{{::listItem.name}}</div>
+              </a>
+            </li>
+          </ul>
+        </span>
+      </div>
+      <div class="responses" ng-if="post.responders.length === 0">
+        No responses yet!
+      </div>
+
+    </div>
+
     <div class="followers" ng-if="post.followers.length > 0 && !onlyAuthorFollowing">
       <!-- Add yourself as a follower -->
       <span ng-if="isFollowing">You</span><span ng-if="isFollowing && followersNotMe.length > 1">, </span>
@@ -146,8 +183,6 @@
         <span class="hidden-xs">Mark complete</span>
       </a>
     </div>
-
-  </div>
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
 </div>
