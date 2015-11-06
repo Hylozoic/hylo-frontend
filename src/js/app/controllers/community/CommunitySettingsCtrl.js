@@ -52,6 +52,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
       if (field2) {
         community[field2] = $scope.edited[field2];
       }
+      $scope.join_url = origin + '/c/' + community.slug + '/join/' + community.beta_access_code;
       $analytics.eventTrack('Community: Changed Setting', {
         name: field,
         community_id: community.slug,

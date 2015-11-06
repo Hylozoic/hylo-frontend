@@ -10,6 +10,12 @@
   <div class="all-sections">
 
     <div class="section invite">
+      <div class="section-label">
+        Invite Members via Email
+      </div>
+      <div class="subheader">
+        Each recipient will receive an email with a link to join this community that can be used once.
+      </div>
       <div class="setting-item">
         <div class="full-column">
           <label>Subject</label>
@@ -20,20 +26,20 @@
           <label>Recipients</label>
           <textarea class="form-control" placeholder="Enter email addresses, separated by commas or line breaks" ng-class="{placeholding: !emails}" ng-model="emails"></textarea>
         </div>
-          <div class="main-column">
-            <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>
-            <label for="inviteAsModerator">Invite recipients to be moderators</label>
-          </div>
-          <div class="side-column">
-            <button type="button" ng-click="invite()">
-              <span ng-show="submitting">
-                Sending...
-              </span>
-              <span ng-hide="submitting">
-                Send Invite
-              </span>
-            </button>
-          </div>
+        <div class="main-column">
+          <input type="checkbox" id="inviteAsModerator" ng-model="inviteAsModerator"/>
+          <label for="inviteAsModerator">Invite recipients to be moderators</label>
+        </div>
+        <div class="side-column">
+          <button type="button" ng-click="invite()">
+            <span ng-show="submitting">
+              Sending...
+            </span>
+            <span ng-hide="submitting">
+              Send Invite
+            </span>
+          </button>
+        </div>
 
         <div ng-show="inviteResults" class="results full-column">
           <h3>Results</h3>
@@ -46,26 +52,40 @@
             </tr>
           </table>
         </div>
-        <div class="full-column divider">
-          &nbsp;
-        </div>
-          <div class="half-column invite-code">
-            <label>Invitation code</label>
-            <p>{{community.beta_access_code}}</p>
-            <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
-          </div>
-          <div class="half-column invite-link">
-            <label>Invitation code link</label>
-            <p><a href="{{join_url}}">{{join_url}}</a></p>
-            <p class="help">You can copy this link for pasting in emails or embedding on your webpage
-              to pre-populate the invite code for new members to easily join.</p>
-          </div>
-          <div class="full-column help">
-            If you would like to invite many people at once, please
+        <div class="full-column help">
+          If you would like to invite many people at once, please
           <a href="mailto:hello@hylo.com?subject=Bulk%20Invite">email us at Hylo</a>.
         </div>
       </div>
     </div>
-
+    <div class="section code">
+      <div class="section-label code">
+        Or, invite Members with an invitation code
+      </div>
+      <div class="subheader">
+        You can also share the code and/or link below to allow people to join your community.
+      </div>
+      <div class="setting-item">
+        <div class="half-column invite-code">
+          <label>Invitation code</label>
+          <p>{{community.beta_access_code}}</p>
+          <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
+        </div>
+        <div class="half-column invite-link">
+          <label>Invitation code link</label>
+          <p><a href="{{join_url}}">{{join_url}}</a></p>
+          <p class="help">You can copy this link for pasting in emails or embedding on your webpage
+            to pre-populate the invite code for new members to easily join.</p>
+        </div>
+        <div class="half-column value" ng-hide="editing">
+          <button type="button" ng-click="edit()">Change</button>
+        </div>
+        <div class="half-column edit" ng-show="editing">
+          <input type="text" class="form-control" ng-model="community.beta_access_code"/>
+          <button type="button" ng-click="cancelEdit()">Cancel</button>
+          <button type="button" ng-click="saveEdit()">Save</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

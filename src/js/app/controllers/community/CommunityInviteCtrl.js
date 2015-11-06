@@ -1,4 +1,4 @@
-var controller = function($scope, $analytics, community, extraProperties, $history, $location) {
+var controller = function($scope, $analytics, community, currentUser, extraProperties, $history, $location) {
   $scope.community = community
 
   _.merge(community, extraProperties)
@@ -45,6 +45,28 @@ var controller = function($scope, $analytics, community, extraProperties, $histo
       $history.back();
     }
   };
+
+  $scope.editing = false
+
+  $scope.edit = function () {
+    $scope.editing = true
+  }
+
+  $scope.saveEdit = function () {
+    community.update(community, function() {
+      $scope.join_url = origin + '/c/' + community.slug + '/join/' + community.beta_access_code
+      $analytics.eventTrack('Community: Changed Setting', {
+        name: 'beta_access_code',
+        community_id: community.slug,
+        moderator_id: currentUser.id
+      })
+    })
+    $scope.editing = false
+  }
+
+  $scope.cancelEdit = function () {
+    $scope.editing = false
+  }
 
 };
 
