@@ -181,7 +181,6 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
 
     var data = _.merge({
       name: $scope.title,
-      description: $scope.description,
       type: $scope.postType,
       projectId: project && project.id,
       communities: communities.map(c => c.id)
