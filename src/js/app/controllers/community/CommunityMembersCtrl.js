@@ -1,5 +1,6 @@
 var controller = function($scope, community, usersQuery, $dialog, Cache, currentUser, $timeout) {
   $scope.users = usersQuery.people;
+  $scope.userCount = usersQuery.people_total;
 
   $scope.loadMore = _.debounce(function() {
     if ($scope.loadMoreDisabled) return;
@@ -12,6 +13,8 @@ var controller = function($scope, community, usersQuery, $dialog, Cache, current
         people: $scope.users,
         people_total: resp.people_total
       }, {maxAge: 10 * 60});
+
+      $scope.userCount = resp.people_total;
 
       if (resp.people.length > 0 && $scope.users.length < resp.people_total)
         $timeout(function() { $scope.loadMoreDisabled = false; });
