@@ -142,6 +142,7 @@
           <label>Invitation code</label>
           <p>{{community.beta_access_code}}</p>
           <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
+          <p class="help error" ng-if="form.beta_access_code.$error.unique">This code cannot be used; please choose another.</p>
         </div>
         <div class="half-column">
           <label>Invitation code link</label>
@@ -153,7 +154,7 @@ to pre-populate the invite code for new members to easily join.</p>
           <button type="button" ng-click="edit('beta_access_code')">Change</button>
         </div>
         <div class="half-column edit" ng-show="editing.beta_access_code">
-          <input type="text" class="form-control" ng-model="edited.beta_access_code"/>
+          <input name="beta_access_code" type="text" class="form-control" hylo-unique="beta_access_code" ng-model="edited.beta_access_code" required />
           <button type="button" ng-click="cancelEdit('beta_access_code')">Cancel</button>
           <button type="button" ng-click="saveEdit('beta_access_code')">Save</button>
         </div>
