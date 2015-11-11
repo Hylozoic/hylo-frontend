@@ -243,4 +243,13 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       href: $scope.postUrl
     }, function (response) {})
   }
+
+  $scope.twitterText = function () {
+    var shortName = post.name
+    var max = 100
+    if (shortName.length > max) {
+      shortName = shortName.substring(0, max - 3) + '...'
+    }
+    return shortName + ' via Hylo:'
+  }
 }
