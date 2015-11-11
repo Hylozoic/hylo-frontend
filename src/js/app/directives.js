@@ -15,6 +15,21 @@ angularModule
 .directive('inlinePostInput', require('./directives/inlinePostInput'))
 .directive('postsToolbar', require('./directives/postsToolbar'))
 
+.directive('responsiveDropdownMenu', function () {
+  var margin = 15
+
+  return (scope, element, attrs) => {
+    var parent = element.parent()
+    var toggle = parent.children()[0]
+
+    toggle.addEventListener('click', function () {
+      var left = margin - parent[0].offsetLeft + 'px'
+      var width = document.documentElement.clientWidth - 2 * margin + 'px'
+      element.css({left: left, width: width})
+    })
+  }
+})
+
 .directive('scrollClass', function ($window) {
   return (scope, element, attrs) => {
     var threshold = Number(attrs.scrollClassThreshold)

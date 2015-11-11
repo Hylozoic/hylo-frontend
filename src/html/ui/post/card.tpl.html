@@ -57,7 +57,15 @@
       --></a>
       <span class="community" ng-hide="post.projects[0]">
         in <a ui-sref="community.posts({community: community.slug})">{{::community.name}}</a>
-        <span ng-if="post.communities.length > 1">et al.</span>
+        <span ng-if="otherCommunities.length > 0" class='dropdown' dropdown>
+          and
+          <a class='dropdown-toggle' dropdown-toggle>{{otherCommunities.length}} other{{otherCommunities.length > 1 ? 's' : ''}}</a>
+          <ul class="dropdown-menu" responsive-dropdown-menu>
+            <li ng-repeat='community in otherCommunities'>
+              <a ui-sref='community.posts({community: community.slug})'>{{community.name}}</a>
+            </li>
+          </ul>
+        </span>
       </span>
       <span class="project" ng-if="post.projects[0]">
         in <a ui-sref="project.posts({id: post.projects[0].slug})">"{{::truncate(post.projects[0].title, 28)}}"</a>
@@ -86,7 +94,7 @@
           <a class="dropdown-toggle" dropdown-toggle>
               See Responses
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" responsive-dropdown-menu>
             <li ng-repeat="listItem in responderList() track by listItem.id">
               <span class="header" ng-if="listItem.header">{{listItem.header}}</span>
               <a class="dropdown-list-user" ui-sref="profile.posts({id: listItem.id})" ng-if="!listItem.header">
@@ -121,7 +129,7 @@
           <a class="dropdown-toggle" dropdown-toggle>
             {{followersNotMe.length - 2}} other<span ng-if="followersNotMe.length > 3">s</span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" responsive-dropdown-menu>
             <li ng-repeat="user in followersNotMe.slice(2)">
               <a class="dropdown-list-user" ui-sref="profile.posts({id: user.id})" ng-if="!user.hide">
                 <div back-img="::user.avatar_url" class="avatar"></div>
@@ -148,7 +156,7 @@
               {{::post.contributors.length - 2}} other<span ng-if="::post.contributors.length > 3">s</span>
             </a>
 
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" responsive-dropdown-menu>
               <li ng-repeat="user in post.contributors.slice(2)">
                 <a class="dropdown-list-user" ui-sref="profile.posts({id: user.id})">
                   <div back-img="::user.avatar_url" class="avatar"></div>

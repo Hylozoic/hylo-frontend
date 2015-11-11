@@ -12,6 +12,13 @@
   }
 
   border: 1px solid @border-light;
+
+  &[responsive-dropdown-menu] {
+    a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 a.dropdown-toggle {
@@ -34,4 +41,3 @@ a.dropdown-toggle {
   }
 
 }
-

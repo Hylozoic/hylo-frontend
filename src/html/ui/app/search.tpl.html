@@ -14,8 +14,8 @@
         <div class="person" ng-repeat="person in results.people track by person.id">
           <a class="avatar" back-img="::person.avatar_url" ui-sref="profile.posts({id: person.id})"></a>
           <div class="info">
-            <a class="name" bind-html-unsafe="::name(person)" ui-sref="profile.posts({id: person.id})"></a>
-            <p class="blurb" bind-html-unsafe="::blurb(person)"></p>
+            <a class="name" bind-html-unsafe="name(person)" ui-sref="profile.posts({id: person.id})"></a>
+            <p class="blurb" bind-html-unsafe="blurb(person)"></p>
           </div>
         </div>
         <a ng-if="remaining('people') > 0" ng-click="loadMore('people')" class="load-more">

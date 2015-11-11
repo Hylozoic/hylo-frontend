@@ -59,7 +59,7 @@
           {{project.community.name}}
           <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" role="menu" responsive-dropdown-menu>
           <li ng-repeat="community in communities" ng-click="project.community = community">
             {{community.name}}
           </li>
@@ -76,7 +76,7 @@
           {{pickedVisibility().label}}
           <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" role="menu" responsive-dropdown-menu>
           <li ng-repeat="option in visibilityOptions" ng-click="project.visibility = option.value">
             {{option.label}}
           </li>
