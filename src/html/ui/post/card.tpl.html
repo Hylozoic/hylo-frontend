@@ -181,9 +181,24 @@
       --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type !== 'chat'">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
-      </a>
+      </a><!--
+
+      --><span class="post-share dropdown" ng-if="post.public" dropdown>
+      <a class="share" dropdown-toggle><i class="icon-share"></i>
+        <span class="hidden-xs">Share</span></a>
+        <ul class="dropdown-menu">
+          <li>
+            <a ng-click="shareFacebook()">Share on Facebook</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/intent/tweet?text={{post.name + ' via Hylo:'}}&url={{postUrl}}">Share on Twitter</a>
+          </li>
+        </ul>
+      </span>
     </div>
   </div>
+
+
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
 </div>

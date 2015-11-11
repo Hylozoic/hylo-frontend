@@ -12,12 +12,12 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.isFollowing = false
   $scope.joinPostText = ''
   $scope.onlyAuthorFollowing = false
-
   var currentUser = CurrentUser.get()
   var voteText = "click to <i class='icon-following'></i> me."
   var unvoteText = "click to un-<i class='icon-following'></i> me."
 
   var post = $scope.post
+  $scope.postUrl = $state.href($state.current.name, {postId: post.id}, {absolute: true})
 
   $scope.community = Post.relevantCommunity(post, currentUser)
 
@@ -235,5 +235,12 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       post.responders.push({id: user.id, name: user.name, avatar_url: user.avatar_url, response: response})
       $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
     }
+  }
+
+  $scope.shareFacebook = function () {
+    FB.ui({
+      method: 'share',
+      href: $scope.postUrl
+    }, function (response) {})
   }
 }

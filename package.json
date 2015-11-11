@@ -79,7 +79,8 @@
       "_",
       "angular",
       "format",
-      "AndroidBridge"
+      "AndroidBridge",
+      "FB"
     ]
   }
 }
