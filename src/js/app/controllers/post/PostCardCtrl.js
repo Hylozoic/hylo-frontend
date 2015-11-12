@@ -17,7 +17,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var unvoteText = "click to un-<i class='icon-following'></i> me."
 
   var post = $scope.post
-  $scope.postUrl = $state.href($state.current.name, {postId: post.id}, {absolute: true})
+  $scope.postUrl = $state.href('post', $state.current.name, {postId: post.id}, {absolute: true})
 
   $scope.community = Post.relevantCommunity(post, currentUser)
 
@@ -251,5 +251,28 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       shortName = shortName.substring(0, max - 3) + '...'
     }
     return shortName + ' via Hylo:'
+  }
+
+  $scope.hasFulfill = function () {
+    return $scope.isPostOwner() && !post.fulfilled_at && post.type !== 'chat'
+  }
+
+  $scope.hasShare = function () {
+    return post.public
+  }
+
+  $scope.controlsClass = function () {
+    var n = 0
+    n += $scope.hasFulfill() ? 1 : 0
+    n += $scope.hasShare() ? 1 : 0
+
+    switch (n) {
+      case 0:
+        return ''
+      case 1:
+        return 'four'
+      case 2:
+        return 'five'
+    }
   }
 }
