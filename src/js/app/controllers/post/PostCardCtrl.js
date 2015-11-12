@@ -17,7 +17,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   var unvoteText = "click to un-<i class='icon-following'></i> me."
 
   var post = $scope.post
-  $scope.postUrl = $state.href('post', $state.current.name, {postId: post.id}, {absolute: true})
+  $scope.postUrl = $state.href('post', {postId: post.id}, {absolute: true})
 
   $scope.community = Post.relevantCommunity(post, currentUser)
 
