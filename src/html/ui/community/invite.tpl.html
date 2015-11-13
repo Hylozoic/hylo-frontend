@@ -77,10 +77,10 @@
           <p class="help">You can copy this link for pasting in emails or embedding on your webpage
             to pre-populate the invite code for new members to easily join.</p>
         </div>
-        <div class="half-column value" ng-hide="editing">
+        <div class="half-column value" ng-hide="editing" ng-if="canModerate">
           <button type="button" ng-click="edit()">Change</button>
         </div>
-        <div class="half-column edit" ng-show="editing">
+        <div class="half-column edit" ng-show="editing" ng-if="canModerate">
           <form name="form">
             <input name="beta_access_code" type="text" class="form-control" ng-model="community.beta_access_code" hylo-unique="beta_access_code" required/>
           </form>
