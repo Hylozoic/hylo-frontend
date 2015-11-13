@@ -3,3 +3,6 @@ deployment:
     branch: master
     commands:
       - "grunt deploy --to=production"
+  machine:
+    node:
+      version: 0.12.7
