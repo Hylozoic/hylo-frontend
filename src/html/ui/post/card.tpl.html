@@ -184,9 +184,8 @@
       </a><!--
 
       --><span class="post-share dropdown" dropdown>
-      <a class="share" ng-if="hasShare()" dropdown-toggle>
-        <div class="icon" style="background-color: #388ecb; -webkit-mask-image: url(<%= imageUrl('posts/share.svg') %>); mask-image: url(<%= imageUrl('posts/share.svg') %>)"></div>
-        <span class="hidden-xs">Share</span></a>
+      <a class="share" ng-if="hasShare()" dropdown-toggle><i class="icon-share"></i>
+        <span class="hidden-xs">Share</span></a>      
         <ul class="dropdown-menu">
           <li>
             <a ng-click="shareFacebook()">Share on Facebook</a>
