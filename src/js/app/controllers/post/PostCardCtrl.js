@@ -12,12 +12,12 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.isFollowing = false
   $scope.joinPostText = ''
   $scope.onlyAuthorFollowing = false
-
   var currentUser = CurrentUser.get()
   var voteText = "click to <i class='icon-following'></i> me."
   var unvoteText = "click to un-<i class='icon-following'></i> me."
 
   var post = $scope.post
+  $scope.postUrl = $state.href('post', {postId: post.id}, {absolute: true})
 
   $scope.community = Post.relevantCommunity(post, currentUser)
   $scope.otherCommunities = _.filter(post.communities, c => c.id !== $scope.community.id)
@@ -235,6 +235,45 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       $scope.eventResponse = response
       post.responders.push({id: user.id, name: user.name, avatar_url: user.avatar_url, response: response})
       $analytics.eventTrack('Event: Respond', {post_id: post.id, response: response})
+    }
+  }
+
+  $scope.shareFacebook = function () {
+    FB.ui({
+      method: 'share',
+      href: $scope.postUrl
+    }, function (response) {})
+  }
+
+  $scope.twitterText = function () {
+    var shortName = post.name
+    var max = 100
+    if (shortName.length > max) {
+      shortName = shortName.substring(0, max - 3) + '...'
+    }
+    return shortName + ' via Hylo:'
+  }
+
+  $scope.hasFulfill = function () {
+    return $scope.isPostOwner() && !post.fulfilled_at && post.type !== 'chat'
+  }
+
+  $scope.hasShare = function () {
+    return post.public
+  }
+
+  $scope.controlsClass = function () {
+    var n = 0
+    n += $scope.hasFulfill() ? 1 : 0
+    n += $scope.hasShare() ? 1 : 0
+
+    switch (n) {
+      case 0:
+        return ''
+      case 1:
+        return 'four'
+      case 2:
+        return 'five'
     }
   }
 }

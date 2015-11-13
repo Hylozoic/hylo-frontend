@@ -202,6 +202,40 @@ div.post {
     border-bottom: 1px solid @border-lightest;
     .post-buttons;
 
+    .post-share {
+      .post-buttons;
+
+      .dropdown-menu {
+        left: auto;
+        right: 0px;
+        top: 18px;
+
+        @media (max-width: @screen-xs-max) {
+          margin-top: 15px;
+        }
+      }
+
+      @media (max-width: @screen-xs-max) {
+
+        > a {
+          display: block;
+          float: left;
+          line-height: 37px;
+          height: 37px;
+          padding: 0;
+          width: 33vw !important;
+          text-align: center;
+          margin: 0;
+          text-decoration: none;
+        }
+
+        i {
+          font-size: 20px;
+        }
+
+      }
+    }
+
     > a:first-child {
       padding-left: 0;
     }
@@ -228,10 +262,18 @@ div.post {
       }
     }
 
-    &.has-fulfill {
+    &.four {
       @media (max-width: @screen-xs-max) {
-        > a {
+        a {
           width: 25vw !important;
+        }
+      }
+    }
+
+    &.five {
+      @media (max-width: @screen-xs-max) {
+        a {
+          width: 20vw !important;
         }
       }
     }

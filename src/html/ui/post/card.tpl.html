@@ -169,7 +169,7 @@
       </span>
     </div>
 
-    <div class="post-controls" ng-class="{'has-fulfill': isPostOwner() && !post.fulfilled_at && post.type !== 'chat'}">
+    <div class="post-controls" ng-class="controlsClass()">
       <a class="vote" ng-click="vote()" tooltip-popup-delay="500" tooltip="Show your support and bring this to the attention of others">
         <i ng-class="post.myVote ? 'icon-heart-new-selected' : 'icon-heart-new'"></i>
         <span class="num">{{post.votes}}</span>
@@ -186,12 +186,27 @@
         <span class="hidden-xs">{{isFollowing ? 'Unfollow' : 'Follow'}}</span>
       </a><!--
 
-      --><a class="fulfill" ng-click="markFulfilled()" ng-if="isPostOwner() && !post.fulfilled_at && post.type !== 'chat'">
+      --><a class="fulfill" ng-click="markFulfilled()" ng-if="hasFulfill()">
         <i class="icon-little-check"></i>
         <span class="hidden-xs">Mark complete</span>
-      </a>
+      </a><!--
+
+      --><span class="post-share dropdown" dropdown>
+      <a class="share" ng-if="hasShare()" dropdown-toggle><i class="icon-share"></i>
+        <span class="hidden-xs">Share</span></a>      
+        <ul class="dropdown-menu">
+          <li>
+            <a ng-click="shareFacebook()">Share on Facebook</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/intent/tweet?text={{twitterText()}}&url={{postUrl}}">Share on Twitter</a>
+          </li>
+        </ul>
+      </span>
     </div>
   </div>
+
+
 
   <embedded-comments ng-if="!isCommentsCollapsed" post="post"></embedded-comments>
 </div>
