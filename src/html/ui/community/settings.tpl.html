@@ -154,7 +154,8 @@ to pre-populate the invite code for new members to easily join.</p>
         </div>
         <div class="half-column edit" ng-show="editing.beta_access_code">
           <form name="form">
-          <input name="beta_access_code" type="text" class="form-control" hylo-unique="beta_access_code" ng-model="edited.beta_access_code" required />
+            <input name="beta_access_code" type="text" class="form-control" hylo-unique="beta_access_code" ng-model="edited.beta_access_code" required />
+          </form>
           <p class="help error" ng-if="form.beta_access_code.$error.required">Please fill in a code.</p>
           <p class="help error" ng-if="form.beta_access_code.$error.unique">This code cannot be used; please choose another.</p>
           <button type="button" ng-click="cancelEdit('beta_access_code')">Cancel</button>
