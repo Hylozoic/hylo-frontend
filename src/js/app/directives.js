@@ -19,6 +19,8 @@ angularModule
   var margin = 15
 
   return (scope, element, attrs) => {
+    if (document.documentElement.clientWidth > 480) return
+
     var parent = element.parent()
     var toggle = parent.children()[0]
 
