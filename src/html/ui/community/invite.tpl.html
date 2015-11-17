@@ -68,7 +68,7 @@
       <div class="setting-item">
         <div class="half-column invite-code">
           <label>Invitation code</label>
-          <p>{{community.beta_access_code}}</p>
+          <p>{{community.beta_access_code || '&nbsp;'}}</p>
           <p class="help">This code can be given to people to allow them to join the community, instead of sending individual invitations by email.</p>
         </div>
         <div class="half-column invite-link">
@@ -77,11 +77,15 @@
           <p class="help">You can copy this link for pasting in emails or embedding on your webpage
             to pre-populate the invite code for new members to easily join.</p>
         </div>
-        <div class="half-column value" ng-hide="editing">
+        <div class="half-column value" ng-hide="editing" ng-if="canModerate">
           <button type="button" ng-click="edit()">Change</button>
         </div>
-        <div class="half-column edit" ng-show="editing">
-          <input type="text" class="form-control" ng-model="community.beta_access_code"/>
+        <div class="half-column edit" ng-show="editing" ng-if="canModerate">
+          <form name="form">
+            <input name="beta_access_code" type="text" class="form-control" ng-model="community.beta_access_code" hylo-unique="beta_access_code" required/>
+          </form>
+          <p class="help error" ng-if="form.beta_access_code.$error.required">Please fill in a code.</p>
+          <p class="help error" ng-if="form.beta_access_code.$error.unique">This code cannot be used; please choose another.</p>
           <button type="button" ng-click="cancelEdit()">Cancel</button>
           <button type="button" ng-click="saveEdit()">Save</button>
         </div>

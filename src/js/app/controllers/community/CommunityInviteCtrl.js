@@ -1,5 +1,6 @@
 var controller = function($scope, $analytics, community, currentUser, extraProperties, $history, $location) {
   $scope.community = community
+  $scope.canModerate = currentUser && currentUser.canModerate(community);
 
   _.merge(community, extraProperties)
   var origin = $location.absUrl().replace($location.path(), '')
