@@ -144,6 +144,29 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
     $scope.edited.leader = item;
   };
 
+  $scope.saveSlackhook = function() {
+    community.slack_hook = $scope.slack_hook;
+    $scope.slack_hook = "";
+    community.update({slack_hook: community.slack_hook}, function() {
+      $analytics.eventTrack('Community: Added Slack webhook', {
+        community_id: community.slug,
+        moderator_id: currentUser.id
+      });
+      growl.addSuccessMessage('Slack successfully added.');
+    });
+  };
+
+  $scope.removeSlackhook = function() {
+    $scope.slack_hook = "";
+    community.slack_hook = "";
+    community.update({slack_hook: ""}, function() {
+      $analytics.eventTrack('Community: Removed Slack webhook', {
+        community_id: community.slug,
+        moderator_id: currentUser.id
+      });
+      growl.addSuccessMessage('Slack successfully removed.');
+    });
+  };
 };
 
 module.exports = function(angularModule) {
