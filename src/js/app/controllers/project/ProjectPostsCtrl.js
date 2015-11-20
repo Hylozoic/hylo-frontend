@@ -2,6 +2,8 @@ module.exports = function ($scope, project, Post, Cache, UserCache, growl,
   $analytics, currentUser, postQuery, $stateParams, UserMentions, PostManager) {
   'ngInject'
 
+  $scope.currentUser = currentUser
+
   var postManager = new PostManager({
     firstPage: postQuery,
     scope: $scope,
