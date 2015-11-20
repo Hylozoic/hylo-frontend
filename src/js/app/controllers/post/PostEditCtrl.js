@@ -193,7 +193,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   }
 
   $scope.searchPeople = function (query) {
-    User.autocomplete({q: query}).$promise.then(function (items) {
+    User.autocomplete({q: query, projectId: project && project.id}).$promise.then(function (items) {
       $scope.people = items
     })
   }
@@ -231,7 +231,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
     try {
       _.merge($scope, JSON.parse(window.localStorage.postDraft))
       $scope.switchPostType($scope.postType)
-    } catch(e) {}
+    } catch (e) {}
   } else {
     $scope.switchPostType('chat')
   }
