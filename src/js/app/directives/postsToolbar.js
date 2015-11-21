@@ -15,8 +15,7 @@ module.exports = function () {
       $scope.selectOptions = {
         sort: [
           {label: 'Recent', value: 'recent'},
-          {label: 'Top', value: 'top'},
-          {label: 'Suggested', value: 'suggested'}
+          {label: 'Top', value: 'top'}
         ],
         filter: [
           {label: 'All Posts', value: ($scope.hideWelcomePosts ? 'all' : 'all+welcome')},
