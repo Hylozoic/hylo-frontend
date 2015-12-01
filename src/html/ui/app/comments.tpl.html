@@ -36,7 +36,6 @@
         <div tabindex="-1"
              autocomplete="off"
              contenteditable="true"
-
              mentio=""
              mentio-trigger-char="'@'"
              mentio-items="people"
@@ -44,10 +43,9 @@
              mentio-search="searchPeople(term)"
              mentio-select="getPeopleTextRaw(item)"
              mentio-typed-term="typedTerm"
-
              ng-disabled="createDisabled"
-             ng-focus="commenting = true"
-             ng-blur="commenting = false"
+             ng-focus="commentFocus(true)"
+             ng-blur="commentFocus(false)"
              ng-model="commentInput"
              class="mentio-editor no-border"
              ng-class="{'empty-comment': !commentInput}"

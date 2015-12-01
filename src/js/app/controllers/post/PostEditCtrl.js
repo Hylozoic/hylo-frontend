@@ -17,6 +17,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   var post = $scope.post
   var project = $scope.project
   if (project) communities = $scope.communities = [project.community]
+  $scope.hideNavIOS = require('../../services/hideNavIOS')
 
   $scope.updatePostDraftStorage = _.debounce(() => {
     if (!hasLocalStorage()) return
@@ -73,6 +74,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   $scope.close = function () {
     $rootScope.postEditProgress = null
     clearPostDraftStorage()
+    $scope.hideNavIOS(false)
   }
 
   $scope.$on('post-editor-closing', $scope.close)

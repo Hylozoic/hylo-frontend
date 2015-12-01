@@ -1,3 +1,3 @@
-module.exports = function() {
-  return (navigator.userAgent.indexOf("Hylo-App") > -1)
+module.exports = function () {
+  return (navigator.userAgent.indexOf('Hylo-App') > -1)
 }
