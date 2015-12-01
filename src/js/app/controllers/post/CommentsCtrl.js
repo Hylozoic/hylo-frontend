@@ -2,6 +2,8 @@ var controller = function ($scope, $log, $rootScope, $modal, growl, $window, $ti
   $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser, User) {
   var post = $scope.post
 
+  $scope.hideNavIOS = require('../../services/hideNavIOS')
+
   if (!post.comments) {
     $scope.loading = true
 
@@ -93,6 +95,11 @@ var controller = function ($scope, $log, $rootScope, $modal, growl, $window, $ti
 
   $scope.commentLength = function () {
     return angular.element('<div>' + ($scope.commentInput || '') + '</div>').text().length
+  }
+
+  $scope.commentFocus = function (focus) {
+    $scope.hideNavIOS(focus)
+    $scope.commenting = focus
   }
 }
 
