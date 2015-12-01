@@ -33,7 +33,8 @@
       mentio-search="searchPeople(term)"
       mentio-select="getPeopleTextRaw(item)"
       mentio-typed-term="typedTerm"
-      ng-keypress="updatePostDraftStorage()">
+      ng-keypress="updatePostDraftStorage()"
+      onfocus="if (navigator.userAgent.indexOf('Hylo-App') > -1) {document.getElementById('nav').style.display ='none'}">
     </div>
     <p class="help"><strong>Tip:</strong> use the <strong>@</strong> symbol to mention a community member. They will be notified about your post. And use the <strong>#</strong> symbol followed by a phrase to add a "hashtag". Hashtags help categorize your post and group it with related content, so that it can reach people who are interested.</p>
   </div>
@@ -140,5 +141,4 @@
       </button>
     </div>
   </div>
-
 </div>

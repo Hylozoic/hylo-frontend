@@ -73,6 +73,9 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   $scope.close = function () {
     $rootScope.postEditProgress = null
     clearPostDraftStorage()
+    if (navigator.userAgent.indexOf('Hylo-App') > -1) {
+      document.getElementById('nav').style.display = 'block'
+    }
   }
 
   $scope.$on('post-editor-closing', $scope.close)

@@ -48,6 +48,8 @@
              ng-disabled="createDisabled"
              ng-focus="commenting = true"
              ng-blur="commenting = false"
+             onfocus="if (navigator.userAgent.indexOf('Hylo-App') > -1) {document.getElementById('nav').style.display ='none'}"
+             onblur="if (navigator.userAgent.indexOf('Hylo-App') > -1) {document.getElementById('nav').style.display ='block'}"
              ng-model="commentInput"
              class="mentio-editor no-border"
              ng-class="{'empty-comment': !commentInput}"
