@@ -1,0 +1,76 @@
+<!-- the login-signup-dialog class below is used with the popupDone service -->
+<div class="all-sections login-signup-dialog">
+  <h1>
+    Sign up for Hylo with code
+    {{invitation && invitation.community ? 'to join ' + invitation.community.name : ''}}
+  </h1>
+
+  <form name="form" novalidate>
+
+    <div class="error" ng-show="signupError">{{signupError}}</div>
+
+    <p>Connect one of these services with Hylo THIS IS HERE.</p>
+
+    <div class="service-buttons">
+      <a ng-click="useThirdPartyAuth('google', form)" class="google">Google</a>
+      <a ng-click="useThirdPartyAuth('facebook', form)" class="facebook">Facebook</a>
+      <a ng-click="useThirdPartyAuth('linkedin', form)" class="linkedin">LinkedIn</a>
+    </div>
+
+    <p><strong>Or</strong>, enter your name, email address, and the password you would like to use.</p>
+
+    <div class="form-group">
+      <input type="name"
+             name="name"
+             ng-model="user.name"
+             class="form-control"
+             placeholder="Full name"
+             ng-keyup="$event.which == 13 && submit(form)"
+             required/>
+      <p class="help error" ng-if="form.submitted && form.name.$error.required">Please fill in this field.</p>
+    </div>
+
+    <div class="row">
+      <div class="form-group email left-col">
+        <input type="email"
+               name="email"
+               ng-model="user.email"
+               class="form-control"
+               placeholder="Email address"
+               ng-keyup="$event.which == 13 && submit(form)"
+               required/>
+        <p class="help error" ng-if="form.submitted && form.email.$error.email">Please enter a valid email address.</p>
+        <p class="help error" ng-if="form.submitted && form.email.$error.required">Please fill in this field.</p>
+      </div>
+      <div class="form-group password right-col">
+        <input type="password"
+               name="password"
+               ng-model="user.password"
+               class="form-control"
+               placeholder="Password"
+               pattern=".{6,}"
+               ng-keyup="$event.which == 13 && submit(form)"
+               required/>
+        <p class="help error" ng-if="form.submitted && form.password.$error.pattern">Please choose a password at least 6 characters long.</p>
+        <p class="help error" ng-if="form.submitted && form.password.$error.required">Please fill in this field.</p>
+      </div>
+    </div>
+
+    <p ng-hide="invitation">We are currently in private beta with a number of pilot communities.</p>
+    <p ng-hide="invitation">If you are a member of one of these communities, you should have an <strong>invitation code</strong> from your community manager. You will be asked to enter it after signing up. If you don't have an invitation code, you can request to create your own community.</p>
+    <p>By signing up you are agreeing to our <a href="/terms" target="_blank">Terms of Use.</p>
+
+
+
+    <div class="right">
+      <a class="button" ng-click="submit(form)">Sign up</a>
+    </div>
+  </form>
+
+  <div class="footer">
+    <a ng-click="go('login')">Already signed up? Log in!</a>
+    <!-- &nbsp;•&nbsp;
+    <a onclick="Intercom('showNewMessage', 'I need help logging in! The problem is:')">Need help?</a> -->
+  </div>
+
+</div>
