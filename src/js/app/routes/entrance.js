@@ -63,6 +63,16 @@ module.exports = function($stateProvider) {
       }
     }
   })
+  .state('signupWithCode', {
+    url: '/signupc?code&slug&next',
+    parent: 'entrance',
+    views: {
+      entrance: {
+        templateUrl: '/ui/entrance/signup-with-code.tpl.html',
+        controller: 'SignupCtrl'
+      }
+    }
+  })
   .state('waitlist', {
     url: '/waitlist',
     parent: 'entrance',

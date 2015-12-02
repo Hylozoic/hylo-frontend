@@ -84,7 +84,8 @@
       "angular",
       "format",
       "AndroidBridge",
-      "FB"
+      "FB",
+      "Rollbar"
     ]
   }
 }
