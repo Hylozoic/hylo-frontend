@@ -29,4 +29,5 @@ module.exports = function (angularModule) {
   .factory('User', require('./services/User'))
   .factory('UserMentions', require('./services/UserMentions'))
   .factory('PostManager', require('./services/PostManager'))
+  .factory('ModalLoginSignup', require('./services/ModalLoginSignup'))
 }
