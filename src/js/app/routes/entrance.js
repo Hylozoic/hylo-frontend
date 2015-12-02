@@ -64,7 +64,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('signupWithCode', {
-    url: '/signupc?next&code',
+    url: '/signupc?code&slug&next',
     parent: 'entrance',
     views: {
       entrance: {

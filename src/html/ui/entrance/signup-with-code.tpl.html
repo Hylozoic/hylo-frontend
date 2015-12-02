@@ -1,15 +1,15 @@
 <!-- the login-signup-dialog class below is used with the popupDone service -->
 <div class="all-sections login-signup-dialog">
-  <h1>
-    Sign up for Hylo with code
-    {{invitation && invitation.community ? 'to join ' + invitation.community.name : ''}}
-  </h1>
+  <p ng-if="community"><strong>Welcome to Hylo. You are signing up to join:</strong></p>
+  <h1 ng-if="community" class="community-name">
+    {{community.name}}
+  </h1>  
 
   <form name="form" novalidate>
 
     <div class="error" ng-show="signupError">{{signupError}}</div>
 
-    <p>Connect one of these services with Hylo THIS IS HERE.</p>
+    <p>Connect one of these services with Hylo.</p>
 
     <div class="service-buttons">
       <a ng-click="useThirdPartyAuth('google', form)" class="google">Google</a>
@@ -56,11 +56,7 @@
       </div>
     </div>
 
-    <p ng-hide="invitation">We are currently in private beta with a number of pilot communities.</p>
-    <p ng-hide="invitation">If you are a member of one of these communities, you should have an <strong>invitation code</strong> from your community manager. You will be asked to enter it after signing up. If you don't have an invitation code, you can request to create your own community.</p>
     <p>By signing up you are agreeing to our <a href="/terms" target="_blank">Terms of Use.</p>
-
-
 
     <div class="right">
       <a class="button" ng-click="submit(form)">Sign up</a>

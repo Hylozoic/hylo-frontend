@@ -26,6 +26,10 @@ module.exports = function ($scope, $analytics, User, Community, ThirdPartyAuth, 
   $analytics.eventTrack('Signup start')
   $scope.user = {}
 
+  Community.get({id: $stateParams.slug}).$promise
+  .then((community) => $scope.community = community)
+  .catch(() => $scope.signupError = "We couldn't find a community with that name. Please check your link and try again.")
+
   $scope.invitation = Invitation.storedData() || projectInvitation
 
   var finishSignup = provider => {

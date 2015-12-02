@@ -44,7 +44,7 @@ module.exports = function ($stateProvider) {
         return $stateParams.code
       },
       requireLogin: /* @ngInject*/ function (User, currentUser, $stateParams) {
-        return User.requireLogin(currentUser, 'signupc', $stateParams.code)
+        return User.requireLogin(currentUser, 'signupWithCode', $stateParams.code, $stateParams.community)
       }
     }
   })

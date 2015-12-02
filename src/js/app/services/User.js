@@ -53,10 +53,10 @@ module.exports = function ($resource, $state, Project, $timeout, $q) {
   // that call resources requiring login,
   // add it as a dependency of those.
   // (see e.g. routes/home.js)
-  User.requireLogin = function (user, redirectState, code) {
+  User.requireLogin = function (user, redirectState, code, slug) {
     if (user) return
 
-    var nextParams = {code: code, next: format('%s%s', window.location.pathname, window.location.search)}
+    var nextParams = {code: code, slug: slug, next: format('%s%s', window.location.pathname, window.location.search)}
     if (!redirectState) redirectState = 'login'
 
     $timeout(() => $state.go(redirectState, nextParams))
