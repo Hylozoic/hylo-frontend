@@ -27,7 +27,10 @@ function start ($modal, options) {
     backdrop: true,
     keyboard: false,
     windowClass: 'login-signup-modal',
-    resolve: _.merge({context: () => 'modal'}, options.resolve)
+    resolve: _.merge({
+      context: () => 'modal',
+      projectInvitation: () => null
+    }, options.resolve)
   }
 
   var open = function (state) {

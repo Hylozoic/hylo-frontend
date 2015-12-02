@@ -2,7 +2,8 @@ var RichText = require('../../services/RichText')
 var TimeText = require('../../services/TimeText')
 var truncate = require('html-truncate')
 
-module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analytics, growl, Post, User, UserCache, CurrentUser) {
+module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analytics,
+  growl, Post, User, UserCache, CurrentUser, ModalLoginSignup) {
   'ngInject'
 
   $scope.singlePost = $state.current.data && $state.current.data.singlePost
@@ -80,12 +81,15 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
     modalInstance.result.then(() => $analytics.eventTrack('Post: Fulfill', {post_id: post.id}))
   }
 
-  // Voting is the same thing as "liking"
-  $scope.vote = function () {
+  var toggleVoteState = () => {
     post.myVote = !post.myVote
     post.votes += (post.myVote ? 1 : -1)
     $scope.voteTooltipText = post.myVote ? unvoteText : voteText
+  }
 
+  // Voting is the same thing as "liking"
+  $scope.vote = function () {
+    toggleVoteState()
     Post.vote({id: post.id}, function () {
       $analytics.eventTrack('Post: Like', {
         post_id: post.id,
@@ -93,6 +97,7 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
       })
     }, function (resp) {
       if (_.contains([401, 403], resp.status)) {
+        toggleVoteState()
         $scope.$emit('unauthorized', {context: 'like'})
       }
     })
@@ -107,17 +112,21 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
 
   $scope.toggleFollow = function () {
     var user = currentUser
-    if (!user) return
 
     if (!$scope.isFollowing) {
-      $analytics.eventTrack('Post: Join', {post_id: post.id})
-      post.followers.push({
-        id: user.id,
-        name: user.name,
-        avatar_url: user.avatar
+      Post.follow({id: post.id}, function () {
+        $analytics.eventTrack('Post: Join', {post_id: post.id})
+        post.followers.push({
+          id: user.id,
+          name: user.name,
+          avatar_url: user.avatar
+        })
+        UserCache.followedPosts.clear(user.id)
+      }, function (resp) {
+        if (_.contains([401, 403], resp.status)) {
+          $scope.$emit('unauthorized', {context: 'follow'})
+        }
       })
-      Post.follow({id: post.id})
-      UserCache.followedPosts.clear(user.id)
     } else {
       $analytics.eventTrack('Post: Leave', {post_id: post.id})
       post.followers = _.without(post.followers, _.findWhere(post.followers, {id: user.id}))
@@ -276,4 +285,15 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
         return 'five'
     }
   }
+
+  $scope.$on('unauthorized', function (event, data) {
+    if (_.contains(['like', 'follow'], data.context)) {
+      $dialog.confirm({message: 'You must log in or sign up to do that.'})
+      .then(function () {
+        ModalLoginSignup.start({
+          finish: () => $state.reload()
+        })
+      })
+    }
+  })
 }

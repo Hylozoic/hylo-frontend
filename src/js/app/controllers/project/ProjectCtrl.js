@@ -76,7 +76,7 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
   }
 
   $scope.$on('unauthorized', function(event, data) {
-    if (_.contains(['comment', 'like', 'follow', 'add-members'], data.context)) {
+    if (_.contains(['comment', 'like', 'follow'], data.context)) {
       $dialog.confirm({message: "You must join this project to do that."})
       .then(function() {
         $scope.join();

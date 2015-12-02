@@ -1,5 +1,5 @@
-var controller = function ($scope, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
-  $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser, User) {
+var controller = function ($scope, $state, $log, $rootScope, $modal, growl, $window, $timeout, $analytics,
+  $q, Post, $sce, UserMentions, Comment, $dialog, CurrentUser, User, ModalLoginSignup) {
   var post = $scope.post
 
   $scope.hideNavIOS = require('../../services/hideNavIOS')
@@ -100,6 +100,12 @@ var controller = function ($scope, $log, $rootScope, $modal, growl, $window, $ti
   $scope.commentFocus = function (focus) {
     $scope.hideNavIOS(focus)
     $scope.commenting = focus
+  }
+
+  $scope.signup = function () {
+    ModalLoginSignup.start({
+      finish: () => $state.reload()
+    })
   }
 }
 
