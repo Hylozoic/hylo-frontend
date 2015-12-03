@@ -57,6 +57,12 @@
       </div>
     </div>
   </div>
+
+  <div ng-hide='currentUser'>
+    <br/>
+    <a ng-click='signup()'>Log in or sign up</a> to comment.
+  </div>
+
   <div class="comment-btn">
     <button type="button" ng-show="commentLength() > 0" tabindex="1" class="btn btn-sm comment-btn" ng-click="create()">Comment</button>
   </div>

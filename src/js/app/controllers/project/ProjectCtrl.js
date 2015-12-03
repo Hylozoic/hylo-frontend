@@ -1,7 +1,7 @@
 var RichText = require('../../services/RichText');
 
 module.exports = function($scope, $anchorScroll, project, currentUser, growl,
-  $stateParams, $modal, User, $dialog, $analytics, $rootScope) {
+  $stateParams, $modal, User, $dialog, $analytics, $rootScope, ModalLoginSignup) {
   "ngInject";
 
   var invitationToken = $stateParams.token;
@@ -46,74 +46,37 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
     }
   };
 
-  $scope.join = function() {
-    var join = function(callback) {
-      project.join({token: invitationToken}, function() {
-        // remove the token from the url
-        window.history.replaceState({}, 'Hylo', location.pathname);
+  var join = function(callback) {
+    project.join({token: invitationToken}, function() {
+      // remove the token from the url
+      window.history.replaceState({}, 'Hylo', location.pathname);
 
-        $scope.isContributor = true;
-        $scope.$broadcast('joinProject');
-        growl.addSuccessMessage('You joined the project.');
-        $analytics.eventTrack('Joined project', {project_id: project.id});
-        if (callback) callback();
-      });
-    };
-
-    if (currentUser) {
-      join();
-      return;
-    }
-
-    var defaults = {
-      backdrop: true,
-      keyboard: false,
-      windowClass: 'login-signup-modal',
-      resolve: {
-        context: function() { return 'modal' },
-        projectInvitation: function() {
-          return {projectToken: invitationToken, projectId: project.id};
-        }
-      }
-    };
-
-    var handle = function(result) {
-      if (result.action === 'go') {
-        open(result.state);
-      } else if (result.action === 'finish') {
-        join(function() {
-          $scope.$state.reload();
-        });
-      }
-    };
-
-    var open = function(state) {
-      var options = {};
-      if (state === 'signup') {
-        _.merge(options, {
-          templateUrl: '/ui/entrance/signup.tpl.html',
-          controller: 'SignupCtrl',
-        }, defaults);
-      } else if (state === 'login') {
-        _.merge(options, {
-          templateUrl: '/ui/entrance/login.tpl.html',
-          controller: 'LoginCtrl',
-        }, defaults);
-      } else if (state === 'forgotPassword') {
-        _.merge(options, {
-          templateUrl: '/ui/entrance/forgot-password.tpl.html',
-          controller: 'ForgotPasswordCtrl',
-        }, defaults);
-      }
-      $modal.open(options).result.then(handle);
-    };
-
-    open('signup');
-
+      $scope.isContributor = true;
+      $scope.$broadcast('joinProject');
+      growl.addSuccessMessage('You joined the project.');
+      $analytics.eventTrack('Joined project', {project_id: project.id});
+      if (callback) callback();
+    });
   };
 
+  $scope.join = function () {
+    if (currentUser) {
+      join()
+      return
+    }
+
+    ModalLoginSignup.start({
+      resolve: {
+        projectInvitation: function() {
+          return {projectToken: invitationToken, projectId: project.id}
+        }
+      },
+      finish: () => join(() => $scope.$state.reload())
+    })
+  }
+
   $scope.$on('unauthorized', function(event, data) {
-    if (_.contains(['comment', 'like', 'follow', 'add-members'], data.context)) {
+    if (_.contains(['comment', 'like', 'follow'], data.context)) {
       $dialog.confirm({message: "You must join this project to do that."})
       .then(function() {
         $scope.join();
