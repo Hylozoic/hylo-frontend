@@ -69,6 +69,7 @@ const init = function ($q) {
     return $q(function (resolve) {
       if (document.getElementById(scriptTagId)) {
         createPicker(resolve, options.onPick)
+        return
       }
 
       window[initMethodName] = createInitMethod(resolve, options.onPick)
