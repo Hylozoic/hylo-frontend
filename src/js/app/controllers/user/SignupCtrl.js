@@ -21,14 +21,16 @@ var handleError = function (err, $scope, $analytics) {
   }
 }
 
-module.exports = function ($scope, $analytics, User, Community, ThirdPartyAuth, Invitation, context, projectInvitation, $stateParams) {
+module.exports = function ($scope, $analytics, User, Community, ThirdPartyAuth, Invitation, context, projectInvitation, $stateParams, $state) {
   'ngInject'
   $analytics.eventTrack('Signup start')
   $scope.user = {}
 
-  Community.get({id: $stateParams.slug}).$promise
-  .then((community) => $scope.community = community)
-  .catch(() => $scope.signupError = "We couldn't find a community with that name. Please check your link and try again.")
+  if ($state.current.name === 'signupWithCode') {
+    Community.get({id: $stateParams.slug}).$promise
+    .then((community) => $scope.community = community)
+    .catch(() => $scope.signupError = "We couldn't find a community with that name. Please check your link and try again.")
+  }
 
   $scope.invitation = Invitation.storedData() || projectInvitation
 
