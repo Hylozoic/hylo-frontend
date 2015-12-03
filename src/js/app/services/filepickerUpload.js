@@ -20,7 +20,7 @@ var makeFilename = function (blob) {
     timestamp = new Date().getTime().toString()
 
   if (blob.filename) {
-    return timestamp + '_' + blob.filename.replace(/[ %+]/g, '')
+    return timestamp + '_' + blob.filename.replace(/[ %+\(\)]/g, '')
   }
 
   switch (blob.mimetype) {
