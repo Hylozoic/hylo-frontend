@@ -1,7 +1,7 @@
 var connectWebViewJavascriptBridge = require('./services/webViewJavascriptBridge')
 var isiOSApp = require('./services/isIOSApp')
 var isAndroidApp = require('./services/isAndroidApp')
-var branch = require('../../../node_modules/branch-sdk')
+var branch = require('branch-sdk')
 
 require('./directives')
 require('./controllers')
@@ -104,18 +104,22 @@ app.run(function ($rootScope, $state, growl, $bodyClass, CurrentUser) {
 
   $rootScope.$on('$viewContentLoaded', function () {
     if (!isiOSApp() && !isAndroidApp() && window.hyloEnv.branch.key) {
-      branch.init(window.hyloEnv.branch.key)
-      branch.banner(
-        {
-          icon: '/img/appicon.png',
-          title: 'Hylo App',
-          description: 'The Hylo App!',
-          forgetHide: 10,
-          mobileSticky: true,
-          showDesktop: false
-        },
-        {}
-      )
+      try {
+        branch.init(window.hyloEnv.branch.key)
+        branch.banner(
+          {
+            icon: '/img/appicon.png',
+            title: 'Hylo App',
+            description: 'The Hylo App!',
+            forgetHide: 10,
+            mobileSticky: true,
+            showDesktop: false
+          },
+          {}
+        )
+      } catch (e) {
+        Rollbar.error('Branch SDK error', e)
+      }
     }
   })
 })
