@@ -24,6 +24,8 @@ module.exports = function ($scope, $state, $rootScope, $modal, $dialog, $analyti
   $scope.otherCommunities = _.filter(post.communities, c => c.id !== $scope.community.id)
 
   var userEventResponse = function () {
+    if (!currentUser) return ''
+
     var responder = _.filter(post.responders, responder => responder.id === currentUser.id)[0]
     if (responder) {
       return responder.response
