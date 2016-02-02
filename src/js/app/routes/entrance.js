@@ -116,14 +116,14 @@ module.exports = function($stateProvider) {
     templateUrl: '/ui/user/use-invitation.tpl.html',
     controller: function($scope, Invitation, $stateParams, $state) {
       Invitation.use({token: $stateParams.token}, function(resp) {
-        if (resp.error) {
-          $scope.error = resp.error;
-        } else if (resp.signup) {
+        if (resp.signup) {
           Invitation.store(resp);
           $state.go('signup');
         } else {
           $state.go('appEntry');
         }
+      }, function (resp) {
+        $scope.error = resp.data;
       });
     }
   });
