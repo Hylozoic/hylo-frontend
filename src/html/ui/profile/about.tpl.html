@@ -77,10 +77,10 @@
 	</section>
 
 	<section ng-if="user.extra_info || isSelf">
-		<h2>Additional information</h2>
+		<h2>Additional info and links</h2>
 		<a class="message" ng-if="isSelf && !user.extra_info" ui-sref="editProfile">
 			<i class="icon-edit" title="icon-edit"></i>
-			Add anything else you want other people to know about you here.
+			Add anything else you want other people to know about you here, including links to other websites.
 		</a>
 		<div class="entry" ng-bind-html="extra_info"></div>
 	</section>
