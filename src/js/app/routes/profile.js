@@ -1,3 +1,5 @@
+var RichText = require('../services/RichText')
+
 module.exports = function ($stateProvider) {
   $stateProvider
   .state('profile', {
@@ -33,7 +35,10 @@ module.exports = function ($stateProvider) {
     views: {
       tab: {
         templateUrl: '/ui/profile/about.tpl.html',
-        controller: function() {}
+        controller: function($scope, user) {
+          'ngInject'
+          $scope.extra_info = RichText.markdown(user.extra_info)
+        }
       }
     }
   })

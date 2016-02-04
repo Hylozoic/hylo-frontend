@@ -76,26 +76,13 @@
 		</ul>
 	</section>
 
-	<section ng-if="user.websites.length > 0 || isSelf">
-		<h2>Links</h2>
-		<a class="message" ng-if="isSelf && user.websites.length == 0" ui-sref="editProfile">
-			<i class="icon-edit" title="icon-edit"></i>
-			Add website links.
-		</a>
-		<ul>
-			<li ng-repeat="website in user.websites">
-				<a target="_blank" ng-href="{{normalizeUrl(website)}}">{{website}}</a>
-			</li>
-		</ul>
-	</section>
-
 	<section ng-if="user.extra_info || isSelf">
-		<h2>What I would like to do</h2>
+		<h2>Additional information</h2>
 		<a class="message" ng-if="isSelf && !user.extra_info" ui-sref="editProfile">
 			<i class="icon-edit" title="icon-edit"></i>
 			Add anything else you want other people to know about you here.
 		</a>
-		<div class="entry">{{user.extra_info}}</div>
+		<div class="entry" ng-bind-html="extra_info"></div>
 	</section>
 
 </div>
