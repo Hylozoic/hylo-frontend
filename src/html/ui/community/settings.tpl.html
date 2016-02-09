@@ -212,6 +212,29 @@ to pre-populate the invite code for new members to easily join.</p>
       </div>
 
     </div>
+    
+    <div class="section-label" ng-click="expand5 = !expand5">
+      Send Updates to Slack
+      <i ng-class="{'icon-down': expand5, 'icon-right': !expand5}"></i>
+    </div>
+    <div class="section slack" collapse="!expand5">
+      <div class="setting-item">
+        <div class="full-column">
+          <p>
+            Add a slack webhook url in order to receive notifications there of new posts in the community.
+          </p>
 
+          <div class="webhook" ng-hide="!community.slack_hook">
+            <span class="hook">{{ community.slack_hook }}</span>
+            <a class="close" ng-click="removeSlackhook()">&times;</a>
+          </div>
+
+          <div class="edit value" ng-hide="community.slack_hook">
+            <input type="text" class="form-control" ng-model="slack_hook" />
+            <button type="button" ng-click="saveSlackhook()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
