@@ -5,6 +5,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   _.merge(community, extraProperties);
   var origin = $location.absUrl().replace($location.path(), '');
   $scope.join_url = origin + '/c/' + community.slug + '/join/' + community.beta_access_code;
+  $scope.add_slack_url = origin + '/noo/community/' + community.id + '/settings/slack';
   $scope.community = community;
   $scope.settings = community.settings;
 

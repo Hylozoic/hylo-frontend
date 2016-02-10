@@ -212,7 +212,7 @@ to pre-populate the invite code for new members to easily join.</p>
       </div>
 
     </div>
-    
+
     <div class="section-label" ng-click="expand5 = !expand5">
       Send Updates to Slack
       <i ng-class="{'icon-down': expand5, 'icon-right': !expand5}"></i>
@@ -222,6 +222,7 @@ to pre-populate the invite code for new members to easily join.</p>
         <div class="full-column">
           <p>
             Add a slack webhook url in order to receive notifications there of new posts in the community.
+            <a href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=15397411765.20785715792&redirect_uri={{add_slack_url}}"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
           </p>
 
           <div class="webhook" ng-hide="!community.slack_hook">
