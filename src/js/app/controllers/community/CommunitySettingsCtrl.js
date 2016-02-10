@@ -9,6 +9,12 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   $scope.community = community;
   $scope.settings = community.settings;
 
+  if ($location.$$search.slack === "1") {
+    growl.addSuccessMessage('Success connecting to Slack.');
+  } else if ($location.$$search.slack === "0") {
+    growl.addErrorMessage('There was an error connecting to Slack. Please try again.');
+  }
+
   $scope.close = function() {
     if ($history.isEmpty()) {
       $scope.$state.go('community.posts', {community: community.slug});
@@ -145,29 +151,22 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
     $scope.edited.leader = item;
   };
 
-  $scope.saveSlackhook = function() {
-    community.slack_hook = $scope.slack_hook;
-    $scope.slack_hook = "";
-    community.update({slack_hook: community.slack_hook}, function() {
-      $analytics.eventTrack('Community: Added Slack webhook', {
-        community_id: community.slug,
-        moderator_id: currentUser.id
-      });
-      growl.addSuccessMessage('Slack successfully added.');
+  $scope.removeSlackhook = function() {
+    $scope.slack_configure = community.slack_configure;
+    community.update({slack_hook: "", slack_team: "", slack_configure: ""}, function() {
+      community.slack_hook = "";
+      community.slack_team = "";
+      community.slack_configure = "";
+      $scope.slack_remove_transition = true;
     });
   };
 
-  $scope.removeSlackhook = function() {
-    $scope.slack_hook = "";
-    community.slack_hook = "";
-    community.update({slack_hook: ""}, function() {
-      $analytics.eventTrack('Community: Removed Slack webhook', {
-        community_id: community.slug,
-        moderator_id: currentUser.id
-      });
-      growl.addSuccessMessage('Slack successfully removed.');
-    });
-  };
+  $scope.removeFromSlack = function() {
+    $scope.slack_remove_transition = false;
+    var win = window.open($scope.slack_configure, '_blank');
+    win.focus();
+    $scope.slack_configure = null;
+  }
 };
 
 module.exports = function(angularModule) {

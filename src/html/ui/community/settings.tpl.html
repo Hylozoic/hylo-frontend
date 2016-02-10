@@ -220,19 +220,19 @@ to pre-populate the invite code for new members to easily join.</p>
     <div class="section slack" collapse="!expand5">
       <div class="setting-item">
         <div class="full-column">
-          <p>
-            Add a slack webhook url in order to receive notifications there of new posts in the community.
+          <div class="add-to-slack" ng-hide="community.slack_hook || slack_remove_transition">
+            <p>Connect this community to a <a href="https://slack.com" target="_blank">Slack</a> team and Hylo will notify a channel when there are new posts.</p>
             <a href="https://slack.com/oauth/authorize?scope=incoming-webhook&client_id=15397411765.20785715792&redirect_uri={{add_slack_url}}"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
-          </p>
-
-          <div class="webhook" ng-hide="!community.slack_hook">
-            <span class="hook">{{ community.slack_hook }}</span>
-            <a class="close" ng-click="removeSlackhook()">&times;</a>
           </div>
 
-          <div class="edit value" ng-hide="community.slack_hook">
-            <input type="text" class="form-control" ng-model="slack_hook" />
-            <button type="button" ng-click="saveSlackhook()">Save</button>
+          <div ng-hide="!community.slack_hook || slack_remove_transition">
+            <p>This community is connected to the <span class="slack_team">{{ community.slack_team }}</span> team on Slack.</p>
+            <button type="button" ng-click="removeSlackhook()">Remove</button>
+          </div>
+
+          <div ng-hide="!slack_remove_transition">
+            <p>Ok. Your integration has been removed from Hylo, but be sure to also remove it on Slack.</p>
+            <button type="button" ng-click="removeFromSlack()">Remove from Slack</button>
           </div>
         </div>
       </div>
