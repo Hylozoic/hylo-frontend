@@ -152,20 +152,20 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   };
 
   $scope.removeSlackhook = function() {
-    $scope.slack_configure = community.slack_configure;
-    community.update({slack_hook: "", slack_team: "", slack_configure: ""}, function() {
-      community.slack_hook = "";
+    $scope.slack_configure_url = community.slack_configure_url;
+    community.update({slack_hook_url: "", slack_team: "", slack_configure_url: ""}, function() {
+      community.slack_hook_url = "";
       community.slack_team = "";
-      community.slack_configure = "";
+      community.slack_configure_url = "";
       $scope.slack_remove_transition = true;
     });
   };
 
   $scope.removeFromSlack = function() {
     $scope.slack_remove_transition = false;
-    var win = window.open($scope.slack_configure, '_blank');
+    var win = window.open($scope.slack_configure_url, '_blank');
     win.focus();
-    $scope.slack_configure = null;
+    $scope.slack_configure_url = null;
   }
 };
 
