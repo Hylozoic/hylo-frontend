@@ -25,7 +25,6 @@ module.exports = function($scope, Community, CurrentUser, $timeout, $analytics) 
 
     Community.join({code: $scope.code}, function(membership) {
       var community = membership.community;
-      $analytics.eventTrack('Joined community', {id: community.id, slug: community.slug});
 
       if ($scope.$close) $scope.$close();
 
