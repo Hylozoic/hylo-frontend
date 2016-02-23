@@ -5,8 +5,16 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   _.merge(community, extraProperties);
   var origin = $location.absUrl().replace($location.path(), '');
   $scope.join_url = origin + '/c/' + community.slug + '/join/' + community.beta_access_code;
+  $scope.add_slack_url = origin + '/noo/community/' + community.id + '/settings/slack';
   $scope.community = community;
   $scope.settings = community.settings;
+  $scope.slack_client_id = window.hyloEnv.slack.clientId;
+
+  if ($location.$$search.slack === "1") {
+    growl.addSuccessMessage('Success connecting to Slack.');
+  } else if ($location.$$search.slack === "0") {
+    growl.addErrorMessage('There was an error connecting to Slack. Please try again.');
+  }
 
   $scope.close = function() {
     if ($history.isEmpty()) {
@@ -144,6 +152,22 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
     $scope.edited.leader = item;
   };
 
+  $scope.removeSlackhook = function() {
+    $scope.slack_configure_url = community.slack_configure_url;
+    community.update({slack_hook_url: "", slack_team: "", slack_configure_url: ""}, function() {
+      community.slack_hook_url = "";
+      community.slack_team = "";
+      community.slack_configure_url = "";
+      $scope.slack_remove_transition = true;
+    });
+  };
+
+  $scope.removeFromSlack = function() {
+    $scope.slack_remove_transition = false;
+    var win = window.open($scope.slack_configure_url, '_blank');
+    win.focus();
+    $scope.slack_configure_url = null;
+  }
 };
 
 module.exports = function(angularModule) {
