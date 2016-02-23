@@ -8,6 +8,7 @@ var controller = function ($scope, $history, $analytics, community, currentUser,
   $scope.add_slack_url = origin + '/noo/community/' + community.id + '/settings/slack';
   $scope.community = community;
   $scope.settings = community.settings;
+  $scope.slack_client_id = window.hyloEnv.slack.clientId;
 
   if ($location.$$search.slack === "1") {
     growl.addSuccessMessage('Success connecting to Slack.');
