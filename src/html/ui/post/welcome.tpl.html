@@ -18,7 +18,8 @@
           <a class="name" ui-sref="profile.about({id: user.id})">{{user.name}}</a>
         </strong>
         joined
-        <span class="community-name">{{post.communities[0].name}}</span>
+        <span ng-if="post.communities[0]" class="community-name">{{post.communities[0].name}}</span>
+        <span ng-if="!post.communities[0]" class="community-name">a community that is no longer active</span>        
         {{post.created_at | fromNow}}.
         <span ng-hide="isSelf"><a ng-click="showComments = !showComments">Say hello!</a></span>
       </div>
