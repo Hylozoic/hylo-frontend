@@ -102,7 +102,7 @@ module.exports = function($stateProvider) {
     }
   })
   .state('forgotPassword', {
-    url: '/forgot-password',
+    url: '/set-password',
     parent: 'entrance',
     views: {
       entrance: {

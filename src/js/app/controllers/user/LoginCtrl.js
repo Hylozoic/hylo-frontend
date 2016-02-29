@@ -11,7 +11,7 @@ var handleError = function (err, $scope, $analytics) {
   if (noPasswordMatch) {
     var options = noPasswordMatch[1].split(',')
     if (options[0] === '') {
-      $scope.loginError = format("Your account has no password set. <a href='/forgot-password'>Set your password</a>")
+      $scope.loginError = format("Your account has no password set. <a href='/set-password'>Set your password</a>")
     } else {
       $scope.loginError = format('Your account has no password set. Please log in with %s.',
         _.map(options, function (x) { return _.capitalize(x) }).join(' or '))
