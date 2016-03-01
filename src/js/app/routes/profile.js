@@ -37,7 +37,7 @@ module.exports = function ($stateProvider) {
         templateUrl: '/ui/profile/about.tpl.html',
         controller: function($scope, user) {
           'ngInject'
-          $scope.extra_info = RichText.markdown(user.extra_info)
+          $scope.extra_info = RichText.markdown(user.extra_info || '')
         }
       }
     }
