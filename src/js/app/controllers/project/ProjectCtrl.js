@@ -8,7 +8,10 @@ module.exports = function($scope, $anchorScroll, project, currentUser, growl,
 
   $scope.project = project;
   $scope.isCreator = currentUser && project.user_id === currentUser.id;
-  $scope.canModerate = $scope.isCreator || (project.membership && project.membership.role === 1);
+  $scope.canModerate = $scope.isCreator ||
+    (project.membership && project.membership.role === 1) ||
+    (currentUser && _.some(currentUser.memberships, m =>
+      m.community.id === project.community_id && m.role === 1));
   $scope.isContributor = !!project.membership;
 
   $scope.details = RichText.markdown(project.details || '', {maxlength: 420});
