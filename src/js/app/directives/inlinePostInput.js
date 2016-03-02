@@ -8,7 +8,11 @@ module.exports = function () {
     controller: function ($scope) {
       'ngInject'
 
-      $scope.communities = $scope.community ? [$scope.community] : []
+      $scope.communities = $scope.community
+        ? [$scope.community]
+        : $scope.project
+          ? [$scope.project.community]
+          : []
 
       $scope.expand = function () {
         $scope.expanded = true
@@ -18,7 +22,7 @@ module.exports = function () {
         $scope.expanded = false
       })
     },
-    templateUrl: '/ui/post/inline-edit.tpl.html',
+    template: '<div class="inline-post-input"><post-editor communities="communities" project="project"/></div>',
     replace: true,
     link: function (scope, element, attrs) {
       element.on('click', function () {

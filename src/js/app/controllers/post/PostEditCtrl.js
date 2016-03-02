@@ -16,7 +16,6 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
   var communities = $scope.communities
   var post = $scope.post
   var project = $scope.project
-  if (project) communities = $scope.communities = [project.community]
   $scope.hideNavIOS = require('../../services/hideNavIOS')
 
   $scope.updatePostDraftStorage = _.debounce(() => {
