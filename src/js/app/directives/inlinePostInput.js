@@ -11,7 +11,7 @@ module.exports = function () {
       $scope.communities = $scope.community
         ? [$scope.community]
         : $scope.project
-          ? [$scope.project.community]
+          ? [_.cloneDeep($scope.project.community)]
           : []
 
       $scope.expand = function () {
