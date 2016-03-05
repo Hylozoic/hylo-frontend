@@ -184,7 +184,7 @@ module.exports = function ($scope, CurrentUser, Post, growl, $analytics, $histor
       name: $scope.title,
       type: $scope.postType,
       projectId: project && project.id,
-      communities: communities.map(c => c.id)
+      communities: !project && communities.map(c => c.id)
     }, _.pick($scope, [
       'description',
       'docs', 'removedDocs', 'imageUrl', 'imageRemoved',
