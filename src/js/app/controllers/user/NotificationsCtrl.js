@@ -39,7 +39,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
     if (_.contains(['followAdd', 'follow', 'unfollow'], event.action))
       return false;
 
-    return !!(event.comment.comment_text || event.post.description);
+    return !!(event.comment.text || event.post.description);
   }
 
   $scope.thank = function(comment) {
@@ -76,7 +76,7 @@ var controller = function($scope, currentUser, Activity, activity, Comment, $ana
 
   $scope.present = function(event) {
     var present = require('../../services/RichText').present,
-      text = event.comment.comment_text || event.post.description;
+      text = event.comment.text || event.post.description;
     return present(text, {communityId: event.post.communities[0].id, maxlength: 200});
   }
 };
