@@ -1,4 +1,4 @@
-<inline-post-input ng-if='currentUser' project="project"></inline-post-input>
+<inline-post-input ng-if='isContributor || isCreator' project="project"></inline-post-input>
 
 <div infinite-scroll="loadMore()"
      infinite-scroll-distance="1"
