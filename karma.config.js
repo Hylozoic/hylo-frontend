@@ -1,5 +1,7 @@
 'use strict';
 
+var babelify = require('babelify')
+
 // Karma configuration
 // Generated on Wed Oct 22 2014 16:54:59 GMT-0700 (PDT)
 
@@ -11,7 +13,13 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      transform: ['browserify-ngannotate', 'debowerify', 'es6ify']
+      transform: [
+        'debowerify',
+        'browserify-ngannotate',
+        babelify.configure({
+          ignore: /\/bower_components\//
+        })
+      ]
     },
 
     // frameworks to use

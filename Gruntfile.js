@@ -1,12 +1,12 @@
-require('dotenv').load();
+/* globals rm */
 
-var deploy = require('./deploy'),
-  _ = require('lodash'),
-  es6ify = require('es6ify'),
-  format = require('util').format;
+require('dotenv').load()
 
-module.exports = function(grunt) {
+var deploy = require('./deploy')
+var babelify = require('babelify')
+var _ = require('lodash')
 
+module.exports = function (grunt) {
   grunt.initConfig({
     less: {
       dev: {
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           'dist/deploy/pages/styleguide/bundle.css': ['src/css/styleguide.less'],
           'dist/deploy/pages/subscribe/bundle.css': ['src/css/subscribe.less']
         }
-      },
+      }
     },
     cssmin: {
       deploy: {
@@ -42,9 +42,11 @@ module.exports = function(grunt) {
     browserify: {
       options: {
         transform: [
-          'browserify-ngannotate',
           'debowerify',
-          es6ify.configure(/^(?!.*node_modules)+.+\.js$/)
+          'browserify-ngannotate',
+          babelify.configure({
+            ignore: /\/bower_components\//
+          }),
         ]
       },
       dev: {
@@ -137,7 +139,7 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'src/img', src: ['**'], dest: 'dist/deploy/pages/img/'},
           {expand: true, cwd: 'src/html/ui', src: ['**/*.html'], dest: 'dist/deploy/ui/'},
           {expand: true, cwd: 'src/html/admin', src: ['**/*.html'], dest: 'dist/deploy/admin/'}
-        ],
+        ]
       }
     },
     ngtemplates: {
@@ -212,9 +214,9 @@ module.exports = function(grunt) {
     'node-inspector': {
       dev: {}
     }
-  });
+  })
 
-  require('load-grunt-tasks')(grunt);
+  require('load-grunt-tasks')(grunt)
 
   grunt.registerTask('dev-start', [
     'browserify:dev',
@@ -223,29 +225,28 @@ module.exports = function(grunt) {
     'sync:ui',
     'ejs:pages',
     'ejs:ui'
-  ]);
+  ])
 
   grunt.registerTask('dev', [
     'dev-start',
     'serve',
     'watch'
-  ]);
+  ])
 
-  grunt.registerTask('serve', function() {
+  grunt.registerTask('serve', function () {
     require('./server')({
       log: grunt.log,
-      port: parseInt(grunt.option('port') || 1337)
-    });
-  });
+      port: Number(grunt.option('port') || 1337)
+    })
+  })
 
-  grunt.registerTask('build', function() {
-    var done = this.async(),
-      target = grunt.option('to');
+  grunt.registerTask('build', function () {
+    var done = this.async
+    var target = grunt.option('to')
 
-    deploy.setupEnv(target, grunt.log, function() {
-
+    deploy.setupEnv(target, grunt.log, function () {
       // delay the requiring of templateEnv until after env vars are loaded
-      var templateEnv = require('./templateEnv')(target);
+      var templateEnv = require('./templateEnv')(target)
 
       grunt.config.merge({
         ejs: {
@@ -260,7 +261,7 @@ module.exports = function(grunt) {
             }
           }
         }
-      });
+      })
 
       _.each([
         'clean',
@@ -272,22 +273,21 @@ module.exports = function(grunt) {
         'uglify',
         'less:deploy',
         'cssmin'
-      ], function(task) {
-        grunt.task.run(task);
-      });
+      ], function (task) {
+        grunt.task.run(task)
+      })
 
-      done();
-    });
-  });
+      done()
+    })
+  })
 
-  grunt.registerTask('deploy', ['build', 'upload']);
+  grunt.registerTask('deploy', ['build', 'upload'])
 
-  grunt.registerTask('upload', function() {
-    deploy.run(grunt.option('to'), this.async(), grunt.log);
-  });
+  grunt.registerTask('upload', function () {
+    deploy.run(grunt.option('to'), this.async(), grunt.log)
+  })
 
-  grunt.registerTask('clean', function() {
-    rm('-r', 'dist/*');
-  });
-
-};
+  grunt.registerTask('clean', function () {
+    rm('-r', 'dist/*')
+  })
+}

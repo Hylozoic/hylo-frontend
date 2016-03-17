@@ -1,5 +1,3 @@
-require('traceur/bin/traceur-runtime');
-
 window._ = require('lodash');
 require('angular');
 require('angular-mocks');

@@ -15,7 +15,6 @@ var dependencies = [
   'hyloDirectives',
   'infinite-scroll',
   'mentio',
-  'newrelic-timing',
   'ngAnimate',
   'ngResource',
   'ngSanitize',
