@@ -241,7 +241,7 @@ module.exports = function (grunt) {
   })
 
   grunt.registerTask('build', function () {
-    var done = this.async
+    var done = this.async()
     var target = grunt.option('to')
 
     deploy.setupEnv(target, grunt.log, function () {
@@ -263,7 +263,7 @@ module.exports = function (grunt) {
         }
       })
 
-      _.each([
+      grunt.task.run([
         'clean',
         'copy:deploy',
         'ejs:deploy',
@@ -273,9 +273,7 @@ module.exports = function (grunt) {
         'uglify',
         'less:deploy',
         'cssmin'
-      ], function (task) {
-        grunt.task.run(task)
-      })
+      ])
 
       done()
     })
