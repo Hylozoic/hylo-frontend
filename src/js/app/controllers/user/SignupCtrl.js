@@ -15,6 +15,8 @@ var handleError = function (err, $scope, $analytics) {
 
     $scope.signupError = format('The %s "%s" is already in use. Try logging in instead?', key, value)
     $analytics.eventTrack('Signup failure', {email: email, cause: 'duplicate ' + key})
+  } else if (msg === 'no email') {
+    $scope.signupError = 'The data from that service did not include an email address. Please try a different option.'
   } else {
     $scope.signupError = msg
     $analytics.eventTrack('Signup failure', {email: email, cause: msg})
