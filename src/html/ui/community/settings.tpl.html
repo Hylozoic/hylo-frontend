@@ -83,7 +83,7 @@
             <div class="avatar" back-img="community.leader.avatar_url"></div>
             <div class="name">{{community.leader.name}}</div>
           </div>
-          <p>{{community.welcome_message || "[Not set yet]"}}</p>
+          <p ng-bind-html="(community.welcome_message || '[Not set yet]') | markdown"></p>
           <button type="button" ng-click="edit('welcome_message', 'leader')">Change</button>
         </div>
         <div class="full-column edit" ng-show="editing.welcome_message">
