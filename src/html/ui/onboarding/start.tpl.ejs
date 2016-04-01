@@ -17,7 +17,7 @@
         <div class="avatar" back-img="::onboarding.community.leader.avatar_url"></div>
         <div class="name">{{onboarding.community.leader.name}}</div>
       </div>
-      <p>“{{onboarding.community.welcome_message}}”</p>
+      <p ng-bind-html="('“' + onboarding.community.welcome_message + '”') | markdown"></p>
     </div>
 
     <div class="center">
