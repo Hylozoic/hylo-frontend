@@ -2,7 +2,7 @@ require('shelljs/global');
 var format = require('util').format;
 
 var _command = function(cmd) {
-  return exec(cmd, {silent: true}).output.replace(/\n/, '');
+  return exec(cmd, {silent: true}).stdout.replace(/\n/, '');
 };
 
 module.exports = function(maxlength) {

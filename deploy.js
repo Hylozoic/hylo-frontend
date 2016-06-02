@@ -12,7 +12,7 @@ var util = require('util')
 require('shelljs/global')
 
 var _command = function (cmd) {
-  return exec(cmd, {silent: true}).output.replace(/\n/, '')
+  return exec(cmd, {silent: true}).stdout.replace(/\n/, '')
 }
 
 var username = function () {
