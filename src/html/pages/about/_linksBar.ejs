@@ -16,6 +16,8 @@
 </section>
 
  <script>
-  var activeLink = document.getElementById(page);
-  activeLink.className += " active";
+  if (typeof page !== 'undefined') {
+    var activeLink = document.getElementById(page);
+    activeLink.className += " active";
+  }
  </script>
