@@ -51,7 +51,7 @@
     "html-linkify": "^1.2.0",
     "html-truncate": "tildedave/nodejs-html-truncate#fix_end_truncation_behavior",
     "load-grunt-tasks": "latest",
-    "lodash": "^3.8.0",
+    "lodash": "^4.17.19",
     "marked": "^0.3.3",
     "masonry-layout": "^3.3.0",
     "medium.js": "levity/Medium.js#master",
